@@ -48,10 +48,11 @@ But as I said I miss read it, no drama, I decided to create that on my own. So I
 		}
 	});
 
-t looks at the collection of registered types which are done when you do **MyType.registerClass("MyType");** so it's nice easily does them all.
+It looks at the collection of registered types which are done when you do **MyType.registerClass("MyType");** so it's nice easily does them all.
 It'll automatically create a plug-in for any type inheriting from Sys.UI.Control, but it can easily be done to any base type which want. So you could use Sys.Component (although I don't recommend it).
 
 Yeah it's not really that practical, especially if you have a lot of controls, but it's just a POC. If I get some time I'll modify it to check interfaces instead :P
 
   [1]: http://weblogs.asp.net/bleroy/
   [2]: http://weblogs.asp.net/bleroy/archive/2009/05/04/creating-jquery-plug-ins-from-microsoftajax-components.aspx
+
