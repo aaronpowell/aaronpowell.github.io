@@ -29,7 +29,7 @@ Because the generic is defined at use-time there’s no type in the .NET framewo
 
 There’s no simple way in which you do this, in fact, it’s actually rather hacky. If you’re not familiar with finding methods with Reflection you should probably have a read of this [http://msdn.microsoft.com/en-us/library/system.reflection.aspx][1].
 
-You’d be mistaken for thinking that you can just pass in the method name, cuz it’s an overload Reflection doesn’t know what you want. So the most likely one you need is [Type.GetMethod Method (String, BindingFlags, Binder, array[]()[], array[]()[])][2], but you notice something, you need to pass in the type of ALL the parameters for the method.
+You’d be mistaken for thinking that you can just pass in the method name, cuz it’s an overload Reflection doesn’t know what you want. So the most likely one you need is [Type.GetMethod Method (String, BindingFlags, Binder, array\[\]()\[\], array\[\]()\[\])][2], but you notice something, you need to pass in the type of ALL the parameters for the method.
 Crap, one is a generic type, so it can’t be specified!
 This is where I hit a snag, and from all my research the only solution was a dirty little hack.
 
