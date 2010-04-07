@@ -47,12 +47,15 @@ Notice the use of the IsDirty flag to ensure we're only saving what we should sa
 ## Helper Methods ##
 
 I've provided a few helper methods which can be used for the reading and writing of custom properties on the Umbraco membership object.
+
 ![Helper Methods][4]
 
 The two get methods handle the null and default data checking, along with casting back to the appriate data type. Here's an example implementation:
+
 ![Helper usage][5]
 
 The save is really just a shortcut, I was sick of typing out that same command every time, to use it you would call it from the *PrepareMemberForSaving* method like so:
+
 ![][6]
 
 And we're done
