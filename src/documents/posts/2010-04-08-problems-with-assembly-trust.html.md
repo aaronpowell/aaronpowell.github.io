@@ -44,7 +44,7 @@ So I rolled back to my downloaded version of Autofac and decided to check the ve
 
 So I clicked Unblock, compiled and magic happened. It all worked, no problems what so ever.
 
-*** Moral of this story ***
+### Moral of this story ###
 
 Trust everyone
 
