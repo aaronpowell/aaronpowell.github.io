@@ -2,7 +2,7 @@
 title: "The great Umbraco API misconception"
 metaTitle: "The great Umbraco API misconception"
 description: "Sometimes the truth hurts"
-revised: "2010-04-08"
+revised: "2010-04-11"
 date: "2010-04-08"
 tags: ["umbraco","cms",".net","caution"]
 migrated: "true"
@@ -33,3 +33,10 @@ So next time you try and hook into the Save event to try and prevent a Save from
 Sure you could tie into the rollback feature as well so when you're doing a canceled save you can rollback to the previous version, just make sure you don't recall the Save method and get stuck in a rollback loop! :P
 
 I think we may fix this in v5, but you don't want all the fun nuance of Umbraco going now do you? :P 
+
+### What can I do? ###
+
+So is there anything that you can do to get around the eventing order with Umbraco? The answer is [yes, yes you can][1].
+
+
+  [1]: /umbraco-event-improvments
