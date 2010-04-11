@@ -36,6 +36,8 @@ In addition to deferred saving I've also added an indexer to the Document object
 
 Personally I think this is much more obvious than the getProperty operation, and it's how I'd expect to interact with them in the future.
 
+Internally the indexer wraps the getProperty method so you can use it in any instance. **But** when you're using it is used with optimized mode it will also **cache the properties**! Every time you call getProperty you go into the database (or so I could gather). When you use the indexer and optimized mode the property accessor looks into an internal cache, sees if it's there and if it isn't gets it from the database, adds it to the cache and saves it for later. This is how the deferred saving works, it looks into the cache to set the property values.
+
 Hopefully this makes the eventing in 4.1 a lot more useful if you need to control the flow better.
 
 
