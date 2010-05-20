@@ -2,7 +2,7 @@
 title: "DDD Melbourne &amp; Umbraco"
 metaTitle: "DDD Melbourne &amp; Umbraco"
 description: "DDD Melbourne is on during May and I'll be there to speak about Umbraco"
-revised: "2010-04-22"
+revised: "2010-05-20"
 date: "2010-04-22"
 tags: ["umbraco","dddmelbourne"]
 migrated: "true"
@@ -23,16 +23,25 @@ Don't forget the [NerdDinner][2] on Saturday night too.
 
 This is the session I'll be presenting at DDD Melbourne. I'll be looking at how you can use Umbraco beyond traditional content management. I'll be looking at integration with Flash and Silverlight for rich content, how you can get the most out of performance with Examine and dealing with unpublished content.
 
-After the session I'll be updating this article with any resources for you to download.
+####Slide decks and code samples
 
-See you there!
+Well DDD Melbourne is done and dusted, it was a good time. Really appreciate the work that the guys did to organise it, and very glad to have been given the opportunity to present.
+
+Thanks to all those who attended my session, hopefully something was learnt from it ;).
+
+As promised here is the slide deck and code samples:
+
+* [Slides][3] (including WebForms MVP stuff I didn't get to :P)
+* [Code][4] (DB not included)
 
 ####Footnote
 
-I'm currently helping out [Lewis Benge][3] with [DDD Sydney][4], more information on that will come soon.
+I'm currently helping out [Lewis Benge][5] with [DDD Sydney][6], more information on that will come soon.
 
 
   [1]: http://www.dddmelbourne.com/
   [2]: http://www.nerddinner.com/2070
-  [3]: http://blog.lewisbenge.net/
-  [4]: http://www.dddsydney.com/
+  [3]: /get/dddmelbourne/DDD%20Melbourne%20presentation.pptx
+  [4]: /get/dddmelbourne/DddMelbourne.zip
+  [5]: http://blog.lewisbenge.net/
+  [6]: http://www.dddsydney.com/
