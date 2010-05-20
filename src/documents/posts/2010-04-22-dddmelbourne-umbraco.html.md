@@ -2,7 +2,7 @@
 title: "DDD Melbourne &amp; Umbraco"
 metaTitle: "DDD Melbourne &amp; Umbraco"
 description: "DDD Melbourne is on during May and I'll be there to speak about Umbraco"
-revised: "2010-05-20"
+revised: "2010-05-21"
 date: "2010-04-22"
 tags: ["umbraco","dddmelbourne"]
 migrated: "true"
@@ -41,7 +41,7 @@ I'm currently helping out [Lewis Benge][5] with [DDD Sydney][6], more informatio
 
   [1]: http://www.dddmelbourne.com/
   [2]: http://www.nerddinner.com/2070
-  [3]: /get/dddmelbourne/DDD%20Melbourne%20presentation.pptx
+  [3]: /get/dddmelbourne/secrets-of-an-umbraco-ninja-simplifying-development-with-umbraco.zip
   [4]: /get/dddmelbourne/DddMelbourne.zip
   [5]: http://blog.lewisbenge.net/
   [6]: http://www.dddsydney.com/
