@@ -2,7 +2,7 @@
 title: "ASP.NET WebForms Model-Video-Presenter"
 metaTitle: "ASP.NET WebForms Model-Video-Presenter"
 description: "Articles, links and helpful tidbits for working with Webforms MVP"
-revised: "2010-05-18"
+revised: "2010-05-30"
 date: "2010-05-18"
 tags: ["asp.net","webforms-mvp"]
 migrated: "true"
@@ -18,5 +18,10 @@ ASP.NET WebForms MVP is a really handy project which aims to bring testability t
 
 * [Testing messaging within a presenter][1]
 
+##Fun Stuff
+
+* [Writing Presenters with F#][2]
+
 
   [1]: /testing-messaging-within-a-presenter
+  [2]: /writing-presenters-with-fsharp
