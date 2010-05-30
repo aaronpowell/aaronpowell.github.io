@@ -2,7 +2,7 @@
 title: "ASP.NET WebForms Model-View-Presenter Contrib Project"
 metaTitle: "WebForms MVP Contrib"
 description: "An overview of WebForms MVP Contrib project"
-revised: "2010-04-12"
+revised: "2010-05-30"
 date: "2010-04-12"
 tags: ["asp.net","webforms-mvp","webforms-mvp-contrib"]
 migrated: "true"
