@@ -2,7 +2,7 @@
 title: "Supporting ValueTypes in Autofac"
 metaTitle: "Supporting ValueTypes in Autofac"
 description: "Autofac doesn't support injection of value types as properties, here's how to support it."
-revised: "2010-06-09"
+revised: "2010-06-14"
 date: "2010-06-09"
 tags: ["autofac","c#"]
 migrated: "true"
