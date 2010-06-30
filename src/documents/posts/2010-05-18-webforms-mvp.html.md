@@ -21,12 +21,14 @@ ASP.NET WebForms MVP is a really handy project which aims to bring testability t
 ##Useful Hits
 
 * [Testing messaging within a presenter][2]
+* [Unit Testing with Umbraco][3]
 
 ##Fun Stuff
 
-* [Writing Presenters with F#][3]
+* [Writing Presenters with F#][4]
 
 
   [1]: /webforms-mvp-contrib
   [2]: /testing-messaging-within-a-presenter
-  [3]: /writing-presenters-with-fsharp
+  [3]: /unit-testing-with-umbraco
+  [4]: /writing-presenters-with-fsharp
