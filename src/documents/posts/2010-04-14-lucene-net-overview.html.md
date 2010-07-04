@@ -2,7 +2,7 @@
 title: "An overview of Lucene.Net"
 metaTitle: "Lucene.Net Overview"
 description: "Overview and table-of-contents for Lucene.Net articles"
-revised: "2010-07-04"
+revised: "2010-07-05"
 date: "2010-04-14"
 tags: ["lucene.net","c#",".net","examine","umbraco-examine"]
 migrated: "true"
@@ -43,7 +43,7 @@ To not get completely lost with Lucene you need to understand the terms which it
 
 * [Document][3]
  * This is a record within the Lucene index. It is comprised of fields. When ever you're working with data from the index you're working with a Document
-* Field
+* [Field][3]
  * A single piece of data associated with a document. A field may or may not be indexed, depending on how you're inserting it into your index, and this defines how you can interact with it, and how Lucene will treat it
 * Term
  * A part of a Lucene query. A Term is comprised of a left and a right part, looking like this: `Field:Query`. The left part is the name of the field you're scoring against, the right part is the data to use when scoring
