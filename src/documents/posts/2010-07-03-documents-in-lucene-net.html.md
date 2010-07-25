@@ -23,11 +23,11 @@ But unlike other Document Databases, such as [RaveDB][2], Lucene.Net doesn't all
 
 When pushing the data into a Lucene index it is done via Fields. A Field is *a key/ value pair* if you want to get a very high view of it, but it's really a bit more powerful that that. It's true that it's primary responsibility is to push data into Lucene with a string key and a string value, and providing information to Lucene about how to store that data in the index.
 
-When you're adding a Field to Lucene.Net you need to work out which of the available constructors to use, as there are 9 (yes, 9!) different choices. Personally I like [this particular constructor][6]:
+When you're adding a Field to Lucene.Net you need to work out which of the available constructors to use, as there are 9 (yes, 9!) different choices. Personally I like this particular constructor:
 
 	public Field(string name, string value, Store store, Index index)
 
-I find that it gives the most flexibility and is the most obvious as to what it's doing (it's not the one which we use internal of [Examine][4] we actually use [this one][3] as we want to work with TermVectors).
+I find that it gives the most flexibility and is the most obvious as to what it's doing (it's not the one which we use internal of [Examine][3] we actually use a different one as we want to work with TermVectors).
 
 On top of the name (key) and value parameters there are also three others, Store, Index and TermVector. Each of these are used to define how the data is handled within the Lucene index.
 
@@ -49,7 +49,7 @@ The Index parameter allows you to specify how the data is treated when it's adde
 
 There are 5 types of indexing, let's start with the basic on, NO. This one is fairly obvious, and it does what you're expecting. If you set your field with an Index.NO value it's not going to be accessible via the Lucene searcher. If you're working directly with the Document object then you can get the data (provided it's Store.YES :P) it's accessible via the name of the Field.
 
-There other options are about the analysis of the Field data in the index. I've looked at [Analyzers in the past][5] so hopefully it's a concept your familiar with. Again, choosing the right option here will impact on the size of the index.
+There other options are about the analysis of the Field data in the index. I've looked at [Analyzers in the past][4] so hopefully it's a concept your familiar with. Again, choosing the right option here will impact on the size of the index.
 
 Here's a few good rules on whether to use analysis or not with your Field:
 
@@ -63,6 +63,8 @@ Here's a few good rules on whether to use analysis or not with your Field:
 
 NORMS/ NO_NORMS really comes down to what you need to do with the value when you're searching. If you use NO_NORMS then the value isn't normalized and features such as boost and string-length wont be enabled.
 
+[In this article I've had a look at how the `Field.Store` and `Field.Index` can be used to make a simple application using Lucene.Net][5].
+
 ###TermVector
 
 I thought I'd cover this even through I tend to let the default (`TermVector.NO`) get used. TermVector is used to indicate if you want to have metadata about the *terms* which you're putting into your index. A term is the value (or values if it's an analyzed Field).
@@ -75,9 +77,9 @@ Use this sparingly, as it can blow out the size of your index if you store every
 
 So to finish off this time we've looked at the Document side of a Document Database. Understanding Documents and Fields will allow you to start getting the full power out of the Lucene.Net API.
 
+
   [1]: /lucene-net-overview
   [2]: http://ravendb.net/
-  [3]: http://lucene.apache.org/java/2_9_2/api/all/org/apache/lucene/document/Field.html#Field(java.lang.String, java.lang.String, org.apache.lucene.document.Field.Store, org.apache.lucene.document.Field.Index, org.apache.lucene.document.Field.TermVector)
-  [4]: http://examine.codeplex.com
-  [5]: /lucene-analyzer
-  [6]: http://lucene.apache.org/java/2_9_2/api/all/org/apache/lucene/document/Field.html#Field(java.lang.String, java.lang.String, org.apache.lucene.document.Field.Store, org.apache.lucene.document.Field.Index)
+  [3]: http://examine.codeplex.com
+  [4]: /lucene-analyzer
+  [5]: /building-an-application-with-lucene-net
