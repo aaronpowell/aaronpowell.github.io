@@ -2,7 +2,7 @@
 title: "Documents in Lucene.Net"
 metaTitle: "Documents in Lucene.Net"
 description: ""
-revised: "2010-07-04"
+revised: "2010-07-26"
 date: "2010-07-03"
 tags: ["lucene.net","c#"]
 migrated: "true"
