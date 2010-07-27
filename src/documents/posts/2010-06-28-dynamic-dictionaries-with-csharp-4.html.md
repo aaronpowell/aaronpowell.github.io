@@ -2,7 +2,7 @@
 title: "Dynamic Dictionaries with C# 4.0"
 metaTitle: "Dynamic Dictionaries with C# 4.0"
 description: "Using the C# dynamic features to make it easier to work with Dictionary objects"
-revised: "2010-06-28"
+revised: "2010-07-27"
 date: "2010-06-28"
 tags: ["c#",".net","dynamic","umbraco"]
 migrated: "true"
@@ -81,6 +81,11 @@ While we were working on some sexy features for Umbraco 5 over the CodeGarden 10
 
 Well that's where the idea for the above code came from, in fact we've got a similar piece of code which will be usable within the framework of Umbraco 5 and entity design. But the full info on that will belong to another post ;).
 
+##Released!
+
+I've rolled the above code (with some improvements mind you) into a new project that I've been working on for making working with dynamics in .NET a whole lot easier. You can check out my [Dynamics Library][3] and get dynamacising.
+
 
   [1]: http://msdn.microsoft.com/en-us/library/system.dynamic.dynamicobject.aspx
   [2]: http://msdn.microsoft.com/en-us/library/system.dynamic.dynamicobject.trygetmember.aspx
+  [3]: /dynamics-library
