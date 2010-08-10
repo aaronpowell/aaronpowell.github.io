@@ -2,7 +2,7 @@
 title: "Extending Umbraco Members"
 metaTitle: "Extending Umbraco Members"
 description: ""
-revised: "2010-04-07"
+revised: "2010-08-10"
 date: "2010-04-07"
 tags: ["umbraco","umbraco-3","members"]
 migrated: "true"
@@ -72,3 +72,4 @@ It will be interesting though when Umbraco 4 ships and the membership model chan
   [4]: http://www.aaron-powell.com/media/761/umbmember04_499x399.jpg
   [5]: http://www.aaron-powell.com/media/766/umbmember05_494x45.jpg
   [6]: http://www.aaron-powell.com/media/771/umbmember06_499x139.jpg
+
