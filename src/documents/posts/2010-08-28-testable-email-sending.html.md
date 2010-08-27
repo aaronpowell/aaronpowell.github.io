@@ -13,7 +13,7 @@ This article was migrated from my old website, originally dated 17/07/2009
 ---
 Yesterday [Shannon][1] finally got with the times and learnt about the `System.Net` and how it can be used to [dump emails to your file system][2].
 
-Something I then mentioned to him on Twitter was that you can also use this method to unit test the email that was sent.
+Something I then mentioned to him on Twitter was that you can also use this method to test the email that was sent.
 
 First off lets write ourselves a very basic email sending test:
 
@@ -83,7 +83,7 @@ The problem is that there isn't really a good way to determine the email (someon
 		//and so on
 	}
 
-So there you have it, it's very basic to use and make unit testable email sending.
+So there you have it, it's very basic to use and make testable email sending.
 
   [1]: http://twitter.com/shazwazza
   [2]: http://farmcode.org/post/2009/07/16/Testing-Outgoing-SMTP-Emails-So-Simple!.aspx
