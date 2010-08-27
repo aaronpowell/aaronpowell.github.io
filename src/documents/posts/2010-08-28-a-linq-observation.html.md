@@ -21,11 +21,11 @@ Take this LINQ statement (where ctx is an instance of my DataContext):
 
     var items = ctx.Items;
 
-That statement returns an object of `Table&lt;Item&gt;`, which implements `IQueryable&lt;T&gt;`, `IEnumerable&lt;T&gt;` (and a bunch of others that are not important for this instructional). So it's not executed yet, no DB query has occurred, etc. Now lets take this LINQ statement:
+That statement returns an object of `Table<Item>`, which implements `IQueryable<T>`, `IEnumerable<T>` (and a bunch of others that are not important for this instructional). So it's not executed yet, no DB query has occurred, etc. Now lets take this LINQ statement:
 
     var items2 = from item in ctx.Items select item;
 
-This time I get a result of `IQueryable&lt;Item&gt;`, which implements `IQueryable&lt;T&gt;` (duh!) and `IEnumerable&lt;T&gt;` (and again, a bunch of others).
+This time I get a result of `IQueryable<Item>`, which implements `IQueryable<T>` (duh!) and `IEnumerable<T>` (and again, a bunch of others).
 
 Both of these results have a non-public property called Expression. This reperesents the expression tree which is being used to produce our collection. But here's the interesting part, they are not the same. That's right, although you're getting back basically the same result, the expression used to produce that result is really quite different.
 
@@ -33,6 +33,6 @@ This is due to the way the compiler translates the query syntax of LINQ into a l
 
     var items2 = ctx.Items.Select(item => item);
 
-But is this really a problem, what difference does it make? In the original examples you actually get back the same data every time. You'll have slightly less overhead by using the access of `Table&lt;T&gt;` rather than `IQueryable&lt;T&gt;`, due to the fact that you're not doing a redundant call to Select. But in reality you would not notice the call.
+But is this really a problem, what difference does it make? In the original examples you actually get back the same data every time. You'll have slightly less overhead by using the access of `Table<T>` rather than `IQueryable<T>`, due to the fact that you're not doing a redundant call to Select. But in reality you would not notice the call.
 
 This has caused a problem for me as my direct-access lambda syntax fails my current unit test, where as the query syntax passes. Now to solve that problem! ;)
