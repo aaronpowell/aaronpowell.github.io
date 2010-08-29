@@ -33,7 +33,7 @@ So I did some digging, I was doing everything that should have been done to retu
 
 That looks fine right... right?! *Yes, that is fine :P*
 
-==Hunting for bugs
+##Hunting for bugs
 
 Well it was time to start finding the problem, and I had a feeling this was going to be a doosy. I started by disabling ClientDependency and then the images did start working (although my CSS fell apart...), so I was 100% convinced that the problem was with it, but what could it be, I'm working with binary files here, not CSS.
 
@@ -45,13 +45,13 @@ In fact, that's exactly the problem! The way ClientDependency works is that it a
 
 Cock...
 
-==He'll be making a ContentType and checking it twice
+##He'll be making a ContentType and checking it twice
 
 So this is a very obvious problem, we're not ignoring the images, we're treating their request as though it is any text/plain request, so I put in a conditional check to ignore the image requests, drop it into my blog and hit refresh. But still no joy... I check again that I did put the line of code in, attach the debugger and spin it off.
 
 To my surprise though the content type property of my response is not `image/png` as I expected it expected it to be, but instead it's `text/plain`. Err, WTF? I spin up Charles and check, nope, Charles is saying that it's `image/png` in the browser. I spin up PowerShell and write a simple web request script, again it's telling my `image/png`. Well why the hell is the HttpModule telling me otherwise?
 
-===An event by any other name...
+###An event by any other name...
 
 So I start doing some research and realise that we're using the event [HttpApplication.PreRequestHandlerExecute][2] to do the transform, but fun fact is that this is too early in the request life cycle. At this point the Request object is populated, but it's not been handled, so the object doesn't have the appropriate ContentType set.
 
@@ -59,7 +59,7 @@ After a bit more research I fine a better event to suite my needs, [HttpApplicat
 
 Now my ContentType property is set up and I can do checking against it, and the fix now works nicely (there currently isn't a ClientDependency release available with this fix yet, so if you need it you'll have to grab it from the source).
 
-==A word of caution
+##A word of caution
 
 The reason I've made this post is to bring this oversight to peoples attention. While doing the research to fix this problem I looked at a few different libraries which add custom filters (either to remove whitespace, or to gzip responses, etc) and I didn't find any of them *doing content type checking of the response*. Generally speaking you shouldn't need to do this, and in the past it's not really been needed as it wasn't as common place to have ASP.NET web applications actually return a file. But with the advent of MVC and the easy in which you can use `FileResult` it's something to watch out for.
 
