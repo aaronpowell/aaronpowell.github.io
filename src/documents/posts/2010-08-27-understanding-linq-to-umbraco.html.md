@@ -2,7 +2,7 @@
 title: "Understanding LINQ to Umbraco"
 metaTitle: "Understanding LINQ to Umbraco"
 description: "A look what LINQ to Umbraco is and what it isn't"
-revised: "2010-08-27"
+revised: "2010-09-06"
 date: "2010-08-27"
 tags: ["umbraco","linq-to-umbraco"]
 migrated: "true"
@@ -88,6 +88,10 @@ The `NodeDataProvider` itself has quite a bit of caching built into it. Every ti
 
 There is nothing *wrong* with running a singleton for the `UmbracoDataContext` and `UmbracoDataProvider` objects, just keep in mind that you may get stale data. On the `NodeDataProvider` there is a `Flush` method, this will essentially force the cache to be cleared within it so that next time you'll get new objects from the XML. The reason that the `Flush` method doesn't reside on the `UmbracoDataProvider` is because it should be up to the implementor of the `UmbracoDataProvider` to decide if/ how they are caching objects.
 
+##IQueryable
+
+LINQ to Umbraco doesn't implement IQueryable, instead it implements IEnumerable. If you're interested in understanding why IEnumeraable was used rather than IQueryable I have [covered that in its own article][4].
+
 ##Conclusion
 
 Hopefully this article has given you a bit of an insight into how LINQ to Umbraco was designed, what it was designed for and how you should be use it.
@@ -98,3 +102,4 @@ Everyone who's using it keep your feedback coming so that we can look to expand 
   [1]: http://blogs.msdn.com/b/mattwar/archive/2008/05/04/mocks-nix-an-extensible-linq-to-sql-datacontext.aspx
   [2]: /rssdataprovider-for-linq-to-umbraco
   [3]: /unit-testing-with-umbraco
+  [4]: /iqueryable-linq-to-umbraco
