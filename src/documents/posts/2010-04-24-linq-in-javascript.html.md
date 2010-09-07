@@ -2,7 +2,7 @@
 title: "LINQ in JavaScript"
 metaTitle: "LINQ in JavaScript"
 description: "LINQ is just a pattern, this shows you how to produce it in JavaScript"
-revised: "2010-04-25"
+revised: "2010-09-07"
 date: "2010-04-24"
 tags: ["linq","javascript"]
 migrated: "true"
@@ -131,9 +131,11 @@ Ultimately LINQ in JavaScript is nothing more than throught experiment project. 
 **But I don't recommend that anyone acutally use it**. If you're using a client-side query API such as this (or any of the other LINQ implementations for JavaScript) you're doing it wrong. Particularly operators like where, skip, take and even select. These operators are designed to lower/ change the data volume you are working with, which on the client side is not a good idea. It means that you've returned too much data from the server!
 I see the only real useful reason for this (other than just wanting to prove it can be done) is to manipulate a DOM structure, say client-side reordering of a table.
 
-But that said anyone who's interested in seeing how it works and having a play yourself you can find the code [here][3].
+##Source code
+
+I've pushed the [source code for the LINQ in JavaScript][3] project up to bitbucket. If you're interested in having a play with it you can grab it from there.
 
 
   [1]: http://jslinq.codeplex.com/
   [2]: http://community.bartdesmet.net/blogs/bart/archive/2008/09/14/who-ever-said-linq-predicates-need-to-be-boolean-valued.aspx
-  [3]: /get/linq/linqinjavascript.js
+  [3]: https://bitbucket.org/slace/linq-in-javascript
