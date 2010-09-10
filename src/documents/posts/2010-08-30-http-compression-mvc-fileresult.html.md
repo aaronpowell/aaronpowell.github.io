@@ -2,7 +2,7 @@
 title: "Using HttpCompression libraries and ASP.NET MVC FileResult"
 metaTitle: "Using HttpCompression libraries and ASP.NET MVC FileResult"
 description: "An interesting quirk I found from ClientDe"
-revised: "2010-08-30"
+revised: "2010-09-11"
 date: "2010-08-30"
 tags: ["asp.net-mvc","clientdependency","umbraco"]
 migrated: "true"
@@ -55,7 +55,7 @@ To my surprise though the content type property of my response is not `image/png
 
 So I start doing some research and realise that we're using the event [HttpApplication.PreRequestHandlerExecute][2] to do the transform, but fun fact is that this is too early in the request life cycle. At this point the Request object is populated, but it's not been handled, so the object doesn't have the appropriate ContentType set.
 
-After a bit more research I fine a better event to suite my needs, [HttpApplication.PostReleaseRequestState][3], and this is the one recommended when doing filters against the HttpResponse.
+After a bit more research I fine a better event to suite my needs, [HttpApplication.PostRequestHandlerExecute][3], and this is the one recommended when doing filters against the HttpResponse.
 
 Now my ContentType property is set up and I can do checking against it, and the fix now works nicely (there currently isn't a ClientDependency release available with this fix yet, so if you need it you'll have to grab it from the source).
 
@@ -68,4 +68,5 @@ There's nothing wrong with using HttpModule's to compress your response, clean u
 
   [1]: http://clientdependency.codeplex.com
   [2]: http://msdn.microsoft.com/en-us/library/system.web.httpapplication.prerequesthandlerexecute.aspx
-  [3]: http://msdn.microsoft.com/en-us/library/system.web.httpapplication.postreleaserequeststate.aspx
+  [3]: http://msdn.microsoft.com/en-us/library/system.web.httpapplication.PostRequestHandlerExecute.aspx
+
