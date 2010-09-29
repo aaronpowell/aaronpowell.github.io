@@ -17,10 +17,16 @@ There was a lot of things that I wanted to achieve with LINQ to Umbraco that cou
 
 So this project will aim to fill in the gaps that LINQ to Umbraco leaves out of the core of Umbraco.
 
+## Source and releases
+
+* [Source Code][1]
+* Current Release (coming soon)
+
 ## DocumentDataProvider
-* [Overview][1]
+* [Overview][2]
 
   
 
 
-  [1]: /documentdataprovider-overview
+  [1]: http://bitbucket.org/slace/linq-to-umbraco-extensions
+  [2]: /documentdataprovider-overview
