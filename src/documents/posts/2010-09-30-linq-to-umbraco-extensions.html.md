@@ -2,7 +2,7 @@
 title: "A set of extensions for LINQ to Umbraco"
 metaTitle: "A set of extensions for LINQ to Umbraco"
 description: "Making LINQ to Umbraco way more awesome"
-revised: "2010-09-30"
+revised: "2010-10-01"
 date: "2010-09-30"
 tags: ["umbraco","linq-to-umbraco","linq-to-umbraco-extensions"]
 migrated: "true"
@@ -24,9 +24,11 @@ So this project will aim to fill in the gaps that LINQ to Umbraco leaves out of 
 
 ## DocumentDataProvider
 * [Overview][2]
+* [Creating a DocumentTree class][3]
 
   
 
 
   [1]: http://bitbucket.org/slace/linq-to-umbraco-extensions
   [2]: /documentdataprovider-overview
+  [3]: /documentdataprovider-tree
