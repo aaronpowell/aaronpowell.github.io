@@ -2,7 +2,7 @@
 title: "The great Umbraco API misconception"
 metaTitle: "The great Umbraco API misconception"
 description: "Sometimes the truth hurts"
-revised: "2010-04-11"
+revised: "2010-10-04"
 date: "2010-04-08"
 tags: ["umbraco","cms",".net","caution"]
 migrated: "true"
@@ -38,5 +38,10 @@ I think we may fix this in v5, but you don't want all the fun nuance of Umbraco 
 
 So is there anything that you can do to get around the eventing order with Umbraco? The answer is [yes, yes you can][1].
 
+### Why is it like this?
+
+If you're interested in knowing why this happens check out my article on the [design of data types][2].
+
 
   [1]: /umbraco-event-improvments
+  [2]: /umbraco-data-type-design
