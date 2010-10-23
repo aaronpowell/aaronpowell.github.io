@@ -65,7 +65,7 @@ That's perfectly valid because... **functions are objects**. That's right, anyth
 	};
 	
 	add.add = add;
-	alert(add.add(1,1)); //alerts 1
+	alert(add.add(1,1)); //alerts 2
 
 Ok, so this isn't *really* that useful an example, but it does kind of prove a point.
 
