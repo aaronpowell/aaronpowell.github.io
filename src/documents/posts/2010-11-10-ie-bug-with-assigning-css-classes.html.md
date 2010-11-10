@@ -52,4 +52,4 @@ I then created a very simple little piece of HTML to test with to ensure it wasn
 
 Save that as a HTML file and open it in IE7, IE9 Beta (I don't have 8 or 6 on a machine), Firefox 3.6.11 and Chrome 8. In both the IEs I tested the background colour & padding is not applied, despite the inspector saying that the element has the classes applied to it.
 
-I'll be reporting this as a bug in IE shortly, but of future note to developers **use element.className not elemnet.setAttribute for CSS class assignment!**
+I'll be reporting this as a bug in IE shortly, but of future note to developers **use `element.className` not `elemnet.setAttribute` for CSS class assignment!**
