@@ -27,7 +27,6 @@ The developer who wrote the JavaScript was using `setAttribute` method on the DO
 
 I then created a very simple little piece of HTML to test with to ensure it wasn't something more of a problem from the overall page, but **it always fails in IE**, here's my sample code:
 
-
 	<html>
 		<head>
 			<title>IE CSS assignment testing</title>
