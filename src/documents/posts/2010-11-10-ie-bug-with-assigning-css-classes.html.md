@@ -25,30 +25,17 @@ After scratching my head for a while I took another look at the element creation
 
 The developer who wrote the JavaScript was using `setAttribute` method on the DOM element to set the CSS class, not the `className` property. I've never done it via the method, so I changed it to use the property and vola the CSS class was applied!
 
-I then created a very simple little piece of HTML to test with to ensure it wasn't something more of a problem from the overall page, but **it always fails in IE**, here's my sample code:
+I then created a very simple little piece of HTML to test with (downloadable here) to ensure it wasn't something more of a problem from the overall page, but **it always fails in IE**, here's the JavaScript code that causes the failure:
 
-	<html>
-		<head>
-			<title>IE CSS assignment testing</title>
-			<style type="text/css">
-				.c { background-color:#ff0000;}
-				.s { padding-top:10px; background-color:#00ff00;}
-			</style>
-		</head>
-		<body>
-			<div id="s"></div>
-			
-			<script type="text/javascript">
-				var txt = document.createElement('span');
-				txt.innerHTML = "Hello World";
-				txt.setAttribute('class', 'c');
-				
-				var s = document.getElementById('s');			
-				s.appendChild(txt);
-				s.setAttribute('class', 's');
-			</script>
-		</body>
-	</html>
+	<script type="text/javascript">
+		var txt = document.createElement('span');
+		txt.innerHTML = "Hello World";
+		txt.setAttribute('class', 'c');
+		
+		var s = document.getElementById('s');			
+		s.appendChild(txt);
+		s.setAttribute('class', 's');
+	</script>
 
 Save that as a HTML file and open it in IE7, IE9 Beta (I don't have 8 or 6 on a machine), Firefox 3.6.11 and Chrome 8. In both the IEs I tested the background colour & padding is not applied, despite the inspector saying that the element has the classes applied to it.
 
