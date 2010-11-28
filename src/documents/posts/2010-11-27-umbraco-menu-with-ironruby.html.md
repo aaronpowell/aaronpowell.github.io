@@ -87,13 +87,78 @@ Here's the completed script:
 		puts html
 	end
 
-	puts '</ul></nav>
+	puts '</ul></nav>'
 
 That's a total of 13 lines (including whitespace, which can be condensed to just 7 lines if you change whitespace and HTML formatting) of Ruby code which can build a navigation which will suite a lot of needs. Compare this to the template for `NavigationPrototype.xslt` which ships within an Umbraco install that is 40 lines (ok, fine it **does** have comments :P). Not bad me things, not bad...
 
 ## Conclusion
 
 IronRuby is a great alternative to writing small macros in Umbraco, it's a great alternative to using XSLT. If you're a developer I strongly recommend you look into the DLR support for your Umbraco projects.
+
+# Bonus - making a recursive menu system
+
+In the above code we've make a simple menu system that has a known starting point, but as I pointed out it's not great if you wanted to have a recursive one? Well let's have a look at what is required to do that.
+
+## Recursively finding a parent
+
+The first thing we need to do is work out how to translate this XPath statement (that's from the template shipped in Umbraco):
+
+    $currentPage/ancestor-or-self::node [@level=$level]/node [string(data [@alias='umbracoNaviHide']) != '1']
+
+into something in Ruby.
+
+But there's a problem, we're checking against the `@level` attribute in XSLT, but the `Node` object in the Umbraco API **doesn't have a Level property**! Damn that's going to make my life harder isn't it... Well good news is you can get around this with a bit of trickery. What we're going to do is work against the `Id` property... but hang on, we don't *know* what the Id is of the node at the level we want, and like hell do I want to hard code that anywhere. Well here's where the trickery comes in.
+
+The `Node` object has a property on it for the `Path`, we can use that to *fake* the level. Since a path is always in a known format, a comma-separated string, we can make that into an array, and then path-from-there ;).
+
+    level = 2
+    target_parent_id = currentPage.Path.split(',')[level].to_i rescue -1
+
+Since we're working with microsites here I don't want the upper-most navigation point for the site, I want the point from the current microsite, so I'm finding the ID of the node at level 2, if you were doing a full site specify the array index position (aka level) to be `1`.
+
+We're also doing a `rescue` here, and that will cause -1 to be returned if we for some reason don't have an array that is at least 3 items long (it's not required but it's just safer and easier to recover from if you have an unexpected error).
+
+You'll also notice the `to_i` on the end, this method will convert the string (ie: "1234") into a number (ie: 1234).
+
+Next we to actually find the parent, so we want to simulate the `ancestor-or-self` XPath select, which is really just a recursive function, and if there's something that dynamic languages are great for that's recursive functions.
+
+	parent = currentPage
+	parent = parent.Parent until parent.nil? || parent.Id == target_parent_id
+
+So what we're doing here is calling the `until` loop method and assigning the value of `parent` to `parent.Parent` until one of the conditions returns true. This is similar to a `do {...} while(...)` statement in .NET languages, just a bit funkier ;).
+
+## Bringing it all together
+
+In addition to adding recursive parent lookups we've also decided to fix the script so that no navigation HTML is generated if there is no navigation to display. This can be done with a single-line `if` statement, which looks kind of cool:
+
+	return if (parent && (parent.Children.empty? || parent.Children.any? {|c| c.GetProperty("umbracoNaviHide").Value == "1" })) || parent.nil?
+
+That'll cause the script to exit if the parent wasn't found or there aren't any children to display.
+
+Here's what the whole script looks like now:
+
+	Library = Object.const_get("umbraco").const_get("library")
+
+	target_parent_id = currentPage.Path.split(',')[2].to_i rescue -1
+	parent = currentPage
+	parent = parent.Parent until parent.nil? || parent.Id == target_parent_id
+	
+	return if (parent && (parent.Children.empty? || parent.Children.any? {|c| c.GetProperty("umbracoNaviHide").Value == "1" })) || parent.nil?
+	
+	puts '<nav><ul id="navigation">'
+
+	parent.Children.find_all { |c| c.GetProperty("umbracoNaviHide").Value != "1" }.each_with_index do |child, i|
+		html = ""
+		html << "<li class=\"#{'first' if i == 0}\">"
+		html << "<a href=\"#{Library.NiceUrl(child.Id)}\" class=\"#{ 'selected' if child.Id == currentPage.Id }\" title=\"#{child.Name}\">#{child.Name}</a>"
+		html << "</li>"
+		puts html
+	end
+
+	puts '</ul></nav>'
+
+Happy Ruby-ing :)
+
 
   [1]: /why-im-not-a-fan-of-xslt
   [2]: http://thefarmdigital.com.au
@@ -103,4 +168,5 @@ IronRuby is a great alternative to writing small macros in Umbraco, it's a great
   [6]: http://twitter.com/#!/thomasjo
   [7]: http://ruby-doc.org/core/classes/Enumerable.html#M003124
   [8]: http://ruby-doc.org/core/classes/Enumerable.html#M003137
+
 
