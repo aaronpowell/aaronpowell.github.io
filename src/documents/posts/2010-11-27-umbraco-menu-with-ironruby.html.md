@@ -17,7 +17,7 @@ Recently I've been help a client migrate a number of unmanaged microsites into a
 
 Umbraco has supported DLR languages like [IronPython][4] and [IronRuby][5] for quite some time, so I decided to look into it for this new project.
 
-So with the help of fellow Readifian [Thomas Johansen][6] we set about doing a migration of the microsites and running IronRuby where possible (Thomas is a Ruby fan so that's why we're choosing IronRuby here).
+So with the help of fellow Readifarian [Thomas Johansen][6] we set about doing a migration of the microsites and running IronRuby where possible (Thomas is a Ruby fan so that's why we're choosing IronRuby here).
 
 One of the most common macros I was still writing in XSLT is a navigation, so lets look at how we can do this with IronRuby.
 
@@ -103,3 +103,4 @@ IronRuby is a great alternative to writing small macros in Umbraco, it's a great
   [6]: http://twitter.com/#!/thomasjo
   [7]: http://ruby-doc.org/core/classes/Enumerable.html#M003124
   [8]: http://ruby-doc.org/core/classes/Enumerable.html#M003137
+
