@@ -131,7 +131,7 @@ So what we're doing here is calling the `until` loop method and assigning the va
 
 In addition to adding recursive parent lookups we've also decided to fix the script so that no navigation HTML is generated if there is no navigation to display. This can be done with a single-line `if` statement, which looks kind of cool:
 
-	return if (parent && (parent.Children.empty? || parent.Children.any? {|c| c.GetProperty("umbracoNaviHide").Value == "1" })) || parent.nil?
+	return if (parent && (parent.Children.empty? || parent.Children.any? {|c| c.GetProperty("umbracoNaviHide").Value != "1" })) || parent.nil?
 
 That'll cause the script to exit if the parent wasn't found or there aren't any children to display.
 
@@ -143,7 +143,7 @@ Here's what the whole script looks like now:
 	parent = currentPage
 	parent = parent.Parent until parent.nil? || parent.Id == target_parent_id
 	
-	return if (parent && (parent.Children.empty? || parent.Children.any? {|c| c.GetProperty("umbracoNaviHide").Value == "1" })) || parent.nil?
+	return if (parent && (parent.Children.empty? || parent.Children.any? {|c| c.GetProperty("umbracoNaviHide").Value != "1" })) || parent.nil?
 	
 	puts '<nav><ul id="navigation">'
 
@@ -168,5 +168,6 @@ Happy Ruby-ing :)
   [6]: http://twitter.com/#!/thomasjo
   [7]: http://ruby-doc.org/core/classes/Enumerable.html#M003124
   [8]: http://ruby-doc.org/core/classes/Enumerable.html#M003137
+
 
 
