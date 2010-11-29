@@ -15,7 +15,7 @@ summary: """
 
 # Modularizing your IronRuby files
 
-Having the ability to break a large file into a set of smaller files is quite an important aspect of any kind of programming, and it's a concept that all languages Umbraco supports has. XSTL has `<xsl:include`, .NET has types, but what about DLR scripts?
+Having the ability to break a large file into a set of smaller files is quite an important aspect of any kind of programming, and it's a concept that is in all the languages that Umbraco supports. XSTL has `<xsl:include`, .NET has types, but what about DLR scripts?
 
 IronRuby (and IronPython) allow you to break files into smaller files, but how do you then include them?
 
