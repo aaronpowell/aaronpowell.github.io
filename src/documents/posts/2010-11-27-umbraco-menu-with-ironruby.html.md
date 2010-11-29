@@ -46,11 +46,11 @@ Now that we have our starting node we need to start constructing a navigation, t
 	puts '<nav><ul id="navigation">'
 
 	parent.Children.find_all { |c| c.GetProperty("umbracoNaviHide").Value != "1" }.each_with_index do |child, i|
-		html = ""
-		html << "<li class=\"#{'first' if i == 0}\">"
-		html << "<a href=\"#{Library.NiceUrl(child.Id)}\" class=\"#{ 'selected' if child.Id == currentPage.Id }\" title=\"#{child.Name}\">#{child.Name}</a>"
-		html << "</li>"
-		puts html
+	  puts %Q{
+		<li class="#{'first' if i == 0}">
+		  <a href="#{Library.NiceUrl(child.Id)}" class="#{'selected' if child.Id == currentPage.Id}" target="_self" title="Go to #{child.Name}">#{child.Name}</a>
+		</li>
+	  }
 	end
 
 	puts '</ul></nav>
@@ -80,11 +80,11 @@ Here's the completed script:
 	puts '<nav><ul id="navigation">'
 
 	parent.Children.find_all { |c| c.GetProperty("umbracoNaviHide").Value != "1" }.each_with_index do |child, i|
-		html = ""
-		html << "<li class=\"#{'first' if i == 0}\">"
-		html << "<a href=\"#{Library.NiceUrl(child.Id)}\" class=\"#{ 'selected' if child.Id == currentPage.Id }\" title=\"#{child.Name}\">#{child.Name}</a>"
-		html << "</li>"
-		puts html
+	  puts %Q{
+		<li class="#{'first' if i == 0}">
+		  <a href="#{Library.NiceUrl(child.Id)}" class="#{'selected' if child.Id == currentPage.Id}" target="_self" title="Go to #{child.Name}">#{child.Name}</a>
+		</li>
+	  }
 	end
 
 	puts '</ul></nav>'
@@ -148,11 +148,12 @@ Here's what the whole script looks like now:
 	puts '<nav><ul id="navigation">'
 
 	parent.Children.find_all { |c| c.GetProperty("umbracoNaviHide").Value != "1" }.each_with_index do |child, i|
-		html = ""
-		html << "<li class=\"#{'first' if i == 0}\">"
-		html << "<a href=\"#{Library.NiceUrl(child.Id)}\" class=\"#{ 'selected' if child.Id == currentPage.Id }\" title=\"#{child.Name}\">#{child.Name}</a>"
-		html << "</li>"
-		puts html
+	  puts %Q{
+		<li class="#{'first' if i == 0}">
+		  <a href="#{Library.NiceUrl(child.Id)}" class="#{'selected' if child.Id == currentPage.Id}" target="_self" title="Go to #{child.Name}">#{child.Name}</a>
+		</li>
+	  }
+
 	end
 
 	puts '</ul></nav>'
