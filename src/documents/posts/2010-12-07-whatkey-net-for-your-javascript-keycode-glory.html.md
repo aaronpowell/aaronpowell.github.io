@@ -2,7 +2,7 @@
 title: "WhatKey.net, a simple way to find JavaScript keycodes"
 metaTitle: "WhatKey.net, a simple way to find JavaScript keycodes"
 description: "An overview of a simple site which helps JavaScript developers working with keyboard events"
-revised: "2010-12-09"
+revised: "2010-12-21"
 date: "2010-12-07"
 tags: ["whatkey","javascript","web","project"]
 migrated: "true"
@@ -19,16 +19,18 @@ It's just one of those things that you don't need all that often, but it's just 
 
 As they say, the necessity is the mother of all invention, so I decided to whip up a simple website which anyone can use, available at [http://whatkey.net][2].
 
-All you need to do is fire up [http://whatkey.net][2] and press the key that you want, this give you the keycode for the `keydown` event in big letters. If you want to check different keyboard events, like `keypress` or `keyup` then you can access them by going to [http://whatkey.net/keypress][3] or [http://whatkey.net/keyup][4].
+All you need to do is fire up [http://whatkey.net][3] and press the key that you want, this give you the keycode for the `keydown` event in big letters. If you want to check different keyboard events, like `keypress` or `keyup` then you can access them by going to [http://whatkey.net/keypress][4] or [http://whatkey.net/keyup][5].
 
-Best of all this whole application is done in about 20 lines of code, it runs Ruby, using [Sinatra][5] and hosted on [Heroku][6].
+Best of all this whole application is done in about 20 lines of code ([source code is on GitHub][6]), it runs Ruby, using [Sinatra][7] and hosted on [Heroku][8].
 
 Hopefully this tool becomes useful to other web developers out there.
 
 
   [1]: http://www.logitech.com/en-au/mice-pointers/presentation-remote/devices/5993
   [2]: http://whatkey.net
-  [3]: http://whatkey.net/keypress
-  [4]: http://whatkey.net/keyup
-  [5]: http://sinatrarb.com
-  [6]: http://heroku.com
+  [3]: http://whatkey.net
+  [4]: http://whatkey.net/keypress
+  [5]: http://whatkey.net/keyup
+  [6]: https://github.com/aaronpowell/whatkey
+  [7]: http://sinatrarb.com
+  [8]: http://heroku.com
