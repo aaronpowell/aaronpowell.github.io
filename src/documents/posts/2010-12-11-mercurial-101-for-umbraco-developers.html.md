@@ -2,7 +2,7 @@
 title: "Mercurial 101 as an Umbraco developer"
 metaTitle: "Mercurial 101 as an Umbraco developer"
 description: "A Mercurial primer for Umbraco developers"
-revised: "2010-12-14"
+revised: "2010-12-23"
 date: "2010-12-11"
 tags: ["umbraco","mercurial"]
 migrated: "true"
@@ -17,13 +17,13 @@ You may have read the post that the Umbraco codebase is being moved from a CodeP
 
 ## First up, a Mercurial primer
 
-While there are fancy GUI tools for working with Mercurial (such as [TortoiseHg][2]) I'm going to do a quick run down on what you need to be able to use from the command line to work with Mercurial. Personally I find it easier (and quicker) to work on the command line, but if you'd prefer to learn about TortoiseHg jump over to their doco :).
+While there are fancy GUI tools for working with Mercurial (such as [TortoiseHg][2]) I'm going to do a quick run down on what you need to be able to use from the command line to work with Mercurial. Personally I find it easier (and quicker) to work on the command line, but if you'd prefer to learn about TortoiseHg jump over to their doco, or read [Shannon's][3] [guide to using TortoiseHg][4] :).
 
 ### Commands you need
 
 There are three things you need to be able to do if you're grabbing the code from Mercurial, clone, update and view history: (Note: This is not covering doing changes, just how to get the code and navigate around it)
 
- * hg clone [https://hg01.codeplex.com/umbraco][3]
+ * hg clone [https://hg01.codeplex.com/umbraco][5]
   * This how you get a copy of the codeplex repository onto your machine. This may take a little while, we've got a lot of history (sic) in there that you'll be getting
  * hg update <version you want>
   * This is how you'll get to the release that you want to view the code for. Say you want to work with v4.5.2 then you want to do `hg update Release-4.5.2`
@@ -57,4 +57,6 @@ Happy Hacking :)
 
   [1]: http://umbraco.org/follow-us/blog-archive/2010/12/8/heads-up-umbraco-sourcecode-at-codeplex-to-switch-to-mercurial
   [2]: http://tortoisehg.bitbucket.org/
-  [3]: https://hg01.codeplex.com/umbraco
+  [3]: http://shazwazza.com/
+  [4]: http://shazwazza.com/post/A-UI-guide-to-using-Umbracoe28099s-new-repository-format-Mercurial.aspx
+  [5]: https://hg01.codeplex.com/umbraco
