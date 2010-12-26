@@ -25,7 +25,7 @@ So what does the Razor support for Umbraco include? Well basically it allows Raz
 
 So if you want to work with Razor what do you need to do? Well creating a Razor macro is just as nice as if you're doing any other kind of macro, through the Umbraco UI.
 
-Razor files live along side the Iron* files in the `/python` folder (yeah, that's a hold over from the original DLR engine and changing it would be a breaking change so we have to live with it), and you create them like you create any other DLR script file in the Umbraco back office:
+Razor files live along side the Iron* files in the `/python` folder (yeah, that's a hold over from the original DLR engine and changing it would be a breaking change so we have to live with it. Note - as Morten pointed out in the comments you can set `<add key="umbracoPythonPath" value="~/Razor" />` and use a different path for script files), and you create them like you create any other DLR script file in the Umbraco back office:
 
 ![Create Razor macors][4]
 
