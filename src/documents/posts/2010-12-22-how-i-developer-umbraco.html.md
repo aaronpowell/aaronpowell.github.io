@@ -27,7 +27,7 @@ So for this I'm going to be running the following software:
 
 Although I'm running Windows 7 I've used this setup on Windows XP and Vista as well, so don't fear if you're running an archaic OS :P.
 
-*Side note: I'm using the Umbraco Juno (4.6) beta release, but again this is a mute point, it works with any Umbraco 4.x instance*
+*Side note: I'm using the Umbraco Juno (4.6) beta release, but again this is a moot point, it works with any Umbraco 4.x instance*
 
 ## Getting Umbraco running
 
@@ -37,7 +37,7 @@ For development I use **Web Application** projects, so create a new empty Web Ap
 
 ![New WAP][2]
 
-Once I've added a Web Application I create the solutions required for [WebFormsMVP][3] projects, a `Logic` and `Services` project (which I then remove the `Class1.cs` file). This will end you up with an empty Visual Studio solution (well, except for a web.config file):
+Once I've added a Web Application I create the solutions required for [WebFormsMVP][3] projects, a `Logic` and `Services` project (which I then remove the `Class1.cs` file) and a Test project (omitted from here as it's not important to the overall post). This will end you up with an empty Visual Studio solution (well, except for a web.config file):
 
 ![Look ma', no files][4]
 
