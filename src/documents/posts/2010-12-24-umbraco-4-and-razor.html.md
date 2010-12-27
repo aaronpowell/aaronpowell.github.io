@@ -59,6 +59,22 @@ Well lets take it up a notch and make a slightly more advanced macro, say a news
 
 What we're doing here looping through each of the children of the current page (the `Model`), and generating a `<div>` and then creating the HTML structure inside it.
 
+### Post-beta features
+
+Just a little note I've added a change to the DynamicNode class which is used by the dynamic Model object that allows you to access specific types of children, so you can do this in your Razor file:
+
+	<div class="news-lissting">
+		@foreach(var page in Model.articles) {
+			<div class="news-item">
+				<h2><a href="@page.Url" title="@page.Name">@page.Name</a></h2>
+				<h3>Published: @page.articleDate.ToString("dd MMM yyyy")</h3>
+				<p>@page.description<p>
+			</div>
+		}
+	</div>
+
+In this example my `Model` has children of the type `article` (that's the alias of the DocType) and I'm requesting them all (hence the pluralization). Pretty sweet I think!
+
 ## Conclusion
 
 I'm sure that even the most seasoned XSLT "developer" (I'm looking at you [Warren][5]!) will have to admit the Razor syntax is highly readable for people who aren't .NET developers. And because we're working with a dynamic object it's really simple to access the properties as needed.
