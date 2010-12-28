@@ -19,7 +19,15 @@ Last year I said that [2009 was my biggest year professionally][1], but in reali
 
 In 2010 I set a new goal for myself and that was to become more of a figure in the Australian development community, and I started this off with a dive into the conference circuit.
 
-I kicked it off with [DDD Melbourne][2] where I presented a Beginning Umbraco session. I then headed back to Melbourne for Remix (which I just attended :P), flew to Denmark for [CodeGarden 10 to speak about unit testing][3], returned to Sydney to help organize (and speak at) the first DDD Sydney conference, won Amped and went to Tokyo for Web Directions East, spoke about open source content management at CodeCamp OZ and wrapped up the year with a lightning talk at [SydJs][4] on [JavaScript frameworks][5].
+I...
+
+* Kicked off with [DDD Melbourne][2] where I presented a Beginning Umbraco session
+* I then headed back to Melbourne for Remix (which I just attended :P)
+* Flew to Denmark for [CodeGarden 10 to speak about unit testing][3]
+* Returned to Sydney to help organize (and speak at) the first DDD Sydney conference
+* Won Amped and went to Tokyo for Web Directions East
+* Spoke about open source content management at CodeCamp OZ 
+* And wrapped up the year with a lightning talk at [SydJs][4] on [JavaScript frameworks][5].
 
 Phew, busy conference set, wonder if I can top that next year :P.
 
@@ -43,6 +51,7 @@ But I've also worked on a few other smaller projects:
  * [LINQ to Umbraco Extensions][15]
   * I'll update this soon :P
  * [Dynamic extensions][16]
+ * [Open Conference Protocol][17]
 
 Nice little list I think ;)
 
@@ -50,6 +59,7 @@ Nice little list I think ;)
 ----------
 
 Well that pretty much concludes my 2010 wrap up, in 2011 be sure to look out for me at MIX 11, DDD Sydney and CodeGarden 10 :D
+
 
   [1]: /2009-a-year-in-review
   [2]: /dddmelbourne-umbraco
@@ -67,3 +77,4 @@ Well that pretty much concludes my 2010 wrap up, in 2011 be sure to look out for
   [14]: http://examine.codeplex.com
   [15]: /linq-to-umbraco-extensions
   [16]: /dynamics-library
+  [17]: http://openconferenceprotocol.org
