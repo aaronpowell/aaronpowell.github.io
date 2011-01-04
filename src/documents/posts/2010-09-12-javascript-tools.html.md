@@ -2,7 +2,7 @@
 title: "JavaScript Tools"
 metaTitle: "JavaScript Tools"
 description: "The home of JavaScript tools I have produced"
-revised: "2010-09-13"
+revised: "2011-01-05"
 date: "2010-09-12"
 tags: ["javascript"]
 migrated: "true"
@@ -27,7 +27,7 @@ So this is the landing page for the different articles around the different libr
 
 ## Source Code
 
-I've decided to release the source code for this as open source. It's hosted using Mercurial on my BitBucket account. You can grab it here [http://bitbucket.org/slace/javascript-tools][3] and feel free to use it, fork it or contribute to it :).
+I've decided to release the source code for this as open source. It's hosted using Mercurial on my BitBucket account. You can grab it here [http://hg.slace.biz/javascript-tools][3] and feel free to use it, fork it or contribute to it :).
 
 ### Licence
 
@@ -36,5 +36,5 @@ I've decided to license the JavaScript tools under the MIT license: [http://bitb
 
   [1]: /slace-core-javascript-library
   [2]: /javascript-eventmanager
-  [3]: http://bitbucket.org/slace/javascript-tools
-  [4]: http://bitbucket.org/slace/javascript-tools/src/tip/JavaScriptTools/LICENSE.txt
+  [3]: http://hg.slace.biz/javascript-tools
+  [4]: http://hg.slace.biz/javascript-tools/src/tip/JavaScriptTools/LICENSE.txt
