@@ -2,7 +2,7 @@
 title: "2010, a year in review"
 metaTitle: "2010, a year in review"
 description: "A look back at what was 2010"
-revised: "2010-12-29"
+revised: "2011-01-05"
 date: "2010-12-24"
 tags: ["random"]
 migrated: "true"
@@ -25,15 +25,17 @@ I...
 * I then headed back to Melbourne for Remix (which I just attended :P)
 * Flew to Denmark for [CodeGarden 10 to speak about unit testing][3]
 * Returned to Sydney to help organize (and speak at) the first DDD Sydney conference
+* Spoke about [Umbraco in the CMS Smackdown][4] for [SBTUG][5]
 * Won Amped and went to Tokyo for Web Directions East
 * Spoke about open source content management at CodeCamp OZ 
-* And wrapped up the year with a lightning talk at [SydJs][4] on [JavaScript frameworks][5].
+* Talked about [Open Conference Protocol][6] at the [Sydney Architecture User Group][7]
+* And wrapped up the year with a lightning talk at [SydJs][8] on [JavaScript frameworks][9].
 
 Phew, busy conference set, wonder if I can top that next year :P.
 
 ## Another year, another job
 
-Last year I was excited about taking a new job with TheFARM Digital and getting to work with [Shannon][6] so we could really go crazy with Umbraco development. Well there was some sadness when I [announced that I was to be leaving TheFARM][7] to join [Readify][8].
+Last year I was excited about taking a new job with TheFARM Digital and getting to work with [Shannon][10] so we could really go crazy with Umbraco development. Well there was some sadness when I [announced that I was to be leaving TheFARM][11] to join [Readify][12].
 
 ## Open Source work
 
@@ -41,40 +43,44 @@ I spent a lot of time this year working on Open Source projects. Obviously Umbra
 
 But I've also worked on a few other smaller projects:
 
- * [FunnelWeb][9]
+ * [FunnelWeb][13]
   * A blogging engine targeted at real developers
- * [JavaScript tools][10]
- * [Ole][11]
- * [Slidee][12]
- * [WhatKey.Net][13]
- * [Examine][14]
- * [LINQ to Umbraco Extensions][15]
+ * [JavaScript tools][14]
+ * [Ole][15]
+ * [Slidee][16]
+ * [WhatKey.Net][17]
+ * [Examine][18]
+ * [LINQ to Umbraco Extensions][19]
   * I'll update this soon :P
- * [Dynamic extensions][16]
- * [Open Conference Protocol][17]
+ * [Dynamic extensions][20]
+ * [Open Conference Protocol][21]
 
 Nice little list I think ;)
 
 
 ----------
 
-Well that pretty much concludes my 2010 wrap up, in 2011 be sure to look out for me at MIX 11, DDD Sydney and CodeGarden 10 :D
+Well that pretty much concludes my 2010 wrap up, in 2011 be sure to look out for me at MIX 11, DDD Sydney and CodeGarden 11 :D
 
 
   [1]: /2009-a-year-in-review
   [2]: /dddmelbourne-umbraco
   [3]: /codegarden-10
-  [4]: http://sydjs.com
-  [5]: /sydjs-javascript-frameworks
-  [6]: http://shazwazza.com
-  [7]: /all-good-things-come-to-an-end
-  [8]: http://readify.net
-  [9]: http://www.funnelweblog.com/
-  [10]: /javascript-tools
-  [11]: /ole
-  [12]: http://hg.slace.biz/slidee
-  [13]: /whatkey-net-for-your-javascript-keycode-glory
-  [14]: http://examine.codeplex.com
-  [15]: /linq-to-umbraco-extensions
-  [16]: /dynamics-library
-  [17]: http://openconferenceprotocol.org
+  [4]: http://www.slideshare.net/CraigBailey/umbraco-in-10-minutes
+  [5]: http://www.sbtug.com/
+  [6]: http://openconferenceprotocol.org
+  [7]: http://thesaug.org/
+  [8]: http://sydjs.com
+  [9]: /sydjs-javascript-frameworks
+  [10]: http://shazwazza.com
+  [11]: /all-good-things-come-to-an-end
+  [12]: http://readify.net
+  [13]: http://www.funnelweblog.com/
+  [14]: /javascript-tools
+  [15]: /ole
+  [16]: http://hg.slace.biz/slidee
+  [17]: /whatkey-net-for-your-javascript-keycode-glory
+  [18]: http://examine.codeplex.com
+  [19]: /linq-to-umbraco-extensions
+  [20]: /dynamics-library
+  [21]: http://openconferenceprotocol.org
