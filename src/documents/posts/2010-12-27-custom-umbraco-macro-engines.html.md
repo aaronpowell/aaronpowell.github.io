@@ -2,7 +2,7 @@
 title: "Custom Umbraco Macro Engines"
 metaTitle: "custom-umbraco-macro-engines"
 description: "A quick look at the new abstraction layer on top of the Umbraco Macro Engine in Umbraco Juno"
-revised: "2010-12-29"
+revised: "2011-01-13"
 date: "2010-12-27"
 tags: ["umbraco"]
 migrated: "true"
@@ -59,6 +59,13 @@ Here's a really basic macro engine:
 	
 Now when you go to create a new *Script File* in the Umbraco admin you'll have a new option for your own macro engine.
 
+## Further reading
+
+I've created a supplementary post to this one which looks at [how to create a NHaml based][1] macro engine.
+
 ## Conclusion
 
 Seriously, it's *just that easy* to create your own macro engine, obviously you'll want to do more with the `Execute` method so that it will interact with the script file that you've created, but this should give you a bit of a starting point :).
+
+
+  [1]: /nhaml-umbraco-macroengine
