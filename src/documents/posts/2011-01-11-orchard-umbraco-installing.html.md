@@ -25,7 +25,7 @@ This is from a series in Orchard and Umbraco, [the overview can be found here][1
 
 For this article I've gone out and grabed the [Orchard 1.0 release][2] and [Umbraco 4.6.1 release][3] (Web Deploy version), and the first thing I noticed is that they are basically the same in terms of download size, with Orchard being slightly smaller, it's 7.08Mb where as Umbraco is 7.50Mb. This is nice, both are sub 10Mb (by a long way), and something I wouldn't have a problem storing in a source control system.
 
-I'm going to use IIS Web Deploy for both installs, this way we're playing on a equal footing from the get go. I could have use the [Microsoft Web Platform Installer (Web PI)][4] for it, but at the time of writing the Umbraco instance in Web PI I found to be 4.5.2, which is not the latest stable (but remember I'm writing this less than 24 hours since the Juno release so I'll let that slide). For both products if it's your first install, or you're not someone who's familiar with IIS I'd **strongly** recommend that you use Web PI, in fact it's the recommended install process for both of them.
+I'm going to use IIS Web Deploy for both installs, this way we're playing on a equal footing from the get go. I could have use the [Microsoft Web Platform Installer (Web PI)][4] for it, but at the time of writing the Umbraco instance in Web PI I found to be 4.5.2, which is not the latest stable (**Note: Since writing this post Umbraco Juno 4.6.1 is now available in Web PI**). For both products if it's your first install, or you're not someone who's familiar with IIS I'd **strongly** recommend that you use Web PI, in fact it's the recommended install process for both of them.
 
 With both releases downloaded it's time to get started on actually installing.
 
@@ -45,21 +45,15 @@ Once we kick off the Web Deploy install we get an overview of what Orchard is go
 
 ![Orchard step 1][7]
 
-Cool, it's nice and simple, just two folders that it needs to access, App_Data and Media, that's quite nice but I'm not sure what that means for plug ins (but that's an issue for another day :P). Click next and we'll work with the database:
-
-![Orchard step 2][8]
-
-So I can choose if I want to use an existing database or if we want to create a new one, or not have a database at all. I'm wanting to have the full experience, so I'm going to create a new database, this takes us to the next step which has a nice large set of options:
+Cool, it's nice and simple, just two folders that it needs to access, App_Data and Media, that's quite nice but I'm not sure what that means for plug ins (but that's an issue for another day :P). Click next and we'll work with the database which I can choose if I want to use an existing database or if we want to create a new one, or not have a database at all. I'm wanting to have the full experience, so I'm going to create a new database, this takes us to the next step which has a nice large set of options:
 
 ![Orchard step 3][9]
 
 Now I can configure all my settings, Orchard wants to install into a virtual directory, so I've blanked out the first property as I want it to be in the root of the web site I created in IIS. I put in my database information and click next.
 
-This brings us to the end of the IIS install in which I receive a nice overview of what was just done:
+This brings us to the end of the IIS install in which I receive a nice overview of what was just done.
 
-![Orchard step 4][10]
-
-Sweet, Orchard is done, now let's go onto Umbraco.
+Sweet, Orchard is installed, now let's go onto Umbraco.
 
 ## Installing Umbraco
 
@@ -69,11 +63,7 @@ I start by selecting my Umbraco IIS web site, choosing to import from the downlo
 
 The first thing I think is **WOW**, that's a LOT of folders which Umbraco needs to configure permissions for! As an experienced Umbraco user I tend not to think twice about it, but someone new Umbraco might find this strange. The majority of these folders are required for the plugin support of Umbraco, and a bit of a by-product of there not being a 'simpler' plugin format (ie - a single folder where plugins would go). You can get away with changing many of those permissions later, but at the moment you have to accept it and move on :P.
 
-Like with the Orchard install Umbraco will ask if you want to do a database or not:
-
-![Umbraco step 2][12]
-
-Again I'm going to choose to install a new database just as I did with Orchard. And just like Orchard theres a set of fields to set the path (again I want it at the root so I clear that field), the database information, etc:
+Like with the Orchard install Umbraco will ask if you want to do a database or not. Again I'm going to choose to install a new database just as I did with Orchard. And just like Orchard theres a set of fields to set the path (again I want it at the root so I clear that field), the database information, etc:
 
 ![Umbraco step 3][13]
 
