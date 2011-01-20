@@ -2,7 +2,7 @@
 title: "Unit Testing with Umbraco"
 metaTitle: "Unit Testing with Umbraco"
 description: "A wrap up from my talk on doing unit tested ASP.NET with Umbraco"
-revised: "2010-07-08"
+revised: "2011-01-20"
 date: "2010-06-29"
 tags: ["umbraco","asp.net","unit-testing","webformsmvp"]
 migrated: "true"
@@ -44,6 +44,7 @@ Here's what you'll need from my presentation to be able to dig into it yourself:
 
 - [Slide Deck][8]
 - [Source Code][9]
+- [Video][10]
 
 Hopefully this gives you a good start for doing unit testing your own Umbraco development.
 
@@ -57,3 +58,4 @@ Hopefully this gives you a good start for doing unit testing your own Umbraco de
   [7]: http://code.google.com/p/autofac
   [8]: /get/umbraco/cg10/UnitTestableUmbraco-Slides.zip
   [9]: /get/umbraco/cg10/CodeGarden10.zip
+  [10]: /unit-testing-with-umbraco/video
