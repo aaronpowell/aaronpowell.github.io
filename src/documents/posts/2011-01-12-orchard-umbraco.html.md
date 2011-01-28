@@ -2,7 +2,7 @@
 title: "Orchard & Umbraco - Introduction"
 metaTitle: "Orchard & Umbraco - Introduction"
 description: "An introduction to a series of looking at comparing Orchard CMS and Umbraco"
-revised: "2011-01-18"
+revised: "2011-01-28"
 date: "2011-01-12"
 tags: ["orchard","orchardcms","umbraco"]
 migrated: "true"
@@ -28,7 +28,7 @@ Here is the list of articles in the series:
  * [Install experience][4]
  * [Admin Systems][5]
  * [Creating content][6]
-
+ * [Managing Content][7]
 
   [1]: http://orchardproject.net/
   [2]: http://orchard.codeplex.com/releases/view/50197
@@ -36,3 +36,4 @@ Here is the list of articles in the series:
   [4]: /orchard-umbraco/installing
   [5]: http://www.aaron-powell.com/orchard-umbraco/admin
   [6]: /orchard-umbraco/creating-content
+  [7]: /orchard-umbraco/managing-content
