@@ -142,5 +142,5 @@ I've pushed the [source code for the LINQ in JavaScript][4] project up to bitbuc
 
   [1]: http://jslinq.codeplex.com/
   [2]: http://community.bartdesmet.net/blogs/bart/archive/2008/09/14/who-ever-said-linq-predicates-need-to-be-boolean-valued.aspx
-  [3]: html5
-  [4]: https://bitbucket.org/slace/linq-in-javascript
+  [3]: /linq-in-javascript/html5
+  [4]: https://hg.slace.biz/linq-in-javascript
