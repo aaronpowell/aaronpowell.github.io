@@ -13,7 +13,7 @@ summary: """
 ---
 Sexy!
 
-Seriously, the IE9 font rendering is just beautify, best of the current browser set.
+Seriously, the IE9 font rendering is just beautiful, best of the current browser set.
 
 ![Umbraco on IE9][1]
 
