@@ -13,9 +13,9 @@ summary: """
 ---
 You've probably already heard that [IE9 RC is available][1], and one of the features that has been included is the [HTML5 Geolocation API][2].
 
-I decided to add that to a fun little website that [Tatham Oddie][3] and I built, [isitbeerti.me][4].
+I decided to add that to a fun little website that [Tatham Oddie][3] and I built, [isitbeerti.me][4], if you allow your location to be known you'll be able to bring up a map for the route to where it is midday. Hardly useful but fun none the less.
 
-But there's a problem, although geolocation is detected as being a browser feature it fails for me.
+But there's a problem, although geolocation is detected as being a browser feature it fails for me in the IR9 RC.
 
 # Quick Geolocation API primer
 
@@ -29,9 +29,9 @@ This is pretty sweet, and very easy to use, with the basic implementation requir
 
 There's a few points to note about this:
 
-* I'm only passing in a callback for the *success* statement, I'm not passing in an *error* callback, nor am I passing in any position options (argument #3)
-* I'm not checking if `navigator.geolocation` actually exists, so it'll fail on older browsers
-* Calling `getCurrentPosition` will check if the user has allowed the browser to know where you are for the website, if it's the first time you'll receive a prompt which you can choose to block it anyway 
+* I'm only passing in a callback for the *success* event, I'm not passing in an *error* callback, nor am I passing in any position options (argument #3)
+* I'm not checking if `navigator.geolocation` actually exists, so it'll fail with a JavaScript error in older browsers
+* Calling `getCurrentPosition` will check if the user has allowed the browser to know where you are for the website, if it's the first time you'll receive a prompt which you can choose to block it anyway (resulting in the error callback being invoked)
 
 # The issue with IE9 RC
 
