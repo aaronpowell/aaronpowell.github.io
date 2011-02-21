@@ -2,7 +2,7 @@
 title: "Documents in Lucene.Net"
 metaTitle: "Documents in Lucene.Net"
 description: ""
-revised: "2010-07-26"
+revised: "2011-02-21"
 date: "2010-07-03"
 tags: ["lucene.net","c#"]
 migrated: "true"
@@ -17,7 +17,7 @@ As you're most likely already aware Lucene.Net is a Document Database, which mea
 
 What needs to be understood about the Document concept in Lucene.Net is that is doesn't have anything to do with a file, it's not a PDF, a DOCX, or a XLSX. It's just a key/ value store. As I pointed out in my [overview of Lucene.Net][1] this framework is agnostic of anything like that.
 
-But unlike other Document Databases, such as [RaveDB][2], Lucene.Net doesn't allow you to put just an object into itself, you need to do it via a Document. Once a Document is inserted into the Lucene index it is then given a unique identifier (a numerical ID) and the data on the Document is stored.
+But unlike other Document Databases, such as [RavenDB][2], Lucene.Net doesn't allow you to put just an object into itself, you need to do it via a Document. Once a Document is inserted into the Lucene index it is then given a unique identifier (a numerical ID) and the data on the Document is stored.
 
 ##Data on a Document
 
