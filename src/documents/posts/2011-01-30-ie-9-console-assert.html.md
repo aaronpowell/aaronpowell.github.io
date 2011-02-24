@@ -2,7 +2,7 @@
 title: "Tweaking console.assert in IE9"
 metaTitle: "Tweaking console.assert in IE9"
 description: "A small tweak to console.assert in IE9"
-revised: "2011-01-31"
+revised: "2011-02-25"
 date: "2011-01-30"
 tags: ["ie9","javascript","web"]
 migrated: "true"
@@ -61,6 +61,8 @@ It's not perfect, you can't inspect into the object since it's just a string, bu
 Just don't be silly and pass in `jQuery` as the object, you'll end up with something quite large :P.
 
 **Disclaimer: This was done against the IE9 Beta (build 9.0.7930.16406) so it may change by the time of official release.**
+
+**Disclaimer 2: Tested against the RC and it still doesn't produce an object inspection so this work around is still handy.**
 
   [1]: http://www.aaron-powell.com/get/javascript/ie9-console-assert/chrome-console.png
   [2]: http://www.aaron-powell.com/get/javascript/ie9-console-assert/ie9-bad.png
