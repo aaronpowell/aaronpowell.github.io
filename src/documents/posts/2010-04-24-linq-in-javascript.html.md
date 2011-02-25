@@ -2,7 +2,7 @@
 title: "LINQ in JavaScript"
 metaTitle: "LINQ in JavaScript"
 description: "LINQ is just a pattern, this shows you how to produce it in JavaScript"
-revised: "2011-02-07"
+revised: "2011-02-26"
 date: "2010-04-24"
 tags: ["linq","javascript"]
 migrated: "true"
@@ -139,8 +139,13 @@ LINQ in JavaScript supports the new Array methods which are part of ECMAScript 5
 
 I've pushed the [source code for the LINQ in JavaScript][4] project up to bitbucket. If you're interested in having a play with it you can grab it from there.
 
+## NuGet
+
+I have created a NuGet package for this as well. [You can get it here][5].
+
 
   [1]: http://jslinq.codeplex.com/
   [2]: http://community.bartdesmet.net/blogs/bart/archive/2008/09/14/who-ever-said-linq-predicates-need-to-be-boolean-valued.aspx
   [3]: /linq-in-javascript/html5
   [4]: https://hg.slace.biz/linq-in-javascript
+  [5]: http://nuget.org/Packages/Packages/Details/LinqInJavaScript-1-0
