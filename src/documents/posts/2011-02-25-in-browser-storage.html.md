@@ -72,6 +72,18 @@ For this we've used the `JSON.stringify` method, this will take a JavaScript obj
 
 We can then use the `JSON.parse` to convert the JSON string back to a JavaScript object, when we're reading it back out of our Storage.
 
+# Browser Support
+
+Now that you know all this cool stuff you hit an obvious question, **what browsers can I use this with?** and it's a very good question. Here's a list of what browsers I know it works with:
+
+* IE8 & IE9
+* FireFox 3.5+
+* Chrome
+* Safari
+* Opera 10+
+
+Basically any browser from the last few years support Web Storage, so keep that in mind.
+
 # Conclusion
 
 To wrap up in this article we've looked at the idea of Web Storage and  that there is two different types, `localStorage` if you want to persist across multiple browser sessions or `sessionStorage` if you want to persist for just the current browser session.
