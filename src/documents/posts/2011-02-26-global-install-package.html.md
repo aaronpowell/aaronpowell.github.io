@@ -2,7 +2,7 @@
 title: "How to install a package into all projects of a solution"
 metaTitle: "How to install a package into all projects of a solution"
 description: ""
-revised: "2011-02-26"
+revised: "2011-02-27"
 date: "2011-02-26"
 tags: ["nuget"]
 migrated: "true"
@@ -17,7 +17,7 @@ Ever now and then I need to do an install of a package across all projects in a 
 
 Well here's a script to run from the **Package Management Console**:
 
-    Get-Project -All | %{ Install-Package -Id packageName -Project $_.Name }
+    Get-Project -All | Install-Package packageName
 
 This is also available as a [gist][4].
 
@@ -27,8 +27,11 @@ This is also available as a [gist][4].
 
 Since this is PowerShell you can run filters against it so you could globally install to a sub-set based on a filter of the `Get-Project -All` command.
 
+**Update: With a tip-off from [David Fowler][5] you can compress the script even more. If you want to see the original just check out the gist history.*
+
 
   [1]: http://nuget.org
   [2]: http://nuget.org/Packages/Packages/Details/log4net-1-2-10
   [3]: http://nuget.org/Packages/Packages/Details/Autofac-2-4-4-705
   [4]: https://gist.github.com/843288
+  [5]: http://twitter.com/#!/davidfowl/
