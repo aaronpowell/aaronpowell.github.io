@@ -42,12 +42,89 @@ If you want to change the port it runs on you'll need to run it as an administra
 
 Now it'll run on port `1234` rather than `8080` (or `6590` which is  the default administrator port, just to avoid potential conflicts).
 
+# How do it work
+
+There's a nifty little class in the .NET framework called [HttpListener][4] and this is the core of building your own web server. Basically it's a little class for handling the HTTP protocol.
+
+To use it you need to create a new instance of the class and then specify some prefixes:
+
+    var listener = new HttpListener();
+    listener.Prefixes.Add("http://localhost:8080/");
+    listener.Start();
+
+Now you have a server running and listening on port 8080, via localhost. You can specify what ever hostname you want, or port number (but keep in mind that if you want to run a non-standard port you need to run as an administrator).
+
+To actually handle the requests you can do it synchronously or asynchronously, obviously depending what's best for your scenario. ServerHere listens asynchronously so I'll cover that off (if you're interested in synchronous usages check the MSDN docs).
+
+First off we'll create our web server class:
+
+    public class HttpServer
+    {
+        private readonly HttpListener _listener;
+
+        public HttpServer()
+        {
+            _listener = new HttpListener();
+			_listener.Prefixes.Add("http://localhost:8080/");
+			_listener.Start();
+			
+			_listener.BeginGetContext(HandleResponse, null);
+        }
+
+        public void HandlerResponse(IAsyncResult result) { ... }
+    }
+
+What we're using here is the `BeginGetContext` method, this will then deal with an async request. When the `Context` (which is a HttpContext basically) is ready (ie - someone has requested a URL) you can handle it, write to it, etc:
+
+	private void HandleResponse(IAsyncResult result)
+	{
+		HttpListenerContext context;
+		try
+		{
+			context = _listener.EndGetContext(result);
+
+		    _listener.BeginGetContext(HandleResponse, null);
+		}
+		catch (HttpListenerException)
+		{
+			return;
+		}
+
+		using (var response = context.Response)
+		{
+			response.StatusCode = 200;
+			response.ContentType = "text/plain";
+			using (var writer = new StreamWriter(response.OutputStream))
+			{
+				writer.Write("Hello World!");
+				writer.Flush();
+			}
+			response.Close();
+		}
+	}
+
+This method will do the following:
+
+* Grab the context from the listener (you want to catch the `HttpListenerException` which will be thrown if the server is shutting down)
+* Keep the server alive by re-issuing a `BeginGetContext`
+* Get the response from the context
+* Set a status code
+* Set a content type
+* Write something to the response
+
+I'll leave it as an exercise to the reader to work out how to react to different URLs, return more useful responses, etc.
+
 # Conclusion
 
-Go, [grab the source][4] and create web servers to your hears content!
+To wrap up we've seen a handy little tool for a scenario that you'll probably never come across.
+
+We then looked at the basics for creating your own web server.
+
+Now go, [grab the source][5] and create web servers to your hearts content!
 
 
   [1]: http://jsfiddle.net
   [2]: http://www.aaron-powell.com/upload/Render/javascript/ie-security.PNG
   [3]: http://hg.slace.biz/serverhere
-  [4]: http://hg.slace.biz/serverhere/src
+  [4]: http://msdn.microsoft.com/en-us/library/system.net.httplistener.aspx
+  [5]: http://hg.slace.biz/serverhere/src
