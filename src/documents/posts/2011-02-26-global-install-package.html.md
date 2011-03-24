@@ -2,7 +2,7 @@
 title: "How to install a package into all projects of a solution"
 metaTitle: "How to install a package into all projects of a solution"
 description: ""
-revised: "2011-02-27"
+revised: "2011-03-24"
 date: "2011-02-26"
 tags: ["nuget"]
 migrated: "true"
@@ -25,10 +25,16 @@ This is also available as a [gist][4].
 
 *Challenge to the reader*
 
-Since this is PowerShell you can run filters against it so you could globally install to a sub-set based on a filter of the `Get-Project -All` command.
-
 **Update: With a tip-off from [David Fowler][5] you can compress the script even more. If you want to see the original just check out the gist history.*
 
+# Installing into a project subset
+
+Since this is just a powershell script you can also apply filters, so if you have say multiple test projects you do run this:
+
+
+    Get-Project -All | where { $_.Name.EndsWith(".Test") } | Install-Package NSubstitute
+
+Woot!
 
   [1]: http://nuget.org
   [2]: http://nuget.org/Packages/Packages/Details/log4net-1-2-10
