@@ -2,7 +2,7 @@
 title: "Why I don't like KnockoutJS"
 metaTitle: "Why I don't like KnockoutJS"
 description: ""
-revised: "2011-08-08"
+revised: "2011-08-09"
 date: "2011-08-08"
 tags: ["javascript","knockoutjs","rant"]
 migrated: "true"
@@ -25,7 +25,7 @@ Ok so on to backing up my statement and let me start by showing you why I am not
  
 Can't see it? I'll remove some of the 'guff':
 
-   data-bind="click: registerClick, enable: !hasClickedTooManyTimes()"
+    data-bind="click: registerClick, enable: !hasClickedTooManyTimes()"
 
 Right there, the `data-bind="..."` is what I don't like, the fact that I'm embedding *potentially large amounts of JavaScript in my HTML*.
 
@@ -47,7 +47,9 @@ The shift has seen us using HTML to describe the intention. Using the jQuery uno
 
 This results in a clean separation between HTML and JavaScript with HTML going back to just describing intention and JavaScript taking those intentions and running with it.
 
+## Conclusion
 
+This post has basically outlined my primary grievance with KnockoutJS. As stated, I don't have a problem with the *concept* of it, the idea of two-way binding is quite nice but what's required to achieve that is where the issue lies.
 
 
   [1]: http://knockoutjs.com/
