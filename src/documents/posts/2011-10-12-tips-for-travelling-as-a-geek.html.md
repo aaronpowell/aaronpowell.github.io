@@ -27,8 +27,31 @@ So before you go check out the country and you'll probably find an easy way to p
 
 **Before you go for a local sim card make sure your phone is network unlocked. I ended up in Denmark with a network locked phone and my sim wasn't usable in it :(**
 
+# Internet beats books
 
+Like a studious traveller we picked up our copy of the [Lonely Planet][3] but by the end of the trip we were only use it for one purpose, the find out where **not** to go.
+
+Now I don't want to rag on Lonely Planet too much but it's really hard for a print book to keep pace with the internet. Instead we turned to good ol' technology (since I had a local sim) to find out stuff to do. Now I want to talk about two sites that are invaluable if you're travelling.
+
+## Wikitravel
+
+Url: [http://wikitravel.org][4]
+
+Wikitravel is the wikipedia of travel websites. It's got lots of great tips on history of a place, what to see while you're there how to get in, out and around. The kind of stuff you can get out of a Lonely Planet guide book but it is able to be kept up to date (say around pricing of cabs).
+
+That said be careful of vandalism/ shameless self promotion on the site, you'll occasionally find companies promoting themselves on there. It's generally pretty easy to pick them though.
+
+## Trip Advisor
+
+Url: [http://www.tripadvisor.com/][5]
+
+Trip Advisor is a **must** when you're planning your trip and when you're away. The site is full of user generated content and allows for people to enter information about places they've visited, stayed, eaten at, etc and then vote against them.
+
+Again this is something that kills Lonely Planet. Where Lonely Planet can only have a finite amount of places listed and gets out of date a site based around generate content can reflect the actual mood of travellers.
 
 
   [1]: http://twitter.com/slace
   [2]: http://www.wireless.att.com/cell-phone-service/go-phones/index.jsp#fbid=xkUQSfBVUcY
+  [3]: http://www.lonelyplanet.com/
+  [4]: http://wikitravel.org
+  [5]: http://www.tripadvisor.com/
