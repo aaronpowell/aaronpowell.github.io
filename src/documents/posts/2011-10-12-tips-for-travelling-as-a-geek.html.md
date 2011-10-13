@@ -2,7 +2,7 @@
 title: "Tips for travelling as a geek"
 metaTitle: "Tips for travelling as a geek"
 description: ""
-revised: "2011-10-13"
+revised: "2011-10-14"
 date: "2011-10-12"
 tags: ["random"]
 migrated: "true"
@@ -37,7 +37,7 @@ Now I don't want to rag on Lonely Planet too much but it's really hard for a pri
 
 Url: [http://wikitravel.org][4]
 
-Wikitravel is the wikipedia of travel websites. It's got lots of great tips on history of a place, what to see while you're there how to get in, out and around. The kind of stuff you can get out of a Lonely Planet guide book but it is able to be kept up to date (say around pricing of cabs).
+Wikitravel is the wikipedia of travel websites. It's got lots of great tips on history of a place, what to see while you're there how to get in, out and around. The kind of stuff you can get out of a Lonely Planet guide book but it is able to be kept up to date (say around pricing of cabs). It can even give you those handy tips that you wont find out until you've hit them (such as Melbourne trams having coin-only ticket machines).
 
 That said be careful of vandalism/ shameless self promotion on the site, you'll occasionally find companies promoting themselves on there. It's generally pretty easy to pick them though.
 
@@ -47,7 +47,25 @@ Url: [http://www.tripadvisor.com/][5]
 
 Trip Advisor is a **must** when you're planning your trip and when you're away. The site is full of user generated content and allows for people to enter information about places they've visited, stayed, eaten at, etc and then vote against them.
 
-Again this is something that kills Lonely Planet. Where Lonely Planet can only have a finite amount of places listed and gets out of date a site based around generate content can reflect the actual mood of travellers.
+Again this is something that kills Lonely Planet. Where Lonely Planet can only have a finite amount of places listed and gets out of date, a site based around generate content can reflect the actual mood of travellers to an area.
+
+We used this to find recommendations for hotels, places to eat or just check out others opinions for places we got recommended by friends.
+
+# Have adapters
+
+It goes without saying that when you're travelling having local power adapters is a valuable thing but what I found more valuable was carrying a multi-port adapter. Don't go crazy and take like a 10 port power board if you only have 2 devices but they can be handy (particularly if you're travelling for work as well as play).
+
+# Travel insurance
+
+It goes without saying that you should have travel insurance with you but make sure that your policy will cover you for the devices you are carrying with you. Last thing you want is to lose your laptop and find out that you only had $500 of coverage!
+
+I went with [Travel Insurance Direct][6] who have a reasonably well priced set of plans including yearly world-wide plans.
+
+# TL;DR
+
+* Get a local sim
+* Use [WikiTravel][7] and [Trip Advisor][8]
+* Make sure your travel insurance will cover your gear
 
 
   [1]: http://twitter.com/slace
@@ -55,3 +73,6 @@ Again this is something that kills Lonely Planet. Where Lonely Planet can only h
   [3]: http://www.lonelyplanet.com/
   [4]: http://wikitravel.org
   [5]: http://www.tripadvisor.com/
+  [6]: http://www.travelinsurancedirect.com.au/
+  [7]: http://wikitravel.org
+  [8]: http://www.tripadvisor.com/
