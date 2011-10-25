@@ -2,7 +2,7 @@
 title: "Xamlizer - How to implement something silly in JavaScript"
 metaTitle: "Xamlizer - How to implement something silly in JavaScript"
 description: ""
-revised: "2011-10-25"
+revised: "2011-10-26"
 date: "2011-10-24"
 tags: ["javascript","doing-it-wrong"]
 migrated: "true"
@@ -19,7 +19,57 @@ So I decided to do something a bit silly, I decided to implement the two interfa
 
 ### A dumb idea with a point
 
-Now I see no real reason to use the code that I'm going to look at in any current development but more importantly I want to look at something that is part of ECMAScript 5 that doesn't get the attention it deserves, [`Object.defineProperty`][1].
+Now I see no real reason to use the code that I'm going to look at in any current development (I'll explain why later) but more importantly I want to look at something that is part of ECMAScript 5 that doesn't get the attention it deserves, [`Object.defineProperty`][1].
+
+# JavaScript properties throughout history
+
+JavaScript, unlike languages such as C#, doesn't really have this concept of a property like you get there, the idea of a *get* and *set* operating being something that you can control. Really this is how a *class* in JavaScript with some public properties looks:
+
+    var person = {
+        firstName: 'Aaron',
+        lastName: 'Powell'
+    };
+
+And when we want to update a property we'd do something like this:
+
+    person.firstName = 'John';
+
+Now there's nothing wrong with this, it does what you'll want to do *in a lot of scenarios*, the problem is when you're wanting a slightly more complex scenario, say you want to react to a change to the `firstName` property, maybe perform some validation.
+
+Let's assume we want to have an `age` property on our `person`. Obviously we want to make sure that `age` is at least 0 and probably less than 110 (sounds reasonable :P), well how do you do this?
+
+* Validation before assigning the property?
+ * That'll work, but what if we're exposing it to external API's? How can we enforce the validation to them?
+
+### Functions as properties
+
+The general way which this problem is solved is to rather than use assignable properties you use functions as properties, making your code look like this:
+
+	var person = (function() {
+		var _age;
+
+		return {
+			//firstName, lastName, etc
+			age: function(val) {
+		      	if(val !== undefined && (val >= 0 && val <= 100) {
+		        	_age = val;
+		      	} else {
+		        	//Raise an error
+		      	}
+		      	return _age;
+    		}
+		}
+	})();
+
+Now we use the `age` property like so:
+
+    person.age(27);
+    console.log(person.age()); //outputs 27
+
+Now this isn't really *that* bad, the main pain point to it is that we now have a different way to assign the value, we do it through a function invocation rather than through an assignment statement. This can come to light if you're writing a JavaScript templating engine, you need to check if the *property* is actually a property or a function property. But we do get some nice stuff like the fact that in JavaScript you don't need to do overloads so we can have the one function perform both the `get` and `set` operation for our property.
+
+Libraries such as [KnockoutJS][2] use this pattern for properties to do their UI binding but it can cause confusion, like in KnockoutJS if you want to bind to a property you'd do something like this: `data-bind="css: { someClass: someBoolean }"` which Knockout will understand it's an observable property and bind to the result of the function, but if you want to use the **false** value you need to do `data-bind="css: { someClass: !someBoolean() }"`. Note that this time it's **invoked the property as a function** rather than just using the property.
 
 
   [1]: http://es5.github.com/#x15.2.3.6
+  [2]: http://knockoutjs.com
