@@ -166,6 +166,8 @@ And there we go, we've got a script that'll turn our normal JavaScript objects i
 
 If you dig into the code for Xamlizer you'll see that it doesn't do anything really complex, it just modifies some properties. *Note: As I said it's not really that smart, it actually modifies anything public on the object, so if you have a function that is public it might get crazy :P. But hey, it's just demo code!*
 
+And if you want to see it in action check out the [jsfiddle][7].
+
 # Conclusion
 
 Well this wraps up our look at the limitations in how you have to do properties in ES3, the changes which ES5 provides you with (although their usefulness at the moment is debatable since we have to support ES3 browsers for a while still) and finished off with looking at how to implement a generic library to change fields to properties with debatable usefulness.
@@ -177,3 +179,4 @@ Well this wraps up our look at the limitations in how you have to do properties 
   [4]: http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.aspx
   [5]: http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanging.aspx
   [6]: https://gist.github.com/1318702
+  [7]: http://jsfiddle.net/slace/Zemxm/
