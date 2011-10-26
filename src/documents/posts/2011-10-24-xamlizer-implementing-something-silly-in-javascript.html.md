@@ -2,7 +2,7 @@
 title: "Xamlizer - How to implement something silly in JavaScript"
 metaTitle: "Xamlizer - How to implement something silly in JavaScript"
 description: ""
-revised: "2011-10-26"
+revised: "2011-10-27"
 date: "2011-10-24"
 tags: ["javascript","doing-it-wrong"]
 migrated: "true"
@@ -69,6 +69,38 @@ Now we use the `age` property like so:
 Now this isn't really *that* bad, the main pain point to it is that we now have a different way to assign the value, we do it through a function invocation rather than through an assignment statement. This can come to light if you're writing a JavaScript templating engine, you need to check if the *property* is actually a property or a function property. But we do get some nice stuff like the fact that in JavaScript you don't need to do overloads so we can have the one function perform both the `get` and `set` operation for our property.
 
 Libraries such as [KnockoutJS][2] use this pattern for properties to do their UI binding but it can cause confusion, like in KnockoutJS if you want to bind to a property you'd do something like this: `data-bind="css: { someClass: someBoolean }"` which Knockout will understand it's an observable property and bind to the result of the function, but if you want to use the **false** value you need to do `data-bind="css: { someClass: !someBoolean() }"`. Note that this time it's **invoked the property as a function** rather than just using the property.
+
+The can be a bit confusing and I've seen more than one developer (including myself) getting stumped as to why their bindings weren't working only to realise that it'd because they are binding to `!someBoolean` which equates to `!function() { }` rather than the **result** of the function. It's a very face-palm moment.
+
+# Introducing ES5 properties
+
+As part of the ECMAScript 5 spec the concept of properties was addresses and has resulted in the `Object.defineProperty` API (and an API to define multiple at once, being `Object.defineProperties`) and this allows us to (among other things) define `get` and `set` method bodies for our properties.
+
+Let's revisit our `person.age` property example from above, but do it using an ECMAScript 5 property:
+
+	var person = (function() {
+		var _age;
+
+		var newPerson = { 
+			firstName: 'Aaron',
+			lastName: 'Powell'
+		};
+
+		Object.defineProperty(newPerson, 'age', {
+			get: function() { return _age; },
+			set: function(value) {
+				if(value && value >= 0 && value <= 110) {
+					_age = value
+				} else {
+					//raise error
+				}
+			}
+		});
+
+		return newPerson;
+	})();
+
+
 
 
   [1]: http://es5.github.com/#x15.2.3.6
