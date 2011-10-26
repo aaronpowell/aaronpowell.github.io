@@ -145,9 +145,7 @@ Well since JavaScript doesn't actually have interfaces in the language it's a bi
 
 **Hello Xamlizer!**
 
-<script src="https://gist.github.com/1318702.js"> </script>
-
-Now the script isn't really that smart, all it does is goes through all the properties of the object and then converts them into properties that implement our pattern.
+So I've created a little JavaScript code snippet which I've called **[Xamlizer][6]** that'll take an object and implement `INotifyPropertyChang*` on it. Now the script isn't really that smart, all it does is goes through all the properties of the object and then converts them into properties that implement our pattern.
 
 You can then use it like this:
 
@@ -166,13 +164,16 @@ You can then use it like this:
 
 And there we go, we've got a script that'll turn our normal JavaScript objects into something that can notify subscribers when the property changes.
 
-If you dig into the code for Xamlizer you'll see that it doesn't do anything really complex, it just modifies some properties. *Note: It's not really that smart, it actually modifies anything public on the object, so if you have a function that is public it might get crazy :P. But hey, it's just demo code!*
+If you dig into the code for Xamlizer you'll see that it doesn't do anything really complex, it just modifies some properties. *Note: As I said it's not really that smart, it actually modifies anything public on the object, so if you have a function that is public it might get crazy :P. But hey, it's just demo code!*
 
 # Conclusion
 
 Well this wraps up our look at the limitations in how you have to do properties in ES3, the changes which ES5 provides you with (although their usefulness at the moment is debatable since we have to support ES3 browsers for a while still) and finished off with looking at how to implement a generic library to change fields to properties with debatable usefulness.
+
+
   [1]: http://es5.github.com/#x15.2.3.6
   [2]: http://knockoutjs.com
   [3]: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperty
   [4]: http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.aspx
   [5]: http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanging.aspx
+  [6]: https://gist.github.com/1318702
