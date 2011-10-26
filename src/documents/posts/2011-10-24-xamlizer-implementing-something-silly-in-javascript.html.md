@@ -99,9 +99,80 @@ Let's revisit our `person.age` property example from above, but do it using an E
 
 		return newPerson;
 	})();
+	person.age = 27;
+	console.log(person.age);
 
+Hopefully you can see here the difference between the *function property* and the ES5 property.
 
+With ES5 the property with a function body *looks just like a public field*. Now there's a few other things you can do here, such as make properties read-only and exclude them from `for...in` loops, and for that check out the [MDN][3] (you can also do body-less properties), but it makes it very easy to build smarts into your objects. Also like .NET if you want to provide a `get`/`set` you need to have a backing store, but that's easy to get around with closure scope.
 
+So that covers a basic look ES5 properties. Now back to our bad idea...
 
+# Implementing INotifyPropertyChange in JavaScript
+
+As I demonstrated above it is possible to add a body to your properties let's do something with that idea.
+
+If you're not familiar with `INotifyPropertyChang*` then you should read the [MSDN][4] [docs][5]. The **TL;DR** is that you use trigger the `Changing` event before you assign the property and then the `Changed` event after it's assigned and the UI can react.
+
+As I said I think there's a lot of value in this pattern, it's just that as most Xaml devs will tell you implementing it is a real pain in the ass.
+
+So say you wanted to implement it in JavaScript, it's not overly hard, ultimately we need to do something like this:
+
+	Object.defineProperty(foo, 'prop', {
+		get: function() { return _prop; },
+		set: function(val) {
+			propertyChanging(this, 'prop');
+			_prop = val;
+			propertyChanged(this, 'prop');	
+		}
+	});
+
+I've ignored the guff code like what the `propertyChang*` methods are doing as well as subscribing handlers to the events but you get the idea. This really don't look any different to the C# version though does it? So what's the point?
+
+## Making it better through the magic of JavaScript
+
+As you can see there's a lot of boilerplate code that you need to get this working. In .NET there's no real way to avoid this (unless you do some magic under the covers). But one of the cool things about JavaScript being a dynamic language is that we can modify an object pretty damn easily. Let's go back to our `person` object:
+
+	var person = {
+		firstName: 'Aaron',
+		lastName: 'Powell',
+		age: 27
+	};
+
+Now imagine that I want to implement my JavaScript version of `INotifyPropertyChang*` on it so that my UI can react whenever I update the values, but I don't want to be going through and writing this all out myself, I've got a bunch of objects that I want to *promote* to implementing the interfaces.
+
+Well since JavaScript doesn't actually have interfaces in the language it's a bit tricky, and this is where my funky little script comes in.
+
+**Hello Xamlizer!**
+
+<script src="https://gist.github.com/1318702.js"> </script>
+
+Now the script isn't really that smart, all it does is goes through all the properties of the object and then converts them into properties that implement our pattern.
+
+You can then use it like this:
+
+	var person = {
+		firstName: 'Aaron',
+		lastName: 'Powell',
+		age: 27
+	};
+
+	xamlizer(person);
+	person.addPropertyChanging(function(object, property) {
+		console.log('Property ' + property + 'changing');
+	});
+
+	person.age = 28;
+
+And there we go, we've got a script that'll turn our normal JavaScript objects into something that can notify subscribers when the property changes.
+
+If you dig into the code for Xamlizer you'll see that it doesn't do anything really complex, it just modifies some properties. *Note: It's not really that smart, it actually modifies anything public on the object, so if you have a function that is public it might get crazy :P. But hey, it's just demo code!*
+
+# Conclusion
+
+Well this wraps up our look at the limitations in how you have to do properties in ES3, the changes which ES5 provides you with (although their usefulness at the moment is debatable since we have to support ES3 browsers for a while still) and finished off with looking at how to implement a generic library to change fields to properties with debatable usefulness.
   [1]: http://es5.github.com/#x15.2.3.6
   [2]: http://knockoutjs.com
+  [3]: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperty
+  [4]: http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.aspx
+  [5]: http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanging.aspx
