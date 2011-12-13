@@ -87,7 +87,7 @@ Sometimes you just want an ordered list of values and that's where `sequential` 
 
 ### Date sequences
 
-One cool thing about the `sequence` api is that you can provide it a date and it will increment that. By default the dates will shift one day at a time to get you to your new date:
+One cool thing about the `sequential` api is that you can provide it a date and it will increment that. By default the dates will shift one day at a time to get you to your new date:
 
     tbd.from({ date: new Date })
         .prop('foo').use(tbd.utils.sequential(new Date() /* optional parameter for date property the increment, default is 'd' */)
