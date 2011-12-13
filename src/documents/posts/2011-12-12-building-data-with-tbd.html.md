@@ -77,11 +77,13 @@ For `range` you pass in a min and max value and something from in there will be 
 
 ## Sequences
 
-Sometimes you just want an ordered list of values and that's where `sequence` comes in. Sequence you provide a start point and you'll get a value incremented by one each time from there:
+Sometimes you just want an ordered list of values and that's where `sequential` comes in. Sequential you provide a start point and you'll get a value incremented by one each time from there:
 
     var data = tbd.from({ hello: 'world' })
-                .prop('hello').use(tbd.utils.sequence(1)).done()
+                .prop('hello').use(tbd.utils.sequential(1)).done()
                 .make(10);
+
+*Note: I had a mistake in the initial post, the method is `sequential` not `sequence`.*
 
 ### Date sequences
 
