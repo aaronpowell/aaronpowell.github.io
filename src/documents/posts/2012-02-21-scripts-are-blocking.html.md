@@ -13,7 +13,7 @@ summary: """
 ---
 I decided that I'm tired of explaining why you should do JavaScript combination and avoid inline scripts.
 
-So here's a comic that should explain do it.
+So here's a comic that should explain it.
 
 [![JavaScript placement][2]][1]
 
