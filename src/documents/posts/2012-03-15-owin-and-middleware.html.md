@@ -25,7 +25,7 @@ In comes the concept of [Middleware](http://en.wikipedia.org/wiki/Middleware); n
 
 Back in the last example we had a single method that was handling all the requests that were coming in, be they to `/` or `/favicon.ico`, a HTTP GET or POST, everything was handed to this one method. But this isn't really ideal now is it? You can't really expect an application to be run out of a single delegate now can you? Let's start with a simple handler.
 
-## Handling different verbs
+# Handling different verbs
 
 I want to start by making it easy to filter requests by the HTTP verb used, so I can have different handlers for GET, POST, PUT, etc. This is a pretty common scenario we'd want to handle if we're building a RESTful service so let's get started.
 
@@ -93,7 +93,9 @@ That's pretty simple isn't it, a request comes it, it gets handed to our delegat
             });
         }
         
-Pretty slick! But what do we do if it's not a GET request? Welcome to the world of delegates. You'll notice that there was a `next` variable defined to represent the `AppDelegate`, well we haven't used it yet, but that's what comes into play now when you don't want to handle the current request (or can't), we hand it off to someone else then it's their damn problem.
+When we match our verb we're creating a Request and Response object (these are helpers from Gate) which the handler can then manipulate. The handler is invoked (it's the `app` variable) and our processing is on its way.
+        
+But what do we do if it's not a GET request? Welcome to the world of delegates. You'll notice that there was a `next` variable defined to represent the `AppDelegate`, well we haven't used it yet, but that's what comes into play now when you don't want to handle the current request (or can't), we hand it off to someone else then it's their damn problem.
 
         public static IAppBuilder Get(this IAppBuilder builder, Action<Request, Response> app) {
             return builder.Use<AppDelegate>(next => (env, result, fault) => {
@@ -118,7 +120,7 @@ You can then go and create extensions for all the verbs you want supported as we
 
 # Conclusion
 
-In this post we've had a bit of a look at what to do to make it a bit easier to work with OWIN by starting our own layer of middleware. We created a little middleware helper to give us easy methods to provide delegates for the different HTTP verbs.
+In this post we've had a bit of a look at what to do to make it a bit easier to work with OWIN by starting our own layer of middleware. We created a little middleware helper to give us easy methods to provide delegates for the different HTTP verbs and hopefully given you a starting point for where you could build out other middleware features.
 
 Next time we'll look at what you need to do to have routing included in your application.
 
