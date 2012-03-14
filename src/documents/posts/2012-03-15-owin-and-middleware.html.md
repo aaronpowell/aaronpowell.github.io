@@ -19,7 +19,7 @@ One of the aims of OWIN is to be very lightweight and as we saw in the last post
 
 # Middleware
 
-In comes the concept of [Middleware](http://en.wikipedia.org/wiki/Middleware); now this isn't a new concept in software but it's probably foreign to most .NET developers, particularly ASP.Net as we've always had it there. But with OWIN it's not so you've kind of got to start from scratch.
+In comes the concept of [Middleware](http://en.wikipedia.org/wiki/Middleware); now this isn't a new concept in software but it's probably foreign to most .NET developers, particularly ASP.Net as we've always had it built in and never needed to think about it. But with OWIN it's not so, you've kind of got to start from scratch.
 
 *Now this isn't entirely true, there's already OWIN middleware out there like [Nancy](http://nancyfx.org/), [Kayak](https://github.com/kayak/kayak) and [Gate.Middleware](http://nuget.org/packages/gate.middleware) to name a few, but I want to introduce the concept and what to do to make a basic middleware. Really you want to be looking at existing libraries to give you what you need.*
 
