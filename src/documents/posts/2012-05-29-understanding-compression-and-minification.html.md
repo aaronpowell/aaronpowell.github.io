@@ -13,11 +13,11 @@ summary: """
 ---
 One of my colleagues raised a question on our internal discussion system as to why we should use minified JavaScript libraries. Now I'm sure everyone knows that you *should* minimize your libraries but do you *really* understand what the different levels of minification are and the benefits of the different levels? While I strongly recommend that you should ensure that on a production system you always have your JavaScript minified **and** [gzipped](http://en.wikipedia.org/wiki/Gzip) (well and the right caching headers but that's beyond the scope of this blog post) let's have a look as to exactly what differences it makes.
 
-For the exercise I decided that I would take the [jQuery 1.7.2](http://blog.jquery.com/2012/03/21/jquery-1-7-2-released/) release as it's a very common JavaScript library and it's very well written and formatted. I'm going to use the unminified version to run the steos against. For the minification I've decided to use [uglify js](https://github.com/mishoo/UglifyJS) which is toting itself as the best library for minification, it's also got a pretty nice API so I can work with it programmatically. Lastly I've got a tiny Node.js application running Express.js that is serving out the files.
+For the exercise I decided that I would take the [jQuery 1.7.2](http://blog.jquery.com/2012/03/21/jquery-1-7-2-released/) release as it's a very common JavaScript library and it's very well written and formatted. I'm going to use the unminified version to run the steps against. For the minification I've decided to use [uglify js](https://github.com/mishoo/UglifyJS) which is toting itself as the best library for minification, it's also got a pretty nice API so I can work with it programmatically. Lastly I've got a tiny Node.js application running Express.js that is serving out the files.
 
 # Serving the raw file
 
-Let's start by looking at serving a completely raw file, the jQuery *development* release and if we request our file we'll see something like this:
+Let's start by looking at serving a completely raw file, the jQuery *development* release and if we request our file we'll see something like this as the response headers:
 
     HTTP/1.1 200 OK
     X-Powered-By: Express
@@ -25,7 +25,7 @@ Let's start by looking at serving a completely raw file, the jQuery *development
     Content-Length: 327171
     Connection: keep-alive
     
-So the raw request is coming back at **327171 bytes** so you can see that this is something that you don't want to be doing every time, you want to be doing *some* level of compression on it. Let's turn on gzip for this same request and see what happens:
+So the raw request is coming back at **327171 bytes** which is pretty large. From a production point of view you wouldn't exactly want to do this everytime. Let's turn on gzip for this same request and see what happens:
 
     HTTP/1.1 200 OK
     X-Powered-By: Express
@@ -39,7 +39,7 @@ Now that I've turned on gzip compression our request is already down to **78390 
 
 # Stripping comments
 
-Comments are useful in your codebase but do you really need to send them down to the user? Probably not. So let's strip them out before sending our response. For this I'm going to use uglify.js and rebuilt the AST from our original source. I'm going to maintain the structure of our code so we're going to have a bunch of whitespace still, it make now be exactly what jQuery originally had but at our code would still be useful if we want to step through. If we take a look at the first few lines of the file it looks like this:
+Comments are useful in your codebase but do you really need to send them down to the user? Probably not. So let's strip them out before sending our response and see what impact this has. For this I'm going to use uglify.js and rebuilt the AST from our original source. I'm going to maintain the structure of our code so we're going to have a bunch of whitespace still, it wont be exactly what jQuery originally had since we've had to rebuild the codebase from the AST but at least our code would still be useful if we want to step through. If we take a look at the first few lines of the file it looks like this:
 
 	(function(window, undefined) {
 	    var document = window.document, navigator = window.navigator, location = window.location;
@@ -52,7 +52,7 @@ Comments are useful in your codebase but do you really need to send them down to
 	        jQuery.fn = jQuery.prototype = {
 	            constructor: jQuery,
 	            
-You'll notice that this isn't *exactly* what jQuery's source does, it's close, but there's been some optimisations from understanding the original source.
+As I said this isn't exactly what the jQuery source looked like since we've removed more whitespace but it's close and most importantly it's readable.
 
 Now let's look at the headers:
 
@@ -62,7 +62,7 @@ Now let's look at the headers:
     Content-Length: 254399
     Connection: keep-alive
     
-If we compare that to the original we've gone down to just **254399 bytes**. Cool even that we've dropped a good bit of weight from our response. Now let's also gzip it:
+If we compare that to the original we've gone down to **254399 bytes**. Cool even with that we've dropped a good bit of weight from our response. Now let's also gzip it:
 
     HTTP/1.1 200 OK
     X-Powered-By: Express
@@ -72,11 +72,11 @@ If we compare that to the original we've gone down to just **254399 bytes**. Coo
     Content-Type: application/javascript
     Connection: keep-alive
 
-Again we're getting some better performance, because we don't have the comments, which don't compress as well as say whitespace, we can drop a bit further in our response.
+Again we're getting some better performance because we don't have the comments which don't compress as well as say whitespace and a slightly more organised codebase.
 
 # Mangling our code
 
-One of the most common things that a minifier will do is obfuscate your code, variables, functions, etc will all be renamed into smaller versions so that you have smaller files by having smaller variable names. Obviously this makes your code a whole lot harder to read but it does do wonder for file size. Again we're going to get uglify.js to help us out so let's have a look at the first few lines again:
+One of the most common things that a minifier will do is *obfuscate* your code, variables, functions, etc will all be renamed into smaller versions so that you have smaller files by having smaller names. Obviously this makes your code a whole lot harder to read (hence obfuscation) but it does do wonders for file size. Again we're going to get uglify.js to help us out so let's have a look at the first few lines again:
 
 	(function(a, b) {
 	    function h(a) {
@@ -88,7 +88,7 @@ One of the most common things that a minifier will do is obfuscate your code, va
 	        return b;
 	    }
 	    
-Well that's quite different now isn't it! You'll see from the very first line in the original version we had two arguments `window` and `undefined`, these are now called `a` and `b`, the body has also been rewritten so that there's a different order for the code, functions are now at the top. Here's the original function that is now the `h` function:
+Well that's quite different now isn't it! You'll see from the very first line in the original version we had two arguments `window` and `undefined`, these are now called `a` and `b`, the body has also been rewritten so that there's a different order for the code, functions are now at the top, the first being a function called `h`. Here's the original function that is now the `h` function:
 
     function createFlags(flags) {
         var object = flagsCache[flags] = {}, i, length;
@@ -99,7 +99,7 @@ Well that's quite different now isn't it! You'll see from the very first line in
         return object;
     }
 
-As you can see the use of smaller variable names does have an impact on the size of code blocks so what's the impact on size?
+As you can see the use of smaller variable names and this is done because the variables are never needed by any consumer of the API, so renaming `object` to `b` wont be a problem because anyone who knew it was `object` has also had their references updated. So what's the impact on size?
 
     HTTP/1.1 200 OK
     X-Powered-By: Express
@@ -107,7 +107,7 @@ As you can see the use of smaller variable names does have an impact on the size
     Content-Length: 213222
     Connection: keep-alive
 
-If we compare this back to the last request you'll see that it's only slightly smaller, but this is the advantage of using minimal variable names. And now we'll try gzipping it:
+If we compare this back to the last request you'll see that it's only slightly smaller, but this is the advantage of using minimal variable names (and keep in mind we still have whitespace). And now we'll try gzipping it:
     
     HTTP/1.1 200 OK
     X-Powered-By: Express
@@ -121,7 +121,7 @@ Again we're not really that might smaller than just the comment stripped version
 
 # Optimising the codebase
 
-Although obfuscation can do good things to getting your files smaller you can get even more out of it if you're smart about your codebase, in this stage we're looking at tricks of the JavaScript language that you won't want to actually write but are useful when you're trying to get smaller files. Things like utilising the comma operator can be useful for chaining together statements and removing unreachable code are something best left to the machines, you can easily introduce errors into your JavaScript if you're not careful.
+Although variable minification can do good things to getting your files smaller you can get even more out of it if you're smart about your codebase, in this stage we're looking at tricks of the JavaScript language that you won't want to actually write but are useful when you're trying to get smaller files. Things like utilising the comma operator can be useful for chaining together statements and removing unreachable code are something best left to the machines, you can easily introduce errors into your JavaScript if you're not careful. Let's run this over our codebase:
 
 	(function(a, b) {
 	    function h(a) {
@@ -163,7 +163,7 @@ We've pretty much run through all of the different steps to get our responses do
     Content-Length: 94656
     Connection: keep-alive
 
-So if we drop the whitespace we are *drastically* reducing the size of our library but our code is next to impossible to step into if we need to debug it. So what if we turn on gzipping this time, we've already removed the whitespace, the biggest space waste in our response so can we really get as much from gzipping?
+So if we drop the whitespace we are *drastically* reducing the size of our library but our code is next to impossible to step into if we need to debug it. This is a logical desire of a production system, you really shouldn't be debugging through it. So what if we turn on gzipping this time, we've already removed the whitespace, the biggest space waste in our response so can we really get as much from gzipping?
 
     HTTP/1.1 200 OK
     X-Powered-By: Express
