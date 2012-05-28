@@ -175,6 +175,14 @@ So if we drop the whitespace we are *drastically* reducing the size of our libra
 
 Sweet, we've still got a really good levels of compression against our library, down to just **33632 bytes** for jQuery.
 
+# Size Matters
+
+Now that we've seen how we get to the end goal, an ultra-small version of our JavaScript library we should answer the question of *why*. The simplest answer to the question is speed, by having a smaller file (~30kb vs ~350kb) we can send that down from the server a lot quicker. This is especially important when you're looking at this from a mobile point of view, you've got a limited bandwidth allowance so you want to be able to send as much as quickly as possible.
+
+But what about from the point of view of high-speed network connections, is file size *really* that important if you're transmitting over ADSL2 or something? Well yes it still does matter, even if you can download the file fast you can download smaller files even faster and that will have an impact on the overall speed of your application, the faster all dependencies are loaded the faster your application becomes response to the end user.
+
+The other main reason to ensure that you're files are as small as possible is caching. Again this is most important from a mobile browser point of view but it's still very valid with desktop browsers. Mobile browsers have fairly limited cache allowances. Yahoo! did a [blog post](http://www.yuiblog.com/blog/2010/07/12/mobile-browser-cache-limits-revisited/) which they looked at the allowances for the different mobile devices (although it's a bit out-of-date) and you can see from that you've not got a lot of play so the better packed your files the safer you'll be in cache. Desktop browsers are a lot more flexible since you can change their cache allowances and they also have [higher starting levels](http://www.blaze.io/mobile/understanding-mobile-cache-sizes/).
+
 # Conclusion
 
 So you've seen throughout this blog exactly what makes up minification of JavaScript libraries, what different minification concepts bring to the table and ultimately just *why* you should minify **and** gzip your libraries in production. Keep in mind that there's more to performance that I haven't covered such as caching but there's plenty of articles out there that can help you with that ;).
