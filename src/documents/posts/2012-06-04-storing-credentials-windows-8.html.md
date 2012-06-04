@@ -74,7 +74,7 @@ Once we get passed the oddity of try/ catch driven development it's worthwhile t
 
 Now your store is updated and what's also cool is that you can access them from Windows 8 itself. If you navigate to `Control Panel\User Accounts and Family Safety\Credential Manager` you'll see your newly stored credentials:
 
-	<image here>
+![Credentials Store][1]
 
 And there we go, all stored securely inside the Windows security store. The other cool thing about this is that it allows credentials to roam between devices, I haven't been able to put this to the test yet though as I only have one machine with Windows 8 on it so roaming isn't all that viable!
 
@@ -83,4 +83,4 @@ And there we go, all stored securely inside the Windows security store. The othe
 Storing credentials in Windows 8 is so simple but it has some strangeness about it. Your main point of call is the [`PasswordVault`](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/br227081.aspx) class, part of the Windows 8 runtime, which gives you a simple programming interface into the Windows security store.
 
 
-
+  [1]: http://www.aaron-powell.com/get/windows-8-credentials-store.png
