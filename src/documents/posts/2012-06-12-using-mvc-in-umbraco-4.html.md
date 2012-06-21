@@ -2,7 +2,7 @@
 title: "Using ASP.NET MVC in Umbraco 4"
 metaTitle: "Using ASP.NET MVC in Umbraco 4"
 description: "How to combine ASP.Net MVC applications with an Umbraco project"
-revised: "2012-06-12"
+revised: "2012-06-22"
 date: "2012-06-12"
 tags: ["umbraco","asp.net-mvc"]
 migrated: "true"
@@ -131,7 +131,7 @@ What we've done here is told ASP.NET that we have a class which has a method we 
 
 I've added a couple of `using` statements and I've also added a single route, here you can define as many routes as you want, go as crazy as you need for your application routing. But there's still one more thing we need to do with the routing, we need to make sure Umbraco will also ignore it. The Umbraco routing engine is pretty greedy, it wants to handle everything, the problem is that this isn't an Umbraco route so we don't want it to be handled there. Luckily this is easy to do, open up the `Web.config` and we'll change the `umbracoReservedPaths` appSetting:
 
-    &lt;add key="umbracoReservedPaths" value="~/umbraco,~/install/,~/home" /&gt;
+    <add key="umbracoReservedPaths" value="~/umbraco,~/install/,~/home" />
 
 *Note: The more complex your routes the more you'll need to update this. It might be advisable to put all your routes behind a certain prefix. I've also not tested this with MVC Areas so I have no idea if that'll work. Finally I have an idea on how to make the route registration simpler and more unobtrusive and I'll post a follow up blog post.*
 
@@ -158,15 +158,15 @@ This is just a standard MVC controller, go as nuts with it as needed. Now we'll 
 	    Layout = null;
 	    ViewBag.Title = "Home";
 	}
-	&lt;!DOCTYPE html&gt;
-	&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
-	&lt;head&gt;
-	    &lt;title&gt;@ViewBag.Title&lt;/title&gt;
-	&lt;/head&gt;
-	&lt;body&gt;
-	    &lt;h1&gt;Hello I'm a razor view.&lt;/h1&gt;
-	&lt;/body&gt;
-	&lt;/html&gt;
+	<!DOCTYPE html>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	    <title>@ViewBag.Title</title>
+	</head>
+	<body>
+	    <h1>Hello I'm a razor view.</h1>
+	</body>
+	</html>
 
 *Note: This view is **stupidly** simple, but this is just a proof of concept :P.*
 
@@ -182,10 +182,10 @@ In this demo, because I used NuGet I'm using MVC 4.0 which also means you have R
 
 You need to add your own `Web.config` for the MVC views, this will reside at `/Views/Web.config` in your project. The easiest way to get the contents is to grab it from a new MVC project. If you do that you need to remove a part though, as Umbraco already has some Razor support it will want to take over for the MVC side as well. Because of this you need to remove this part:
 
-    &lt;sectionGroup name="system.web.webPages.razor" type="System.Web.WebPages.Razor.Configuration.RazorWebSectionGroup, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"&gt;
-      &lt;section name="host" type="System.Web.WebPages.Razor.Configuration.HostSection, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" /&gt;
-      &lt;section name="pages" type="System.Web.WebPages.Razor.Configuration.RazorPagesSection, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" /&gt;
-    &lt;/sectionGroup&gt;
+    <sectionGroup name="system.web.webPages.razor" type="System.Web.WebPages.Razor.Configuration.RazorWebSectionGroup, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
+      <section name="host" type="System.Web.WebPages.Razor.Configuration.HostSection, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" />
+      <section name="pages" type="System.Web.WebPages.Razor.Configuration.RazorPagesSection, System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" />
+    </sectionGroup>
 
 This section is actually defined in the Umbraco Web.config for Razor support so declaring it a second time will result in an error.
 
