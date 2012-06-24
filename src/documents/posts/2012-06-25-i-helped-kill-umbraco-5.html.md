@@ -2,7 +2,7 @@
 title: "I helped kill Umbraco 5"
 metaTitle: "I helped kill Umbraco 5"
 description: "Hi, my name's Aaron Powell and I was involved in killing Umbraco 5."
-revised: "2012-06-24"
+revised: "2012-06-25"
 date: "2012-06-25"
 tags: ["umbraco","umbraco-5","opinionated"]
 migrated: "true"
@@ -19,7 +19,7 @@ If you're new to this blog you may not have heard of my before so here's a bit o
 
 I was also involved in some of the initial design and development of Umbraco 5 and worked with Shannon (mostly) as a sounding board when he needed to bounce ideas off someone while working on Umbraco 5.
 
-But late last year I announced that I was [leaving the project](http://www.aaron-powell.com/umbraco/so-long-and-thanks-for-all-the-fish) and it was bred out of frustrations towards  the direction Umbraco 5 was going and the role that someone like myself, an outsider to the HQ, could maintain on the project. Ultimately I didn't believe I couldn't contribute in the way I saw as useful to so it was decided that I would leave the project.
+But late last year I announced that I was [leaving the project](http://www.aaron-powell.com/umbraco/so-long-and-thanks-for-all-the-fish) and it was bred out of frustrations towards  the direction Umbraco 5 was going and the role that someone like myself, an outsider to the HQ, could maintain on the project. Ultimately I didn't believe I could contribute in the way I saw as useful to so it was decided that I would leave the project.
 
 Even after leaving the project I still stayed in contact with many of the people on it, I had a lot of respect for Niels, Shannon, Matt, etc and they are all people I consider friends who I'd often chat with on Skype or various other mediums. I then decided to build a commercial extension for Umbraco 5 as a way to provide feedback on the way the project was shaping up (and to make some money on the side :P).
 
