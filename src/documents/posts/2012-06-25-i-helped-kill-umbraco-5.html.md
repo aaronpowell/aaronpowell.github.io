@@ -2,7 +2,7 @@
 title: "I helped kill Umbraco 5"
 metaTitle: "I helped kill Umbraco 5"
 description: "Hi, my name's Aaron Powell and I was involved in killing Umbraco 5."
-revised: "2012-06-25"
+revised: "2012-06-27"
 date: "2012-06-25"
 tags: ["umbraco","umbraco-5","opinionated"]
 migrated: "true"
@@ -63,7 +63,7 @@ Really what we were seeing is that most people didn't care that the underlying s
 
 While the community has had [Our](http://our.umbraco.org) for a few years now it has always been focused on the *user* community, how do I solve problems *with* Umbraco but it was never very good when it came to solving the problems *in* Umbraco. This topic was more born out of discussions with various people and not a structured discussion but ultimately contributors, HQ and implementers alike wanted a way to discuss the direction of Umbraco itself, people have businesses built around it so when changes happen that they don't understand (the what or the why) it can be a nervous time.
 
-Some of this is what happened throughout the v5 development process, decisions were made that the community felt they didn't have a say in, that they assumed was for the best but they didn't really know; ultimately they felt out of control. To this end we decided to set up the [Umbraco-dev mailing list](http://www.aaron-powell.com/umbraco/introducing-umbraco-dev-list) so that the community has somewhere they can raise concerns directly to the people developing the product.
+Some of this is what happened throughout the v5 development process, decisions were made that the community felt they didn't have a say in, that they assumed was for the best but they didn't really know; ultimately they felt out of control. To this end we decided to set up the [Umbraco-dev mailing list](http://www.aaron-powell.com/umbraco/introducing-umbraco-contributor-list) so that the community has somewhere they can raise concerns directly to the people developing the product.
 
 # The downfall of v5
 
