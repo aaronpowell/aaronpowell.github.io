@@ -13,7 +13,7 @@ summary: """
 ---
 A few weeks ago a new project came up at work which I moved onto, a project which is XAML based. More specifically Windows 8 XAML and having built a Windows 8 app using HTML and JavaScript I was keen to give it a crack.
 
-Now I'm very much a web guy. If you read my blog you'll know that I spend more time blogging about JavaScript than anything else. But in an effort to be a better developer I thought it was worthwhile diving into the other kind of angled brackets and give this thing ago and I want to share some thoughts of mine having spent two weeks doing XAML development.
+Now I'm very much a web guy. If you read my blog you'll know that I spend more time blogging about JavaScript than anything else. But in an effort to be a better developer I thought it was worthwhile diving into the other kind of angled brackets and give this thing ago and I want to share some thoughts of mine having spent two weeks doing XAML development (for the record this isn't the first time I've looked at XAML, I looked at it back in about early 2010, did some playing with XAML 1.0, I even own a book on it, but I never got very far :P).
 
 ## XAML is verbose
 
