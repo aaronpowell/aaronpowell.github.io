@@ -11,7 +11,7 @@ summary: """
 
 """
 ---
-A few weeks ago a new project came up at work which I moved onto, a project which is XAML based.
+A few weeks ago a new project came up at work which I moved onto, a project which is XAML based. More specifically Windows 8 XAML and having built a Windows 8 app using HTML and JavaScript I was keen to give it a crack.
 
 Now I'm very much a web guy. If you read my blog you'll know that I spend more time blogging about JavaScript than anything else. But in an effort to be a better developer I thought it was worthwhile diving into the other kind of angled brackets and give this thing ago and I want to share some thoughts of mine having spent two weeks doing XAML development.
 
@@ -53,7 +53,27 @@ Yeah you'd think so, but no. There's no way in the box to do the mapping between
 
 I come from a world of the DOM where event wireup is pretty fucked. IE always did it one way, really old IE did it another and then there was the spec. The only nice thing was there was only one *type* of events. XAML though seems to have two independent eventing models, *traditional* .NET events and commands. Both seem to be first-class citizens, but commands seem to have been conceived outside of wedlock and thus treated like a bastard.
 
+Some elements seem to implement commands as well as events, others just implement events. It's quite frustrating, the fact that bindings are a common way to wire up commands to actions (like button clicks). But events can't be bound, so you end up having to rely on code-behind or custom solutions. Neither of these are a great resolution, I just don't get why it's not in the box.
 
+## Controls
+
+Now this just baffles ms, as I said at the top this is Windows 8 XAML so I'm sure it's a bit different in the other flavours but controls available is just whacky.
+
+Here's an example, there's no built-in control that restricts an input to just containing numerical values. Maybe I'm use to the web but I think this makes sense:
+
+    <input type="number" />
+
+In a HTML5-enabled browser this does a few things:
+
+* It will only allow numerical values
+* It switches keyboards on soft-keyboard devices
+
+But there's nothing built in that will do this in Windows 8 XAML. Or how about a date picker? You know that's kind of a common scenario in an application, to be able to select a date... And apparently that didn't make it [until .NET 4.0 anyway][2].
+
+## Bindings
+
+I must say that bindings are pretty sweet, coming from HTML and JavaScript I can see why things like Knockout.js were written, the ability to componentise a UI and link data up is very nice. I also think value converters are a pretty neat 
 
 
   [1]: http://umbraco.com/help-and-support/video-tutorials/umbraco-fundamentals/razor.aspx
+  [2]: http://msdn.microsoft.com/en-us/library/system.windows.controls.datepicker.aspx
