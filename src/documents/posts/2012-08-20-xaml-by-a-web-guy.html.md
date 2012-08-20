@@ -70,9 +70,29 @@ In a HTML5-enabled browser this does a few things:
 
 But there's nothing built in that will do this in Windows 8 XAML. Or how about a date picker? You know that's kind of a common scenario in an application, to be able to select a date... And apparently that didn't make it [until .NET 4.0 anyway][2].
 
+## Validation
+
+The fact that there's no built in validation floored me. This is a problem that was solved in ASP.Net in what, version 1.0? You know the idea of a required field shouldn't be that hard... MVC did a great job including data annotations and building up that client side to integrate with jQuery validation (or their own validation framework as it was back in the day).
+
+But there's nothing in XAML for validation, no required fields, no regex validation, no data annotations for building up validation rules for your view model. It's all up to you to solve on your own.
+
 ## Bindings
 
-I must say that bindings are pretty sweet, coming from HTML and JavaScript I can see why things like Knockout.js were written, the ability to componentise a UI and link data up is very nice. I also think value converters are a pretty neat 
+I must say that bindings are pretty sweet, coming from HTML and JavaScript I can see why things like Knockout.js were written, the ability to componentise a UI and link data up is very nice. I also think value converters are a pretty neat, a good way to produce a global solution to consistent bindings.
+
+I have one major problem with bindings, debugging. It's 2012 and the "debugging" experience for bindings is to look at the Visual Studio Output window. I shit you not! I've managed to pretty much avoid needing the Output window ever since VS2003 except when I was looking into compiler errors but instead I've been keeping my eye on it every time a binding doesn't do what I expect it to do.
+
+How on earth does this not have a debugging experience? I remember the demos from Silverlight 5 showing it off but it's apparently not in VS 2012 from what I can see, it seems like a massive oversight.
+
+This leads me to the next WTF I've found in Windows 8 XAML (I think it's only the case in Windows 8 XAML), **you can't bind `Nullable<T>`**. You would *not* believe how long that took me to find out but yep, if you have a nullable DateTime, int, float, etc don't expect to be able to bind to it. I've had mixed success with Dependency Properties over INotifyPropertyChanged but the majority of my tests have shown it to fail.
+
+## Wrap up
+
+Although my "full time" XAML experience is still fairly limited I can't help but keep looking at it in a completely bemused fashion. While my experience is localised to Windows 8 XAML, I'm constantly shocked at how half-baked it feels. Some people might argue that Windows 8 XAML is a v1 product and should be treated as much but seriously this is the **forth** incarnation of XAML, **forth** (WPF, Silverlight, Windows Phone 7 and now Windows 8)!
+
+But don't get me wrong, I'm having a *heap* of fun, this is all relatively new to me, but the fact that XAML is in the state that it's in I can see why HTML is a first-class citizen in Windows 8, at least it's a fully featured markup engine.
+
+*PS: Yes I know many of my problems can be solved with existing open source projects. My point is that a lot of the problems I've come across are not edge cases, they are things I'd expect my UI layer to do out of the box.*
 
 
   [1]: http://umbraco.com/help-and-support/video-tutorials/umbraco-fundamentals/razor.aspx
