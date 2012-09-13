@@ -73,28 +73,15 @@ So far the _best_ answer I've got from anyone on how to do this is to make your 
 
 Now that just plain sucks.
 
-# How I addressed my concerns
+# Conclusion
 
-Ok enough complaining it's time for action. I decided that I would set about creating a way which I could handle settings with the following goals:
+Yes this was mostly a rant. As I keep saying the settings in Windows 8 XAML sucks. There's some very pointy edges, particularly when you are comparing the experience to the WinJS experience.
 
-* I wanted to be able to MVVM them and have that all wired up
-* I didn't want to have to create all the flyouts myself, that should be convention based
-* I want to be able to navigate to a particular settings pane programmatically
-* I shouldn't have to care about the life cycle of wiring up the event handlers
+My tips are:
 
-So I've been using [Okra][8] form my Windows 8 application as a MVVM library. I really like the way it does navigation and the way it uses conventions to load things up, so I decided that I wanted to copy that model myself and make it work for settings.
-
-I started off with a `SettingsNavigationManager` which I could consume in any of my ViewModel's elsewhere in my application:
-
-    public interface ISettingsNavigationManager
-    {
-        void NavigateTo(string settingsPane);
-        void NavigateTo(string settingsPane, object arguments);
-    }
-
-This has the basic kinds of navigation that I'll be doing, providing a name and optional arguments.
-
-I also needed some attributes to export my types to MEF which I'm using to wire everything up, so for this I created a `SettingsPaneExportAttribute`
+* Use Callisto, it's got a great control for doing settings (and many other good controls)
+* Know when and where you need to wire up your event handlers, ideally the Activated event but you can scope them to a particular page
+* Try to avoid a UX which requires the users to be forced into the settings, have it discoverable and intuitive for them
 
 
   [1]: http://msdn.microsoft.com/en-us/library/windows/apps/hh694083.aspx#4.1.1_Your_app_must_have_a_privacy_statement_if_it_collects_personal_information
