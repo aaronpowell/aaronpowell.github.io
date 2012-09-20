@@ -64,6 +64,8 @@ So [ArchLinux][12] and [PuppyLinux][13] were two of the top recommended distros,
 
 I downloaded GitLab, booted Hyper-V, attached the ISO and kicked off the installer. After being prompted for some credentials to log in and having to use the **Legacy Network Adapter** in Hyper-V (apparently Turnkey supports the standard one but 5 minutes of configuring modules didn't work for me so I went 'meh, legacy it is' :P) my git server was up and running!
 
+_For the record my VM specs are a 5GB hard drive and it has 512mb RAM dedicated to it. I was tempted to drop it down to 256mb as it really just idles mostly but I've got RAM to spare._
+
 Next step was to log into the web portal, setup a git project on the server and add my public key and _it just worked_. Seriously, I was **shocked** that it was that simple!
 
 I even managed to get the other developer (who prefers GUI tools over command line, weirdo!) setup to use [GitHub for Windows][15] against my GitLab server.
