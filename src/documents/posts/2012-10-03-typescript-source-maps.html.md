@@ -63,7 +63,7 @@ Inspecting variables in TypeScript
 
 # Conclusion
 
-The fact that there was enough forward planning from the TypeScript team to include support for Source Maps in the initial release is a really great thing. Through the magic of Chrome we can debug code written in it as through it was our original code.
+The fact that there was enough forward planning from the TypeScript team to include support for Source Maps in the initial release is a really great thing. Through the magic of Chrome we can debug code written in it as through it was our original code. If you want have a play [here's the code][7].
 
 Hopefully either the Visual Studio or IE (or both) team also pick up Source Maps and add support for them too.
 
@@ -76,3 +76,4 @@ Happy cross-compiling.
   [4]: http://www.aaron-powell.com/get/typescript/typescript-sourcemap-01.PNG
   [5]: http://www.aaron-powell.com/get/typescript/typescript-sourcemap-02.PNG
   [6]: http://www.aaron-powell.com/get/typescript/typescript-sourcemap-03.PNG
+  [7]: https://github.com/aaronpowell/typescript-pubsub
