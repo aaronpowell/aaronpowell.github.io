@@ -17,4 +17,6 @@ I was looking around in the IE10 developer tools today and dug into the `Tools -
 
 How did I miss that IE10 in Windows 8 RTM has built in User Agents for _IE10 for Windows Phone 8_ and _IE for Xbox_?
 
+That'll teach me to only ever use the _Browser Mode_ options...
+
   [1]: http://www.aaron-powell.com/get/ie-ua.png
