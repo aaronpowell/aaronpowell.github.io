@@ -35,7 +35,7 @@ So far I haven't had much luck getting into this file to view the database conte
 
 Firefox was the 2nd browser to go prefix free with IndexedDB, it is unprefixed as of version 16. Logically since Firefox is a cross-platform browser they use a cross-platform database, [SQLite](http://www.sqlite.org/). It's also not surprising that they are using SQLite as IndexedDB replaced the WebSQL proposal which was based on SQLite (one of the reasons cited as to discontinuing WebSQL was everyone used SQLite so they weren't getting independent implementations), so it makes sense that they salvaged what they could from the first implementation of a complex storage model.
 
-Being open source you can browse the [code for Firefox's IndexedDB implementation](http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/) which is awesomely mind binding. Check out the [OpenDatabaseHelper.cpp](http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/OpenDatabaseHelper.cpp), it's responsible for setting up your database connection as well as doing a bunch of SQL to make sure everything is ready for data (yep, Firefox has SQL statements in it!). Another file of interest is [IDBObjectStore.cpp](http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/IDBObjectStore.cpp#1594) and the line I've linked to is the method that is responsible for inserting a new record into the database (at least I'm pretty sure it is).
+Being open source you can browse the [code for Firefox's IndexedDB implementation](http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/) which is awesomely mind bending. Check out the [OpenDatabaseHelper.cpp](http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/OpenDatabaseHelper.cpp), it's responsible for setting up your database connection as well as doing a bunch of SQL to make sure everything is ready for data (yep, Firefox has SQL statements in it!). Another file of interest is [IDBObjectStore.cpp](http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/IDBObjectStore.cpp#1594) and the line I've linked to is the method that is responsible for inserting a new record into the database (at least I'm pretty sure it is).
 
 If you are wanting to look into your database then the easiest way is with the [SQLite Manager](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/) Firefox extension. The files created for IndexedDB are stored in the following location:
 
@@ -43,7 +43,7 @@ If you are wanting to look into your database then the easiest way is with the [
 
 Open up the SQLite Manager extension and then you can dive into your database.
 
-# Chrome/ WebKit
+# Chrome / WebKit
 
 At the time of writing the IndexedDB implementation of [WebKit](http://webkit.org), and by extension Chrome, is still prefixed, in fact they are prefixing pretty much everything IndexedDB related with `webkit`. The implementation seems to be driven by the Chrome team and that probably also indicates why they are using a Google produced database, [LevelDB](http://code.google.com/p/leveldb/).
 
