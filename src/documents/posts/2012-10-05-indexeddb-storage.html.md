@@ -39,7 +39,7 @@ Being open source you can browse the [code for Firefox's IndexedDB implementatio
 
 If you are wanting to look into your database then the easiest way is with the [SQLite Manager](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/) Firefox extension. The files created for IndexedDB are stored in the following location:
 
-> %AppData%\Roaming\Mozilla\Firefox\Profiles\<your profile id>\indexedDB\<domain>
+> %AppData%\Roaming\Mozilla\Firefox\Profiles\your profile id\indexedDB\domain
 
 Open up the SQLite Manager extension and then you can dive into your database.
 
@@ -53,7 +53,7 @@ You can browse the [source of their implementation](https://trac.webkit.org/brow
 
 There isn't any stand-alone viewer for LevelDB that I've come across but really that's not that big a deal as currently Chrome is the only browser who has an IndexedDB inspector built into its developer tools. Just navigate to the _Resources_ tab and there's an IndexedDB section (you may have to right click -> refresh the node as it's not a live view). I do hope the other browser vendors bring this feature in as well as it's really quite neat to have. But if you really must find the files for IndexedDB then they are located here:
 
-> %AppData\Local\Google\Chrome\User Data\Default
+> %AppData%\Local\Google\Chrome\User Data\Default
 
 _Note: If you're using Chrome Canary then it's in the **Chrome SxS** folder._
 
