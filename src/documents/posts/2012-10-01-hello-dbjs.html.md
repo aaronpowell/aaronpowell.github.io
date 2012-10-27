@@ -2,7 +2,7 @@
 title: "Hello db.js"
 metaTitle: "Hello db.js"
 description: "An introduction to db.js, an IndexedDB wrapper."
-revised: "2012-10-01"
+revised: "2012-10-28"
 date: "2012-10-01"
 tags: ["indexeddb","web","winjs"]
 migrated: "true"
@@ -96,13 +96,13 @@ Now that you have a connection db.js will be smart about what stores you have av
 IndexedDB has a really nice feature when it comes to adding data (well doing any operation really), it has transaction support! The problem is that because of this everything takes lot more code to do. With db.js this is seemlessly handled for you and when you're doing bulk inserts it'll even take care of that:
 
     var promise = server.people
-        .add([{
+        .add({
             firstName: 'Aaron',
             lastName: 'Powell'
         }, {
             firstName: 'John',
             lastName: 'Smith'
-        }]);
+        });
 
 Here you'll notice we're accessing the `people` property on our `server`, this tells db.js which of our object stores we want to work against. Next you pass in one or more items that represent the objects you want to store and then the method returns a Promise. To know when you have added all records use a `done` handler:
 
