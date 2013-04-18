@@ -2,7 +2,7 @@
 title: "Internet Explorer userAgents"
 metaTitle: "Internet Explorer userAgents"
 description: "A new program from the IE team"
-revised: "2013-04-18"
+revised: "2013-04-19"
 date: "2013-04-19"
 tags: ["internet-explorer","web"]
 migrated: "true"
@@ -17,6 +17,10 @@ So what do we do? Well ultimately it doesn't really change anything in my day-to
 
 There is another side though, and that's addressing specific Internet Explorer problems. Fellow userAgent [Johnathan Sampson](https://twitter.com/jonathansampson/) has been documenting IE10 specific problems as well as work around for those with the aim to be able to produce a guide on things to watch out for and how best to work around them.
 
-Over the coming months you'll probably see us out and about in the community, helping to ensure that web developers are as well informed as they can be when producing applications for the modern web. There's even a new Twitter account for IE developer relations, [@IEDevChat](http://twitter.com/iedevchat).
+Over the coming months you'll probably see us out and about in the community, helping to ensure that web developers are as well informed as they can be when producing applications for the modern web. If you want to get in touch with us you can:
+
+- [Find us on the twitter list](https://twitter.com/IEDevChat/ie-useragents)
+- [Ping the @IEDevChat twitter account](https://twitter.com/IEDevChat)
+- Use the #IEuserAgents hash tag
 
 One final note, please stop sniffing userAgents, I promise that I had a shower this morning ;).
