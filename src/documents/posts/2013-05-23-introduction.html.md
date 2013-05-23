@@ -19,7 +19,7 @@ Throughout this series we're going to be looking at how to do this, how to do of
 
 * [Introduction](/flight-mode/introduction)
 * [Cookies](/flight-mode/cookies)
-* localStorage and sessionStorage (coming soon)
+* [localStorage and sessionStorage](/flight-mode/local-session-storage)
 * IndexedDB (coming soon)
 * FileSystem APIs (coming soon)
 * Useful libraries for offline storage (coming soon)
