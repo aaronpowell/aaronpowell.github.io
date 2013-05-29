@@ -1,0 +1,9 @@
+<!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-github" href="https://github.com/<%- @site.github %>"><span><%- @site.github %></span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/<%- @site.twitter %>"><span>@<%- @site.twitter %></span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>

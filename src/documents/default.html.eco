@@ -1,0 +1,8 @@
+---
+layout: "home"
+isPage: true
+---
+
+<h1><%= @site.author %></h1>
+<h2><%= @site.title %></h2>
+<p>JavaScripter. Blogger. Speaker.</p>

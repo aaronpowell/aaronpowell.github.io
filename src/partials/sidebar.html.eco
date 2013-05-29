@@ -1,0 +1,54 @@
+<!-- Sidebar -->
+<div id="sidebar" class="4u">
+
+    <!-- Excerpts -->
+        <section>
+            <ul class="divided">
+                <% for post in @relatedPosts(@document).slice(0, 5): %>
+                    <li>
+                        <h1>Matches!</h1>
+                    </li>
+                <% end %>
+                <li>
+
+                    <!-- Excerpt -->
+                        <article class="is-excerpt">
+                            <header>
+                                <span class="date">May 18, 2013</span>
+                                <h3><a href="#">Ermergerd sterf herpernd</a></h3>
+                            </header>
+                            <p>Lorem ipsum dolor odio facilisis convallis. Etiam non nunc vel est 
+                            suscipit convallis non id orci lorem ipsum sed magna consequat feugiat lorem dolore.</p>
+                        </article>
+
+                </li>
+                <li>
+
+                    <!-- Excerpt -->
+                        <article class="is-excerpt">
+                            <header>
+                                <span class="date">May 15, 2013</span>
+                                <h3><a href="#">Kerfer merks mer herper</a></h3>
+                            </header>
+                            <p>Lorem ipsum dolor odio facilisis convallis. Etiam non nunc vel est 
+                            suscipit convallis non id orci lorem ipsum sed magna consequat feugiat lorem dolore.</p>
+                        </article>
+
+                </li>
+                <li>
+
+                    <!-- Excerpt -->
+                        <article class="is-excerpt">
+                            <header>
+                                <span class="date">May 12, 2013</span>
+                                <h3><a href="#">Blerg persts er fern</a></h3>
+                            </header>
+                            <p>Lorem ipsum dolor odio facilisis convallis. Etiam non nunc vel est 
+                            suscipit convallis non id orci lorem ipsum sed magna consequat feugiat lorem dolore.</p>
+                        </article>
+
+                </li>
+            </ul>
+        </section>
+
+</div>

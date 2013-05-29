@@ -1,0 +1,11 @@
+---
+title: 'About'
+layout: 'default'
+---
+<p>I'm Aaron Powell and welcome to my site/blog. I'm a web developer prodominately focused on the ASP.Net stack but when I'm at work and when I'm not you can find me writing JavaScript.</p>
+<p>This site comprises of most of my musings in code form, experiements and open-source work.</p>
+<ul>
+    <li>Senior Developer and Technical Specialist (Web) with <a href="http://readify.net" title="Readify" target="_blank">Readify</a></li>
+    <li>Internet Explorer <a href="http://useragents.ie" title="userAgent" target="_blank">userAgent</a></li>
+    <li>Internet Explorer MVP</li>
+</ul>
