@@ -5,7 +5,7 @@
 */
 
 window._skel_config = {
-	prefix: 'css/style',
+	prefix: '/css/style',
 	resetCSS: true,
 	boxModel: 'border',
 	grid: {
@@ -27,6 +27,9 @@ window._skel_config = {
 		'1000px': {
 			range: '481-1200',
 			containers: 960
+		},
+		'custom': {
+			range: '481-'
 		}
 	}
 };

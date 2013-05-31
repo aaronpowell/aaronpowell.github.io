@@ -1,0 +1,5 @@
+<ul class="tags">
+    <% for tag in @tags: %>
+        <li><a class="icon icon-tag" href="<%- @getTagUrl(tag) %>"><span><%- tag %></span></a></li>
+    <% end %>
+</ul>
