@@ -73,9 +73,9 @@ ORDER BY [t1].[Published], [t0].[Revised]
             }
 
             var commitMessage = string.IsNullOrEmpty(item.Reason) ? "I should have given a reason" : item.Reason;
-Console.WriteLine(commitMessage);
-            //repo.Index.Stage("*");
-            //repo.Commit(commitMessage, new Signature("Aaron Powell", "me@aaron-powell.com", (DateTime) item.Date));
+
+            repo.Index.Stage("*");
+            repo.Commit(commitMessage, new Signature("Aaron Powell", "me@aaron-powell.com", (DateTime) item.Date));
 
         }
     }
