@@ -17,7 +17,8 @@
     "moment": "~2.0.0",
     "docpad-plugin-paged": "~2.1.4",
     "docpad-plugin-highlightjs": "~2.1.6",
-    "docpad-plugin-tagging": "~2.0.1"
+    "docpad-plugin-tagging": "~2.0.1",
+    "docpad-plugin-dateurls": "~2.1.0"
   },
   "main": "node_modules/docpad/bin/docpad-server"
 }
