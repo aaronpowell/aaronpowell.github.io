@@ -1,0 +1,22 @@
+{
+    "name": "docpad-plugin-staticroutes",
+    "version": "2.0.0",
+    "description": "TODO",
+    "homepage": "TODO",
+    "keywords": [
+        "docpad",
+        "docpad-plugin"
+    ],
+    "author": "Copyright holders Aaron Powell <me@aaron-powell.com> (http://www.aaron-powell.com)",
+    "maintainers": [
+        "Aaron Powell <me@aaron-powell.com> (https://github.com/aaronpowell)"
+    ],
+    "contributors": [
+        "Aaron Powell <me@aaron-powell.com> (https://github.com/aaronpowell)"
+    ],
+    "engines" : {
+        "node": ">=0.8",
+        "docpad": ">=6"
+    },
+    "main": "./staticroutes.plugin.js"
+}

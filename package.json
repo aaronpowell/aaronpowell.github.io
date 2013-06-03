@@ -12,7 +12,6 @@
     "docpad-plugin-marked": "~2.1.1",
     "docpad-plugin-eco": "~2.0.2",
     "docpad-plugin-partials": "~2.6.2",
-    "docpad-plugin-cleanurls": "~2.4.3",
     "marked": "~0.2.9",
     "moment": "~2.0.0",
     "docpad-plugin-paged": "~2.1.4",
