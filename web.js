@@ -1,6 +1,10 @@
 var express = require('express');
 var app = express();
 
+app.get('/routes.json', function (req, res) {
+    res.status(403).send('403 Forbidden');
+})
+
 app.use(express.static(__dirname + '/out'));
 
 var routes = require('./out/routes.json').routes;
