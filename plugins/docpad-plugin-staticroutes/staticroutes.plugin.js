@@ -27,15 +27,13 @@ module.exports = function (BasePlugin) {
 
         StaticRoutes.prototype.name = 'staticroutes';
 
-        StaticRoutes.prototype.renderBefore = function(opts, next) {
-            var collection = opts.collection;
-
-            var docs = collection.toJSON();
+        StaticRoutes.prototype.writeAfter = function(opts, next) {
+            var docs = this.docpad.getCollection('documents').toJSON();
 
             var routes = docs.map(function (doc) {
                 return {
                     url: doc.url,
-                    redirects: doc.urls
+                    redirects: doc.urls.filter(function (x) { return x !== doc.url; })
                 };
             });
 

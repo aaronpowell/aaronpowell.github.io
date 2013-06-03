@@ -22,7 +22,7 @@
             </div>
             <% end %>
         <ul class="actions">
-            <li><a href="/archive" class="button button-icon icon icon-file">Archive</a></li>
+            <li><a href="/archive.html" class="button button-icon icon icon-file">Archive</a></li>
         </ul>
     </section>
 
