@@ -171,8 +171,8 @@
 var result = engine.process();
 <span class="function"><span class="title">expect</span><span class="params">(result[<span class="number">0</span>])</span>.<span class="title">to</span>.<span class="title">equal</span><span class="params">(<span class="number">3</span>)</span>;</code></pre>
 <p>Pretty simple, create a new engine, provide it some parameters and process it. You can also install mathy as a global Node.js module and get a new command that will do math for you:</p>
-<pre class="highlighted"><code class="ruby"><span class="variable">0.9698138511739671gt;</span> npm install -g mathy
-<span class="variable">0.9698138511739671gt;</span> mathy <span class="string">"1 + 2"</span> /<span class="regexp">/output's 3</code></pre>
+<pre class="highlighted"><code class="ruby"><span class="variable">0.8618443845771253gt;</span> npm install -g mathy
+<span class="variable">0.8618443845771253gt;</span> mathy <span class="string">"1 + 2"</span> /<span class="regexp">/output's 3</code></pre>
 <h1>Smarter than your average shell</h1>
 <p>So that example isn&#39;t particularly useful, open up PowerShell (or Terminal) and you can easily just type <code>1 + 2</code> and get a result. Where mathy does get a bit more useful is when you want a more complex formula parsed, something like this:</p>
 <pre class="highlighted"><code class="erlang">var engine = new mathy.<span class="variable">Engine</span>(<span class="tuple">{ name: 'a', derivation: '<span class="number">1</span> + <span class="number">2</span> * <span class="number">3</span> - <span class="number">1</span> * <span class="number">10</span> ^ <span class="number">1</span> / <span class="number">5</span>' }</span>);

@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>IE CSS assignment testing</title>
+		<style type="text/css">
+			.c { background-color:#ff0000;}
+			.s { padding-top:10px; background-color:#00ff00;}
+		</style>
+	</head>
+	<body>
+		<div id="s"></div>
+		
+		<script type="text/javascript">
+			var txt = document.createElement('span');
+			txt.innerHTML = "Hello World";
+			txt.setAttribute('class', 'c');
+			
+			var s = document.getElementById('s');			
+			s.appendChild(txt);
+			s.setAttribute('class', 's');
+		</script>
+	</body>
+</html>

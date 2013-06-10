@@ -4,7 +4,7 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-06-10T06:50:11.138Z</updated>
+    <updated>2013-06-10T07:02:18.121Z</updated>
     <id></id>
     <author>
         <name>Aaron Powell</name>
@@ -243,69 +243,48 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - Introduction</title>
-            <link href="/posts/2013-05-23-introduction.html"/>
+            <title>Flight Mode - local and session storage</title>
+            <link href="/posts/2013-05-23-local-session-storage.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>/posts/2013-05-23-introduction.html</id>
-            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
-&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
+            <id>/posts/2013-05-23-local-session-storage.html</id>
+            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
+&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
+&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
+&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
+&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
+&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
+&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
+&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
+&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
+var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
+localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
+};
+
+Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
+&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
+&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
-&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
-        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
-            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-        }
-
-        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
+&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
 </content>
         </entry>
     
@@ -371,48 +350,69 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - local and session storage</title>
-            <link href="/posts/2013-05-23-local-session-storage.html"/>
+            <title>Flight Mode - Introduction</title>
+            <link href="/posts/2013-05-23-introduction.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>/posts/2013-05-23-local-session-storage.html</id>
-            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
-&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
-&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
-&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
-&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
-&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
-&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
-&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
-&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
-var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
-localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
-};
-
-Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
+            <id>/posts/2013-05-23-introduction.html</id>
+            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
+&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
-&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
-&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
+&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
+        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
+            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        }
+
+        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
 </content>
         </entry>
     
@@ -559,8 +559,8 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
 var result = engine.process();
 &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(result[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;])&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;to&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;equal&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;)&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Pretty simple, create a new engine, provide it some parameters and process it. You can also install mathy as a global Node.js module and get a new command that will do math for you:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;variable&quot;&gt;0.9698138511739671gt;&lt;/span&gt; npm install -g mathy
-&lt;span class=&quot;variable&quot;&gt;0.9698138511739671gt;&lt;/span&gt; mathy &lt;span class=&quot;string&quot;&gt;&quot;1 + 2&quot;&lt;/span&gt; /&lt;span class=&quot;regexp&quot;&gt;/output's 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;variable&quot;&gt;0.8618443845771253gt;&lt;/span&gt; npm install -g mathy
+&lt;span class=&quot;variable&quot;&gt;0.8618443845771253gt;&lt;/span&gt; mathy &lt;span class=&quot;string&quot;&gt;&quot;1 + 2&quot;&lt;/span&gt; /&lt;span class=&quot;regexp&quot;&gt;/output's 3&lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;Smarter than your average shell&lt;/h1&gt;
 &lt;p&gt;So that example isn&amp;#39;t particularly useful, open up PowerShell (or Terminal) and you can easily just type &lt;code&gt;1 + 2&lt;/code&gt; and get a result. Where mathy does get a bit more useful is when you want a more complex formula parsed, something like this:&lt;/p&gt;
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;var engine = new mathy.&lt;span class=&quot;variable&quot;&gt;Engine&lt;/span&gt;(&lt;span class=&quot;tuple&quot;&gt;{ name: 'a', derivation: '&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt; - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; * &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; ^ &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; / &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;' }&lt;/span&gt;);
@@ -3683,71 +3683,6 @@ amplify.request.define(&lt;span class=&quot;string&quot;&gt;'my-data'&lt;/span&g
         </entry>
     
         <entry>
-            <title>You don't need to use $.proxy</title>
-            <link href="/posts/2011-12-12-you-dont-need-jquery-proxy.html"/>
-            <updated>2011-12-12T00:00:00.000Z</updated>
-            <id>/posts/2011-12-12-you-dont-need-jquery-proxy.html</id>
-            <content type="html">&lt;p&gt;I&amp;#39;ve been recently going through some extending of a jQuery UI widget which a colleague had written when I came across quite a number of statements that were using the &lt;a href=&quot;http://api.jquery.com/jQuery.proxy/&quot;&gt;proxy&lt;/a&gt; method from jQuery.&lt;/p&gt;
-&lt;p&gt;For anyone who&amp;#39;s not familiar with the &lt;code&gt;proxy&lt;/code&gt; method is allows you to take a function and specify a context (the &lt;code&gt;this&lt;/code&gt; value) so when you pass it around for execution you always know what you&amp;#39;re going to have as the context.&lt;/p&gt;
-&lt;p&gt;The method has been around for a while and it did serve a good purpose but these days its usefulness is becoming limited and I&amp;#39;m going to look at a few reasons as to why you shouldn&amp;#39;t be using it.&lt;/p&gt;
-&lt;h1&gt;Understand this&lt;/h1&gt;
-&lt;p&gt;The most common reason I see that people will use &lt;code&gt;proxy&lt;/code&gt; is because they don&amp;#39;t understand how &lt;code&gt;this&lt;/code&gt; works in JavaScript. While there are dozens of articles through your favourite search engine explaining &lt;code&gt;this&lt;/code&gt; (&lt;a href=&quot;http://javascriptweblog.wordpress.com/2010/08/30/understanding-javascripts-this/&quot;&gt;here&amp;#39;s a good start&lt;/a&gt;) I&amp;#39;ll do my best to give a quick overview.&lt;/p&gt;
-&lt;p&gt;When people come from C# they already have a notion of &lt;code&gt;this&lt;/code&gt; and what it represents, unfortunately this is a broken assumption when moving to JavaScript. In C# &lt;code&gt;this&lt;/code&gt; represents the current class which you&amp;#39;re working within but since JavaScript &lt;em&gt;isn&amp;#39;t&lt;/em&gt; a classical language there isn&amp;#39;t the concept of a &lt;em&gt;class&lt;/em&gt; so you couldn&amp;#39;t really associate it to one could you?&lt;/p&gt;
-&lt;p&gt;Instead &lt;code&gt;this&lt;/code&gt; represents the context for which a function is executed for and different kinds of execution result in different contexts. Here&amp;#39;s a few examples:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Invoking a function from an object will set the context to the owner object&lt;/li&gt;
-&lt;li&gt;Invoking a function literal will set the context to the global object (&lt;code&gt;window&lt;/code&gt; in a browser)&lt;/li&gt;
-&lt;li&gt;Invoking a function with apply/ call allows it to be controlled&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;And this is why a lot of people get utterly confused with &lt;code&gt;this&lt;/code&gt; in JavaScript.&lt;/p&gt;
-&lt;p&gt;But what does this have to do with the &lt;code&gt;$.proxy&lt;/code&gt; method? As I said one of the most common reasons I see people using it is because they want to be able to access members of a particular object within a callback (such as a function called from an AJAX success). Because they are aware that in their outer function they can go &lt;code&gt;this.foo&lt;/code&gt; they expect it to be available within the callback (after all isn&amp;#39;t the callback in the same class?) but it will fail so they use &lt;code&gt;$.proxy&lt;/code&gt; to ensure that they can access the member(s) they require.&lt;/p&gt;
-&lt;p&gt;So why is it a poor choice in this scenario? Well the reason is  that you can solve the problem in a much simpler fashion, by understanding JavaScript closures. You can draw a lot of similarities between JavaScript closures and C# closures, but the simplest explanation is that a variable with be within scope until all functions that require is have been descoped. But with the case of &lt;code&gt;this&lt;/code&gt;, since it changes between function scopes the &lt;code&gt;var that = this&lt;/code&gt; pattern emerged in JavaScript.&lt;/p&gt;
-&lt;p&gt;Let&amp;#39;s have a look at some code:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; foo = {
-    makeRequest: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-        $.&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'/foo'&lt;/span&gt;, $.proxy(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(result)&lt;/span&gt; {&lt;/span&gt;
-                &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.update(result);
-            }, &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;)
-        );
-    },
-
-    update: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;/* ... */&lt;/span&gt; }
-};
-
-&lt;span class=&quot;comment&quot;&gt;//somewhere later in the code&lt;/span&gt;
-foo.makeRequest();&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here we&amp;#39;re using the &lt;code&gt;proxy&lt;/code&gt; method to make it possible to access the &lt;code&gt;update&lt;/code&gt; method, since when we called the &lt;code&gt;makeRequest&lt;/code&gt; method its &lt;code&gt;this&lt;/code&gt; is a reference to &lt;code&gt;foo&lt;/code&gt; (we&amp;#39;re assuming that the assignment of &lt;code&gt;foo&lt;/code&gt; is out of scope for the &lt;code&gt;makeRequest&lt;/code&gt; method). So let&amp;#39;s update it to use variable closures:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; foo = {
-    makeRequest: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; that = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;
-        $.&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'/foo'&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(result)&lt;/span&gt; {&lt;/span&gt;
-            that.update(result);
-        });
-    },
-
-    update: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;/* ... */&lt;/span&gt; }
-};
-
-foo.makeRequest();&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The difference here is that I&amp;#39;m assigning the value of &lt;code&gt;this&lt;/code&gt; to a variable before the callback is created and inside the callback I refer back to the variable.&lt;/p&gt;
-&lt;p&gt;So why is this better than using &lt;code&gt;proxy&lt;/code&gt;? The primary reason is readability, if you look at the first snippet you&amp;#39;re intention is obscured by the use of &lt;code&gt;proxy&lt;/code&gt; to change the scope. When someone who understands JavaScript comes to that snippet they have to know what the use of &lt;code&gt;proxy&lt;/code&gt; is and why the &lt;code&gt;this&lt;/code&gt; context needs to be controlled. With the second snippet it&amp;#39;s clearer to see that you want to call the &lt;code&gt;update&lt;/code&gt; method on the same object which &lt;code&gt;makeRequest&lt;/code&gt; was invoked from.&lt;/p&gt;
-&lt;h1&gt;Use built-in methods&lt;/h1&gt;
-&lt;p&gt;An often missed note of JavaScript (well ECMAScript really) is that the functionality that is provided by &lt;code&gt;proxy&lt;/code&gt; (and the similar methods in the other libraries) is built into the language, through the &lt;a href=&quot;https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind&quot;&gt;bind&lt;/a&gt; method. The &lt;code&gt;bind&lt;/code&gt; method was added as part of ECMAScript 5 and&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Creates a new function that, when called, itself calls this function in the context of the provided this value, with a given sequence of arguments preceding any provided when the new function was called.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Hmm that sounds pretty much like what you get from the &lt;code&gt;proxy&lt;/code&gt; method yet it&amp;#39;s built into the language.&lt;/p&gt;
-&lt;p&gt;This means that you can (potentially) get a performance boost (&lt;a href=&quot;http://jsperf.com/bind-vs-jquery-proxy&quot;&gt;check it out on JSPerf&lt;/a&gt;) by using a native browser API rather than the wrapper. Also at the time of writing jQuery (1.7.1) doesn&amp;#39;t use the native browser method it does the code itself.&lt;/p&gt;
-&lt;p&gt;Performance aside the main difference between the jQuery implementation and the ECMASCript 5 specification is the jQuery &lt;code&gt;proxy&lt;/code&gt; method &lt;em&gt;does not throw a type error if the first argument is not a function&lt;/em&gt; which the &lt;a href=&quot;http://es5.github.com/#x15.3.4.5&quot;&gt;spec states&lt;/a&gt; &lt;code&gt;bind&lt;/code&gt; will do. So although they are named differently they are providing the same functionality except for a critical check.&lt;/p&gt;
-&lt;p&gt;The take away from this point is that it&amp;#39;s built into the language so using it makes a lot of sense and when you&amp;#39;re in browsers that don&amp;#39;t support it it&amp;#39;s easy to polyfil the missing API (the mdn docs include the polyfil).&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;That wraps up my &amp;quot;rant&amp;quot; against using the &lt;code&gt;proxy&lt;/code&gt; method in jQuery. The goal of this article was to teach you a bit more about the JavaScript language and that things people commonly try and work around have simpler solutions.&lt;/p&gt;
-&lt;p&gt;By understanding language concepts such as &lt;code&gt;this&lt;/code&gt; and closures you can avoid manipulating scope.&lt;/p&gt;
-&lt;p&gt;By knowing what&amp;#39;s new in the language you can use built-in APIs and make faster and more portable code.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Building data with tbd</title>
             <link href="/posts/2011-12-12-building-data-with-tbd.html"/>
             <updated>2011-12-12T00:00:00.000Z</updated>
@@ -3820,6 +3755,71 @@ foo.makeRequest();&lt;/code&gt;&lt;/pre&gt;
 &lt;h1&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;So this wraps up our look at &lt;code&gt;tbd&lt;/code&gt;, a useful little tool I wrote to make it easier to build out some fake data for when you&amp;#39;re mocking a UI or to pump into a test.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/aaronpowell/tbd&quot;&gt;Grab it today!&lt;/a&gt;&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>You don't need to use $.proxy</title>
+            <link href="/posts/2011-12-12-you-dont-need-jquery-proxy.html"/>
+            <updated>2011-12-12T00:00:00.000Z</updated>
+            <id>/posts/2011-12-12-you-dont-need-jquery-proxy.html</id>
+            <content type="html">&lt;p&gt;I&amp;#39;ve been recently going through some extending of a jQuery UI widget which a colleague had written when I came across quite a number of statements that were using the &lt;a href=&quot;http://api.jquery.com/jQuery.proxy/&quot;&gt;proxy&lt;/a&gt; method from jQuery.&lt;/p&gt;
+&lt;p&gt;For anyone who&amp;#39;s not familiar with the &lt;code&gt;proxy&lt;/code&gt; method is allows you to take a function and specify a context (the &lt;code&gt;this&lt;/code&gt; value) so when you pass it around for execution you always know what you&amp;#39;re going to have as the context.&lt;/p&gt;
+&lt;p&gt;The method has been around for a while and it did serve a good purpose but these days its usefulness is becoming limited and I&amp;#39;m going to look at a few reasons as to why you shouldn&amp;#39;t be using it.&lt;/p&gt;
+&lt;h1&gt;Understand this&lt;/h1&gt;
+&lt;p&gt;The most common reason I see that people will use &lt;code&gt;proxy&lt;/code&gt; is because they don&amp;#39;t understand how &lt;code&gt;this&lt;/code&gt; works in JavaScript. While there are dozens of articles through your favourite search engine explaining &lt;code&gt;this&lt;/code&gt; (&lt;a href=&quot;http://javascriptweblog.wordpress.com/2010/08/30/understanding-javascripts-this/&quot;&gt;here&amp;#39;s a good start&lt;/a&gt;) I&amp;#39;ll do my best to give a quick overview.&lt;/p&gt;
+&lt;p&gt;When people come from C# they already have a notion of &lt;code&gt;this&lt;/code&gt; and what it represents, unfortunately this is a broken assumption when moving to JavaScript. In C# &lt;code&gt;this&lt;/code&gt; represents the current class which you&amp;#39;re working within but since JavaScript &lt;em&gt;isn&amp;#39;t&lt;/em&gt; a classical language there isn&amp;#39;t the concept of a &lt;em&gt;class&lt;/em&gt; so you couldn&amp;#39;t really associate it to one could you?&lt;/p&gt;
+&lt;p&gt;Instead &lt;code&gt;this&lt;/code&gt; represents the context for which a function is executed for and different kinds of execution result in different contexts. Here&amp;#39;s a few examples:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Invoking a function from an object will set the context to the owner object&lt;/li&gt;
+&lt;li&gt;Invoking a function literal will set the context to the global object (&lt;code&gt;window&lt;/code&gt; in a browser)&lt;/li&gt;
+&lt;li&gt;Invoking a function with apply/ call allows it to be controlled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And this is why a lot of people get utterly confused with &lt;code&gt;this&lt;/code&gt; in JavaScript.&lt;/p&gt;
+&lt;p&gt;But what does this have to do with the &lt;code&gt;$.proxy&lt;/code&gt; method? As I said one of the most common reasons I see people using it is because they want to be able to access members of a particular object within a callback (such as a function called from an AJAX success). Because they are aware that in their outer function they can go &lt;code&gt;this.foo&lt;/code&gt; they expect it to be available within the callback (after all isn&amp;#39;t the callback in the same class?) but it will fail so they use &lt;code&gt;$.proxy&lt;/code&gt; to ensure that they can access the member(s) they require.&lt;/p&gt;
+&lt;p&gt;So why is it a poor choice in this scenario? Well the reason is  that you can solve the problem in a much simpler fashion, by understanding JavaScript closures. You can draw a lot of similarities between JavaScript closures and C# closures, but the simplest explanation is that a variable with be within scope until all functions that require is have been descoped. But with the case of &lt;code&gt;this&lt;/code&gt;, since it changes between function scopes the &lt;code&gt;var that = this&lt;/code&gt; pattern emerged in JavaScript.&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s have a look at some code:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; foo = {
+    makeRequest: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        $.&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'/foo'&lt;/span&gt;, $.proxy(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(result)&lt;/span&gt; {&lt;/span&gt;
+                &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.update(result);
+            }, &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;)
+        );
+    },
+
+    update: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;/* ... */&lt;/span&gt; }
+};
+
+&lt;span class=&quot;comment&quot;&gt;//somewhere later in the code&lt;/span&gt;
+foo.makeRequest();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here we&amp;#39;re using the &lt;code&gt;proxy&lt;/code&gt; method to make it possible to access the &lt;code&gt;update&lt;/code&gt; method, since when we called the &lt;code&gt;makeRequest&lt;/code&gt; method its &lt;code&gt;this&lt;/code&gt; is a reference to &lt;code&gt;foo&lt;/code&gt; (we&amp;#39;re assuming that the assignment of &lt;code&gt;foo&lt;/code&gt; is out of scope for the &lt;code&gt;makeRequest&lt;/code&gt; method). So let&amp;#39;s update it to use variable closures:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; foo = {
+    makeRequest: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; that = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;;
+        $.&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'/foo'&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(result)&lt;/span&gt; {&lt;/span&gt;
+            that.update(result);
+        });
+    },
+
+    update: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;/* ... */&lt;/span&gt; }
+};
+
+foo.makeRequest();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The difference here is that I&amp;#39;m assigning the value of &lt;code&gt;this&lt;/code&gt; to a variable before the callback is created and inside the callback I refer back to the variable.&lt;/p&gt;
+&lt;p&gt;So why is this better than using &lt;code&gt;proxy&lt;/code&gt;? The primary reason is readability, if you look at the first snippet you&amp;#39;re intention is obscured by the use of &lt;code&gt;proxy&lt;/code&gt; to change the scope. When someone who understands JavaScript comes to that snippet they have to know what the use of &lt;code&gt;proxy&lt;/code&gt; is and why the &lt;code&gt;this&lt;/code&gt; context needs to be controlled. With the second snippet it&amp;#39;s clearer to see that you want to call the &lt;code&gt;update&lt;/code&gt; method on the same object which &lt;code&gt;makeRequest&lt;/code&gt; was invoked from.&lt;/p&gt;
+&lt;h1&gt;Use built-in methods&lt;/h1&gt;
+&lt;p&gt;An often missed note of JavaScript (well ECMAScript really) is that the functionality that is provided by &lt;code&gt;proxy&lt;/code&gt; (and the similar methods in the other libraries) is built into the language, through the &lt;a href=&quot;https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind&quot;&gt;bind&lt;/a&gt; method. The &lt;code&gt;bind&lt;/code&gt; method was added as part of ECMAScript 5 and&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Creates a new function that, when called, itself calls this function in the context of the provided this value, with a given sequence of arguments preceding any provided when the new function was called.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Hmm that sounds pretty much like what you get from the &lt;code&gt;proxy&lt;/code&gt; method yet it&amp;#39;s built into the language.&lt;/p&gt;
+&lt;p&gt;This means that you can (potentially) get a performance boost (&lt;a href=&quot;http://jsperf.com/bind-vs-jquery-proxy&quot;&gt;check it out on JSPerf&lt;/a&gt;) by using a native browser API rather than the wrapper. Also at the time of writing jQuery (1.7.1) doesn&amp;#39;t use the native browser method it does the code itself.&lt;/p&gt;
+&lt;p&gt;Performance aside the main difference between the jQuery implementation and the ECMASCript 5 specification is the jQuery &lt;code&gt;proxy&lt;/code&gt; method &lt;em&gt;does not throw a type error if the first argument is not a function&lt;/em&gt; which the &lt;a href=&quot;http://es5.github.com/#x15.3.4.5&quot;&gt;spec states&lt;/a&gt; &lt;code&gt;bind&lt;/code&gt; will do. So although they are named differently they are providing the same functionality except for a critical check.&lt;/p&gt;
+&lt;p&gt;The take away from this point is that it&amp;#39;s built into the language so using it makes a lot of sense and when you&amp;#39;re in browsers that don&amp;#39;t support it it&amp;#39;s easy to polyfil the missing API (the mdn docs include the polyfil).&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;That wraps up my &amp;quot;rant&amp;quot; against using the &lt;code&gt;proxy&lt;/code&gt; method in jQuery. The goal of this article was to teach you a bit more about the JavaScript language and that things people commonly try and work around have simpler solutions.&lt;/p&gt;
+&lt;p&gt;By understanding language concepts such as &lt;code&gt;this&lt;/code&gt; and closures you can avoid manipulating scope.&lt;/p&gt;
+&lt;p&gt;By knowing what&amp;#39;s new in the language you can use built-in APIs and make faster and more portable code.&lt;/p&gt;
 </content>
         </entry>
     
@@ -8378,27 +8378,6 @@ alert(&lt;span class=&quot;keyword&quot;&gt;add&lt;/span&gt;&lt;span class=&quot
         </entry>
     
         <entry>
-            <title>A LINQ observation</title>
-            <link href="/posts/2010-08-28-a-linq-observation.html"/>
-            <updated>2010-08-28T00:00:00.000Z</updated>
-            <id>/posts/2010-08-28-a-linq-observation.html</id>
-            <content type="html">&lt;p&gt;Well I&amp;#39;m making good headway with LINQ to Umbraco, in the next few days I&amp;#39;ll be doing a very interesting check in (which I&amp;#39;ll also blog here about). My tweet-peeps already have an idea of what it entails, but there&amp;#39;s a bit of a problem with it still which I want to address before the commit.&lt;/p&gt;
-&lt;p&gt;And that problem has lead to an observation I made about LINQ, well, about Expression-based LINQ (ie - something implementing IQueryable, so LINQ to SQL, or LINQ to Umbraco, etc).&lt;/p&gt;
-&lt;p&gt;I&amp;#39;ll use LINQ to SQL for the examples as it&amp;#39;s more accessible to everyone.&lt;/p&gt;
-&lt;p&gt;Take this LINQ statement (where ctx is an instance of my DataContext):&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That statement returns an object of &lt;code&gt;Table&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and a bunch of others that are not important for this instructional). So it&amp;#39;s not executed yet, no DB query has occurred, etc. Now lets take this LINQ statement:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; items2 = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; ctx.Items &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; item;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This time I get a result of &lt;code&gt;IQueryable&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt; (duh!) and &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and again, a bunch of others).&lt;/p&gt;
-&lt;p&gt;Both of these results have a non-public property called Expression. This reperesents the expression tree which is being used to produce our collection. But here&amp;#39;s the interesting part, they are not the same. That&amp;#39;s right, although you&amp;#39;re getting back basically the same result, the expression used to produce that result is really quite different.&lt;/p&gt;
-&lt;p&gt;This is due to the way the compiler translates the query syntax of LINQ into a lambda syntax. In reality the 2nd example is equal to this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items2 = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.Select&lt;/span&gt;(item =&amp;gt; item)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But is this really a problem, what difference does it make? In the original examples you actually get back the same data every time. You&amp;#39;ll have slightly less overhead by using the access of &lt;code&gt;Table&amp;lt;T&amp;gt;&lt;/code&gt; rather than &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, due to the fact that you&amp;#39;re not doing a redundant call to Select. But in reality you would not notice the call.&lt;/p&gt;
-&lt;p&gt;This has caused a problem for me as my direct-access lambda syntax fails my current unit test, where as the query syntax passes. Now to solve that problem! ;)&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Not getting DropDownList value when setting it via JavaScript</title>
             <link href="/posts/2010-08-28-no-value-when-settings-dropdown-with-javascript.html"/>
             <updated>2010-08-28T00:00:00.000Z</updated>
@@ -8428,18 +8407,23 @@ Hmm I said to myself, I looked at the form, it&amp;#39;s setting the value right
         </entry>
     
         <entry>
-            <title>SharePoint feature corrupts page layout</title>
-            <link href="/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html"/>
+            <title>A LINQ observation</title>
+            <link href="/posts/2010-08-28-a-linq-observation.html"/>
             <updated>2010-08-28T00:00:00.000Z</updated>
-            <id>/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html</id>
-            <content type="html">&lt;p&gt;Something that I&amp;#39;ve come across a few times when working on SharePoint/ MOSS 2007 features. When importing a Page Layout the ASPX some times becomes corrupt. You end up with additional HTML inserts once it&amp;#39;s been imported into SharePoint.&lt;/p&gt;
-&lt;p&gt;The corruption is in the form of HTML tags, outside the last &amp;lt;/asp:Content&amp;gt; tag.&lt;/p&gt;
-&lt;p&gt;Well it turns out that the problem is caused when you import an ASPX that has a &amp;lt;/asp:content&amp;gt; tag it&amp;#39;ll happen.
-Did you notice the problem?&lt;/p&gt;
-&lt;p&gt;That&amp;#39;s right, if you have a lowercase c then it&amp;#39;ll import corrupt. Let me show the problem again, highlighted this time:
-&amp;lt;/asp:&lt;strong&gt;c&lt;/strong&gt;ontent&amp;gt;&lt;/p&gt;
-&lt;p&gt;All you need to do is ensure that that has a capital letter, so the tag is &amp;lt;/asp:Content&amp;gt; and it&amp;#39;s all good again.&lt;/p&gt;
-&lt;p&gt;The most common cause of this happening is doing a format-document within Visual Studio on the ASPX when it is in the features class-library project. Visual Studio doesn&amp;#39;t handle the ASPX file correctly, and formats it as a raw XHTML file, which dictates that the XHTML tags need to be in all lowercase.&lt;/p&gt;
+            <id>/posts/2010-08-28-a-linq-observation.html</id>
+            <content type="html">&lt;p&gt;Well I&amp;#39;m making good headway with LINQ to Umbraco, in the next few days I&amp;#39;ll be doing a very interesting check in (which I&amp;#39;ll also blog here about). My tweet-peeps already have an idea of what it entails, but there&amp;#39;s a bit of a problem with it still which I want to address before the commit.&lt;/p&gt;
+&lt;p&gt;And that problem has lead to an observation I made about LINQ, well, about Expression-based LINQ (ie - something implementing IQueryable, so LINQ to SQL, or LINQ to Umbraco, etc).&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ll use LINQ to SQL for the examples as it&amp;#39;s more accessible to everyone.&lt;/p&gt;
+&lt;p&gt;Take this LINQ statement (where ctx is an instance of my DataContext):&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That statement returns an object of &lt;code&gt;Table&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and a bunch of others that are not important for this instructional). So it&amp;#39;s not executed yet, no DB query has occurred, etc. Now lets take this LINQ statement:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; items2 = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; ctx.Items &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; item;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This time I get a result of &lt;code&gt;IQueryable&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt; (duh!) and &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and again, a bunch of others).&lt;/p&gt;
+&lt;p&gt;Both of these results have a non-public property called Expression. This reperesents the expression tree which is being used to produce our collection. But here&amp;#39;s the interesting part, they are not the same. That&amp;#39;s right, although you&amp;#39;re getting back basically the same result, the expression used to produce that result is really quite different.&lt;/p&gt;
+&lt;p&gt;This is due to the way the compiler translates the query syntax of LINQ into a lambda syntax. In reality the 2nd example is equal to this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items2 = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.Select&lt;/span&gt;(item =&amp;gt; item)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But is this really a problem, what difference does it make? In the original examples you actually get back the same data every time. You&amp;#39;ll have slightly less overhead by using the access of &lt;code&gt;Table&amp;lt;T&amp;gt;&lt;/code&gt; rather than &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, due to the fact that you&amp;#39;re not doing a redundant call to Select. But in reality you would not notice the call.&lt;/p&gt;
+&lt;p&gt;This has caused a problem for me as my direct-access lambda syntax fails my current unit test, where as the query syntax passes. Now to solve that problem! ;)&lt;/p&gt;
 </content>
         </entry>
     
@@ -8514,10 +8498,26 @@ public void EmailSender() {
         </entry>
     
         <entry>
-            <title>Creating custom DataProviders for LINQ to Umbraco</title>
-            <link href="/posts/2010-08-27-creating-custom-dataprovider-for-linq-to-umbraco.html"/>
+            <title>SharePoint feature corrupts page layout</title>
+            <link href="/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html"/>
+            <updated>2010-08-28T00:00:00.000Z</updated>
+            <id>/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html</id>
+            <content type="html">&lt;p&gt;Something that I&amp;#39;ve come across a few times when working on SharePoint/ MOSS 2007 features. When importing a Page Layout the ASPX some times becomes corrupt. You end up with additional HTML inserts once it&amp;#39;s been imported into SharePoint.&lt;/p&gt;
+&lt;p&gt;The corruption is in the form of HTML tags, outside the last &amp;lt;/asp:Content&amp;gt; tag.&lt;/p&gt;
+&lt;p&gt;Well it turns out that the problem is caused when you import an ASPX that has a &amp;lt;/asp:content&amp;gt; tag it&amp;#39;ll happen.
+Did you notice the problem?&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s right, if you have a lowercase c then it&amp;#39;ll import corrupt. Let me show the problem again, highlighted this time:
+&amp;lt;/asp:&lt;strong&gt;c&lt;/strong&gt;ontent&amp;gt;&lt;/p&gt;
+&lt;p&gt;All you need to do is ensure that that has a capital letter, so the tag is &amp;lt;/asp:Content&amp;gt; and it&amp;#39;s all good again.&lt;/p&gt;
+&lt;p&gt;The most common cause of this happening is doing a format-document within Visual Studio on the ASPX when it is in the features class-library project. Visual Studio doesn&amp;#39;t handle the ASPX file correctly, and formats it as a raw XHTML file, which dictates that the XHTML tags need to be in all lowercase.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Creating a RssDataProvider for LINQ to Umbraco</title>
+            <link href="/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html"/>
             <updated>2010-08-27T00:00:00.000Z</updated>
-            <id>/posts/2010-08-27-creating-custom-dataprovider-for-linq-to-umbraco.html</id>
+            <id>/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html</id>
             <content type="html">&lt;p&gt;Sorry to all the people who were kind enough to come to my &lt;a href=&quot;http://our.umbraco.org/wiki/codegarden-2009/open-space-minutes/linq&quot;&gt;LINQ to Umbraco session at CodeGarden 09&lt;/a&gt;, I said I would do this post soon after the session. Sadly I started enjoying Copenhagen too much without the need to be sitting at my laptop and now it&amp;#39;s a week later, I&amp;#39;m home and it&amp;#39;s time I come good on my promise.&lt;/p&gt;
 &lt;h2&gt;The LINQ to Umbraco DataProvider model&lt;/h2&gt;
 &lt;p&gt;Something that I have implemented with LINQ to Umbraco, and something which will be taking a stronger focus in Umbraco going forward, is a Provider model for the Umbraco data.
@@ -8607,10 +8607,10 @@ And how does it work? Well just like this:&lt;/p&gt;
         </entry>
     
         <entry>
-            <title>Creating a RssDataProvider for LINQ to Umbraco</title>
-            <link href="/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html"/>
+            <title>Creating custom DataProviders for LINQ to Umbraco</title>
+            <link href="/posts/2010-08-27-creating-custom-dataprovider-for-linq-to-umbraco.html"/>
             <updated>2010-08-27T00:00:00.000Z</updated>
-            <id>/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html</id>
+            <id>/posts/2010-08-27-creating-custom-dataprovider-for-linq-to-umbraco.html</id>
             <content type="html">&lt;p&gt;Sorry to all the people who were kind enough to come to my &lt;a href=&quot;http://our.umbraco.org/wiki/codegarden-2009/open-space-minutes/linq&quot;&gt;LINQ to Umbraco session at CodeGarden 09&lt;/a&gt;, I said I would do this post soon after the session. Sadly I started enjoying Copenhagen too much without the need to be sitting at my laptop and now it&amp;#39;s a week later, I&amp;#39;m home and it&amp;#39;s time I come good on my promise.&lt;/p&gt;
 &lt;h2&gt;The LINQ to Umbraco DataProvider model&lt;/h2&gt;
 &lt;p&gt;Something that I have implemented with LINQ to Umbraco, and something which will be taking a stronger focus in Umbraco going forward, is a Provider model for the Umbraco data.
@@ -9633,28 +9633,6 @@ Admittedly I&amp;#39;ve gone a little bit overboard with my events between the t
         </entry>
     
         <entry>
-            <title>ASP.NET WebForms Model-Video-Presenter</title>
-            <link href="/posts/2010-05-18-webforms-mvp.html"/>
-            <updated>2010-05-18T00:00:00.000Z</updated>
-            <id>/posts/2010-05-18-webforms-mvp.html</id>
-            <content type="html">&lt;p&gt;ASP.NET WebForms MVP is a really handy project which aims to bring testability to WebForms development.&lt;/p&gt;
-&lt;h2&gt;WebForms MVP Contrib&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/webforms-mvp-contrib&quot;&gt;A look at the ASP.NET WebForms MVP Contrib project&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Useful Hits&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/testing-messaging-within-a-presenter&quot;&gt;Testing messaging within a presenter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/unit-testing-with-umbraco&quot;&gt;Unit Testing with Umbraco&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Fun Stuff&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/writing-presenters-with-fsharp&quot;&gt;Writing Presenters with F#&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Testing Messaging Within a Presenter</title>
             <link href="/posts/2010-05-18-testing-messaging-within-a-presenter.html"/>
             <updated>2010-05-18T00:00:00.000Z</updated>
@@ -9794,6 +9772,28 @@ public void PromoPresenterTests_Published_From_Other_Presenter() {
         </entry>
     
         <entry>
+            <title>ASP.NET WebForms Model-Video-Presenter</title>
+            <link href="/posts/2010-05-18-webforms-mvp.html"/>
+            <updated>2010-05-18T00:00:00.000Z</updated>
+            <id>/posts/2010-05-18-webforms-mvp.html</id>
+            <content type="html">&lt;p&gt;ASP.NET WebForms MVP is a really handy project which aims to bring testability to WebForms development.&lt;/p&gt;
+&lt;h2&gt;WebForms MVP Contrib&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/webforms-mvp-contrib&quot;&gt;A look at the ASP.NET WebForms MVP Contrib project&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Useful Hits&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/testing-messaging-within-a-presenter&quot;&gt;Testing messaging within a presenter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/unit-testing-with-umbraco&quot;&gt;Unit Testing with Umbraco&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Fun Stuff&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/writing-presenters-with-fsharp&quot;&gt;Writing Presenters with F#&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Oh woe is (Mobile)Me</title>
             <link href="/posts/2010-04-25-oh-woe-is-mobile-me.html"/>
             <updated>2010-04-25T00:00:00.000Z</updated>
@@ -9817,28 +9817,6 @@ After doing some quick math I concluded that it was ~60 days since I got my iPho
 &lt;p&gt;I instantly signed out of MobileMe, and low and behold the DNS flooding stopped happening!&lt;/p&gt;
 &lt;p&gt;Thank you Apple for producing a service which is capable of bringing down an office network, you&amp;#39;ve just made sure I strongly consider not purchasing MobileMe in the future!&lt;/p&gt;
 &lt;p&gt;Oh and I&amp;#39;m never going to live this down at work, Shan isn&amp;#39;t a fan of Apple so this is just adding fuel to the fire!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Working with dates and LINQ to SQL</title>
-            <link href="/posts/2010-04-25-working-with-dates-and-linq-to-sql.html"/>
-            <updated>2010-04-25T00:00:00.000Z</updated>
-            <id>/posts/2010-04-25-working-with-dates-and-linq-to-sql.html</id>
-            <content type="html">&lt;p&gt;Something I&amp;#39;ve heard developers complain about on numerous occasion is that DateTime comparisons between SQL and .NET is a real pain. Often you need to do a comparison of the date against either a Min or Max value.&lt;/p&gt;
-&lt;p&gt;With raw .NET this is really quite easy, you can just use the DateTime struct and grab DateTime.MinValue or DateTime.MaxValue.&lt;/p&gt;
-&lt;p&gt;But if you&amp;#39;ve ever done this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;var res = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; Collection 
-          &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;.CreatedDate != DateTime.MinValue 
-          select &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You&amp;#39;ll get the following exception thrown:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;http&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;SqlTypeException&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The problem is that &lt;code&gt;DateTime.MinValue&lt;/code&gt; is actually &lt;strong&gt;01/01/0001 12:00:00 AM&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;So I&amp;#39;ve quite often seen hacks where a new date is being created which represent the minimum value of the SQL server, and all kinds of weird things, but that&amp;#39;s all redundant.
-The comparision value is built into the .NET framework.&lt;/p&gt;
-&lt;p&gt;All you need to use is &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.aspx&quot;&gt;System.Data.SqlTypes.SqlDateTime&lt;/a&gt; structure. This exposes two fields, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.minvalue.aspx&quot;&gt;MinValue&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.maxvalue.aspx&quot;&gt;MaxValue&lt;/a&gt;. All you need to do is access the Value property of these and pass it into your LINQ statement.
-The date will be parsed correctly as a SQL valid date and you can do your comparisons!&lt;/p&gt;
-&lt;p&gt;So please, stop with any silly workaround for date comparisons with SQL and .NET :P&lt;/p&gt;
 </content>
         </entry>
     
@@ -9885,6 +9863,28 @@ Set to runat=&amp;quot;server&amp;quot;
 And you should only be setting runat=&amp;quot;server&amp;quot; on elements you need server-side access to, but that&amp;#39;s a topic for another night.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;So this brings me to the end of another post. Hopefully it&amp;#39;s been enlightening and I haven&amp;#39;t upset too many people :P&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Working with dates and LINQ to SQL</title>
+            <link href="/posts/2010-04-25-working-with-dates-and-linq-to-sql.html"/>
+            <updated>2010-04-25T00:00:00.000Z</updated>
+            <id>/posts/2010-04-25-working-with-dates-and-linq-to-sql.html</id>
+            <content type="html">&lt;p&gt;Something I&amp;#39;ve heard developers complain about on numerous occasion is that DateTime comparisons between SQL and .NET is a real pain. Often you need to do a comparison of the date against either a Min or Max value.&lt;/p&gt;
+&lt;p&gt;With raw .NET this is really quite easy, you can just use the DateTime struct and grab DateTime.MinValue or DateTime.MaxValue.&lt;/p&gt;
+&lt;p&gt;But if you&amp;#39;ve ever done this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;var res = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; Collection 
+          &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;.CreatedDate != DateTime.MinValue 
+          select &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You&amp;#39;ll get the following exception thrown:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;http&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;SqlTypeException&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The problem is that &lt;code&gt;DateTime.MinValue&lt;/code&gt; is actually &lt;strong&gt;01/01/0001 12:00:00 AM&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So I&amp;#39;ve quite often seen hacks where a new date is being created which represent the minimum value of the SQL server, and all kinds of weird things, but that&amp;#39;s all redundant.
+The comparision value is built into the .NET framework.&lt;/p&gt;
+&lt;p&gt;All you need to use is &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.aspx&quot;&gt;System.Data.SqlTypes.SqlDateTime&lt;/a&gt; structure. This exposes two fields, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.minvalue.aspx&quot;&gt;MinValue&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.maxvalue.aspx&quot;&gt;MaxValue&lt;/a&gt;. All you need to do is access the Value property of these and pass it into your LINQ statement.
+The date will be parsed correctly as a SQL valid date and you can do your comparisons!&lt;/p&gt;
+&lt;p&gt;So please, stop with any silly workaround for date comparisons with SQL and .NET :P&lt;/p&gt;
 </content>
         </entry>
     
@@ -10409,6 +10409,70 @@ Sure you could tie into the rollback feature as well so when you&amp;#39;re doin
         </entry>
     
         <entry>
+            <title>Are Extension Methods Really Evil?</title>
+            <link href="/posts/2010-04-08-are-extension-methods-really-evil.html"/>
+            <updated>2010-04-08T00:00:00.000Z</updated>
+            <id>/posts/2010-04-08-are-extension-methods-really-evil.html</id>
+            <content type="html">&lt;p&gt;Ruben (of Umbraco fame) recently wrote a post entitled Extension Methods: Silent static slaves which was in response to a comment I&amp;#39;d left on a previous post about static classes and static method being evil.&lt;/p&gt;
+&lt;p&gt;If you haven&amp;#39;t read Ruben post then I suggest you do before continue on with mine as a lot of what I&amp;#39;ll be saying is in counter argument to him (including the comments).&lt;/p&gt;
+&lt;p&gt;Done? Good, continue on!&lt;/p&gt;
+&lt;p&gt;Ruben has produced a demo which is great for illistrating his point, but is it an example of good design turning bad or just bad design from the start?&lt;/p&gt;
+&lt;p&gt;The first thing I want to look at is that his extension methods are on the interface and implementation class.
+This is bad design to start with, but it&amp;#39;s not just bad design if you&amp;#39;re using extension methods, this could manifest itself as bad design if you did it as helper methods in a separate class, eg:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Helpers&lt;/span&gt; {&lt;/span&gt;
+  &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; CalculateShoeCount(Animal animal) {
+   &lt;span class=&quot;comment&quot;&gt;//do processing&lt;/span&gt;
+  }
+  &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; CalculateShoeCount(Monkey animal) {
+   &lt;span class=&quot;comment&quot;&gt;//do processing&lt;/span&gt;
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So this would fall into the same trap if we don&amp;#39;t re-cast Animal to Monkey before calling the helper.&lt;/p&gt;
+&lt;p&gt;But does this prove Ruben&amp;#39;s initial point, that static&amp;#39;s are just plain evil?
+Well no, design isn&amp;#39;t possible without statics. If you try and design without statics you end up with nothing but instance memebers. If that&amp;#39;s the case where do I find the current method int.TryParse, does this become 0.TryParse?&lt;/p&gt;
+&lt;p&gt;Ruben&amp;#39;s demo is an example of bad design producing worse design. In good design the CalculateShoeCount would be a member of the Animal interface, particularly since the implementation changes per interface implementation type.&lt;/p&gt;
+&lt;p&gt;So how can we use extension methods to produce good design? Well first you really need to understand what an extension method is. As Ruben quite correctly pointed out an extension is just syntactic suger and extension methods should be treated as such. Developers need to understand that extension methods are only designed to provide functionality to a classes public instance members; they are stateless.
+(This is why I don&amp;#39;t understand why so many people of Stack Overflow want extension properties added to the compiler, this is where people are missing the point of the extension concept)
+And if you&amp;#39;re expecting a stateful nature from the extension methods then you&amp;#39;ve missed their goal.&lt;/p&gt;
+&lt;p&gt;Lets look at some good examples of using extension methods. Here&amp;#39;s a fav of mine for Umbraco:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; string Url(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; Node node) {
+  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; umbraco&lt;span class=&quot;variable&quot;&gt;.library&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.NiceUrl&lt;/span&gt;(node&lt;span class=&quot;variable&quot;&gt;.Id&lt;/span&gt;);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(Hey look, a static calling a static ;)).&lt;/p&gt;
+&lt;p&gt;Or how about this one:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; IEnumerable&amp;lt;ListItem&amp;gt; SelectedItems(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; ListControl ctrl) {
+  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; ctrl&lt;span class=&quot;variable&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.Cast&lt;/span&gt;&amp;lt;ListItem&amp;gt;()&lt;span class=&quot;variable&quot;&gt;.Where&lt;/span&gt;(item =&amp;gt; item&lt;span class=&quot;variable&quot;&gt;.Selected&lt;/span&gt;);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we&amp;#39;re using an extension method with an extension method.&lt;/p&gt;
+&lt;p&gt;But both of these examples are using actual class implementations, not interfaces, does that make a difference?
+Yes, and a big one. When you are putting extensions on an interface there needs to be no possibility of confusion about what the extensions are for. And if you are also providing an extension of an implementation of the class they need to be in separate namespaces. If they aren&amp;#39;t, you will end up with what Ruben shows, misrepresentation of the methods abilities.&lt;/p&gt;
+&lt;p&gt;IQueryable&lt;T&gt; is a perfect example of how to use extension methods on top of an interface. If you have a look at the construct of the interface there&amp;#39;s actually no constructs within it! This means that &amp;quot;all&amp;quot; the functionality is provided by extension methods, allowing anyone to write their own extensions.
+If I was to not include the namespace System.Linq I can then write my own query extensions, eg a Where that does return a bool, or negate operators which I don&amp;#39;t want to support.&lt;/p&gt;
+&lt;p&gt;So in my opinion extension methdos are no more evil than anything else in programming; they can easily be abused and misused, but find something that it&amp;#39;d not possible to misuse to prove bad design.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Why no Umbraco on Aaron-Powell.com?</title>
+            <link href="/posts/2010-04-08-why-no-umbraco.html"/>
+            <updated>2010-04-08T00:00:00.000Z</updated>
+            <id>/posts/2010-04-08-why-no-umbraco.html</id>
+            <content type="html">&lt;p&gt;So unsurprisingly I&amp;#39;ve had a few people question why I&amp;#39;m not using Umbraco for the latest version of Aaron-Powell.com.&lt;/p&gt;
+&lt;p&gt;First off let&amp;#39;s just have a look back on my blogging and the blog engines I&amp;#39;ve used.&lt;/p&gt;
+&lt;p&gt;Back before I was the world-famous blogger that I am today I used Windows Live Spaces for blogging, yeah, I was &lt;strong&gt;just that awesome&lt;/strong&gt;. But when I decided to buy my own domain I thought it was only appropriate that I started using some actual software.&lt;/p&gt;
+&lt;p&gt;I chose Umbraco, which was in version 3 at the time (this was somewhere around August 2008) which wasn&amp;#39;t too bad at the time.&lt;/p&gt;
+&lt;p&gt;I installed &lt;a href=&quot;http://www.creativewebspecialist.co.uk/&quot;&gt;Warren Buckley&amp;#39;s&lt;/a&gt; Creative Web Starter kit which was available at the time. Last year when I met him and he had a look I think he was shocked at just how old a version of it I was running! I had a pretty basic skin on it, which err, was ok (ha!).&lt;/p&gt;
+&lt;p&gt;Next I installed the Blog 4 Umbraco package (version 1) which I then rewrote the front end controls for it.&lt;/p&gt;
+&lt;p&gt;By now I was not really using OOTB other than the document types (which I&amp;#39;d also hacked a bit) and it was starting to become a bit of a mess. But I kept with it, I did a major overhaul of it when I produced the &lt;a href=&quot;/training-videos&quot;&gt;LINQ to Umbraco training videos&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And this brings us to the present day. Although my Umbraco site did do what I needed it to do, but I&amp;#39;m never content, so I was looking for the next round of improvements. Since MVC is completely the sex I decided that I wanted to use that as a blogging platform. Now it is true that I could have used Umbraco still, but I don&amp;#39;t &lt;em&gt;really&lt;/em&gt; have the time to re-write the front end &lt;em&gt;yet again&lt;/em&gt;! :P&lt;/p&gt;
+&lt;p&gt;This is why I chose PaulPad, that and I really liked the OOTB style of the site. Essentially it brought all of what I was looking for in a code base to me with very little work needed.&lt;/p&gt;
+&lt;p&gt;Something else really appealing about PaulPad is that this is actually much less of a blogging platform than it is a wiki platform. Something I had noticed on my Umbraco blogging engine was that it wasn&amp;#39;t great if I wanted to go back and revise a post and have it very obvious. With more of a wiki feel it&amp;#39;s easier to do that. Also, there&amp;#39;s a lot more transparency over the revision history, which will be handy with some upcoming topics.&lt;/p&gt;
+&lt;p&gt;Lastly, I believe that if you are going to be able to truly evangalise a platform (ie - Umbraco) you can&amp;#39;t just use it. You need to be familiar with your competitors (although PaulPad is hardly a competitor :P), so this is a good way to really just play with something that&amp;#39;s not Umbraco.&lt;/p&gt;
+&lt;p&gt;Hopefully that sheds some light on my &lt;em&gt;madness&lt;/em&gt; regarding my dismissal of Umbraco as my choice of blogging platform.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>LINQ to XML to... Excel?</title>
             <link href="/posts/2010-04-08-linq-to-xml-to-excel.html"/>
             <updated>2010-04-08T00:00:00.000Z</updated>
@@ -10493,46 +10557,30 @@ Update: You should get dataToShow.First() not dataToShow.ToList() so you can get
         </entry>
     
         <entry>
-            <title>Are Extension Methods Really Evil?</title>
-            <link href="/posts/2010-04-08-are-extension-methods-really-evil.html"/>
+            <title>Reflection And Generics</title>
+            <link href="/posts/2010-04-08-reflection-and-generics.html"/>
             <updated>2010-04-08T00:00:00.000Z</updated>
-            <id>/posts/2010-04-08-are-extension-methods-really-evil.html</id>
-            <content type="html">&lt;p&gt;Ruben (of Umbraco fame) recently wrote a post entitled Extension Methods: Silent static slaves which was in response to a comment I&amp;#39;d left on a previous post about static classes and static method being evil.&lt;/p&gt;
-&lt;p&gt;If you haven&amp;#39;t read Ruben post then I suggest you do before continue on with mine as a lot of what I&amp;#39;ll be saying is in counter argument to him (including the comments).&lt;/p&gt;
-&lt;p&gt;Done? Good, continue on!&lt;/p&gt;
-&lt;p&gt;Ruben has produced a demo which is great for illistrating his point, but is it an example of good design turning bad or just bad design from the start?&lt;/p&gt;
-&lt;p&gt;The first thing I want to look at is that his extension methods are on the interface and implementation class.
-This is bad design to start with, but it&amp;#39;s not just bad design if you&amp;#39;re using extension methods, this could manifest itself as bad design if you did it as helper methods in a separate class, eg:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Helpers&lt;/span&gt; {&lt;/span&gt;
-  &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; CalculateShoeCount(Animal animal) {
-   &lt;span class=&quot;comment&quot;&gt;//do processing&lt;/span&gt;
-  }
-  &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; CalculateShoeCount(Monkey animal) {
-   &lt;span class=&quot;comment&quot;&gt;//do processing&lt;/span&gt;
-  }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So this would fall into the same trap if we don&amp;#39;t re-cast Animal to Monkey before calling the helper.&lt;/p&gt;
-&lt;p&gt;But does this prove Ruben&amp;#39;s initial point, that static&amp;#39;s are just plain evil?
-Well no, design isn&amp;#39;t possible without statics. If you try and design without statics you end up with nothing but instance memebers. If that&amp;#39;s the case where do I find the current method int.TryParse, does this become 0.TryParse?&lt;/p&gt;
-&lt;p&gt;Ruben&amp;#39;s demo is an example of bad design producing worse design. In good design the CalculateShoeCount would be a member of the Animal interface, particularly since the implementation changes per interface implementation type.&lt;/p&gt;
-&lt;p&gt;So how can we use extension methods to produce good design? Well first you really need to understand what an extension method is. As Ruben quite correctly pointed out an extension is just syntactic suger and extension methods should be treated as such. Developers need to understand that extension methods are only designed to provide functionality to a classes public instance members; they are stateless.
-(This is why I don&amp;#39;t understand why so many people of Stack Overflow want extension properties added to the compiler, this is where people are missing the point of the extension concept)
-And if you&amp;#39;re expecting a stateful nature from the extension methods then you&amp;#39;ve missed their goal.&lt;/p&gt;
-&lt;p&gt;Lets look at some good examples of using extension methods. Here&amp;#39;s a fav of mine for Umbraco:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; string Url(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; Node node) {
-  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; umbraco&lt;span class=&quot;variable&quot;&gt;.library&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.NiceUrl&lt;/span&gt;(node&lt;span class=&quot;variable&quot;&gt;.Id&lt;/span&gt;);
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;(Hey look, a static calling a static ;)).&lt;/p&gt;
-&lt;p&gt;Or how about this one:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; IEnumerable&amp;lt;ListItem&amp;gt; SelectedItems(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; ListControl ctrl) {
-  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; ctrl&lt;span class=&quot;variable&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.Cast&lt;/span&gt;&amp;lt;ListItem&amp;gt;()&lt;span class=&quot;variable&quot;&gt;.Where&lt;/span&gt;(item =&amp;gt; item&lt;span class=&quot;variable&quot;&gt;.Selected&lt;/span&gt;);
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now we&amp;#39;re using an extension method with an extension method.&lt;/p&gt;
-&lt;p&gt;But both of these examples are using actual class implementations, not interfaces, does that make a difference?
-Yes, and a big one. When you are putting extensions on an interface there needs to be no possibility of confusion about what the extensions are for. And if you are also providing an extension of an implementation of the class they need to be in separate namespaces. If they aren&amp;#39;t, you will end up with what Ruben shows, misrepresentation of the methods abilities.&lt;/p&gt;
-&lt;p&gt;IQueryable&lt;T&gt; is a perfect example of how to use extension methods on top of an interface. If you have a look at the construct of the interface there&amp;#39;s actually no constructs within it! This means that &amp;quot;all&amp;quot; the functionality is provided by extension methods, allowing anyone to write their own extensions.
-If I was to not include the namespace System.Linq I can then write my own query extensions, eg a Where that does return a bool, or negate operators which I don&amp;#39;t want to support.&lt;/p&gt;
-&lt;p&gt;So in my opinion extension methdos are no more evil than anything else in programming; they can easily be abused and misused, but find something that it&amp;#39;d not possible to misuse to prove bad design.&lt;/p&gt;
+            <id>/posts/2010-04-08-reflection-and-generics.html</id>
+            <content type="html">&lt;p&gt;Or to name this another way… &lt;strong&gt;Oh my god the pain&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Anyone who’s been brave enough to delve into the bowels of the Umbraco Interaction Layer will have been able to see just how much Reflection I’m using, for those who haven’t think about this.
+With the UIL I needed a way to find all the properties of a generated class and be able to either populate all of them or save from all of them. To do that I’ve got some custom attributes which decorate the properties which I look out for.&lt;/p&gt;
+&lt;p&gt;Now this in itself isn’t a problem, all my properties are strongly typed, it’s all sweet. The problem was around the populating of the data when you open an existing Umbraco document object. I have two generic methods in my Helper library (which have many an appearance in my Umbraco Membership class too!) which have the construct:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key);
+&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key, T defaultValue);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ou’ll notice that one is an overload, and the overload parameter is a generic. This is where the problem arises.&lt;/p&gt;
+&lt;p&gt;Because the generic is defined at use-time there’s no type in the .NET framework which can represent something as a generic like you can with an Int32 or a String, and this is where the problem arises, how do you find the overloaded method using reflection, and once it’s found how do you invoke it!?&lt;/p&gt;
+&lt;h2&gt;First things first, finding the method&lt;/h2&gt;
+&lt;p&gt;There’s no simple way in which you do this, in fact, it’s actually rather hacky. If you’re not familiar with finding methods with Reflection you should probably have a read of this &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You’d be mistaken for thinking that you can just pass in the method name, cuz it’s an overload Reflection doesn’t know what you want. So the most likely one you need is &lt;a href=&quot;&quot;&gt;Type.GetMethod Method (String, BindingFlags, Binder, array[]()[], array[\&lt;/a&gt;[])]&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/5fed8f59.aspx&quot;&gt;2&lt;/a&gt;, but you notice something, you need to pass in the type of ALL the parameters for the method.
+Crap, one is a generic type, so it can’t be specified!
+This is where I hit a snag, and from all my research the only solution was a dirty little hack.&lt;/p&gt;
+&lt;p&gt;We know what’s different between the two methods, one has two parameters, the other has three, and this is how we’re going to find the sucker. On the Type class there’s another method, Type.GetMethods() or as I prefer to use (to improve performance) Type.GetMethods(BindingFlags bindingAttr). This will get you an array of methods with the right access levels.&lt;/p&gt;
+&lt;p&gt;Now let’s pull out our old friend LINQ and find the sucker in the array, we end up with something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;type&quot;&gt;MethodInfo&lt;/span&gt; method = &lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;Helper&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetMethods&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Public&lt;/span&gt; | &lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Static&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;m&lt;/span&gt; =&amp;gt; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Name&lt;/span&gt; == &quot;&lt;span class=&quot;type&quot;&gt;GetPropertyValue&lt;/span&gt;&quot; &amp;amp;&amp;amp; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetParameters&lt;/span&gt;()&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;()&lt;/span&gt; == 3);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Invoking the method&lt;/h2&gt;
+&lt;p&gt;Ok, so we found the method but how do we invoke it if it’s generic? That’s actually quite easy:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt; methodResult = (int)method.&lt;span class=&quot;type&quot;&gt;MakeGenericMethod&lt;/span&gt;(&lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt;)&lt;/span&gt;).&lt;span class=&quot;type&quot;&gt;Invoke&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;title&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;object&lt;/span&gt;[] { &lt;span class=&quot;title&quot;&gt;doc&lt;/span&gt;, “&lt;span class=&quot;type&quot;&gt;SomeAlias&lt;/span&gt;” })&lt;/span&gt;; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So I make a generic instance of the method using a specified type as the generic type and then invoke it! This is the best and most optimised solution I’ve been able to come up with so far, if anyone can think of something better I’d love to hear it!&lt;/p&gt;
 </content>
         </entry>
     
@@ -10565,54 +10613,6 @@ If I was to not include the namespace System.Linq I can then write my own query 
         </entry>
     
         <entry>
-            <title>Why no Umbraco on Aaron-Powell.com?</title>
-            <link href="/posts/2010-04-08-why-no-umbraco.html"/>
-            <updated>2010-04-08T00:00:00.000Z</updated>
-            <id>/posts/2010-04-08-why-no-umbraco.html</id>
-            <content type="html">&lt;p&gt;So unsurprisingly I&amp;#39;ve had a few people question why I&amp;#39;m not using Umbraco for the latest version of Aaron-Powell.com.&lt;/p&gt;
-&lt;p&gt;First off let&amp;#39;s just have a look back on my blogging and the blog engines I&amp;#39;ve used.&lt;/p&gt;
-&lt;p&gt;Back before I was the world-famous blogger that I am today I used Windows Live Spaces for blogging, yeah, I was &lt;strong&gt;just that awesome&lt;/strong&gt;. But when I decided to buy my own domain I thought it was only appropriate that I started using some actual software.&lt;/p&gt;
-&lt;p&gt;I chose Umbraco, which was in version 3 at the time (this was somewhere around August 2008) which wasn&amp;#39;t too bad at the time.&lt;/p&gt;
-&lt;p&gt;I installed &lt;a href=&quot;http://www.creativewebspecialist.co.uk/&quot;&gt;Warren Buckley&amp;#39;s&lt;/a&gt; Creative Web Starter kit which was available at the time. Last year when I met him and he had a look I think he was shocked at just how old a version of it I was running! I had a pretty basic skin on it, which err, was ok (ha!).&lt;/p&gt;
-&lt;p&gt;Next I installed the Blog 4 Umbraco package (version 1) which I then rewrote the front end controls for it.&lt;/p&gt;
-&lt;p&gt;By now I was not really using OOTB other than the document types (which I&amp;#39;d also hacked a bit) and it was starting to become a bit of a mess. But I kept with it, I did a major overhaul of it when I produced the &lt;a href=&quot;/training-videos&quot;&gt;LINQ to Umbraco training videos&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;And this brings us to the present day. Although my Umbraco site did do what I needed it to do, but I&amp;#39;m never content, so I was looking for the next round of improvements. Since MVC is completely the sex I decided that I wanted to use that as a blogging platform. Now it is true that I could have used Umbraco still, but I don&amp;#39;t &lt;em&gt;really&lt;/em&gt; have the time to re-write the front end &lt;em&gt;yet again&lt;/em&gt;! :P&lt;/p&gt;
-&lt;p&gt;This is why I chose PaulPad, that and I really liked the OOTB style of the site. Essentially it brought all of what I was looking for in a code base to me with very little work needed.&lt;/p&gt;
-&lt;p&gt;Something else really appealing about PaulPad is that this is actually much less of a blogging platform than it is a wiki platform. Something I had noticed on my Umbraco blogging engine was that it wasn&amp;#39;t great if I wanted to go back and revise a post and have it very obvious. With more of a wiki feel it&amp;#39;s easier to do that. Also, there&amp;#39;s a lot more transparency over the revision history, which will be handy with some upcoming topics.&lt;/p&gt;
-&lt;p&gt;Lastly, I believe that if you are going to be able to truly evangalise a platform (ie - Umbraco) you can&amp;#39;t just use it. You need to be familiar with your competitors (although PaulPad is hardly a competitor :P), so this is a good way to really just play with something that&amp;#39;s not Umbraco.&lt;/p&gt;
-&lt;p&gt;Hopefully that sheds some light on my &lt;em&gt;madness&lt;/em&gt; regarding my dismissal of Umbraco as my choice of blogging platform.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Reflection And Generics</title>
-            <link href="/posts/2010-04-08-reflection-and-generics.html"/>
-            <updated>2010-04-08T00:00:00.000Z</updated>
-            <id>/posts/2010-04-08-reflection-and-generics.html</id>
-            <content type="html">&lt;p&gt;Or to name this another way… &lt;strong&gt;Oh my god the pain&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Anyone who’s been brave enough to delve into the bowels of the Umbraco Interaction Layer will have been able to see just how much Reflection I’m using, for those who haven’t think about this.
-With the UIL I needed a way to find all the properties of a generated class and be able to either populate all of them or save from all of them. To do that I’ve got some custom attributes which decorate the properties which I look out for.&lt;/p&gt;
-&lt;p&gt;Now this in itself isn’t a problem, all my properties are strongly typed, it’s all sweet. The problem was around the populating of the data when you open an existing Umbraco document object. I have two generic methods in my Helper library (which have many an appearance in my Umbraco Membership class too!) which have the construct:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key);
-&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key, T defaultValue);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;ou’ll notice that one is an overload, and the overload parameter is a generic. This is where the problem arises.&lt;/p&gt;
-&lt;p&gt;Because the generic is defined at use-time there’s no type in the .NET framework which can represent something as a generic like you can with an Int32 or a String, and this is where the problem arises, how do you find the overloaded method using reflection, and once it’s found how do you invoke it!?&lt;/p&gt;
-&lt;h2&gt;First things first, finding the method&lt;/h2&gt;
-&lt;p&gt;There’s no simple way in which you do this, in fact, it’s actually rather hacky. If you’re not familiar with finding methods with Reflection you should probably have a read of this &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You’d be mistaken for thinking that you can just pass in the method name, cuz it’s an overload Reflection doesn’t know what you want. So the most likely one you need is &lt;a href=&quot;&quot;&gt;Type.GetMethod Method (String, BindingFlags, Binder, array[]()[], array[\&lt;/a&gt;[])]&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/5fed8f59.aspx&quot;&gt;2&lt;/a&gt;, but you notice something, you need to pass in the type of ALL the parameters for the method.
-Crap, one is a generic type, so it can’t be specified!
-This is where I hit a snag, and from all my research the only solution was a dirty little hack.&lt;/p&gt;
-&lt;p&gt;We know what’s different between the two methods, one has two parameters, the other has three, and this is how we’re going to find the sucker. On the Type class there’s another method, Type.GetMethods() or as I prefer to use (to improve performance) Type.GetMethods(BindingFlags bindingAttr). This will get you an array of methods with the right access levels.&lt;/p&gt;
-&lt;p&gt;Now let’s pull out our old friend LINQ and find the sucker in the array, we end up with something like this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;type&quot;&gt;MethodInfo&lt;/span&gt; method = &lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;Helper&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetMethods&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Public&lt;/span&gt; | &lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Static&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;m&lt;/span&gt; =&amp;gt; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Name&lt;/span&gt; == &quot;&lt;span class=&quot;type&quot;&gt;GetPropertyValue&lt;/span&gt;&quot; &amp;amp;&amp;amp; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetParameters&lt;/span&gt;()&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;()&lt;/span&gt; == 3);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Invoking the method&lt;/h2&gt;
-&lt;p&gt;Ok, so we found the method but how do we invoke it if it’s generic? That’s actually quite easy:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt; methodResult = (int)method.&lt;span class=&quot;type&quot;&gt;MakeGenericMethod&lt;/span&gt;(&lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt;)&lt;/span&gt;).&lt;span class=&quot;type&quot;&gt;Invoke&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;title&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;object&lt;/span&gt;[] { &lt;span class=&quot;title&quot;&gt;doc&lt;/span&gt;, “&lt;span class=&quot;type&quot;&gt;SomeAlias&lt;/span&gt;” })&lt;/span&gt;; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So I make a generic instance of the method using a specified type as the generic type and then invoke it! This is the best and most optimised solution I’ve been able to come up with so far, if anyone can think of something better I’d love to hear it!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Training Vidoes</title>
             <link href="/posts/2010-04-07-training-videos.html"/>
             <updated>2010-04-07T00:00:00.000Z</updated>
@@ -10637,69 +10637,6 @@ We&amp;#39;ll look at how to generate the classes and some suggestions on how to
 &lt;h2&gt;Session 6&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9853289&quot;&gt;Outputting XML&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In this session I&amp;#39;ll be looking at how you can transform the LINQ to Umbraco entities and generate an XML response, for something such as a RSS feed.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Building LINQ to Umbraco</title>
-            <link href="/posts/2010-04-07-building-linq-to-umbraco.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-building-linq-to-umbraco.html</id>
-            <content type="html">&lt;h1&gt;In the beginning&lt;/h1&gt;
-&lt;p&gt;LINQ to Umbraco is actually a lot old a project that most people realise, in fact the initial idea of LINQ to Umbraco started when I had a discussion with Niels Hartvig (founder of Umbraco) at the end of 2007 when he was running training in Melbourne.&lt;/p&gt;
-&lt;p&gt;Back then C# 3.0 was just released, Visual Studio 2008 was just out and everyone was very excited about this new technology &lt;em&gt;LINQ&lt;/em&gt;. I discussed it with him and he really liked the idea of having a LINQ provider, but it was nothing more than a &amp;quot;That would be awesome!&amp;quot; idea. Keep in mind, this is before Umbraco 4.0 had even been released!&lt;/p&gt;
-&lt;p&gt;About 6 months later I had got fed up with working directly with the Document API (as we were doing a lot of Document creation at the time) and I decided that I would write a wrapper for it. This project was called &lt;strong&gt;Umbraco Interaction Layer&lt;/strong&gt;, and was really just a new way to create/ edit/ delete documents. As an afterthought I decided to add &amp;quot;LINQ&amp;quot; to it, but it was again nothing more than a wrapper on top of the Document API so it was really shit slow (and would &lt;strong&gt;really&lt;/strong&gt; hammer a database!).&lt;/p&gt;
-&lt;p&gt;After I released the initial version there was a lot of community excitement about having LINQ to Umbraco, so after raising it with Niels that I was planning on writing a &lt;em&gt;proper&lt;/em&gt; LINQ provider, one which wouldn&amp;#39;t bring a server to its knees I was asked to join the core team and include it in the Umbraco 4.5 release.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>C#/ .NET</title>
-            <link href="/posts/2010-04-07-csharp.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-csharp.html</id>
-            <content type="html">&lt;h2&gt;My Projects&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/dynamics-library&quot;&gt;AaronPowell.Dynamics&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/location-service-with-fsharp-and-twitter&quot;&gt;Location Service with F# and Twitter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;NuGet&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/nuget/global-install-package&quot;&gt;How to install a package into all projects of a solution&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/creating-a-nuget-plugin-engine&quot;&gt;Creating a NuGet-based plugin engine&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/nuget/linqpad&quot;&gt;Querying NuGet via LINQPad&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;LINQ Articles&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/linq-to-xml-to-excel&quot;&gt;LINQ to XML to... Excel?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/query-syntax-vs-method-syntax&quot;&gt;Query Syntax vs Method Syntax&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Lucene.Net&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/lucene-net-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;The dark arts&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/reflection-and-generics&quot;&gt;Reflection and Generics&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/Recursive-anonymous-functions-the-NET-version&quot;&gt;Recursive anonymous functions - the .NET version&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/why-does-this-code-work&quot;&gt;Why does this code work?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/dealing-with-type-casting-limitations&quot;&gt;Dealing with type casting limitations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/dynamic-dictionaries-with-csharp-4&quot;&gt;Dynamic Dictionaries with C# 4.0&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/lazy-keyedcollections&quot;&gt;Using Lazy&amp;lt;T&amp;gt; with KeyedCollection&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Miscellaneous&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/problems-with-assembly-trust&quot;&gt;Problems with Assembly Trust&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/working-with-dates-and-linq-to-sql&quot;&gt;Working with dates and LINQ to SQL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/Handy-extension-method-for-null-coalesing&quot;&gt;Handy extension method for null-coalesing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/supporting-valuetypes-in-autofac&quot;&gt;Supporting ValueTypes in Autofac&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/testable-email-sending&quot;&gt;Testable Email Sending&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/a-linq-observation&quot;&gt;A LINQ observation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Musings&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/are-extension-methods-really-evil&quot;&gt;Are Extension Methods Really Evil?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
         </entry>
     
@@ -10825,6 +10762,94 @@ This will let ASP.NET know the class type and I can then access the properties t
         </entry>
     
         <entry>
+            <title>C#/ .NET</title>
+            <link href="/posts/2010-04-07-csharp.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-csharp.html</id>
+            <content type="html">&lt;h2&gt;My Projects&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/dynamics-library&quot;&gt;AaronPowell.Dynamics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/location-service-with-fsharp-and-twitter&quot;&gt;Location Service with F# and Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;NuGet&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/nuget/global-install-package&quot;&gt;How to install a package into all projects of a solution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/creating-a-nuget-plugin-engine&quot;&gt;Creating a NuGet-based plugin engine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/nuget/linqpad&quot;&gt;Querying NuGet via LINQPad&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;LINQ Articles&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/linq-to-xml-to-excel&quot;&gt;LINQ to XML to... Excel?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/query-syntax-vs-method-syntax&quot;&gt;Query Syntax vs Method Syntax&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Lucene.Net&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/lucene-net-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;The dark arts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/reflection-and-generics&quot;&gt;Reflection and Generics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/Recursive-anonymous-functions-the-NET-version&quot;&gt;Recursive anonymous functions - the .NET version&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/why-does-this-code-work&quot;&gt;Why does this code work?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/dealing-with-type-casting-limitations&quot;&gt;Dealing with type casting limitations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/dynamic-dictionaries-with-csharp-4&quot;&gt;Dynamic Dictionaries with C# 4.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/lazy-keyedcollections&quot;&gt;Using Lazy&amp;lt;T&amp;gt; with KeyedCollection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Miscellaneous&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/problems-with-assembly-trust&quot;&gt;Problems with Assembly Trust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/working-with-dates-and-linq-to-sql&quot;&gt;Working with dates and LINQ to SQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/Handy-extension-method-for-null-coalesing&quot;&gt;Handy extension method for null-coalesing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/supporting-valuetypes-in-autofac&quot;&gt;Supporting ValueTypes in Autofac&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/testable-email-sending&quot;&gt;Testable Email Sending&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/a-linq-observation&quot;&gt;A LINQ observation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Musings&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/are-extension-methods-really-evil&quot;&gt;Are Extension Methods Really Evil?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Building LINQ to Umbraco</title>
+            <link href="/posts/2010-04-07-building-linq-to-umbraco.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-building-linq-to-umbraco.html</id>
+            <content type="html">&lt;h1&gt;In the beginning&lt;/h1&gt;
+&lt;p&gt;LINQ to Umbraco is actually a lot old a project that most people realise, in fact the initial idea of LINQ to Umbraco started when I had a discussion with Niels Hartvig (founder of Umbraco) at the end of 2007 when he was running training in Melbourne.&lt;/p&gt;
+&lt;p&gt;Back then C# 3.0 was just released, Visual Studio 2008 was just out and everyone was very excited about this new technology &lt;em&gt;LINQ&lt;/em&gt;. I discussed it with him and he really liked the idea of having a LINQ provider, but it was nothing more than a &amp;quot;That would be awesome!&amp;quot; idea. Keep in mind, this is before Umbraco 4.0 had even been released!&lt;/p&gt;
+&lt;p&gt;About 6 months later I had got fed up with working directly with the Document API (as we were doing a lot of Document creation at the time) and I decided that I would write a wrapper for it. This project was called &lt;strong&gt;Umbraco Interaction Layer&lt;/strong&gt;, and was really just a new way to create/ edit/ delete documents. As an afterthought I decided to add &amp;quot;LINQ&amp;quot; to it, but it was again nothing more than a wrapper on top of the Document API so it was really shit slow (and would &lt;strong&gt;really&lt;/strong&gt; hammer a database!).&lt;/p&gt;
+&lt;p&gt;After I released the initial version there was a lot of community excitement about having LINQ to Umbraco, so after raising it with Niels that I was planning on writing a &lt;em&gt;proper&lt;/em&gt; LINQ provider, one which wouldn&amp;#39;t bring a server to its knees I was asked to join the core team and include it in the Umbraco 4.5 release.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Overview</title>
+            <link href="/posts/2010-04-07-linq-to-umbraco-overview.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-linq-to-umbraco-overview.html</id>
+            <content type="html">&lt;h1&gt;What?&lt;/h1&gt;
+&lt;p&gt;Anyone who has had to do a lot of work with the Umbraco API and interacting with nodes will know that using the .NET API isn&amp;#39;t &lt;em&gt;great&lt;/em&gt;. It&amp;#39;s not bad, but in a strongly typed world a loosely typed objects are no where near as much fun.&lt;/p&gt;
+&lt;p&gt;Especially if you want to move around those items!&lt;/p&gt;
+&lt;p&gt;Umbraco is more than just a content management system, Umbraco a great application framework. If you start looking conceptually at Document Types in Umbraco you&amp;#39;re realise that they are really just a way of &lt;em&gt;describing&lt;/em&gt; data. So to this end they are actually really great at &lt;em&gt;describing&lt;/em&gt; .NET types.&lt;/p&gt;
+&lt;p&gt;LINQ to Umbraco aims to take these meta-types which you are defining within the CMS and generate strongly typed representations of them which you can work with at a .NET level.&lt;/p&gt;
+&lt;p&gt;Become the types defined in Umbraco can be easily used to represent any data. To this end LINQ to Umbraco is &lt;strong&gt;provider based&lt;/strong&gt;, allowing the underling data source to be defined by the developer.&lt;/p&gt;
+&lt;h2&gt;Provider Based?&lt;/h2&gt;
+&lt;p&gt;Because of the way LINQ to Umbraco is designed it is possible to swap-out the way that the data is access within itself. This is what the UmbracoDataProvider class is used for.&lt;/p&gt;
+&lt;p&gt;Out of the box LINQ to Umbraco supplies a single UmbracoDataProvider implementation, the &lt;strong&gt;NodeDataProvider&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The NodeDataProvider is designed to interact with the XML cache of Umbraco, working with published data. This provides read-only operations, &lt;em&gt;despite LINQ to Umbraco providing full CRUD capabilities&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;When to use it?&lt;/h1&gt;
+&lt;p&gt;LINQ to Umbraco is not designed to be a replacement for XSLT, nor is it to be a complete replacement for the existing Umbraco API&amp;#39;s.&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s not saying it can&amp;#39;t be used in these scenarios, but LINQ to Umbraco is best used when you&amp;#39;re looking at Umbraco data in a site-wide scope.&lt;/p&gt;
+&lt;h1&gt;Design&lt;/h1&gt;
+&lt;p&gt;The design of LINQ to Umbraco borrows very heavily from that of LINQ to SQL, by having a DataContext which all interactions flow out from.&lt;/p&gt;
+&lt;p&gt;Because of this (and due to the provider model) there is no understanding of the data hierarchy. With the initial access of the data from the DataContext it looks at the data &lt;em&gt;as a whole picture&lt;/em&gt;, allowing you to not concern yourself with the hierarchy, unless you need it.&lt;/p&gt;
+&lt;p&gt;In addition to having a LINQ to SQL style DataContext all of the hierarchy of Umbraco is matched by LINQ to Umbraco. This means that you can traverse down a node&amp;#39;s children collections, in a strongly typed manner.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Extending Umbraco Members</title>
             <link href="/posts/2010-04-07-extending-umbraco-members.html"/>
             <updated>2010-04-07T00:00:00.000Z</updated>
@@ -10859,31 +10884,6 @@ You&amp;#39;ve got to make sure you&amp;#39;re reading from the correct alias, t
 &lt;p&gt;So there you have it, a simple little class for creating a .NET implementation of an Umbraco member.&lt;/p&gt;
 &lt;p&gt;There are two downloads available, Member.cs or a compiled DLL.&lt;/p&gt;
 &lt;p&gt;It will be interesting though when Umbraco 4 ships and the membership model changes to use the ASP.NET membership providers...&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Overview</title>
-            <link href="/posts/2010-04-07-linq-to-umbraco-overview.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-linq-to-umbraco-overview.html</id>
-            <content type="html">&lt;h1&gt;What?&lt;/h1&gt;
-&lt;p&gt;Anyone who has had to do a lot of work with the Umbraco API and interacting with nodes will know that using the .NET API isn&amp;#39;t &lt;em&gt;great&lt;/em&gt;. It&amp;#39;s not bad, but in a strongly typed world a loosely typed objects are no where near as much fun.&lt;/p&gt;
-&lt;p&gt;Especially if you want to move around those items!&lt;/p&gt;
-&lt;p&gt;Umbraco is more than just a content management system, Umbraco a great application framework. If you start looking conceptually at Document Types in Umbraco you&amp;#39;re realise that they are really just a way of &lt;em&gt;describing&lt;/em&gt; data. So to this end they are actually really great at &lt;em&gt;describing&lt;/em&gt; .NET types.&lt;/p&gt;
-&lt;p&gt;LINQ to Umbraco aims to take these meta-types which you are defining within the CMS and generate strongly typed representations of them which you can work with at a .NET level.&lt;/p&gt;
-&lt;p&gt;Become the types defined in Umbraco can be easily used to represent any data. To this end LINQ to Umbraco is &lt;strong&gt;provider based&lt;/strong&gt;, allowing the underling data source to be defined by the developer.&lt;/p&gt;
-&lt;h2&gt;Provider Based?&lt;/h2&gt;
-&lt;p&gt;Because of the way LINQ to Umbraco is designed it is possible to swap-out the way that the data is access within itself. This is what the UmbracoDataProvider class is used for.&lt;/p&gt;
-&lt;p&gt;Out of the box LINQ to Umbraco supplies a single UmbracoDataProvider implementation, the &lt;strong&gt;NodeDataProvider&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The NodeDataProvider is designed to interact with the XML cache of Umbraco, working with published data. This provides read-only operations, &lt;em&gt;despite LINQ to Umbraco providing full CRUD capabilities&lt;/em&gt;.&lt;/p&gt;
-&lt;h1&gt;When to use it?&lt;/h1&gt;
-&lt;p&gt;LINQ to Umbraco is not designed to be a replacement for XSLT, nor is it to be a complete replacement for the existing Umbraco API&amp;#39;s.&lt;/p&gt;
-&lt;p&gt;That&amp;#39;s not saying it can&amp;#39;t be used in these scenarios, but LINQ to Umbraco is best used when you&amp;#39;re looking at Umbraco data in a site-wide scope.&lt;/p&gt;
-&lt;h1&gt;Design&lt;/h1&gt;
-&lt;p&gt;The design of LINQ to Umbraco borrows very heavily from that of LINQ to SQL, by having a DataContext which all interactions flow out from.&lt;/p&gt;
-&lt;p&gt;Because of this (and due to the provider model) there is no understanding of the data hierarchy. With the initial access of the data from the DataContext it looks at the data &lt;em&gt;as a whole picture&lt;/em&gt;, allowing you to not concern yourself with the hierarchy, unless you need it.&lt;/p&gt;
-&lt;p&gt;In addition to having a LINQ to SQL style DataContext all of the hierarchy of Umbraco is matched by LINQ to Umbraco. This means that you can traverse down a node&amp;#39;s children collections, in a strongly typed manner.&lt;/p&gt;
 </content>
         </entry>
     
