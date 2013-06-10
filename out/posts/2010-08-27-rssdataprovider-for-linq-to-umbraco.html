@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Creating a RssDataProvider for LINQ to Umbraco | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Creating a RssDataProvider for LINQ to Umbraco</h1>
+                <h2>27th August 2010</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/linq-to-umbraco.html"><span>linq-to-umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/umbracodataprovider.html"><span>umbracodataprovider</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">4th December 2010</span>
+                            <h3><a href="/posts/2010-12-04-ole.html">Ole Erling appears in NodeJS</a></h3>
+                        </header>
+                        <p>Having some fun with NodeJS and a crazy Danish dude</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/nodejs.html"><span>nodejs</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th September 2012</span>
+                            <h3><a href="/posts/2012-09-05-text-casing-and-examine.html">Text casing and Examine</a></h3>
+                        </header>
+                        <p>A few times I&#39;ve seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we&#39;ve had to handle a few times within our...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/lucene-net.html"><span>lucene.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/examine.html"><span>examine</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th June 2012</span>
+                            <h3><a href="/posts/2012-06-25-i-helped-kill-umbraco-5.html">I helped kill Umbraco 5</a></h3>
+                        </header>
+                        <p>Hi, my name&#39;s Aaron Powell and I was involved in killing Umbraco 5.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/opinionated.html"><span>opinionated</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th June 2012</span>
+                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
+                        </header>
+                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>Sorry to all the people who were kind enough to come to my <a href="http://our.umbraco.org/wiki/codegarden-2009/open-space-minutes/linq">LINQ to Umbraco session at CodeGarden 09</a>, I said I would do this post soon after the session. Sadly I started enjoying Copenhagen too much without the need to be sitting at my laptop and now it&#39;s a week later, I&#39;m home and it&#39;s time I come good on my promise.</p>
+<h2>The LINQ to Umbraco DataProvider model</h2>
+<p>Something that I have implemented with LINQ to Umbraco, and something which will be taking a stronger focus in Umbraco going forward, is a Provider model for the Umbraco data.
+What this means with LINQ to Umbraco? Well the classes generated for LINQ to Umbraco act as proxies to a data model, they don&#39;t expect the data to come from anyway in particular.</p>
+<p>This has a really neat advantage of the fact that you can write your own DataProvider which exposes the data from how ever you want. LINQ to Umbraco will ship as part of 4.1 with a single DataProvider, the NodeDataProvider. This enables the use of LINQ to Umbraco against the XML cache, which was the inital design of it.</p>
+<h2>Anatomy from a DataProvider</h2>
+<p>The DataProvider itself is an abstract class which has a number of methods which are implemented do different operations, the primary method you need to be implementing is the LoadTree<TDocType> method, this is responsible for the initial population of the collection from your data source.</p>
+<p>There are other methods which have different uses, I wont be covering them in this post, but they will be going up on the new Umbraco wiki (which the LINQ to Umbraco section is starting to come up).</p>
+<p>The <code>LoadTree&lt;TDocType&gt;</code> method needs to then return an instance of a <code>Tree&lt;TDocType&gt;</code>, which is another abstract class that needs to be implemented to handle the data mapping for your data provider.</p>
+<h2>Creating an RssDataProvider</h2>
+<p>While we were hacking at the Umbraco Retreat prior to CodeGarden 09 I decided to try a proof-of-concept about how you could use the generated classes in a proxy manner. I may have written LINQ to Umbraco for this purpose, but it wasn&#39;t something that I had actually tried to do.
+So I decided to create a basic little DataProvider which would read an RSS feed and turn the returned data from there into LINQ to Umbraco objects which could then be used in the Umbraco content tree.</p>
+<p>The first step is you need to generate the LINQ to Umbraco classes, with Umbraco 4.1 you will be able to do this directly from the Settings -&gt; Document Types node. I created a basic little Document Type named RSS Item and then generated the class for it.</p>
+<p>Next came the task of implementing my custom UmbracoDataProvider, I created my class:</p>
+<pre class="highlighted"><code class="python">public <span class="class"><span class="keyword">class</span> <span class="title">RssDataProvider</span> :</span> UmbracoDataProvider { }</code></pre>
+<p>And then set about implementing a constructor which takes the RSS feed URL (in this demo I used the Yahoo! Pipes which are on the homepage of our.umbraco) and then implemented the LoadTree<TDocType> method:</p>
+<p>public override Tree LoadTree() 
+{
+    //supporting loading a full Tree
+    //throw an exception if the type of the tree is an unsupported one
+    if (typeof(TDocType) != typeof(RssItem))
+    {
+        throw new NotSupportedException(typeof(TDocType).Name);
+    }</p>
+<pre class="highlighted"><code class="objectivec"><span class="comment">//create a request to the URL supplied</span>
+WebRequest request = WebRequest<span class="variable">.Create</span>(<span class="keyword">this</span><span class="variable">._feedUrl</span>);
+
+<span class="comment">//do a GET and string buffer the response</span>
+HttpWebResponse response = (HttpWebResponse)request<span class="variable">.GetResponse</span>();
+Stream dataStream = response<span class="variable">.GetResponseStream</span>();
+StreamReader reader = new StreamReader(dataStream);
+string responseFromServer = reader<span class="variable">.ReadToEnd</span>();
+
+<span class="comment">//make a LINQ to XML representation of the RSS</span>
+XDocument xdoc = XDocument<span class="variable">.Parse</span>(responseFromServer);
+
+<span class="comment">//select the posts</span>
+var items = xdoc<span class="variable">.Descendants</span>(<span class="string">"item"</span>);
+
+<span class="comment">//make an RssTree from the items returned by the feed</span>
+<span class="keyword">return</span> new RssTree(items, <span class="keyword">this</span>);</code></pre>
+<p>}
+So now I have a load method which reads my RSS feed (and I&#39;ve restricted it to only support my RssItem Document Type), now it&#39;s time to create the RssTree<TDocType> from the provided data.</p>
+<h2>Tree&lt;TDocType&gt;</h2>
+<p>This class is really just a wrapper for the IEnumerable<T> class. The way in which I have implemented the RssTree (and how I implemented the NodeTree) is by using delayed loading. What I mean is that the data isn&#39;t converted from the source to the result until the GetEnumerator() method is called.
+This means that unless I do something with the collection there is no performance hit.</p>
+<p>The following code is a bit of a hack (for the return type anyway) but that is because I wanted to show it being done without the use of reflection. If you want to see how to achieve it with a complete generic type check out the source for the NodeTree which is on Codeplex.</p>
+<p>Anyway here&#39;s how the GetEnumerator() method looks:</p>
+<pre class="highlighted"><code class="applescript">public override IEnumerator GetEnumerator()
+{
+    //this <span class="keyword">is</span> a bit hacky <span class="keyword">as</span> i only support <span class="number">1</span> doc type
+    //normally <span class="keyword">the</span> load can be done via reflection (which <span class="keyword">is</span> how <span class="keyword">the</span> NodeTree works)
+    foreach (var <span class="property">item</span> <span class="keyword">in</span> _items)
+    {
+        var rssItem = new TDocType() <span class="keyword">as</span> RssItem;
+        rssItem.Name = (<span class="type">string</span>)<span class="property">item</span>.Element(<span class="string">"title"</span>);
+        rssItem.Link = (<span class="type">string</span>)<span class="property">item</span>.Element(<span class="string">"link"</span>);
+        rssItem.Description = (<span class="type">string</span>)<span class="property">item</span>.Element(<span class="string">"description"</span>);
+        rssItem.PublishDate = (DateTime)<span class="property">item</span>.Element(<span class="string">"pubDate"</span>);
+        rssItem.Content = (<span class="type">string</span>)<span class="property">item</span>.Element(<span class="string">"content"</span>);
+        rssItem.CreateDate = (DateTime)<span class="property">item</span>.Element(<span class="string">"pubDate"</span>);
+
+        //Because RssItem may <span class="keyword">not</span> be <span class="keyword">the</span> type <span class="keyword">of</span> TDocType (although <span class="keyword">in</span> this example we'll assume <span class="keyword">it</span> always <span class="keyword">is</span>)
+        //we have <span class="keyword">to</span> downcast <span class="keyword">to</span> DocTypeBase <span class="keyword">before</span> casting <span class="keyword">to</span> <span class="keyword">the</span> generic.
+        yield <span class="constant">return</span> (TDocType)(DocTypeBase)rssItem;
+    }
+}</code></pre>
+<p>So what&#39;s going on, well first off we&#39;re itterating through the collection of XML items returned from the initial load (_items) and then creating a new instance of the RssItem class and assigning the properties from the XML.
+You can see the comment mentioning the hack, having to do some crazy casting, that is because I&#39;m not really doing the Generics properly.</p>
+<p>I&#39;ve also implemented it via yield return, not building the entire collection into say a List<T> and then returning its Enumerator. The reason for this is you&#39;ll pick up a bit of performance if you are doing methods like Take(int) or breaking from a loop early.
+You should probably push the items into an internal collection to support caching (which is what the Node implementation does), but this is just a quick demo.</p>
+<p>Any that is as simple as it gets to write your own custom DataProvider for LINQ to Umbraco! Sure I&#39;ve skipped a few sections (such as how to do child associations, but in this demo it&#39;s not really viable) but hopefully this should give you a heads up on how to do it.
+And how does it work? Well just like this:</p>
+<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">using</span> <span class="params">(var ctx = new <span class="variable">RssDataContext</span>(new <span class="variable">RssDataProvider</span>(<span class="string">"http://pipes.yahoo.com/pipes/pipe.run?_id=8llM7pvk3RGFfPy4pgt1Yg&amp;_render=rss"</span>)</span>))
+{
+    <span class="title">var</span> <span class="title">feedItems</span> = <span class="title">ctx</span>.R<span class="title">ssItems</span>.T<span class="title">ake</span><span class="params">(<span class="number">8</span>)</span>;
+
+    A<span class="title">ssert</span>.I<span class="title">sNotNull</span><span class="params">(feed<span class="variable">Items</span>)</span>;
+    A<span class="title">ssert</span>.I<span class="title">sTrue</span><span class="params">(feed<span class="variable">Items</span>.<span class="variable">GetEnumerator</span>()</span> != <span class="title">null</span>);
+}</code></pre>
+<p>That&#39;s right, the above code is from a unit test, remember LINQ to Umbraco is capable of running outside of a web context so it is very easy to unit test!</p>
+<h2>Making this into an Umbraco Content Tree</h2>
+<p>Now here is where the fun part comes in, you can easily turn the above data provider into a custom Umbraco tree. This means you can either make it into your own custom Umbraco module (/ application, what ever you call it!), or append it to the standard Content Tree! Isn&#39;t THAT a funky idea hey!</p>
+<p>I&#39;m not going to get too in-depth into this, Shannon Deminik has done some good documentation about that (again, see the <a href="http://our.umbraco.org/wiki/reference/api-cheatsheet/tree-api---to-create-custom-treesapplications">wiki</a>). So rather than going over the code I&#39;m going to show it off in a short screencast and you can look into the provided source package with this post.</p>
+<p>The screenscast is available <a href="http://screencast.com/t/NS24jMo6xkp">here</a> and the source code is <a href="/media/2640/umbracodataproviderdemo.zip">here</a>.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/rssdataprovider-for-linq-to-umbraco';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

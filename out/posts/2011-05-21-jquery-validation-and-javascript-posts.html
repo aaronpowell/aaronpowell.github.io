@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>jQuery validation, JavaScript form submitting and another bad idea | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">jQuery validation, JavaScript form submitting and another bad idea</h1>
+                <h2>21st May 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">10th July 2011</span>
+                            <h3><a href="/posts/2011-07-10-javascript-quiz.html">JavaScript Quiz</a></h3>
+                        </header>
+                        <p>Today I released a little website, [<a href="http://javascriptquiz.com][1">http://javascriptquiz.com][1</a>], which was inspired by [<a href="http://cssquiz.com][2">http://cssquiz.com][2</a>].</p>
+<p>Basically it&#39;s a site which I&#39;ll put out JavaScript questions for people to tackle...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th May 2009</span>
+                            <h3><a href="/posts/2009-05-05-creating-jquery-plugins-from-ms-ajax-components.html">Creating jQuery plugins for MS AJAX components, dynamically!</a></h3>
+                        </header>
+                        <p>Bringing jQuery and MS AJAX together</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ms-ajax.html"><span>ms-ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">8th February 2011</span>
+                            <h3><a href="/posts/2011-02-08-blink.html">Implementing the blink tag using jQuery</a></h3>
+                        </header>
+                        <p>How to implement the blink tag using jQuery and some silliness :P</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/doing-it-wrong.html"><span>doing-it-wrong</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">9th February 2011</span>
+                            <h3><a href="/posts/2011-02-09-marquee.html">Implementing the marquee tag using jQuery</a></h3>
+                        </header>
+                        <p>This time we&#39;ll implement the marquee tag, just because we can!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/doing-it-wrong.html"><span>doing-it-wrong</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">20th May 2011</span>
+                            <h3><a href="/posts/2011-05-20-jquery-validation-and-dynamic-forms.html">jQuery validation, dynamic forms and a really bad idea</a></h3>
+                        </header>
+                        <p>Currently at work I&#39;m part of a team that&#39;s developing a really JavaScript heavy application and in doing so we&#39;re finding problems, challenges and solutions. One such that I was working on recentl...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p><a href="/javascript/jquery-validation-and-dynamic-forms">In my last post</a> I looked at how to use jQuery validation in a dynamic form and some problems you can have with handling rule sets.</p>
+<p>Something I mentioned in the posts was that I was also submitting the form using JavaScript rather than a form post or anything. This didn&#39;t actually make it into the final post and part of the reason was it would have added a heck of a lot more to the overall post, making it a lot longer than I think anyone would want to read. The other part of the reason was I started writing the post at 11pm on Friday night and finished it on Saturday night so I may have got a bit sidetracked :P (even though I did proof read it I missed that part!).</p>
+<p>So as promised here is the conclusion to my last post :P.</p>
+<h1>Submitting forms with JavaScript</h1>
+<p>When submitting a form with JavaScript there&#39;s a few ways you can go about it, one of the ways is to use an AJAX request on the form submit, so basically serializing the form fields into a JSON blob which you include in your POST.</p>
+<p>This is good because you can do progressive enhancement since you have an actual URL to POST to if JavaScript is disabled.</p>
+<p>But no, we&#39;re not going down that route, instead we&#39;re going to be calling a JavaScript method on our external API. This poses some problems, we don&#39;t have URL to submit to. But we still have a <code>&lt;form&gt;</code> tag, so we&#39;ve got an issue, we have to avoid the form submit!</p>
+<pre class="highlighted"><code class="haskell"><span class="title">function</span> postForm(validation, form) {
+    var fields = form.find('input'),
+        <span class="typedef"><span class="keyword">data</span> = <span class="container">{}</span>;</span>
+
+    for(var i=<span class="number">0</span>, il=fields.length; i&lt;il; i++) {
+        var field = fields[i];
+
+        <span class="typedef"><span class="keyword">data</span>[i] = <span class="container">{
+            <span class="title">value</span>: $(<span class="title">field</span>).<span class="title">val</span>(),
+            <span class="title">type</span>: $(<span class="title">field</span>).<span class="title">attr</span>('<span class="title">type'</span>)
+        }</span>;</span>
+    }
+
+    external.submit(<span class="typedef"><span class="keyword">data</span>);</span>
+}</code></pre>
+<p>Great, that was pretty easy to build up our <em>submit</em> schema, so we can hook it up into jQuery Validation:</p>
+<pre class="highlighted"><code class="haskell"><span class="title">function</span> buildForm(form, fields) {
+    var fieldset = form.find('fieldset'),
+            ol = $('&lt;ol&gt;&lt;/ol&gt;'),
+            templates = {
+                    text: $('text-template'),
+                    date: $('date-template') //and so on for more templates
+            },
+            rules = {},
+            messages = {}
+            settings = {
+                rules: rules,
+                messages: messages,
+                submitHandler: function postForm(validator, form) {
+                    var fields = form.find('input'),
+                        <span class="typedef"><span class="keyword">data</span> = <span class="container">{}</span>;</span>
+
+                    for(var i=<span class="number">0</span>, il=fields.length; i&lt;il; i++) {
+                        var field = fields[i];
+
+                        <span class="typedef"><span class="keyword">data</span>[i] = <span class="container">{
+                            <span class="title">value</span>: $(<span class="title">field</span>).<span class="title">val</span>(),
+                            <span class="title">type</span>: $(<span class="title">field</span>).<span class="title">attr</span>('<span class="title">type'</span>)
+                        }</span>;</span>
+                    }
+
+                    external.submit(<span class="typedef"><span class="keyword">data</span>);</span>
+                }
+            };
+    //parse form code from the last post
+
+    //update this line to use our object <span class="keyword">not</span> the inline object
+    $.extend(validationRules.settings, settings);
+}</code></pre>
+<p>So I&#39;ve updated the code from the last post which now includes the <code>submitHandler</code> property on the settings for the validation rules. This is a method that will be called once the form passes all validation rules that have been applied to it.</p>
+<p>This is a fine piece of code, it works exactly as we would expect, except there&#39;s an issue, <strong>the form will still post</strong>.</p>
+<p>jQuery Validation works by tying into the form submit event, and the <code>submitHandler</code> method is called as part of that, so if all validation passes it&#39;ll allow the browser to finish executing the submit operation. This is a problem, we&#39;re not defining an action or a method and according to the W3C spec the <a href="http://dev.w3.org/html5/spec-author-view/spec.html#attr-fs-action">default action</a> is the URL of the forms owner and the <a href="http://dev.w3.org/html5/spec-author-view/spec.html#attr-fs-method">default method</a> is GET. Crap, so even if we don&#39;t specify anything it&#39;ll still have some default operations.</p>
+<p>But it&#39;s not <em>really</em> a problem, we can just use the <code>preventDefault</code> method to stop the event from continuing because if we can stop the event from going on we don&#39;t have to worry about the form submitting completely.</p>
+<p>Well that&#39;s good, but we have a problem, how do we cancel the event? Sadly the <code>submitHandler</code> method has no access to the form event object. According to the source though we can pass in <code>debug: true</code> as a setting to the validator which will then calls <code>preventDefault</code>, but that looks ugly, having <code>debug: true</code> in production code...</p>
+<p>So the only solution is we modify the source for the validation plugin. Good news is I have modified the jQuery Validation plugin, I have a fork <a href="https://github.com/aaronpowell/jquery-validation/commit/6a5eadd42661655d80248a825431bf30c56a34af">here</a> which I hope the pull request of gets accepted ;).</p>
+<p>Now we update our <code>submitHandler</code> method:</p>
+<pre class="highlighted"><code class="matlab">submitHandlers: <span class="function"><span class="keyword">function</span> <span class="title">postForm</span><span class="params">(validator, form, event)</span> {</span>
+    var fields = <span class="transposed_variable">form.</span><span class="built_in">find</span>(<span class="string">'input'</span>),
+        data = <span class="cell">{}</span>;
+
+    <span class="transposed_variable">event.</span>preventDefault();</code></pre>
+<h1>Conclusion</h1>
+<p>So to wrap up the second part of the intended one-part series we&#39;ve looked at how you can work around using JavaScript to send data and still prevent a browser from submitting the data.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/javascript/jquery-validation-and-javascript-posts';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

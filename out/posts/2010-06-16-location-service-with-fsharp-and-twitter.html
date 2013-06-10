@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Creating a location service with F# and Twitter | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Creating a location service with F# and Twitter</h1>
+                <h2>16th June 2010</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/f-.html"><span>f#</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/twitter.html"><span>twitter</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/geo-location.html"><span>geo-location</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">30th May 2010</span>
+                            <h3><a href="/posts/2010-05-30-writing-presenters-with-fsharp.html">Writing Presenters with F#</a></h3>
+                        </header>
+                        <p>This may not be the best idea, but hey, why not, let&#39;s writing Presenters with F#!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/webformsmvp.html"><span>webformsmvp</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/f-.html"><span>f#</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/fsharp.html"><span>fsharp</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>A while ago <a href="http://tath.am">Tatham Oddie</a> sent me a small app he&#39;d built which allowed you to find recent locations which he had been at, data which is scraped via twitter (you can see it <a href="http://tath.am/where">here</a>). It&#39;s rather a nifty little thing and it&#39;s done with approximately 50 lines of ruby (although I must point out that he is using some external libraries which do mean that he&#39;s got a lot more code, just not all his :P).</p>
+<p>I&#39;d always contemplated having a crack at doing something like this as it&#39;s a good way to investigate some functional programming.</p>
+<p>Well while sitting in the Qantas club lounge waiting for my flight back from Remix earlier this month I decided to write it, using F#. Hey, why the hell not!</p>
+<h2>Getting started</h2>
+<p>So today I finally got around to finishing the code and deploying it onto my website, in fact you can see it in action via <a href="/findme"><a href="http://www.aaron-powell.com/findme">http://www.aaron-powell.com/findme</a></a>. I&#39;ve also made this in a way which you can test with any username, say, Tatham&#39;s - <a href="/findme/tathamoddie"><a href="http://www.aaron-powell.com/findme/tathamoddie">http://www.aaron-powell.com/findme/tathamoddie</a></a>.</p>
+<p>I also added support for Twitter lists, so say, readify - <a href="/findme/digory/readify"><a href="http://www.aaron-powell.com/findme/digory/readify">http://www.aaron-powell.com/findme/digory/readify</a></a>.</p>
+<p>What you&#39;ll see is that this is actually just a redirect to Google Maps, passing in a URL like <a href="/findme/kml/slace"><a href="http://www.aaron-powell.com/findme/kml/slace">http://www.aaron-powell.com/findme/kml/slace</a></a>. If you hit this URL you&#39;ll get back an XML file, well actually you&#39;ll get back a <em>KML</em> file, which stands for Keyhole Markup Language.</p>
+<h3>KML</h3>
+<p>KML is the markup language for geo-location which Google is backing (in fact Keyhole is the original name of the company which Google Earth came from), and all it does is defines a series of points and a series of styles.</p>
+<p>This is what a basic KML file looks like:</p>
+<pre class="highlighted"><code class="parser3"><span class="xml"><span class="pi">&lt;?xml version="</span><span class="number">1.0</span><span class="xml">" encoding="utf-</span><span class="number">8</span><span class="xml">" standalone="yes"?&gt;
+<span class="tag">&lt;<span class="title">kml</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">Document</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">name</span>&gt;</span>@slace tracking<span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">Style</span> <span class="attribute">id</span>=<span class="value">"icon-</span><span class="number">000</span><span class="xml">"&gt;
+      <span class="tag">&lt;<span class="title">IconStyle</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">color</span>&gt;</span>ffffffff<span class="tag">&lt;/<span class="title">color</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">colorMode</span>&gt;</span>normal<span class="tag">&lt;/<span class="title">colorMode</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">Icon</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">href</span>&gt;</span>http://aaron-powell.com/get/map-pins/</span><span class="number">0010.</span><span class="xml">png<span class="tag">&lt;/<span class="title">href</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">Icon</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">IconStyle</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">Style</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">Placemark</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">name</span>&gt;</span></span><span class="number">001.</span><span class="xml"> Wed </span><span class="number">16</span><span class="xml"> Jun </span><span class="number">09</span><span class="xml">:</span><span class="number">42</span><span class="xml">:</span><span class="number">11</span><span class="xml"> </span><span class="number">2010</span><span class="xml"><span class="tag">&lt;/<span class="title">name</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">styleUrl</span>&gt;</span>#icon-</span><span class="number">000</span><span class="xml"><span class="tag">&lt;/<span class="title">styleUrl</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">Point</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">coordinates</span>&gt;</span></span><span class="number">151.25144901</span><span class="xml">, -</span><span class="number">33.91480491</span><span class="xml"><span class="tag">&lt;/<span class="title">coordinates</span>&gt;</span>
+      <span class="tag">&lt;/<span class="title">Point</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">Placemark</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">Document</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">kml</span>&gt;</span></span></code></pre>
+<p>As you can see I define a style element (which has an image) and a point (which has the longitude and latitude). </p>
+<p>If you want to learn more about KML I suggest you look <a href="http://code.google.com/apis/kml/documentation/">here</a>.</p>
+<h3>Getting our data</h3>
+<p>As I mentioned this app is scrapping via twitter, and if you&#39;re using twitter you&#39;re probably aware that you can choose to geotag your tweets, most twitter clients support this.</p>
+<p>All I&#39;m doing is using some of the public REST API&#39;s which twitter has to pull down the data I require, and then filtering it for what I want.</p>
+<h2>Looking at some code</h2>
+<p>So we need to scrape some data from twitter. To do this you can use an existing .NET API such as <a href="http://tweetsharp.codeplex.com/">TweetSharp</a>, but at the moment I&#39;ve rolled my own very basic twitter API in F# (also, as part of my learning experience). </p>
+<p><em>Disclaimer - I don&#39;t suggest writing a full API in F#, it&#39;s definitely not the best language for class libraries :P</em></p>
+<p>I&#39;ve made a simple little method which you can invoke from my API which takes a URL and gives you back the various statuses:</p>
+<pre class="highlighted"><code class="objectivec">let TwitterStatusGet (url:string) = 
+    let webRequest = HttpWebRequest<span class="variable">.Create</span> url
+
+    <span class="comment">// set the method to GET</span>
+    webRequest<span class="variable">.Method</span>  &lt;- <span class="string">"GET"</span>
+
+    <span class="comment">// set up the stream</span>
+    let reqStream = webRequest<span class="variable">.GetResponse</span>()
+    reqStream<span class="variable">.Headers</span><span class="variable">.Add</span>(HttpResponseHeader<span class="variable">.CacheControl</span>, <span class="string">"public, max-age=300"</span>)
+    let streamReader = new StreamReader(reqStream<span class="variable">.GetResponseStream</span>())
+    let response = streamReader<span class="variable">.ReadToEnd</span>()
+
+    <span class="comment">// close the stream</span>
+    reqStream<span class="variable">.Close</span>()
+    streamReader<span class="variable">.Close</span>()
+
+    let xml = XDocument<span class="variable">.Parse</span>(response)
+    xml<span class="variable">.Descendants</span>(!!<span class="string">"status"</span>)
+        |&gt; Seq<span class="variable">.map</span>(fun e -&gt; new Status(e))</code></pre>
+<p>So this is defining a method named <code>TwitterStatusGet</code> which has a <code>String</code> input value. This is passed to the <code>HttpWebRequest.Create</code> method, and then we invoke the request and turn the response into XML. We then take the tranformed XML, find all the descendants with the name status and then turn them into a .NET type which I&#39;ve created (the internals of it are irrelevant here), and then returns them.</p>
+<p>The method <code>Seq.map</code> is essentially an F# version of the <code>IEnumerable.Select</code>.</p>
+<p>Then we need to filter them for ones which haven&#39;t been geotagged:</p>
+<pre class="highlighted"><code class="brainfuck"><span class="comment">let</span> <span class="comment">statuses</span> <span class="comment">=</span> <span class="comment">TwitterStatusGet</span> <span class="comment">("http://api</span>.<span class="comment">twitter</span>.<span class="comment">com/1/statuses/user_timeline</span>.<span class="comment">xml?screen_name="</span> <span class="literal">+</span> <span class="comment">username</span> <span class="literal">+</span> <span class="comment">"&amp;count="</span> <span class="literal">+</span> <span class="comment">count</span>.<span class="comment">ToString())</span>
+<span class="comment">let</span> <span class="comment">taggedStatuses</span> <span class="comment">=</span> <span class="comment">statuses</span>
+                <span class="comment">|</span>&gt; <span class="comment">Seq</span>.<span class="comment">filter(fun</span> <span class="comment">e</span> <span class="literal">-</span>&gt; <span class="comment">e</span>.<span class="comment">Geo</span>.<span class="comment">Lat</span> &lt;&gt; <span class="comment">0</span>.<span class="comment">0)</code></pre>
+<p>Then I just add a bit of code to get rid of statuses which are next to each other (saying to had several tweets from the same place isn&#39;t very interesting):</p>
+<pre class="highlighted"><code class="matlab">let points = new List&lt;Status&gt;()
+<span class="keyword">for</span> <span class="built_in">i</span> in <span class="number">0</span> .. <span class="transposed_variable">taggedStatuses.</span>Count()-<span class="number">1</span> do
+    let curr = <span class="transposed_variable">taggedStatuses.</span>ElementAt(<span class="built_in">i</span>);
+    <span class="keyword">if</span> <span class="transposed_variable">points.</span>Count &gt; <span class="number">0</span> then
+        let prev = <span class="transposed_variable">points.</span>ElementAt(<span class="transposed_variable">points.</span>Count-<span class="number">1</span>)
+        <span class="keyword">if</span> calculate_displacement <span class="transposed_variable">prev.</span>Geo <span class="transposed_variable">curr.</span>Geo &gt; <span class="number">0.5</span> then
+            <span class="transposed_variable">points.</span>Add(curr)
+    <span class="keyword">else</span>
+        <span class="transposed_variable">points.</span>Add(curr)</code></pre>
+<p>To do this I&#39;ve got a funky little method for calculating the distance between two points:</p>
+<pre class="highlighted"><code class="objectivec">let rad deg = 
+    deg*(Math<span class="variable">.PI</span>/<span class="number">180.0</span>)
+
+let calculate_displacement (point1: LatLon) (point2: LatLon) : <span class="keyword">float</span> =
+    let radius = <span class="number">6371.0</span>
+    let dLat = rad(point2<span class="variable">.Lat</span>-point1<span class="variable">.Lat</span>)
+    let dLon = rad(point2<span class="variable">.Lon</span>-point1<span class="variable">.Lon</span>)
+    let a = Math<span class="variable">.Sin</span>(dLat/<span class="number">2.0</span>) * Math<span class="variable">.Sin</span>(dLat/<span class="number">2.0</span>) +
+            Math<span class="variable">.Cos</span>(rad(point1<span class="variable">.Lat</span>)) * Math<span class="variable">.Cos</span>(rad(point2<span class="variable">.Lat</span>)) *
+            Math<span class="variable">.Sin</span>(dLon/<span class="number">2.0</span>) * Math<span class="variable">.Sin</span>(dLon/<span class="number">2.0</span>)
+    radius * (<span class="number">2.0</span> * Math<span class="variable">.Atan2</span>(Math<span class="variable">.Sqrt</span>(a), Math<span class="variable">.Sqrt</span>(<span class="number">1.0</span>-a)))</code></pre>
+<p>I&#39;m sure I could write this is a much <em>F#-y</em> way, and if someone wants to do that please show me how, but we&#39;re just doing some simple calculations based on the points and then returning the distance between them.</p>
+<p>The last piece of the puzzle is tranforming the unique points which we now have into KML. I&#39;m going to spare that bit of code for the moment, I&#39;m using LINQ to XML to do this, and working with LINQ to XML in F# requires a whole blog post of its own.</p>
+<h2>Putting it all together</h2>
+<p>So now that I&#39;ve got all this data I can now just add a reference into my blog project which then return the data. I&#39;ve noticed that Google Maps has a very quick timeout which means that sometimes you&#39;ll get an error for your requests, but hit it again after a minute or two and it generally comes back. Also, I&#39;ve added a 1 hour output cache on each request so if you do new tweets they wont appear immediately.</p>
+<p>I just set up a few simple routes which support both username and list name passing.</p>
+<p>And there you go, that&#39;s how you can use twitter to scrape the data about where someone has been tweeting from. Feel free to use my service, I&#39;m thinking of setting up a CG10 list which you can then track people who are coming to CodeGarden this year ;).</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/location-service-with-fsharp-and-twitter';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

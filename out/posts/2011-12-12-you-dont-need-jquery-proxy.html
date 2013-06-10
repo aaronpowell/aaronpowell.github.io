@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>You don't need to use $.proxy | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">You don't need to use $.proxy</h1>
+                <h2>12th December 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd July 2011</span>
+                            <h3><a href="/posts/2011-07-02-postman.html">Introducing Postman - A JavaScript Messaging Library</a></h3>
+                        </header>
+                        <h1>Prelude</h1>
+<p>Back in May I presented at DDD Melbourne on JavaScript design patterns. One of the patterns that I was talking about was the idea of [pub/ sub][1].</p>
+<p>Let me start by saying that this isn&#39;...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/postman.html"><span>postman</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/coffeescript.html"><span>coffeescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th May 2009</span>
+                            <h3><a href="/posts/2009-05-05-creating-jquery-plugins-from-ms-ajax-components.html">Creating jQuery plugins for MS AJAX components, dynamically!</a></h3>
+                        </header>
+                        <p>Bringing jQuery and MS AJAX together</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ms-ajax.html"><span>ms-ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">8th February 2011</span>
+                            <h3><a href="/posts/2011-02-08-blink.html">Implementing the blink tag using jQuery</a></h3>
+                        </header>
+                        <p>How to implement the blink tag using jQuery and some silliness :P</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/doing-it-wrong.html"><span>doing-it-wrong</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">9th February 2011</span>
+                            <h3><a href="/posts/2011-02-09-marquee.html">Implementing the marquee tag using jQuery</a></h3>
+                        </header>
+                        <p>This time we&#39;ll implement the marquee tag, just because we can!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/doing-it-wrong.html"><span>doing-it-wrong</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">20th May 2011</span>
+                            <h3><a href="/posts/2011-05-20-jquery-validation-and-dynamic-forms.html">jQuery validation, dynamic forms and a really bad idea</a></h3>
+                        </header>
+                        <p>Currently at work I&#39;m part of a team that&#39;s developing a really JavaScript heavy application and in doing so we&#39;re finding problems, challenges and solutions. One such that I was working on recentl...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>I&#39;ve been recently going through some extending of a jQuery UI widget which a colleague had written when I came across quite a number of statements that were using the <a href="http://api.jquery.com/jQuery.proxy/">proxy</a> method from jQuery.</p>
+<p>For anyone who&#39;s not familiar with the <code>proxy</code> method is allows you to take a function and specify a context (the <code>this</code> value) so when you pass it around for execution you always know what you&#39;re going to have as the context.</p>
+<p>The method has been around for a while and it did serve a good purpose but these days its usefulness is becoming limited and I&#39;m going to look at a few reasons as to why you shouldn&#39;t be using it.</p>
+<h1>Understand this</h1>
+<p>The most common reason I see that people will use <code>proxy</code> is because they don&#39;t understand how <code>this</code> works in JavaScript. While there are dozens of articles through your favourite search engine explaining <code>this</code> (<a href="http://javascriptweblog.wordpress.com/2010/08/30/understanding-javascripts-this/">here&#39;s a good start</a>) I&#39;ll do my best to give a quick overview.</p>
+<p>When people come from C# they already have a notion of <code>this</code> and what it represents, unfortunately this is a broken assumption when moving to JavaScript. In C# <code>this</code> represents the current class which you&#39;re working within but since JavaScript <em>isn&#39;t</em> a classical language there isn&#39;t the concept of a <em>class</em> so you couldn&#39;t really associate it to one could you?</p>
+<p>Instead <code>this</code> represents the context for which a function is executed for and different kinds of execution result in different contexts. Here&#39;s a few examples:</p>
+<ul>
+<li>Invoking a function from an object will set the context to the owner object</li>
+<li>Invoking a function literal will set the context to the global object (<code>window</code> in a browser)</li>
+<li>Invoking a function with apply/ call allows it to be controlled</li>
+</ul>
+<p>And this is why a lot of people get utterly confused with <code>this</code> in JavaScript.</p>
+<p>But what does this have to do with the <code>$.proxy</code> method? As I said one of the most common reasons I see people using it is because they want to be able to access members of a particular object within a callback (such as a function called from an AJAX success). Because they are aware that in their outer function they can go <code>this.foo</code> they expect it to be available within the callback (after all isn&#39;t the callback in the same class?) but it will fail so they use <code>$.proxy</code> to ensure that they can access the member(s) they require.</p>
+<p>So why is it a poor choice in this scenario? Well the reason is  that you can solve the problem in a much simpler fashion, by understanding JavaScript closures. You can draw a lot of similarities between JavaScript closures and C# closures, but the simplest explanation is that a variable with be within scope until all functions that require is have been descoped. But with the case of <code>this</code>, since it changes between function scopes the <code>var that = this</code> pattern emerged in JavaScript.</p>
+<p>Let&#39;s have a look at some code:</p>
+<pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> foo = {
+    makeRequest: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        $.<span class="keyword">get</span>(<span class="string">'/foo'</span>, $.proxy(<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
+                <span class="keyword">this</span>.update(result);
+            }, <span class="keyword">this</span>)
+        );
+    },
+
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span> <span class="comment">/* ... */</span> }
+};
+
+<span class="comment">//somewhere later in the code</span>
+foo.makeRequest();</code></pre>
+<p>Here we&#39;re using the <code>proxy</code> method to make it possible to access the <code>update</code> method, since when we called the <code>makeRequest</code> method its <code>this</code> is a reference to <code>foo</code> (we&#39;re assuming that the assignment of <code>foo</code> is out of scope for the <code>makeRequest</code> method). So let&#39;s update it to use variable closures:</p>
+<pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> foo = {
+    makeRequest: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">var</span> that = <span class="keyword">this</span>;
+        $.<span class="keyword">get</span>(<span class="string">'/foo'</span>,<span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
+            that.update(result);
+        });
+    },
+
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span> <span class="comment">/* ... */</span> }
+};
+
+foo.makeRequest();</code></pre>
+<p>The difference here is that I&#39;m assigning the value of <code>this</code> to a variable before the callback is created and inside the callback I refer back to the variable.</p>
+<p>So why is this better than using <code>proxy</code>? The primary reason is readability, if you look at the first snippet you&#39;re intention is obscured by the use of <code>proxy</code> to change the scope. When someone who understands JavaScript comes to that snippet they have to know what the use of <code>proxy</code> is and why the <code>this</code> context needs to be controlled. With the second snippet it&#39;s clearer to see that you want to call the <code>update</code> method on the same object which <code>makeRequest</code> was invoked from.</p>
+<h1>Use built-in methods</h1>
+<p>An often missed note of JavaScript (well ECMAScript really) is that the functionality that is provided by <code>proxy</code> (and the similar methods in the other libraries) is built into the language, through the <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">bind</a> method. The <code>bind</code> method was added as part of ECMAScript 5 and</p>
+<blockquote>
+<p>Creates a new function that, when called, itself calls this function in the context of the provided this value, with a given sequence of arguments preceding any provided when the new function was called.</p>
+</blockquote>
+<p>Hmm that sounds pretty much like what you get from the <code>proxy</code> method yet it&#39;s built into the language.</p>
+<p>This means that you can (potentially) get a performance boost (<a href="http://jsperf.com/bind-vs-jquery-proxy">check it out on JSPerf</a>) by using a native browser API rather than the wrapper. Also at the time of writing jQuery (1.7.1) doesn&#39;t use the native browser method it does the code itself.</p>
+<p>Performance aside the main difference between the jQuery implementation and the ECMASCript 5 specification is the jQuery <code>proxy</code> method <em>does not throw a type error if the first argument is not a function</em> which the <a href="http://es5.github.com/#x15.3.4.5">spec states</a> <code>bind</code> will do. So although they are named differently they are providing the same functionality except for a critical check.</p>
+<p>The take away from this point is that it&#39;s built into the language so using it makes a lot of sense and when you&#39;re in browsers that don&#39;t support it it&#39;s easy to polyfil the missing API (the mdn docs include the polyfil).</p>
+<h1>Conclusion</h1>
+<p>That wraps up my &quot;rant&quot; against using the <code>proxy</code> method in jQuery. The goal of this article was to teach you a bit more about the JavaScript language and that things people commonly try and work around have simpler solutions.</p>
+<p>By understanding language concepts such as <code>this</code> and closures you can avoid manipulating scope.</p>
+<p>By knowing what&#39;s new in the language you can use built-in APIs and make faster and more portable code.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/javascript/you-dont-need-jquery-proxy';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

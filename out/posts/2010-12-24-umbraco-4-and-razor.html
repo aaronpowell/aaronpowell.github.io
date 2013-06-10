@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Using Razor in Umbraco 4 | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Using Razor in Umbraco 4</h1>
+                <h2>24th December 2010</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/razor.html"><span>razor</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">4th December 2010</span>
+                            <h3><a href="/posts/2010-12-04-ole.html">Ole Erling appears in NodeJS</a></h3>
+                        </header>
+                        <p>Having some fun with NodeJS and a crazy Danish dude</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/nodejs.html"><span>nodejs</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th September 2012</span>
+                            <h3><a href="/posts/2012-09-05-text-casing-and-examine.html">Text casing and Examine</a></h3>
+                        </header>
+                        <p>A few times I&#39;ve seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we&#39;ve had to handle a few times within our...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/lucene-net.html"><span>lucene.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/examine.html"><span>examine</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th June 2012</span>
+                            <h3><a href="/posts/2012-06-25-i-helped-kill-umbraco-5.html">I helped kill Umbraco 5</a></h3>
+                        </header>
+                        <p>Hi, my name&#39;s Aaron Powell and I was involved in killing Umbraco 5.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/opinionated.html"><span>opinionated</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th June 2012</span>
+                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
+                        </header>
+                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>If you&#39;ve been following the development of Umbraco Juno (4.6) you&#39;ll have seen that <a href="http://twitter.com/umbraco">Niels</a> <a href="http://our.umbraco.org/projects/website-utilities/razorcontrol-for-juno">released an add-in</a> for early Juno builds to which was for working with <a href="http://weblogs.asp.net/scottgu/archive/2010/07/02/introducing-razor.aspx">Razor</a>, the new syntax for ASP.Net development.</p>
+<p>Well here&#39;s something even more exciting, Umbraco Juno no longer requires an add-in, instead it has a out-of-the-box support for working with Razor!</p>
+<p><strong>AWESOME!</strong></p>
+<h2>Umbraco &lt;3 Razor</h2>
+<p>So what does the Razor support for Umbraco include? Well basically it allows Razor to be used in the same way that you use the Iron* languages, XSLT or .NET controls... as a macro. This means that you can use Razor just as you would any other language option.</p>
+<h2>Working with Razor in Umbraco</h2>
+<p>So if you want to work with Razor what do you need to do? Well creating a Razor macro is just as nice as if you&#39;re doing any other kind of macro, through the Umbraco UI.</p>
+<p>Razor files live along side the Iron* files in the <code>/python</code> folder (yeah, that&#39;s a hold over from the original DLR engine and changing it would be a breaking change so we have to live with it. Note - as Morten pointed out in the comments you can set <code>&lt;add key=&quot;umbracoPythonPath&quot; value=&quot;~/Razor&quot; /&gt;</code> and use a different path for script files), and you create them like you create any other DLR script file in the Umbraco back office:</p>
+<p><img src="/get/umbraco/umbraco-4-razor/umbraco-4-razor-01.png" alt="Create Razor macors"></p>
+<p>(Yes there&#39;s a spelling error in the beta which I&#39;ve fixed :P)</p>
+<p>Now you can start coding up your Razor macros.</p>
+<h2>My first Razor macro</h2>
+<p>With Razor macros there&#39;s a slightly different way that you go about it, rather than using <code>currentPage</code> as you would with XSLT or an Iron* script you have a <code>Model</code> property which you work with.</p>
+<p>To make this a bit nicer as well the <code>Model</code> property is a dynamic object, allowing you to access the properties as if they were actually properties of the model, meaning you can do this following:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"content"</span>&gt;</span>@Model.bodyText<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<p>That&#39;s how easy it is to access the properties of the <code>Model</code>, no more <code>getProperty(&quot;bodyText&quot;).Value</code>. And there you have it, a basic Razor macro has been created.</p>
+<h3>Something a bit more advanced</h3>
+<p>Well lets take it up a notch and make a slightly more advanced macro, say a news listing:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"news-lissting"</span>&gt;</span>
+    @foreach(var page in Model.Children) {
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"news-item"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">h2</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"@page.Url"</span> <span class="attribute">title</span>=<span class="value">"@page.Name"</span>&gt;</span>@page.Name<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">h2</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">h3</span>&gt;</span>Published: @page.articleDate.ToString("dd MMM yyyy")<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">p</span>&gt;</span>@page.description<span class="tag">&lt;<span class="title">p</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    }
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<p>What we&#39;re doing here looping through each of the children of the current page (the <code>Model</code>), and generating a <code>&lt;div&gt;</code> and then creating the HTML structure inside it.</p>
+<h3>Post-beta features</h3>
+<p>Just a little note I&#39;ve added a change to the DynamicNode class which is used by the dynamic Model object that allows you to access specific types of children, so you can do this in your Razor file:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"news-lissting"</span>&gt;</span>
+    @foreach(var page in Model.articles) {
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"news-item"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">h2</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"@page.Url"</span> <span class="attribute">title</span>=<span class="value">"@page.Name"</span>&gt;</span>@page.Name<span class="tag">&lt;/<span class="title">a</span>&gt;</span><span class="tag">&lt;/<span class="title">h2</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">h3</span>&gt;</span>Published: @page.articleDate.ToString("dd MMM yyyy")<span class="tag">&lt;/<span class="title">h3</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">p</span>&gt;</span>@page.description<span class="tag">&lt;<span class="title">p</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    }
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<p>In this example my <code>Model</code> has children of the type <code>article</code> (that&#39;s the alias of the DocType) and I&#39;m requesting them all (hence the pluralization). Pretty sweet I think!</p>
+<h2>Conclusion</h2>
+<p>I&#39;m sure that even the most seasoned XSLT &quot;developer&quot; (I&#39;m looking at you <a href="http://twitter.com/warrenbuckley">Warren</a>!) will have to admit the Razor syntax is highly readable for people who aren&#39;t .NET developers. And because we&#39;re working with a dynamic object it&#39;s really simple to access the properties as needed.</p>
+<p>This brings us to the end of our quick look at the Razor support which is coming in Umbraco Juno, and how it&#39;s going to be another great choice for developers.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/umbraco-4-and-razor';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

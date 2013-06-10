@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Creating a NuGet-based plugin engine | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Creating a NuGet-based plugin engine</h1>
+                <h2>20th February 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/nuget.html"><span>nuget</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/funnelweb.html"><span>funnelweb</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th December 2010</span>
+                            <h3><a href="/posts/2010-12-13-umbraco-and-mercurial-how-to-contribute.html">Umbraco & Mercurial - How to contribute</a></h3>
+                        </header>
+                        <p>A quick guide on how to contribute to Umbraco using Mercurial</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/mercurial.html"><span>mercurial</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th September 2012</span>
+                            <h3><a href="/posts/2012-09-05-text-casing-and-examine.html">Text casing and Examine</a></h3>
+                        </header>
+                        <p>A few times I&#39;ve seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we&#39;ve had to handle a few times within our...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/lucene-net.html"><span>lucene.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/examine.html"><span>examine</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th June 2012</span>
+                            <h3><a href="/posts/2012-06-25-i-helped-kill-umbraco-5.html">I helped kill Umbraco 5</a></h3>
+                        </header>
+                        <p>Hi, my name&#39;s Aaron Powell and I was involved in killing Umbraco 5.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/opinionated.html"><span>opinionated</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th June 2012</span>
+                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
+                        </header>
+                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>Two of the main Open Source projects I work on have extensibility aspects to them, <a href="http://umbraco.codeplex.com">Umbraco</a> and <a href="http://www.funnelweblog.com">FunnelWeb</a>.</p>
+<p>We&#39;re a bit early in the development cycle for Umbraco 5 to be diving into the packaging, but FunnelWeb is more at a point where we can dive into this. So it got me thinking about how we&#39;d go about creating a simple way that developers can share plugins or themes they&#39;ve created?</p>
+<p>Umbraco 4.x runs a decent package engine, but it&#39;s custom developed, running a custom server, and a bunch of other stuff. For a smallish Open Source project like FunnelWeb this is a large investment which we&#39;re rather avoid. Also with Umbraco 5 we&#39;re looking at whether the custom developed way is the best was to go or not, as again there is time and money that needs to be invested for it too.</p>
+<p>My next thought was <a href="http://nuget.codeplex.com">NuGet</a>, it&#39;s all the rage at the moment (rightly so), so I was wondering if we can&#39;t just used it as our source?</p>
+<p>Unsurprisingly I&#39;m not the first person to look at this, it&#39;s powering Orchard&#39;s gallery, but I couldn&#39;t find any decent documentation on how to use it. So after cracking open the Orchard source, doing some investigation it seems to be working. In the rest of this article I&#39;ll cover a very basic way to do it.</p>
+<h1>What you&#39;ll need</h1>
+<p>There&#39;s two things you need:</p>
+<ul>
+<li>A server</li>
+<li>A consumer</li>
+</ul>
+<p>There&#39;s a server available as part of the NuGet source code, or alternatively you can install the <a href="http://nuget.org/Packages/Packages/Details/NuGet-Server-1-2-2210-35">NuGet package for NuGet.Server</a> ;).</p>
+<p>Once you&#39;ve installed the NuGet.Server package (I&#39;m going to assume that you&#39;ve done that) drop in your own NuGet packages into the <code>/Packages</code> folder and you&#39;re ready to go. If you want to test this add it to Visual Studio and you can test it via <code>http://&lt;your url&gt;/nuget/Packages</code>. Woot, one part down, now for the tricky part.</p>
+<h1>Consuming a NuGet feed yourself</h1>
+<p>Let&#39;s build a little console app which will view our packages, first off you need to add a reference to <a href="http://nuget.org/Packages/Packages/Details/NuGet-Core-1-1-229-159">NuGet.Core</a> and then we can start coding. </p>
+<p>The first thing you need is a repository which you&#39;re going to work against:</p>
+<pre class="highlighted"><code class="php">    <span class="keyword">var</span> repo =
+        PackageRepositoryFactory.<span class="keyword">Default</span>.CreateRepository(
+            <span class="keyword">new</span> PackageSource(<span class="string">"http://nuget.local/nuget/Packages"</span>, <span class="string">"Default"</span>));</code></pre>
+<p>It&#39;s easiest to just use the default repository, unless you&#39;re doing something <em>truely</em> scary, and for the <code>PackageSource</code> we&#39;re providing a source which is the URL of the OData feed which our packages sit behind (you can give a file system path if you&#39;re using that and it still works).</p>
+<p>From the repository you can:</p>
+<ul>
+<li>List the packages</li>
+<li>Add a new package</li>
+<li>Remove a package</li>
+</ul>
+<p>(The last two I&#39;m assuming are for the feature that&#39;s being toted for NuGet 1.2 which allows you to <a href="http://www.youtube.com/user/davidebbo2#p/a/u/0/RxdUqw_PXII">push new packages from the NuGet console</a>)</p>
+<p>There&#39;s a number of Extension Methods that are also available which make it easier find packages, so you can do something like this:</p>
+<pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> <span class="package"><span class="keyword">package</span> = <span class="title">repo</span>.<span class="title">FindPackage</span>("<span class="title">My</span>-<span class="title">Awesome</span>-<span class="title">Package</span>");</code></pre>
+<p>Next thing we want to do is install a package, and for this you need a <code>PackageManager</code>:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> packageManager = <span class="keyword">new</span> PackageManager(
+    repo,
+    <span class="keyword">new</span> DefaultPackagePathResolver(<span class="string">"http://nuget.local/nuget/Packages"</span>),
+    <span class="keyword">new</span> PhysicalFileSystem(Environment.CurrentDirectory + <span class="string">@"\Packages"</span>)
+);</code></pre>
+<p>For this we need to provide the following:</p>
+<ul>
+<li>The repository to install from</li>
+<li>A package path resolver<ul>
+<li>This takes the same path as the repository</li>
+</ul>
+</li>
+<li>A folder to install the packages into<ul>
+<li>This could be your <code>/bin</code> if it&#39;s a web app, or anything else you want</li>
+</ul>
+</li>
+</ul>
+<p>The <code>PackageManager</code> is what we use to integrate with our local application, and it&#39;s responsible for the install and uninstall process:</p>
+<pre class="highlighted"><code class="lua">packageManager.Install(<span class="built_in">package</span>, <span class="keyword">false</span>);</code></pre>
+<p>For this we&#39;re providing:</p>
+<ul>
+<li>The package to install (you can also provide the ID of the package)</li>
+<li>Whether or not you want dependencies resolved (<code>false</code> tells it to ignore dependencies)</li>
+</ul>
+<p>It&#39;s just that simple. And to uninstall it&#39;s equally as simple:</p>
+<pre class="highlighted"><code class="avrasm">packageManager<span class="preprocessor">.Uninstall</span>(package)<span class="comment">;</span></code></pre>
+<p>Again for this you just need to provide the package instance (or ID) of the package to uninstall.</p>
+<h1>Conclusion</h1>
+<p>As you can see from only a few lines of code you can create your own consumer of NuGet feeds:</p>
+<pre class="highlighted"><code class="actionscript"><span class="class"><span class="keyword">class</span> <span class="title">Program</span>
+{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> Main(string[] args)
+    {
+        <span class="keyword">var</span> repo =
+            PackageRepositoryFactory.Default.CreateRepository(
+                <span class="keyword">new</span> PackageSource(<span class="string">"http://nuget.local/nuget/Packages"</span>, <span class="string">"Default"</span>));
+
+        <span class="keyword">var</span> packageManager = <span class="keyword">new</span> PackageManager(
+            repo,
+            <span class="keyword">new</span> DefaultPackagePathResolver(<span class="string">"http://nuget.local/nuget/Packages"</span>),
+            <span class="keyword">new</span> PhysicalFileSystem(Environment.CurrentDirectory + @<span class="string">"\Packages"</span>)
+            );
+
+        <span class="keyword">var</span> <span class="package"><span class="keyword">package</span> = <span class="title">repo</span>.<span class="title">FindPackage</span>("<span class="title">My</span>-<span class="title">Awesome</span>-<span class="title">Package</span>");
+
+        <span class="title">packageManager</span>.<span class="title">InstallPackage</span>(<span class="title">package</span>, <span class="title">false</span>);
+
+        <span class="title">Console</span>.<span class="title">WriteLine</span>("<span class="title">Installed</span>!");
+        <span class="title">Console</span>.<span class="title">Read</span>();
+
+        <span class="title">packageManager</span>.<span class="title">UninstallPackage</span>(<span class="title">package</span>);
+
+        <span class="title">Console</span>.<span class="title">WriteLine</span>("<span class="title">Uninstalled</span>!");
+        <span class="title">Console</span>.<span class="title">Read</span>();
+    }
+}</code></pre>
+<p>So keep an eye on FunnelWeb as we work on using this to produce a theme and plugin engine.</p>
+<p>And who knows, this may also be the way we do the packager which will ship in Umbraco 5.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/creating-a-nuget-plugin-engine';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

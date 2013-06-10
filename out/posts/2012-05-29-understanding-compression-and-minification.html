@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Understanding compression and minification | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Understanding compression and minification</h1>
+                <h2>29th May 2012</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd July 2011</span>
+                            <h3><a href="/posts/2011-07-02-postman.html">Introducing Postman - A JavaScript Messaging Library</a></h3>
+                        </header>
+                        <h1>Prelude</h1>
+<p>Back in May I presented at DDD Melbourne on JavaScript design patterns. One of the patterns that I was talking about was the idea of [pub/ sub][1].</p>
+<p>Let me start by saying that this isn&#39;...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/postman.html"><span>postman</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/coffeescript.html"><span>coffeescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd January 2013</span>
+                            <h3><a href="/posts/2013-01-22-hello-mathy.html">Hello mathy</a></h3>
+                        </header>
+                        <p>An introduction to another new library from me, this time it&#39;s mathy, a simple formula parser</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">7th January 2013</span>
+                            <h3><a href="/posts/2013-01-07-thoughts-on-typescript.html">Thoughts on TypeScript</a></h3>
+                        </header>
+                        <p>Some of my impressions from trying to implement something in TypeScript</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd October 2012</span>
+                            <h3><a href="/posts/2012-10-02-pubsub-in-typescript.html">PubSub in TypeScript</a></h3>
+                        </header>
+                        <p>It&#39;s that time again, time for more Pub/Sub!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th September 2012</span>
+                            <h3><a href="/posts/2012-09-14-creating-classes.html">Creating classes in WinJS</a></h3>
+                        </header>
+                        <p>A look at how you can create JavaScript classes in WinJS</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/winjs.html"><span>winjs</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/windows8.html"><span>windows8</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>One of my colleagues raised a question on our internal discussion system as to why we should use minified JavaScript libraries. Now I&#39;m sure everyone knows that you <em>should</em> minimize your libraries but do you <em>really</em> understand what the different levels of minification are and the benefits of the different levels? While I strongly recommend that you should ensure that on a production system you always have your JavaScript minified <strong>and</strong> <a href="http://en.wikipedia.org/wiki/Gzip">gzipped</a> (well and the right caching headers but that&#39;s beyond the scope of this blog post) let&#39;s have a look as to exactly what differences it makes.</p>
+<p>For the exercise I decided that I would take the <a href="http://blog.jquery.com/2012/03/21/jquery-1-7-2-released/">jQuery 1.7.2</a> release as it&#39;s a very common JavaScript library and it&#39;s very well written and formatted. I&#39;m going to use the unminified version to run the steps against. For the minification I&#39;ve decided to use <a href="https://github.com/mishoo/UglifyJS">uglify js</a> which is toting itself as the best library for minification, it&#39;s also got a pretty nice API so I can work with it programmatically. Lastly I&#39;ve got a tiny Node.js application running Express.js that is serving out the files.</p>
+<h1>Serving the raw file</h1>
+<p>Let&#39;s start by looking at serving a completely raw file, the jQuery <em>development</em> release and if we request our file we&#39;ll see something like this as the response headers:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript</span>
+<span class="attribute">Content-Length</span>: <span class="string">327171</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>So the raw request is coming back at <strong>327171 bytes</strong> which is pretty large. From a production point of view you wouldn&#39;t exactly want to do this everytime. Let&#39;s turn on gzip for this same request and see what happens:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Encoding</span>: <span class="string">gzip</span>
+<span class="attribute">Vary</span>: <span class="string">Accept-Encoding</span>
+<span class="attribute">Content-Length</span>: <span class="string">78390</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>Now that I&#39;ve turned on gzip compression our request is already down to <strong>78390 bytes</strong>, this is a pretty drastic reduction already and all we&#39;ve done is turn on compression. But we&#39;re not really getting the most our of our response, gzipping is good, it takes care of common parts of our code, the <code>function</code> keyword, whitespace, etc, but there&#39;s still more we can get out of this.</p>
+<h1>Stripping comments</h1>
+<p>Comments are useful in your codebase but do you really need to send them down to the user? Probably not. So let&#39;s strip them out before sending our response and see what impact this has. For this I&#39;m going to use uglify.js and rebuilt the AST from our original source. I&#39;m going to maintain the structure of our code so we&#39;re going to have a bunch of whitespace still, it wont be exactly what jQuery originally had since we&#39;ve had to rebuild the codebase from the AST but at least our code would still be useful if we want to step through. If we take a look at the first few lines of the file it looks like this:</p>
+<pre class="highlighted"><code class="clojure"><span class="list">(<span class="title">function</span><span class="list">(<span class="title">window</span>, undefined)</span> <span class="collection">{
+    var document = window.document, navigator = window.navigator, location = window.location<span class="comment">;</span>
+    var jQuery = function<span class="list">()</span> <span class="collection">{
+        var jQuery = function<span class="list">(<span class="title">selector</span>, context)</span> <span class="collection">{
+            return new jQuery.fn.init<span class="list">(<span class="title">selector</span>, context, rootjQuery)</span><span class="comment">;</span>
+        }</span>, _jQuery = window.jQuery, _$ = window.$, rootjQuery, quickExpr = /^<span class="list">(<span class="title">?</span>:<span class="collection">[<span class="comment">^#&lt;</span>]</span>*<span class="list">(<span class="title"><span class="built_in">&lt;</span></span><span class="collection">[\w\W]</span>+&gt;)</span><span class="collection">[<span class="comment">^&gt;</span>]</span>*$|#<span class="list">([\<span class="title">w</span>\-]*)</span>$)</span>/, rnotwhite = /\S/, trimLeft = /^\s+/, trimRight = /\s+$/, rsingleTag = /<span class="comment">^&lt;</span><span class="list">(\<span class="title">w+</span>)</span>\s*\/?&gt;<span class="list">(<span class="title">?</span><span class="attribute">:&lt;</span>\/\1&gt;)</span>?$/, rvalidchars = /^<span class="collection">[\]</span>,:<span class="collection">{}</span>\s]</span>*$/, rvalidescape = /\\<span class="list">(<span class="title">?</span>:<span class="collection">[<span class="string">"\\\/bfnrt]|u[0-9a-fA-F]{4})/g, rvalidtokens = /"</span><span class="collection">[^<span class="string">"\\\n\r]*"</span>|true|false|null|-?\d+<span class="list">(<span class="title">?</span>:\.\d*)</span>?<span class="list">(<span class="title">?</span>:<span class="collection">[eE]</span><span class="collection">[+\-]</span>?\d+)</span>?/g, rvalidbraces = /<span class="list">(<span class="title">?</span>:^|:|,)</span><span class="list">(<span class="title">?</span>:\s*\<span class="collection">[)+/g, rwebkit = /<span class="list">(<span class="title">webkit</span>)</span><span class="collection">[ \/]</span><span class="list">([\<span class="title">w.</span>]+)</span>/, ropera = /<span class="list">(<span class="title">opera</span>)</span><span class="list">(<span class="title">?</span><span class="attribute">:.*version</span>)</span>?<span class="collection">[ \/]</span><span class="list">([\<span class="title">w.</span>]+)</span>/, rmsie = /<span class="list">(<span class="title">msie</span>)</span> <span class="list">([\<span class="title">w.</span>]+)</span>/, rmozilla = /<span class="list">(<span class="title">mozilla</span>)</span><span class="list">(<span class="title">?</span><span class="attribute">:.*?</span> rv:<span class="list">([\<span class="title">w.</span>]+)</span>)</span>?/, rdashAlpha = /-<span class="list">([<span class="title">a-z</span>]|<span class="collection">[0-9]</span>)</span>/ig, rmsPrefix = /<span class="comment">^-ms-/</span>, fcamelCase = function<span class="list">(<span class="title">all</span>, letter)</span> <span class="collection">{
+            return <span class="list">(<span class="title">letter</span> + <span class="string">""</span>)</span>.toUpperCase<span class="list">()</span><span class="comment">;</span>
+        }</span>, userAgent = navigator.userAgent, browserMatch, readyList, DOMContentLoaded, toString = Object.prototype.toString, hasOwn = Object.prototype.hasOwnProperty, push = Array.prototype.push, slice = Array.prototype.slice, trim = String.prototype.trim, indexOf = Array.prototype.indexOf, class2type = <span class="collection">{}</span><span class="comment">;</span>
+        jQuery.fn = jQuery.prototype = <span class="collection">{
+            constructor: jQuery,</code></pre>
+<p>As I said this isn&#39;t exactly what the jQuery source looked like since we&#39;ve removed more whitespace but it&#39;s close and most importantly it&#39;s readable.</p>
+<p>Now let&#39;s look at the headers:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript; charset=utf-8</span>
+<span class="attribute">Content-Length</span>: <span class="string">254399</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>If we compare that to the original we&#39;ve gone down to <strong>254399 bytes</strong>. Cool even with that we&#39;ve dropped a good bit of weight from our response. Now let&#39;s also gzip it:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Encoding</span>: <span class="string">gzip</span>
+<span class="attribute">Vary</span>: <span class="string">Accept-Encoding</span>
+<span class="attribute">Content-Length</span>: <span class="string">48566</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>Again we&#39;re getting some better performance because we don&#39;t have the comments which don&#39;t compress as well as say whitespace and a slightly more organised codebase.</p>
+<h1>Mangling our code</h1>
+<p>One of the most common things that a minifier will do is <em>obfuscate</em> your code, variables, functions, etc will all be renamed into smaller versions so that you have smaller files by having smaller names. Obviously this makes your code a whole lot harder to read (hence obfuscation) but it does do wonders for file size. Again we&#39;re going to get uglify.js to help us out so let&#39;s have a look at the first few lines again:</p>
+<pre class="highlighted"><code class="lisp"><span class="list">(<span class="title">function</span><span class="body"><span class="list">(<span class="title">a</span><span class="body">, b)</span></span> {
+    function h<span class="list">(<span class="title">a</span><span class="body">)</span></span> {
+        var b = g[a] = {}, c, d<span class="comment">;</span>
+        a = a.split<span class="list">(<span class="title">/</span><span class="body">\s+/)</span></span><span class="comment">;</span>
+        for <span class="list">(<span class="title">c</span><span class="body"> = <span class="number">0</span>, d = a.length<span class="comment">; c &lt; d; c++) {</span>
+            b[a[c]] = true<span class="comment">;</span>
+        }
+        return b<span class="comment">;</span>
+    }</code></pre>
+<p>Well that&#39;s quite different now isn&#39;t it! You&#39;ll see from the very first line in the original version we had two arguments <code>window</code> and <code>undefined</code>, these are now called <code>a</code> and <code>b</code>, the body has also been rewritten so that there&#39;s a different order for the code, functions are now at the top, the first being a function called <code>h</code>. Here&#39;s the original function that is now the <code>h</code> function:</p>
+<pre class="highlighted"><code class="matlab"><span class="function"><span class="keyword">function</span> <span class="title">createFlags</span><span class="params">(flags)</span> {</span>
+    var object = flagsCache<span class="matrix">[flags]</span> = <span class="cell">{}</span>, <span class="built_in">i</span>, <span class="built_in">length</span>;
+    flags = <span class="transposed_variable">flags.</span>split(/\s+/);
+    <span class="keyword">for</span> (<span class="built_in">i</span> = <span class="number">0</span>, <span class="built_in">length</span> = <span class="transposed_variable">flags.</span><span class="built_in">length</span>; <span class="built_in">i</span> &lt; <span class="built_in">length</span>; <span class="built_in">i</span>++) <span class="cell">{
+        object[flags[i]] = true;
+    }</span>
+    <span class="keyword">return</span> object;
+}</code></pre>
+<p>As you can see the use of smaller variable names and this is done because the variables are never needed by any consumer of the API, so renaming <code>object</code> to <code>b</code> wont be a problem because anyone who knew it was <code>object</code> has also had their references updated. So what&#39;s the impact on size?</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript; charset=utf-8</span>
+<span class="attribute">Content-Length</span>: <span class="string">213222</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>If we compare this back to the last request you&#39;ll see that it&#39;s only slightly smaller, but this is the advantage of using minimal variable names (and keep in mind we still have whitespace). And now we&#39;ll try gzipping it:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Encoding</span>: <span class="string">gzip</span>
+<span class="attribute">Vary</span>: <span class="string">Accept-Encoding</span>
+<span class="attribute">Content-Length</span>: <span class="string">42854</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>Again we&#39;re not really that might smaller than just the comment stripped version but we are shrinking our response down.</p>
+<h1>Optimising the codebase</h1>
+<p>Although variable minification can do good things to getting your files smaller you can get even more out of it if you&#39;re smart about your codebase, in this stage we&#39;re looking at tricks of the JavaScript language that you won&#39;t want to actually write but are useful when you&#39;re trying to get smaller files. Things like utilising the comma operator can be useful for chaining together statements and removing unreachable code are something best left to the machines, you can easily introduce errors into your JavaScript if you&#39;re not careful. Let&#39;s run this over our codebase:</p>
+<pre class="highlighted"><code class="lisp"><span class="list">(<span class="title">function</span><span class="body"><span class="list">(<span class="title">a</span><span class="body">, b)</span></span> {
+    function h<span class="list">(<span class="title">a</span><span class="body">)</span></span> {
+        var b = g[a] = {}, c, d<span class="comment">;</span>
+        a = a.split<span class="list">(<span class="title">/</span><span class="body">\s+/)</span></span><span class="comment">;</span>
+        for <span class="list">(<span class="title">c</span><span class="body"> = <span class="number">0</span>, d = a.length<span class="comment">; c &lt; d; c++) b[a[c]] = !0;</span>
+        return b<span class="comment">;</span>
+    }</code></pre>
+<p>Well now <em>that</em> is looking rather different isn&#39;t it. You&#39;ll see that there&#39;s some interesting tricks that have been applied, in particular the use of <code>!0</code>. Fascinating how you can exploit JavaScript boolean operations isn&#39;t it. If you&#39;re unsure of what this is doing in JavaScript <code>0</code> is a falsey value, meaning that JavaScript will treat <code>0</code> as <code>false</code>, but it&#39;s not <em>actually</em> false (<code>0 === false</code> returns <code>false</code>) but by putting a <code>!</code> operator it will force the value to be converted to an actual boolean by returning the inverse, and <code>!0 === true</code>. Like I said, fascinating.</p>
+<p>So what&#39;s it do for our response size (keep in mind we still have whitespace maintained):</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript; charset=utf-8</span>
+<span class="attribute">Content-Length</span>: <span class="string">155600</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>Well that&#39;s looking good, we&#39;ve really dropped the size nicely, and if we gzip it:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Encoding</span>: <span class="string">gzip</span>
+<span class="attribute">Vary</span>: <span class="string">Accept-Encoding</span>
+<span class="attribute">Content-Length</span>: <span class="string">39185</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>Almost there! It&#39;s getting pretty small right there ey!</p>
+<h1>Putting it all together</h1>
+<p>We&#39;ve pretty much run through all of the different steps to get our responses down, we&#39;ve seen the impact of each step, but let&#39;s roll it all together and also strip off the whitespace:</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript; charset=utf-8</span>
+<span class="attribute">Content-Length</span>: <span class="string">94656</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>So if we drop the whitespace we are <em>drastically</em> reducing the size of our library but our code is next to impossible to step into if we need to debug it. This is a logical desire of a production system, you really shouldn&#39;t be debugging through it. So what if we turn on gzipping this time, we&#39;ve already removed the whitespace, the biggest space waste in our response so can we really get as much from gzipping?</p>
+<pre class="highlighted"><code class="http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">X-Powered-By</span>: <span class="string">Express</span>
+<span class="attribute">Content-Encoding</span>: <span class="string">gzip</span>
+<span class="attribute">Vary</span>: <span class="string">Accept-Encoding</span>
+<span class="attribute">Content-Length</span>: <span class="string">33632</span>
+<span class="attribute">Content-Type</span>: <span class="string">application/javascript</span>
+<span class="attribute">Connection</span>: <span class="string">keep-alive</span></code></pre>
+<p>Sweet, we&#39;ve still got a really good levels of compression against our library, down to just <strong>33632 bytes</strong> for jQuery.</p>
+<h1>Size Matters</h1>
+<p>Now that we&#39;ve seen how we get to the end goal, an ultra-small version of our JavaScript library we should answer the question of <em>why</em>. The simplest answer to the question is speed, by having a smaller file (~30kb vs ~350kb) we can send that down from the server a lot quicker. This is especially important when you&#39;re looking at this from a mobile point of view, you&#39;ve got a limited bandwidth allowance so you want to be able to send as much as quickly as possible.</p>
+<p>But what about from the point of view of high-speed network connections, is file size <em>really</em> that important if you&#39;re transmitting over ADSL2 or something? Well yes it still does matter, even if you can download the file fast you can download smaller files even faster and that will have an impact on the overall speed of your application, the faster all dependencies are loaded the faster your application becomes response to the end user.</p>
+<p>The other main reason to ensure that you&#39;re files are as small as possible is caching. Again this is most important from a mobile browser point of view but it&#39;s still very valid with desktop browsers. Mobile browsers have fairly limited cache allowances. Yahoo! did a <a href="http://www.yuiblog.com/blog/2010/07/12/mobile-browser-cache-limits-revisited/">blog post</a> which they looked at the allowances for the different mobile devices (although it&#39;s a bit out-of-date) and you can see from that you&#39;ve not got a lot of play so the better packed your files the safer you&#39;ll be in cache. Desktop browsers are a lot more flexible since you can change their cache allowances and they also have <a href="http://www.blaze.io/mobile/understanding-mobile-cache-sizes/">higher starting levels</a>.</p>
+<h1>Conclusion</h1>
+<p>So you&#39;ve seen throughout this blog exactly what makes up minification of JavaScript libraries, what different minification concepts bring to the table and ultimately just <em>why</em> you should minify <strong>and</strong> gzip your libraries in production. Keep in mind that there&#39;s more to performance that I haven&#39;t covered such as caching but there&#39;s plenty of articles out there that can help you with that ;).</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/javascript/understanding-compression-and-minification';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

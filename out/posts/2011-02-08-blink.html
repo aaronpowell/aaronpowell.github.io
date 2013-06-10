@@ -1,0 +1,365 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Implementing the blink tag using jQuery | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Implementing the blink tag using jQuery</h1>
+                <h2>8th February 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/doing-it-wrong.html"><span>doing-it-wrong</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">3rd September 2011</span>
+                            <h3><a href="/posts/2011-09-03-qunit-beyond-the-browser-part-1.html">Going beyond the browser with QUnit - Part 1</a></h3>
+                        </header>
+                        <p>Taking your QUnit tests out of the browser to use your tests with Node.js</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/nodejs.html"><span>nodejs</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/qunit.html"><span>qunit</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th May 2009</span>
+                            <h3><a href="/posts/2009-05-05-creating-jquery-plugins-from-ms-ajax-components.html">Creating jQuery plugins for MS AJAX components, dynamically!</a></h3>
+                        </header>
+                        <p>Bringing jQuery and MS AJAX together</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ms-ajax.html"><span>ms-ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd January 2013</span>
+                            <h3><a href="/posts/2013-01-22-hello-mathy.html">Hello mathy</a></h3>
+                        </header>
+                        <p>An introduction to another new library from me, this time it&#39;s mathy, a simple formula parser</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th January 2013</span>
+                            <h3><a href="/posts/2013-01-14-ie10-console-thoughts.html">Making the Internet Explorer JavaScript tools better, again</a></h3>
+                        </header>
+                        <p>A look at what&#39;s changed since I last pointed out the failings of the IE dev tools</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/internet-explorer.html"><span>internet-explorer</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web-dev.html"><span>web-dev</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">4th April 2010</span>
+                            <h3><a href="/posts/2010-04-04-web-dev.html">Web Development</a></h3>
+                        </header>
+                        <p>Articles on the topic of web development</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net.html"><span>asp.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>Do you miss the good old days of of the web where you had the <code>&lt;blink&gt;</code> tag, oh it was wonderful.</p>
+<p>Well today I decided that I wanted to bring it back, damnit I <em>want</em> my text to blink!</p>
+<p>Thanks to the wonders of <a href="http://jquery.com">jQuery</a> this is a snap to build, in fact here it is:</p>
+<pre class="highlighted"><code class="lisp"><span class="list">(<span class="title">function</span><span class="body"><span class="list">(<span class="body">$)</span></span> {
+    $.fn.blinky = function<span class="list">(<span class="body">)</span></span> {
+      var that = this<span class="comment">;</span>
+        function go<span class="list">(<span class="body">)</span></span> {
+          $<span class="list">(<span class="title">that</span><span class="body">)</span></span>.fadeOut<span class="list">(<span class="body">)</span></span>.fadeIn<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+           setTimeout<span class="list">(<span class="title">go</span><span class="body">, <span class="number">1e3</span>)</span></span><span class="comment">; </span>
+        }<span class="comment">;</span>
+        go<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+    }<span class="comment">;</span>
+
+})</span></span><span class="list">(<span class="title">jQuery</span><span class="body">)</span></span><span class="comment">;</span></code></pre>
+<p>Now you can use it just like this:</p>
+<pre class="highlighted"><code class="ruby"><span class="variable">$(</span><span class="string">'h1'</span>).blinky();</code></pre>
+<p>Woo, all your <code>h1</code> elements are going to blink :D.</p>
+<h1>Breaking it down</h1>
+<p>To make this work you need to run the code periodically, in my case I&#39;m running it every 1000 milliseconds (<code>1e3</code> is just a lazy way of doing it, exponents are fun!). You could do this with the <code>setInterval</code> method, but <code>setInterval</code> isn&#39;t great, if your code is going to take longer than the allocated time it&#39;ll start again, <strong>before</strong> the previous has finished!</p>
+<p>Instead I&#39;m using the recursive setTimeout pattern, let&#39;s look at that.</p>
+<h2>Recursive setTimeout pattern</h2>
+<p>This pattern is cropping up with some of the more popular frameworks, and the idea is that rather executing on a particular interval you execute when the code you want to run is completed.</p>
+<p>Here&#39;s a better example:</p>
+<pre class="highlighted"><code class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span><span class="params">()</span> {</span>
+    $.<span class="keyword">get</span>(<span class="string">'/foo'</span>, <span class="keyword">function</span>(result) {
+        <span class="comment">//do something with the result</span>
+        setTimeout(doStuff, <span class="number">1e4</span>);
+    };
+}</code></pre>
+<p>As you can see we&#39;re doing an AJAX <code>get</code> which may take a while to complete, and once it does complete we&#39;ll do it again in 1000 milliseconds. If I&#39;d been using a <code>setInterval</code> then there is the possibility of having two running at the same time, since the first hadn&#39;t finished before the second started.</p>
+<h1>Sexing blink up</h1>
+<p>So now that we have a working <code>&lt;blink&gt;</code> simulator, let&#39;s sex it up a bit. Why not make it so we can specify the speed at which it blinks at:</p>
+<pre class="highlighted"><code class="lisp"><span class="list">(<span class="title">function</span><span class="body"><span class="list">(<span class="body">$)</span></span> {
+    $.fn.blinky = function<span class="list">(<span class="title">frequency</span><span class="body">)</span></span> {
+      frequency = frequency || <span class="number">1e3</span><span class="comment">;</span>
+      var that = this<span class="comment">;</span>
+        function go<span class="list">(<span class="body">)</span></span> {
+          $<span class="list">(<span class="title">that</span><span class="body">)</span></span>.fadeOut<span class="list">(<span class="body">)</span></span>.fadeIn<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+           setTimeout<span class="list">(<span class="title">go</span><span class="body">, frequency)</span></span><span class="comment">; </span>
+        }<span class="comment">;</span>
+        go<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+    }<span class="comment">;</span>
+
+})</span></span><span class="list">(<span class="title">jQuery</span><span class="body">)</span></span><span class="comment">;</span></code></pre>
+<p>Now you can optionally pass in a frequency you want to blink at:</p>
+<pre class="highlighted"><code class="ruby"><span class="variable">$(</span><span class="string">'h1'</span>).blinky(<span class="number">2</span>e3);</code></pre>
+<p>Woo-hoo, delayed blink!</p>
+<p>How about we extend it so that you can specify the number of times you want to blink:</p>
+<pre class="highlighted"><code class="lisp"><span class="list">(<span class="title">function</span><span class="body"><span class="list">(<span class="body">$)</span></span> {
+    $.fn.blinky = function<span class="list">(<span class="title">args</span><span class="body">)</span></span> {
+      var opts = { frequency: <span class="number">1e3</span>, count: <span class="number">-1</span> }<span class="comment">;</span>
+      args = $.extend<span class="list">(<span class="title">true</span><span class="body">, opts, args)</span></span><span class="comment">;  </span>
+      var i = <span class="number">0</span><span class="comment">;</span>
+      var that = this<span class="comment">;</span>
+        function go<span class="list">(<span class="body">)</span></span> {
+          if<span class="list">(<span class="title">i</span><span class="body"> == args.count)</span></span> return<span class="comment">;</span>
+          i++<span class="comment">;</span>
+          $<span class="list">(<span class="title">that</span><span class="body">)</span></span>.fadeOut<span class="list">(<span class="body">)</span></span>.fadeIn<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+          setTimeout<span class="list">(<span class="title">go</span><span class="body">, args.frequency)</span></span><span class="comment">; </span>
+        }<span class="comment">;</span>
+        go<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+    }<span class="comment">;</span>
+
+})</span></span><span class="list">(<span class="title">jQuery</span><span class="body">)</span></span><span class="comment">;</span></code></pre>
+<p>I&#39;ve also refactored to use an object literal as the arguments, using <a href="http://api.jquery.com/jQuery.extend/">jQuery.extend</a>, meaning you can do it like this:</p>
+<pre class="highlighted"><code class="smalltalk"><span class="char">$(</span><span class="string">'h1'</span>).blinky({ frequency : <span class="number">2e3</span>, <span class="method">count:</span> <span class="number">3</span> });</code></pre>
+<p>This will cause the <code>h1</code> to blink 3 times over the course of 6 seconds, how pretty.</p>
+<h1>Making it REALLY sexy!</h1>
+<p>I&#39;m sure you&#39;ve heard by now that <a href="http://blog.jquery.com/2011/01/31/jquery-15-released/">jQuery 1.5 is out</a>, and one of the new features of jQuery 1.5 is the <code>Deferred</code> object. <a href="http://api.jquery.com/category/deferred-object/">Full API doco is here</a>, but the short of it is that <code>Deferred</code> is how the new AJAX API works (I suggest you check out the jQuery doco for the best explanation of it), but one of the really cool things is that you can use <code>Deferred</code> in your own API, so that when your operations finish it can raise a <code>done</code> or <code>fail</code> method, depending on what is happening.</p>
+<p>Since we have the ability to specify a number of times to execute our blink will occur why not use <code>Deferred</code> to call a method when we&#39;re done, seems like a good idea right.</p>
+<p>There&#39;s plenty of examples on the web of how to use <code>Deferred</code>, but here&#39;s a basic example:</p>
+<pre class="highlighted"><code class="actionscript"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span><span class="params">()</span> {</span>
+    <span class="comment">//create an instance of deferred</span>
+    <span class="keyword">var</span> dfd = $.Deferred();
+
+    $.<span class="keyword">get</span>(<span class="string">'/foo'</span>, <span class="keyword">function</span>(result) {
+        <span class="comment">//do stuff with result</span>
+        <span class="comment">//success, so we tell the deferred object to resolve itself</span>
+        <span class="keyword">return</span> dfd.resolve();
+    });
+    <span class="comment">//return a promise to be deferred</span>
+    <span class="keyword">return</span> dfd.promise();
+}</code></pre>
+<p>The high level workflow is:</p>
+<ul>
+<li>Create a deferred object</li>
+<li>return a promise, to indicate that the deferred will complete at some point</li>
+<li>in the <code>get</code> method when it completes call the resolve method so anyone listening to the deferred will be run</li>
+</ul>
+<p>Now let&#39;s add it to our blink method:</p>
+<pre class="highlighted"><code class="lisp"><span class="list">(<span class="title">function</span><span class="body"><span class="list">(<span class="body">$)</span></span> {
+    $.fn.blinky = function<span class="list">(<span class="title">args</span><span class="body">)</span></span> {
+      var opts = { frequency: <span class="number">1e3</span>, count: <span class="number">-1</span> }<span class="comment">;</span>
+      args = $.extend<span class="list">(<span class="title">true</span><span class="body">, opts, args)</span></span><span class="comment">;  </span>
+      var i = <span class="number">0</span><span class="comment">;</span>
+      var that = this<span class="comment">;</span>
+      var dfd = $.Deferred<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+        function go<span class="list">(<span class="body">)</span></span> {
+            if<span class="list">(<span class="title">that</span><span class="body">.length == <span class="number">0</span>)</span></span> {
+                return dfd.reject<span class="list">(<span class="body">)</span></span><span class="comment">;    </span>
+            }
+            if<span class="list">(<span class="title">i</span><span class="body"> == args.count)</span></span> {
+                return dfd.resolve<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+            }
+          i++<span class="comment">;</span>
+          $<span class="list">(<span class="title">that</span><span class="body">)</span></span>.fadeOut<span class="list">(<span class="body">)</span></span>.fadeIn<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+          setTimeout<span class="list">(<span class="title">go</span><span class="body">, args.frequency)</span></span><span class="comment">; </span>
+        }<span class="comment">;</span>
+        go<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+        return dfd.promise<span class="list">(<span class="body">)</span></span><span class="comment">;</span>
+    }<span class="comment">;</span>
+
+})</span></span><span class="list">(<span class="title">jQuery</span><span class="body">)</span></span><span class="comment">;</span></code></pre>
+<p>With deferred we can now do this:</p>
+<pre class="highlighted"><code class="smalltalk"><span class="char">$(</span><span class="string">'h1'</span>)
+.blink({ <span class="method">count:</span> <span class="number">2</span> })
+.done(function() {
+    <span class="char">$(</span><span class="string">'h1'</span>).css(<span class="string">'color'</span>, <span class="string">'#f00'</span>);
+});</code></pre>
+<p>So once we&#39;ve finished executing the two iterations the blink the <code>h1</code> will turn red.</p>
+<p>We&#39;ve also got code in for a failure, if there was nothing found in our selector it&#39;ll raise a failure method:</p>
+<pre class="highlighted"><code class="vbscript">$(<span class="comment">'foo')</span>
+.blink({ count: <span class="number">2</span> })
+.fail(<span class="keyword">function</span>() {
+    console.<span class="built_in">log</span>(<span class="comment">'aww snap!');</span>
+});</code></pre>
+<h1>Conclusion</h1>
+<p>Just like this we&#39;ve come to the end of our post. This isn&#39;t really a useful jQuery plugin, in fact <code>&lt;bink&gt;</code> was a terrible idea, it&#39;s more a way that we can investigate a few interesting points, such as:</p>
+<ul>
+<li>recursive setTimeout pattern for better control over delayed execution</li>
+<li>using Deferred to execute code once we&#39;re done without passing the callback as an argument</li>
+</ul>
+<p>If anyone is interested the <a href="https://gist.github.com/818234">full code is available as a gist</a> and <a href="http://jsfiddle.net/slace/saB4q/">I&#39;ve created a playground</a> on <a href="http://jsfiddle.net/">jsfiddle</a>.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/doing-it-wrong/blink';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

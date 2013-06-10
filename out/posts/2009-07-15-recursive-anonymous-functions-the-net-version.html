@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Recursive anonymous functions - the .NET version | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Recursive anonymous functions - the .NET version</h1>
+                <h2>15th July 2009</h2>
+                <ul class="tags">
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>When playing around with JavaScript I decided to have a look at creating <a href="/Recursive-anonymous-functions">recursive anonymous functions</a>, which are a good bit of fun.</p>
+<p>Well I decided to have a challange, could you do it in .NET? Well lets ignore the pointlessness of the exercise and just enjoy the challenge.</p>
+<p>Well, I did it, it&#39;s sure as shit isn&#39;t pretty but hey, it works. In this post I&#39;ll show off how it works, but to sum it up - <strong>Reflection</strong>. But not where near as much as you&#39;d think.</p>
+<p>Part of why I wanted to try it was for LINQ to Umbraco, see the performance of how we&#39;re loading nodes at the moment and if we could optimise it (and this isn&#39;t the way if there is one!).
+I&#39;m doing a recursive call against a XML file, trying to find a node which is at a depth I don&#39;t know.</p>
+<p>With JavaScript functions there&#39;s the really nice argument.callee which is a reference to the method executing the current method, sadly in .NET we don&#39;t have that, so we have to find it ourselves.
+Remember, this is an anonymous function, but .NET doesn&#39;t have true anonymous functions, the compiler creates it on our behalf. The method name is something like &quot;&lt;&gt;b__0&quot;, but it&#39;s compile time generated so I don&#39;t really know (I&#39;m sure if you read the documentation on the C# compiler you may be able to work it out, good luck with that :P).</p>
+<p>We need to look into the stack frame to work out where we are, like this:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> thisMethod = <span class="keyword">new</span> StackFrame(<span class="number">0</span>).GetMethod();</code></pre>
+<p>This will return an object representatnion of the current method, which we can invoke ourselves!</p>
+<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">return</span> <span class="params">(<span class="variable">XElement</span>)</span><span class="title">thisMethod</span>.I<span class="title">nvoke</span><span class="params">(e, new object[] <span class="tuple">{ ee }</span>)</span>;</code></pre>
+<p>But what&#39;s the invoke doing? Well we&#39;re passing in an instance of the current XElement (e) and we&#39;re doing it for each of that XElements children (e.Elements(), represented by ee). Here&#39;s the recursive part of the method.</p>
+<p>So lets put it all together:</p>
+<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">if</span> <span class="params">(e.<span class="variable">Name</span> == <span class="string">"what_i_want"</span>)</span>
+{
+    <span class="title">return</span> <span class="title">e</span>;
+}
+<span class="title">else</span>
+{
+    <span class="title">if</span> <span class="params">(e.<span class="variable">Elements</span>()</span>.C<span class="title">ount</span><span class="params">()</span> != 0)
+    {
+        <span class="title">var</span> <span class="title">thisMethod</span> = <span class="title">new</span> S<span class="title">tackFrame</span><span class="params">(<span class="number">0</span>)</span>.G<span class="title">etMethod</span><span class="params">()</span>;
+        <span class="title">foreach</span> <span class="params">(<span class="variable">XElement</span> ee in e.<span class="variable">Elements</span>()</span>)
+            <span class="title">return</span> <span class="params">(<span class="variable">XElement</span>)</span><span class="title">thisMethod</span>.I<span class="title">nvoke</span><span class="params">(e, new object[] <span class="tuple">{ ee }</span>)</span>;
+    }
+    <span class="title">return</span> <span class="title">null</span>;
+}</code></pre>
+<p>So that&#39;s the body of the anonymous function, where the variable <strong>e</strong> is a XElement object. We check the name against the one we want, if it&#39;s not we&#39;ll check it&#39;s children.
+Alternatively you could do this as a Func<XElement, bool> which would only return the items into the IEnumerable&lt;&gt;, but by returning null we can see how many trees were followed which turned out to be duds. Just change the return statements to boolean values and pass it to anything that takes Func<XElement, bool> (like Where, First, etc).</p>
+<p>So how do we use it? Like this:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> nodes = root.Elements().Select(e =&gt;
+{
+    <span class="keyword">if</span> (e.Name == <span class="string">"what_i_want"</span>)
+    {
+        <span class="keyword">return</span> e;
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">if</span> (e.Elements().Count() != <span class="number">0</span>)
+        {
+            <span class="keyword">var</span> thisMethod = <span class="keyword">new</span> StackFrame(<span class="number">0</span>).GetMethod();
+            <span class="keyword">foreach</span> (XElement ee <span class="keyword">in</span> e.Elements())
+                <span class="keyword">return</span> (XElement)thisMethod.Invoke(e, <span class="keyword">new</span> <span class="keyword">object</span>[] { ee });
+        }
+        <span class="keyword">return</span> <span class="keyword">null</span>;
+    }
+});</code></pre>
+<p>And how does it perform, well it&#39;s about 10x slower, but hey, there&#39;s nothing wrong with trying to achieve something crazy! :P</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/recursive-anonymous-functions-the-net-version';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

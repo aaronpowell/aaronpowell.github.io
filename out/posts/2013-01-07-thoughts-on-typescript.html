@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Thoughts on TypeScript | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Thoughts on TypeScript</h1>
+                <h2>7th January 2013</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd July 2011</span>
+                            <h3><a href="/posts/2011-07-02-postman.html">Introducing Postman - A JavaScript Messaging Library</a></h3>
+                        </header>
+                        <h1>Prelude</h1>
+<p>Back in May I presented at DDD Melbourne on JavaScript design patterns. One of the patterns that I was talking about was the idea of [pub/ sub][1].</p>
+<p>Let me start by saying that this isn&#39;...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/postman.html"><span>postman</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/coffeescript.html"><span>coffeescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd January 2013</span>
+                            <h3><a href="/posts/2013-01-22-hello-mathy.html">Hello mathy</a></h3>
+                        </header>
+                        <p>An introduction to another new library from me, this time it&#39;s mathy, a simple formula parser</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd October 2012</span>
+                            <h3><a href="/posts/2012-10-02-pubsub-in-typescript.html">PubSub in TypeScript</a></h3>
+                        </header>
+                        <p>It&#39;s that time again, time for more Pub/Sub!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">21st May 2011</span>
+                            <h3><a href="/posts/2011-05-21-jquery-validation-and-javascript-posts.html">jQuery validation, JavaScript form submitting and another bad idea</a></h3>
+                        </header>
+                        <p>[In my last post][1] I looked at how to use jQuery validation in a dynamic form and some problems you can have with handling rule sets.</p>
+<p>Something I mentioned in the posts was that I was also submi...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">3rd October 2012</span>
+                            <h3><a href="/posts/2012-10-03-typescript-source-maps.html">Using Source Maps with TypeScript</a></h3>
+                        </header>
+                        <p>Another quick look at what you can do with TypeScript</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/debugging.html"><span>debugging</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>When <a href="http://typescriptlang.org">TypeScript</a> was announced I was pretty skeptical of it. I&#39;ve been doing JavaScript development for a while now, I know many of the ins and outs of JavaScript development and I&#39;ve never seen any problem with the syntax or the lack of type system.</p>
+<p>But like a good skeptic I wanted to reserve my opinion until I had a chance to actually use it. This was the same approach <a href="http://www.aaron-powell.com/javascript/postman">which I took with CoffeeScript</a>, you don&#39;t really know something until you&#39;ve made something with it (and for the record I wasn&#39;t particularly fussed by CoffeeScript).</p>
+<p>Well I decided to do this, I wrote a small library called <a href="https://github.com/aaronpowell/mathy.js">mathy</a> and I wanted to share some of my thoughts from having made something with it. Keep in mind this is only a small library so it&#39;s not exactly extensive, but I feel it&#39;s a good start.</p>
+<h1>Project background</h1>
+<p>I just want to clarify a few things about how I did this project:</p>
+<ul>
+<li>I used Sublime Text 2 as my editor, not Visual Studio</li>
+<li>This is written primarily as a Node.js package but I also want it to work in the browser</li>
+<li>The repository should contain the TypeScript source <em>and</em> the output JavaScript, consumers shouldn&#39;t be forced to use TypeScript if they don&#39;t want to</li>
+</ul>
+<h1>The good</h1>
+<ul>
+<li>The compiler errors can be nice, caught a few spelling errors and API usage errors through them which I wouldn&#39;t have caught until runtime/while the tests were being executed</li>
+<li>Debugging is fine. Even though I&#39;m not debugging the TypeScript (since it&#39;s run as the compiled JavaScript through Node.js I don&#39;t have source map debugging) the JavaScript looks close enough to my original code that it&#39;s pretty obvious as to where I&#39;m at</li>
+<li>Being able to create modules using a keyword is good, save a bunch of boilerplate guff</li>
+<li>I&#39;ve used a class for part of the API which is very handy and easy to use, but most importantly it’s syntactically simple</li>
+<li>It doesn&#39;t try and stop me from writing any of the funky stuff that I actually want to write ;)</li>
+<li>Fat-arrow <code>=&gt;</code> is really sweet, I’d never really got into CoffeeScript enough to have built anything much but I can see why those guys rave about it</li>
+</ul>
+<h1>The bad</h1>
+<ul>
+<li>If you&#39;re not using Visual Studio it’s kind of a pain, Sublime Text 2 only has syntax highlighting support so you don&#39;t exactly get much benefit, no intellisense or anything</li>
+<li>The fact you can&#39;t programmatically use the compiler sucks. Even though TypeScript&#39;s compiler is available as a Node.js package you have to execute the compiler yourself and pass in the input. It&#39;d be nicer if you could just <code>require(&#39;typescript&#39;)</code> instead of what I have to do in the <a href="https://github.com/aaronpowell/mathy.js/blob/master/Makefile">Makefile</a></li>
+<li>The way modules are generated can be a real pain if you&#39;re trying to target the browser <em>and</em> Node.js. If you want to go with CommonJS the internal modules they generate create a global variable to store your object in, but that won’t work in Node.js as the variable isn&#39;t exported. If you make it a public module it assumes there is a public “exports” object to attach to which is fine in Node.js but sucks in the browser! I had to have a shitty implementation to get it working that assumes in the browser there is the <code>exports</code> object. You can use the AMD support but it forces you to use RequireJS (or CurlJS or any other loader). It&#39;d be nicer if there was optional AMD support, like how I have it done in <a href="https://github.com/aaronpowell/db.js">db.js</a>, so you can have something that will export as a AMD <em>if AMDs are available</em>, otherwise just be a global object</li>
+<li>There seems to be no way to plug a definition file into Node.js so all my unit tests are just written in plain JS which really sucks as I changed the API and didn&#39;t realise until every single unit test failed</li>
+</ul>
+<h1>The really shitty</h1>
+<ul>
+<li>The generated code isn&#39;t in a closure scope unless you use a module, which in turn the closure scope is really ridged (particularly from the CommonJS module point of view) which means<ul>
+<li>You can&#39;t create interfaces in a function</li>
+<li>You can&#39;t create classes in a function</li>
+<li>You can&#39;t create modules in a function (ok, I kind of get this one)</li>
+</ul>
+</li>
+</ul>
+<h1>Conclusion</h1>
+<p>So with all that considered what&#39;s my thoughts so far? I actually do like it, particularly the way the compiler can catch some stupid mistakes. I&#39;d like to try it on a much bigger project, particularly something in Visual Studio to see how well that goes, especially by having things like intellisense working.</p>
+<p>The biggest problem I see is the module system, it&#39;s really shit <em>if you don&#39;t do exactly as Microsoft does</em>, and here in lies the problem. If you want to load in third party libraries it really doesn&#39;t work too nicely, you end up with <code>any</code> type declarations around which really isn&#39;t helpful.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/javascript/thoughts-on-typescript';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Revisiting using ASP.NET MVC in Umbraco 4 | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Revisiting using ASP.NET MVC in Umbraco 4</h1>
+                <h2>11th July 2012</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">27th November 2010</span>
+                            <h3><a href="/posts/2010-11-27-umbraco-menu-with-ironruby.html">Creating a menu in Umbraco with IronRuby</a></h3>
+                        </header>
+                        <p>No more XSLT, DRL for the win</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ironruby.html"><span>ironruby</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th September 2012</span>
+                            <h3><a href="/posts/2012-09-05-text-casing-and-examine.html">Text casing and Examine</a></h3>
+                        </header>
+                        <p>A few times I&#39;ve seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we&#39;ve had to handle a few times within our...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/lucene-net.html"><span>lucene.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/examine.html"><span>examine</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th June 2012</span>
+                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
+                        </header>
+                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th January 2012</span>
+                            <h3><a href="/posts/2012-01-25-macros-in-packages.html">Macros in packages</a></h3>
+                        </header>
+                        <p>Wanting to include a Macro in your v5 package, where do you start?</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbaco.html"><span>umbaco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>A month on I wanted to revisit my post on <a href="http://www.aaron-powell.com/umbraco/using-mvc-in-umbraco-4">using MVC with Umbraco 4</a>. I write the code and draft while driving back from the retreat so it wasn&#39;t very <em>deeply</em> investigated.</p>
+<p>Basically it was done as a proof of concept.</p>
+<p>Well today I was chatting with someone who was wanting to take the PoC and try it in production and through chatting we learnt a few things about what I initially write about that are important to know if you&#39;re wanting to try it as well.</p>
+<h3>Watch your routes</h3>
+<p>There was a problem with the site whenever you hit the root of the site, the <code>/</code> route, the controller action was being executed. Luckily this is an easy fix. The MVC route registration looked like this:</p>
+<pre class="highlighted"><code class="objectivec">routes<span class="variable">.MapRoute</span>(
+    <span class="string">"Default"</span>,
+    <span class="string">"{controller}/{action}/{id}"</span>,
+    new { controller = <span class="string">"Home"</span>, action = <span class="string">"Index"</span>, <span class="keyword">id</span> = <span class="string">""</span> },
+);</code></pre>
+<p>Now if you know you&#39;re MVC you&#39;ll know that that matches the <code>/</code> route as well in MVC since we&#39;ve given a default controller and action (it&#39;s also why <code>/home</code> matches the Index action on Home). So what&#39;s interesting here is that MVC&#39;s routing engine takes priority over the Umbraco one.</p>
+<p>To fix it you need to add some kind of static prefix to the route, what&#39;s probably the easiest is to hard code the controller name, like so:</p>
+<pre class="highlighted"><code class="objectivec">routes<span class="variable">.MapRoute</span>(
+    <span class="string">"Default"</span>,
+    <span class="string">"home/{action}/{id}"</span>,
+    new { controller = <span class="string">"Home"</span>, action = <span class="string">"Index"</span>, <span class="keyword">id</span> = <span class="string">""</span> },
+);</code></pre>
+<p>This tells MVC that anything <code>/home</code> will go to the Home controller, it can&#39;t go anywhere else.</p>
+<h3>Umbraco reserved paths</h3>
+<p>The above point leads onto this point, as I said it turns out that the MVC routes took over the Umbraco ones, this means that you <strong>don&#39;t</strong> have to add an ignore route for Umbraco.</p>
+<p>In the last post I said you needed to add <code>~/home</code> like this:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">add</span> <span class="attribute">key</span>=<span class="value">"umbracoReservedPaths"</span> <span class="attribute">value</span>=<span class="value">"~/umbraco,~/install/,~/home"</span> /&gt;</span></code></pre>
+<p>Well seems I was wrong about that, sorry!</p>
+<h1>Conclusion</h1>
+<p>What I&#39;ve blogged is still very much a proof of concept but it seems that some people are thinking that it is actually a valid concept. This is a few lessons learnt from a project actually trying it out, I hope the guys blog about it once they are done but we&#39;ll see.</p>
+<p>If you learn any more yourself let me know!</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/umbraco/using-mvc-in-umbraco-4-revisited';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

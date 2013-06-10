@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Why do you care where your packages are? | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Why do you care where your packages are?</h1>
+                <h2>27th April 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/nuget.html"><span>nuget</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">28th March 2011</span>
+                            <h3><a href="/posts/2011-03-28-an-uninformed-overview.html">An uninformed overview of NuGet</a></h3>
+                        </header>
+                        <p>In case you&#39;ve been living under a rock for the last few months you should have heard about [NuGet][2], and if you have been here&#39;s the abridged version.</p>
+<p>NuGet is a package manager for .NET projec...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/nuget.html"><span>nuget</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">26th February 2011</span>
+                            <h3><a href="/posts/2011-02-26-global-install-package.html">How to install a package into all projects of a solution</a></h3>
+                        </header>
+                        <p>This is a script that I&#39;ve been keeping in my toolbox since [NuGet][1] was first released.</p>
+<p>Ever now and then I need to do an install of a package across all projects in a solution. [log4net][2] is...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/nuget.html"><span>nuget</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">24th February 2011</span>
+                            <h3><a href="/posts/2011-02-24-linqpad.html">Querying NuGet via LINQPad</a></h3>
+                        </header>
+                        <p>How to dig into the NuGet feed easily</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/nuget.html"><span>nuget</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">20th February 2011</span>
+                            <h3><a href="/posts/2011-02-20-creating-a-nuget-plugin-engine.html">Creating a NuGet-based plugin engine</a></h3>
+                        </header>
+                        <p>How to create a plugin engine using NuGet as the distribution format</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/nuget.html"><span>nuget</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/funnelweb.html"><span>funnelweb</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>As a consultant I&#39;ve had an opportunity to see the way different project manage their external dependencies, and being an active member of in open source projects has given me a good view on this as well. From all this I&#39;ve noticed an interesting trend, <strong>there&#39;s no agreed standard for where to put external dependencies</strong>.</p>
+<p>At previous companies I&#39;ve worked with structures like a folder above the solution root called <code>lib</code>, a <code>dll</code> folder at the root of the solution or a common folder on the file system which every project gets its assemblies from.</p>
+<p>Open source projects are much better, <a href="http://www.funnelweblog.com">FunnelWeb</a> has both a <code>lib</code> folder (above solution root) and the NuGet <code>packages</code> folder, <a href="http://webformmvp.com">WebForms MVP</a> has a <code>Dependencies</code> folder and a NuGet one, where as <a href="http://umbraco.codeplex.com">Umbraco</a> 4.7 has a <code>foreign dlls</code> (at solution root) and Umbraco 5 has <code>Resources/References</code> above the solution root.</p>
+<p>So as you can see there&#39;s not a lot of commonality between projects, and the more projects you sample the more you&#39;ll see this trend; some overlap by generally speaking each project has its own flavor. Even Umbraco doesn&#39;t keep it consistent between the two versions (yes this can be argued with the legacy nature of 4.x but it&#39;s a bit of a weak excuse, they are <em>drastically</em> different).</p>
+<h2>A look at other communities</h2>
+<p>Over the last few months I&#39;ve been playing around with both Ruby and Node.js and one of the first things you&#39;ll notice when working with these technologies is that this <em>confusion</em> doesn&#39;t exist.</p>
+<p>It wasn&#39;t until a few months after I started with these technologies that I actually learnt where external dependencies actually exist on your computer, and there&#39;s a really good reason for that.</p>
+<p>Take Ruby for example, Ruby has had the <code>gem</code> tool for a long time and you use <code>gem</code> to download an open source library and include it into your project. Say I want to build a site using <a href="http://sinatrarb.com">Sinatra</a>, I run:</p>
+<pre class="highlighted"><code class="nginx"><span class="title">gem</span> install sinatra</code></pre>
+<p>Now I have Sinatra on my machine (assuming I didn&#39;t previously) and I can include it into my project. If I throw my project up on <a href="http://github.com">GitHub</a> and someone else grabs it they can install the gems I required themselves (or not if they already have them). And if I&#39;m a really proactive developer I can create a Gemfile file and they can use <code>bundler</code> to install all the gems I specified. But where these gems <em>install</em> to is not important, in fact you&#39;re encouraged to not care by the fact that there is no feedback regarding that in <code>gem install</code> process.</p>
+<p>Noe.js has a similar story using <code>npm</code>, and it works in a similar manner, you install packages but dont&#39; concern yourself as to where they actually go on disk.</p>
+<h2>Then there was NuGet</h2>
+<p>So what we&#39;ve seen with Ruby and Node.js is that the focus around a package management tool really helps getting around the problem of where to put your dependencies. As is often the case .NET is late to the party, but now it&#39;s here with its shiny new tool, <a href="http://nuget.org">NuGet</a>.</p>
+<p>When you work with NuGet you find that it has a very gem-like feel to it, when you install a NuGet package it doesn&#39;t tell you where the file(s) end up on disk, <em>they just end up somewhere</em>. Well it turns out that it&#39;s not very hard to work out where they were, they reside in a <code>packages</code> folder existing at the level of the solution. This is not quite as nice as the global gem or npm, it&#39;s still including them in the scope of a particular project, but to an extent you can see why it is this way, the Visual Studio tools probably needed an easy way in which they can find somewhere that is scoped to the solution.</p>
+<p>Fantastic, with NuGet we&#39;ve now got one less thing that&#39;ll be different between .NET projects (there&#39;s still coding standard, project naming, etc to deal with :P), right... right? Well apparently not. While having a browse around the NuGet issue list I noticed that the top-voted NuGet issue is on this topic, <a href="http://nuget.codeplex.com/workitem/215">that the package location should be customizable</a>.</p>
+<p>This smacks of developers thinking that they don&#39;t like change. That they have always done something some way and that it should always be done that way. Don&#39;t get me wrong, I&#39;m not saying that the NuGet <code>packages</code> folder is perfect and that we should just blindly follow it, I&#39;m just saying that <strong>it doesn&#39;t matter</strong>, it can be in a folder at the root of the solution, in a folder in a users Documents folder or hard-coded into the Windows directory, it shouldn&#39;t matter.</p>
+<h2>Conclusion</h2>
+<p>.NET developers often get hung up on <em>doing it their way</em> and not being willing to change. One such hang up is the location of external references, but it shouldn&#39;t matter, let the package manager dictate it for you and have one less standard that you are maintaining for yourself.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/nuget/why-does-package-location-matter';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

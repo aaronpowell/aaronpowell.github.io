@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Some tips and tricks for working with IronRuby and Umbraco | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Some tips and tricks for working with IronRuby and Umbraco</h1>
+                <h2>27th November 2010</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/ironruby.html"><span>ironruby</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">11th December 2010</span>
+                            <h3><a href="/posts/2010-12-11-mercurial-101-for-umbraco-developers.html">Mercurial 101 as an Umbraco developer</a></h3>
+                        </header>
+                        <p>A Mercurial primer for Umbraco developers</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/mercurial.html"><span>mercurial</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th September 2012</span>
+                            <h3><a href="/posts/2012-09-05-text-casing-and-examine.html">Text casing and Examine</a></h3>
+                        </header>
+                        <p>A few times I&#39;ve seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we&#39;ve had to handle a few times within our...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/lucene-net.html"><span>lucene.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/examine.html"><span>examine</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th June 2012</span>
+                            <h3><a href="/posts/2012-06-25-i-helped-kill-umbraco-5.html">I helped kill Umbraco 5</a></h3>
+                        </header>
+                        <p>Hi, my name&#39;s Aaron Powell and I was involved in killing Umbraco 5.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/opinionated.html"><span>opinionated</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th June 2012</span>
+                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
+                        </header>
+                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p><em>Note: The following has been tested in Umbraco 4.5.2 on .NET 3.5, and it <strong>works on my machine</strong></em></p>
+<h1>Modularizing your IronRuby files</h1>
+<p>Having the ability to break a large file into a set of smaller files is quite an important aspect of any kind of programming, and it&#39;s a concept that is in all the languages that Umbraco supports. XSTL has <code>&lt;xsl:include</code>, .NET has types, but what about DLR scripts?</p>
+<p>IronRuby (and IronPython) allow you to break files into smaller files, but how do you then include them?</p>
+<p>I&#39;ve seen examples with IronPython of peeople doing <code>Server.MapPath(&quot;~/python&quot;)</code> and having it all included like that, but with IronRuby (and I&#39;m assuming IronPython) it isn&#39;t that complex.</p>
+<h2>Script settings file</h2>
+<p>There&#39;s a file called <strong>~/config/scripting.config</strong> which is a little gem here. It&#39;s the file that you modify if you want to do something like add an additional DLR language (like <a href="http://iunknown.com/2007/11/lolcode-on-dlr.html">LOLCode</a>), but what&#39;s more interesting is this section:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">options</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">options</span>&gt;</span></code></pre>
+<p>Full information about the DLR hosting specification can be found <a href="http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=dlr&amp;DownloadId=127516">here</a> (and it goes into more details about this config section) but in short you can use this to pass folders into the script.</p>
+<p>Here&#39;s a good sample (and what we&#39;re using):</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">options</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">set</span> <span class="attribute">language</span>=<span class="value">"Ruby"</span> <span class="attribute">options</span>=<span class="value">"LibraryPaths"</span> <span class="attribute">value</span>=<span class="value">"python"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">options</span>&gt;</span></code></pre>
+<p>What we&#39;re configuring here is:</p>
+<ul>
+<li>Setting the language to target as Ruby (you can use something from the names part of the language definition</li>
+<li>Specifying that we want to include the ~/python folder, using the <strong>LibraryPaths</strong> option.<ul>
+<li>This is the important one, the folders start from the root of your website (ie: /) so anything that&#39;s inside your site can be added (ok, that&#39;s not entirely true but it&#39;s true enough :P)</li>
+</ul>
+</li>
+</ul>
+<p>Now when each script is loaded it will include references to anything else in your ~/python folder, sweet :D.</p>
+<h2>Adding external files</h2>
+<p>Now that you know how to ensure that all external script files are available to each other how do you actually use them? Well with IronRuby it&#39;s really simple:</p>
+<pre class="highlighted"><code class="nginx"><span class="title">requires</span> <span class="string">"MyAwesomeRubyScript"</span></code></pre>
+<p>Chuck that at the top of your file and then everything will be available to you from that script file. You can even create master includes so you can include specific scripts through 1 additional include:</p>
+<p><strong>SomeIncludes.rb</strong></p>
+<pre class="highlighted"><code class="haskell"><span class="title">requires</span> <span class="string">"MyAwesomeScript"</span>
+<span class="title">requires</span> <span class="string">"SomeOtherScript"</span></code></pre>
+<p><strong>MainScript.rb</strong></p>
+<pre class="highlighted"><code class="nginx"><span class="title">requires</span> <span class="string">"SomeIncludes"</span>
+
+<span class="comment">#work against what was defined in MyAwesomeScript.rb</span></code></pre>
+<h1>Working with XML</h1>
+<p>In case you hadn&#39;t already noticed Umbraco has a lot of integration with XML, and although there is a .NET API and DLR workings sometimes you&#39;re just kind of stuck with XML. Take for example using the <strong>Related Links</strong> data type, that stores XML into the property value, which is <em>great</em> in XSLT, but how do you go with it in the DLR?</p>
+<p>Well I came across a neat little script today for working with IronRuby and XML, <a href="http://code.msdn.microsoft.com/IronRubyXml">which you can get too</a>. And using the tip from above we can include it into any script file we need.</p>
+<p>Let&#39;s make a basic IronRuby macro which will render a <strong>Related Links</strong> data type as a <code>&lt;ul&gt;</code>:</p>
+<p><em>Assumptions: We have the XML helper I linked about in a file called <code>xml.rb</code>. We have a property on the current node called <strong>QuickLinks</strong>.</em></p>
+<h2>QuickLinks.rb</h2>
+<p>Here&#39;s a simple little Ruby script to turn our property into some HTML:</p>
+<pre class="highlighted"><code class="xml">requires 'xml'
+
+links = currentPage.get_property('quickLinks').value
+
+xmlDoc = Document.new(links)
+
+html = '<span class="tag">&lt;<span class="title">ul</span>&gt;</span>'
+i = 0
+xmlDoc.elements('links/link') do |e|
+    html <span class="tag">&lt;<span class="title">&lt;</span> %<span class="attribute">Q</span>{
+        &lt;<span class="attribute">li</span> <span class="attribute">class</span>=<span class="value">"#{'first ' if i == 0 }#{e.get('@type').value}"</span> <span class="attribute">target</span>=<span class="value">"#{'_blank' if e.get('@newwindow').value == '1'}"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#{e.get('@link').value}"</span> <span class="attribute">title</span>=<span class="value">"#{e.get('@title').value}"</span>&gt;</span>#{e.get('@title'}.value<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    }
+            i+=1
+end
+
+    html <span class="tag">&lt;<span class="title">&lt;</span> '&lt;/<span class="attribute">ul</span>&gt;</span>'
+puts html</code></pre>
+<p>This will create a new XML object which we can using in the Ruby script, we then do a XPath statement to find the link items and then iterate through them.</p>
+<p>The XML library I used has a few shorthand method such as <code>get</code> that allows us to grab a contextual XPath statement result (it translates to <a href="http://msdn.microsoft.com/en-us/library/fb63z0tw.aspx">XmlNode.SelectSingleNode</a> internally) so we can quickly access the attributes and their values. I&#39;ve also shown you how to use each attribute to build your list.</p>
+<p>And you go, a Ruby script which you can use to create your very own related links :).</p>
+<h1>Ruby-style naming</h1>
+<p>Although this tip isn&#39;t specific to the Umbraco usage of IronRuby it&#39;s a good tip to know if you&#39;re doing IronRuby coding. The Ruby naming conventions are not like the .NET naming conventions, rather than using PascalCase they go with underscoring to break up words, so in .NET we&#39;d write a method name like <code>HelloWorld(...)</code> in Ruby we&#39;d write <code>hello_world(...)</code>.</p>
+<p>The smart folks behind IronRuby have taken this into account, and we can actually use Ruby-style naming even with .NET objects.</p>
+<p>Previously I&#39;ve shown <a href="/umbraco-menu-with-ironruby125">how to build a menu with IronRuby</a>, well if you wanted to make it more Ruby-esq you can actually do this:</p>
+<pre class="highlighted"><code class="javascript">parent.children.find_all { |c| c.get_property(<span class="string">"umbracoNaviHide"</span>).value != <span class="string">"1"</span> }.each_with_index <span class="keyword">do</span> |child, i|
+  puts %Q{
+        <span class="xml"><span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"#{'first' if i == 0}"</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#{Library.nice_url(child.id)}"</span> <span class="attribute">class</span>=<span class="value">"#{'selected' if child.id == currentPage.id}"</span> <span class="attribute">target</span>=<span class="value">"_self"</span> <span class="attribute">title</span>=<span class="value">"Go to #{child.name}"</span>&gt;</span>#{child.name}<span class="tag">&lt;/<span class="title">a</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+  }
+end</span></code></pre>
+<p>I&#39;ve done a few subtle changes, like:</p>
+<pre class="highlighted"><code class="objectivec">c<span class="variable">.get_property</span>(<span class="string">"umbracoNaviHide"</span>)<span class="variable">.value</span></code></pre>
+<p>Or even</p>
+<pre class="highlighted"><code class="objectivec">library<span class="variable">.nice_url</span>(c<span class="variable">.id</span>)</code></pre>
+<p>Now it looks truly like a Ruby script, and not a .NET developers wild attempt to be up with the hip kids playing with Ruby :P.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/umbraco-ironruby-tips-and-tricks';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

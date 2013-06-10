@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Adding data attributes to MVC3 forms with HtmlHelpers | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Adding data attributes to MVC3 forms with HtmlHelpers</h1>
+                <h2>26th May 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/mvc3.html"><span>mvc3</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">11th July 2012</span>
+                            <h3><a href="/posts/2012-07-11-using-mvc-in-umbraco-4-revisited.html">Revisiting using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>An update on using ASP.NET MVC with Umbraco 4.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th January 2011</span>
+                            <h3><a href="/posts/2011-01-25-controller-plugins-with-mvc3.html">Creating Controllers-as-plugins using MVC3</a></h3>
+                        </header>
+                        <p>A look at how to make pluggable Controllers using MVC3</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/mvc3.html"><span>mvc3</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/autofac.html"><span>autofac</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/funnelweb.html"><span>funnelweb</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">30th August 2010</span>
+                            <h3><a href="/posts/2010-08-30-http-compression-mvc-fileresult.html">Using HttpCompression libraries and ASP.NET MVC FileResult</a></h3>
+                        </header>
+                        <p>An interesting quirk I found from ClientDe</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/clientdependency.html"><span>clientdependency</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">16th June 2010</span>
+                            <h3><a href="/posts/2010-06-16-aspnet-mvc-xml-action-result.html">ASP.NET MVC XML Action Result</a></h3>
+                        </header>
+                        <p>An easy way to return XML from ASP.NET MVC</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net.html"><span>asp.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/c-.html"><span>c#</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/action-result.html"><span>action-result</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/xml.html"><span>xml</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>In a site I&#39;m working on I wanted to add a data attribute, you know, <code>data-*</code>, to a form that was being generated from a controller action in MVC3. So I have the code like this:</p>
+<pre class="highlighted"><code class="javascript">@using(Html.BeginFor(<span class="string">"Index"</span>, <span class="string">"Home"</span>, FormMethod.Posts) {
+    <span class="xml"><span class="comment">&lt;!-- form contents --&gt;</span>
+}</span></code></pre>
+<p>Now I want the form to be opening in a new window, but I&#39;m a good developer and I don&#39;t like littering my code with <code>target=&quot;_blank&quot;</code>, instead I have some jQuery that I&#39;m using to detect elements that are to go into new windows and adding the attribute programmatically.</p>
+<p>I want to run this jQuery method:</p>
+<pre class="highlighted"><code class="haskell">$('form[<span class="typedef"><span class="keyword">data</span>-external=true]').attr<span class="container">('<span class="title">target'</span>, '<span class="title">_blank'</span>)</span>;</span></code></pre>
+<p>But I was stumped, how do you add <code>data-external</code> to the form? The HtmlHelper <em>does</em> allow you to pass in attributes, but they are done through an anonymous .NET object, and <code>-</code> isn&#39;t valid in a member name in C# (it is in the CLR though), so this code doesn&#39;t complie:</p>
+<pre class="highlighted"><code class="haskell">@using(<span class="type">Html</span>.<span class="type">BeginFor</span>(<span class="string">"Index"</span>, <span class="string">"Home"</span>, <span class="type">FormMethod</span>.<span class="type">Posts</span>, new { <span class="typedef"><span class="keyword">data</span>-external = "true" }) <span class="container">{</code></pre>
+<p>Good thing is that the MVC team have already got this sorted, instead of a hyphen you can use an underscore:</p>
+<pre class="highlighted"><code class="cs">@<span class="keyword">using</span>(Html.BeginFor(<span class="string">"Index"</span>, <span class="string">"Home"</span>, FormMethod.Posts, <span class="keyword">new</span> { data_external = <span class="string">"true"</span> }) {</code></pre>
+<p>Now you&#39;ll get a form like this:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"/home/index"</span> <span class="attribute">method</span>=<span class="value">"post"</span> <span class="attribute">data-external</span>=<span class="value">"true"</span>&gt;</span></code></pre>
+<p>Hopefully this will prove handy for someone else too.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/data-attribute-mvc3-forms';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Creating a ViewModel from the server | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Creating a ViewModel from the server</h1>
+                <h2>18th September 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/knockoutjs.html"><span>knockoutjs</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd July 2011</span>
+                            <h3><a href="/posts/2011-07-02-postman.html">Introducing Postman - A JavaScript Messaging Library</a></h3>
+                        </header>
+                        <h1>Prelude</h1>
+<p>Back in May I presented at DDD Melbourne on JavaScript design patterns. One of the patterns that I was talking about was the idea of [pub/ sub][1].</p>
+<p>Let me start by saying that this isn&#39;...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/postman.html"><span>postman</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/coffeescript.html"><span>coffeescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th March 2013</span>
+                            <h3><a href="/posts/2013-03-25-knockoutjs.html">KnockoutJS plugin for Glimpse</a></h3>
+                        </header>
+                        <p>A new release of a KnockoutJS plugin for Glimpse</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/knockoutjs.html"><span>knockoutjs</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/glimpse.html"><span>glimpse</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th January 2013</span>
+                            <h3><a href="/posts/2013-01-14-ie10-console-thoughts.html">Making the Internet Explorer JavaScript tools better, again</a></h3>
+                        </header>
+                        <p>A look at what&#39;s changed since I last pointed out the failings of the IE dev tools</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/internet-explorer.html"><span>internet-explorer</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web-dev.html"><span>web-dev</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">7th January 2013</span>
+                            <h3><a href="/posts/2013-01-07-thoughts-on-typescript.html">Thoughts on TypeScript</a></h3>
+                        </header>
+                        <p>Some of my impressions from trying to implement something in TypeScript</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd October 2012</span>
+                            <h3><a href="/posts/2012-10-02-pubsub-in-typescript.html">PubSub in TypeScript</a></h3>
+                        </header>
+                        <p>It&#39;s that time again, time for more Pub/Sub!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>If you&#39;ve been doing much work with <a href="http://knockoutjs.com">KnockoutJS</a> you&#39;ll probably see examples where the code looks like this:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> todoViewModel = <span class="keyword">function</span>() {
+    <span class="keyword">this</span>.items = <span class="keyword">new</span> ko.observableArray([<span class="string">'Item 1'</span>, <span class="string">'Item 2'</span>, <span class="string">'Item 3'</span>]);
+    <span class="keyword">this</span>.selectedItem = <span class="keyword">new</span> ko.observable(<span class="string">'Item 1'</span>);
+};</code></pre>
+<p>What I&#39;m trying to point out here is that the <code>viewModel</code> is being defined in JavaScript and that the items within it are coded into your JavaScript.</p>
+<p>While you can argue that this is demo code and it should only be treated as such something I&#39;ve noticed is <em>there isn&#39;t any other examples</em>. I haven&#39;t seen any example where they are talking about getting the data initially from the server for their viewModel.</p>
+<p>So how do you approach this? In this article I&#39;m going to look at how to create a viewModel from the server using ASP.Net MVC.</p>
+<p><em>Note: I&#39;m talking about doing a viewModel as part of the initial page load since generally speaking you&#39;ll have been doing data layer interaction as part of the request. Building a viewModel using an AJAX request is a different story and I wont be covering.</em></p>
+<h1>From the server to the client</h1>
+<p>Let&#39;s get started with an example of our controller:</p>
+<pre class="highlighted"><code class="python">public <span class="class"><span class="keyword">class</span> <span class="title">TaskController</span> :</span> Controller
+{
+    public ActionResult Index()
+    {
+        var vm = new TaskViewModel
+                     {
+                         Tasks = new[] { new Task(<span class="string">"Write Blog Post"</span>), new Task(<span class="string">"Publish Blog Post"</span>) }
+                     };
+
+        <span class="keyword">return</span> View(vm);
+    }
+}</code></pre>
+<p>I&#39;m just going to have a reasonably simple ViewModel that just has a collection of tasks that I want to display as part of my KnockoutJS-built UI but the tasks are to be pulled in from my data layer (obviously this is demo code and it&#39;s hard coded so you&#39;ll have to use your imagination for that part :P).</p>
+<p>For the view I&#39;m just creating something that is very simple for the task list:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">data-bind</span>=<span class="value">"submit:addTask"</span>&gt;</span>
+    Add task: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-bind</span>=<span class="value">'value:taskToAdd, valueUpdate: "afterkeydown"'</span> /&gt;</span>
+    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">data-bind</span>=<span class="value">"enable: taskToAdd().length &gt; 0"</span>&gt;</span>Add<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">form</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">p</span>&gt;</span>Your values:<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<span class="tag">&lt;<span class="title">select</span> <span class="attribute">multiple</span>=<span class="value">"multiple"</span> <span class="attribute">height</span>=<span class="value">"5"</span> <span class="attribute">data-bind</span>=<span class="value">"options:tasks"</span>&gt;</span> <span class="tag">&lt;/<span class="title">select</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">data-bind</span>=<span class="value">"click: removeSelected, enable: hasTasks"</span>&gt;</span>Remove<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">data-bind</span>=<span class="value">"click: sortTasks, enable: hasTasks"</span>&gt;</span>Sort<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<p>Now we have a conundrum, how do I as part of my response create a KnockoutJS ViewModel that I can then use in my UI?</p>
+<h1>It&#39;s all about the serialization</h1>
+<p>When I was prototyping this for my current project I remembers that <a href="http://twitter.com/#!/shazwazza">Shannon</a> has mentioned that he&#39;d done something similar himself and I&#39;ve shamelessly taken his approach and am using it :P.</p>
+<p>His approach was to use a serializer to create a JSON object from the model (there was some other stuff in the skype message he sent me but I&#39;ll confess to having not read that :P). For the serialization you can use the <a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx">JavaScriptSerializer</a>, the <a href="http://msdn.microsoft.com/en-us/library/system.runtime.serialization.json.datacontractjsonserializer.aspx">DataContractJsonSerializer</a> or <a href="http://json.codeplex.com/">Json.NET</a>. Personally I prefer Json.NET and it&#39;s what I&#39;ll be using in this demo.</p>
+<p>So let&#39;s make a little HTML helper to do this for us:</p>
+<pre class="highlighted"><code class="php"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HtmlHelperExtensions</span>
+{</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> IHtmlString KnockoutFrom&lt;T&gt;(<span class="keyword">this</span> HtmlHelper&lt;T&gt; html, T obj)
+    {
+        <span class="keyword">var</span> serializer = <span class="keyword">new</span> JsonSerializer
+                             {
+                                 ContractResolver = <span class="keyword">new</span> CamelCasePropertyNamesContractResolver()
+                             };
+
+        <span class="keyword">return</span> <span class="keyword">new</span> HtmlString(JObject.FromObject(obj, serializer).ToString());
+    }
+}</code></pre>
+<p>All we&#39;re doing here is creating an instance of the <code>JsonSerializer</code> from Json.NET and telling it to use the <code>CamelCasePropertyNamesContractResolver</code>. This is why I like Json.NET, it allows me to convert my .NET naming conventions into JavaScript conventions without a lot of effort. Lastly we just return the serialized object. Not really anything special happening in here.</p>
+<p>Now in my View I can do this:</p>
+<pre class="highlighted"><code class="css"><span class="at_rule">@Html.<span class="function">KnockoutFrom(Model)</span></code></pre>
+<p>Hmm but this isn&#39;t really helpful, we&#39;re just getting out JSON blob in our view, I still would have to do a bunch of work to actually make it usable and especially if I am doing this on a lot of pages it&#39;s a lot of code that I&#39;d prefer not to do every time. So let&#39;s see if we can improve our extension method.</p>
+<h1>Setting up the viewModel</h1>
+<p>So what do we want from our improved version? Well I&#39;d like the observables to be set up for me and I&#39;d like it to avoid global variables.</p>
+<p>To do this what I&#39;m going to do is update my extension method to use the <a href="http://knockoutjs.com/documentation/plugins-mapping.html">Knockout Mapping plugin</a>. This plugin is really sweet as it allows me to map a JSON object into a KnockoutJS object and is great when you&#39;re working with AJAX data, you can easily pull down some data from the server and then use the plugin to extend it into your ViewModel.</p>
+<p>In this case though I&#39;m going to use it to map the JSON version of our server ViewModel into our KnockoutJS one:</p>
+<pre class="highlighted"><code class="avrasm">    public static IHtmlString KnockoutFrom&lt;T&gt;(this HtmlHelper&lt;T&gt; html, T obj)
+    {
+        var serializer = new JsonSerializer
+                             {
+                                 ContractResolver = new CamelCasePropertyNamesContractResolver()
+                             }<span class="comment">;</span>
+
+        var sb = new StringBuilder()<span class="comment">;</span>
+        sb<span class="preprocessor">.Append</span>(<span class="string">"(function() {"</span>)<span class="comment">;</span>
+
+        var json = JObject<span class="preprocessor">.FromObject</span>(obj, serializer)<span class="comment">;</span>
+
+        sb<span class="preprocessor">.Append</span>(<span class="string">"var vm = ko.mapping.fromJS("</span> + json + <span class="string">");"</span>)<span class="comment">;</span>
+
+        sb<span class="preprocessor">.Append</span>(<span class="string">"ko.applyBindings(vm);"</span>)<span class="comment">;</span>
+
+        sb<span class="preprocessor">.Append</span>(<span class="string">"})();"</span>)<span class="comment">;</span>
+
+        return new HtmlString(sb<span class="preprocessor">.ToString</span>())<span class="comment">;</span>
+    }</code></pre>
+<p>The main updates here are:</p>
+<ul>
+<li>I&#39;m using a <code>StringBuilder</code> to build up some JavaScript (normally I hate server-generated JavaScript but here it serves a good purpose)</li>
+<li>I&#39;m creating an <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">immediately-invoked function expression</a> to prevent leakage</li>
+<li>I&#39;m doing my binding straight away, hiding the need for that too</li>
+</ul>
+<p>Excellent, this works, at least it works to an extent as we still have a few problems:</p>
+<ul>
+<li>What if I want to restrict where the binding happens?</li>
+<li>What about adding methods to my KnockoutJS viewModel?</li>
+</ul>
+<h1>Improving interactivity</h1>
+<p>While the above will work fine for simple scenarios it&#39;s not great if you have a complex UI that you want to work with, and realistically it&#39;s not likely you&#39;ll have a viewModel you don&#39;t want  to extend with dependantObservables or anything, so let&#39;s do some refactoring.</p>
+<p>I&#39;m going to change the end of my extension method to look like this:</p>
+<pre class="highlighted"><code class="avrasm">        sb<span class="preprocessor">.Append</span>(<span class="string">"var vm = ko.mapping.fromJS("</span> + json + <span class="string">");"</span>)<span class="comment">;</span>
+
+        var type = obj<span class="preprocessor">.GetType</span>()<span class="comment">;</span>
+
+        var ns = JavaScriptify(type<span class="preprocessor">.Namespace</span>)<span class="comment">;</span>
+        sb<span class="preprocessor">.Append</span>(<span class="string">"namespace('"</span> + ns + <span class="string">"');"</span>)<span class="comment">;</span>
+        sb<span class="preprocessor">.Append</span>(ns + <span class="string">"."</span> + JavaScriptify(type<span class="preprocessor">.Name</span>) + <span class="string">" = vm;"</span>)<span class="comment">;</span>
+
+        sb<span class="preprocessor">.Append</span>(<span class="string">"})();"</span>)<span class="comment">;</span>
+
+        return new HtmlString(sb<span class="preprocessor">.ToString</span>())<span class="comment">;</span></code></pre>
+<p>What I&#39;ve done here is instead of doing the bindings I&#39;m just going to create a global object which the viewModel will be assigned to (but I am <a href="http://www.aaron-powell.com/slace-core-javascript-library">namespacing</a> it so it&#39;s a bit better). This object I can then interact with in my JavaScript and add methods/ properties/ etc to myself.</p>
+<p>I&#39;m also using a helper method to make the .NET namespace &amp; type names friendlier for JavaScript:</p>
+<pre class="highlighted"><code class="objectivec">    <span class="keyword">private</span> <span class="keyword">static</span> string JavaScriptify(string s)
+    {
+        <span class="keyword">return</span> string<span class="variable">.Join</span>(<span class="string">"."</span>, s<span class="variable">.Split</span>(<span class="string">'.'</span>)<span class="variable">.Select</span>(x =&gt; x[<span class="number">0</span>]<span class="variable">.ToString</span>()<span class="variable">.ToLower</span>() + x<span class="variable">.Substring</span>(<span class="number">1</span>, x<span class="variable">.Length</span> - <span class="number">1</span>)));
+    }</code></pre>
+<p>With this new extension method I can update my View to play around with the viewModel before binding:</p>
+<pre class="highlighted"><code class="matlab">&lt;script&gt;
+    @<span class="transposed_variable">Html.</span>KnockoutFrom(Model)
+
+    $(<span class="keyword">function</span>() <span class="cell">{
+        var model = knockout.serverViewModels.models.taskViewModel;
+
+        model.addTask = function() {}</span>;
+        <span class="transposed_variable">model.</span>taskToAdd = new <span class="transposed_variable">ko.</span>observable(<span class="string">''</span>);
+        <span class="transposed_variable">model.</span>removeSelected = <span class="keyword">function</span>() <span class="cell">{}</span>;
+        <span class="transposed_variable">model.</span>hasTasks = <span class="keyword">function</span>() <span class="cell">{}</span>;
+        <span class="transposed_variable">model.</span>sortTasks = <span class="keyword">function</span>() <span class="cell">{}</span>;
+
+        <span class="transposed_variable">ko.</span>applyBindings(model);
+    });
+&lt;/script&gt;</code></pre>
+<h1>Conclusion</h1>
+<p>This wraps up my post on how to convert your server ViewModel into something that can be used in your KnockoutJS, allowing you to push all data down in the initial request rather than subsequent ones.</p>
+<p>Thanks to Shannon for the initial idea, hopefully this little extension will make it even easier.</p>
+<p>If you want to grab the code it is <a href="http://hg.apwll.me/knockoutjs-server-viewmodels">available here</a>.</p>
+<p>One final note, the Json.NET serializer <strong>does</strong> support the <code>DataMember</code> attributes, so you can also selectively include properties from your server ViewModel by attributing them too.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/javascript/creating-vms-from-server';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

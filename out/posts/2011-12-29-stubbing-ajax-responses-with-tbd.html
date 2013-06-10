@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Stubbing AJAX responses with tbd and AmpliyJS | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Stubbing AJAX responses with tbd and AmpliyJS</h1>
+                <h2>29th December 2011</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/amplifyjs.html"><span>amplifyjs</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd July 2011</span>
+                            <h3><a href="/posts/2011-07-02-postman.html">Introducing Postman - A JavaScript Messaging Library</a></h3>
+                        </header>
+                        <h1>Prelude</h1>
+<p>Back in May I presented at DDD Melbourne on JavaScript design patterns. One of the patterns that I was talking about was the idea of [pub/ sub][1].</p>
+<p>Let me start by saying that this isn&#39;...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/postman.html"><span>postman</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/coffeescript.html"><span>coffeescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd January 2013</span>
+                            <h3><a href="/posts/2013-01-22-hello-mathy.html">Hello mathy</a></h3>
+                        </header>
+                        <p>An introduction to another new library from me, this time it&#39;s mathy, a simple formula parser</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">7th January 2013</span>
+                            <h3><a href="/posts/2013-01-07-thoughts-on-typescript.html">Thoughts on TypeScript</a></h3>
+                        </header>
+                        <p>Some of my impressions from trying to implement something in TypeScript</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd October 2012</span>
+                            <h3><a href="/posts/2012-10-02-pubsub-in-typescript.html">PubSub in TypeScript</a></h3>
+                        </header>
+                        <p>It&#39;s that time again, time for more Pub/Sub!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th September 2012</span>
+                            <h3><a href="/posts/2012-09-14-creating-classes.html">Creating classes in WinJS</a></h3>
+                        </header>
+                        <p>A look at how you can create JavaScript classes in WinJS</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/winjs.html"><span>winjs</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/windows8.html"><span>windows8</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>A project which I&#39;m working on at the moment I&#39;m using <a href="http://amplifyjs.com/">AmplifyJS</a> to simplify my front-end routing through to my underlying data service calls. The problem is that I haven&#39;t got the backend services ready yet (there&#39;s some outstanding blockers in the API I&#39;m working against) so I&#39;m focusing my work on the front end.</p>
+<p>But there&#39;s the obvious problem, I want to push data to the UI but I don&#39;t have any way to get the data.</p>
+<p>Luckily I wrote <a href="http://www.aaron-powell.com/javascript/building-data-with-tbd">tbd recently</a> which can solve one of the problems, it can generate data to pump into my new UI and this is where AmplifyJS really comes to shine.</p>
+<h1>Introduction to faking data with amplify.request</h1>
+<p>To simplify my front-end routing I&#39;m going to be using the <a href="http://amplifyjs.com/api/request/">Request API</a> from AmplifyJS and if you&#39;re not familiar with it check out the <a href="http://amplifyjs.com/api/request/">docs</a> before going further as I only plan to cover the testing side of it.</p>
+<p>Let&#39;s say I have a route defined like so:</p>
+<pre class="highlighted"><code class="haskell"><span class="title">amplify</span>.request.define('get-<span class="typedef"><span class="keyword">data</span>', 'ajax', <span class="container">{
+    <span class="title">url</span>: '/<span class="title">data</span>-<span class="title">service'</span>,
+    <span class="title">dataType</span>: '<span class="title">json'</span>,
+    <span class="title">type</span>: '<span class="type">GET</span>'
+}</span>);</span></code></pre>
+<p>And later in my app I&#39;m accessing it:</p>
+<pre class="highlighted"><code class="haskell"><span class="title">amplify</span>.request('get-<span class="typedef"><span class="keyword">data</span>', function <span class="container">(<span class="title">data</span>)</span> <span class="container">{
+    //<span class="title">using</span> <span class="title">templating</span> <span class="title">pump</span> <span class="title">out</span> <span class="title">the</span> <span class="type">UI</span> <span class="title">from</span> <span class="title">the</span> <span class="title">data</span>
+}</span>);</span></code></pre>
+<p>So where does the faking data come in? Well the cool thing about how Amplify is designed means that you can <em>replace a defined request</em>!</p>
+<p>Say what?!</p>
+<p>First thing we need to understand is the <a href="http://amplifyjs.com/api/request/#request_types">request types</a>. When you define your request in AmplifyJS the 2nd argument you pass in is the <code>request type</code>, generally speaking this will be <code>ajax</code> as that is the provided request type in the API. You can define your own types so if you were wanting to pull in from an OData service you can setup that, add a new key to the <code>request types</code> and then it&#39;s all sweet (sorry how to do that is beyond this articles scope).</p>
+<p>Where it gets really interesting is that if your provide only two arguments to the <code>define</code> method, a key and a <strong>function</strong> this works as well. In this case <strong>your function is executed when you invoke the request</strong>. Now let&#39;s add this code:</p>
+<pre class="highlighted"><code class="haskell"><span class="title">amplify</span>.request.define('my-<span class="typedef"><span class="keyword">data</span>', function <span class="container">(<span class="title">settings</span>)</span> <span class="container">{
+    <span class="title">settings</span>.<span class="title">success</span>({
+        <span class="title">status</span>: '<span class="title">success'</span>,
+        <span class="title">items</span>: { }</span></span>
+    });
+});</code></pre>
+<p>This will make it so that whenever I call my request I will get a successful response with no data. There are properties which you need to set, first is the <code>status</code> to <code>success</code> so that AmplifyJS knows the response was successful, second is the <code>items</code> property which will contain any data you want returned to the method.</p>
+<h2>Setting up your project</h2>
+<p>Now you&#39;ve got the basics down I thought I&#39;d just give a bit of an insight into how I go about including this into a project. As mentioned you can override a defined request as many times as you want:</p>
+<pre class="highlighted"><code class="r">amplify.request.define(<span class="string">'my-data'</span>, <span class="string">'ajax'</span>, { <span class="keyword">...</span> });
+amplify.request.define(<span class="string">'my-data'</span>, <span class="string">'odata'</span>, { <span class="keyword">...</span> });
+amplify.request.define(<span class="string">'my-data'</span>, <span class="keyword">function</span> (settings) { <span class="keyword">...</span> });</code></pre>
+<p>Here I&#39;ve setup the request three times but the last one to be executed is the one included.</p>
+<p>The way I setup my project is that I have a file which I define my requests in, all of them together (or at least logically broken down into groups of common requests). For when I&#39;m wanting to stub out my requests I create a secondary file and include the stubbed out requests in there and then include it <em>directly after the main file</em>. This means that once the real request is created it&#39;s immediately replaced with fake out.</p>
+<p>With the fake requests in a separate file I can include or exclude them as I please, as my services come online or even use them in unit tests.</p>
+<h1>Building your data</h1>
+<p>The idea of doing this all with AmplifyJS was shown to me by <a href="http://twitter.com/elijahmanor">Elijah Manor</a>. He sent me this <a href="http://jsfiddle.net/slace/ubeeK/">jsfiddle</a> which shows it all setup.</p>
+<p>The problem with examples like this is that they are using fixed data, every reload of that page will show you exactly the same thing and clicking the refresh button on the UI will reload the data with exactly the same data. Now in this demo it&#39;s not really that bit a deal, the data doesn&#39;t really need to look different each time it&#39;s not going to make much difference. But what if you are doing something that will look different based on the data, say you&#39;re doing some charting?</p>
+<p>I&#39;ve created a <a href="http://jsfiddle.net/slace/8tBYt/">jsfiddle</a> to demonstrate this, when you click the button the chart will be rebuilt with different data.</p>
+<p>Now here&#39;s my mock request:</p>
+<pre class="highlighted"><code class="delphi">amplify.request.define(<span class="string">'get-data'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(settings)</span> <span class="comment">{
+    var data = tbd.from({}</span>)
+                .<span class="title">prop</span><span class="params">(<span class="string">'category'</span>)</span>.<span class="title">use</span><span class="params">(tbd.utils.random(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>)</span>).<span class="title">done</span><span class="params">()</span>
+                .<span class="title">prop</span><span class="params">(<span class="string">'value'</span>)</span>.<span class="title">use</span><span class="params">(tbd.utils.range(10, 100)</span>).<span class="title">done</span><span class="params">()</span>
+                .<span class="title">make</span><span class="params">(tbd.utils.range(3, 8)</span><span class="params">()</span>);</span>
+
+    settings.success(<span class="comment">{
+        status: 'success',
+        items: data
+    }</span>);
+});</code></pre>
+<p>With <code>tbd</code> I&#39;m scaffolding out a data series for my charting API, using the alphabet as the <em>label</em> and then a randomly chosen number between 10 and 100 for the value. This means that as I generate new data my UI will change (I&#39;m leveraging one of <code>tbd</code>&#39;s util methods to generate a random number of results as well (I might clean up the API to make that simpler in the future).</p>
+<h1>Conclusion</h1>
+<p>And there we have it an example of how we can combine a couple of helpful JavaScript libraries to make it easier to:</p>
+<ul>
+<li>Simplify out UI request layer</li>
+<li>Make sure our development isn&#39;t halted while data services are under development</li>
+<li>Have less hard coded data responses</li>
+</ul>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/javascript/stubbing-ajax-responses-with-tbd';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

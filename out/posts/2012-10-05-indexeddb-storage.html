@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>How the browsers store IndexedDB data | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">How the browsers store IndexedDB data</h1>
+                <h2>5th October 2012</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th March 2012</span>
+                            <h3><a href="/posts/2012-03-14-hello-owin.html">Hello OWIN</a></h3>
+                        </header>
+                        <p>An introduction to OWIN and building a server.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">30th May 2013</span>
+                            <h3><a href="/posts/2013-05-30-libraries.html">Flight Mode - Libraries</a></h3>
+                        </header>
+                        <p>Throughout the last few posts we&#39;ve looked at the different ways which we can store data offline in browsers and then created a basic little API that will help is with doing that. The <code>FlightMode</code> ...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/flight-mode.html"><span>flight-mode</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/localStorage.html"><span>localStorage</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/sessionStorage.html"><span>sessionStorage</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/offline-storage.html"><span>offline-storage</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">19th April 2013</span>
+                            <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
+                        </header>
+                        <p>A new program from the IE team</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/internet-explorer.html"><span>internet-explorer</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">10th April 2013</span>
+                            <h3><a href="/posts/2013-04-10-wdc13.html">IndexedDB at Web Directions Code 13</a></h3>
+                        </header>
+                        <p>Upcoming speaking on IndexedDB</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/speaking.html"><span>speaking</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd January 2013</span>
+                            <h3><a href="/posts/2013-01-22-hello-mathy.html">Hello mathy</a></h3>
+                        </header>
+                        <p>An introduction to another new library from me, this time it&#39;s mathy, a simple formula parser</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>As you&#39;ve probably noticed I&#39;ve been doing a lot of digging into <a href="http://www.w3.org/TR/IndexedDB/">IndexedDB</a> across the various browsers but there&#39;s one thing that I find quite interesting, <em>how it all works</em>. So for the <strong><a href="http://www.reddit.com/r/todayilearned/">TIL</a></strong> session we&#39;ve going to find out how the browsers store the data for IndexedDB*.</p>
+<p>*<em>Note: This will be a pretty high-level look since I&#39;m sooo not a C++ developer and C++ is the primary language of browser engines :P.</em></p>
+<h1>Internet Explorer</h1>
+<p>We&#39;ll start with the first browser to go unprefixed for IndexedDB, IE (well IE10), also since we can&#39;t look at the source of IE most of this is speculative.</p>
+<p>Internet Explorer uses the <a href="http://en.wikipedia.org/wiki/Extensible_Storage_Engine">Extensible Storage Engine</a> as its underlying storage model. This is the same database format that many of Windows features use including the Desktop Search (very common in Windows 8), Active Directory on Windows Servers and even Exchange.</p>
+<p>ESE seems like a good idea for IndexedDB as it has many of the features that you&#39;re going to want such as keys, indexes and multi-value indexes* so I&#39;m not surprised that the IE team have built on top of what is already there.</p>
+<p>*<em>Side point - IE currently doesn&#39;t support multiEntry indexes from IndexedDB which really sucks, especially since ESE seems to support it natively :(.</em></p>
+<p>If you&#39;re curious to go digging around for your IndexedDB files you&#39;ll find them at:</p>
+<blockquote>
+<p>%AppData%\Local\Microsoft\Internet Explorer\Indexed DB\Internet.edb</p>
+</blockquote>
+<p>So far I haven&#39;t had much luck getting into this file to view the database contents, I&#39;ve tried <a href="http://www.woanware.co.uk/?page_id=89">EseDbViewer</a> but it fails to open the database files and trying to dig through the Windows API itself is just plain unpleasant. Nobody likes COM.</p>
+<h1>Firefox</h1>
+<p>Firefox was the 2nd browser to go prefix free with IndexedDB, it is unprefixed as of version 16. Logically since Firefox is a cross-platform browser they use a cross-platform database, <a href="http://www.sqlite.org/">SQLite</a>. It&#39;s also not surprising that they are using SQLite as IndexedDB replaced the WebSQL proposal which was based on SQLite (one of the reasons cited as to discontinuing WebSQL was everyone used SQLite so they weren&#39;t getting independent implementations), so it makes sense that they salvaged what they could from the first implementation of a complex storage model.</p>
+<p>Being open source you can browse the <a href="http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/">code for Firefox&#39;s IndexedDB implementation</a> which is awesomely mind bending. Check out the <a href="http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/OpenDatabaseHelper.cpp">OpenDatabaseHelper.cpp</a>, it&#39;s responsible for setting up your database connection as well as doing a bunch of SQL to make sure everything is ready for data (yep, Firefox has SQL statements in it!). Another file of interest is <a href="http://mxr.mozilla.org/mozilla-aurora/source/dom/indexedDB/IDBObjectStore.cpp#1594">IDBObjectStore.cpp</a> and the line I&#39;ve linked to is the method that is responsible for inserting a new record into the database (at least I&#39;m pretty sure it is).</p>
+<p>If you are wanting to look into your database then the easiest way is with the <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/">SQLite Manager</a> Firefox extension. The files created for IndexedDB are stored in the following location:</p>
+<blockquote>
+<p>%AppData%\Roaming\Mozilla\Firefox\Profiles\your profile id\indexedDB\domain</p>
+</blockquote>
+<p>Open up the SQLite Manager extension and then you can dive into your database.</p>
+<h1>Chrome / WebKit</h1>
+<p>At the time of writing the IndexedDB implementation of <a href="http://webkit.org">WebKit</a>, and by extension Chrome, is still prefixed, in fact they are prefixing pretty much everything IndexedDB related with <code>webkit</code>. The implementation seems to be driven by the Chrome team and that probably also indicates why they are using a Google produced database, <a href="http://code.google.com/p/leveldb/">LevelDB</a>.</p>
+<p><em>Note: The implementation is already in the main WebKit repository which means that sooner or later it will appear in Safari as they also use WebKit under the hood.</em></p>
+<p>You can browse the <a href="https://trac.webkit.org/browser/trunk/Source/WebCore/Modules/indexeddb">source of their implementation</a> in all its C++ glory, it really is quite nicely written, at least to my untrained C++ eyes. The actual storage of the data is done through the <a href="https://trac.webkit.org/browser/trunk/Source/WebCore/Modules/indexeddb/IDBLevelDBBackingStore.cpp">IDBLevelDBBackingStore.cpp</a> class, but exposed as an abstraction so I guess it can be swapped out (and I&#39;d guess that&#39;s how they swapped between SQLite and LevelDB to begin with). The one thing that I do find curious is that LevelDB doesn&#39;t support indexes yet obviously IndexedDB does, so there&#39;s probably some trickery going on when they are pushing the data into the database (and well it hurts my head to read that much C++ :P).</p>
+<p>There isn&#39;t any stand-alone viewer for LevelDB that I&#39;ve come across but really that&#39;s not that big a deal as currently Chrome is the only browser who has an IndexedDB inspector built into its developer tools. Just navigate to the <em>Resources</em> tab and there&#39;s an IndexedDB section (you may have to right click -&gt; refresh the node as it&#39;s not a live view). I do hope the other browser vendors bring this feature in as well as it&#39;s really quite neat to have. But if you really must find the files for IndexedDB then they are located here:</p>
+<blockquote>
+<p>%AppData%\Local\Google\Chrome\User Data\Default</p>
+</blockquote>
+<p><em>Note: If you&#39;re using Chrome Canary then it&#39;s in the <strong>Chrome SxS</strong> folder.</em></p>
+<h1>Conclusion</h1>
+<p><strong>TIL</strong>:</p>
+<ul>
+<li>IE uses the same database format as Exchange and Active Directory for IndexedDB</li>
+<li>Firefox is using SQLite so are kind of implementing a NoSQL database in to SQL database</li>
+<li>Chrome (and WebKit) are using a Key/ Value store which has heritage in BigTable</li>
+<li>C++ is no less scary than when I was at uni</li>
+</ul>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/web/indexeddb-storage';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

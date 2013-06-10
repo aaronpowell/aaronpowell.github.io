@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Creating an installer task | LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Creating an installer task</h1>
+                <h2>24th January 2012</h2>
+                <ul class="tags">
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a></li>
+    
+        <li><a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a></li>
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">4th December 2010</span>
+                            <h3><a href="/posts/2010-12-04-ole.html">Ole Erling appears in NodeJS</a></h3>
+                        </header>
+                        <p>Having some fun with NodeJS and a crazy Danish dude</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/nodejs.html"><span>nodejs</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th September 2012</span>
+                            <h3><a href="/posts/2012-09-05-text-casing-and-examine.html">Text casing and Examine</a></h3>
+                        </header>
+                        <p>A few times I&#39;ve seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we&#39;ve had to handle a few times within our...</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/lucene-net.html"><span>lucene.net</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/examine.html"><span>examine</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">25th June 2012</span>
+                            <h3><a href="/posts/2012-06-25-i-helped-kill-umbraco-5.html">I helped kill Umbraco 5</a></h3>
+                        </header>
+                        <p>Hi, my name&#39;s Aaron Powell and I was involved in killing Umbraco 5.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/opinionated.html"><span>opinionated</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">13th June 2012</span>
+                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
+                        </header>
+                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">12th June 2012</span>
+                            <h3><a href="/posts/2012-06-12-using-mvc-in-umbraco-4.html">Using ASP.NET MVC in Umbraco 4</a></h3>
+                        </header>
+                        <p>How to combine ASP.Net MVC applications with an Umbraco project</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/asp-net-mvc.html"><span>asp.net-mvc</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>As you possibly know I&#39;m working on an extension for Umbraco 5 called <a href="http://stats-it.com">Stats It</a> and I&#39;ve initially been focusing on making the install process nice and smooth for people who want to get up and running with the package. A good install experience will do wonders for giving your project credibility.</p>
+<p>For this I have had to do a bit of digging into the <strong>Task</strong> system which is coming in v5, which is acting as a replacement for the traditional .NET event system, and in this article I&#39;m going to share some tips when building <strong>installer tasks</strong>.</p>
+<h1>Right task for the job</h1>
+<p>In v5 there are two kinds of tasks available, <strong>Standard Tasks</strong> (my name) and <strong>Configuration Tasks</strong> and depending on what you&#39;re wanting to do you&#39;ll need to choose the right kind of task. Here&#39;s a quick overview of the two task types:</p>
+<h2>Standard Task</h2>
+<p>This is the most common type of task that you&#39;ll be creating; a task inherits from <code>Umbraco.Cms.Web.Tasks.AbstractWebTask</code> and requires a <code>Umbraco.Framework.Tasks.TaskAttribute</code> to be added so that the Umbraco framework layer will be able to find it (and you need to provide the attribute with a Guid for identification). This task type is very basic and can be used for any task that is raised in the system and then execute a piece of code, because of this you can think of it as being very similar to the event handlers that were in the Umbraco 4 system (or that you&#39;ll find in any .NET application).</p>
+<h2>Configuration Tasks</h2>
+<p>This task is primarily used in the install/ uninstall process of Umbraco 5 and inherits from <code>Umbraco.Cms.Web.Tasks.ConfigurationTask</code>. Where the previous task type you require an attribute the Configuration Tasks <strong>don&#39;t</strong> and you&#39;ll get some very undesired results if you <em>do</em> include the attribute. The power of this task type though is it allows you to specify values in the configuration file for the task, providing static values into the task as it is executed.</p>
+<p><em>Side note - there is another task type <code>Umbraco.Framework.Tasks.AbstractTask</code> which is the base class for the <code>AbstractWebTask</code> but instead of relying on the web-side of Umbraco 5 it can be run without any web references. This would what you want if you are using the Umbraco framework outside of a web context, which it can do in-theory, but it&#39;s well beyond the scope of this post :P.</em></p>
+<h1>Task configuration</h1>
+<p>In addition to creating a class you&#39;ll also need to add a section in your configuration file that your task definition will reside within. There are two ways to do this:</p>
+<ol>
+<li>Add to the master web.config file (not recommended as it can have upgrade issues)</li>
+<li>Add your own package</li>
+</ol>
+<p>I&#39;m going to make the assumption that you&#39;re creating your own package here and you&#39;ll have your own web.config that you want to work against. First off you need to ensure you have the right web.config section:</p>
+<pre class="highlighted"><code class="xml"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">configSections</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">sectionGroup</span> <span class="attribute">name</span>=<span class="value">"umbraco.cms"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">section</span> <span class="attribute">name</span>=<span class="value">"tasks"</span> <span class="attribute">type</span>=<span class="value">"Umbraco.Cms.Web.Configuration.Tasks.TasksConfiguration, Umbraco.Cms.Web"</span> <span class="attribute">requirePermission</span>=<span class="value">"false"</span> /&gt;</span>
+    <span class="tag">&lt;/<span class="title">sectionGroup</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">configSections</span>&gt;</span>
+ <span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></code></pre>
+<p>This is the basis of your web.config file (and assuming there&#39;s nothing else in it yet) and what we&#39;ve done is created a new web.config section called <strong>umbraco.cms</strong> and in that included the <strong>tasks</strong> section which uses a type provided by Umbraco.</p>
+<p>Next we need to register our tasks:</p>
+<pre class="highlighted"><code class="xml">  <span class="tag">&lt;<span class="title">umbraco.cms</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">tasks</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">add</span> <span class="attribute">type</span>=<span class="value">"MyPackages.Tasks.MyAwesomeTask, MyPackage"</span> <span class="attribute">trigger</span>=<span class="value">"post-package-install"</span> /&gt;</span>
+    <span class="tag">&lt;/<span class="title">tasks</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">umbraco.cms</span>&gt;</span></code></pre>
+<p>This section would appear after the <code>&lt;/configSections&gt;</code> node and adds the section which we defined and then within that we add our tasks. There are two pieces of information we have to provide it:</p>
+<ol>
+<li>The fully qualified type of our task (namespace + classname + assembly)</li>
+<li>A trigger for the task, for install tasks there is one called <code>post-package-install</code></li>
+</ol>
+<p>So that&#39;s the setup, now to make a task.</p>
+<h1>Creating your first task</h1>
+<p>So you&#39;re working on the next awesome package for Umbraco 5 and you need some stuff to happen when you install your package, well let&#39;s get cracking and make your first task. We&#39;ll do a basic task which will email you on package install, kind of a basic pingback to tell you when someone has installed the package. First up we&#39;ll make a class:</p>
+<pre class="highlighted"><code class="objectivec">using System;
+using Umbraco<span class="variable">.Cms</span><span class="variable">.Web</span><span class="variable">.Context</span>;
+using Umbraco<span class="variable">.Cms</span><span class="variable">.Web</span><span class="variable">.Tasks</span>;
+using Umbraco<span class="variable">.Framework</span>;
+using Umbraco<span class="variable">.Framework</span><span class="variable">.Tasks</span>;
+
+namespace TaskDemo
+{
+    [Task(<span class="string">"{C1C251E1-CACF-447A-9516-694251C16B08}"</span>, TaskTriggers<span class="variable">.PostPackageInstall</span>)]
+    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="id">EmailOnInstall</span> : <span class="id">AbstractWebTask</span></span>
+    {
+        <span class="keyword">public</span> EmailOnInstall(IUmbracoApplicationContext applicationContext) : base(applicationContext)
+        {
+        }
+
+        <span class="keyword">public</span> override <span class="keyword">void</span> Execute(TaskExecutionContext context)
+        {
+            <span class="keyword">throw</span> new NotImplementedException();
+        }
+    }
+}</code></pre>
+<p>This is as empty a file as you can possibly have for an Umbraco 5 task, currently this will just error on install, pretty useful!</p>
+<p>The important stuff will be happening within the <code>Execute</code> method, this is the method that is invoked when task is run and obviously where you want to put your logic, so let&#39;s build it out:</p>
+<pre class="highlighted"><code class="avrasm">public override void Execute(TaskExecutionContext context)
+{
+    var email = new MailMessage
+                    {
+                        From = new MailAddress(<span class="string">"phone-home@demo.com"</span>)
+                    }<span class="comment">;</span>
+    email<span class="preprocessor">.To</span><span class="preprocessor">.Add</span>(new MailAddress(<span class="string">"new-install@demo.com"</span>))<span class="comment">;</span>
+    email<span class="preprocessor">.Subject</span> = <span class="string">"A new install has happened!"</span><span class="comment">;</span>
+    email<span class="preprocessor">.Body</span> = <span class="string">"Hey dude,\r\nSomeone has installed your awesome package!\r\nH5YR!"</span><span class="comment">;</span>
+
+    var smtpClient = new SmtpClient()<span class="comment">;</span>
+    //server config skipped
+    smtpClient<span class="preprocessor">.Send</span>(email)<span class="comment">;</span>
+}</code></pre>
+<p>There we go, a <em>very</em> basic implementation of a task has been done! Here&#39;s the config for this:</p>
+<pre class="highlighted"><code class="xml"><span class="pi">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="tag">&lt;<span class="title">configuration</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">configSections</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">sectionGroup</span> <span class="attribute">name</span>=<span class="value">"umbraco.cms"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">section</span> <span class="attribute">name</span>=<span class="value">"tasks"</span> <span class="attribute">type</span>=<span class="value">"Umbraco.Cms.Web.Configuration.Tasks.TasksConfiguration, Umbraco.Cms.Web"</span> <span class="attribute">requirePermission</span>=<span class="value">"false"</span> /&gt;</span>
+    <span class="tag">&lt;/<span class="title">sectionGroup</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">configSections</span>&gt;</span>
+
+  <span class="tag">&lt;<span class="title">umbraco.cms</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">tasks</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">add</span> <span class="attribute">type</span>=<span class="value">"TaskDemo.EmailOnInstall, TaskDemo"</span> <span class="attribute">trigger</span>=<span class="value">"post-package-install"</span> /&gt;</span>
+    <span class="tag">&lt;/<span class="title">tasks</span>&gt;</span>
+  <span class="tag">&lt;/<span class="title">umbraco.cms</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></code></pre>
+<p>Something you may notice is that in my config <strong>and</strong> in my class I&#39;ve had to specify the trigger, this could be a mistake that I&#39;ve made in my understanding thus-far but it seems to me that that is needed, someone feel free to correct me ;).</p>
+<h1>Creating a configuration task</h1>
+<p>As stipulated the above task is <strong>very</strong> basic but it does show you how you can work with the basics of a task. Well let&#39;s say that you want to create something a bit more advanced, say you want to have a task that will grant permissions to your custom application when the package is installed (this is a common problem solved in the PackageActionContrib in v4). For this we&#39;ll leverage the Configuration Task type so that we can make it a reusable task.</p>
+<pre class="highlighted"><code class="nginx"><span class="title">using</span> System;
+<span class="title">using</span> Umbraco.Cms.Web.Context;
+<span class="title">using</span> Umbraco.Cms.Web.Tasks;
+<span class="title">using</span> Umbraco.Framework.Tasks;
+
+<span class="title">namespace</span> TaskDemo
+{
+    <span class="title">public</span> class GrantPermissions : ConfigurationTask
+    {
+        <span class="title">public</span> GrantPermissions(ConfigurationTaskContext configurationTaskContext) : base(configurationTaskContext)
+        {
+        }
+
+        <span class="title">public</span> override void Execute(TaskExecutionContext context)
+        {
+            <span class="title">throw</span> new NotImplementedException();
+        }
+    }
+}</code></pre>
+<p>So again we&#39;ve got our skeleton class but this time we inherit from <code>ConfigurationTask</code> so that we can provide it with configuration values.</p>
+<p>Inside the <code>Execute</code> method we can access the <code>ConfigurationTaskContext.Parameters</code> property which will contain the parameters that are passed in from our configuration file, like so:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> Execute(TaskExecutionContext context)
+{
+    <span class="keyword">if</span> (!ConfigurationTaskContext.Parameters.ContainsKey(<span class="string">"application"</span>))
+        <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentException(<span class="string">"No application supplied"</span>);
+}</code></pre>
+<p>A simple check to make sure that we did get an application supplied, I want that as a pre-condition so that people don&#39;t break things on me!</p>
+<p>But let&#39;s do something with the application provided:</p>
+<p><em>Note: We&#39;re diving into the Hive here, I&#39;m going to glance over how Hive works here, that&#39;s beyond the scope of this article, just believe me when I say that the code does work :P</em></p>
+<pre class="highlighted"><code class="objectivec"><span class="keyword">public</span> override <span class="keyword">void</span> Execute(TaskExecutionContext context)
+{
+    <span class="keyword">if</span> (!ConfigurationTaskContext<span class="variable">.Parameters</span><span class="variable">.ContainsKey</span>(<span class="string">"application"</span>))
+        <span class="keyword">throw</span> new ArgumentException(<span class="string">"No application supplied"</span>);
+
+    var controller = (Controller)context<span class="variable">.EventSource</span>;
+    <span class="comment">//Get the ID of the current user</span>
+    var <span class="keyword">id</span> = ((UmbracoBackOfficeIdentity)controller<span class="variable">.User</span><span class="variable">.Identity</span>)<span class="variable">.Id</span>;
+    <span class="comment">//Access the Hive user store</span>
+    using (var uow = ApplicationContext<span class="variable">.Hive</span><span class="variable">.OpenWriter</span>&lt;ISecurityStore&gt;())
+    {
+        <span class="comment">//find the current user in Hive</span>
+        var entity = uow<span class="variable">.Repositories</span><span class="variable">.Get</span>&lt;User&gt;(<span class="keyword">id</span>);
+        <span class="comment">//Add the specified app to their permissions</span>
+        var apps = new List&lt;string&gt;(entity<span class="variable">.Applications</span>)
+                        {
+                            ConfigurationTaskContext<span class="variable">.Parameters</span>[<span class="string">"application"</span>]
+                        };
+        <span class="comment">//Update their permissions</span>
+        entity<span class="variable">.Applications</span> = apps;
+        <span class="comment">//Tell Hive to update the object -- possibly not needed</span>
+        uow<span class="variable">.Repositories</span><span class="variable">.AddOrUpdate</span>(entity);
+        <span class="comment">//tell Hive that we want to save the changes to its store</span>
+        uow<span class="variable">.Complete</span>();
+        controller<span class="variable">.HttpContext</span><span class="variable">.CreateUmbracoAuthTicket</span>(entity);
+    }
+}</code></pre>
+<p>I&#39;ve put some comments inline to explain the code as it goes but the important part is that we are reading the task parameters out and adding it to the users permissions.</p>
+<p>Once this is all updated it amazingly will just give a new icon in the applications tray on the install of the package!</p>
+<p>Now let&#39;s have a look at the config:</p>
+<pre class="highlighted"><code class="xml">    <span class="tag">&lt;<span class="title">tasks</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">add</span> <span class="attribute">type</span>=<span class="value">"TaskDemo.GrantPermissions, TaskDemo"</span> <span class="attribute">trigger</span>=<span class="value">"post-package-install"</span>&gt;</span>
+          <span class="tag">&lt;<span class="title">parameter</span> <span class="attribute">name</span>=<span class="value">"application"</span> <span class="attribute">value</span>=<span class="value">"my-awesome-app"</span> /&gt;</span>
+      <span class="tag">&lt;/<span class="title">add</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">tasks</span>&gt;</span></code></pre>
+<h1>Conclusion</h1>
+<p>While the code above may look a little bit scare to begin with it&#39;s actually not that bad when it comes to creating tasks. There&#39;s a few simple rules which you need to remember:</p>
+<ol>
+<li>Pick the right type of task for your work, do you want to pass in config values or can you compile everything together?</li>
+<li>Do you need to work with anything web specific or is just the base FrameworkContext going to be enough?</li>
+<li>Make sure you subscribe to the right event!</li>
+</ol>
+<p>There&#39;s a few tasks built into the core of Umbraco 5 for copying files so that can also provide a good reference source.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/umbraco/creating-an-installer-task';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>
