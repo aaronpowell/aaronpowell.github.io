@@ -7,7 +7,7 @@
 <html>
     <head>
   <meta charset="utf-8">
-  <title>Hello mathy | LINQ to Fail</title>
+  <title>Hello mathy - LINQ to Fail</title>
   <meta name="author" content="Aaron Powell">
   <meta name="viewport" content="width=1040" />
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
@@ -66,16 +66,15 @@
                     <article class="is-excerpt">
                         <header>
                             <span class="date">9th August 2011</span>
-                            <h3><a href="/posts/2011-08-09-knockoutjs-preparser.html">Introducing the KnockoutJS preparser</a></h3>
+                            <h3><a href="/posts/2011-08-09-a-story.html">JavaScript: A story</a></h3>
                         </header>
-                        <p>In my [previous post][1] I outlined one of the biggest issues I have with [KnockoutJS][2] as being its WPF/ Silverlight binding syntax and how it requires you to put JavaScript into your HTML.</p>
-<p>Now...</p>
+                        <p>Everyone use to notice the old war veteran that sat on the corner. His uniform was tatty and he’s always be spouting about his heyday with lines like “Don’t  you remember my role in the first brows...</p>
 
                         <div class="tags">
                             
                                 <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
                             
-                                <a class="icon icon-tag" href="/tagged/knockoutjs.html"><span>knockoutjs</span></a>
+                                <a class="icon icon-tag" href="/tagged/random.html"><span>random</span></a>
                             
                         </div>
                     </article>
@@ -172,8 +171,8 @@
 var result = engine.process();
 <span class="function"><span class="title">expect</span><span class="params">(result[<span class="number">0</span>])</span>.<span class="title">to</span>.<span class="title">equal</span><span class="params">(<span class="number">3</span>)</span>;</code></pre>
 <p>Pretty simple, create a new engine, provide it some parameters and process it. You can also install mathy as a global Node.js module and get a new command that will do math for you:</p>
-<pre class="highlighted"><code class="ruby"><span class="variable">0.8725484977476299gt;</span> npm install -g mathy
-<span class="variable">0.8725484977476299gt;</span> mathy <span class="string">"1 + 2"</span> /<span class="regexp">/output's 3</code></pre>
+<pre class="highlighted"><code class="ruby"><span class="variable">0.9698138511739671gt;</span> npm install -g mathy
+<span class="variable">0.9698138511739671gt;</span> mathy <span class="string">"1 + 2"</span> /<span class="regexp">/output's 3</code></pre>
 <h1>Smarter than your average shell</h1>
 <p>So that example isn&#39;t particularly useful, open up PowerShell (or Terminal) and you can easily just type <code>1 + 2</code> and get a result. Where mathy does get a bit more useful is when you want a more complex formula parsed, something like this:</p>
 <pre class="highlighted"><code class="erlang">var engine = new mathy.<span class="variable">Engine</span>(<span class="tuple">{ name: 'a', derivation: '<span class="number">1</span> + <span class="number">2</span> * <span class="number">3</span> - <span class="number">1</span> * <span class="number">10</span> ^ <span class="number">1</span> / <span class="number">5</span>' }</span>);
