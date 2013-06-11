@@ -1,6 +1,7 @@
 ---
 title: 'About'
 layout: 'default'
+urls: ["/about"]
 ---
 ## About Me ##
 
