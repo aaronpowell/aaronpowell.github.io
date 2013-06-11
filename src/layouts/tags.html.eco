@@ -19,7 +19,7 @@
             <div id="main" class="container">
                 <div class="row">
                     <div id="content" class="12u skel-cell-mainContent">
-                        <% for doc in @getCollection('posts').findAll({tags: '$in': @document.tag}).toJSON(): %>
+                        <% for doc in @getCollection('posts').findAll({tags: '$in': @document.tag}, [{ date: -1 }]).toJSON(): %>
                         <article class="is-post">
                             <header>
                                 <h2><a href='<%=doc.url%>'><%= doc.title %></a></h2>

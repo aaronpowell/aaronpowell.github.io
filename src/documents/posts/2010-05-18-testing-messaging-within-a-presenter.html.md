@@ -4,7 +4,7 @@ metaTitle: "Testing Messaging Within a Presenter"
 description: "Cross-Presenter messaging is really handy, and here's how to do testing of it when it's in a presenter"
 revised: "2010-05-18"
 date: "2010-05-18"
-tags: ["asp.net","webforms-mvp","cross-presenter-messaging"]
+tags: ["asp.net","webforms-mvp"]
 migrated: "true"
 urls: ["/testing-messaging-within-a-presenter"]
 summary: """

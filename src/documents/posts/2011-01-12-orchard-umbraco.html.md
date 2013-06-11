@@ -4,7 +4,7 @@ metaTitle: "Orchard & Umbraco - Introduction"
 description: "An introduction to a series of looking at comparing Orchard CMS and Umbraco"
 revised: "2011-01-28"
 date: "2011-01-12"
-tags: ["orchard","orchardcms","umbraco"]
+tags: ["orchard","umbraco"]
 migrated: "true"
 urls: ["/orchard-umbraco"]
 summary: """

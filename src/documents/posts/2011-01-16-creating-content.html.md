@@ -4,7 +4,7 @@ metaTitle: "Orchard & Umbraco - Creating Content"
 description: "In this article we'll look at the difference between the two systems when it comes to creating content."
 revised: "2011-01-17"
 date: "2011-01-16"
-tags: ["umbraco","orchard","orchardcms","orchard-umbraco"]
+tags: ["umbraco","orchard"]
 migrated: "true"
 urls: ["/orchard-umbraco/creating-content"]
 summary: """

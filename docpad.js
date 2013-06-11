@@ -28,7 +28,10 @@ docpadConfig = {
         url: {
           '$ne': post.url
         }
-      }).toJSON();
+      }, [{
+          date: -1
+        }
+      ]).toJSON();
 
       return posts.map(function(p) {
         var matches;

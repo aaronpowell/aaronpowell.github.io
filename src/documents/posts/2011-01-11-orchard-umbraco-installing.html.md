@@ -2,11 +2,11 @@
 title: "Orchard & Umbraco - The install experience"
 metaTitle: "Orchard & Umbraco - The install experience"
 description: "A comparison between the install experience between Orchard CMS and Umbraco Juno"
-revised: "2011-01-13"
+revised: "2011-01-16"
 date: "2011-01-11"
-tags: ["orchard","orchardcms","umbraco"]
+tags: ["orchard","umbraco"]
 migrated: "true"
-urls: ["/orchard-umbraco-installing"]
+urls: ["/orchard-umbraco/installing"]
 summary: """
 <strong>Official install documentation</strong>
 <br />

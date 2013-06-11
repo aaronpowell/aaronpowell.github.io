@@ -4,7 +4,7 @@ metaTitle: "Orchard & Umbraco - Managing Content"
 description: "An overview of how to manage content in the two different CMSs"
 revised: "2011-01-28"
 date: "2011-01-27"
-tags: ["orchard","umbraco","orchardcms","orchard-umbraco"]
+tags: ["orchard","umbraco"]
 migrated: "true"
 urls: ["/orchard-umbraco/managing-content"]
 summary: """

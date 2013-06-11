@@ -4,7 +4,7 @@ metaTitle: "Yes, I LIKE WebForms!"
 description: "I think ASP.Net WebForms is really quite good, and here's some thoughts on the topic"
 revised: "2010-08-08"
 date: "2010-08-07"
-tags: ["webforms-mvp","webforms","web","aspnet"]
+tags: ["webforms-mvp","webforms","web","asp.net"]
 migrated: "true"
 urls: ["/yes-i-like-webforms"]
 summary: """

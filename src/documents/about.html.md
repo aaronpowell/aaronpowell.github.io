@@ -1,19 +1,6 @@
---- cson
-title: "Everything you never wanted to know"
-metaTitle: "About"
-description: "About this site and all that fun stuff"
-revised: "2011-09-21"
-date: "2010-04-05"
-tags: ["random","about","contact"]
-migrated: "true"
-urls: ["/about"]
-summary: """
-Where to find me:<br />
-<a href=\"http://twitter.com/slace\" title=\"Twitter\">Twitter: @slace</a><br />
-<a href=\"mailto:me@aaron-powell.com\" title=\"Email\">Email: me@aaron-powell.com</a><br />
-<span>MSN: aazzap@hotmail.com</span><br />
-<span>Skype: aaron.l.powell</span><br />
-"""
+---
+title: 'About'
+layout: 'default'
 ---
 ## About Me ##
 

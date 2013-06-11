@@ -4,7 +4,7 @@ metaTitle: "ASP.NET MVC XML Action Result"
 description: "An easy way to return XML from ASP.NET MVC"
 revised: "2010-06-16"
 date: "2010-06-16"
-tags: ["asp.net","asp.net-mvc","c#","action-result","xml"]
+tags: ["asp.net","asp.net-mvc","c#","xml"]
 migrated: "true"
 urls: ["/aspnet-mvc-xml-action-result"]
 summary: """
