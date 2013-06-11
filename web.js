@@ -6,6 +6,7 @@ app.get('/routes.json', function (req, res) {
 })
 
 app.use(express.static(__dirname + '/out'));
+app.use('/get', express.static(__dirname + '/src/files/get'));
 
 var routes = require('./out/routes.json').routes;
 

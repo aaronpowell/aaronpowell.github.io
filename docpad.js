@@ -1,10 +1,13 @@
-var docpadConfig, marked, moment;
+var docpadConfig, marked, moment, path;
 
 marked = require('marked');
 
 moment = require('moment');
 
+path = require('path');
+
 docpadConfig = {
+  ignorePaths: [path.join(__dirname, 'src', 'files', 'get')],
   templateData: {
     site: {
       title: 'LINQ to Fail',
