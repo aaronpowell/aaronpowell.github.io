@@ -31,8 +31,8 @@ The usage is something like this:
 
 Pretty simple, create a new engine, provide it some parameters and process it. You can also install mathy as a global Node.js module and get a new command that will do math for you:
 
-	$> npm install -g mathy
-	$> mathy "1 + 2" //output's 3
+	>> npm install -g mathy
+	>> mathy "1 + 2" //output's 3
 
 # Smarter than your average shell
 
