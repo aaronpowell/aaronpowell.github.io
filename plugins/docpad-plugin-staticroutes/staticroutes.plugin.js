@@ -35,13 +35,15 @@ module.exports = function (BasePlugin) {
                     url: doc.url,
                     redirects: doc.urls.filter(function (x) { return x !== doc.url; })
                 };
+            }).filter(function (route) {
+                return !!route.redirects.length;
             });
 
             fs.writeFile(
                 path.join(this.docpad.config.outPath, 'routes.json'),
                 JSON.stringify({
                     routes: routes
-                }),
+                }, null, '\t'),
                 next
             );
         };
