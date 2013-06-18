@@ -31,15 +31,15 @@
 			]
 		},
 		{
-			"url": "/posts/2009-07-15-recursive-anonymous-functions-the-net-version.html",
-			"redirects": [
-				"/recursive-anonymous-functions-the-net-version"
-			]
-		},
-		{
 			"url": "/posts/2010-04-01-umbraco.html",
 			"redirects": [
 				"/umbraco"
+			]
+		},
+		{
+			"url": "/posts/2009-07-15-recursive-anonymous-functions-the-net-version.html",
+			"redirects": [
+				"/recursive-anonymous-functions-the-net-version"
 			]
 		},
 		{
@@ -67,15 +67,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-07-extending-umbraco-members.html",
-			"redirects": [
-				"/extending-umbraco-members"
-			]
-		},
-		{
 			"url": "/posts/2010-04-07-linq-to-umbraco-overview.html",
 			"redirects": [
 				"/linq-to-umbraco-overview"
+			]
+		},
+		{
+			"url": "/posts/2010-04-07-extending-umbraco-members.html",
+			"redirects": [
+				"/extending-umbraco-members"
 			]
 		},
 		{
@@ -127,12 +127,6 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-09-umbraco-auspac-january-2010.html",
-			"redirects": [
-				"/umbraco-auspac-january-2010"
-			]
-		},
-		{
 			"url": "/posts/2010-04-11-umbraco-data-type-design.html",
 			"redirects": [
 				"/umbraco-data-type-design"
@@ -145,21 +139,27 @@
 			]
 		},
 		{
+			"url": "/posts/2010-04-09-umbraco-auspac-january-2010.html",
+			"redirects": [
+				"/umbraco-auspac-january-2010"
+			]
+		},
+		{
 			"url": "/posts/2010-04-14-lucene-net-overview.html",
 			"redirects": [
 				"/lucene-net-overview"
 			]
 		},
 		{
-			"url": "/posts/2010-04-12-webforms-mvp-contrib.html",
-			"redirects": [
-				"/webforms-mvp-contrib"
-			]
-		},
-		{
 			"url": "/posts/2010-04-22-dddmelbourne-umbraco.html",
 			"redirects": [
 				"/dddmelbourne-umbraco"
+			]
+		},
+		{
+			"url": "/posts/2010-04-12-webforms-mvp-contrib.html",
+			"redirects": [
+				"/webforms-mvp-contrib"
 			]
 		},
 		{
@@ -181,27 +181,27 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-25-exception-thrown-when-using-xslt-extensions.html",
-			"redirects": [
-				"/exception-thrown-when-using-xslt-extensions"
-			]
-		},
-		{
 			"url": "/posts/2010-04-25-handy-extension-method-for-null-coalesing.html",
 			"redirects": [
 				"/handy-extension-method-for-null-coalesing"
 			]
 		},
 		{
-			"url": "/posts/2010-04-25-oh-woe-is-mobile-me.html",
+			"url": "/posts/2010-04-25-exception-thrown-when-using-xslt-extensions.html",
 			"redirects": [
-				"/oh-woe-is-mobile-me"
+				"/exception-thrown-when-using-xslt-extensions"
 			]
 		},
 		{
 			"url": "/posts/2010-04-25-why-does-this-code-work.html",
 			"redirects": [
 				"/why-does-this-code-work"
+			]
+		},
+		{
+			"url": "/posts/2010-04-25-oh-woe-is-mobile-me.html",
+			"redirects": [
+				"/oh-woe-is-mobile-me"
 			]
 		},
 		{
@@ -223,15 +223,21 @@
 			]
 		},
 		{
+			"url": "/posts/2010-05-23-client-event-pool.html",
+			"redirects": [
+				"/client-event-pool"
+			]
+		},
+		{
 			"url": "/posts/2010-05-18-webforms-mvp.html",
 			"redirects": [
 				"/webforms-mvp"
 			]
 		},
 		{
-			"url": "/posts/2010-05-23-client-event-pool.html",
+			"url": "/posts/2010-06-09-supporting-valuetypes-in-autofac.html",
 			"redirects": [
-				"/client-event-pool"
+				"/supporting-valuetypes-in-autofac"
 			]
 		},
 		{
@@ -247,21 +253,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-06-09-supporting-valuetypes-in-autofac.html",
-			"redirects": [
-				"/supporting-valuetypes-in-autofac"
-			]
-		},
-		{
 			"url": "/posts/2010-06-14-aspnet-mvc-model-binding-with-implicit-operators.html",
 			"redirects": [
 				"/aspnet-mvc-model-binding-with-implicit-operators"
-			]
-		},
-		{
-			"url": "/posts/2010-06-16-aspnet-mvc-xml-action-result.html",
-			"redirects": [
-				"/aspnet-mvc-xml-action-result"
 			]
 		},
 		{
@@ -271,15 +265,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-06-27-codegarden-10.html",
+			"url": "/posts/2010-06-16-aspnet-mvc-xml-action-result.html",
 			"redirects": [
-				"/codegarden-10"
+				"/aspnet-mvc-xml-action-result"
 			]
 		},
 		{
-			"url": "/posts/2010-06-28-dynamic-dictionaries-with-csharp-4.html",
+			"url": "/posts/2010-06-27-codegarden-10.html",
 			"redirects": [
-				"/dynamic-dictionaries-with-csharp-4"
+				"/codegarden-10"
 			]
 		},
 		{
@@ -289,15 +283,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-07-03-documents-in-lucene-net.html",
+			"url": "/posts/2010-06-28-dynamic-dictionaries-with-csharp-4.html",
 			"redirects": [
-				"/documents-in-lucene-net"
+				"/dynamic-dictionaries-with-csharp-4"
 			]
 		},
 		{
-			"url": "/posts/2010-07-05-dynamics-library.html",
+			"url": "/posts/2010-07-03-documents-in-lucene-net.html",
 			"redirects": [
-				"/dynamics-library"
+				"/documents-in-lucene-net"
 			]
 		},
 		{
@@ -307,9 +301,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-07-yes-i-like-webforms.html",
+			"url": "/posts/2010-07-05-dynamics-library.html",
 			"redirects": [
-				"/yes-i-like-webforms"
+				"/dynamics-library"
 			]
 		},
 		{
@@ -319,9 +313,21 @@
 			]
 		},
 		{
+			"url": "/posts/2010-08-07-yes-i-like-webforms.html",
+			"redirects": [
+				"/yes-i-like-webforms"
+			]
+		},
+		{
 			"url": "/posts/2010-08-27-creating-custom-dataprovider-for-linq-to-umbraco.html",
 			"redirects": [
 				"/creating-custom-dataprovider-for-linq-to-umbraco"
+			]
+		},
+		{
+			"url": "/posts/2010-08-27-understanding-linq-to-umbraco.html",
+			"redirects": [
+				"/understanding-linq-to-umbraco"
 			]
 		},
 		{
@@ -331,9 +337,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-27-understanding-linq-to-umbraco.html",
+			"url": "/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html",
 			"redirects": [
-				"/understanding-linq-to-umbraco"
+				"/sharepoint-feature-corrupts-page-layout"
 			]
 		},
 		{
@@ -349,27 +355,21 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html",
-			"redirects": [
-				"/sharepoint-feature-corrupts-page-layout"
-			]
-		},
-		{
 			"url": "/posts/2010-08-28-testable-email-sending.html",
 			"redirects": [
 				"/testable-email-sending"
 			]
 		},
 		{
-			"url": "/posts/2010-08-30-http-compression-mvc-fileresult.html",
-			"redirects": [
-				"/http-compression-mvc-fileresult"
-			]
-		},
-		{
 			"url": "/posts/2010-09-06-iqueryable-linq-to-umbraco.html",
 			"redirects": [
 				"/iqueryable-linq-to-umbraco"
+			]
+		},
+		{
+			"url": "/posts/2010-08-30-http-compression-mvc-fileresult.html",
+			"redirects": [
+				"/http-compression-mvc-fileresult"
 			]
 		},
 		{
@@ -385,15 +385,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-09-12-slace-core-javascript-library.html",
-			"redirects": [
-				"/slace-core-javascript-library"
-			]
-		},
-		{
 			"url": "/posts/2010-09-22-lazy-keyedcollections.html",
 			"redirects": [
 				"/lazy-keyedcollections"
+			]
+		},
+		{
+			"url": "/posts/2010-09-12-slace-core-javascript-library.html",
+			"redirects": [
+				"/slace-core-javascript-library"
 			]
 		},
 		{
@@ -415,15 +415,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-10-01-documentdataprovider-tree.html",
-			"redirects": [
-				"/documentdataprovider-tree"
-			]
-		},
-		{
 			"url": "/posts/2010-10-23-javascript-functions-are-objects.html",
 			"redirects": [
 				"/javascript-functions-are-objects"
+			]
+		},
+		{
+			"url": "/posts/2010-10-01-documentdataprovider-tree.html",
+			"redirects": [
+				"/documentdataprovider-tree"
 			]
 		},
 		{
@@ -439,15 +439,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-11-27-umbraco-ironruby-tips-and-tricks.html",
-			"redirects": [
-				"/umbraco-ironruby-tips-and-tricks"
-			]
-		},
-		{
 			"url": "/posts/2010-11-27-umbraco-menu-with-ironruby.html",
 			"redirects": [
 				"/umbraco-menu-with-ironruby"
+			]
+		},
+		{
+			"url": "/posts/2010-11-27-umbraco-ironruby-tips-and-tricks.html",
+			"redirects": [
+				"/umbraco-ironruby-tips-and-tricks"
 			]
 		},
 		{
@@ -595,15 +595,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-02-11-umbraco-ie9rc.html",
-			"redirects": [
-				"/umbraco-ie9rc"
-			]
-		},
-		{
 			"url": "/posts/2011-02-11-ie9-rc-geolocation-issue.html",
 			"redirects": [
 				"/ie9-rc-geolocation-issue"
+			]
+		},
+		{
+			"url": "/posts/2011-02-11-umbraco-ie9rc.html",
+			"redirects": [
+				"/umbraco-ie9rc"
 			]
 		},
 		{
@@ -1087,9 +1087,9 @@
 			]
 		},
 		{
-			"url": "/posts/2013-01-07-thoughts-on-typescript.html",
+			"url": "/posts/2012-10-18-dbjs-chrome.html",
 			"redirects": [
-				"/javascript/thoughts-on-typescript"
+				"/web/dbjs-chrome"
 			]
 		},
 		{
@@ -1099,9 +1099,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-10-18-dbjs-chrome.html",
+			"url": "/posts/2013-01-07-thoughts-on-typescript.html",
 			"redirects": [
-				"/web/dbjs-chrome"
+				"/javascript/thoughts-on-typescript"
 			]
 		},
 		{
@@ -1165,15 +1165,15 @@
 			]
 		},
 		{
-			"url": "/posts/2013-05-23-local-session-storage.html",
-			"redirects": [
-				"/flight-mode/local-session-storage"
-			]
-		},
-		{
 			"url": "/posts/2013-05-23-introduction.html",
 			"redirects": [
 				"/flight-mode/introduction"
+			]
+		},
+		{
+			"url": "/posts/2013-05-23-local-session-storage.html",
+			"redirects": [
+				"/flight-mode/local-session-storage"
 			]
 		},
 		{
@@ -1183,15 +1183,15 @@
 			]
 		},
 		{
-			"url": "/posts/2013-05-28-file-system.html",
-			"redirects": [
-				"/flight-mode/file-system"
-			]
-		},
-		{
 			"url": "/posts/2013-05-30-libraries.html",
 			"redirects": [
 				"/flight-mode/libraries"
+			]
+		},
+		{
+			"url": "/posts/2013-05-28-file-system.html",
+			"redirects": [
+				"/flight-mode/file-system"
 			]
 		}
 	]
