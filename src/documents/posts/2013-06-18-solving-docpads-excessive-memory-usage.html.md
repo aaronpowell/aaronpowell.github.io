@@ -21,7 +21,7 @@ So I crack out the Heroku toolbox and inspect the log files and find the crash, 
 
 Ok, fine, let's have a look at what could be wrong, how a static site could be blowing out the memory allowance (512mb it's allocated). I fire up the `docpad run` command which is what is done on Heroku and this is what I get:
 
-![DocPad memory usage](/get/docpad-memory-usage.png)
+![DocPad memory usage](/get/docpad-memory-usage.PNG)
 
 That's nearly 700mb memory usage for a static site! I've seen it peak at over 900mb, run idle around 850mb, all kinds of wacky memory usage.
 

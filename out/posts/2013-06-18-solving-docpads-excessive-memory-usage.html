@@ -90,7 +90,7 @@
 <p>So I crack out the Heroku toolbox and inspect the log files and find the crash, it crashed because <em>it exceeded the allocated memory</em>.</p>
 <p><strong>Exceeded the allocated memory?!</strong> IT&#39;S A STATIC SITE!</p>
 <p>Ok, fine, let&#39;s have a look at what could be wrong, how a static site could be blowing out the memory allowance (512mb it&#39;s allocated). I fire up the <code>docpad run</code> command which is what is done on Heroku and this is what I get:</p>
-<p><img src="/get/docpad-memory-usage.png" alt="DocPad memory usage"></p>
+<p><img src="/get/docpad-memory-usage.PNG" alt="DocPad memory usage"></p>
 <p>That&#39;s nearly 700mb memory usage for a static site! I&#39;ve seen it peak at over 900mb, run idle around 850mb, all kinds of wacky memory usage.</p>
 <h1>The not so static static site</h1>
 <p>So it would seem that I made a false assumption about DocPad, it&#39;s not quite as static as I thought it was. While yes, it generates all these flat HTML files on disk it also keeps all the content in memory:</p>
