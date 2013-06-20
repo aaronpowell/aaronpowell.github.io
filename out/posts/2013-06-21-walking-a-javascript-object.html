@@ -7,7 +7,7 @@
 <html>
     <head>
   <meta charset="utf-8">
-  <title>LINQ in JavaScript, now with more ES5 - LINQ to Fail</title>
+  <title>Walking a JavaScript object - LINQ to Fail</title>
   <meta name="author" content="Aaron Powell">
   <meta name="viewport" content="width=1040" />
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
@@ -30,17 +30,11 @@
 
         <div id="header-wrapper">
             <div id="header" class="container">
-                <h1 id="logo">LINQ in JavaScript, now with more ES5</h1>
-                <h2>6th February 2011</h2>
+                <h1 id="logo">Walking a JavaScript object</h1>
+                <h2>21st June 2013</h2>
                 <ul class="tags">
     
         <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
-    
-        <li><a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a></li>
-    
-        <li><a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a></li>
-    
-        <li><a class="icon icon-tag" href="/tagged/linq-in-javascript.html"><span>linq-in-javascript</span></a></li>
     
 </ul>
                 <!-- Nav -->
@@ -67,34 +61,20 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
-                            <span class="date">9th August 2011</span>
-                            <h3><a href="/posts/2011-08-09-knockoutjs-preparser.html">Introducing the KnockoutJS preparser</a></h3>
+                            <span class="date">2nd July 2011</span>
+                            <h3><a href="/posts/2011-07-02-postman.html">Introducing Postman - A JavaScript Messaging Library</a></h3>
                         </header>
-                        <p>In my [previous post][1] I outlined one of the biggest issues I have with [KnockoutJS][2] as being its WPF/ Silverlight binding syntax and how it requires you to put JavaScript into your HTML.</p>
-<p>Now...</p>
+                        <h1>Prelude</h1>
+<p>Back in May I presented at DDD Melbourne on JavaScript design patterns. One of the patterns that I was talking about was the idea of [pub/ sub][1].</p>
+<p>Let me start by saying that this isn&#39;...</p>
 
                         <div class="tags">
                             
                                 <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
                             
-                                <a class="icon icon-tag" href="/tagged/knockoutjs.html"><span>knockoutjs</span></a>
+                                <a class="icon icon-tag" href="/tagged/postman.html"><span>postman</span></a>
                             
-                        </div>
-                    </article>
-                </li>
-            
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">21st June 2013</span>
-                            <h3><a href="/posts/2013-06-21-walking-a-javascript-object.html">Walking a JavaScript object</a></h3>
-                        </header>
-                        <p>Ever had a path to a path to a property on a JavaScript object that you want to walk? Something along the lines of <code>foo.bar.baz</code>.</p>
-<p>Recently I was trying to solve this problem and came across a nifty little trick</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                                <a class="icon icon-tag" href="/tagged/coffeescript.html"><span>coffeescript</span></a>
                             
                         </div>
                     </article>
@@ -123,28 +103,6 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
-                            <span class="date">14th January 2013</span>
-                            <h3><a href="/posts/2013-01-14-ie10-console-thoughts.html">Making the Internet Explorer JavaScript tools better, again</a></h3>
-                        </header>
-                        <p>A look at what&#39;s changed since I last pointed out the failings of the IE dev tools</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/internet-explorer.html"><span>internet-explorer</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web-dev.html"><span>web-dev</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
-                <li>
-                    <article class="is-excerpt">
-                        <header>
                             <span class="date">7th January 2013</span>
                             <h3><a href="/posts/2013-01-07-thoughts-on-typescript.html">Thoughts on TypeScript</a></h3>
                         </header>
@@ -160,39 +118,86 @@
                     </article>
                 </li>
             
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd October 2012</span>
+                            <h3><a href="/posts/2012-10-02-pubsub-in-typescript.html">PubSub in TypeScript</a></h3>
+                        </header>
+                        <p>It&#39;s that time again, time for more Pub/Sub!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/typescript.html"><span>typescript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th September 2012</span>
+                            <h3><a href="/posts/2012-09-14-creating-classes.html">Creating classes in WinJS</a></h3>
+                        </header>
+                        <p>A look at how you can create JavaScript classes in WinJS</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/winjs.html"><span>winjs</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/windows8.html"><span>windows8</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
         </ul>
     </section>
 </div>
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <p>When I first wrote <a href="/linq-in-javascript">LINQ in JavaScript</a> a few years ago it was just a thought experiment.</p>
-<p>Since then I&#39;ve actually found that I want to use it, quite often in fact, and a lot of the reason I&#39;ve been wanting this is because I&#39;m lacking the ECMAScript 5 features which LINQ in JavaScript provides.</p>
-<h1>ECMAScript 5 quick primer</h1>
-<p>A lot of people mistake many of the ECMAScript 5 (ES5) features for being HTML5, but it isn&#39;t really, what we&#39;re looking at here are the next features of JavaScript, and these are the <code>map</code>/<code>filter</code> methods.</p>
-<p>These methods are similar to the kind of things you expect in functional programming languages, and how you can interact with arrays. The <a href="http://ie.microsoft.com/testdrive/">IE9 Test Drive</a> actually has a good set of <a href="http://ie.microsoft.com/testdrive/HTML5/ECMAScript5Array/Default.html">examples of using these new features</a>.</p>
-<p>So now that browsers are starting to come with built in methods like <code>Array.prototype.map</code>, which will transform the data into a new type or <code>Array.prototype.filter</code>, allowing us to conditionally remove items from the array, it&#39;d make sense to actually use them.</p>
-<h1>Improving LINQ in JavaScript</h1>
-<p>As I said browsers are starting to ship with the new features on Array they are going to be a lot faster than anything written purely in JavaScript and residing in-browser.</p>
-<p>Let&#39;s for example look at improving the <code>Array.where</code> method:</p>
-<pre class="highlighted"><code class="php"><span class="keyword">Array</span>.prototype.where = <span class="keyword">Array</span>.prototype.filter || <span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> {</span>
-    <span class="comment">//implement a custom method</span>
+                            <p>Recently I was trying to solve a problem where I had a JSON path to a property on an object, the path was going to be <code>n</code> layers deep and the object itself was also <code>n</code> layers deep. I needed to solve this problem in a fairly generic manner, as there was a number of different scenarios under which this could would be run.</p>
+<p>Basically I had this:</p>
+<pre class="highlighted"><code class="nginx"><span class="title">var</span> path = <span class="string">'foo.bar.baz'</span>;</code></pre>
+<p>And an object like this:</p>
+<pre class="highlighted"><code class="smalltalk">var obj = {
+    <span class="method">foo:</span> {
+        <span class="method">bar:</span> {
+            <span class="method">baz:</span> <span class="number">42</span>
+        }
+    }
+};</code></pre>
+<p>So from the <code>path</code> I want to be able to find out the value in the object that matches it.</p>
+<h1>Pass #1</h1>
+<p>A colleague of mine gave me the code which would do this, from an application they had, implemented using a for loop:</p>
+<pre class="highlighted"><code class="erlang">var value = obj;
+var paths = path.split('.');
+<span class="function"><span class="title">for</span> <span class="params">(var i = <span class="number">0</span>; i &lt; paths.length; i++)</span> {
+    <span class="title">value</span> = <span class="title">value</span>[<span class="title">paths</span>[<span class="title">i</span>]];
+}
+
+<span class="title">console</span>.<span class="title">log</span><span class="params">(value)</span>;</code></pre>
+<p>Well that does exactly what needs to be done, exactly as advertised. Job done right?</p>
+<h1>Pass #2</h1>
+<p>The for loop is so old school, these days it&#39;s all functional programming that the kids are into these days so I looked at our method and decided there had to be another way which we could approach this, something a bit more functional.</p>
+<p>Since what we&#39;re doing it walking through an object I wondered &quot;Could I use something from the <code>map</code>/<code>reduce</code>/<code>filter</code> family for that?&quot;. Well it turns out that <strong>yes</strong> there is something ideal for that, <code>reduce</code>.</p>
+<p>You see the <code>reduce</code> method takes a callback like this:</p>
+<pre class="highlighted"><code class="lua"><span class="function"><span class="keyword">function</span> <span class="params">(prev, current)</span></span> {
+    //<span class="keyword">return</span> what is to be the <span class="built_in">next</span> <span class="string">'prev'</span> value
 }</code></pre>
-<p>Here what we&#39;re doing is executing the logic of:</p>
-<ul>
-<li>If the <code>Array.prototype.filter</code> method exists assign it to <code>Array.prototype.where</code></li>
-<li>If it doesn&#39;t we&#39;ll provide a custom method</li>
-</ul>
-<p>We can do the same thing with <code>select</code> and <code>indexOf</code>, using built-in methods from the <code>Array.prototype</code> chain.</p>
-<h1>Other updates</h1>
-<p>While adding these updates I also decided to do some other performance tweaks:</p>
-<ul>
-<li><code>skip</code> will now use <code>Array.prototype.slice</code> rather than iterating through the collection in JavaScript</li>
-<li><code>take</code> also uses <code>slice</code>, but does a -1 multiplication so we go backwards through the collection</li>
-<li><code>groupBy</code> has been cleaned up so there&#39;s a few less lines of code in it</li>
-<li><code>select</code> and <code>where</code> will pass in all the ES5 arguments when running in browsers that don&#39;t support ES5</li>
-</ul>
-<p>Feel free to <a href="http://hg.slace.biz/linq-in-javascript/overview">check out the code from my bitbucket</a>, and maybe some others than I will use it ;).</p>
+<p>So as long as the <code>prev</code> is an instance of <code>obj</code> then we can walk it, and doing that is fine as we can provide an argument to the <code>reduce</code> method that defines what the initial value will be. This means we can rewrite our walker like so:</p>
+<pre class="highlighted"><code class="matlab">var value = <span class="transposed_variable">path.</span>split(<span class="string">'.'</span>).reduce(<span class="function"><span class="keyword">function</span> <span class="params">(prev, curr)</span> { </span>
+    <span class="keyword">return</span> prev<span class="matrix">[curr]</span>;
+}, obj);</code></pre>
+<p>And there we have it, a nice little object walker.</p>
 
                         </article>
                     </div>
@@ -204,7 +209,7 @@
 window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
 window.disqus_identifier = document.title || 'Home';
 window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
-window.disqus_url = document.location.origin + '/linq-in-javascript/html5';
+window.disqus_url = document.location.origin + '/posts/2013-06-21-walking-a-javascript-object.html';
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function () {
