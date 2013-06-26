@@ -1,7 +1,7 @@
 --- cson
 title: 'DDDMelbourne workshop'
 date: '2013-06-26'
-tags: 'dddmelbourne'
+tags: ['dddmelbourne']
 description: """I'm going to be presenting a JavaScript workshop at the upcoming DDDMelbourne conference
 """
 ---
