@@ -162,7 +162,7 @@ That bit of code does not even require a back-end file for the User Control. And
 
 I hope that this has been useful and explains just how easy it can be to use standard ASP.NET features to expose Umbraco Member Types.
 
-  [1]: http://www.aaron-powell.com/get/media/2723/picture%201_497x245.jpg
-  [2]: http://www.aaron-powell.com/get/media/2728/picture%202_495x190.jpg
-  [3]: http://www.aaron-powell.com/get/media/2733/picture%203_500x129.jpg
+  [1]: http://www.aaron-powell.com/get/media/2723/picture%201.jpg
+  [2]: http://www.aaron-powell.com/get/media/2728/picture%202.jpg
+  [3]: http://www.aaron-powell.com/get/media/2733/picture%203.jpg
 

@@ -70,9 +70,9 @@ Generally people will just use the Umbraco API and the Member.getProperty(alias)
 <p>That&#39;s what I&#39;m going to explain here, how you can use the ASP.NET ProfileProvider and it&#39;s associated classes with an Umbraco-defined MemberType.</p>
 <h2>Our Member Type</h2>
 <p>For this I&#39;m going to have a very basic little Member Type, it&#39;ll have three bits of data on it, First Name, Middle Name and Last Name.</p>
-<p><img src="http://www.aaron-powell.com/get/media/2723/picture%201_497x245.jpg" alt=""></p>
+<p><img src="http://www.aaron-powell.com/get/media/2723/picture%201.jpg" alt=""></p>
 <p>As you can see these are defined as per normal, nothing special about that. I can then go to my Umbraco Member and enter some data and view it:</p>
-<p><img src="http://www.aaron-powell.com/get/media/2728/picture%202_495x190.jpg" alt=""></p>
+<p><img src="http://www.aaron-powell.com/get/media/2728/picture%202.jpg" alt=""></p>
 <h2>Accessing via ASP.NET</h2>
 <p>Now we need to be able to access this via ASP.NET, there are two things we need to configure. First is we want to define our .NET class which represents the Member Type. To do this we need to create a class which inherits from System.Web.Profile.ProfileBase:</p>
 <pre class="highlighted"><code class="python">using System;
@@ -172,7 +172,7 @@ This will let ASP.NET know the class type and I can then access the properties t
     <span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p>That bit of code does not even require a back-end file for the User Control. And how does it look? Well just like this:</p>
-<p><img src="http://www.aaron-powell.com/get/media/2733/picture%203_500x129.jpg" alt=""></p>
+<p><img src="http://www.aaron-powell.com/get/media/2733/picture%203.jpg" alt=""></p>
 <h2>Conclusion</h2>
 <p>I hope that this has been useful and explains just how easy it can be to use standard ASP.NET features to expose Umbraco Member Types.</p>
 

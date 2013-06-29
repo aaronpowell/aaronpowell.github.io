@@ -179,23 +179,23 @@ Now, don&#39;t get me wrong, this isn&#39;t the only way to add the events to a 
 Because they are all separate I didn&#39;t have a real way to pass the ID of the control that was to make the popup appear. Oh, and to make thing more complicated there were 2 links for each popup, sadly the Modal Popup doesn&#39;t support multiple controls to do the poping-up (or as far as I&#39;m aware...)</p>
 <p>I also didn&#39;t want each of the popups to overlay each other, it doesn&#39;t really look that good (as I&#39;ll show shortly), so I needed a way to hide the master popup when the child was shown, and then when the child was hidden I want the master to reappear.</p>
 <p>So I&#39;m doing 3 basic controls for my example, a Login control:</p>
-<p><img src="http://www.aaron-powell.com/get/media/1944/picture%201_398x285.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1944/picture%201.png">Full size</a></p>
+<p><img src="http://www.aaron-powell.com/get/media/1944/picture%201.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1944/picture%201.png">Full size</a></p>
 <p>a Forgotten Password control:</p>
-<p><img src="http://www.aaron-powell.com/get/media/1949/picture%202_499x164.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1949/picture%202.png">Full size</a></p>
+<p><img src="http://www.aaron-powell.com/get/media/1949/picture%202.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1949/picture%202.png">Full size</a></p>
 <p>a Registration control:</p>
-<p><img src="http://www.aaron-powell.com/get/media/1954/picture%203_497x245.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1954/picture%203.png">Full size</a></p>
+<p><img src="http://www.aaron-powell.com/get/media/1954/picture%203.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1954/picture%203.png">Full size</a></p>
 <p>And add a dash of CSS and you get a lovely little popup:</p>
 <p><img src="http://www.aaron-powell.com/get/media/1959/picture%204.png" alt=""></p>
 <p>(Ok, so my design skills aren&#39;t great!)</p>
 <p>So now it&#39;s time to tie up the master control with the child controls. To do this I&#39;m going to have 2 events raised from the child controls, one for when the popup is shown and one for when it is hidden.
 I&#39;m also going to have an event which can be raised elsewhere on each child control which will initiate the showing of the popup (you could add one for the hiding, but I&#39;m using the inbuilt hiding from the CancelControlID property of the modal popup).</p>
 <p>For each they will look as follows:</p>
-<p><img src="http://www.aaron-powell.com/get/media/1969/picture%206_499x69.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1964/picture%205.png">Full size</a></p>
+<p><img src="http://www.aaron-powell.com/get/media/1969/picture%206.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1964/picture%205.png">Full size</a></p>
 <p>Lets have a look at how they work, first off I locate the the <code>Sys.Component</code> instance of the ModalPopup control.
 There are <code>showing</code> and <code>hiding</code> events fired off from the ModalPopup, so I&#39;m going to add a handler, the handler though will just be a stub which in-turn raises an event within our Client Event Pool. I&#39;ve given them names which will indicate what they are used for.
 Lastly I&#39;m going to add an event handler so anyone can raise an event which will show the popup.</p>
 <p>Now lets have a look in the Login control:</p>
-<p><img src="http://www.aaron-powell.com/get/media/1979/picture%207_498x245.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1979/picture%207.png">Full size</a></p>
+<p><img src="http://www.aaron-powell.com/get/media/1979/picture%207.jpg" alt=""><a href="http://www.aaron-powell.com/get/media/1979/picture%207.png">Full size</a></p>
 <p>The first 2 lines of this is adding event handlers to the links on the control. All they do is tell the Client Event Pool to raise an event, an event which I previously set up to be consumed by the child controls.</p>
 <p>Next we set up the Client Event Pool to listen for the hide and show events from our child controls.
 It listens for the events to be raised and when they are it&#39;ll either hide or show the modal on the current page.
