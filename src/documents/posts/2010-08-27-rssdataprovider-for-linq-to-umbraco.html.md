@@ -130,4 +130,4 @@ The screenscast is available [here][3] and the source code is [here][4].
   [1]: http://our.umbraco.org/wiki/codegarden-2009/open-space-minutes/linq
   [2]: http://our.umbraco.org/wiki/reference/api-cheatsheet/tree-api---to-create-custom-treesapplications
   [3]: http://screencast.com/t/NS24jMo6xkp
-  [4]: /media/2640/umbracodataproviderdemo.zip
+  [4]: /get/media/2640/umbracodataproviderdemo.zip

@@ -66,10 +66,10 @@ There are two downloads available, Member.cs or a compiled DLL.
 
 It will be interesting though when Umbraco 4 ships and the membership model changes to use the ASP.NET membership providers...
 
-  [1]: http://www.aaron-powell.com/media/746/umbmember01.png
-  [2]: http://www.aaron-powell.com/media/751/umbmember02.png
-  [3]: http://www.aaron-powell.com/media/756/umbmember03.png
-  [4]: http://www.aaron-powell.com/media/761/umbmember04_499x399.jpg
-  [5]: http://www.aaron-powell.com/media/766/umbmember05_494x45.jpg
-  [6]: http://www.aaron-powell.com/media/771/umbmember06_499x139.jpg
+  [1]: http://www.aaron-powell.com/get/media/746/umbmember01.png
+  [2]: http://www.aaron-powell.com/get/media/751/umbmember02.png
+  [3]: http://www.aaron-powell.com/get/media/756/umbmember03.png
+  [4]: http://www.aaron-powell.com/get/media/761/umbmember04_499x399.jpg
+  [5]: http://www.aaron-powell.com/get/media/766/umbmember05_494x45.jpg
+  [6]: http://www.aaron-powell.com/get/media/771/umbmember06_499x139.jpg
 

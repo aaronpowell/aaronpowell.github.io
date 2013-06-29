@@ -132,17 +132,17 @@ The `args` property is actually an array of all the arguments passed into the me
 Hopefully this has been a bit of fun looking at how you can use MS Ajax or a generic implementation of a client event pool to have disconnected AJAX functionality.
 
   [1]: http://seejoelprogram.wordpress.com/2008/07/31/a-client-event-pool-in-javascript/
-  [2]: http://www.aaron-powell.com/media/1944/picture%201_398x285.jpg
-  [3]: http://www.aaron-powell.com/media/1944/picture%201.png
-  [4]: http://www.aaron-powell.com/media/1949/picture%202_499x164.jpg
-  [5]: http://www.aaron-powell.com/media/1949/picture%202.png
-  [6]: http://www.aaron-powell.com/media/1954/picture%203_497x245.jpg
-  [7]: http://www.aaron-powell.com/media/1954/picture%203.png
-  [8]: http://www.aaron-powell.com/media/1959/picture%204.png
-  [9]: http://www.aaron-powell.com/media/1969/picture%206_499x69.jpg
-  [10]: http://www.aaron-powell.com/media/1964/picture%205.png
-  [11]: http://www.aaron-powell.com/media/1979/picture%207_498x245.jpg
-  [12]: http://www.aaron-powell.com/media/1979/picture%207.png
-  [13]: http://www.aaron-powell.com/media/1974/picture%208.png
-  [14]: http://www.aaron-powell.com/media/1984/picture%209.png
+  [2]: http://www.aaron-powell.com/get/media/1944/picture%201_398x285.jpg
+  [3]: http://www.aaron-powell.com/get/media/1944/picture%201.png
+  [4]: http://www.aaron-powell.com/get/media/1949/picture%202_499x164.jpg
+  [5]: http://www.aaron-powell.com/get/media/1949/picture%202.png
+  [6]: http://www.aaron-powell.com/get/media/1954/picture%203_497x245.jpg
+  [7]: http://www.aaron-powell.com/get/media/1954/picture%203.png
+  [8]: http://www.aaron-powell.com/get/media/1959/picture%204.png
+  [9]: http://www.aaron-powell.com/get/media/1969/picture%206_499x69.jpg
+  [10]: http://www.aaron-powell.com/get/media/1964/picture%205.png
+  [11]: http://www.aaron-powell.com/get/media/1979/picture%207_498x245.jpg
+  [12]: http://www.aaron-powell.com/get/media/1979/picture%207.png
+  [13]: http://www.aaron-powell.com/get/media/1974/picture%208.png
+  [14]: http://www.aaron-powell.com/get/media/1984/picture%209.png
   [15]: /get/web-dev/clienteventpooldemo.zip

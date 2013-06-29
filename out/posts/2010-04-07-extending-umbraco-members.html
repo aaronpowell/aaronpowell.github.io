@@ -170,22 +170,22 @@ You&#39;ve got to make sure you&#39;re reading from the correct alias, typing ch
 <p>So lets look at some sections of the class.</p>
 <h2>Default Properties</h2>
 <p>A member has a few default properties which are also built into the framework. There are also a few additional properties which the framework uses (such as the MembershipTypeId) which are coded in. All of the default properties are virtual so they can be overriden if so desired.
-<img src="http://www.aaron-powell.com/media/746/umbmember01.png" alt="Properties"></p>
+<img src="http://www.aaron-powell.com/get/media/746/umbmember01.png" alt="Properties"></p>
 <p>An interesting addition I have made is the IsDirty property. This is used later on during the Save to ensure that only members who have actually got data changed are saved back into Umbraco. This limits database hits and improves performance.</p>
 <h2>Constructors</h2>
 <p>I&#39;ve found that there are 3 really useful constructors, a new member constructor and two existing member constructors.
-<img src="http://www.aaron-powell.com/media/751/umbmember02.png" alt="Constructors"></p>
+<img src="http://www.aaron-powell.com/get/media/751/umbmember02.png" alt="Constructors"></p>
 <p>What you&#39;ll notice from this is that the constructor which takes an Umbraco member is actually marked as private. This is because the framework is targetted at multi-teired applications, like MVC/ MVP where you want to keep data layers separate from the others. And by doing this you can avoid having the Umbraco DLL&#39;s included in any other project in your solution.</p>
 <p>Next you&#39;ll notice a call to the method <em>PopulateCustomProperties</em>, this is an abstract method which you need to implement yourself to populate your own properties on a membership object.</p>
-<p>Click to see the <a href="http://www.aaron-powell.com/media/756/umbmember03.png">Saving</a> method.</p>
+<p>Click to see the <a href="http://www.aaron-powell.com/get/media/756/umbmember03.png">Saving</a> method.</p>
 <p>Notice the use of the IsDirty flag to ensure we&#39;re only saving what we should save.</p>
 <h2>Helper Methods</h2>
 <p>I&#39;ve provided a few helper methods which can be used for the reading and writing of custom properties on the Umbraco membership object.</p>
-<p><img src="http://www.aaron-powell.com/media/761/umbmember04_499x399.jpg" alt="Helper Methods"></p>
+<p><img src="http://www.aaron-powell.com/get/media/761/umbmember04_499x399.jpg" alt="Helper Methods"></p>
 <p>The two get methods handle the null and default data checking, along with casting back to the appriate data type. Here&#39;s an example implementation:</p>
-<p><img src="http://www.aaron-powell.com/media/766/umbmember05_494x45.jpg" alt="Helper usage"></p>
+<p><img src="http://www.aaron-powell.com/get/media/766/umbmember05_494x45.jpg" alt="Helper usage"></p>
 <p>The save is really just a shortcut, I was sick of typing out that same command every time, to use it you would call it from the <em>PrepareMemberForSaving</em> method like so:</p>
-<p><img src="http://www.aaron-powell.com/media/771/umbmember06_499x139.jpg" alt=""></p>
+<p><img src="http://www.aaron-powell.com/get/media/771/umbmember06_499x139.jpg" alt=""></p>
 <p>And we&#39;re done</p>
 <p>So there you have it, a simple little class for creating a .NET implementation of an Umbraco member.</p>
 <p>There are two downloads available, Member.cs or a compiled DLL.</p>
