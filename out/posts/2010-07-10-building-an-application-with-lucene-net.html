@@ -183,7 +183,7 @@
 <p>This kind of split approach with Lucene is a common way to use Lucene. When working with Lucene the most performance intensive part of the process is actually getting the data back out of the index. Searching against Lucene is really fast, it&#39;s what Lucene is designed for. So we have Lucene to mainly just store our analyzed version of our data, and then we have our underlying data store to retrieve all of the data.</p>
 <h2>Building the BlogManager</h2>
 <p>I&#39;m going to be making this little application using WPF (yep, the web developer is trying WPF, and it&#39;s going... ok :P). First off I want a way to add RSS feeds to be able to search against:</p>
-<p><img src="/get/csharp/blogmanager/blogmanager001.PNG" alt=""></p>
+<p><img src="/get/csharp/BlogManager/blogmanager001.PNG" alt=""></p>
 <p>So there we go, we&#39;re able to provide the URL for a blog and we&#39;re going to push some data into our index. I&#39;m actually using Lucene to store the URL&#39;s as well as the actual blogs to search against. Remember that a Document Database doesn&#39;t have a schema, so you can stick anything in there that you want. Let&#39;s see some code:</p>
 <pre class="highlighted"><code class="avrasm">public MainWindow()
 {
@@ -229,14 +229,14 @@ writer<span class="preprocessor">.AddDocument</span>(doc)<span class="comment">;
 <p>Now we just do a commit to our index:</p>
 <pre class="highlighted"><code class="sql">writer.<span class="operator"><span class="keyword">Commit</span>();</span></code></pre>
 <p>Our blog has been added into our index, woo! Now it&#39;ll be listed below in the data grid:</p>
-<p><img src="/get/csharp/blogmanager/blogmanager002.PNG" alt=""></p>
+<p><img src="/get/csharp/BlogManager/blogmanager002.PNG" alt=""></p>
 <h2>Searching the blogs</h2>
 <p>Now that we&#39;ve got some stuff in our index let&#39;s try and get at it. I&#39;ve got another awesome example of UI design for that:</p>
-<p><img src="/get/csharp/blogmanager/blogmanager003.PNG" alt=""></p>
+<p><img src="/get/csharp/BlogManager/blogmanager003.PNG" alt=""></p>
 <p>Here I&#39;ve got a big text box which I can enter a Lucene query using the <a href="http://lucene.apache.org/java/2_3_2/queryparsersyntax.html">Lucene Query Parser Syntax</a> so I can just get at the data. Lets say that I want all the posts which had Umbraco in the title:</p>
-<p><img src="/get/csharp/blogmanager/blogmanager004.PNG" alt=""></p>
+<p><img src="/get/csharp/BlogManager/blogmanager004.PNG" alt=""></p>
 <p>Or maybe I&#39;ll get all the ones which contain Umbraco or Lucene.Net:</p>
-<p><img src="/get/csharp/blogmanager/blogmanager005.PNG" alt=""></p>
+<p><img src="/get/csharp/BlogManager/blogmanager005.PNG" alt=""></p>
 <p>And here&#39;s the underlying code:</p>
 <pre class="highlighted"><code class="avrasm">var queryParser = new MultiFieldQueryParser(Version<span class="preprocessor">.LUCENE</span>_29, new[] { <span class="string">"title"</span>, <span class="string">"content"</span>, <span class="string">"categories"</span>, <span class="string">"type"</span> }, analyzer)<span class="comment">;</span>
 var query = new BooleanQuery()<span class="comment">;</span>

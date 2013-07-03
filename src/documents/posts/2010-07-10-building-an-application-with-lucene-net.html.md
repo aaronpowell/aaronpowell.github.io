@@ -149,14 +149,14 @@ I'll publish the source code in a little while, along with a downloadable versio
 But hopefully this gives you a view at how you can use Lucene in your own applications.
 
 
-  [1]: /get/csharp/blogmanager/blogmanager001.PNG
+  [1]: /get/csharp/BlogManager/blogmanager001.PNG
   [2]: http://lucene.apache.org/java/2_9_2/api/all/org/apache/lucene/analysis/standard/StandardAnalyzer.html
   [3]: /lucene-analyzer
   [4]: http://lucene.apache.org/java/2_9_2/api/all/index.html?org/apache/lucene/store/SimpleFSDirectory.html
   [5]: http://msdn.microsoft.com/en-us/library/system.servicemodel.syndication.syndicationfeed.aspx
-  [6]: /get/csharp/blogmanager/blogmanager002.PNG
-  [7]: /get/csharp/blogmanager/blogmanager003.PNG
+  [6]: /get/csharp/BlogManager/blogmanager002.PNG
+  [7]: /get/csharp/BlogManager/blogmanager003.PNG
   [8]: http://lucene.apache.org/java/2_3_2/queryparsersyntax.html
-  [9]: /get/csharp/blogmanager/blogmanager004.PNG
-  [10]: /get/csharp/blogmanager/blogmanager005.PNG
+  [9]: /get/csharp/BlogManager/blogmanager004.PNG
+  [10]: /get/csharp/BlogManager/blogmanager005.PNG
   [11]: http://lucene.apache.org/java/2_9_2/api/all/org/apache/lucene/queryParser/MultiFieldQueryParser.html
