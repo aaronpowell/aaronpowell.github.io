@@ -55,7 +55,18 @@ docpadConfig = {
       }).filter(function(x) {
         return x.matches > 0;
       }).sort(function(x, y) {
-        return x.matches < y.matches;
+        if (x.matches < y.matches) {
+          return -1;
+        } else if (x.matches > y.matches) {
+          return 1;
+        }
+
+        if (x.post.date < y.post.date) {
+          return 1;
+        } else if (x.post.date > y.post.date) {
+          return -1;
+        }
+        return 0;
       }).map(function(x) {
         return x.post;
       });
