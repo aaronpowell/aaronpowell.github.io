@@ -4,13 +4,66 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-06-26T01:05:09.682Z</updated>
+    <updated>2013-07-04T06:26:49.201Z</updated>
     <id></id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>JavaScript call and apply</title>
+            <link href="/posts/2013-07-04-javascript-call-and-apply.html"/>
+            <updated>2013-07-04T00:00:00.000Z</updated>
+            <id>/posts/2013-07-04-javascript-call-and-apply.html</id>
+            <content type="html">&lt;p&gt;A colleague recently came across this line in our codebase that I wrote:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;binding&lt;span class=&quot;preprocessor&quot;&gt;.vehicle&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.involvements&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.push&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.apply&lt;/span&gt;(binding&lt;span class=&quot;preprocessor&quot;&gt;.vehicle&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.involvements&lt;/span&gt;, vehicle&lt;span class=&quot;preprocessor&quot;&gt;.involvements&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What the overall result of the code is isn&amp;#39;t particularly important, the part that tripped them up (and made them think I&amp;#39;m on drugs I&amp;#39;m not actually on) was this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;binding&lt;span class=&quot;preprocessor&quot;&gt;.vehicle&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.involvements&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.push&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.apply&lt;/span&gt;(binding&lt;span class=&quot;preprocessor&quot;&gt;.vehicle&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.involvements&lt;/span&gt;, vehicle&lt;span class=&quot;preprocessor&quot;&gt;.involvements&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the  involvements property is an array in both scenarios which exposes a push method, the confusion was around what the apply method does and why I was even using it.&lt;/p&gt;
+&lt;p&gt;Both call and apply are methods which are part of the JavaScript language and are exposed on the Function prototype, meaning that they can be accessed from any function, so let&amp;#39;s say we have this function:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(a)&lt;/span&gt; {&lt;/span&gt;
+      &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(this, a, argument);
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we invoke it like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;('b')&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is the same as doing this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(window, &lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;])&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Note: In ES3 it&amp;#39;ll be window, ES5 strict mode it&amp;#39;ll be null, or undefined, I forget which&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Now let&amp;#39;s throw the apply method into the mix and invoke it like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;foo&lt;span class=&quot;preprocessor&quot;&gt;.apply&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;])&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This time it&amp;#39;ll be like we&amp;#39;ve done this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;])&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could alternatively provide an array of arguments so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;foo&lt;span class=&quot;preprocessor&quot;&gt;.apply&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;'c'&lt;/span&gt;])&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Becomes:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'c'&lt;/span&gt;])&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So what happened?&lt;/p&gt;
+&lt;p&gt;The apply method takes two arguments, the first is what controls the this value, the second is an array of objects that will be decomposed to represent the various arguments passed in, meaning that the array item 0 will be the first argument, b in our example, and so on.&lt;/p&gt;
+&lt;p&gt;The call method is similar but instead of taking an array that represents the arguments it takes a splat, anything after the this context will be used directly as the arguments. So we&amp;#39;d use call like this to achieve the same result:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;foo&lt;span class=&quot;preprocessor&quot;&gt;.call&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'a'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'b'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'c'&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Relating it to our original code&lt;/h2&gt;
+&lt;p&gt;Let&amp;#39;s think about how this related back to our original code, working with arrays and push. Say I have an array and I want to add N number of values to said array. How would you do it?&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; arr = [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;];
+&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; arr2 = [&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;];
+&lt;span class=&quot;comment&quot;&gt;//I want arr == [1,2,3,4,5,6]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Well the first obvious candidate is a for loop:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &amp;lt; &lt;span class=&quot;transposed_variable&quot;&gt;arr2.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;++) &lt;span class=&quot;cell&quot;&gt;{
+      arr.push(arr2[i]);
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;#39;ll do exactly what we&amp;#39;re after, but there&amp;#39;s a problem, we&amp;#39;re calling push &lt;em&gt;a lot&lt;/em&gt;, once for every item in the array in fact(!!). This can be a bit of a performance hit, especially if you have large arrays, the JavaScript runtime engine simply can&amp;#39;t optimise it because it doesn&amp;#39;t know how many there could be so it can&amp;#39;t preallocate the memory, meaning it&amp;#39;s somewhat inefficient.&lt;/p&gt;
+&lt;p&gt;Alternatively you could use the &lt;code&gt;concat&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;ini&quot;&gt;&lt;span class=&quot;setting&quot;&gt;arr = &lt;span class=&quot;value&quot;&gt;arr.concat(arr2);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That works just fine but the problem is that you replace arr with a new instance of it. &lt;em&gt;Generally speaking&lt;/em&gt; that&amp;#39;s not a problem, but if you&amp;#39;re relying on the object itself to not change, at a memory level (say it&amp;#39;s an observable property from Knockout, or a bound property in WinJS), you&amp;#39;ll potentially run into problems.&lt;/p&gt;
+&lt;p&gt;So we&amp;#39;re back to push, we want to append multiple items to an existing array without overriding the original object/property. The nice thing about push is that we can provide it N number of arguments which represent all the items we wish to push. Well since I&amp;#39;ve got an array I can&amp;#39;t exactly pass that in directly, since then argument 1 will be the array, it won&amp;#39;t be decomposed. And this is where apply comes in, we can provide the array as the 2nd argument to apply and have N number of items pushed to the array. This brings us to doing this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;arr&lt;span class=&quot;preprocessor&quot;&gt;.push&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.apply&lt;/span&gt;(arr, arr2)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And there we have it, we&amp;#39;ve used apply to decompose an array and push all he values into the target array, basically we&amp;#39;ve done this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;arr&lt;span class=&quot;preprocessor&quot;&gt;.push&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since the this context we&amp;#39;ve set is the &lt;code&gt;arr&lt;/code&gt; object itself.&lt;/p&gt;
+&lt;p&gt;Hopefully that does a good enough explanation to confuse everyone ;).&lt;/p&gt;
+</content>
+        </entry>
     
         <entry>
             <title>DDDMelbourne workshop</title>
@@ -541,6 +594,52 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
+            <title>Flight Mode - local and session storage</title>
+            <link href="/posts/2013-05-23-local-session-storage.html"/>
+            <updated>2013-05-23T00:00:00.000Z</updated>
+            <id>/posts/2013-05-23-local-session-storage.html</id>
+            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
+&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
+&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
+&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
+&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
+&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
+&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
+&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
+&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
+var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
+localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
+};
+
+Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
+&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
+&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Flight Mode - Introduction</title>
             <link href="/posts/2013-05-23-introduction.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
@@ -604,52 +703,6 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
 })&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Flight Mode - local and session storage</title>
-            <link href="/posts/2013-05-23-local-session-storage.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>/posts/2013-05-23-local-session-storage.html</id>
-            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
-&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
-&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
-&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
-&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
-&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
-&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
-&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
-&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
-var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
-localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
-};
-
-Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
-&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
-&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
 </content>
         </entry>
     
@@ -4819,6 +4872,18 @@ global&lt;span class=&quot;preprocessor&quot;&gt;.document&lt;/span&gt; = window
         </entry>
     
         <entry>
+            <title>Are you going to Teched Australia?</title>
+            <link href="/posts/2011-08-08-teched-au-2011.html"/>
+            <updated>2011-08-08T00:00:00.000Z</updated>
+            <id>/posts/2011-08-08-teched-au-2011.html</id>
+            <content type="html">&lt;p&gt;Because if you are you get to see me not once but twice! Woot!&lt;/p&gt;
+&lt;p&gt;Come down and check out &lt;a href=&quot;http://australia.msteched.com/topic/details/WEB203&quot;&gt;WEB203 - Chasing the Evolving Web&lt;/a&gt; and learn how to keep ahead of the game when it comes to doing the latest and greatest on the web.&lt;/p&gt;
+&lt;p&gt;In addition you should come to &lt;a href=&quot;http://australia.msteched.com/topic/details/DEV305&quot;&gt;DEV305 - An MMO in 45 Minutes: Developing for 2 screens and a cloud without being cut&lt;/a&gt; for some utter bedlam with myself, &lt;a href=&quot;http://lzcd.com&quot;&gt;Luke Drumm&lt;/a&gt;, &lt;a href=&quot;http://www.richard-banks.org&quot;&gt;Richard Banks&lt;/a&gt; and &lt;a href=&quot;http://azure.snagy.name/blog/&quot;&gt;Steve Nagy&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;See you there!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Why I don't like KnockoutJS</title>
             <link href="/posts/2011-08-08-why-i-don-t-like-knockoutjs.html"/>
             <updated>2011-08-08T00:00:00.000Z</updated>
@@ -4846,18 +4911,6 @@ global&lt;span class=&quot;preprocessor&quot;&gt;.document&lt;/span&gt; = window
 &lt;p&gt;This results in a clean separation between HTML and JavaScript with HTML going back to just describing intention and JavaScript taking those intentions and running with it.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;This post has basically outlined my primary grievance with KnockoutJS. As stated, I don&amp;#39;t have a problem with the &lt;em&gt;concept&lt;/em&gt; of it, the idea of two-way binding is quite nice but what&amp;#39;s required to achieve that is where the issue lies.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Are you going to Teched Australia?</title>
-            <link href="/posts/2011-08-08-teched-au-2011.html"/>
-            <updated>2011-08-08T00:00:00.000Z</updated>
-            <id>/posts/2011-08-08-teched-au-2011.html</id>
-            <content type="html">&lt;p&gt;Because if you are you get to see me not once but twice! Woot!&lt;/p&gt;
-&lt;p&gt;Come down and check out &lt;a href=&quot;http://australia.msteched.com/topic/details/WEB203&quot;&gt;WEB203 - Chasing the Evolving Web&lt;/a&gt; and learn how to keep ahead of the game when it comes to doing the latest and greatest on the web.&lt;/p&gt;
-&lt;p&gt;In addition you should come to &lt;a href=&quot;http://australia.msteched.com/topic/details/DEV305&quot;&gt;DEV305 - An MMO in 45 Minutes: Developing for 2 screens and a cloud without being cut&lt;/a&gt; for some utter bedlam with myself, &lt;a href=&quot;http://lzcd.com&quot;&gt;Luke Drumm&lt;/a&gt;, &lt;a href=&quot;http://www.richard-banks.org&quot;&gt;Richard Banks&lt;/a&gt; and &lt;a href=&quot;http://azure.snagy.name/blog/&quot;&gt;Steve Nagy&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;See you there!&lt;/p&gt;
 </content>
         </entry>
     
@@ -6069,19 +6122,6 @@ dependencies&lt;span class=&quot;preprocessor&quot;&gt;.Dump&lt;/span&gt;()&lt;s
         </entry>
     
         <entry>
-            <title>How does Umbraco look in IE9 RC?</title>
-            <link href="/posts/2011-02-11-umbraco-ie9rc.html"/>
-            <updated>2011-02-11T00:00:00.000Z</updated>
-            <id>/posts/2011-02-11-umbraco-ie9rc.html</id>
-            <content type="html">&lt;p&gt;Sexy!&lt;/p&gt;
-&lt;p&gt;Seriously, the IE9 font rendering is just beautiful, best of the current browser set.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/upload/Render/umbraco/umbraco-ie9rc.PNG&quot; alt=&quot;Umbraco on IE9&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Compare that to Chrome, notice the lack of antialiasing on the header text.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/upload/Render/umbraco/umbraco-chrome.PNG&quot; alt=&quot;Umbracon on Chrome&quot;&gt;&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Issue with Geolocation in IE9 RC</title>
             <link href="/posts/2011-02-11-ie9-rc-geolocation-issue.html"/>
             <updated>2011-02-11T00:00:00.000Z</updated>
@@ -6108,6 +6148,42 @@ dependencies&lt;span class=&quot;preprocessor&quot;&gt;.Dump&lt;/span&gt;()&lt;s
 &lt;p&gt;Well as it turns out this is a &lt;strong&gt;known issue of the RC&lt;/strong&gt;, and a little birdy has told me that the cause of this is because &lt;strong&gt;the service used by the browser has an issue with DateTime objects which aren&amp;#39;t US formatted&lt;/strong&gt;. Ironically though it does work just fine in the USA, so it seems like an odd issue to have cropped up, after all geolocation does imply something global ;).&lt;/p&gt;
 &lt;p&gt;The same little birdy has said that a fix is in the works, and luckily this is a &lt;strong&gt;service level fix&lt;/strong&gt; so hopefully they can roll it out without any browser changes.&lt;/p&gt;
 &lt;p&gt;Fingers crossed and we can make location-based websites for all major browser vendors soon.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>How does Umbraco look in IE9 RC?</title>
+            <link href="/posts/2011-02-11-umbraco-ie9rc.html"/>
+            <updated>2011-02-11T00:00:00.000Z</updated>
+            <id>/posts/2011-02-11-umbraco-ie9rc.html</id>
+            <content type="html">&lt;p&gt;Sexy!&lt;/p&gt;
+&lt;p&gt;Seriously, the IE9 font rendering is just beautiful, best of the current browser set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/upload/Render/umbraco/umbraco-ie9rc.PNG&quot; alt=&quot;Umbraco on IE9&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Compare that to Chrome, notice the lack of antialiasing on the header text.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/upload/Render/umbraco/umbraco-chrome.PNG&quot; alt=&quot;Umbracon on Chrome&quot;&gt;&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Blink and marquee!</title>
+            <link href="/posts/2011-02-09-blinking-marquee.html"/>
+            <updated>2011-02-09T00:00:00.000Z</updated>
+            <id>/posts/2011-02-09-blinking-marquee.html</id>
+            <content type="html">&lt;p&gt;Recently I&amp;#39;ve blogged about creating the a &lt;a href=&quot;http://www.aaron-powell.com/doing-it-wrong/blink&quot;&gt;&lt;code&gt;blink&lt;/code&gt; tag&lt;/a&gt; with jQuery, I&amp;#39;ve also blogged about making a &lt;a href=&quot;http://www.aaron-powell.com/doing-it-wrong/marquee&quot;&gt;&lt;code&gt;marquee&lt;/code&gt; tag&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Well can we combine them? Sure we can! But with &lt;code&gt;$.Deferred()&lt;/code&gt; there&amp;#39;s some more cool things we can do, like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;smalltalk&quot;&gt;&lt;span class=&quot;char&quot;&gt;$.&lt;/span&gt;when(&lt;span class=&quot;char&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).blink({ &lt;span class=&quot;method&quot;&gt;count:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt; }), &lt;span class=&quot;char&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).marquee({ &lt;span class=&quot;method&quot;&gt;count:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; }))
+    .done(function() {
+        &lt;span class=&quot;char&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).css(&lt;span class=&quot;string&quot;&gt;'color'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'#f00'&lt;/span&gt;);
+    });&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once both the plugins have completed the text will turn red.&lt;/p&gt;
+&lt;p&gt;Without wanting to get too deep into how Deferred works (&lt;a href=&quot;http://api.jquery.com/category/deferred-object/&quot;&gt;read the doco for that&lt;/a&gt;) the high-level view is that when all the methods that are passed into &lt;code&gt;$.when&lt;/code&gt; raise &lt;code&gt;deferred.resolve&lt;/code&gt; (it only works if they use promise and such properly), but yeah, that&amp;#39;s how you can have a function invoked when all the deferred method complete!&lt;/p&gt;
+&lt;p&gt;Hey, you could even do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$.&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;when&lt;/span&gt;(&lt;span class=&quot;variable&quot;&gt;$(&lt;/span&gt;.get(&lt;span class=&quot;string&quot;&gt;'/foo'&lt;/span&gt;), &lt;span class=&quot;variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).blink({ &lt;span class=&quot;symbol&quot;&gt;count:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt; }))
+    .done(function() {
+        &lt;span class=&quot;variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).css(&lt;span class=&quot;string&quot;&gt;'color'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'#f00'&lt;/span&gt;);
+    });&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Blink &amp;amp; AJAX, how awesome!&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s a &lt;a href=&quot;http://jsfiddle.net/slace/C85VH/&quot;&gt;jsfiddle&lt;/a&gt; if you want to play too.&lt;/p&gt;
 </content>
         </entry>
     
@@ -6304,29 +6380,6 @@ dependencies&lt;span class=&quot;preprocessor&quot;&gt;.Dump&lt;/span&gt;()&lt;s
 &lt;p&gt;This brings us to the conclusion of our fun into jQuery again and bringing back a good ol&amp;#39; friend in the form of &lt;code&gt;marquee&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;I&amp;#39;ve got a &lt;a href=&quot;https://gist.github.com/820404&quot;&gt;gist&lt;/a&gt; if you want the code and a &lt;a href=&quot;http://jsfiddle.net/slace/88YLG/&quot;&gt;jsfiddle&lt;/a&gt; if you want to play around with it.&lt;/p&gt;
 &lt;p&gt;Go go gadget 1998 :D.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Blink and marquee!</title>
-            <link href="/posts/2011-02-09-blinking-marquee.html"/>
-            <updated>2011-02-09T00:00:00.000Z</updated>
-            <id>/posts/2011-02-09-blinking-marquee.html</id>
-            <content type="html">&lt;p&gt;Recently I&amp;#39;ve blogged about creating the a &lt;a href=&quot;http://www.aaron-powell.com/doing-it-wrong/blink&quot;&gt;&lt;code&gt;blink&lt;/code&gt; tag&lt;/a&gt; with jQuery, I&amp;#39;ve also blogged about making a &lt;a href=&quot;http://www.aaron-powell.com/doing-it-wrong/marquee&quot;&gt;&lt;code&gt;marquee&lt;/code&gt; tag&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Well can we combine them? Sure we can! But with &lt;code&gt;$.Deferred()&lt;/code&gt; there&amp;#39;s some more cool things we can do, like this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;smalltalk&quot;&gt;&lt;span class=&quot;char&quot;&gt;$.&lt;/span&gt;when(&lt;span class=&quot;char&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).blink({ &lt;span class=&quot;method&quot;&gt;count:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt; }), &lt;span class=&quot;char&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).marquee({ &lt;span class=&quot;method&quot;&gt;count:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; }))
-    .done(function() {
-        &lt;span class=&quot;char&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).css(&lt;span class=&quot;string&quot;&gt;'color'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'#f00'&lt;/span&gt;);
-    });&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Once both the plugins have completed the text will turn red.&lt;/p&gt;
-&lt;p&gt;Without wanting to get too deep into how Deferred works (&lt;a href=&quot;http://api.jquery.com/category/deferred-object/&quot;&gt;read the doco for that&lt;/a&gt;) the high-level view is that when all the methods that are passed into &lt;code&gt;$.when&lt;/code&gt; raise &lt;code&gt;deferred.resolve&lt;/code&gt; (it only works if they use promise and such properly), but yeah, that&amp;#39;s how you can have a function invoked when all the deferred method complete!&lt;/p&gt;
-&lt;p&gt;Hey, you could even do this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$.&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;when&lt;/span&gt;(&lt;span class=&quot;variable&quot;&gt;$(&lt;/span&gt;.get(&lt;span class=&quot;string&quot;&gt;'/foo'&lt;/span&gt;), &lt;span class=&quot;variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).blink({ &lt;span class=&quot;symbol&quot;&gt;count:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt; }))
-    .done(function() {
-        &lt;span class=&quot;variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;'h1'&lt;/span&gt;).css(&lt;span class=&quot;string&quot;&gt;'color'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'#f00'&lt;/span&gt;);
-    });&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Blink &amp;amp; AJAX, how awesome!&lt;/p&gt;
-&lt;p&gt;Here&amp;#39;s a &lt;a href=&quot;http://jsfiddle.net/slace/C85VH/&quot;&gt;jsfiddle&lt;/a&gt; if you want to play too.&lt;/p&gt;
 </content>
         </entry>
     
@@ -7162,56 +7215,6 @@ internal NHamlTemplateEngine()
         </entry>
     
         <entry>
-            <title>2010, a year in review</title>
-            <link href="/posts/2010-12-24-2010-a-year-in-review.html"/>
-            <updated>2010-12-24T00:00:00.000Z</updated>
-            <id>/posts/2010-12-24-2010-a-year-in-review.html</id>
-            <content type="html">&lt;p&gt;Well it&amp;#39;s about that time of the year, the time when you look back at the year that was... and what a year 2010 has been.&lt;/p&gt;
-&lt;p&gt;Last year I said that &lt;a href=&quot;/2009-a-year-in-review&quot;&gt;2009 was my biggest year professionally&lt;/a&gt;, but in reality 2010 trumped it well and truly.&lt;/p&gt;
-&lt;h2&gt;2010, the year of the conference&lt;/h2&gt;
-&lt;p&gt;In 2010 I set a new goal for myself and that was to become more of a figure in the Australian development community, and I started this off with a dive into the conference circuit.&lt;/p&gt;
-&lt;p&gt;I...&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Kicked off with &lt;a href=&quot;/dddmelbourne-umbraco&quot;&gt;DDD Melbourne&lt;/a&gt; where I presented a Beginning Umbraco session&lt;/li&gt;
-&lt;li&gt;I then headed back to Melbourne for Remix (which I just attended :P)&lt;/li&gt;
-&lt;li&gt;Flew to Denmark for &lt;a href=&quot;/codegarden-10&quot;&gt;CodeGarden 10 to speak about unit testing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Returned to Sydney to help organize (and speak at) the first DDD Sydney conference&lt;/li&gt;
-&lt;li&gt;Spoke about &lt;a href=&quot;http://www.slideshare.net/CraigBailey/umbraco-in-10-minutes&quot;&gt;Umbraco in the CMS Smackdown&lt;/a&gt; for &lt;a href=&quot;http://www.sbtug.com/&quot;&gt;SBTUG&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Won Amped and went to Tokyo for Web Directions East&lt;/li&gt;
-&lt;li&gt;Spoke about open source content management at CodeCamp OZ &lt;/li&gt;
-&lt;li&gt;Talked about &lt;a href=&quot;http://openconferenceprotocol.org&quot;&gt;Open Conference Protocol&lt;/a&gt; at the &lt;a href=&quot;http://thesaug.org/&quot;&gt;Sydney Architecture User Group&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;And wrapped up the year with a lightning talk at &lt;a href=&quot;http://sydjs.com&quot;&gt;SydJs&lt;/a&gt; on &lt;a href=&quot;/sydjs-javascript-frameworks&quot;&gt;JavaScript frameworks&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Phew, busy conference set, wonder if I can top that next year :P.&lt;/p&gt;
-&lt;h2&gt;Another year, another job&lt;/h2&gt;
-&lt;p&gt;Last year I was excited about taking a new job with TheFARM Digital and getting to work with &lt;a href=&quot;http://shazwazza.com&quot;&gt;Shannon&lt;/a&gt; so we could really go crazy with Umbraco development. Well there was some sadness when I &lt;a href=&quot;/all-good-things-come-to-an-end&quot;&gt;announced that I was to be leaving TheFARM&lt;/a&gt; to join &lt;a href=&quot;http://readify.net&quot;&gt;Readify&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Open Source work&lt;/h2&gt;
-&lt;p&gt;I spent a lot of time this year working on Open Source projects. Obviously Umbraco has featured highly in this area, with version 5 underway (and helping with the team migrate to Mercurial) a lot of my time was devoted there.&lt;/p&gt;
-&lt;p&gt;But I&amp;#39;ve also worked on a few other smaller projects:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.funnelweblog.com/&quot;&gt;FunnelWeb&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;A blogging engine targeted at real developers&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/javascript-tools&quot;&gt;JavaScript tools&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/ole&quot;&gt;Ole&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://hg.slace.biz/slidee&quot;&gt;Slidee&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/whatkey-net-for-your-javascript-keycode-glory&quot;&gt;WhatKey.Net&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://examine.codeplex.com&quot;&gt;Examine&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/linq-to-umbraco-extensions&quot;&gt;LINQ to Umbraco Extensions&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;I&amp;#39;ll update this soon :P&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/dynamics-library&quot;&gt;Dynamic extensions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://openconferenceprotocol.org&quot;&gt;Open Conference Protocol&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Nice little list I think ;)&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Well that pretty much concludes my 2010 wrap up, in 2011 be sure to look out for me at MIX 11, DDD Sydney and CodeGarden 11 :D&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Using Razor in Umbraco 4</title>
             <link href="/posts/2010-12-24-umbraco-4-and-razor.html"/>
             <updated>2010-12-24T00:00:00.000Z</updated>
@@ -7259,6 +7262,56 @@ internal NHamlTemplateEngine()
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;I&amp;#39;m sure that even the most seasoned XSLT &amp;quot;developer&amp;quot; (I&amp;#39;m looking at you &lt;a href=&quot;http://twitter.com/warrenbuckley&quot;&gt;Warren&lt;/a&gt;!) will have to admit the Razor syntax is highly readable for people who aren&amp;#39;t .NET developers. And because we&amp;#39;re working with a dynamic object it&amp;#39;s really simple to access the properties as needed.&lt;/p&gt;
 &lt;p&gt;This brings us to the end of our quick look at the Razor support which is coming in Umbraco Juno, and how it&amp;#39;s going to be another great choice for developers.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>2010, a year in review</title>
+            <link href="/posts/2010-12-24-2010-a-year-in-review.html"/>
+            <updated>2010-12-24T00:00:00.000Z</updated>
+            <id>/posts/2010-12-24-2010-a-year-in-review.html</id>
+            <content type="html">&lt;p&gt;Well it&amp;#39;s about that time of the year, the time when you look back at the year that was... and what a year 2010 has been.&lt;/p&gt;
+&lt;p&gt;Last year I said that &lt;a href=&quot;/2009-a-year-in-review&quot;&gt;2009 was my biggest year professionally&lt;/a&gt;, but in reality 2010 trumped it well and truly.&lt;/p&gt;
+&lt;h2&gt;2010, the year of the conference&lt;/h2&gt;
+&lt;p&gt;In 2010 I set a new goal for myself and that was to become more of a figure in the Australian development community, and I started this off with a dive into the conference circuit.&lt;/p&gt;
+&lt;p&gt;I...&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Kicked off with &lt;a href=&quot;/dddmelbourne-umbraco&quot;&gt;DDD Melbourne&lt;/a&gt; where I presented a Beginning Umbraco session&lt;/li&gt;
+&lt;li&gt;I then headed back to Melbourne for Remix (which I just attended :P)&lt;/li&gt;
+&lt;li&gt;Flew to Denmark for &lt;a href=&quot;/codegarden-10&quot;&gt;CodeGarden 10 to speak about unit testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Returned to Sydney to help organize (and speak at) the first DDD Sydney conference&lt;/li&gt;
+&lt;li&gt;Spoke about &lt;a href=&quot;http://www.slideshare.net/CraigBailey/umbraco-in-10-minutes&quot;&gt;Umbraco in the CMS Smackdown&lt;/a&gt; for &lt;a href=&quot;http://www.sbtug.com/&quot;&gt;SBTUG&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Won Amped and went to Tokyo for Web Directions East&lt;/li&gt;
+&lt;li&gt;Spoke about open source content management at CodeCamp OZ &lt;/li&gt;
+&lt;li&gt;Talked about &lt;a href=&quot;http://openconferenceprotocol.org&quot;&gt;Open Conference Protocol&lt;/a&gt; at the &lt;a href=&quot;http://thesaug.org/&quot;&gt;Sydney Architecture User Group&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;And wrapped up the year with a lightning talk at &lt;a href=&quot;http://sydjs.com&quot;&gt;SydJs&lt;/a&gt; on &lt;a href=&quot;/sydjs-javascript-frameworks&quot;&gt;JavaScript frameworks&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Phew, busy conference set, wonder if I can top that next year :P.&lt;/p&gt;
+&lt;h2&gt;Another year, another job&lt;/h2&gt;
+&lt;p&gt;Last year I was excited about taking a new job with TheFARM Digital and getting to work with &lt;a href=&quot;http://shazwazza.com&quot;&gt;Shannon&lt;/a&gt; so we could really go crazy with Umbraco development. Well there was some sadness when I &lt;a href=&quot;/all-good-things-come-to-an-end&quot;&gt;announced that I was to be leaving TheFARM&lt;/a&gt; to join &lt;a href=&quot;http://readify.net&quot;&gt;Readify&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Open Source work&lt;/h2&gt;
+&lt;p&gt;I spent a lot of time this year working on Open Source projects. Obviously Umbraco has featured highly in this area, with version 5 underway (and helping with the team migrate to Mercurial) a lot of my time was devoted there.&lt;/p&gt;
+&lt;p&gt;But I&amp;#39;ve also worked on a few other smaller projects:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.funnelweblog.com/&quot;&gt;FunnelWeb&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;A blogging engine targeted at real developers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/javascript-tools&quot;&gt;JavaScript tools&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/ole&quot;&gt;Ole&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://hg.slace.biz/slidee&quot;&gt;Slidee&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/whatkey-net-for-your-javascript-keycode-glory&quot;&gt;WhatKey.Net&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://examine.codeplex.com&quot;&gt;Examine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/linq-to-umbraco-extensions&quot;&gt;LINQ to Umbraco Extensions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;I&amp;#39;ll update this soon :P&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/dynamics-library&quot;&gt;Dynamic extensions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://openconferenceprotocol.org&quot;&gt;Open Conference Protocol&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Nice little list I think ;)&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Well that pretty much concludes my 2010 wrap up, in 2011 be sure to look out for me at MIX 11, DDD Sydney and CodeGarden 11 :D&lt;/p&gt;
 </content>
         </entry>
     
@@ -8040,6 +8093,41 @@ alert(&lt;span class=&quot;keyword&quot;&gt;add&lt;/span&gt;&lt;span class=&quot
         </entry>
     
         <entry>
+            <title>Overview of the DocumentDataProvider</title>
+            <link href="/posts/2010-09-30-documentdataprovider-overview.html"/>
+            <updated>2010-09-30T00:00:00.000Z</updated>
+            <id>/posts/2010-09-30-documentdataprovider-overview.html</id>
+            <content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;If you&amp;#39;ve read my article on &lt;a href=&quot;/understanding-linq-to-umbraco&quot;&gt;Understanding LINQ to Umbraco&lt;/a&gt; (and if you haven&amp;#39;t you really should go do that) you&amp;#39;ll know that LINQ to Umbraco does have the scaffolding for doing full CRUD operations. But with CRUD it is up to the underlying &lt;code&gt;UmbracoDataProvider&lt;/code&gt; implementation to support.&lt;/p&gt;
+&lt;p&gt;Because the OOTB &lt;code&gt;UmbracoDataProvider&lt;/code&gt; instance, the &lt;code&gt;NodeDataProvider&lt;/code&gt; is only concerned with how to access the in-memory cache so having full CRUD doesn&amp;#39;t make sense.&lt;/p&gt;
+&lt;p&gt;This is where the &lt;code&gt;DocumentDataProvider&lt;/code&gt; fits in; like its name suggests it is designed to work with the Umbraco Document API, which is responsible for performing CRUD operations. So the ultimate goal of the &lt;code&gt;DocumentDataProvider&lt;/code&gt; will be to provide full CRUD operations against the Umbraco database.&lt;/p&gt;
+&lt;h2&gt;DocumentDataProvider vs NodeDataProvider&lt;/h2&gt;
+&lt;p&gt;So if the goal of the &lt;code&gt;DocumentDataProvider&lt;/code&gt; is to provide full CRUD where will that leave &lt;code&gt;NodeDataProvider&lt;/code&gt;? Well they should still sit side-by-side. For your common usage you should still use the &lt;code&gt;NodeDataProvider&lt;/code&gt;, this will only be interacting with published content, and the in-memory cache. The &lt;code&gt;DocumentDataProvider&lt;/code&gt; on the other hand will be interacting with the Document API, this means that it&amp;#39;ll be tied to the SQL instance, and doing read operations will suffer from the same performance limitations that you can find from the Document API. There will be caching built into the &lt;code&gt;DocumentDataProvider&lt;/code&gt;, but by-and-large there will be limits to how that can help.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>A set of extensions for LINQ to Umbraco</title>
+            <link href="/posts/2010-09-30-linq-to-umbraco-extensions.html"/>
+            <updated>2010-09-30T00:00:00.000Z</updated>
+            <id>/posts/2010-09-30-linq-to-umbraco-extensions.html</id>
+            <content type="html">&lt;p&gt;LINQ to Umbraco is awesome, let&amp;#39;s not deny it, but I had a thought of how could I make it even more awesome...&lt;/p&gt;
+&lt;p&gt;There was a lot of things that I wanted to achieve with LINQ to Umbraco that couldn&amp;#39;t be done in the time frame of the Umbraco 4.5 release, and some things which aren&amp;#39;t really applicable in the context of the Umbraco core.&lt;/p&gt;
+&lt;p&gt;So this project will aim to fill in the gaps that LINQ to Umbraco leaves out of the core of Umbraco.&lt;/p&gt;
+&lt;h2&gt;Source and releases&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://bitbucket.org/slace/linq-to-umbraco-extensions&quot;&gt;Source Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Current Release (coming soon)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;DocumentDataProvider&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/documentdataprovider-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/documentdataprovider-tree&quot;&gt;Creating a DocumentTree class&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>JavaScript functions that rewrite themselves for a Singleton pattern</title>
             <link href="/posts/2010-09-30-javascript-singleton.html"/>
             <updated>2010-09-30T00:00:00.000Z</updated>
@@ -8122,41 +8210,6 @@ alert(&lt;span class=&quot;keyword&quot;&gt;add&lt;/span&gt;&lt;span class=&quot
 &lt;h1&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;That wraps it all up, we&amp;#39;ve see how we can create functions in JavaScript which will rewrite themselves to simulate a Singleton. The ultimate usefulness of this code is up for debate, but it is a good example of how you can do some really funky stuff with JavaScript.&lt;/p&gt;
 &lt;p&gt;Just be careful you don&amp;#39;t make your rewriting functions too smart or they may become sentient!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Overview of the DocumentDataProvider</title>
-            <link href="/posts/2010-09-30-documentdataprovider-overview.html"/>
-            <updated>2010-09-30T00:00:00.000Z</updated>
-            <id>/posts/2010-09-30-documentdataprovider-overview.html</id>
-            <content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;If you&amp;#39;ve read my article on &lt;a href=&quot;/understanding-linq-to-umbraco&quot;&gt;Understanding LINQ to Umbraco&lt;/a&gt; (and if you haven&amp;#39;t you really should go do that) you&amp;#39;ll know that LINQ to Umbraco does have the scaffolding for doing full CRUD operations. But with CRUD it is up to the underlying &lt;code&gt;UmbracoDataProvider&lt;/code&gt; implementation to support.&lt;/p&gt;
-&lt;p&gt;Because the OOTB &lt;code&gt;UmbracoDataProvider&lt;/code&gt; instance, the &lt;code&gt;NodeDataProvider&lt;/code&gt; is only concerned with how to access the in-memory cache so having full CRUD doesn&amp;#39;t make sense.&lt;/p&gt;
-&lt;p&gt;This is where the &lt;code&gt;DocumentDataProvider&lt;/code&gt; fits in; like its name suggests it is designed to work with the Umbraco Document API, which is responsible for performing CRUD operations. So the ultimate goal of the &lt;code&gt;DocumentDataProvider&lt;/code&gt; will be to provide full CRUD operations against the Umbraco database.&lt;/p&gt;
-&lt;h2&gt;DocumentDataProvider vs NodeDataProvider&lt;/h2&gt;
-&lt;p&gt;So if the goal of the &lt;code&gt;DocumentDataProvider&lt;/code&gt; is to provide full CRUD where will that leave &lt;code&gt;NodeDataProvider&lt;/code&gt;? Well they should still sit side-by-side. For your common usage you should still use the &lt;code&gt;NodeDataProvider&lt;/code&gt;, this will only be interacting with published content, and the in-memory cache. The &lt;code&gt;DocumentDataProvider&lt;/code&gt; on the other hand will be interacting with the Document API, this means that it&amp;#39;ll be tied to the SQL instance, and doing read operations will suffer from the same performance limitations that you can find from the Document API. There will be caching built into the &lt;code&gt;DocumentDataProvider&lt;/code&gt;, but by-and-large there will be limits to how that can help.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>A set of extensions for LINQ to Umbraco</title>
-            <link href="/posts/2010-09-30-linq-to-umbraco-extensions.html"/>
-            <updated>2010-09-30T00:00:00.000Z</updated>
-            <id>/posts/2010-09-30-linq-to-umbraco-extensions.html</id>
-            <content type="html">&lt;p&gt;LINQ to Umbraco is awesome, let&amp;#39;s not deny it, but I had a thought of how could I make it even more awesome...&lt;/p&gt;
-&lt;p&gt;There was a lot of things that I wanted to achieve with LINQ to Umbraco that couldn&amp;#39;t be done in the time frame of the Umbraco 4.5 release, and some things which aren&amp;#39;t really applicable in the context of the Umbraco core.&lt;/p&gt;
-&lt;p&gt;So this project will aim to fill in the gaps that LINQ to Umbraco leaves out of the core of Umbraco.&lt;/p&gt;
-&lt;h2&gt;Source and releases&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://bitbucket.org/slace/linq-to-umbraco-extensions&quot;&gt;Source Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Current Release (coming soon)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;DocumentDataProvider&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/documentdataprovider-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/documentdataprovider-tree&quot;&gt;Creating a DocumentTree class&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
         </entry>
     
@@ -8604,6 +8657,27 @@ alert(&lt;span class=&quot;keyword&quot;&gt;add&lt;/span&gt;&lt;span class=&quot
         </entry>
     
         <entry>
+            <title>A LINQ observation</title>
+            <link href="/posts/2010-08-28-a-linq-observation.html"/>
+            <updated>2010-08-28T00:00:00.000Z</updated>
+            <id>/posts/2010-08-28-a-linq-observation.html</id>
+            <content type="html">&lt;p&gt;Well I&amp;#39;m making good headway with LINQ to Umbraco, in the next few days I&amp;#39;ll be doing a very interesting check in (which I&amp;#39;ll also blog here about). My tweet-peeps already have an idea of what it entails, but there&amp;#39;s a bit of a problem with it still which I want to address before the commit.&lt;/p&gt;
+&lt;p&gt;And that problem has lead to an observation I made about LINQ, well, about Expression-based LINQ (ie - something implementing IQueryable, so LINQ to SQL, or LINQ to Umbraco, etc).&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ll use LINQ to SQL for the examples as it&amp;#39;s more accessible to everyone.&lt;/p&gt;
+&lt;p&gt;Take this LINQ statement (where ctx is an instance of my DataContext):&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That statement returns an object of &lt;code&gt;Table&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and a bunch of others that are not important for this instructional). So it&amp;#39;s not executed yet, no DB query has occurred, etc. Now lets take this LINQ statement:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; items2 = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; ctx.Items &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; item;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This time I get a result of &lt;code&gt;IQueryable&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt; (duh!) and &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and again, a bunch of others).&lt;/p&gt;
+&lt;p&gt;Both of these results have a non-public property called Expression. This reperesents the expression tree which is being used to produce our collection. But here&amp;#39;s the interesting part, they are not the same. That&amp;#39;s right, although you&amp;#39;re getting back basically the same result, the expression used to produce that result is really quite different.&lt;/p&gt;
+&lt;p&gt;This is due to the way the compiler translates the query syntax of LINQ into a lambda syntax. In reality the 2nd example is equal to this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items2 = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.Select&lt;/span&gt;(item =&amp;gt; item)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But is this really a problem, what difference does it make? In the original examples you actually get back the same data every time. You&amp;#39;ll have slightly less overhead by using the access of &lt;code&gt;Table&amp;lt;T&amp;gt;&lt;/code&gt; rather than &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, due to the fact that you&amp;#39;re not doing a redundant call to Select. But in reality you would not notice the call.&lt;/p&gt;
+&lt;p&gt;This has caused a problem for me as my direct-access lambda syntax fails my current unit test, where as the query syntax passes. Now to solve that problem! ;)&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Not getting DropDownList value when setting it via JavaScript</title>
             <link href="/posts/2010-08-28-no-value-when-settings-dropdown-with-javascript.html"/>
             <updated>2010-08-28T00:00:00.000Z</updated>
@@ -8629,22 +8703,6 @@ Hmm I said to myself, I looked at the form, it&amp;#39;s setting the value right
   });
 });&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;Page_IsValid&lt;/code&gt; is the client variable updated with the result of the client side validation.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>SharePoint feature corrupts page layout</title>
-            <link href="/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html"/>
-            <updated>2010-08-28T00:00:00.000Z</updated>
-            <id>/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html</id>
-            <content type="html">&lt;p&gt;Something that I&amp;#39;ve come across a few times when working on SharePoint/ MOSS 2007 features. When importing a Page Layout the ASPX some times becomes corrupt. You end up with additional HTML inserts once it&amp;#39;s been imported into SharePoint.&lt;/p&gt;
-&lt;p&gt;The corruption is in the form of HTML tags, outside the last &amp;lt;/asp:Content&amp;gt; tag.&lt;/p&gt;
-&lt;p&gt;Well it turns out that the problem is caused when you import an ASPX that has a &amp;lt;/asp:content&amp;gt; tag it&amp;#39;ll happen.
-Did you notice the problem?&lt;/p&gt;
-&lt;p&gt;That&amp;#39;s right, if you have a lowercase c then it&amp;#39;ll import corrupt. Let me show the problem again, highlighted this time:
-&amp;lt;/asp:&lt;strong&gt;c&lt;/strong&gt;ontent&amp;gt;&lt;/p&gt;
-&lt;p&gt;All you need to do is ensure that that has a capital letter, so the tag is &amp;lt;/asp:Content&amp;gt; and it&amp;#39;s all good again.&lt;/p&gt;
-&lt;p&gt;The most common cause of this happening is doing a format-document within Visual Studio on the ASPX when it is in the features class-library project. Visual Studio doesn&amp;#39;t handle the ASPX file correctly, and formats it as a raw XHTML file, which dictates that the XHTML tags need to be in all lowercase.&lt;/p&gt;
 </content>
         </entry>
     
@@ -8719,23 +8777,18 @@ public void EmailSender() {
         </entry>
     
         <entry>
-            <title>A LINQ observation</title>
-            <link href="/posts/2010-08-28-a-linq-observation.html"/>
+            <title>SharePoint feature corrupts page layout</title>
+            <link href="/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html"/>
             <updated>2010-08-28T00:00:00.000Z</updated>
-            <id>/posts/2010-08-28-a-linq-observation.html</id>
-            <content type="html">&lt;p&gt;Well I&amp;#39;m making good headway with LINQ to Umbraco, in the next few days I&amp;#39;ll be doing a very interesting check in (which I&amp;#39;ll also blog here about). My tweet-peeps already have an idea of what it entails, but there&amp;#39;s a bit of a problem with it still which I want to address before the commit.&lt;/p&gt;
-&lt;p&gt;And that problem has lead to an observation I made about LINQ, well, about Expression-based LINQ (ie - something implementing IQueryable, so LINQ to SQL, or LINQ to Umbraco, etc).&lt;/p&gt;
-&lt;p&gt;I&amp;#39;ll use LINQ to SQL for the examples as it&amp;#39;s more accessible to everyone.&lt;/p&gt;
-&lt;p&gt;Take this LINQ statement (where ctx is an instance of my DataContext):&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That statement returns an object of &lt;code&gt;Table&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and a bunch of others that are not important for this instructional). So it&amp;#39;s not executed yet, no DB query has occurred, etc. Now lets take this LINQ statement:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; items2 = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; ctx.Items &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; item;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This time I get a result of &lt;code&gt;IQueryable&amp;lt;Item&amp;gt;&lt;/code&gt;, which implements &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt; (duh!) and &lt;code&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; (and again, a bunch of others).&lt;/p&gt;
-&lt;p&gt;Both of these results have a non-public property called Expression. This reperesents the expression tree which is being used to produce our collection. But here&amp;#39;s the interesting part, they are not the same. That&amp;#39;s right, although you&amp;#39;re getting back basically the same result, the expression used to produce that result is really quite different.&lt;/p&gt;
-&lt;p&gt;This is due to the way the compiler translates the query syntax of LINQ into a lambda syntax. In reality the 2nd example is equal to this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var items2 = ctx&lt;span class=&quot;preprocessor&quot;&gt;.Items&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.Select&lt;/span&gt;(item =&amp;gt; item)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But is this really a problem, what difference does it make? In the original examples you actually get back the same data every time. You&amp;#39;ll have slightly less overhead by using the access of &lt;code&gt;Table&amp;lt;T&amp;gt;&lt;/code&gt; rather than &lt;code&gt;IQueryable&amp;lt;T&amp;gt;&lt;/code&gt;, due to the fact that you&amp;#39;re not doing a redundant call to Select. But in reality you would not notice the call.&lt;/p&gt;
-&lt;p&gt;This has caused a problem for me as my direct-access lambda syntax fails my current unit test, where as the query syntax passes. Now to solve that problem! ;)&lt;/p&gt;
+            <id>/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html</id>
+            <content type="html">&lt;p&gt;Something that I&amp;#39;ve come across a few times when working on SharePoint/ MOSS 2007 features. When importing a Page Layout the ASPX some times becomes corrupt. You end up with additional HTML inserts once it&amp;#39;s been imported into SharePoint.&lt;/p&gt;
+&lt;p&gt;The corruption is in the form of HTML tags, outside the last &amp;lt;/asp:Content&amp;gt; tag.&lt;/p&gt;
+&lt;p&gt;Well it turns out that the problem is caused when you import an ASPX that has a &amp;lt;/asp:content&amp;gt; tag it&amp;#39;ll happen.
+Did you notice the problem?&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s right, if you have a lowercase c then it&amp;#39;ll import corrupt. Let me show the problem again, highlighted this time:
+&amp;lt;/asp:&lt;strong&gt;c&lt;/strong&gt;ontent&amp;gt;&lt;/p&gt;
+&lt;p&gt;All you need to do is ensure that that has a capital letter, so the tag is &amp;lt;/asp:Content&amp;gt; and it&amp;#39;s all good again.&lt;/p&gt;
+&lt;p&gt;The most common cause of this happening is doing a format-document within Visual Studio on the ASPX when it is in the features class-library project. Visual Studio doesn&amp;#39;t handle the ASPX file correctly, and formats it as a raw XHTML file, which dictates that the XHTML tags need to be in all lowercase.&lt;/p&gt;
 </content>
         </entry>
     
@@ -8828,7 +8881,7 @@ And how does it work? Well just like this:&lt;/p&gt;
 &lt;h2&gt;Making this into an Umbraco Content Tree&lt;/h2&gt;
 &lt;p&gt;Now here is where the fun part comes in, you can easily turn the above data provider into a custom Umbraco tree. This means you can either make it into your own custom Umbraco module (/ application, what ever you call it!), or append it to the standard Content Tree! Isn&amp;#39;t THAT a funky idea hey!&lt;/p&gt;
 &lt;p&gt;I&amp;#39;m not going to get too in-depth into this, Shannon Deminik has done some good documentation about that (again, see the &lt;a href=&quot;http://our.umbraco.org/wiki/reference/api-cheatsheet/tree-api---to-create-custom-treesapplications&quot;&gt;wiki&lt;/a&gt;). So rather than going over the code I&amp;#39;m going to show it off in a short screencast and you can look into the provided source package with this post.&lt;/p&gt;
-&lt;p&gt;The screenscast is available &lt;a href=&quot;http://screencast.com/t/NS24jMo6xkp&quot;&gt;here&lt;/a&gt; and the source code is &lt;a href=&quot;/media/2640/umbracodataproviderdemo.zip&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The screenscast is available &lt;a href=&quot;http://screencast.com/t/NS24jMo6xkp&quot;&gt;here&lt;/a&gt; and the source code is &lt;a href=&quot;/get/media/2640/umbracodataproviderdemo.zip&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </content>
         </entry>
     
@@ -8921,7 +8974,7 @@ And how does it work? Well just like this:&lt;/p&gt;
 &lt;h2&gt;Making this into an Umbraco Content Tree&lt;/h2&gt;
 &lt;p&gt;Now here is where the fun part comes in, you can easily turn the above data provider into a custom Umbraco tree. This means you can either make it into your own custom Umbraco module (/ application, what ever you call it!), or append it to the standard Content Tree! Isn&amp;#39;t THAT a funky idea hey!&lt;/p&gt;
 &lt;p&gt;I&amp;#39;m not going to get too in-depth into this, Shannon Deminik has done some good documentation about that (again, see the &lt;a href=&quot;http://our.umbraco.org/wiki/reference/api-cheatsheet/tree-api---to-create-custom-treesapplications&quot;&gt;wiki&lt;/a&gt;). So rather than going over the code I&amp;#39;m going to show it off in a short screencast and you can look into the provided source package with this post.&lt;/p&gt;
-&lt;p&gt;The screenscast is available &lt;a href=&quot;http://screencast.com/t/NS24jMo6xkp&quot;&gt;here&lt;/a&gt; and the source code is &lt;a href=&quot;/media/2640/umbracodataproviderdemo.zip&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The screenscast is available &lt;a href=&quot;http://screencast.com/t/NS24jMo6xkp&quot;&gt;here&lt;/a&gt; and the source code is &lt;a href=&quot;/get/media/2640/umbracodataproviderdemo.zip&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </content>
         </entry>
     
@@ -9050,7 +9103,7 @@ And how does it work? Well just like this:&lt;/p&gt;
 &lt;p&gt;This kind of split approach with Lucene is a common way to use Lucene. When working with Lucene the most performance intensive part of the process is actually getting the data back out of the index. Searching against Lucene is really fast, it&amp;#39;s what Lucene is designed for. So we have Lucene to mainly just store our analyzed version of our data, and then we have our underlying data store to retrieve all of the data.&lt;/p&gt;
 &lt;h2&gt;Building the BlogManager&lt;/h2&gt;
 &lt;p&gt;I&amp;#39;m going to be making this little application using WPF (yep, the web developer is trying WPF, and it&amp;#39;s going... ok :P). First off I want a way to add RSS feeds to be able to search against:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/get/csharp/blogmanager/blogmanager001.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/get/csharp/BlogManager/blogmanager001.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;So there we go, we&amp;#39;re able to provide the URL for a blog and we&amp;#39;re going to push some data into our index. I&amp;#39;m actually using Lucene to store the URL&amp;#39;s as well as the actual blogs to search against. Remember that a Document Database doesn&amp;#39;t have a schema, so you can stick anything in there that you want. Let&amp;#39;s see some code:&lt;/p&gt;
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;public MainWindow()
 {
@@ -9096,14 +9149,14 @@ writer&lt;span class=&quot;preprocessor&quot;&gt;.AddDocument&lt;/span&gt;(doc)&
 &lt;p&gt;Now we just do a commit to our index:&lt;/p&gt;
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;sql&quot;&gt;writer.&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;Commit&lt;/span&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Our blog has been added into our index, woo! Now it&amp;#39;ll be listed below in the data grid:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/get/csharp/blogmanager/blogmanager002.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/get/csharp/BlogManager/blogmanager002.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;h2&gt;Searching the blogs&lt;/h2&gt;
 &lt;p&gt;Now that we&amp;#39;ve got some stuff in our index let&amp;#39;s try and get at it. I&amp;#39;ve got another awesome example of UI design for that:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/get/csharp/blogmanager/blogmanager003.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/get/csharp/BlogManager/blogmanager003.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Here I&amp;#39;ve got a big text box which I can enter a Lucene query using the &lt;a href=&quot;http://lucene.apache.org/java/2_3_2/queryparsersyntax.html&quot;&gt;Lucene Query Parser Syntax&lt;/a&gt; so I can just get at the data. Lets say that I want all the posts which had Umbraco in the title:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/get/csharp/blogmanager/blogmanager004.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/get/csharp/BlogManager/blogmanager004.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Or maybe I&amp;#39;ll get all the ones which contain Umbraco or Lucene.Net:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/get/csharp/blogmanager/blogmanager005.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/get/csharp/BlogManager/blogmanager005.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;And here&amp;#39;s the underlying code:&lt;/p&gt;
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var queryParser = new MultiFieldQueryParser(Version&lt;span class=&quot;preprocessor&quot;&gt;.LUCENE&lt;/span&gt;_29, new[] { &lt;span class=&quot;string&quot;&gt;&quot;title&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;content&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;categories&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;type&quot;&lt;/span&gt; }, analyzer)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
 var query = new BooleanQuery()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
@@ -9788,31 +9841,31 @@ Now, don&amp;#39;t get me wrong, this isn&amp;#39;t the only way to add the even
 Because they are all separate I didn&amp;#39;t have a real way to pass the ID of the control that was to make the popup appear. Oh, and to make thing more complicated there were 2 links for each popup, sadly the Modal Popup doesn&amp;#39;t support multiple controls to do the poping-up (or as far as I&amp;#39;m aware...)&lt;/p&gt;
 &lt;p&gt;I also didn&amp;#39;t want each of the popups to overlay each other, it doesn&amp;#39;t really look that good (as I&amp;#39;ll show shortly), so I needed a way to hide the master popup when the child was shown, and then when the child was hidden I want the master to reappear.&lt;/p&gt;
 &lt;p&gt;So I&amp;#39;m doing 3 basic controls for my example, a Login control:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1944/picture%201_398x285.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/media/1944/picture%201.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1944/picture%201.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/get/media/1944/picture%201.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;a Forgotten Password control:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1949/picture%202_499x164.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/media/1949/picture%202.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1949/picture%202.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/get/media/1949/picture%202.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;a Registration control:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1954/picture%203_497x245.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/media/1954/picture%203.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1954/picture%203.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/get/media/1954/picture%203.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;And add a dash of CSS and you get a lovely little popup:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1959/picture%204.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1959/picture%204.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;(Ok, so my design skills aren&amp;#39;t great!)&lt;/p&gt;
 &lt;p&gt;So now it&amp;#39;s time to tie up the master control with the child controls. To do this I&amp;#39;m going to have 2 events raised from the child controls, one for when the popup is shown and one for when it is hidden.
 I&amp;#39;m also going to have an event which can be raised elsewhere on each child control which will initiate the showing of the popup (you could add one for the hiding, but I&amp;#39;m using the inbuilt hiding from the CancelControlID property of the modal popup).&lt;/p&gt;
 &lt;p&gt;For each they will look as follows:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1969/picture%206_499x69.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/media/1964/picture%205.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1969/picture%206.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/get/media/1964/picture%205.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Lets have a look at how they work, first off I locate the the &lt;code&gt;Sys.Component&lt;/code&gt; instance of the ModalPopup control.
 There are &lt;code&gt;showing&lt;/code&gt; and &lt;code&gt;hiding&lt;/code&gt; events fired off from the ModalPopup, so I&amp;#39;m going to add a handler, the handler though will just be a stub which in-turn raises an event within our Client Event Pool. I&amp;#39;ve given them names which will indicate what they are used for.
 Lastly I&amp;#39;m going to add an event handler so anyone can raise an event which will show the popup.&lt;/p&gt;
 &lt;p&gt;Now lets have a look in the Login control:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1979/picture%207_498x245.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/media/1979/picture%207.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1979/picture%207.jpg&quot; alt=&quot;&quot;&gt;&lt;a href=&quot;http://www.aaron-powell.com/get/media/1979/picture%207.png&quot;&gt;Full size&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;The first 2 lines of this is adding event handlers to the links on the control. All they do is tell the Client Event Pool to raise an event, an event which I previously set up to be consumed by the child controls.&lt;/p&gt;
 &lt;p&gt;Next we set up the Client Event Pool to listen for the hide and show events from our child controls.
 It listens for the events to be raised and when they are it&amp;#39;ll either hide or show the modal on the current page.
 Admittedly I&amp;#39;ve gone a little bit overboard with my events between the two child controls. Each could just raise events like &lt;code&gt;hideParent&lt;/code&gt; and &lt;code&gt;showParent&lt;/code&gt;, and then I would only need 2 handlers against the Client Event Pool, but to illistrate my point I&amp;#39;ve gone the verbos method.&lt;/p&gt;
 &lt;p&gt;Now I&amp;#39;ve gone for having the popups showing like this:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1974/picture%208.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1974/picture%208.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;To this:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1984/picture%209.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1984/picture%209.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;Admittedly static images can&amp;#39;t really show how it works, but it&amp;#39;s much nicer to not overlay popups, and ability to having popups automatically hiding and showing the loss-of-focus ones is a really sweet idea.&lt;/p&gt;
 &lt;p&gt;I&amp;#39;ll admit that it&amp;#39;s possible to do this without the need for a Client Event Pool, you can expose all the appropriate properties on the child controls which then can be set appropriately within it&amp;#39;s parent, but think of it a step further, if you wanted a link on the Forgot Password to the Registration page. Because they aren&amp;#39;t really aware of each other it is very difficult to achieve (but not impossible). Your UserControl can also expose wrappers to the Showing and Hiding client events on the modal popup, but it still has the same problem as mentioned previously.&lt;/p&gt;
 &lt;p&gt;And there we have it, a nice little example of how to use a Client Event Pool to make it easier to link previously unlinked components in a soft way.&lt;/p&gt;
@@ -10020,48 +10073,78 @@ public void PromoPresenterTests_Published_From_Other_Presenter() {
         </entry>
     
         <entry>
-            <title>Why I'm not a fan of XSLT</title>
-            <link href="/posts/2010-04-25-why-im-not-a-fan-of-xslt.html"/>
+            <title>Oh woe is (Mobile)Me</title>
+            <link href="/posts/2010-04-25-oh-woe-is-mobile-me.html"/>
             <updated>2010-04-25T00:00:00.000Z</updated>
-            <id>/posts/2010-04-25-why-im-not-a-fan-of-xslt.html</id>
-            <content type="html">&lt;p&gt;When I first joined the Umbraco team with the goal of bringing LINQ to Umbraco to the core framework there was some excitement and quite a bit of the early excitement was from Umbraco MVP &lt;a href=&quot;http://www.creativewebspecialist.co.uk/&quot;&gt;Warren Buckley&lt;/a&gt;.
-And with the recent beta release the focus has come back onto LINQ to Umbraco, myself and XSLT.&lt;/p&gt;
-&lt;p&gt;While preparing to write this post I was tossing up with the name. Although I&amp;#39;ve entitled it &amp;quot;Why I&amp;#39;m not a fan of XSLT&amp;quot; it would have been just as apt to name it &amp;quot;Why write LINQ to Umbraco?&amp;quot;.&lt;/p&gt;
-&lt;p&gt;As you read through this post I was you to keep in mind that I&amp;#39;m not someone who is really that good at XPath and XSLT. In fact, my dislike for XSLT is why I wrote LINQ to Umbraco!&lt;/p&gt;
-&lt;p&gt;But why, being an Umbraco user, don&amp;#39;t i like XSLT? After all, it&amp;#39;s a fairly core part of Umbraco!&lt;/p&gt;
-&lt;h2&gt;Compile time checking&lt;/h2&gt;
-&lt;p&gt;That&amp;#39;s right, I&amp;#39;m very much a developer, and very much a compiler-driven developer. Runtime errors really are the worst to try and debug, and that&amp;#39;s what you really get with XPath. XPath is evaluated at runtime (yes, that&amp;#39;s a bit generalized :P), so if you have something wrong in your syntax you wont find it immediately.&lt;/p&gt;
-&lt;p&gt;Compare that to .NET code, it&amp;#39;s very hard to write .NET code which wont compile. True that you can still get runtime errors, but they are a lot harder to achieve in the scenario&amp;#39;s we&amp;#39;re looking at for LINQ to Umbraco vs XSLT.&lt;/p&gt;
-&lt;h2&gt;Strong typing&lt;/h2&gt;
-&lt;p&gt;Again, another example of me being very much a developer, I would much rather look at an object with properties which knows of the type of the data.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re not careful you can mistake the type and then you, again, have a runtime error :P.
-The .NET compiler wont let you assign a string to an int.&lt;/p&gt;
-&lt;h1&gt;Readability&lt;/h1&gt;
-&lt;p&gt;This one will cause a bit of a stir, but I simply don&amp;#39;t find XPath &amp;amp; XSLT readable. Take these two examples:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//node[nodeTypeAlias='home_page']/node[nodeTypeAlias='contact_us' nodeName='Contact Aaron']&lt;/span&gt;
-
-ctx&lt;span class=&quot;variable&quot;&gt;.HomePages&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.ContactUs&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.Where&lt;/span&gt;(c =&amp;gt; c&lt;span class=&quot;variable&quot;&gt;.Name&lt;/span&gt; == &lt;span class=&quot;string&quot;&gt;&quot;Contact Aaron&quot;&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;My example is very basic, but if you look into a more complex XSLT file (such as many which exists in Warrens CWS package). In fact, in the unit tests for LINQ to Umbraco there is a replication of a few of them (have a look in the source on Codeplex if you want to see them).&lt;/p&gt;
-&lt;p&gt;A very important component of code for me is readability. When debugging, especially if the code isn&amp;#39;t yours to begin with, readability is a vital component. You don&amp;#39;t want to have to waste time trying to understand what&amp;#39;s going on in the code before trying to solve it.
-And if you can&amp;#39;t work out the code properly then there&amp;#39;s a chance you&amp;#39;ll just make the problem worse.&lt;/p&gt;
-&lt;h2&gt;API Design&lt;/h2&gt;
-&lt;p&gt;Again I&amp;#39;ll probably cause a stir with this one again but it&amp;#39;s another thing that is very dear to my heart. I am a strong believer in proper API design, and if it&amp;#39;s done wrong then it can make your life hell in the future.&lt;/p&gt;
-&lt;p&gt;I also like abstractions. LINQ to Umbraco is an example of that... provider model! Here at The FARM we&amp;#39;ve got a great level of abstraction which we use, we don&amp;#39;t pass classes around, only interfaces, which means that your UI is dumb, really really dumb.
-There isn&amp;#39;t any business logic contained there, and there&amp;#39;s nothing more complex than a method call.&lt;/p&gt;
-&lt;p&gt;But too often when I see an XSLT it&amp;#39;s containing more than just UI code. And this isn&amp;#39;t really a fault of XSLT, but of how it&amp;#39;s perceived. When you look at an ASPX/ ASCX people have a different mindset, you don&amp;#39;t put anything really in the front-end file other than the markup as there is a CS file associated which you think to put the other complex code into.
-But with an XSLT there isn&amp;#39;t another file, so everything ends up there.&lt;/p&gt;
-&lt;p&gt;Then it becomes too complex to try and achieve with XSLT &lt;em&gt;cough variable incrementing cough&lt;/em&gt; so an XSLT extension is written. And I&amp;#39;ve seen some really scary XSLT extensions, which allow you to do things which just make me want to cringe.&lt;/p&gt;
-&lt;p&gt;XSLT should only be concerned with formatting data to output markup...&lt;/p&gt;
-&lt;h2&gt;XSLT&amp;#39;s produce better markup&lt;/h2&gt;
-&lt;p&gt;Anyone who says that is ill-informed. If you don&amp;#39;t think you can write valid, XHTML markup with ASP.NET Web Forms then you&amp;#39;re not doing it right!&lt;/p&gt;
-&lt;p&gt;Control Adapters, Repeaters, List View, inline script blocks, etc can all be used to produce what ever markup you so desire.
-And it doesn&amp;#39;t take much effort to produce good markup with ASP.NET. In fact, with Visual Studio 2008 it&amp;#39;s really hard to use the standard editor to produce crappy markup.&lt;/p&gt;
-&lt;p&gt;The biggest problem is ID&amp;#39;s of elements, but you only have that problem if the element is:&lt;/p&gt;
-&lt;p&gt;Inside a naming container
-Set to runat=&amp;quot;server&amp;quot;
-And you should only be setting runat=&amp;quot;server&amp;quot; on elements you need server-side access to, but that&amp;#39;s a topic for another night.&lt;/p&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;So this brings me to the end of another post. Hopefully it&amp;#39;s been enlightening and I haven&amp;#39;t upset too many people :P&lt;/p&gt;
+            <id>/posts/2010-04-25-oh-woe-is-mobile-me.html</id>
+            <content type="html">&lt;p&gt;Anyone who is (lucky enough to be) on my msn contact list (and signed in during my work hours) will have seen something curious happening over the past week since I returned back to work.&lt;/p&gt;
+&lt;p&gt;For those of you not, basically I was signing in and out constantly with a frequency of say every 10 minutes.
+This oddly made is surprisingly hard to hold a conversation with someone.
+But more problematic was that not only was msn dropping out but the whole internet was. You could hardly even achieve a successful Google search.&lt;/p&gt;
+&lt;p&gt;And this wasn&amp;#39;t just a problem for me, but for everyone here at TheFARM.&lt;/p&gt;
+&lt;p&gt;The first assumption was that it was something wrong with our ISP, we&amp;#39;re not on a super faster internet connection, and no one had problems outside of work, so it seemed like a logical assumption... right?&lt;/p&gt;
+&lt;p&gt;Well it turns out that when you assume you make an ass out of you and me (ha, see what I did there! :P).
+The problem wasn&amp;#39;t our internet, in fact the problem could be blamed on one individual, yep you guessed it, me :(.&lt;/p&gt;
+&lt;p&gt;Turns out that when I wasn&amp;#39;t on the network everything was fine, everyone could use the web, chat on msn, do what ever they wanted, but as soon as I plugged in, BAM, the internet died.
+So after a bit of detective work (mostly by Shannon) it was concluded that my computer was doing something nasty to the network.
+So we cracked out a copy of &lt;a href=&quot;http://www.wireshark.org/&quot;&gt;Wireshark&lt;/a&gt; and decided to do some detective work with packet sniffing.&lt;/p&gt;
+&lt;p&gt;Immediately it was obvious what was happening, I was flooding our DNS server with requests, requests that the DNS server was returned as invalid. 
+The requests kept looking for a URL along the lines of tcp.members.mac.com and after a bit of searching it turned out that that URL is related to the Apple MobileMe service.
+So Shan asked if I was signed up with MobileMe, to which I responded &amp;quot;I don&amp;#39;t believe so&amp;quot;, but it turned out again I was wrong, I had signed up to MobileMe, but it must have been when I first got my iPhone.
+When you get an iPhone you can sign up with a 60 day trail, something I must have done (hey, it said I was signed in, guess I signed up at some point :P).
+After doing some quick math I concluded that it was ~60 days since I got my iPhone when we first started having internet problems (the last working week last year).&lt;/p&gt;
+&lt;p&gt;I instantly signed out of MobileMe, and low and behold the DNS flooding stopped happening!&lt;/p&gt;
+&lt;p&gt;Thank you Apple for producing a service which is capable of bringing down an office network, you&amp;#39;ve just made sure I strongly consider not purchasing MobileMe in the future!&lt;/p&gt;
+&lt;p&gt;Oh and I&amp;#39;m never going to live this down at work, Shan isn&amp;#39;t a fan of Apple so this is just adding fuel to the fire!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Why does this code work?</title>
+            <link href="/posts/2010-04-25-why-does-this-code-work.html"/>
+            <updated>2010-04-25T00:00:00.000Z</updated>
+            <id>/posts/2010-04-25-why-does-this-code-work.html</id>
+            <content type="html">&lt;p&gt;In the discussion on the Umbraco forum about using LINQ to Umbraco I posted a short code snippet of something we write fairly frequently at &lt;a href=&quot;http://www.farmcode.org/post/2009/02/24/Linq-to-Umbraco.aspx&quot;&gt;TheFARM using our version of LINQ with Umbraco&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I thought I&amp;#39;d post the challenge to my trusty followers, for them to see if they know why the code works. First off the code:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;r&quot;&gt;IEnumerable&amp;lt;XElement&amp;gt; nodes = UmbXmlLinqExtensions.GetNodeByXpath(&lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt;); 
+IEnumerable&amp;lt;IUmbracoPage&amp;gt; pages = nodes.Select(n =&amp;gt;(IUmbracoPage)(UmbracoPage)n);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What the XPath being evaluated isn&amp;#39;t important, what is important is you&amp;#39;ll notice that we have a collection of &lt;code&gt;System.Xml.Linq.XElement&lt;/code&gt;&amp;#39;s, but then it&amp;#39;s directly casting each XElement to &lt;code&gt;IUmbracoPage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s the skeleton for the class and interface:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;r&quot;&gt;public interface IUmbracoPage { &lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt; } 
+public class UmbracoPage : IUmbracoPage { &lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt; }&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again the body of the interface isn&amp;#39;t important, what is important is that the class only inherits from the interface, it does not inherit from XElement.&lt;/p&gt;
+&lt;h3&gt;Why does this work&lt;/h3&gt;
+&lt;p&gt;Well the answer is actually very simple, and it&amp;#39;s a really handy feature of the C# language, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/xhbhezf4.aspx&quot;&gt;explicit operators&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Explicit operators allow you to define explicit casting between types. So the code that was missing from my original post was this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;explicit&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;operator&lt;/span&gt; UmbracoPage(XElement x) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; UmbracoPage(x);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What I&amp;#39;ve done here is defined how the compiler is to treat a casting of an XElement to an instance of UmbracoPage, and since UmbracoPage inherits IUmbracoPage there is already a defined casting to it.&lt;/p&gt;
+&lt;p&gt;Inside the body of my explicit operator I can do anything I desire, here I&amp;#39;m just returning a new instance, passing the XElement to the constructor.&lt;/p&gt;
+&lt;p&gt;I find it really quite elegant, and that it reduces code smell quite nicely.&lt;/p&gt;
+&lt;p&gt;But explicit operators also have a buddy, in the form of &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/z5z9kes2.aspx&quot;&gt;implicit operators&lt;/a&gt; (which was the close-but-no-cigar answer). These work by the type being defined by the assignment target, eg:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;nginx&quot;&gt;&lt;span class=&quot;title&quot;&gt;UmbracoPage&lt;/span&gt; page = xElement;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;#39;m personally not a fan of implicit operators though, I find them less obvious when you&amp;#39;re reading code.&lt;/p&gt;
+&lt;p&gt;So there you have it, a slightly obscure language feature to play with!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>2009, a year in review</title>
+            <link href="/posts/2010-04-25-2009-a-year-in-review.html"/>
+            <updated>2010-04-25T00:00:00.000Z</updated>
+            <id>/posts/2010-04-25-2009-a-year-in-review.html</id>
+            <content type="html">&lt;p&gt;So a new decade is upon us and with 2009 wrapped up it&amp;#39;s time to look retrospectively at the year that was.&lt;/p&gt;
+&lt;p&gt;2009 was the biggest year professionally that I&amp;#39;ve had, the whole year has been filled with new adventures into the development world.&lt;/p&gt;
+&lt;p&gt;At the start of the year I announced my first Open Source project, the Umbraco Interaction Layer (UIL) was ceasing development as I&amp;#39;d joined the Umbraco core development team.&lt;/p&gt;
+&lt;p&gt;I had lot of fun delving into LINQ in greater depths, like commenting on the &lt;a href=&quot;/query-syntax-vs-method-syntax&quot;&gt;difference between LINQ query syntax vs LINQ methods syntax&lt;/a&gt;, then having more fun by writing a &lt;a href=&quot;/linq-in-javascript&quot;&gt;JavaScript LINQ implementation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Next I took up a pleasure of mine, doing bizar coding, first with &lt;a href=&quot;/recursive-anonymous-functions&quot;&gt;recursive anonymous self executing functions in JavaScript&lt;/a&gt; and then I wrote &lt;a href=&quot;/recursive-anonymous-functions-the-net-version&quot;&gt;it in .NET too&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Also I was luck enough to get invited to Code Garden 09 in Copenhagen, which was an awesome trip and a great chance to meet other Umbracians from around the world. One of the outcomes was the first AUSPAC webinar (with the 2nd coming in the new year).
+Also coming out of my Denmark trip was a new employment opportunity which saw me moving from my home town of Melbourne to Sydney to join Shannon at TheFARM.&lt;/p&gt;
+&lt;p&gt;Umbraco managed to get out Umbraco 4.1 Beta 1 on time, although the scheduled has since been revised (there will be more information coming shortly on this).
+And to celebrate the occasion I released a set of &lt;a href=&quot;/training-videos&quot;&gt;videos on using LINQ to Umbraco&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Then to finish the year off I released a new Open Source project, &lt;a href=&quot;/webforms-mvp-contrib&quot;&gt;ASP.NET Web Forms Model-View-Presenter Contrib&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;What a busy year! Hopefully 2010 can prove to be just as exciting :D&lt;/p&gt;
 </content>
         </entry>
     
@@ -10196,51 +10279,70 @@ test&lt;span class=&quot;preprocessor&quot;&gt;.NullCoalese&lt;/span&gt;(&lt;spa
         </entry>
     
         <entry>
-            <title>2009, a year in review</title>
-            <link href="/posts/2010-04-25-2009-a-year-in-review.html"/>
+            <title>Why I'm not a fan of XSLT</title>
+            <link href="/posts/2010-04-25-why-im-not-a-fan-of-xslt.html"/>
             <updated>2010-04-25T00:00:00.000Z</updated>
-            <id>/posts/2010-04-25-2009-a-year-in-review.html</id>
-            <content type="html">&lt;p&gt;So a new decade is upon us and with 2009 wrapped up it&amp;#39;s time to look retrospectively at the year that was.&lt;/p&gt;
-&lt;p&gt;2009 was the biggest year professionally that I&amp;#39;ve had, the whole year has been filled with new adventures into the development world.&lt;/p&gt;
-&lt;p&gt;At the start of the year I announced my first Open Source project, the Umbraco Interaction Layer (UIL) was ceasing development as I&amp;#39;d joined the Umbraco core development team.&lt;/p&gt;
-&lt;p&gt;I had lot of fun delving into LINQ in greater depths, like commenting on the &lt;a href=&quot;/query-syntax-vs-method-syntax&quot;&gt;difference between LINQ query syntax vs LINQ methods syntax&lt;/a&gt;, then having more fun by writing a &lt;a href=&quot;/linq-in-javascript&quot;&gt;JavaScript LINQ implementation&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Next I took up a pleasure of mine, doing bizar coding, first with &lt;a href=&quot;/recursive-anonymous-functions&quot;&gt;recursive anonymous self executing functions in JavaScript&lt;/a&gt; and then I wrote &lt;a href=&quot;/recursive-anonymous-functions-the-net-version&quot;&gt;it in .NET too&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;Also I was luck enough to get invited to Code Garden 09 in Copenhagen, which was an awesome trip and a great chance to meet other Umbracians from around the world. One of the outcomes was the first AUSPAC webinar (with the 2nd coming in the new year).
-Also coming out of my Denmark trip was a new employment opportunity which saw me moving from my home town of Melbourne to Sydney to join Shannon at TheFARM.&lt;/p&gt;
-&lt;p&gt;Umbraco managed to get out Umbraco 4.1 Beta 1 on time, although the scheduled has since been revised (there will be more information coming shortly on this).
-And to celebrate the occasion I released a set of &lt;a href=&quot;/training-videos&quot;&gt;videos on using LINQ to Umbraco&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Then to finish the year off I released a new Open Source project, &lt;a href=&quot;/webforms-mvp-contrib&quot;&gt;ASP.NET Web Forms Model-View-Presenter Contrib&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;What a busy year! Hopefully 2010 can prove to be just as exciting :D&lt;/p&gt;
+            <id>/posts/2010-04-25-why-im-not-a-fan-of-xslt.html</id>
+            <content type="html">&lt;p&gt;When I first joined the Umbraco team with the goal of bringing LINQ to Umbraco to the core framework there was some excitement and quite a bit of the early excitement was from Umbraco MVP &lt;a href=&quot;http://www.creativewebspecialist.co.uk/&quot;&gt;Warren Buckley&lt;/a&gt;.
+And with the recent beta release the focus has come back onto LINQ to Umbraco, myself and XSLT.&lt;/p&gt;
+&lt;p&gt;While preparing to write this post I was tossing up with the name. Although I&amp;#39;ve entitled it &amp;quot;Why I&amp;#39;m not a fan of XSLT&amp;quot; it would have been just as apt to name it &amp;quot;Why write LINQ to Umbraco?&amp;quot;.&lt;/p&gt;
+&lt;p&gt;As you read through this post I was you to keep in mind that I&amp;#39;m not someone who is really that good at XPath and XSLT. In fact, my dislike for XSLT is why I wrote LINQ to Umbraco!&lt;/p&gt;
+&lt;p&gt;But why, being an Umbraco user, don&amp;#39;t i like XSLT? After all, it&amp;#39;s a fairly core part of Umbraco!&lt;/p&gt;
+&lt;h2&gt;Compile time checking&lt;/h2&gt;
+&lt;p&gt;That&amp;#39;s right, I&amp;#39;m very much a developer, and very much a compiler-driven developer. Runtime errors really are the worst to try and debug, and that&amp;#39;s what you really get with XPath. XPath is evaluated at runtime (yes, that&amp;#39;s a bit generalized :P), so if you have something wrong in your syntax you wont find it immediately.&lt;/p&gt;
+&lt;p&gt;Compare that to .NET code, it&amp;#39;s very hard to write .NET code which wont compile. True that you can still get runtime errors, but they are a lot harder to achieve in the scenario&amp;#39;s we&amp;#39;re looking at for LINQ to Umbraco vs XSLT.&lt;/p&gt;
+&lt;h2&gt;Strong typing&lt;/h2&gt;
+&lt;p&gt;Again, another example of me being very much a developer, I would much rather look at an object with properties which knows of the type of the data.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re not careful you can mistake the type and then you, again, have a runtime error :P.
+The .NET compiler wont let you assign a string to an int.&lt;/p&gt;
+&lt;h1&gt;Readability&lt;/h1&gt;
+&lt;p&gt;This one will cause a bit of a stir, but I simply don&amp;#39;t find XPath &amp;amp; XSLT readable. Take these two examples:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//node[nodeTypeAlias='home_page']/node[nodeTypeAlias='contact_us' nodeName='Contact Aaron']&lt;/span&gt;
+
+ctx&lt;span class=&quot;variable&quot;&gt;.HomePages&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.ContactUs&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.Where&lt;/span&gt;(c =&amp;gt; c&lt;span class=&quot;variable&quot;&gt;.Name&lt;/span&gt; == &lt;span class=&quot;string&quot;&gt;&quot;Contact Aaron&quot;&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My example is very basic, but if you look into a more complex XSLT file (such as many which exists in Warrens CWS package). In fact, in the unit tests for LINQ to Umbraco there is a replication of a few of them (have a look in the source on Codeplex if you want to see them).&lt;/p&gt;
+&lt;p&gt;A very important component of code for me is readability. When debugging, especially if the code isn&amp;#39;t yours to begin with, readability is a vital component. You don&amp;#39;t want to have to waste time trying to understand what&amp;#39;s going on in the code before trying to solve it.
+And if you can&amp;#39;t work out the code properly then there&amp;#39;s a chance you&amp;#39;ll just make the problem worse.&lt;/p&gt;
+&lt;h2&gt;API Design&lt;/h2&gt;
+&lt;p&gt;Again I&amp;#39;ll probably cause a stir with this one again but it&amp;#39;s another thing that is very dear to my heart. I am a strong believer in proper API design, and if it&amp;#39;s done wrong then it can make your life hell in the future.&lt;/p&gt;
+&lt;p&gt;I also like abstractions. LINQ to Umbraco is an example of that... provider model! Here at The FARM we&amp;#39;ve got a great level of abstraction which we use, we don&amp;#39;t pass classes around, only interfaces, which means that your UI is dumb, really really dumb.
+There isn&amp;#39;t any business logic contained there, and there&amp;#39;s nothing more complex than a method call.&lt;/p&gt;
+&lt;p&gt;But too often when I see an XSLT it&amp;#39;s containing more than just UI code. And this isn&amp;#39;t really a fault of XSLT, but of how it&amp;#39;s perceived. When you look at an ASPX/ ASCX people have a different mindset, you don&amp;#39;t put anything really in the front-end file other than the markup as there is a CS file associated which you think to put the other complex code into.
+But with an XSLT there isn&amp;#39;t another file, so everything ends up there.&lt;/p&gt;
+&lt;p&gt;Then it becomes too complex to try and achieve with XSLT &lt;em&gt;cough variable incrementing cough&lt;/em&gt; so an XSLT extension is written. And I&amp;#39;ve seen some really scary XSLT extensions, which allow you to do things which just make me want to cringe.&lt;/p&gt;
+&lt;p&gt;XSLT should only be concerned with formatting data to output markup...&lt;/p&gt;
+&lt;h2&gt;XSLT&amp;#39;s produce better markup&lt;/h2&gt;
+&lt;p&gt;Anyone who says that is ill-informed. If you don&amp;#39;t think you can write valid, XHTML markup with ASP.NET Web Forms then you&amp;#39;re not doing it right!&lt;/p&gt;
+&lt;p&gt;Control Adapters, Repeaters, List View, inline script blocks, etc can all be used to produce what ever markup you so desire.
+And it doesn&amp;#39;t take much effort to produce good markup with ASP.NET. In fact, with Visual Studio 2008 it&amp;#39;s really hard to use the standard editor to produce crappy markup.&lt;/p&gt;
+&lt;p&gt;The biggest problem is ID&amp;#39;s of elements, but you only have that problem if the element is:&lt;/p&gt;
+&lt;p&gt;Inside a naming container
+Set to runat=&amp;quot;server&amp;quot;
+And you should only be setting runat=&amp;quot;server&amp;quot; on elements you need server-side access to, but that&amp;#39;s a topic for another night.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;So this brings me to the end of another post. Hopefully it&amp;#39;s been enlightening and I haven&amp;#39;t upset too many people :P&lt;/p&gt;
 </content>
         </entry>
     
         <entry>
-            <title>Why does this code work?</title>
-            <link href="/posts/2010-04-25-why-does-this-code-work.html"/>
+            <title>Working with dates and LINQ to SQL</title>
+            <link href="/posts/2010-04-25-working-with-dates-and-linq-to-sql.html"/>
             <updated>2010-04-25T00:00:00.000Z</updated>
-            <id>/posts/2010-04-25-why-does-this-code-work.html</id>
-            <content type="html">&lt;p&gt;In the discussion on the Umbraco forum about using LINQ to Umbraco I posted a short code snippet of something we write fairly frequently at &lt;a href=&quot;http://www.farmcode.org/post/2009/02/24/Linq-to-Umbraco.aspx&quot;&gt;TheFARM using our version of LINQ with Umbraco&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I thought I&amp;#39;d post the challenge to my trusty followers, for them to see if they know why the code works. First off the code:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;r&quot;&gt;IEnumerable&amp;lt;XElement&amp;gt; nodes = UmbXmlLinqExtensions.GetNodeByXpath(&lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt;); 
-IEnumerable&amp;lt;IUmbracoPage&amp;gt; pages = nodes.Select(n =&amp;gt;(IUmbracoPage)(UmbracoPage)n);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What the XPath being evaluated isn&amp;#39;t important, what is important is you&amp;#39;ll notice that we have a collection of &lt;code&gt;System.Xml.Linq.XElement&lt;/code&gt;&amp;#39;s, but then it&amp;#39;s directly casting each XElement to &lt;code&gt;IUmbracoPage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Here&amp;#39;s the skeleton for the class and interface:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;r&quot;&gt;public interface IUmbracoPage { &lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt; } 
-public class UmbracoPage : IUmbracoPage { &lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt; }&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Again the body of the interface isn&amp;#39;t important, what is important is that the class only inherits from the interface, it does not inherit from XElement.&lt;/p&gt;
-&lt;h3&gt;Why does this work&lt;/h3&gt;
-&lt;p&gt;Well the answer is actually very simple, and it&amp;#39;s a really handy feature of the C# language, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/xhbhezf4.aspx&quot;&gt;explicit operators&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Explicit operators allow you to define explicit casting between types. So the code that was missing from my original post was this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;explicit&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;operator&lt;/span&gt; UmbracoPage(XElement x) {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; UmbracoPage(x);
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What I&amp;#39;ve done here is defined how the compiler is to treat a casting of an XElement to an instance of UmbracoPage, and since UmbracoPage inherits IUmbracoPage there is already a defined casting to it.&lt;/p&gt;
-&lt;p&gt;Inside the body of my explicit operator I can do anything I desire, here I&amp;#39;m just returning a new instance, passing the XElement to the constructor.&lt;/p&gt;
-&lt;p&gt;I find it really quite elegant, and that it reduces code smell quite nicely.&lt;/p&gt;
-&lt;p&gt;But explicit operators also have a buddy, in the form of &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/z5z9kes2.aspx&quot;&gt;implicit operators&lt;/a&gt; (which was the close-but-no-cigar answer). These work by the type being defined by the assignment target, eg:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;nginx&quot;&gt;&lt;span class=&quot;title&quot;&gt;UmbracoPage&lt;/span&gt; page = xElement;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I&amp;#39;m personally not a fan of implicit operators though, I find them less obvious when you&amp;#39;re reading code.&lt;/p&gt;
-&lt;p&gt;So there you have it, a slightly obscure language feature to play with!&lt;/p&gt;
+            <id>/posts/2010-04-25-working-with-dates-and-linq-to-sql.html</id>
+            <content type="html">&lt;p&gt;Something I&amp;#39;ve heard developers complain about on numerous occasion is that DateTime comparisons between SQL and .NET is a real pain. Often you need to do a comparison of the date against either a Min or Max value.&lt;/p&gt;
+&lt;p&gt;With raw .NET this is really quite easy, you can just use the DateTime struct and grab DateTime.MinValue or DateTime.MaxValue.&lt;/p&gt;
+&lt;p&gt;But if you&amp;#39;ve ever done this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;var res = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; Collection 
+          &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;.CreatedDate != DateTime.MinValue 
+          select &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You&amp;#39;ll get the following exception thrown:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;http&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;SqlTypeException&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The problem is that &lt;code&gt;DateTime.MinValue&lt;/code&gt; is actually &lt;strong&gt;01/01/0001 12:00:00 AM&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So I&amp;#39;ve quite often seen hacks where a new date is being created which represent the minimum value of the SQL server, and all kinds of weird things, but that&amp;#39;s all redundant.
+The comparision value is built into the .NET framework.&lt;/p&gt;
+&lt;p&gt;All you need to use is &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.aspx&quot;&gt;System.Data.SqlTypes.SqlDateTime&lt;/a&gt; structure. This exposes two fields, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.minvalue.aspx&quot;&gt;MinValue&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.maxvalue.aspx&quot;&gt;MaxValue&lt;/a&gt;. All you need to do is access the Value property of these and pass it into your LINQ statement.
+The date will be parsed correctly as a SQL valid date and you can do your comparisons!&lt;/p&gt;
+&lt;p&gt;So please, stop with any silly workaround for date comparisons with SQL and .NET :P&lt;/p&gt;
 </content>
         </entry>
     
@@ -10286,55 +10388,6 @@ fileContents, Boolean ignoreDebugging)&lt;/p&gt;
 &lt;p&gt;If you&amp;#39;re not defining your own constructor though this isn&amp;#39;t a problem.&lt;/p&gt;
 &lt;p&gt;I only came across this bug when I was trying to define the default constructor as private, attempting to do a very tight API design (not exposing constructors where I didn&amp;#39;t want them).
 Whoops!&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Working with dates and LINQ to SQL</title>
-            <link href="/posts/2010-04-25-working-with-dates-and-linq-to-sql.html"/>
-            <updated>2010-04-25T00:00:00.000Z</updated>
-            <id>/posts/2010-04-25-working-with-dates-and-linq-to-sql.html</id>
-            <content type="html">&lt;p&gt;Something I&amp;#39;ve heard developers complain about on numerous occasion is that DateTime comparisons between SQL and .NET is a real pain. Often you need to do a comparison of the date against either a Min or Max value.&lt;/p&gt;
-&lt;p&gt;With raw .NET this is really quite easy, you can just use the DateTime struct and grab DateTime.MinValue or DateTime.MaxValue.&lt;/p&gt;
-&lt;p&gt;But if you&amp;#39;ve ever done this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;var res = &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; Collection 
-          &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;.CreatedDate != DateTime.MinValue 
-          select &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You&amp;#39;ll get the following exception thrown:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;http&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;SqlTypeException&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The problem is that &lt;code&gt;DateTime.MinValue&lt;/code&gt; is actually &lt;strong&gt;01/01/0001 12:00:00 AM&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;So I&amp;#39;ve quite often seen hacks where a new date is being created which represent the minimum value of the SQL server, and all kinds of weird things, but that&amp;#39;s all redundant.
-The comparision value is built into the .NET framework.&lt;/p&gt;
-&lt;p&gt;All you need to use is &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.aspx&quot;&gt;System.Data.SqlTypes.SqlDateTime&lt;/a&gt; structure. This exposes two fields, &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.minvalue.aspx&quot;&gt;MinValue&lt;/a&gt; and &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.data.sqltypes.sqldatetime.maxvalue.aspx&quot;&gt;MaxValue&lt;/a&gt;. All you need to do is access the Value property of these and pass it into your LINQ statement.
-The date will be parsed correctly as a SQL valid date and you can do your comparisons!&lt;/p&gt;
-&lt;p&gt;So please, stop with any silly workaround for date comparisons with SQL and .NET :P&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Oh woe is (Mobile)Me</title>
-            <link href="/posts/2010-04-25-oh-woe-is-mobile-me.html"/>
-            <updated>2010-04-25T00:00:00.000Z</updated>
-            <id>/posts/2010-04-25-oh-woe-is-mobile-me.html</id>
-            <content type="html">&lt;p&gt;Anyone who is (lucky enough to be) on my msn contact list (and signed in during my work hours) will have seen something curious happening over the past week since I returned back to work.&lt;/p&gt;
-&lt;p&gt;For those of you not, basically I was signing in and out constantly with a frequency of say every 10 minutes.
-This oddly made is surprisingly hard to hold a conversation with someone.
-But more problematic was that not only was msn dropping out but the whole internet was. You could hardly even achieve a successful Google search.&lt;/p&gt;
-&lt;p&gt;And this wasn&amp;#39;t just a problem for me, but for everyone here at TheFARM.&lt;/p&gt;
-&lt;p&gt;The first assumption was that it was something wrong with our ISP, we&amp;#39;re not on a super faster internet connection, and no one had problems outside of work, so it seemed like a logical assumption... right?&lt;/p&gt;
-&lt;p&gt;Well it turns out that when you assume you make an ass out of you and me (ha, see what I did there! :P).
-The problem wasn&amp;#39;t our internet, in fact the problem could be blamed on one individual, yep you guessed it, me :(.&lt;/p&gt;
-&lt;p&gt;Turns out that when I wasn&amp;#39;t on the network everything was fine, everyone could use the web, chat on msn, do what ever they wanted, but as soon as I plugged in, BAM, the internet died.
-So after a bit of detective work (mostly by Shannon) it was concluded that my computer was doing something nasty to the network.
-So we cracked out a copy of &lt;a href=&quot;http://www.wireshark.org/&quot;&gt;Wireshark&lt;/a&gt; and decided to do some detective work with packet sniffing.&lt;/p&gt;
-&lt;p&gt;Immediately it was obvious what was happening, I was flooding our DNS server with requests, requests that the DNS server was returned as invalid. 
-The requests kept looking for a URL along the lines of tcp.members.mac.com and after a bit of searching it turned out that that URL is related to the Apple MobileMe service.
-So Shan asked if I was signed up with MobileMe, to which I responded &amp;quot;I don&amp;#39;t believe so&amp;quot;, but it turned out again I was wrong, I had signed up to MobileMe, but it must have been when I first got my iPhone.
-When you get an iPhone you can sign up with a 60 day trail, something I must have done (hey, it said I was signed in, guess I signed up at some point :P).
-After doing some quick math I concluded that it was ~60 days since I got my iPhone when we first started having internet problems (the last working week last year).&lt;/p&gt;
-&lt;p&gt;I instantly signed out of MobileMe, and low and behold the DNS flooding stopped happening!&lt;/p&gt;
-&lt;p&gt;Thank you Apple for producing a service which is capable of bringing down an office network, you&amp;#39;ve just made sure I strongly consider not purchasing MobileMe in the future!&lt;/p&gt;
-&lt;p&gt;Oh and I&amp;#39;m never going to live this down at work, Shan isn&amp;#39;t a fan of Apple so this is just adding fuel to the fire!&lt;/p&gt;
 </content>
         </entry>
     
@@ -10557,6 +10610,20 @@ I see the only real useful reason for this (other than just wanting to prove it 
         </entry>
     
         <entry>
+            <title>Umbraco DataType Design</title>
+            <link href="/posts/2010-04-11-umbraco-data-type-design.html"/>
+            <updated>2010-04-11T00:00:00.000Z</updated>
+            <id>/posts/2010-04-11-umbraco-data-type-design.html</id>
+            <content type="html">&lt;h2&gt;DataType&amp;#39;s in Umbraco 4.x&lt;/h2&gt;
+&lt;p&gt;I&amp;#39;ve often seem people wondering why performances is &lt;em&gt;so terrible&lt;/em&gt; when creating Documents, particularly lots of Documents from the Umbraco API. There is a good reason for this, the design of the DataType allows anyone to be able to implement them to do almost anything.&lt;/p&gt;
+&lt;p&gt;The standard way to use a DataType is to write to the Umbraco database, but you don&amp;#39;t have to do it that way, you can write to an XML file, call a web service or actually have no data saving.&lt;/p&gt;
+&lt;p&gt;Because of this it&amp;#39;s up the responsibility of the DataType creator to do the CRUD operations, it&amp;#39;s not possible to have Umbraco have some kind of a global save operation (because what if there wasn&amp;#39;t a save!).&lt;/p&gt;
+&lt;p&gt;This does mean that there&amp;#39;s the probability for lots of database interaction when you perform CRUD operations, but it does mean that DataTypes are infinitely flexible.&lt;/p&gt;
+&lt;p&gt;Because of this we were able to produce &lt;a href=&quot;http://our.umbraco.org/projects/thefarm-media-link-checker&quot;&gt;TheFARM Media Link Checker package&lt;/a&gt; for Umbraco. And I&amp;#39;d also hasten a guess that this flexibility also allowed the &lt;a href=&quot;http://our.umbraco.org/projects/google-analytics-for-umbraco&quot;&gt;Google Analytics for Umbraco&lt;/a&gt; package to now allow lookups from the content item.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
             <title>Umbraco Event Improvements</title>
             <link href="/posts/2010-04-11-umbraco-event-improvments.html"/>
             <updated>2010-04-11T00:00:00.000Z</updated>
@@ -10580,20 +10647,6 @@ I see the only real useful reason for this (other than just wanting to prove it 
         </entry>
     
         <entry>
-            <title>Umbraco DataType Design</title>
-            <link href="/posts/2010-04-11-umbraco-data-type-design.html"/>
-            <updated>2010-04-11T00:00:00.000Z</updated>
-            <id>/posts/2010-04-11-umbraco-data-type-design.html</id>
-            <content type="html">&lt;h2&gt;DataType&amp;#39;s in Umbraco 4.x&lt;/h2&gt;
-&lt;p&gt;I&amp;#39;ve often seem people wondering why performances is &lt;em&gt;so terrible&lt;/em&gt; when creating Documents, particularly lots of Documents from the Umbraco API. There is a good reason for this, the design of the DataType allows anyone to be able to implement them to do almost anything.&lt;/p&gt;
-&lt;p&gt;The standard way to use a DataType is to write to the Umbraco database, but you don&amp;#39;t have to do it that way, you can write to an XML file, call a web service or actually have no data saving.&lt;/p&gt;
-&lt;p&gt;Because of this it&amp;#39;s up the responsibility of the DataType creator to do the CRUD operations, it&amp;#39;s not possible to have Umbraco have some kind of a global save operation (because what if there wasn&amp;#39;t a save!).&lt;/p&gt;
-&lt;p&gt;This does mean that there&amp;#39;s the probability for lots of database interaction when you perform CRUD operations, but it does mean that DataTypes are infinitely flexible.&lt;/p&gt;
-&lt;p&gt;Because of this we were able to produce &lt;a href=&quot;http://our.umbraco.org/projects/thefarm-media-link-checker&quot;&gt;TheFARM Media Link Checker package&lt;/a&gt; for Umbraco. And I&amp;#39;d also hasten a guess that this flexibility also allowed the &lt;a href=&quot;http://our.umbraco.org/projects/google-analytics-for-umbraco&quot;&gt;Google Analytics for Umbraco&lt;/a&gt; package to now allow lookups from the content item.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Umbraco AUSPAC January 2010</title>
             <link href="/posts/2010-04-09-umbraco-auspac-january-2010.html"/>
             <updated>2010-04-09T00:00:00.000Z</updated>
@@ -10606,34 +10659,6 @@ I see the only real useful reason for this (other than just wanting to prove it 
 &lt;li&gt;&lt;a href=&quot;/get/auspac/Umbraco.AusPac.UnitTesting.zip&quot;&gt;.NET project&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For those who are interested I did record tonights session, but it appears that it stopped recording about 20 minutes before the end. The majority of the video can be found &lt;a href=&quot;http://vimeo.com/9438884&quot;&gt;here for your viewing pleasure&lt;/a&gt;.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Reflection And Generics</title>
-            <link href="/posts/2010-04-08-reflection-and-generics.html"/>
-            <updated>2010-04-08T00:00:00.000Z</updated>
-            <id>/posts/2010-04-08-reflection-and-generics.html</id>
-            <content type="html">&lt;p&gt;Or to name this another way… &lt;strong&gt;Oh my god the pain&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Anyone who’s been brave enough to delve into the bowels of the Umbraco Interaction Layer will have been able to see just how much Reflection I’m using, for those who haven’t think about this.
-With the UIL I needed a way to find all the properties of a generated class and be able to either populate all of them or save from all of them. To do that I’ve got some custom attributes which decorate the properties which I look out for.&lt;/p&gt;
-&lt;p&gt;Now this in itself isn’t a problem, all my properties are strongly typed, it’s all sweet. The problem was around the populating of the data when you open an existing Umbraco document object. I have two generic methods in my Helper library (which have many an appearance in my Umbraco Membership class too!) which have the construct:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key);
-&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key, T defaultValue);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;ou’ll notice that one is an overload, and the overload parameter is a generic. This is where the problem arises.&lt;/p&gt;
-&lt;p&gt;Because the generic is defined at use-time there’s no type in the .NET framework which can represent something as a generic like you can with an Int32 or a String, and this is where the problem arises, how do you find the overloaded method using reflection, and once it’s found how do you invoke it!?&lt;/p&gt;
-&lt;h2&gt;First things first, finding the method&lt;/h2&gt;
-&lt;p&gt;There’s no simple way in which you do this, in fact, it’s actually rather hacky. If you’re not familiar with finding methods with Reflection you should probably have a read of this &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You’d be mistaken for thinking that you can just pass in the method name, cuz it’s an overload Reflection doesn’t know what you want. So the most likely one you need is &lt;a href=&quot;&quot;&gt;Type.GetMethod Method (String, BindingFlags, Binder, array[]()[], array[\&lt;/a&gt;[])]&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/5fed8f59.aspx&quot;&gt;2&lt;/a&gt;, but you notice something, you need to pass in the type of ALL the parameters for the method.
-Crap, one is a generic type, so it can’t be specified!
-This is where I hit a snag, and from all my research the only solution was a dirty little hack.&lt;/p&gt;
-&lt;p&gt;We know what’s different between the two methods, one has two parameters, the other has three, and this is how we’re going to find the sucker. On the Type class there’s another method, Type.GetMethods() or as I prefer to use (to improve performance) Type.GetMethods(BindingFlags bindingAttr). This will get you an array of methods with the right access levels.&lt;/p&gt;
-&lt;p&gt;Now let’s pull out our old friend LINQ and find the sucker in the array, we end up with something like this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;type&quot;&gt;MethodInfo&lt;/span&gt; method = &lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;Helper&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetMethods&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Public&lt;/span&gt; | &lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Static&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;m&lt;/span&gt; =&amp;gt; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Name&lt;/span&gt; == &quot;&lt;span class=&quot;type&quot;&gt;GetPropertyValue&lt;/span&gt;&quot; &amp;amp;&amp;amp; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetParameters&lt;/span&gt;()&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;()&lt;/span&gt; == 3);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Invoking the method&lt;/h2&gt;
-&lt;p&gt;Ok, so we found the method but how do we invoke it if it’s generic? That’s actually quite easy:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt; methodResult = (int)method.&lt;span class=&quot;type&quot;&gt;MakeGenericMethod&lt;/span&gt;(&lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt;)&lt;/span&gt;).&lt;span class=&quot;type&quot;&gt;Invoke&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;title&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;object&lt;/span&gt;[] { &lt;span class=&quot;title&quot;&gt;doc&lt;/span&gt;, “&lt;span class=&quot;type&quot;&gt;SomeAlias&lt;/span&gt;” })&lt;/span&gt;; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So I make a generic instance of the method using a specified type as the generic type and then invoke it! This is the best and most optimised solution I’ve been able to come up with so far, if anyone can think of something better I’d love to hear it!&lt;/p&gt;
 </content>
         </entry>
     
@@ -10713,11 +10738,92 @@ Update: You should get dataToShow.First() not dataToShow.ToList() so you can get
     headerRow
 ),&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then lastly we generate the data cells (note - this can be done like the header, just chose to do it differently to illistrate that it can be done several ways):&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/1198/linq_to_excel001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/1198/linq_to_excel001.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;(yes I used an image this time, the formatting is a real bitch in the Umbraco WYSIWYG editor!).&lt;/p&gt;
 &lt;p&gt;Lastly there needs to be a WorksheetOptions node, and then you can combine all the XElements together, add it to an XDocument object and save!&lt;/p&gt;
 &lt;p&gt;There you have it, how to create an Excel document using LINQ to XML and C#.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;/get/csharp/excelgenerator.zip&quot;&gt;Download the source here.&lt;/a&gt;&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>The great Umbraco API misconception</title>
+            <link href="/posts/2010-04-08-the-great-umbraco-api-misconception.html"/>
+            <updated>2010-04-08T00:00:00.000Z</updated>
+            <id>/posts/2010-04-08-the-great-umbraco-api-misconception.html</id>
+            <content type="html">&lt;p&gt;When Umbraco 4 was released it was a very exciting that there was an event model around everything in the back-end. This meant you could more powerful ActionHandlers firing on pre and post events (even though they are named against the standard .NET naming conventions).&lt;/p&gt;
+&lt;p&gt;Also, people were very excited that when a pre, sorry, before event fired it was possible to do a cancel on the event args. This was really good for a Save event, it meant for more custom actions, business logic around the saving, you name it.&lt;/p&gt;
+&lt;p&gt;But there&amp;#39;s a problem, canceling the save doesn&amp;#39;t do anything, the data is still saved!
+But what, that&amp;#39;s not right, I canceled the event.&lt;/p&gt;
+&lt;p&gt;And here is the problem, calling Save on a Document object does nothing! Nothing at all except firing the events.&lt;/p&gt;
+&lt;p&gt;So when does the data get saved, well that happens in this line:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;doc&lt;span class=&quot;preprocessor&quot;&gt;.getProperty&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;my_property&quot;&lt;/span&gt;)&lt;span class=&quot;preprocessor&quot;&gt;.Value&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;#39;s right, the Set statement of the Value property of a Property object (well actually the Set statement of the associated IData.Value property, which is what&amp;#39;s called from Property.set_Value).&lt;/p&gt;
+&lt;p&gt;Well yeah, that&amp;#39;s the problem right there, if the Set statement does the save, doing the Save method has been rather pointless.
+It&amp;#39;s also got a really horrible problem of doing a shit load of database calls.&lt;/p&gt;
+&lt;p&gt;So next time you try and hook into the Save event to try and prevent a Save from happening, well sorry to break it to you, it just wont work!
+Sure you could tie into the rollback feature as well so when you&amp;#39;re doing a canceled save you can rollback to the previous version, just make sure you don&amp;#39;t recall the Save method and get stuck in a rollback loop! :P&lt;/p&gt;
+&lt;p&gt;I think we may fix this in v5, but you don&amp;#39;t want all the fun nuance of Umbraco going now do you? :P &lt;/p&gt;
+&lt;h3&gt;What can I do?&lt;/h3&gt;
+&lt;p&gt;So is there anything that you can do to get around the eventing order with Umbraco? The answer is &lt;a href=&quot;/umbraco-event-improvments&quot;&gt;yes, yes you can&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Why is it like this?&lt;/h3&gt;
+&lt;p&gt;If you&amp;#39;re interested in knowing why this happens check out my article on the &lt;a href=&quot;/umbraco-data-type-design&quot;&gt;design of data types&lt;/a&gt;.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Reflection And Generics</title>
+            <link href="/posts/2010-04-08-reflection-and-generics.html"/>
+            <updated>2010-04-08T00:00:00.000Z</updated>
+            <id>/posts/2010-04-08-reflection-and-generics.html</id>
+            <content type="html">&lt;p&gt;Or to name this another way… &lt;strong&gt;Oh my god the pain&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Anyone who’s been brave enough to delve into the bowels of the Umbraco Interaction Layer will have been able to see just how much Reflection I’m using, for those who haven’t think about this.
+With the UIL I needed a way to find all the properties of a generated class and be able to either populate all of them or save from all of them. To do that I’ve got some custom attributes which decorate the properties which I look out for.&lt;/p&gt;
+&lt;p&gt;Now this in itself isn’t a problem, all my properties are strongly typed, it’s all sweet. The problem was around the populating of the data when you open an existing Umbraco document object. I have two generic methods in my Helper library (which have many an appearance in my Umbraco Membership class too!) which have the construct:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key);
+&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; T GetPropertyValue&amp;lt;T&amp;gt;(Document doc, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; key, T defaultValue);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ou’ll notice that one is an overload, and the overload parameter is a generic. This is where the problem arises.&lt;/p&gt;
+&lt;p&gt;Because the generic is defined at use-time there’s no type in the .NET framework which can represent something as a generic like you can with an Int32 or a String, and this is where the problem arises, how do you find the overloaded method using reflection, and once it’s found how do you invoke it!?&lt;/p&gt;
+&lt;h2&gt;First things first, finding the method&lt;/h2&gt;
+&lt;p&gt;There’s no simple way in which you do this, in fact, it’s actually rather hacky. If you’re not familiar with finding methods with Reflection you should probably have a read of this &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&quot;&gt;http://msdn.microsoft.com/en-us/library/system.reflection.aspx&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You’d be mistaken for thinking that you can just pass in the method name, cuz it’s an overload Reflection doesn’t know what you want. So the most likely one you need is &lt;a href=&quot;&quot;&gt;Type.GetMethod Method (String, BindingFlags, Binder, array[]()[], array[\&lt;/a&gt;[])]&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/5fed8f59.aspx&quot;&gt;2&lt;/a&gt;, but you notice something, you need to pass in the type of ALL the parameters for the method.
+Crap, one is a generic type, so it can’t be specified!
+This is where I hit a snag, and from all my research the only solution was a dirty little hack.&lt;/p&gt;
+&lt;p&gt;We know what’s different between the two methods, one has two parameters, the other has three, and this is how we’re going to find the sucker. On the Type class there’s another method, Type.GetMethods() or as I prefer to use (to improve performance) Type.GetMethods(BindingFlags bindingAttr). This will get you an array of methods with the right access levels.&lt;/p&gt;
+&lt;p&gt;Now let’s pull out our old friend LINQ and find the sucker in the array, we end up with something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;type&quot;&gt;MethodInfo&lt;/span&gt; method = &lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;Helper&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetMethods&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Public&lt;/span&gt; | &lt;span class=&quot;type&quot;&gt;BindingFlags&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Static&lt;/span&gt;)&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;m&lt;/span&gt; =&amp;gt; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Name&lt;/span&gt; == &quot;&lt;span class=&quot;type&quot;&gt;GetPropertyValue&lt;/span&gt;&quot; &amp;amp;&amp;amp; &lt;span class=&quot;title&quot;&gt;m&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;GetParameters&lt;/span&gt;()&lt;/span&gt;.&lt;span class=&quot;type&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;()&lt;/span&gt; == 3);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Invoking the method&lt;/h2&gt;
+&lt;p&gt;Ok, so we found the method but how do we invoke it if it’s generic? That’s actually quite easy:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt; methodResult = (int)method.&lt;span class=&quot;type&quot;&gt;MakeGenericMethod&lt;/span&gt;(&lt;span class=&quot;typedef&quot;&gt;typeof&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;int&lt;/span&gt;)&lt;/span&gt;).&lt;span class=&quot;type&quot;&gt;Invoke&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;(&lt;span class=&quot;title&quot;&gt;null&lt;/span&gt;, &lt;span class=&quot;title&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;object&lt;/span&gt;[] { &lt;span class=&quot;title&quot;&gt;doc&lt;/span&gt;, “&lt;span class=&quot;type&quot;&gt;SomeAlias&lt;/span&gt;” })&lt;/span&gt;; &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So I make a generic instance of the method using a specified type as the generic type and then invoke it! This is the best and most optimised solution I’ve been able to come up with so far, if anyone can think of something better I’d love to hear it!&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Problems with Assembly Trust</title>
+            <link href="/posts/2010-04-08-problems-with-assembly-trust.html"/>
+            <updated>2010-04-08T00:00:00.000Z</updated>
+            <id>/posts/2010-04-08-problems-with-assembly-trust.html</id>
+            <content type="html">&lt;p&gt;When I was migrating PaulPad to ASP.NET MVC2 I decided that I wanted to also upgrade it to Autofac2. The main reason for it was the type registration is much nicer with it&amp;#39;s lambda syntax than it was in the 1.4 release which PaulPad previously used.&lt;/p&gt;
+&lt;p&gt;So I set about downloading the latest version of &lt;a href=&quot;http://code.google.com/p/autofac/&quot;&gt;Autofac&lt;/a&gt; and getting it up and running.&lt;/p&gt;
+&lt;p&gt;Because Autofac2 supports both MVC1 and MVC2 I needed to use &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/7wd6ex19(VS.80).aspx&quot;&gt;Assembly Binding&lt;/a&gt; to ensure that it worked properly. And this is where everything started to go bad. I kept getting weird a weird runtime error, an &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.entrypointnotfoundexception.aspx&quot;&gt;EntryPointNotFoundException&lt;/a&gt; was being thrown.&lt;/p&gt;
+&lt;p&gt;At the time I couldn&amp;#39;t get Autofac2 to compile for .NET 3.5 (&lt;a href=&quot;http://code.google.com/p/autofac/issues/detail?id=208&quot;&gt;I&amp;#39;ve since produced a patch to fix that&lt;/a&gt;) so I was in a world of pain.&lt;/p&gt;
+&lt;p&gt;I did manage to get it working by implementing my own controller registration and my own &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.web.mvc.icontrollerfactory.aspx&quot;&gt;IControllerFactory&lt;/a&gt; and then it was working fine, even though I used the source of the AutofacControllerFactory! By now I was scratching my head massively, I mean, I&amp;#39;m doing exactly what they are doing, but why does mine not work?&lt;/p&gt;
+&lt;p&gt;From the limited debugging I was able to do (kind of hard when you don&amp;#39;t have the Autofac PDB&amp;#39;s) I found out that when calling &lt;strong&gt;builder.RegisterControllers&lt;/strong&gt; nothing was happening. The controllers weren&amp;#39;t being found. Huh? But they were in the assembly, so it wasn&amp;#39;t making sense.&lt;/p&gt;
+&lt;p&gt;Once I got Autofac to compile though I did some debugging and was getting a weird error when it run the following code:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;IController&lt;/span&gt;)&lt;/span&gt;.I&lt;span class=&quot;title&quot;&gt;sAssignableFrom&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(controller&lt;span class=&quot;variable&quot;&gt;Type&lt;/span&gt;)&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The error was:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Type IController exists in System.Web.Mvc.dll and System.Web.Mvc.dll&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(Well, something to that effect anyway)&lt;/p&gt;
+&lt;p&gt;So I was sitting there with a completely dumbfounded looked on my face, of course it exists in that assembly, by why does it look there twice? The only logical thought was that it wasn&amp;#39;t doing the assembly binding properly. But how can that be? I&amp;#39;ve not had assembly finding fail before, if it failed it shouldn&amp;#39;t have compiled.&lt;/p&gt;
+&lt;p&gt;Shit wasn&amp;#39;t making sense.&lt;/p&gt;
+&lt;p&gt;So I rolled back to my downloaded version of Autofac and decided to check the version number, but immediately upon opening up the properties dialog I say the message &amp;quot;This file came from another computer and might be blocked to help protect this computer&amp;quot;, and then there was the &lt;strong&gt;Unblock&lt;/strong&gt; button.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;facepalm&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So I clicked Unblock, compiled and magic happened. It all worked, no problems what so ever.&lt;/p&gt;
+&lt;h3&gt;Moral of this story&lt;/h3&gt;
+&lt;p&gt;Trust everyone&lt;/p&gt;
 </content>
         </entry>
     
@@ -10766,34 +10872,6 @@ If I was to not include the namespace System.Linq I can then write my own query 
         </entry>
     
         <entry>
-            <title>Problems with Assembly Trust</title>
-            <link href="/posts/2010-04-08-problems-with-assembly-trust.html"/>
-            <updated>2010-04-08T00:00:00.000Z</updated>
-            <id>/posts/2010-04-08-problems-with-assembly-trust.html</id>
-            <content type="html">&lt;p&gt;When I was migrating PaulPad to ASP.NET MVC2 I decided that I wanted to also upgrade it to Autofac2. The main reason for it was the type registration is much nicer with it&amp;#39;s lambda syntax than it was in the 1.4 release which PaulPad previously used.&lt;/p&gt;
-&lt;p&gt;So I set about downloading the latest version of &lt;a href=&quot;http://code.google.com/p/autofac/&quot;&gt;Autofac&lt;/a&gt; and getting it up and running.&lt;/p&gt;
-&lt;p&gt;Because Autofac2 supports both MVC1 and MVC2 I needed to use &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/7wd6ex19(VS.80).aspx&quot;&gt;Assembly Binding&lt;/a&gt; to ensure that it worked properly. And this is where everything started to go bad. I kept getting weird a weird runtime error, an &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.entrypointnotfoundexception.aspx&quot;&gt;EntryPointNotFoundException&lt;/a&gt; was being thrown.&lt;/p&gt;
-&lt;p&gt;At the time I couldn&amp;#39;t get Autofac2 to compile for .NET 3.5 (&lt;a href=&quot;http://code.google.com/p/autofac/issues/detail?id=208&quot;&gt;I&amp;#39;ve since produced a patch to fix that&lt;/a&gt;) so I was in a world of pain.&lt;/p&gt;
-&lt;p&gt;I did manage to get it working by implementing my own controller registration and my own &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.web.mvc.icontrollerfactory.aspx&quot;&gt;IControllerFactory&lt;/a&gt; and then it was working fine, even though I used the source of the AutofacControllerFactory! By now I was scratching my head massively, I mean, I&amp;#39;m doing exactly what they are doing, but why does mine not work?&lt;/p&gt;
-&lt;p&gt;From the limited debugging I was able to do (kind of hard when you don&amp;#39;t have the Autofac PDB&amp;#39;s) I found out that when calling &lt;strong&gt;builder.RegisterControllers&lt;/strong&gt; nothing was happening. The controllers weren&amp;#39;t being found. Huh? But they were in the assembly, so it wasn&amp;#39;t making sense.&lt;/p&gt;
-&lt;p&gt;Once I got Autofac to compile though I did some debugging and was getting a weird error when it run the following code:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;IController&lt;/span&gt;)&lt;/span&gt;.I&lt;span class=&quot;title&quot;&gt;sAssignableFrom&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(controller&lt;span class=&quot;variable&quot;&gt;Type&lt;/span&gt;)&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The error was:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Type IController exists in System.Web.Mvc.dll and System.Web.Mvc.dll&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;(Well, something to that effect anyway)&lt;/p&gt;
-&lt;p&gt;So I was sitting there with a completely dumbfounded looked on my face, of course it exists in that assembly, by why does it look there twice? The only logical thought was that it wasn&amp;#39;t doing the assembly binding properly. But how can that be? I&amp;#39;ve not had assembly finding fail before, if it failed it shouldn&amp;#39;t have compiled.&lt;/p&gt;
-&lt;p&gt;Shit wasn&amp;#39;t making sense.&lt;/p&gt;
-&lt;p&gt;So I rolled back to my downloaded version of Autofac and decided to check the version number, but immediately upon opening up the properties dialog I say the message &amp;quot;This file came from another computer and might be blocked to help protect this computer&amp;quot;, and then there was the &lt;strong&gt;Unblock&lt;/strong&gt; button.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;facepalm&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;So I clicked Unblock, compiled and magic happened. It all worked, no problems what so ever.&lt;/p&gt;
-&lt;h3&gt;Moral of this story&lt;/h3&gt;
-&lt;p&gt;Trust everyone&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
             <title>Why no Umbraco on Aaron-Powell.com?</title>
             <link href="/posts/2010-04-08-why-no-umbraco.html"/>
             <updated>2010-04-08T00:00:00.000Z</updated>
@@ -10814,27 +10892,156 @@ If I was to not include the namespace System.Linq I can then write my own query 
         </entry>
     
         <entry>
-            <title>The great Umbraco API misconception</title>
-            <link href="/posts/2010-04-08-the-great-umbraco-api-misconception.html"/>
-            <updated>2010-04-08T00:00:00.000Z</updated>
-            <id>/posts/2010-04-08-the-great-umbraco-api-misconception.html</id>
-            <content type="html">&lt;p&gt;When Umbraco 4 was released it was a very exciting that there was an event model around everything in the back-end. This meant you could more powerful ActionHandlers firing on pre and post events (even though they are named against the standard .NET naming conventions).&lt;/p&gt;
-&lt;p&gt;Also, people were very excited that when a pre, sorry, before event fired it was possible to do a cancel on the event args. This was really good for a Save event, it meant for more custom actions, business logic around the saving, you name it.&lt;/p&gt;
-&lt;p&gt;But there&amp;#39;s a problem, canceling the save doesn&amp;#39;t do anything, the data is still saved!
-But what, that&amp;#39;s not right, I canceled the event.&lt;/p&gt;
-&lt;p&gt;And here is the problem, calling Save on a Document object does nothing! Nothing at all except firing the events.&lt;/p&gt;
-&lt;p&gt;So when does the data get saved, well that happens in this line:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;doc&lt;span class=&quot;preprocessor&quot;&gt;.getProperty&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;my_property&quot;&lt;/span&gt;)&lt;span class=&quot;preprocessor&quot;&gt;.Value&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That&amp;#39;s right, the Set statement of the Value property of a Property object (well actually the Set statement of the associated IData.Value property, which is what&amp;#39;s called from Property.set_Value).&lt;/p&gt;
-&lt;p&gt;Well yeah, that&amp;#39;s the problem right there, if the Set statement does the save, doing the Save method has been rather pointless.
-It&amp;#39;s also got a really horrible problem of doing a shit load of database calls.&lt;/p&gt;
-&lt;p&gt;So next time you try and hook into the Save event to try and prevent a Save from happening, well sorry to break it to you, it just wont work!
-Sure you could tie into the rollback feature as well so when you&amp;#39;re doing a canceled save you can rollback to the previous version, just make sure you don&amp;#39;t recall the Save method and get stuck in a rollback loop! :P&lt;/p&gt;
-&lt;p&gt;I think we may fix this in v5, but you don&amp;#39;t want all the fun nuance of Umbraco going now do you? :P &lt;/p&gt;
-&lt;h3&gt;What can I do?&lt;/h3&gt;
-&lt;p&gt;So is there anything that you can do to get around the eventing order with Umbraco? The answer is &lt;a href=&quot;/umbraco-event-improvments&quot;&gt;yes, yes you can&lt;/a&gt;.&lt;/p&gt;
-&lt;h3&gt;Why is it like this?&lt;/h3&gt;
-&lt;p&gt;If you&amp;#39;re interested in knowing why this happens check out my article on the &lt;a href=&quot;/umbraco-data-type-design&quot;&gt;design of data types&lt;/a&gt;.&lt;/p&gt;
+            <title>Extending Umbraco Members</title>
+            <link href="/posts/2010-04-07-extending-umbraco-members.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-extending-umbraco-members.html</id>
+            <content type="html">&lt;p&gt;Recently we&amp;#39;ve had several projects which have come through in which we are building a solution in Umbraco and the client wants to have memberships within the site.&lt;/p&gt;
+&lt;p&gt;Umbraco 3.x has a fairly neat membership system but it&amp;#39;s a bit limited when you want to interact with the member at a code level. Because members are just specialised nodes they can quite easily have custom properties put against them, but reading them in your code is less than appealing.
+You&amp;#39;ve got to make sure you&amp;#39;re reading from the correct alias, typing checking, null checking, etc.&lt;/p&gt;
+&lt;p&gt;And as I kept finding I was writing the same code over and over again for the reading and writing to the properties I thought I&amp;#39;d put together a small framework class.&lt;/p&gt;
+&lt;p&gt;The framework requires the following Umbraco DLL&amp;#39;s:
+&lt;em&gt; businesslogic.dll
+&lt;/em&gt; cms.dll&lt;/p&gt;
+&lt;p&gt;So lets look at some sections of the class.&lt;/p&gt;
+&lt;h2&gt;Default Properties&lt;/h2&gt;
+&lt;p&gt;A member has a few default properties which are also built into the framework. There are also a few additional properties which the framework uses (such as the MembershipTypeId) which are coded in. All of the default properties are virtual so they can be overriden if so desired.
+&lt;img src=&quot;http://www.aaron-powell.com/get/media/746/umbmember01.png&quot; alt=&quot;Properties&quot;&gt;&lt;/p&gt;
+&lt;p&gt;An interesting addition I have made is the IsDirty property. This is used later on during the Save to ensure that only members who have actually got data changed are saved back into Umbraco. This limits database hits and improves performance.&lt;/p&gt;
+&lt;h2&gt;Constructors&lt;/h2&gt;
+&lt;p&gt;I&amp;#39;ve found that there are 3 really useful constructors, a new member constructor and two existing member constructors.
+&lt;img src=&quot;http://www.aaron-powell.com/get/media/751/umbmember02.png&quot; alt=&quot;Constructors&quot;&gt;&lt;/p&gt;
+&lt;p&gt;What you&amp;#39;ll notice from this is that the constructor which takes an Umbraco member is actually marked as private. This is because the framework is targetted at multi-teired applications, like MVC/ MVP where you want to keep data layers separate from the others. And by doing this you can avoid having the Umbraco DLL&amp;#39;s included in any other project in your solution.&lt;/p&gt;
+&lt;p&gt;Next you&amp;#39;ll notice a call to the method &lt;em&gt;PopulateCustomProperties&lt;/em&gt;, this is an abstract method which you need to implement yourself to populate your own properties on a membership object.&lt;/p&gt;
+&lt;p&gt;Click to see the &lt;a href=&quot;http://www.aaron-powell.com/get/media/756/umbmember03.png&quot;&gt;Saving&lt;/a&gt; method.&lt;/p&gt;
+&lt;p&gt;Notice the use of the IsDirty flag to ensure we&amp;#39;re only saving what we should save.&lt;/p&gt;
+&lt;h2&gt;Helper Methods&lt;/h2&gt;
+&lt;p&gt;I&amp;#39;ve provided a few helper methods which can be used for the reading and writing of custom properties on the Umbraco membership object.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/761/umbmember04.jpg&quot; alt=&quot;Helper Methods&quot;&gt;&lt;/p&gt;
+&lt;p&gt;The two get methods handle the null and default data checking, along with casting back to the appriate data type. Here&amp;#39;s an example implementation:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/766/umbmember05.jpg&quot; alt=&quot;Helper usage&quot;&gt;&lt;/p&gt;
+&lt;p&gt;The save is really just a shortcut, I was sick of typing out that same command every time, to use it you would call it from the &lt;em&gt;PrepareMemberForSaving&lt;/em&gt; method like so:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/771/umbmember06.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;And we&amp;#39;re done&lt;/p&gt;
+&lt;p&gt;So there you have it, a simple little class for creating a .NET implementation of an Umbraco member.&lt;/p&gt;
+&lt;p&gt;There are two downloads available, Member.cs or a compiled DLL.&lt;/p&gt;
+&lt;p&gt;It will be interesting though when Umbraco 4 ships and the membership model changes to use the ASP.NET membership providers...&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Building LINQ to Umbraco</title>
+            <link href="/posts/2010-04-07-building-linq-to-umbraco.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-building-linq-to-umbraco.html</id>
+            <content type="html">&lt;h1&gt;In the beginning&lt;/h1&gt;
+&lt;p&gt;LINQ to Umbraco is actually a lot old a project that most people realise, in fact the initial idea of LINQ to Umbraco started when I had a discussion with Niels Hartvig (founder of Umbraco) at the end of 2007 when he was running training in Melbourne.&lt;/p&gt;
+&lt;p&gt;Back then C# 3.0 was just released, Visual Studio 2008 was just out and everyone was very excited about this new technology &lt;em&gt;LINQ&lt;/em&gt;. I discussed it with him and he really liked the idea of having a LINQ provider, but it was nothing more than a &amp;quot;That would be awesome!&amp;quot; idea. Keep in mind, this is before Umbraco 4.0 had even been released!&lt;/p&gt;
+&lt;p&gt;About 6 months later I had got fed up with working directly with the Document API (as we were doing a lot of Document creation at the time) and I decided that I would write a wrapper for it. This project was called &lt;strong&gt;Umbraco Interaction Layer&lt;/strong&gt;, and was really just a new way to create/ edit/ delete documents. As an afterthought I decided to add &amp;quot;LINQ&amp;quot; to it, but it was again nothing more than a wrapper on top of the Document API so it was really shit slow (and would &lt;strong&gt;really&lt;/strong&gt; hammer a database!).&lt;/p&gt;
+&lt;p&gt;After I released the initial version there was a lot of community excitement about having LINQ to Umbraco, so after raising it with Niels that I was planning on writing a &lt;em&gt;proper&lt;/em&gt; LINQ provider, one which wouldn&amp;#39;t bring a server to its knees I was asked to join the core team and include it in the Umbraco 4.5 release.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Training Vidoes</title>
+            <link href="/posts/2010-04-07-training-videos.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-training-videos.html</id>
+            <content type="html">&lt;p&gt;In an effort to get everyone up to speed with LINQ to Umbraco I have put together a series of videos. This series looks at how you can use LINQ to Umbraco to create a simple blog engine.&lt;/p&gt;
+&lt;h2&gt;Session 1&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9788833&quot;&gt;Getting Stardted&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this session I&amp;#39;ll be looking at the basics of what is required for LINQ to Umbraco.
+We&amp;#39;ll look at how to generate the classes and some suggestions on how to get the best generated class names.&lt;/p&gt;
+&lt;h2&gt;Session 2&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9790826&quot;&gt;Working with LINQ to Umbraco entities&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this session I&amp;#39;ll be looking at the code which was generated from the first session and how we can do some basic interactions. We&amp;#39;ll also create our first control using LINQ to Umbraco.&lt;/p&gt;
+&lt;h2&gt;Session 3&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9854122&quot;&gt;Delving into the UmbracoDataContext&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this session I&amp;#39;ll be looking at the heart of LINQ to Umbraco, the UmbracoDataContext. We&amp;#39;ll look at what it&amp;#39;s role is, and how it can be used in extensibility.&lt;/p&gt;
+&lt;h2&gt;Session 4&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9790069&quot;&gt;Performance and Caching&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this session I&amp;#39;ll look at how to get the most out of performance and the caching which is built into LINQ to Umbraco.&lt;/p&gt;
+&lt;h2&gt;Session 5&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9789599&quot;&gt;Paging and Control-less forms&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this session I&amp;#39;ll be looking at how easy it is to do paging with LINQ to Umbraco entities. Also with MVC being such a hot topic I&amp;#39;ll show you how you can make a form which renders LINQ to Umbraco with no ASP.NET server controls.&lt;/p&gt;
+&lt;h2&gt;Session 6&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9853289&quot;&gt;Outputting XML&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this session I&amp;#39;ll be looking at how you can transform the LINQ to Umbraco entities and generate an XML response, for something such as a RSS feed.&lt;/p&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>C#/ .NET</title>
+            <link href="/posts/2010-04-07-csharp.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-csharp.html</id>
+            <content type="html">&lt;h2&gt;My Projects&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/dynamics-library&quot;&gt;AaronPowell.Dynamics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/location-service-with-fsharp-and-twitter&quot;&gt;Location Service with F# and Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;NuGet&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/nuget/global-install-package&quot;&gt;How to install a package into all projects of a solution&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/creating-a-nuget-plugin-engine&quot;&gt;Creating a NuGet-based plugin engine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/nuget/linqpad&quot;&gt;Querying NuGet via LINQPad&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;LINQ Articles&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/linq-to-xml-to-excel&quot;&gt;LINQ to XML to... Excel?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/query-syntax-vs-method-syntax&quot;&gt;Query Syntax vs Method Syntax&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Lucene.Net&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/lucene-net-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;The dark arts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/reflection-and-generics&quot;&gt;Reflection and Generics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/Recursive-anonymous-functions-the-NET-version&quot;&gt;Recursive anonymous functions - the .NET version&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/why-does-this-code-work&quot;&gt;Why does this code work?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/dealing-with-type-casting-limitations&quot;&gt;Dealing with type casting limitations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/dynamic-dictionaries-with-csharp-4&quot;&gt;Dynamic Dictionaries with C# 4.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/lazy-keyedcollections&quot;&gt;Using Lazy&amp;lt;T&amp;gt; with KeyedCollection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Miscellaneous&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/problems-with-assembly-trust&quot;&gt;Problems with Assembly Trust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/working-with-dates-and-linq-to-sql&quot;&gt;Working with dates and LINQ to SQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/Handy-extension-method-for-null-coalesing&quot;&gt;Handy extension method for null-coalesing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/supporting-valuetypes-in-autofac&quot;&gt;Supporting ValueTypes in Autofac&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/testable-email-sending&quot;&gt;Testable Email Sending&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/a-linq-observation&quot;&gt;A LINQ observation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Musings&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/are-extension-methods-really-evil&quot;&gt;Are Extension Methods Really Evil?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        </entry>
+    
+        <entry>
+            <title>Overview</title>
+            <link href="/posts/2010-04-07-linq-to-umbraco-overview.html"/>
+            <updated>2010-04-07T00:00:00.000Z</updated>
+            <id>/posts/2010-04-07-linq-to-umbraco-overview.html</id>
+            <content type="html">&lt;h1&gt;What?&lt;/h1&gt;
+&lt;p&gt;Anyone who has had to do a lot of work with the Umbraco API and interacting with nodes will know that using the .NET API isn&amp;#39;t &lt;em&gt;great&lt;/em&gt;. It&amp;#39;s not bad, but in a strongly typed world a loosely typed objects are no where near as much fun.&lt;/p&gt;
+&lt;p&gt;Especially if you want to move around those items!&lt;/p&gt;
+&lt;p&gt;Umbraco is more than just a content management system, Umbraco a great application framework. If you start looking conceptually at Document Types in Umbraco you&amp;#39;re realise that they are really just a way of &lt;em&gt;describing&lt;/em&gt; data. So to this end they are actually really great at &lt;em&gt;describing&lt;/em&gt; .NET types.&lt;/p&gt;
+&lt;p&gt;LINQ to Umbraco aims to take these meta-types which you are defining within the CMS and generate strongly typed representations of them which you can work with at a .NET level.&lt;/p&gt;
+&lt;p&gt;Become the types defined in Umbraco can be easily used to represent any data. To this end LINQ to Umbraco is &lt;strong&gt;provider based&lt;/strong&gt;, allowing the underling data source to be defined by the developer.&lt;/p&gt;
+&lt;h2&gt;Provider Based?&lt;/h2&gt;
+&lt;p&gt;Because of the way LINQ to Umbraco is designed it is possible to swap-out the way that the data is access within itself. This is what the UmbracoDataProvider class is used for.&lt;/p&gt;
+&lt;p&gt;Out of the box LINQ to Umbraco supplies a single UmbracoDataProvider implementation, the &lt;strong&gt;NodeDataProvider&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The NodeDataProvider is designed to interact with the XML cache of Umbraco, working with published data. This provides read-only operations, &lt;em&gt;despite LINQ to Umbraco providing full CRUD capabilities&lt;/em&gt;.&lt;/p&gt;
+&lt;h1&gt;When to use it?&lt;/h1&gt;
+&lt;p&gt;LINQ to Umbraco is not designed to be a replacement for XSLT, nor is it to be a complete replacement for the existing Umbraco API&amp;#39;s.&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s not saying it can&amp;#39;t be used in these scenarios, but LINQ to Umbraco is best used when you&amp;#39;re looking at Umbraco data in a site-wide scope.&lt;/p&gt;
+&lt;h1&gt;Design&lt;/h1&gt;
+&lt;p&gt;The design of LINQ to Umbraco borrows very heavily from that of LINQ to SQL, by having a DataContext which all interactions flow out from.&lt;/p&gt;
+&lt;p&gt;Because of this (and due to the provider model) there is no understanding of the data hierarchy. With the initial access of the data from the DataContext it looks at the data &lt;em&gt;as a whole picture&lt;/em&gt;, allowing you to not concern yourself with the hierarchy, unless you need it.&lt;/p&gt;
+&lt;p&gt;In addition to having a LINQ to SQL style DataContext all of the hierarchy of Umbraco is matched by LINQ to Umbraco. This means that you can traverse down a node&amp;#39;s children collections, in a strongly typed manner.&lt;/p&gt;
 </content>
         </entry>
     
@@ -10851,9 +11058,9 @@ Generally people will just use the Umbraco API and the Member.getProperty(alias)
 &lt;p&gt;That&amp;#39;s what I&amp;#39;m going to explain here, how you can use the ASP.NET ProfileProvider and it&amp;#39;s associated classes with an Umbraco-defined MemberType.&lt;/p&gt;
 &lt;h2&gt;Our Member Type&lt;/h2&gt;
 &lt;p&gt;For this I&amp;#39;m going to have a very basic little Member Type, it&amp;#39;ll have three bits of data on it, First Name, Middle Name and Last Name.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/2723/picture%201_497x245.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/2723/picture%201.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;As you can see these are defined as per normal, nothing special about that. I can then go to my Umbraco Member and enter some data and view it:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/2728/picture%202_495x190.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/2728/picture%202.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;h2&gt;Accessing via ASP.NET&lt;/h2&gt;
 &lt;p&gt;Now we need to be able to access this via ASP.NET, there are two things we need to configure. First is we want to define our .NET class which represents the Member Type. To do this we need to create a class which inherits from System.Web.Profile.ProfileBase:&lt;/p&gt;
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;python&quot;&gt;using System;
@@ -10953,163 +11160,9 @@ This will let ASP.NET know the class type and I can then access the properties t
     &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;That bit of code does not even require a back-end file for the User Control. And how does it look? Well just like this:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/2733/picture%203_500x129.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/media/2733/picture%203.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;I hope that this has been useful and explains just how easy it can be to use standard ASP.NET features to expose Umbraco Member Types.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Extending Umbraco Members</title>
-            <link href="/posts/2010-04-07-extending-umbraco-members.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-extending-umbraco-members.html</id>
-            <content type="html">&lt;p&gt;Recently we&amp;#39;ve had several projects which have come through in which we are building a solution in Umbraco and the client wants to have memberships within the site.&lt;/p&gt;
-&lt;p&gt;Umbraco 3.x has a fairly neat membership system but it&amp;#39;s a bit limited when you want to interact with the member at a code level. Because members are just specialised nodes they can quite easily have custom properties put against them, but reading them in your code is less than appealing.
-You&amp;#39;ve got to make sure you&amp;#39;re reading from the correct alias, typing checking, null checking, etc.&lt;/p&gt;
-&lt;p&gt;And as I kept finding I was writing the same code over and over again for the reading and writing to the properties I thought I&amp;#39;d put together a small framework class.&lt;/p&gt;
-&lt;p&gt;The framework requires the following Umbraco DLL&amp;#39;s:
-&lt;em&gt; businesslogic.dll
-&lt;/em&gt; cms.dll&lt;/p&gt;
-&lt;p&gt;So lets look at some sections of the class.&lt;/p&gt;
-&lt;h2&gt;Default Properties&lt;/h2&gt;
-&lt;p&gt;A member has a few default properties which are also built into the framework. There are also a few additional properties which the framework uses (such as the MembershipTypeId) which are coded in. All of the default properties are virtual so they can be overriden if so desired.
-&lt;img src=&quot;http://www.aaron-powell.com/media/746/umbmember01.png&quot; alt=&quot;Properties&quot;&gt;&lt;/p&gt;
-&lt;p&gt;An interesting addition I have made is the IsDirty property. This is used later on during the Save to ensure that only members who have actually got data changed are saved back into Umbraco. This limits database hits and improves performance.&lt;/p&gt;
-&lt;h2&gt;Constructors&lt;/h2&gt;
-&lt;p&gt;I&amp;#39;ve found that there are 3 really useful constructors, a new member constructor and two existing member constructors.
-&lt;img src=&quot;http://www.aaron-powell.com/media/751/umbmember02.png&quot; alt=&quot;Constructors&quot;&gt;&lt;/p&gt;
-&lt;p&gt;What you&amp;#39;ll notice from this is that the constructor which takes an Umbraco member is actually marked as private. This is because the framework is targetted at multi-teired applications, like MVC/ MVP where you want to keep data layers separate from the others. And by doing this you can avoid having the Umbraco DLL&amp;#39;s included in any other project in your solution.&lt;/p&gt;
-&lt;p&gt;Next you&amp;#39;ll notice a call to the method &lt;em&gt;PopulateCustomProperties&lt;/em&gt;, this is an abstract method which you need to implement yourself to populate your own properties on a membership object.&lt;/p&gt;
-&lt;p&gt;Click to see the &lt;a href=&quot;http://www.aaron-powell.com/media/756/umbmember03.png&quot;&gt;Saving&lt;/a&gt; method.&lt;/p&gt;
-&lt;p&gt;Notice the use of the IsDirty flag to ensure we&amp;#39;re only saving what we should save.&lt;/p&gt;
-&lt;h2&gt;Helper Methods&lt;/h2&gt;
-&lt;p&gt;I&amp;#39;ve provided a few helper methods which can be used for the reading and writing of custom properties on the Umbraco membership object.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/761/umbmember04_499x399.jpg&quot; alt=&quot;Helper Methods&quot;&gt;&lt;/p&gt;
-&lt;p&gt;The two get methods handle the null and default data checking, along with casting back to the appriate data type. Here&amp;#39;s an example implementation:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/766/umbmember05_494x45.jpg&quot; alt=&quot;Helper usage&quot;&gt;&lt;/p&gt;
-&lt;p&gt;The save is really just a shortcut, I was sick of typing out that same command every time, to use it you would call it from the &lt;em&gt;PrepareMemberForSaving&lt;/em&gt; method like so:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/media/771/umbmember06_499x139.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;And we&amp;#39;re done&lt;/p&gt;
-&lt;p&gt;So there you have it, a simple little class for creating a .NET implementation of an Umbraco member.&lt;/p&gt;
-&lt;p&gt;There are two downloads available, Member.cs or a compiled DLL.&lt;/p&gt;
-&lt;p&gt;It will be interesting though when Umbraco 4 ships and the membership model changes to use the ASP.NET membership providers...&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Building LINQ to Umbraco</title>
-            <link href="/posts/2010-04-07-building-linq-to-umbraco.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-building-linq-to-umbraco.html</id>
-            <content type="html">&lt;h1&gt;In the beginning&lt;/h1&gt;
-&lt;p&gt;LINQ to Umbraco is actually a lot old a project that most people realise, in fact the initial idea of LINQ to Umbraco started when I had a discussion with Niels Hartvig (founder of Umbraco) at the end of 2007 when he was running training in Melbourne.&lt;/p&gt;
-&lt;p&gt;Back then C# 3.0 was just released, Visual Studio 2008 was just out and everyone was very excited about this new technology &lt;em&gt;LINQ&lt;/em&gt;. I discussed it with him and he really liked the idea of having a LINQ provider, but it was nothing more than a &amp;quot;That would be awesome!&amp;quot; idea. Keep in mind, this is before Umbraco 4.0 had even been released!&lt;/p&gt;
-&lt;p&gt;About 6 months later I had got fed up with working directly with the Document API (as we were doing a lot of Document creation at the time) and I decided that I would write a wrapper for it. This project was called &lt;strong&gt;Umbraco Interaction Layer&lt;/strong&gt;, and was really just a new way to create/ edit/ delete documents. As an afterthought I decided to add &amp;quot;LINQ&amp;quot; to it, but it was again nothing more than a wrapper on top of the Document API so it was really shit slow (and would &lt;strong&gt;really&lt;/strong&gt; hammer a database!).&lt;/p&gt;
-&lt;p&gt;After I released the initial version there was a lot of community excitement about having LINQ to Umbraco, so after raising it with Niels that I was planning on writing a &lt;em&gt;proper&lt;/em&gt; LINQ provider, one which wouldn&amp;#39;t bring a server to its knees I was asked to join the core team and include it in the Umbraco 4.5 release.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Overview</title>
-            <link href="/posts/2010-04-07-linq-to-umbraco-overview.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-linq-to-umbraco-overview.html</id>
-            <content type="html">&lt;h1&gt;What?&lt;/h1&gt;
-&lt;p&gt;Anyone who has had to do a lot of work with the Umbraco API and interacting with nodes will know that using the .NET API isn&amp;#39;t &lt;em&gt;great&lt;/em&gt;. It&amp;#39;s not bad, but in a strongly typed world a loosely typed objects are no where near as much fun.&lt;/p&gt;
-&lt;p&gt;Especially if you want to move around those items!&lt;/p&gt;
-&lt;p&gt;Umbraco is more than just a content management system, Umbraco a great application framework. If you start looking conceptually at Document Types in Umbraco you&amp;#39;re realise that they are really just a way of &lt;em&gt;describing&lt;/em&gt; data. So to this end they are actually really great at &lt;em&gt;describing&lt;/em&gt; .NET types.&lt;/p&gt;
-&lt;p&gt;LINQ to Umbraco aims to take these meta-types which you are defining within the CMS and generate strongly typed representations of them which you can work with at a .NET level.&lt;/p&gt;
-&lt;p&gt;Become the types defined in Umbraco can be easily used to represent any data. To this end LINQ to Umbraco is &lt;strong&gt;provider based&lt;/strong&gt;, allowing the underling data source to be defined by the developer.&lt;/p&gt;
-&lt;h2&gt;Provider Based?&lt;/h2&gt;
-&lt;p&gt;Because of the way LINQ to Umbraco is designed it is possible to swap-out the way that the data is access within itself. This is what the UmbracoDataProvider class is used for.&lt;/p&gt;
-&lt;p&gt;Out of the box LINQ to Umbraco supplies a single UmbracoDataProvider implementation, the &lt;strong&gt;NodeDataProvider&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;The NodeDataProvider is designed to interact with the XML cache of Umbraco, working with published data. This provides read-only operations, &lt;em&gt;despite LINQ to Umbraco providing full CRUD capabilities&lt;/em&gt;.&lt;/p&gt;
-&lt;h1&gt;When to use it?&lt;/h1&gt;
-&lt;p&gt;LINQ to Umbraco is not designed to be a replacement for XSLT, nor is it to be a complete replacement for the existing Umbraco API&amp;#39;s.&lt;/p&gt;
-&lt;p&gt;That&amp;#39;s not saying it can&amp;#39;t be used in these scenarios, but LINQ to Umbraco is best used when you&amp;#39;re looking at Umbraco data in a site-wide scope.&lt;/p&gt;
-&lt;h1&gt;Design&lt;/h1&gt;
-&lt;p&gt;The design of LINQ to Umbraco borrows very heavily from that of LINQ to SQL, by having a DataContext which all interactions flow out from.&lt;/p&gt;
-&lt;p&gt;Because of this (and due to the provider model) there is no understanding of the data hierarchy. With the initial access of the data from the DataContext it looks at the data &lt;em&gt;as a whole picture&lt;/em&gt;, allowing you to not concern yourself with the hierarchy, unless you need it.&lt;/p&gt;
-&lt;p&gt;In addition to having a LINQ to SQL style DataContext all of the hierarchy of Umbraco is matched by LINQ to Umbraco. This means that you can traverse down a node&amp;#39;s children collections, in a strongly typed manner.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>Training Vidoes</title>
-            <link href="/posts/2010-04-07-training-videos.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-training-videos.html</id>
-            <content type="html">&lt;p&gt;In an effort to get everyone up to speed with LINQ to Umbraco I have put together a series of videos. This series looks at how you can use LINQ to Umbraco to create a simple blog engine.&lt;/p&gt;
-&lt;h2&gt;Session 1&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9788833&quot;&gt;Getting Stardted&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this session I&amp;#39;ll be looking at the basics of what is required for LINQ to Umbraco.
-We&amp;#39;ll look at how to generate the classes and some suggestions on how to get the best generated class names.&lt;/p&gt;
-&lt;h2&gt;Session 2&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9790826&quot;&gt;Working with LINQ to Umbraco entities&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this session I&amp;#39;ll be looking at the code which was generated from the first session and how we can do some basic interactions. We&amp;#39;ll also create our first control using LINQ to Umbraco.&lt;/p&gt;
-&lt;h2&gt;Session 3&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9854122&quot;&gt;Delving into the UmbracoDataContext&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this session I&amp;#39;ll be looking at the heart of LINQ to Umbraco, the UmbracoDataContext. We&amp;#39;ll look at what it&amp;#39;s role is, and how it can be used in extensibility.&lt;/p&gt;
-&lt;h2&gt;Session 4&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9790069&quot;&gt;Performance and Caching&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this session I&amp;#39;ll look at how to get the most out of performance and the caching which is built into LINQ to Umbraco.&lt;/p&gt;
-&lt;h2&gt;Session 5&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9789599&quot;&gt;Paging and Control-less forms&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this session I&amp;#39;ll be looking at how easy it is to do paging with LINQ to Umbraco entities. Also with MVC being such a hot topic I&amp;#39;ll show you how you can make a form which renders LINQ to Umbraco with no ASP.NET server controls.&lt;/p&gt;
-&lt;h2&gt;Session 6&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://vimeo.com/9853289&quot;&gt;Outputting XML&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this session I&amp;#39;ll be looking at how you can transform the LINQ to Umbraco entities and generate an XML response, for something such as a RSS feed.&lt;/p&gt;
-</content>
-        </entry>
-    
-        <entry>
-            <title>C#/ .NET</title>
-            <link href="/posts/2010-04-07-csharp.html"/>
-            <updated>2010-04-07T00:00:00.000Z</updated>
-            <id>/posts/2010-04-07-csharp.html</id>
-            <content type="html">&lt;h2&gt;My Projects&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/dynamics-library&quot;&gt;AaronPowell.Dynamics&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/location-service-with-fsharp-and-twitter&quot;&gt;Location Service with F# and Twitter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;NuGet&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/nuget/global-install-package&quot;&gt;How to install a package into all projects of a solution&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/creating-a-nuget-plugin-engine&quot;&gt;Creating a NuGet-based plugin engine&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/nuget/linqpad&quot;&gt;Querying NuGet via LINQPad&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;LINQ Articles&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/linq-to-xml-to-excel&quot;&gt;LINQ to XML to... Excel?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/query-syntax-vs-method-syntax&quot;&gt;Query Syntax vs Method Syntax&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Lucene.Net&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/lucene-net-overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;The dark arts&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/reflection-and-generics&quot;&gt;Reflection and Generics&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/Recursive-anonymous-functions-the-NET-version&quot;&gt;Recursive anonymous functions - the .NET version&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/why-does-this-code-work&quot;&gt;Why does this code work?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/dealing-with-type-casting-limitations&quot;&gt;Dealing with type casting limitations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/dynamic-dictionaries-with-csharp-4&quot;&gt;Dynamic Dictionaries with C# 4.0&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/lazy-keyedcollections&quot;&gt;Using Lazy&amp;lt;T&amp;gt; with KeyedCollection&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Miscellaneous&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/problems-with-assembly-trust&quot;&gt;Problems with Assembly Trust&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/working-with-dates-and-linq-to-sql&quot;&gt;Working with dates and LINQ to SQL&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/Handy-extension-method-for-null-coalesing&quot;&gt;Handy extension method for null-coalesing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/supporting-valuetypes-in-autofac&quot;&gt;Supporting ValueTypes in Autofac&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/testable-email-sending&quot;&gt;Testable Email Sending&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/a-linq-observation&quot;&gt;A LINQ observation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Musings&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/are-extension-methods-really-evil&quot;&gt;Are Extension Methods Really Evil?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
         </entry>
     

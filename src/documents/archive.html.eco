@@ -5,7 +5,7 @@ tags: ['page']
 isPaged: true
 pageOrder: 0
 pagedCollection: 'posts'
-pageSize: 3
+pageSize: 10
 ---
 <% posts = @getCollection('posts') %>
 <% for i in [@document.page.startIdx...@document.page.endIdx]: %>

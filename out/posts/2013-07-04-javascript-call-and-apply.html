@@ -7,7 +7,7 @@
 <html>
     <head>
   <meta charset="utf-8">
-  <title>Walking a JavaScript object - LINQ to Fail</title>
+  <title>JavaScript call and apply - LINQ to Fail</title>
   <meta name="author" content="Aaron Powell">
   <meta name="viewport" content="width=1040" />
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
@@ -30,8 +30,8 @@
 
         <div id="header-wrapper">
             <div id="header" class="container">
-                <h1 id="logo">Walking a JavaScript object</h1>
-                <h2>21st June 2013</h2>
+                <h1 id="logo">JavaScript call and apply</h1>
+                <h2>4th July 2013</h2>
                 <ul class="tags">
     
         <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
@@ -61,10 +61,11 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
-                            <span class="date">4th July 2013</span>
-                            <h3><a href="/posts/2013-07-04-javascript-call-and-apply.html">JavaScript call and apply</a></h3>
+                            <span class="date">21st June 2013</span>
+                            <h3><a href="/posts/2013-06-21-walking-a-javascript-object.html">Walking a JavaScript object</a></h3>
                         </header>
-                        <p>After having confused one of my colleagues with some code that used the JavaScript <code>apply</code> method and giving them an answer that didn&#39;t leave them completely bemused I thought I&#39;d share my explanation with the world.</p>
+                        <p>Ever had a path to a path to a property on a JavaScript object that you want to walk? Something along the lines of <code>foo.bar.baz</code>.</p>
+<p>Recently I was trying to solve this problem and came across a nifty little trick</p>
 
                         <div class="tags">
                             
@@ -160,40 +161,51 @@
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <p>Recently I was trying to solve a problem where I had a JSON path to a property on an object, the path was going to be <code>n</code> layers deep and the object itself was also <code>n</code> layers deep. I needed to solve this problem in a fairly generic manner, as there was a number of different scenarios under which this could would be run.</p>
-<p>Basically I had this:</p>
-<pre class="highlighted"><code class="nginx"><span class="title">var</span> path = <span class="string">'foo.bar.baz'</span>;</code></pre>
-<p>And an object like this:</p>
-<pre class="highlighted"><code class="smalltalk">var obj = {
-    <span class="method">foo:</span> {
-        <span class="method">bar:</span> {
-            <span class="method">baz:</span> <span class="number">42</span>
-        }
-    }
+                            <p>A colleague recently came across this line in our codebase that I wrote:</p>
+<pre class="highlighted"><code class="avrasm">binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span><span class="preprocessor">.push</span><span class="preprocessor">.apply</span>(binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span>, vehicle<span class="preprocessor">.involvements</span>)<span class="comment">;</span></code></pre>
+<p>What the overall result of the code is isn&#39;t particularly important, the part that tripped them up (and made them think I&#39;m on drugs I&#39;m not actually on) was this:</p>
+<pre class="highlighted"><code class="avrasm">binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span><span class="preprocessor">.push</span><span class="preprocessor">.apply</span>(binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span>, vehicle<span class="preprocessor">.involvements</span>)<span class="comment">;</span></code></pre>
+<p>Now the  involvements property is an array in both scenarios which exposes a push method, the confusion was around what the apply method does and why I was even using it.</p>
+<p>Both call and apply are methods which are part of the JavaScript language and are exposed on the Function prototype, meaning that they can be accessed from any function, so let&#39;s say we have this function:</p>
+<pre class="highlighted"><code class="matlab"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> <span class="params">(a)</span> {</span>
+      <span class="transposed_variable">console.</span><span class="built_in">log</span>(this, a, argument);
 };</code></pre>
-<p>So from the <code>path</code> I want to be able to find out the value in the object that matches it.</p>
-<h1>Pass #1</h1>
-<p>A colleague of mine gave me the code which would do this, from an application they had, implemented using a for loop:</p>
-<pre class="highlighted"><code class="erlang">var value = obj;
-var paths = path.split('.');
-<span class="function"><span class="title">for</span> <span class="params">(var i = <span class="number">0</span>; i &lt; paths.length; i++)</span> {
-    <span class="title">value</span> = <span class="title">value</span>[<span class="title">paths</span>[<span class="title">i</span>]];
-}
-
-<span class="title">console</span>.<span class="title">log</span><span class="params">(value)</span>;</code></pre>
-<p>Well that does exactly what needs to be done, exactly as advertised. Job done right?</p>
-<h1>Pass #2</h1>
-<p>The for loop is so old school, these days it&#39;s all functional programming that the kids are into these days so I looked at our method and decided there had to be another way which we could approach this, something a bit more functional.</p>
-<p>Since what we&#39;re doing it walking through an object I wondered &quot;Could I use something from the <code>map</code>/<code>reduce</code>/<code>filter</code> family for that?&quot;. Well it turns out that <strong>yes</strong> there is something ideal for that, <code>reduce</code>.</p>
-<p>You see the <code>reduce</code> method takes a callback like this:</p>
-<pre class="highlighted"><code class="lua"><span class="function"><span class="keyword">function</span> <span class="params">(prev, current)</span></span> {
-    //<span class="keyword">return</span> what is to be the <span class="built_in">next</span> <span class="string">'prev'</span> value
-}</code></pre>
-<p>So as long as the <code>prev</code> is an instance of <code>obj</code> then we can walk it, and doing that is fine as we can provide an argument to the <code>reduce</code> method that defines what the initial value will be. This means we can rewrite our walker like so:</p>
-<pre class="highlighted"><code class="matlab">var value = <span class="transposed_variable">path.</span>split(<span class="string">'.'</span>).reduce(<span class="function"><span class="keyword">function</span> <span class="params">(prev, curr)</span> { </span>
-    <span class="keyword">return</span> prev<span class="matrix">[curr]</span>;
-}, obj);</code></pre>
-<p>And there we have it, a nice little object walker.</p>
+<p>And we invoke it like this:</p>
+<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">foo</span><span class="params">('b')</span>;</code></pre>
+<p>It is the same as doing this:</p>
+<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(window, <span class="string">'b'</span>, [<span class="string">'b'</span>])<span class="comment">;</span></code></pre>
+<p><em>Note: In ES3 it&#39;ll be window, ES5 strict mode it&#39;ll be null, or undefined, I forget which</em></p>
+<p>Now let&#39;s throw the apply method into the mix and invoke it like so:</p>
+<pre class="highlighted"><code class="avrasm">foo<span class="preprocessor">.apply</span>(<span class="string">'a'</span>, [<span class="string">'b'</span>])<span class="comment">;</span></code></pre>
+<p>This time it&#39;ll be like we&#39;ve done this:</p>
+<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, [<span class="string">'b'</span>])<span class="comment">;</span></code></pre>
+<p>We could alternatively provide an array of arguments so:</p>
+<pre class="highlighted"><code class="avrasm">foo<span class="preprocessor">.apply</span>(<span class="string">'a'</span>, [<span class="string">'b'</span>,<span class="string">'c'</span>])<span class="comment">;</span></code></pre>
+<p>Becomes:</p>
+<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, [<span class="string">'b'</span>, <span class="string">'c'</span>])<span class="comment">;</span></code></pre>
+<p>So what happened?</p>
+<p>The apply method takes two arguments, the first is what controls the this value, the second is an array of objects that will be decomposed to represent the various arguments passed in, meaning that the array item 0 will be the first argument, b in our example, and so on.</p>
+<p>The call method is similar but instead of taking an array that represents the arguments it takes a splat, anything after the this context will be used directly as the arguments. So we&#39;d use call like this to achieve the same result:</p>
+<pre class="highlighted"><code class="avrasm">foo<span class="preprocessor">.call</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)<span class="comment">;</span></code></pre>
+<h2>Relating it to our original code</h2>
+<p>Let&#39;s think about how this related back to our original code, working with arrays and push. Say I have an array and I want to add N number of values to said array. How would you do it?</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];
+<span class="keyword">var</span> arr2 = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];
+<span class="comment">//I want arr == [1,2,3,4,5,6]</span></code></pre>
+<p>Well the first obvious candidate is a for loop:</p>
+<pre class="highlighted"><code class="matlab"><span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="transposed_variable">arr2.</span><span class="built_in">length</span>; <span class="built_in">i</span>++) <span class="cell">{
+      arr.push(arr2[i]);
+}</span></code></pre>
+<p>That&#39;ll do exactly what we&#39;re after, but there&#39;s a problem, we&#39;re calling push <em>a lot</em>, once for every item in the array in fact(!!). This can be a bit of a performance hit, especially if you have large arrays, the JavaScript runtime engine simply can&#39;t optimise it because it doesn&#39;t know how many there could be so it can&#39;t preallocate the memory, meaning it&#39;s somewhat inefficient.</p>
+<p>Alternatively you could use the <code>concat</code> method:</p>
+<pre class="highlighted"><code class="ini"><span class="setting">arr = <span class="value">arr.concat(arr2);</span></span></code></pre>
+<p>That works just fine but the problem is that you replace arr with a new instance of it. <em>Generally speaking</em> that&#39;s not a problem, but if you&#39;re relying on the object itself to not change, at a memory level (say it&#39;s an observable property from Knockout, or a bound property in WinJS), you&#39;ll potentially run into problems.</p>
+<p>So we&#39;re back to push, we want to append multiple items to an existing array without overriding the original object/property. The nice thing about push is that we can provide it N number of arguments which represent all the items we wish to push. Well since I&#39;ve got an array I can&#39;t exactly pass that in directly, since then argument 1 will be the array, it won&#39;t be decomposed. And this is where apply comes in, we can provide the array as the 2nd argument to apply and have N number of items pushed to the array. This brings us to doing this:</p>
+<pre class="highlighted"><code class="avrasm">arr<span class="preprocessor">.push</span><span class="preprocessor">.apply</span>(arr, arr2)<span class="comment">;</span></code></pre>
+<p>And there we have it, we&#39;ve used apply to decompose an array and push all he values into the target array, basically we&#39;ve done this:</p>
+<pre class="highlighted"><code class="avrasm">arr<span class="preprocessor">.push</span>(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)<span class="comment">;</span></code></pre>
+<p>Since the this context we&#39;ve set is the <code>arr</code> object itself.</p>
+<p>Hopefully that does a good enough explanation to confuse everyone ;).</p>
 
                         </article>
                     </div>
@@ -205,7 +217,7 @@ var paths = path.split('.');
 window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
 window.disqus_identifier = document.title || 'Home';
 window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
-window.disqus_url = document.location.origin + '/posts/2013-06-21-walking-a-javascript-object.html';
+window.disqus_url = document.location.origin + '/posts/2013-07-04-javascript-call-and-apply.html';
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function () {
