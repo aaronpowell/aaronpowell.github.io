@@ -19,6 +19,12 @@
 			]
 		},
 		{
+			"url": "/posts/2009-07-15-recursive-anonymous-functions-the-net-version.html",
+			"redirects": [
+				"/recursive-anonymous-functions-the-net-version"
+			]
+		},
+		{
 			"url": "/posts/2009-06-06-recursive-anonymous-functions.html",
 			"redirects": [
 				"/recursive-anonymous-functions"
@@ -28,12 +34,6 @@
 			"url": "/posts/2009-05-05-creating-jquery-plugins-from-ms-ajax-components.html",
 			"redirects": [
 				"/creating-jquery-plugins-from-ms-ajax-components"
-			]
-		},
-		{
-			"url": "/posts/2009-07-15-recursive-anonymous-functions-the-net-version.html",
-			"redirects": [
-				"/recursive-anonymous-functions-the-net-version"
 			]
 		},
 		{
@@ -73,21 +73,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-07-training-videos.html",
-			"redirects": [
-				"/training-videos"
-			]
-		},
-		{
 			"url": "/posts/2010-04-07-linq-to-umbraco-overview.html",
 			"redirects": [
 				"/linq-to-umbraco-overview"
 			]
 		},
 		{
-			"url": "/posts/2010-04-07-umbraco-members-profiles.html",
+			"url": "/posts/2010-04-07-training-videos.html",
 			"redirects": [
-				"/umbraco-members-profiles"
+				"/training-videos"
 			]
 		},
 		{
@@ -97,27 +91,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-08-linq-to-xml-to-excel.html",
-			"redirects": [
-				"/linq-to-xml-to-excel"
-			]
-		},
-		{
 			"url": "/posts/2010-04-08-problems-with-assembly-trust.html",
 			"redirects": [
 				"/problems-with-assembly-trust"
 			]
 		},
 		{
-			"url": "/posts/2010-04-08-the-great-umbraco-api-misconception.html",
+			"url": "/posts/2010-04-08-linq-to-xml-to-excel.html",
 			"redirects": [
-				"/the-great-umbraco-api-misconception"
-			]
-		},
-		{
-			"url": "/posts/2010-04-08-reflection-and-generics.html",
-			"redirects": [
-				"/reflection-and-generics"
+				"/linq-to-xml-to-excel"
 			]
 		},
 		{
@@ -127,15 +109,21 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-09-umbraco-auspac-january-2010.html",
+			"url": "/posts/2010-04-08-the-great-umbraco-api-misconception.html",
 			"redirects": [
-				"/umbraco-auspac-january-2010"
+				"/the-great-umbraco-api-misconception"
 			]
 		},
 		{
-			"url": "/posts/2010-04-11-umbraco-event-improvments.html",
+			"url": "/posts/2010-04-07-umbraco-members-profiles.html",
 			"redirects": [
-				"/umbraco-event-improvments"
+				"/umbraco-members-profiles"
+			]
+		},
+		{
+			"url": "/posts/2010-04-09-umbraco-auspac-january-2010.html",
+			"redirects": [
+				"/umbraco-auspac-january-2010"
 			]
 		},
 		{
@@ -151,6 +139,12 @@
 			]
 		},
 		{
+			"url": "/posts/2010-04-11-umbraco-event-improvments.html",
+			"redirects": [
+				"/umbraco-event-improvments"
+			]
+		},
+		{
 			"url": "/posts/2010-04-14-lucene-net-overview.html",
 			"redirects": [
 				"/lucene-net-overview"
@@ -163,15 +157,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-24-linq-in-javascript.html",
-			"redirects": [
-				"/linq-in-javascript"
-			]
-		},
-		{
 			"url": "/posts/2010-04-25-2009-a-year-in-review.html",
 			"redirects": [
 				"/2009-a-year-in-review"
+			]
+		},
+		{
+			"url": "/posts/2010-04-25-exception-thrown-when-using-xslt-extensions.html",
+			"redirects": [
+				"/exception-thrown-when-using-xslt-extensions"
 			]
 		},
 		{
@@ -181,9 +175,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-25-exception-thrown-when-using-xslt-extensions.html",
+			"url": "/posts/2010-04-08-reflection-and-generics.html",
 			"redirects": [
-				"/exception-thrown-when-using-xslt-extensions"
+				"/reflection-and-generics"
 			]
 		},
 		{
@@ -199,15 +193,21 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-25-why-im-not-a-fan-of-xslt.html",
-			"redirects": [
-				"/why-im-not-a-fan-of-xslt"
-			]
-		},
-		{
 			"url": "/posts/2010-04-25-why-does-this-code-work.html",
 			"redirects": [
 				"/why-does-this-code-work"
+			]
+		},
+		{
+			"url": "/posts/2010-04-24-linq-in-javascript.html",
+			"redirects": [
+				"/linq-in-javascript"
+			]
+		},
+		{
+			"url": "/posts/2010-04-25-why-im-not-a-fan-of-xslt.html",
+			"redirects": [
+				"/why-im-not-a-fan-of-xslt"
 			]
 		},
 		{
@@ -229,6 +229,12 @@
 			]
 		},
 		{
+			"url": "/posts/2010-05-27-lucene-analyzer.html",
+			"redirects": [
+				"/lucene-analyzer"
+			]
+		},
+		{
 			"url": "/posts/2010-05-23-client-event-pool.html",
 			"redirects": [
 				"/client-event-pool"
@@ -238,12 +244,6 @@
 			"url": "/posts/2010-05-30-writing-presenters-with-fsharp.html",
 			"redirects": [
 				"/writing-presenters-with-fsharp"
-			]
-		},
-		{
-			"url": "/posts/2010-05-27-lucene-analyzer.html",
-			"redirects": [
-				"/lucene-analyzer"
 			]
 		},
 		{
@@ -277,21 +277,27 @@
 			]
 		},
 		{
-			"url": "/posts/2010-06-28-dynamic-dictionaries-with-csharp-4.html",
-			"redirects": [
-				"/dynamic-dictionaries-with-csharp-4"
-			]
-		},
-		{
 			"url": "/posts/2010-06-29-unit-testing-with-umbraco.html",
 			"redirects": [
 				"/unit-testing-with-umbraco"
 			]
 		},
 		{
+			"url": "/posts/2010-06-28-dynamic-dictionaries-with-csharp-4.html",
+			"redirects": [
+				"/dynamic-dictionaries-with-csharp-4"
+			]
+		},
+		{
 			"url": "/posts/2010-07-03-documents-in-lucene-net.html",
 			"redirects": [
 				"/documents-in-lucene-net"
+			]
+		},
+		{
+			"url": "/posts/2010-08-07-yes-i-like-webforms.html",
+			"redirects": [
+				"/yes-i-like-webforms"
 			]
 		},
 		{
@@ -307,12 +313,6 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-07-yes-i-like-webforms.html",
-			"redirects": [
-				"/yes-i-like-webforms"
-			]
-		},
-		{
 			"url": "/posts/2010-08-08-all-good-things-come-to-an-end.html",
 			"redirects": [
 				"/all-good-things-come-to-an-end"
@@ -325,39 +325,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html",
+			"url": "/posts/2010-09-06-iqueryable-linq-to-umbraco.html",
 			"redirects": [
-				"/rssdataprovider-for-linq-to-umbraco"
-			]
-		},
-		{
-			"url": "/posts/2010-08-27-understanding-linq-to-umbraco.html",
-			"redirects": [
-				"/understanding-linq-to-umbraco"
-			]
-		},
-		{
-			"url": "/posts/2010-08-28-a-linq-observation.html",
-			"redirects": [
-				"/a-linq-observation"
-			]
-		},
-		{
-			"url": "/posts/2010-08-28-no-value-when-settings-dropdown-with-javascript.html",
-			"redirects": [
-				"/no-value-when-settings-dropdown-with-javascript"
-			]
-		},
-		{
-			"url": "/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html",
-			"redirects": [
-				"/sharepoint-feature-corrupts-page-layout"
-			]
-		},
-		{
-			"url": "/posts/2010-08-28-testable-email-sending.html",
-			"redirects": [
-				"/testable-email-sending"
+				"/iqueryable-linq-to-umbraco"
 			]
 		},
 		{
@@ -367,9 +337,39 @@
 			]
 		},
 		{
-			"url": "/posts/2010-09-06-iqueryable-linq-to-umbraco.html",
+			"url": "/posts/2010-08-28-no-value-when-settings-dropdown-with-javascript.html",
 			"redirects": [
-				"/iqueryable-linq-to-umbraco"
+				"/no-value-when-settings-dropdown-with-javascript"
+			]
+		},
+		{
+			"url": "/posts/2010-08-27-understanding-linq-to-umbraco.html",
+			"redirects": [
+				"/understanding-linq-to-umbraco"
+			]
+		},
+		{
+			"url": "/posts/2010-08-28-testable-email-sending.html",
+			"redirects": [
+				"/testable-email-sending"
+			]
+		},
+		{
+			"url": "/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html",
+			"redirects": [
+				"/rssdataprovider-for-linq-to-umbraco"
+			]
+		},
+		{
+			"url": "/posts/2010-08-28-a-linq-observation.html",
+			"redirects": [
+				"/a-linq-observation"
+			]
+		},
+		{
+			"url": "/posts/2010-08-28-sharepoint-feature-corrupts-page-layout.html",
+			"redirects": [
+				"/sharepoint-feature-corrupts-page-layout"
 			]
 		},
 		{
@@ -385,12 +385,6 @@
 			]
 		},
 		{
-			"url": "/posts/2010-09-12-slace-core-javascript-library.html",
-			"redirects": [
-				"/slace-core-javascript-library"
-			]
-		},
-		{
 			"url": "/posts/2010-09-22-lazy-keyedcollections.html",
 			"redirects": [
 				"/lazy-keyedcollections"
@@ -403,9 +397,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-09-30-javascript-singleton.html",
+			"url": "/posts/2010-09-12-slace-core-javascript-library.html",
 			"redirects": [
-				"/javascript-singleton"
+				"/slace-core-javascript-library"
 			]
 		},
 		{
@@ -421,21 +415,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-10-23-javascript-functions-are-objects.html",
-			"redirects": [
-				"/javascript-functions-are-objects"
-			]
-		},
-		{
 			"url": "/posts/2010-11-07-base64-encoding-images-with-powershell.html",
 			"redirects": [
 				"/base64-encoding-images-with-powershell"
 			]
 		},
 		{
-			"url": "/posts/2010-11-10-ie-bug-with-assigning-css-classes.html",
+			"url": "/posts/2010-09-30-javascript-singleton.html",
 			"redirects": [
-				"/ie-bug-with-assigning-css-classes"
+				"/javascript-singleton"
 			]
 		},
 		{
@@ -445,9 +433,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-11-27-umbraco-menu-with-ironruby.html",
+			"url": "/posts/2010-10-23-javascript-functions-are-objects.html",
 			"redirects": [
-				"/umbraco-menu-with-ironruby"
+				"/javascript-functions-are-objects"
+			]
+		},
+		{
+			"url": "/posts/2010-11-10-ie-bug-with-assigning-css-classes.html",
+			"redirects": [
+				"/ie-bug-with-assigning-css-classes"
 			]
 		},
 		{
@@ -463,6 +457,18 @@
 			]
 		},
 		{
+			"url": "/posts/2010-11-27-umbraco-menu-with-ironruby.html",
+			"redirects": [
+				"/umbraco-menu-with-ironruby"
+			]
+		},
+		{
+			"url": "/posts/2010-12-20-sydjs-javascript-frameworks.html",
+			"redirects": [
+				"/sydjs-javascript-frameworks"
+			]
+		},
+		{
 			"url": "/posts/2010-12-11-mercurial-101-for-umbraco-developers.html",
 			"redirects": [
 				"/mercurial-101-for-umbraco-developers"
@@ -475,9 +481,9 @@
 			]
 		},
 		{
-			"url": "/posts/2010-12-20-sydjs-javascript-frameworks.html",
+			"url": "/posts/2010-12-24-umbraco-4-and-razor.html",
 			"redirects": [
-				"/sydjs-javascript-frameworks"
+				"/umbraco-4-and-razor"
 			]
 		},
 		{
@@ -487,33 +493,27 @@
 			]
 		},
 		{
-			"url": "/posts/2010-12-24-2010-a-year-in-review.html",
-			"redirects": [
-				"/2010-a-year-in-review"
-			]
-		},
-		{
-			"url": "/posts/2010-12-24-umbraco-4-and-razor.html",
-			"redirects": [
-				"/umbraco-4-and-razor"
-			]
-		},
-		{
 			"url": "/posts/2010-12-27-custom-umbraco-macro-engines.html",
 			"redirects": [
 				"/custom-umbraco-macro-engines"
 			]
 		},
 		{
-			"url": "/posts/2010-12-28-nhaml-umbraco-macroengine.html",
-			"redirects": [
-				"/nhaml-umbraco-macroengine"
-			]
-		},
-		{
 			"url": "/posts/2011-01-11-orchard-umbraco-installing.html",
 			"redirects": [
 				"/orchard-umbraco/installing"
+			]
+		},
+		{
+			"url": "/posts/2010-12-24-2010-a-year-in-review.html",
+			"redirects": [
+				"/2010-a-year-in-review"
+			]
+		},
+		{
+			"url": "/posts/2010-12-28-nhaml-umbraco-macroengine.html",
+			"redirects": [
+				"/nhaml-umbraco-macroengine"
 			]
 		},
 		{
@@ -565,15 +565,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-02-06-html5.html",
-			"redirects": [
-				"/linq-in-javascript/html5"
-			]
-		},
-		{
 			"url": "/posts/2011-01-30-ie-9-console-assert.html",
 			"redirects": [
 				"/ie-9-console-assert"
+			]
+		},
+		{
+			"url": "/posts/2011-02-06-html5.html",
+			"redirects": [
+				"/linq-in-javascript/html5"
 			]
 		},
 		{
@@ -769,15 +769,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-09-03-qunit-beyond-the-browser-part-1.html",
-			"redirects": [
-				"/javascript/qunit-beyond-the-browser-part-1"
-			]
-		},
-		{
 			"url": "/posts/2011-09-03-slides.html",
 			"redirects": [
 				"/speaking/teched-nz-2011/slides"
+			]
+		},
+		{
+			"url": "/posts/2011-09-03-qunit-beyond-the-browser-part-1.html",
+			"redirects": [
+				"/javascript/qunit-beyond-the-browser-part-1"
 			]
 		},
 		{
@@ -865,15 +865,15 @@
 			]
 		},
 		{
-			"url": "/posts/2012-01-24-creating-an-installer-task.html",
-			"redirects": [
-				"/umbraco/creating-an-installer-task"
-			]
-		},
-		{
 			"url": "/posts/2012-01-25-macros-in-packages.html",
 			"redirects": [
 				"/umbraco/macros-in-packages"
+			]
+		},
+		{
+			"url": "/posts/2012-01-24-creating-an-installer-task.html",
+			"redirects": [
+				"/umbraco/creating-an-installer-task"
 			]
 		},
 		{
@@ -895,9 +895,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-03-15-owin-and-middleware.html",
+			"url": "/posts/2012-03-19-owin-responses.html",
 			"redirects": [
-				"/web/owin-and-middleware"
+				"/web/owin-responses"
 			]
 		},
 		{
@@ -907,9 +907,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-03-19-owin-responses.html",
+			"url": "/posts/2012-03-15-owin-and-middleware.html",
 			"redirects": [
-				"/web/owin-responses"
+				"/web/owin-and-middleware"
 			]
 		},
 		{
@@ -925,6 +925,12 @@
 			]
 		},
 		{
+			"url": "/posts/2012-05-29-understanding-compression-and-minification.html",
+			"redirects": [
+				"/javascript/understanding-compression-and-minification"
+			]
+		},
+		{
 			"url": "/posts/2012-04-02-owin-view-engines-part-2.html",
 			"redirects": [
 				"/web/owin-view-engines-part-2"
@@ -934,12 +940,6 @@
 			"url": "/posts/2012-04-10-owin-conclusion.html",
 			"redirects": [
 				"/web/owin-conclusion"
-			]
-		},
-		{
-			"url": "/posts/2012-05-29-understanding-compression-and-minification.html",
-			"redirects": [
-				"/javascript/understanding-compression-and-minification"
 			]
 		},
 		{
@@ -955,6 +955,12 @@
 			]
 		},
 		{
+			"url": "/posts/2012-06-13-introducing-umbraco-contributor-list.html",
+			"redirects": [
+				"/umbraco/introducing-umbraco-contributor-list"
+			]
+		},
+		{
 			"url": "/posts/2012-06-04-storing-credentials-windows-8.html",
 			"redirects": [
 				"/storing-credentials-windows-8"
@@ -964,12 +970,6 @@
 			"url": "/posts/2012-06-12-using-mvc-in-umbraco-4.html",
 			"redirects": [
 				"/umbraco/using-mvc-in-umbraco-4"
-			]
-		},
-		{
-			"url": "/posts/2012-06-13-introducing-umbraco-contributor-list.html",
-			"redirects": [
-				"/umbraco/introducing-umbraco-contributor-list"
 			]
 		},
 		{
@@ -991,27 +991,27 @@
 			]
 		},
 		{
-			"url": "/posts/2012-08-20-xaml-by-a-web-guy.html",
-			"redirects": [
-				"/xaml/xaml-by-a-web-guy"
-			]
-		},
-		{
 			"url": "/posts/2012-08-28-webview-oh-you.html",
 			"redirects": [
 				"/xaml/webview-oh-you"
 			]
 		},
 		{
-			"url": "/posts/2012-08-31-forcing-windows-8-keyboard-to-hide.html",
+			"url": "/posts/2012-08-20-xaml-by-a-web-guy.html",
 			"redirects": [
-				"/xaml/forcing-windows-8-keyboard-to-hide"
+				"/xaml/xaml-by-a-web-guy"
 			]
 		},
 		{
 			"url": "/posts/2012-09-05-text-casing-and-examine.html",
 			"redirects": [
 				"/text-casing-and-examine"
+			]
+		},
+		{
+			"url": "/posts/2012-08-31-forcing-windows-8-keyboard-to-hide.html",
+			"redirects": [
+				"/xaml/forcing-windows-8-keyboard-to-hide"
 			]
 		},
 		{
@@ -1027,9 +1027,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-09-21-a-simple-git-server-on-windows.html",
+			"url": "/posts/2012-09-26-teched-2012.html",
 			"redirects": [
-				"/a-simple-git-server-on-windows"
+				"/speaking/teched-2012"
 			]
 		},
 		{
@@ -1039,9 +1039,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-09-26-teched-2012.html",
+			"url": "/posts/2012-09-21-a-simple-git-server-on-windows.html",
 			"redirects": [
-				"/speaking/teched-2012"
+				"/a-simple-git-server-on-windows"
 			]
 		},
 		{
@@ -1063,15 +1063,15 @@
 			]
 		},
 		{
-			"url": "/posts/2012-10-03-typescript-source-maps.html",
-			"redirects": [
-				"/web/typescript-source-maps"
-			]
-		},
-		{
 			"url": "/posts/2012-10-04-ie10-user-agent-switching.html",
 			"redirects": [
 				"/web/ie10-user-agent-switching"
+			]
+		},
+		{
+			"url": "/posts/2012-10-03-typescript-source-maps.html",
+			"redirects": [
+				"/web/typescript-source-maps"
 			]
 		},
 		{
@@ -1129,15 +1129,15 @@
 			]
 		},
 		{
-			"url": "/posts/2013-03-10-a-week-with-a-surface-pro.html",
-			"redirects": [
-				"/random/a-week-with-a-surface-pro"
-			]
-		},
-		{
 			"url": "/posts/2013-03-25-knockoutjs.html",
 			"redirects": [
 				"/glimpse/knockoutjs"
+			]
+		},
+		{
+			"url": "/posts/2013-03-10-a-week-with-a-surface-pro.html",
+			"redirects": [
+				"/random/a-week-with-a-surface-pro"
 			]
 		},
 		{
@@ -1177,15 +1177,15 @@
 			]
 		},
 		{
-			"url": "/posts/2013-05-27-indexeddb.html",
-			"redirects": [
-				"/flight-mode/indexeddb"
-			]
-		},
-		{
 			"url": "/posts/2013-05-28-file-system.html",
 			"redirects": [
 				"/flight-mode/file-system"
+			]
+		},
+		{
+			"url": "/posts/2013-05-27-indexeddb.html",
+			"redirects": [
+				"/flight-mode/indexeddb"
 			]
 		},
 		{

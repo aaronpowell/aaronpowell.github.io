@@ -7,7 +7,7 @@
 <html>
     <head>
   <meta charset="utf-8">
-  <title>JavaScript call and apply - LINQ to Fail</title>
+  <title>JavaScript bind, currying and arrow functions - LINQ to Fail</title>
   <meta name="author" content="Aaron Powell">
   <meta name="viewport" content="width=1040" />
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
@@ -30,8 +30,8 @@
 
         <div id="header-wrapper">
             <div id="header" class="container">
-                <h1 id="logo">JavaScript call and apply</h1>
-                <h2>4th July 2013</h2>
+                <h1 id="logo">JavaScript bind, currying and arrow functions</h1>
+                <h2>5th July 2013</h2>
                 <ul class="tags">
     
         <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
@@ -61,10 +61,10 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
-                            <span class="date">5th July 2013</span>
-                            <h3><a href="/posts/2013-07-05-javascript-binding-currying-and-arrows.html">JavaScript bind, currying and arrow functions</a></h3>
+                            <span class="date">4th July 2013</span>
+                            <h3><a href="/posts/2013-07-04-javascript-call-and-apply.html">JavaScript call and apply</a></h3>
                         </header>
-                        <p>After confusing my colleagues with how to invoke functions with a modifided set of arguments at a single time the next evolutionary point was to confuse them with creating functions that are always called with a different state.</p>
+                        <p>After having confused one of my colleagues with some code that used the JavaScript <code>apply</code> method and giving them an answer that didn&#39;t leave them completely bemused I thought I&#39;d share my explanation with the world.</p>
 
                         <div class="tags">
                             
@@ -157,51 +157,59 @@
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <p>A colleague recently came across this line in our codebase that I wrote:</p>
-<pre class="highlighted"><code class="avrasm">binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span><span class="preprocessor">.push</span><span class="preprocessor">.apply</span>(binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span>, vehicle<span class="preprocessor">.involvements</span>)<span class="comment">;</span></code></pre>
-<p>What the overall result of the code is isn&#39;t particularly important, the part that tripped them up (and made them think I&#39;m on drugs I&#39;m not actually on) was this:</p>
-<pre class="highlighted"><code class="avrasm">binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span><span class="preprocessor">.push</span><span class="preprocessor">.apply</span>(binding<span class="preprocessor">.vehicle</span><span class="preprocessor">.involvements</span>, vehicle<span class="preprocessor">.involvements</span>)<span class="comment">;</span></code></pre>
-<p>Now the  involvements property is an array in both scenarios which exposes a push method, the confusion was around what the apply method does and why I was even using it.</p>
-<p>Both call and apply are methods which are part of the JavaScript language and are exposed on the Function prototype, meaning that they can be accessed from any function, so let&#39;s say we have this function:</p>
-<pre class="highlighted"><code class="matlab"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> <span class="params">(a)</span> {</span>
-      <span class="transposed_variable">console.</span><span class="built_in">log</span>(this, a, argument);
+                            <p>How many times have you written code like this:</p>
+<pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> foo = {
+    makeRequest: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        $.<span class="keyword">get</span>(<span class="string">'/foo'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(result)</span> {</span>
+                <span class="keyword">this</span>.update(result);
+            });
+        );
+    },
+    update: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span> <span class="comment">/* ... */</span> }
+};
+<span class="comment">//somewhere later in the code</span>
+foo.makeRequest();</code></pre>
+<p>Only to have it poo itself saying that <code>this.update</code> is not a function? Maybe it was with an event handler not an AJAX request, all in all it&#39;s the same problem, you tried to use something and JavaScript changed the value of this on you.</p>
+<p>Welcome to the wonderful world of JavaScript scoping.</p>
+<p>So there&#39;s a bunch of ways which you can solve this, you can write the <code>var that = this;</code> style code being a very popular one, basically leveraging closure scopes to keep an instance of the type in memory until the function itself is GC&#39;ed.</p>
+<p>But there&#39;s another approach, <code>Function.bind</code>.</p>
+<p>We&#39;ll start with our simple demo:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="params">(x)</span> {</span>
+      console.log(<span class="keyword">this</span>, x, arguments);
 };</code></pre>
-<p>And we invoke it like this:</p>
-<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">foo</span><span class="params">('b')</span>;</code></pre>
-<p>It is the same as doing this:</p>
-<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(window, <span class="string">'b'</span>, [<span class="string">'b'</span>])<span class="comment">;</span></code></pre>
-<p><em>Note: In ES3 it&#39;ll be window, ES5 strict mode it&#39;ll be null, or undefined, I forget which</em></p>
-<p>Now let&#39;s throw the apply method into the mix and invoke it like so:</p>
-<pre class="highlighted"><code class="avrasm">foo<span class="preprocessor">.apply</span>(<span class="string">'a'</span>, [<span class="string">'b'</span>])<span class="comment">;</span></code></pre>
-<p>This time it&#39;ll be like we&#39;ve done this:</p>
-<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, [<span class="string">'b'</span>])<span class="comment">;</span></code></pre>
-<p>We could alternatively provide an array of arguments so:</p>
-<pre class="highlighted"><code class="avrasm">foo<span class="preprocessor">.apply</span>(<span class="string">'a'</span>, [<span class="string">'b'</span>,<span class="string">'c'</span>])<span class="comment">;</span></code></pre>
-<p>Becomes:</p>
-<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, [<span class="string">'b'</span>, <span class="string">'c'</span>])<span class="comment">;</span></code></pre>
-<p>So what happened?</p>
-<p>The apply method takes two arguments, the first is what controls the this value, the second is an array of objects that will be decomposed to represent the various arguments passed in, meaning that the array item 0 will be the first argument, b in our example, and so on.</p>
-<p>The call method is similar but instead of taking an array that represents the arguments it takes a splat, anything after the this context will be used directly as the arguments. So we&#39;d use call like this to achieve the same result:</p>
-<pre class="highlighted"><code class="avrasm">foo<span class="preprocessor">.call</span>(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)<span class="comment">;</span></code></pre>
-<h2>Relating it to our original code</h2>
-<p>Let&#39;s think about how this related back to our original code, working with arrays and push. Say I have an array and I want to add N number of values to said array. How would you do it?</p>
-<pre class="highlighted"><code class="cs"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];
-<span class="keyword">var</span> arr2 = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];
-<span class="comment">//I want arr == [1,2,3,4,5,6]</span></code></pre>
-<p>Well the first obvious candidate is a for loop:</p>
-<pre class="highlighted"><code class="matlab"><span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="transposed_variable">arr2.</span><span class="built_in">length</span>; <span class="built_in">i</span>++) <span class="cell">{
-      arr.push(arr2[i]);
-}</span></code></pre>
-<p>That&#39;ll do exactly what we&#39;re after, but there&#39;s a problem, we&#39;re calling push <em>a lot</em>, once for every item in the array in fact(!!). This can be a bit of a performance hit, especially if you have large arrays, the JavaScript runtime engine simply can&#39;t optimise it because it doesn&#39;t know how many there could be so it can&#39;t preallocate the memory, meaning it&#39;s somewhat inefficient.</p>
-<p>Alternatively you could use the <code>concat</code> method:</p>
-<pre class="highlighted"><code class="ini"><span class="setting">arr = <span class="value">arr.concat(arr2);</span></span></code></pre>
-<p>That works just fine but the problem is that you replace arr with a new instance of it. <em>Generally speaking</em> that&#39;s not a problem, but if you&#39;re relying on the object itself to not change, at a memory level (say it&#39;s an observable property from Knockout, or a bound property in WinJS), you&#39;ll potentially run into problems.</p>
-<p>So we&#39;re back to push, we want to append multiple items to an existing array without overriding the original object/property. The nice thing about push is that we can provide it N number of arguments which represent all the items we wish to push. Well since I&#39;ve got an array I can&#39;t exactly pass that in directly, since then argument 1 will be the array, it won&#39;t be decomposed. And this is where apply comes in, we can provide the array as the 2nd argument to apply and have N number of items pushed to the array. This brings us to doing this:</p>
-<pre class="highlighted"><code class="avrasm">arr<span class="preprocessor">.push</span><span class="preprocessor">.apply</span>(arr, arr2)<span class="comment">;</span></code></pre>
-<p>And there we have it, we&#39;ve used apply to decompose an array and push all he values into the target array, basically we&#39;ve done this:</p>
-<pre class="highlighted"><code class="avrasm">arr<span class="preprocessor">.push</span>(<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)<span class="comment">;</span></code></pre>
-<p>Since the this context we&#39;ve set is the <code>arr</code> object itself.</p>
-<p>Hopefully that does a good enough explanation to confuse everyone ;).</p>
+<p>As we remember from last time we can get this:</p>
+<pre class="highlighted"><code class="cs">foo(<span class="number">42</span>); <span class="comment">//console.log(window, 42, [42]);</span></code></pre>
+<p>Now saw we can the foo function to have a known value of what this is when it&#39;s called, no matter how it&#39;s invoked, even if someone was to sneaky and use call or apply? Well that&#39;s what we can use the bind method for:</p>
+<pre class="highlighted"><code class="haskell"><span class="title">var</span> bar = foo.bind({ a:<span class="string"> 'b'</span> });
+<span class="title">bar</span>(<span class="number">42</span>); //console.log({ a:<span class="string"> 'b'</span> }, <span class="number">42</span>, [<span class="number">42</span>]);
+<span class="title">bar</span>.call('abc', <span class="number">42</span>);</code></pre>
+<p>So both times we call the bar function we have the same result, even though we&#39;re trying to specify a this context using the call method.</p>
+<h2>Other uses for bind</h2>
+<p>While bind is most commonly used to force a function to always have a specific value for the this object it can also be used for another purpose, to bind specific arguments. If we revisit our foo method we could do this:</p>
+<pre class="highlighted"><code class="avrasm">var baz = foo<span class="preprocessor">.bind</span>(<span class="string">'a'</span>, <span class="string">'b'</span>)<span class="comment">;</span>
+baz()<span class="comment">; //console.log('a', 'b', ['b']);</span></code></pre>
+<h2>Practical application of argument binding</h2>
+<p>When you&#39;re looking for a practical application for argument binding an idea that comes to mind is <a href="http://en.wikipedia.org/wiki/Currying">Currying</a>. I&#39;m not going to dive too deeply into what currying is, if you&#39;re not familiar with the concept start with the Wikipedia link and expand from there (also functional programming isn&#39;t my area of expertise, I just understand some of the basics and may be missing the point from here on out, if so Twitter is --&gt; for you to rant on).</p>
+<p>Let&#39;s create a new function to add two numbers:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span> <span class="params">(x, y)</span> {</span>
+      <span class="keyword">return</span> x + y;
+};</code></pre>
+<p>Ideally we want to be able to do something like this:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> add2 = curry(sum, <span class="number">2</span>);
+add2(<span class="number">4</span>); <span class="comment">// 6</span></code></pre>
+<p>Now we&#39;ll create a curry function:</p>
+<pre class="highlighted"><code class="matlab">var curry = <span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> {</span>
+      var args = <span class="transposed_variable">Array.</span><span class="transposed_variable">prototype.</span><span class="transposed_variable">slice.</span>call(arguments, <span class="number">1</span>);
+      <span class="keyword">return</span> <span class="transposed_variable">fn.</span><span class="transposed_variable">bind.</span>apply(fn, <span class="matrix">[this].</span>concat(args);
+};</code></pre>
+<p>While this function is kind of trippy looking it&#39;s more because it&#39;s a very generic method, it&#39;s allowing us to curry a function and bind any number of arguments in place (which is why we&#39;re using the apply method of bind to provide an array of arguments) and the arguments we provide when calling the bound function will be appended on to the ones which we pre-bound.</p>
+<p>But from this we end up with a new function that we can call as above.</p>
+<p><em>Bonus: My colleague <a href="https://twitter.com/liammclennan">Liam Mclennan</a> flicked me <a href="https://gist.github.com/liammclennan/3654718#comment-559457">this gist</a> of how to do an even cooler currying approach.</em></p>
+<h2>Fat arrows</h2>
+<p>If you&#39;ve done anything with CoffeeScript or TypeScript you might be familiar with the concept of fat arrow functions. These languages use a modified syntax to deal with lexical scoping problem that bind can be used to solve. TypeScript tracks your usage of this in fat arrow functions and replaces it with a captured variable, CoffeeScript relies on the <code>@</code> symbol to do a similar thing.</p>
+<p>For anyone who&#39;s not been following the evolution of <a href="http://wiki.ecmascript.org/doku.php?id=harmony:proposals">ECMAScript 6</a> (the next version of JavaScript) one of the accepted new syntax features is <a href="http://wiki.ecmascript.org/doku.php?id=harmony:arrow_function_syntax">arrow function syntax</a>.</p>
+<p>Simply put the language is going to have a way to defining a function which you can be confident of what the this value will be (sure you can still futz with it if you want to but it&#39;s covering the most common scenarios).</p>
+<p>To test out the new arrow function syntax grab Firefox v22 or newer.</p>
 
                         </article>
                     </div>
@@ -213,7 +221,7 @@
 window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
 window.disqus_identifier = document.title || 'Home';
 window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
-window.disqus_url = document.location.origin + '/posts/2013-07-04-javascript-call-and-apply.html';
+window.disqus_url = document.location.origin + '/posts/2013-07-05-javascript-binding-currying-and-arrows.html';
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function () {
