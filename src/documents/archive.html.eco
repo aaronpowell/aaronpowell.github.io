@@ -22,15 +22,18 @@ pageSize: 3
 
 <div class="pagination">
     <ul>
-        <% if !@getDocument().hasPrevPage(): %>
-            <li class="disabled icon icon-angle-left"><span>Prev</span></li>
+        <!-- Previous Page Button -->
+        <% unless @hasPrevPage(): %>
+            <li class="disabled"><span>Prev</span></li>
         <% else: %>
-            <li><a class="icon icon-angle-left" href="<%= @getDocument().getPrevPage() %>">Prev</a></li>
+            <li><a href="<%= @getPrevPage() %>">Prev</a></li>
         <% end %>
-        <% if !@getDocument().hasNextPage(): %>
-            <li class="disabled"><span>Next</span><span class="icon icon-angle-right"></span></li>
+
+        <!-- Next Page Button -->
+        <% unless @hasNextPage(): %>
+            <li class="disabled"><span>Next</span></li>
         <% else: %>
-            <li><a href="<%= @getDocument().getNextPage() %>">Next<span class="icon icon-angle-right"></span></a></li>
+            <li><a href="<%= @getNextPage() %>">Next</a></li>
         <% end %>
     </ul>
 </div>
