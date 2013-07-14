@@ -10,7 +10,7 @@ In the [last post](/posts/2013-07-10-implementing-indexers-in-javascript.html) I
 
 While JavaScript isn't a classical language, it's prototypal, and doesn't have a notion of classes ([yet](http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes)), but it does have a new operator. What's interesting is [it's an operator](http://www.ecma-international.org/ecma-262/5.1/#sec-11.2.2) like C# (see 14.5.10 of the spec, yep I looked it up :P), and operators tend to do something unique which is also the case with JavaScript new. If you're a spec-nut you can read what happens in the link above (and also the [[[Construct]]](http://www.ecma-international.org/ecma-262/5.1/#sec-13.2.2) method which is important), but if you're not it does a few things that are of note:
 
-* It expects a function as _thing_ being new'ed up
+* It expects a function as the _thing_ being new'ed up
 * The result is a new object that has the prototype of the function that was new'ed, but also potentially their own values (such as values provided as the arguments)
 
 So let's make a simple "class" which consists of a constructor function:
@@ -33,7 +33,13 @@ Now if we run the following we'll get two different people:
 
     console.assert(aaron == john); //fails
 
-The important part of the Person constructor has a this scope (which we've learnt to manipulate in the past) and what would we expect it to be? Well functions inherit the scope of their parent (unless you modify it) which means that our parent scope of Person will be the global object (window in the browser) or null in ES5 Strict Mode.
+The two people we've created are different objects, which is exactly what we expect, but if we did:
+
+    console.assert(aaron.fullName == john.fullName);
+
+The assert won't fail since they are the same method _reference_, but on two different objects.
+
+Another important part of the Person constructor has a this scope (which we've learnt to manipulate in the past) and what would we expect it to be? Well functions inherit the scope of their parent (unless you modify it) which means that our parent scope of Person will be the global object (window in the browser) or null in ES5 Strict Mode.
 
 But that's not the case when you use the new operator, the new operator is yet another way we can modify this, under this scenario it becomes a completely new object literal, it's similar to doing this:
 
