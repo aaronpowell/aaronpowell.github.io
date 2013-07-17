@@ -4,7 +4,7 @@ metaTitle: "umbraco-members-profiles"
 description: ""
 revised: "2010-04-07"
 date: "2010-04-07"
-tags: []
+tags: ['umbraco', 'members']
 migrated: "true"
 urls: ["/umbraco-members-profiles"]
 summary: """
