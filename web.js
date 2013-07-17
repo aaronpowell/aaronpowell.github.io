@@ -25,4 +25,8 @@ routes.map(function (route) {
     return;
 });
 
+app.get(/^\/tagged\/(\w+)$/, function (req, res) {
+    res.redirect(301, req.path + '.html');
+});
+
 app.listen(process.env.PORT || 3000);
