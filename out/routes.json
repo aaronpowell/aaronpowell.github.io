@@ -7,12 +7,6 @@
 			]
 		},
 		{
-			"url": "/atom.xml",
-			"redirects": [
-				"/feed"
-			]
-		},
-		{
 			"url": "/posts/2009-05-05-creating-jquery-plugins-from-ms-ajax-components.html",
 			"redirects": [
 				"/creating-jquery-plugins-from-ms-ajax-components"

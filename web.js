@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
 
 app.get('/routes.json', function (req, res) {
     res.status(403).send('403 Forbidden');
@@ -27,6 +28,13 @@ routes.map(function (route) {
 
 app.get(/^\/tagged\/(\w+)$/, function (req, res) {
     res.redirect(301, req.path + '.html');
+});
+
+app.get('/feed', function (req, res) {
+    fs.readFile(__dirname + '/out/atom.xml', 'utf8', function (err, data) {
+        res.set('Content-Type', 'application/xml');
+        res.send(data);
+    })
 });
 
 app.listen(process.env.PORT || 3000);
