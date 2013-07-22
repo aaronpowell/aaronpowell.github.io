@@ -7,7 +7,7 @@
 <html>
     <head>
   <meta charset="utf-8">
-  <title>The JavaScript new operator - LINQ to Fail</title>
+  <title>Array-like objects - LINQ to Fail</title>
   <meta name="author" content="Aaron Powell">
   <meta name="viewport" content="width=1040" />
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
@@ -30,8 +30,8 @@
 
         <div id="header-wrapper">
             <div id="header" class="container">
-                <h1 id="logo">The JavaScript new operator</h1>
-                <h2>14th July 2013</h2>
+                <h1 id="logo">Array-like objects</h1>
+                <h2>22nd July 2013</h2>
                 <ul class="tags">
     
         <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
@@ -61,11 +61,10 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
-                            <span class="date">22nd July 2013</span>
-                            <h3><a href="/posts/2013-07-22-array-like-objects.html">Array-like objects</a></h3>
+                            <span class="date">14th July 2013</span>
+                            <h3><a href="/posts/2013-07-14-javascript-new-operator.html">The JavaScript new operator</a></h3>
                         </header>
-                        <p>Just because it looks like a duck, walks like a duck, quacks like a duck doesn&#39;t mean it&#39;s a duck. There&#39;s dangers with making assumptions of your JavaScript objects based on their surface area.</p>
-<p>That said, a lot of power can be gleamed by these seemingly innocent assumptions.</p>
+                        <p>Time to revisit something that was overlooked in the last post, the <code>new</code> operator in JavaScript and what it does.</p>
 
                         <div class="tags">
                             
@@ -147,56 +146,56 @@
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <p>In the <a href="/posts/2013-07-10-implementing-indexers-in-javascript.html">last post</a> I was changing some C# code to JavaScript but there was one part that I just <em>dropped</em> and didn&#39;t explain why, and that was the use of the new operator.</p>
-<p>While JavaScript isn&#39;t a classical language, it&#39;s prototypal, and doesn&#39;t have a notion of classes (<a href="http://wiki.ecmascript.org/doku.php?id=strawman:maximally_minimal_classes">yet</a>), but it does have a new operator. What&#39;s interesting is <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-11.2.2">it&#39;s an operator</a> like C# (see 14.5.10 of the spec, yep I looked it up :P), and operators tend to do something unique which is also the case with JavaScript new. If you&#39;re a spec-nut you can read what happens in the link above (and also the <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-13.2.2">[[Construct]]</a> method which is important), but if you&#39;re not it does a few things that are of note:</p>
+                            <p>You&#39;ve possibly head the saying</p>
+<blockquote>
+<p>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck. - <a href="http://books.google.com/books?id=j7zds6xx7S0C&amp;pg=PA68&amp;dq=%22james+Riley%22+OR+%22James+Whitcomb+Riley%22+bird++duck&amp;num=100">credit</a></p>
+</blockquote>
+<p>This is a common adage when talking about <a href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a> in programming, especially when it comes to working with dynamic languages like JavaScript, based on assumptions made about an object you can attempt to infer other details. Statically typed languages on the other hand make it a bit harder to do Duck Typing, <a href="http://blogs.bartdesmet.net/blogs/bart/archive/2008/11/10/introducing-the-c-ducktaper-bridging-the-dynamic-world-with-the-static-world.aspx">that&#39;s not to say it&#39;s impossible</a>.</p>
+<p>Due to the dynamic nature of JavaScript we actually come across this quite often with arrays in JavaScript. So what makes an object an array? Well there&#39;s two basic building blocks of an array:</p>
 <ul>
-<li>It expects a function as the <em>thing</em> being new&#39;ed up</li>
-<li>The result is a new object that has the prototype of the function that was new&#39;ed, but also potentially their own values (such as values provided as the arguments)</li>
+<li>Numerical identifiers</li>
+<li>A length property</li>
 </ul>
-<p>So let&#39;s make a simple &quot;class&quot; which consists of a constructor function:</p>
-<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span> <span class="params">(firstName, lastName)</span> {</span>
-    <span class="keyword">this</span>.firstName = firstName;
-    <span class="keyword">this</span>.lastName = lastName;
-}; </code></pre>
-<p>We can then add members to all instances by modifying the prototype:</p>
-<pre class="highlighted"><code class="objectivec">Person<span class="variable">.prototype</span><span class="variable">.fullName</span> = function () {
-    <span class="keyword">return</span> <span class="keyword">this</span><span class="variable">.firstName</span> + <span class="string">" "</span> + <span class="keyword">this</span><span class="variable">.lastName</span>;
-}</code></pre>
-<p>Now if we run the following we&#39;ll get two different people:</p>
-<pre class="highlighted"><code class="vhdl">var aaron = <span class="keyword">new</span> Person(<span class="attribute">'Aaron</span>', <span class="attribute">'Powell</span>');
-var john = <span class="keyword">new</span> Person(<span class="attribute">'John</span>', <span class="attribute">'Smith</span>');
-
-console.<span class="keyword">assert</span>(aaron == john); //fails</code></pre>
-<p>The two people we&#39;ve created are different objects, which is exactly what we expect, but if we did:</p>
-<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.assert</span>(aaron<span class="preprocessor">.fullName</span> == john<span class="preprocessor">.fullName</span>)<span class="comment">;</span></code></pre>
-<p>The assert won&#39;t fail since they are the same method <em>reference</em>, but on two different objects.</p>
-<p>Another important part of the Person constructor has a this scope (which we&#39;ve learnt to manipulate in the past) and what would we expect it to be? Well functions inherit the scope of their parent (unless you modify it) which means that our parent scope of Person will be the global object (window in the browser) or null in ES5 Strict Mode.</p>
-<p>But that&#39;s not the case when you use the new operator, the new operator is yet another way we can modify this, under this scenario it becomes a completely new object literal, it&#39;s similar to doing this:</p>
-<pre class="highlighted"><code class="javascript">Person = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">var</span> obj = {};
-    <span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span> <span class="params">(firstName, lastName)</span> {</span>
-        <span class="keyword">this</span>.firstName = firstName;
-        <span class="keyword">this</span>.lastName = lastName;
-    };
-    Person.apply(obj, arguments);
-    <span class="keyword">return</span> obj;
-};</code></pre>
-<p>Well that&#39;s close, it doesn&#39;t maintain the prototype chain or setup the constructor properly, what it does do is create a new object that is then returned, meaning each invocation of Person will result in a different object, much like the new operator.</p>
-<h2>Is it new or not?</h2>
-<p>The problem with the new operator is that it&#39;s applied to a function, it can be applied to <em>any</em> function, but it can also be omitted. This means you can create yourself a function that&#39;s intended to be a constructor but not used with a new operator, and doing this would mean that you&#39;re augmenting a this scope you probably shouldn&#39;t be, such as the global object.</p>
-<p>So how do we know if someone used the new operator? You&#39;re probably not writing your own pre-parser to check the code before it&#39;s executed so it&#39;s not like you know the omitted it at a code level. Well there&#39;s an alternative <em>check the constructor</em>.</p>
-<p>One thing I omitted from the above pseudo-new implementation is setting up the obj.constructor property, this is something that the new operator does, and it&#39;s the easiest way to check if a function was invoked with a new operator:</p>
-<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span> <span class="params">(firstName, lastName)</span> {</span>
-    <span class="keyword">if</span> (<span class="keyword">this</span>.constructor !== Person) {
-        <span class="keyword">return</span> <span class="keyword">new</span> Person(firstName, lastName);
-    }
-    <span class="comment">//setup properties</span>
-}</code></pre>
-<p>Here we&#39;re checking the constructor against the type we expect the constructor to be. If the function wasn&#39;t invoked with the new operator it won&#39;t receive the right constructor type which means we can assume that function was invoked normally and expects a return, a return which can then be a new instance.</p>
-<p>This can be a very useful trick if you&#39;re exposing something that&#39;s to be constructible but you don&#39;t trust your consumers to do the right thing.</p>
-<h2>Wrap up</h2>
-<p>The new operator is an interesting one, it&#39;s a great way to create objects that have unique instances but still share a common root (being the prototype). There&#39;s arguments all over the internet about whether you should use the new operator or not, whether your API should not require the new operator, whether not using new means a violation of the API or whether your API should just be smart enough to deal with both usages.</p>
-<p>But why would you use it? Well that&#39;s a story for another day ;).</p>
+<p>So take this code snippet:</p>
+<pre class="highlighted"><code class="matlab">var foo = ??;
+<span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; <span class="transposed_variable">foo.</span><span class="built_in">length</span>; <span class="built_in">i</span>++) <span class="cell">{
+    console.log(foo[i]);
+}</span></code></pre>
+<p>From this we can infer that <code>foo</code> is quite possibly an array, it meets our basic requirements to be an array, but like the dangers of duck typing this doesn&#39;t mean that it&#39;s actually an array does it?</p>
+<h1>Array-like objects</h1>
+<p>It&#39;s quite common in JavaScript to come across array-like objects, objects that on the surface look like arrays but as soon as you look beneath the surface it&#39;ll become apparent that they aren&#39;t actually arrays. You&#39;ve probably come across these objects in the past and not really given it a second thought, two really common objects are the <code>arguments</code> object and a <code>NodeList</code> (you know, from <code>querySelectorAll</code>). Both of these objects have numerical indexers, length, but no <code>push</code>, <code>pop</code> and so on, basically they don&#39;t inherit <code>Array.prototype</code>.</p>
+<p>With both of these objects the fact that they don&#39;t inherit from <code>Array.prototype</code> is a bit of a pain, it means you couldn&#39;t do something like this for example:</p>
+<pre class="highlighted"><code class="matlab">var inputs = <span class="transposed_variable">form.</span>querySelectorAll(<span class="string">'input'</span>);
+var values = <span class="transposed_variable">inputs.</span>map(<span class="function"><span class="keyword">function</span> <span class="params">(input)</span> {</span>
+        <span class="keyword">return</span> <span class="cell">{
+            value: input.value,
+            name: input.getAttribute(<span class="string">'name'</span>)
+        }</span>;
+    });</code></pre>
+<p>So this is a pretty simple bit of code, you want to get all the input name/value pairs, maybe to submit them via AJAX but that&#39;s not important, what&#39;s important is we&#39;re using the <code>Array.map</code> method, something very common if you&#39;re doing anything in a modern JavaScript engine (modern being &gt;= IE9).</p>
+<h1>Making arrays of array-like objects</h1>
+<p>If you&#39;ve found yourself an array-like object chances are you want to use it like an array, that begs the obvious question, how do we make it an array?</p>
+<p>Well there&#39;s a pretty easy solution to this, we have numerical indexes and a length property, so what about a <code>for loop</code>:</p>
+<pre class="highlighted"><code class="matlab">var items = <span class="matrix">[]</span>;
+<span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>, il = <span class="transposed_variable">inputs.</span><span class="built_in">length</span>; <span class="built_in">i</span> &lt; il; <span class="built_in">i</span>++) <span class="cell">{
+    items.push(inputs[i]);
+}</span></code></pre>
+<p>But... <code>for loop</code>&#39;s are so old school there&#39;s got to be a better way. Well there is and here we can look at exploiting JavaScript&#39;s functions. We&#39;ve seen that you can use <a href="/posts/2013-07-04-javascript-call-and-apply.html"><code>call</code> and <code>apply</code></a> to futz with function scope and this we can do to improve our array-like object manipulation.</p>
+<h1>Futzing slice</h1>
+<p>When you&#39;re wanting to create new arrays from existing ones the easiest way is using the <code>slice</code> method. The <code>slice</code> method can be neat if you want to take parts of an array between two indexes, but it can also be used if you want to create a whole clone of the array, like so:</p>
+<pre class="highlighted"><code class="avrasm">var array1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<span class="comment">;</span>
+var array2 = array1<span class="preprocessor">.slice</span>(<span class="number">0</span>)<span class="comment">;</span>
+console<span class="preprocessor">.log</span>(array1 !== array2)<span class="comment">;</span></code></pre>
+<p>By passing <code>0</code> we take a slice starting at index 0 and since we provided no end point it&#39;ll go to the length of the array.</p>
+<p>But <code>slice</code> is a function just like everything else, you can use <code>call</code> against it.</p>
+<p>And where it gets really interesting is when we play with our array-like objects, we can pass <em>that</em> as our context to our <code>slice</code> method:</p>
+<pre class="highlighted"><code class="avrasm">var items = Array<span class="preprocessor">.prototype</span><span class="preprocessor">.slice</span><span class="preprocessor">.call</span>(inputs, <span class="number">0</span>)<span class="comment">;</span></code></pre>
+<p>Yep that&#39;s right, <code>slice</code> doesn&#39;t require an array, just something that <em>looks</em> like an array, as far as <code>slice</code> is concerned it looks like a duck, it quacked, so hey, we&#39;ll treat it like a duck, check out <a href="http://hg.mozilla.org/mozilla-central/file/2268ff80683a/js/src/jsarray.cpp#l2536">the SpiderMonkey source</a>, it really only cares if there&#39;s a <code>length</code> property, pretty neat!</p>
+<h1>Conclusion</h1>
+<p>We&#39;ve seen some building blocks over the last few weeks, things we can use to manipulate functions and objects in the interesting ways and this is just another common usage of the patterns.</p>
+<p>A small piece of advice, if you&#39;re doing a lot of these calls you can assign <code>slice</code> into a variable which you can use, which will make the minification work a whole lot better:</p>
+<pre class="highlighted"><code class="avrasm">var slice = Array<span class="preprocessor">.prototype</span><span class="preprocessor">.slice</span><span class="comment">;</span>
+var items = slice<span class="preprocessor">.call</span>(inputs, <span class="number">0</span>)<span class="comment">;</span></code></pre>
 
                         </article>
                     </div>
@@ -208,7 +207,7 @@ console.<span class="keyword">assert</span>(aaron == john); //fails</code></pre>
 window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
 window.disqus_identifier = document.title || 'Home';
 window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
-window.disqus_url = document.location.origin + '/posts/2013-07-14-javascript-new-operator.html';
+window.disqus_url = document.location.origin + '/posts/2013-07-22-array-like-objects.html';
 
 /* * * DON'T EDIT BELOW THIS LINE * * */
 (function () {
