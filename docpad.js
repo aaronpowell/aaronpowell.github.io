@@ -15,7 +15,8 @@ docpadConfig = {
       email: 'me@aaron-powell.com',
       github: 'aaronpowell',
       twitter: 'slace',
-      description: '.net, C#, asp.net, umbraco'
+      description: '.net, C#, asp.net, umbraco',
+      url: 'http://www.aaron-powell.com'
     },
     contentTrim: function(str) {
       if (str.length > 200) {
