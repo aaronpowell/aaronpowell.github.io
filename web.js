@@ -30,7 +30,14 @@ app.get(/^\/tagged\/(\w+)$/, function (req, res) {
     res.redirect(301, req.path + '.html');
 });
 
-app.get('/feed/rss', function (req, res) {
+app.get('/feed', function (req, res) {
+    fs.readFile(__dirname + '/out/atom.xml', 'utf8', function (err, data) {
+        res.set('Content-Type', 'application/xml');
+        res.send(data);
+    })
+});
+
+app.get('/feeds/rss', function (req, res) {
     fs.readFile(__dirname + '/out/atom.xml', 'utf8', function (err, data) {
         res.set('Content-Type', 'application/xml');
         res.send(data);
