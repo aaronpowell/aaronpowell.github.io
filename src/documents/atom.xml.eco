@@ -18,6 +18,9 @@
             <updated><%= document.date.toISOString() %></updated>
             <id><%= @site.url %><%= document.url %></id>
             <content type="html"><%= document.contentRenderedWithoutLayouts %></content>
+            <% for tag in document.tags: %>
+            <category><%= tag %></category>
+            <% end %>
         </entry>
     <% end %>
 </feed>

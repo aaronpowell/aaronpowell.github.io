@@ -4,7 +4,7 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-07-22T23:27:14.455Z</updated>
+    <updated>2013-07-23T00:52:04.371Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
@@ -68,6 +68,9 @@ console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(array1 !== a
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var slice = Array&lt;span class=&quot;preprocessor&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.slice&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
 var items = slice&lt;span class=&quot;preprocessor&quot;&gt;.call&lt;/span&gt;(inputs, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
+            
+            <category>javascript</category>
+            
         </entry>
     
         <entry>
@@ -126,6 +129,9 @@ console.&lt;span class=&quot;keyword&quot;&gt;assert&lt;/span&gt;(aaron == john)
 &lt;p&gt;The new operator is an interesting one, it&amp;#39;s a great way to create objects that have unique instances but still share a common root (being the prototype). There&amp;#39;s arguments all over the internet about whether you should use the new operator or not, whether your API should not require the new operator, whether not using new means a violation of the API or whether your API should just be smart enough to deal with both usages.&lt;/p&gt;
 &lt;p&gt;But why would you use it? Well that&amp;#39;s a story for another day ;).&lt;/p&gt;
 </content>
+            
+            <category>javascript</category>
+            
         </entry>
     
         <entry>
@@ -259,6 +265,9 @@ o&lt;span class=&quot;preprocessor&quot;&gt;.toString&lt;/span&gt; = toString&lt
 &lt;h2&gt;Done!&lt;/h2&gt;
 &lt;p&gt;And with that we wrap up this week&amp;#39;s adventure, if you&amp;#39;ve made it this far well done it was a long one but damn it was fun!&lt;/p&gt;
 </content>
+            
+            <category>javascript</category>
+            
         </entry>
     
         <entry>
@@ -320,6 +329,9 @@ add2(&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;); &lt;span class=&quot;
 &lt;p&gt;Simply put the language is going to have a way to defining a function which you can be confident of what the this value will be (sure you can still futz with it if you want to but it&amp;#39;s covering the most common scenarios).&lt;/p&gt;
 &lt;p&gt;To test out the new arrow function syntax grab Firefox v22 or newer.&lt;/p&gt;
 </content>
+            
+            <category>javascript</category>
+            
         </entry>
     
         <entry>
@@ -373,6 +385,9 @@ add2(&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;); &lt;span class=&quot;
 &lt;p&gt;Since the this context we&amp;#39;ve set is the &lt;code&gt;arr&lt;/code&gt; object itself.&lt;/p&gt;
 &lt;p&gt;Hopefully that does a good enough explanation to confuse everyone ;).&lt;/p&gt;
 </content>
+            
+            <category>javascript</category>
+            
         </entry>
     
         <entry>
@@ -385,6 +400,9 @@ add2(&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;); &lt;span class=&quot;
 &lt;p&gt;The workshop is going to be on an aspect of JavaScript that I&amp;#39;m quite passionate about and we&amp;#39;ll be getting really hands-on and mostly just writing code for the hour, so bring your device and get ready to code.&lt;/p&gt;
 &lt;p&gt;So &lt;a href=&quot;http://dddmelb4.eventbrite.com.au/&quot;&gt;register now&lt;/a&gt; before it&amp;#39;s too late (ticket&amp;#39;s are going quick).&lt;/p&gt;
 </content>
+            
+            <category>dddmelbourne</category>
+            
         </entry>
     
         <entry>
@@ -427,6 +445,9 @@ var paths = path.split('.');
 }, obj);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;And there we have it, a nice little object walker.&lt;/p&gt;
 </content>
+            
+            <category>javascript</category>
+            
         </entry>
     
         <entry>
@@ -517,6 +538,9 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
 &lt;p&gt;But that said if you want to invest a little bit of effort and not rely on DocPad as your routing engine then you can rely on just the HTML that is generated and use a middleware like Express.js to handle the routing with a minimal memory footprint.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;For the record, my site now run around the 20mb memory footprint.&lt;/em&gt;&lt;/p&gt;
 </content>
+            
+            <category>docpad</category>
+            
         </entry>
     
         <entry>
@@ -539,6 +563,11 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
 &lt;h1&gt;The future of FunnelWeb&lt;/h1&gt;
 &lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
 </content>
+            
+            <category>funnelweb</category>
+            
+            <category>docpad</category>
+            
         </entry>
     
         <entry>
@@ -671,6 +700,13 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
 &lt;li&gt;LibGit2Sharp didn&amp;#39;t seem to like it when I wasn&amp;#39;t in the &lt;code&gt;master&lt;/code&gt; branch. I initially tried to use a separate branch to create all the commits that I&amp;#39;d then review and rebase into master, but whenever I did this it would create a new repository in the destination folder so I ended up with nested Git repositories. Again I didn&amp;#39;t delve into the underlying reason, I left it for Brendan to entertain himself with, instead I just did it in master and deleted my clone the few times I stuffed up :P&lt;/li&gt;
 &lt;/ul&gt;
 </content>
+            
+            <category>funnelweb</category>
+            
+            <category>scriptcs</category>
+            
+            <category>git</category>
+            
         </entry>
     
         <entry>
@@ -708,6 +744,17 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
 &lt;p&gt;This has been a brief overview of a number of different JavaScript libraries for working with different offline storage models, libraries from the generic abstraction all the way down to specific implementations.&lt;/p&gt;
 &lt;p&gt;By no means is this an extensive list of libraries available, I&amp;#39;m sure that there&amp;#39;s dozens more out there that would be worth looking into, but ultimately this was meant to be an introduction to a few which I see a great deal of promise in.&lt;/p&gt;
 </content>
+            
+            <category>flight-mode</category>
+            
+            <category>indexeddb</category>
+            
+            <category>localStorage</category>
+            
+            <category>sessionStorage</category>
+            
+            <category>offline-storage</category>
+            
         </entry>
     
         <entry>
@@ -747,6 +794,13 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The idea of being able to store files, complete files, in a structured manner on the client is a really exciting one. Admittedly there&amp;#39;s a much narrower use-case for such an API compared to other storage options we&amp;#39;ve discussed the problems that it solves are very real and will likely become more valid as more true web applications rise.&lt;/p&gt;
 &lt;p&gt;The API itself is not back to work against, if it is a bit inconsistent and keep in mind that the specification is still in draft status so it may change in the future.&lt;/p&gt;
 </content>
+            
+            <category>flight-mode</category>
+            
+            <category>offline-storage</category>
+            
+            <category>file-system</category>
+            
         </entry>
     
         <entry>
@@ -901,6 +955,13 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;While there are drawbacks with the API design, particularly the fact that it can be very verbose &lt;em&gt;and&lt;/em&gt; very foreign to web developers it isn&amp;#39;t that difficult to hide away the bulk of the API with your own façade, using libraries like &lt;code&gt;Q&lt;/code&gt; to make it easier to interact with the API and only exposing the features that you really need in your application.&lt;/p&gt;
 &lt;p&gt;Definitely keep an eye on IndexedDB in the coming years, especially when doing Windows 8 applications, as it&amp;#39;ll be more available and more important for building offline applications.&lt;/p&gt;
 </content>
+            
+            <category>flight-mode</category>
+            
+            <category>offline-storage</category>
+            
+            <category>indexeddb</category>
+            
         </entry>
     
         <entry>
@@ -968,6 +1029,11 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
 </content>
+            
+            <category>offline-storage</category>
+            
+            <category>flight-mode</category>
+            
         </entry>
     
         <entry>
@@ -1029,6 +1095,13 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you&amp;#39;re curious to see an implementation of cookies for storage in the wild you can check out &lt;a href=&quot;http://qantas.com.au&quot;&gt;Qantas&lt;/a&gt;, they use cookies to store information like your recent search options. There&amp;#39;s a &lt;code&gt;usercontext&lt;/code&gt; cookie that contains the information about where you are that could be wanting to start a flight from.&lt;/p&gt;
 &lt;p&gt;All in all cookies are not really a good option when it comes to store data for our offline application.&lt;/p&gt;
 </content>
+            
+            <category>offline-storage</category>
+            
+            <category>flight-mode</category>
+            
+            <category>cookies</category>
+            
         </entry>
     
         <entry>
@@ -1075,6 +1148,15 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
 &lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
 &lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
 </content>
+            
+            <category>flight-mode</category>
+            
+            <category>offline-storage</category>
+            
+            <category>localStorage</category>
+            
+            <category>sessionStorage</category>
+            
         </entry>
     
         <entry>
@@ -1108,6 +1190,9 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
 &lt;h2&gt;If &lt;code&gt;null&lt;/code&gt; is valid from your response make sure you tell jQuery what &lt;code&gt;dataType&lt;/code&gt; you want it to be.&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/aaronpowell/jquery-ajax-datatype-issue&quot;&gt;There&amp;#39;s an example repository available here.&lt;/a&gt;&lt;/p&gt;
 </content>
+            
+            <category>jquery</category>
+            
         </entry>
     
         <entry>
@@ -1126,6 +1211,11 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
 &lt;/ul&gt;
 &lt;p&gt;One final note, please stop sniffing userAgents, I promise that I had a shower this morning ;).&lt;/p&gt;
 </content>
+            
+            <category>internet-explorer</category>
+            
+            <category>web</category>
+            
         </entry>
     
         <entry>
@@ -1136,6 +1226,11 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
             <content type="html">&lt;p&gt;I&amp;#39;m going to be speaking at the upcoming &lt;a href=&quot;http://code13.webdirections.org/#AaronPowell&quot;&gt;Web Directions Code&lt;/a&gt; in Melbourne (2nd &amp;amp; 3rd May) on the topic of IndexedDB. I&amp;#39;m pretty stoked to be invited to speak as there&amp;#39;s a lot of heavy weights of the web development community that are going to be around and I&amp;#39;ll finally have a chance to crack out my IndexedDB talk to a larger audience.&lt;/p&gt;
 &lt;p&gt;So do yourself a favor, grab a ticket and come on down!&lt;/p&gt;
 </content>
+            
+            <category>speaking</category>
+            
+            <category>indexeddb</category>
+            
         </entry>
     
         <entry>
@@ -1163,6 +1258,11 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
 &lt;p&gt;Like I said this is a very early release, but it&amp;#39;s more I wanted it out there and to get feedback ASAP to work out what to focus on. I&amp;#39;ve only done some basic testing so if you&amp;#39;re using it on large Knockout VM&amp;#39;s I&amp;#39;d like to hear how it goes.&lt;/p&gt;
 &lt;p&gt;The code is all &lt;a href=&quot;https://github.com/aaronpowell/glimpse-knockout&quot;&gt;up on GitHub&lt;/a&gt; so feel free to send PR&amp;#39;s or raise issues so I can get to work on it!&lt;/p&gt;
 </content>
+            
+            <category>knockoutjs</category>
+            
+            <category>glimpse</category>
+            
         </entry>
     
 </feed>
