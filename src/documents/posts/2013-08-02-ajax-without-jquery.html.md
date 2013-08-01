@@ -1,7 +1,7 @@
 --- cson
 title: 'AJAX without jQuery'
 date: '2013-08-02'
-tags: ['javascript']
+tags: ['javascript', 'ajax', 'jquery']
 description: """When was the last time you wrote an AJAX request?
 
 When was the last time you did it without relying on jQuery?
