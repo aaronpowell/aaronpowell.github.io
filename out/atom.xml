@@ -4,13 +4,82 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-07-23T00:52:04.371Z</updated>
+    <updated>2013-08-01T23:24:46.185Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>AJAX without jQuery</title>
+            <link href="http://www.aaron-powell.com/posts/2013-08-02-ajax-without-jquery.html"/>
+            <updated>2013-08-02T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-08-02-ajax-without-jquery.html</id>
+            <content type="html">&lt;p&gt;I&amp;#39;m very much of the opinion that the better you know your tools the better you can make intelligent choices about the layers you put over them. One such layer I see constantly used that people tend to use but not really understand is jQuery. Don&amp;#39;t get me wrong I&amp;#39;m not anti-jQuery or anything, but like I said I believe you should understand your tools before you try and abstract them away.&lt;/p&gt;
+&lt;p&gt;So today I want to look at a really critical part of jQuery, AJAX.&lt;/p&gt;
+&lt;p&gt;You&amp;#39;ve probably written something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;$.ajax({
+    &lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;type&lt;/span&gt;: 'get',&lt;/span&gt;
+    url:&lt;span class=&quot;string&quot;&gt; '/foo'&lt;/span&gt;,
+    success: function (&lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt;) &lt;span class=&quot;container&quot;&gt;{
+        //&lt;span class=&quot;title&quot;&gt;something&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;data&lt;/span&gt;
+    }&lt;/span&gt;&lt;/span&gt;
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But what&amp;#39;s that doing under the hood?&lt;/p&gt;
+&lt;h1&gt;Hello XMLHttpRequest&lt;/h1&gt;
+&lt;p&gt;If you&amp;#39;re doing an AJAX request you&amp;#39;re going to need the &lt;em&gt;X&lt;/em&gt; part of that and that&amp;#39;s handled through the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest&quot;&gt;&lt;code&gt;XMLHttpRequest&lt;/code&gt;&lt;/a&gt; object. This object is the descendant of the &lt;code&gt;ActiveX&lt;/code&gt; object which Microsoft added to early Internet Explorer which kick started the AJAX revolution.&lt;/p&gt;
+&lt;p&gt;So this is the backbone of doing the request and obviously the backbone of what jQuery does under its API, but how do we use it?&lt;/p&gt;
+&lt;h1&gt;Creating a GET with XMLHttpRequest&lt;/h1&gt;
+&lt;p&gt;Let&amp;#39;s look back to our example above, how does that work? Well first things first we need to create an instance of the &lt;code&gt;XMLHttpRequest&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XMLHttpRequest();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we need to open our request telling it what kind method we want to use and where to go:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;xhr.&lt;span class=&quot;keyword&quot;&gt;open&lt;/span&gt;(&lt;span class=&quot;attribute&quot;&gt;'get&lt;/span&gt;', '/foo');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Note: There&amp;#39;s a few other arguments which we can pass through, whether you want it to be handled as an async request as well as credentials if you&amp;#39;re doing an authenticated request.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Since we&amp;#39;ve opened our request we&amp;#39;re probably going to want to do something when it completes right? To do that we rely on the DOM event standard, using the &lt;code&gt;addEventListener&lt;/code&gt; method (you can assign event listeners using the &lt;code&gt;on...&lt;/code&gt; style but that&amp;#39;s so IE6). Probably the most important event to be listening for is the &lt;code&gt;load&lt;/code&gt; event, this is the one that is executed when a successful response is completed:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;xhr.addEventListener(&lt;span class=&quot;string&quot;&gt;'load'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;comment&quot;&gt;//handle success&lt;/span&gt;
+}, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are other events you can listen for, &lt;code&gt;progress&lt;/code&gt;, &lt;code&gt;error&lt;/code&gt; and &lt;code&gt;abort&lt;/code&gt; which do pretty much what their names state. The &lt;code&gt;progress&lt;/code&gt; event is really useful if you&amp;#39;re expecting a request to take a long time to complete, say you&amp;#39;re uploading a file, or expecting a large response, you can listen for this and inform the user of the status, you know, awesome progress bar style.&lt;/p&gt;
+&lt;p&gt;But we&amp;#39;re not done yet, our request is still in a &lt;em&gt;holding pattern&lt;/em&gt;, the request hasn&amp;#39;t been issued, that doesn&amp;#39;t happen unless we explicitly make it so, we have to explicitly send the request:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;xhr&lt;span class=&quot;preprocessor&quot;&gt;.send&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see it in action &lt;a href=&quot;http://jsbin.com/inikir/1&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Handling responses&lt;/h1&gt;
+&lt;p&gt;So you&amp;#39;re probably going to want to do something when the response comes in right? And even more logical is to do something with the response data that comes back. Depending what kind of data you&amp;#39;re getting back you have different ways to work with it. Let&amp;#39;s start with the one you&amp;#39;re most like going to want from an AJAX request, JSON.&lt;/p&gt;
+&lt;p&gt;Well the XMLHttpRequest doesn&amp;#39;t really have the concept of JSON, as far as it is concerned this is just text, so we get at it from the &lt;code&gt;responseText&lt;/code&gt; property of &lt;em&gt;either&lt;/em&gt; the first argument of the event handler &lt;strong&gt;or&lt;/strong&gt; the &lt;code&gt;xhr&lt;/code&gt; object itself. With this you would then convert it to a JavaScript object using the JSON API:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;xhr.addEventListener(&lt;span class=&quot;string&quot;&gt;'load'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; o = JSON.parse(xhr.responseText); &lt;span class=&quot;comment&quot;&gt;//or e.responseText&lt;/span&gt;
+    &lt;span class=&quot;comment&quot;&gt;//work with our object&lt;/span&gt;
+}, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What if you are expecting HTML? Say you&amp;#39;re loading a template or doing another kind of partial page load. For this you&amp;#39;re &lt;em&gt;likely&lt;/em&gt; to want the &lt;code&gt;responseXML&lt;/code&gt; property. Modern browsers support this, which turns your response content into a DOM snippet you can work with. If you&amp;#39;ve got an older browser &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Analyzing_and_manipulating_the_responseXML_property&quot;&gt;there are other options available&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;POST-ing data&lt;/h1&gt;
+&lt;p&gt;We&amp;#39;ve seen how to &lt;code&gt;GET&lt;/code&gt; data, but what about if we want to &lt;code&gt;POST&lt;/code&gt; data?&lt;/p&gt;
+&lt;p&gt;Obviously we&amp;#39;d need to change the &lt;code&gt;open&lt;/code&gt; call:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;xhr.&lt;span class=&quot;keyword&quot;&gt;open&lt;/span&gt;(&lt;span class=&quot;attribute&quot;&gt;'POST&lt;/span&gt;', '/foo');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But we&amp;#39;re probably going to want to submit some data too right? That&amp;#39;s the whole point of a POST isn&amp;#39;t it? Most likely you&amp;#39;re going to be POST-ing data from a form, and to do that you can use the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/FormData&quot;&gt;FormData&lt;/a&gt; API. In this scenario you need to pass the FormData instance through the &lt;code&gt;send&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt; = new &lt;span class=&quot;type&quot;&gt;FormData&lt;/span&gt;&lt;span class=&quot;container&quot;&gt;()&lt;/span&gt;;&lt;/span&gt;
+&lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt;.append&lt;span class=&quot;container&quot;&gt;('&lt;span class=&quot;title&quot;&gt;name'&lt;/span&gt;, '&lt;span class=&quot;type&quot;&gt;Aaron&lt;/span&gt;')&lt;/span&gt;;&lt;/span&gt;
+&lt;span class=&quot;title&quot;&gt;xhr&lt;/span&gt;.send(&lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will send up request body with &lt;code&gt;name=Aaron&lt;/code&gt; in it, where &lt;code&gt;name&lt;/code&gt; is the key of a form value and &lt;code&gt;Aaron&lt;/code&gt; is the value. This can be read out of the middleware of whatever HTTP framework you&amp;#39;re working with. ASP.Net this would be the &lt;code&gt;HttpRequest.Form&lt;/code&gt; object, Express.js it&amp;#39;ll be &lt;code&gt;request.form&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re not posting FormData but instead want to POST JSON then you&amp;#39;ll need to do make sure your server knows it&amp;#39;s like that, and doing so means setting the headers appropriately. First off you&amp;#39;ll want to set the &lt;code&gt;Content-Type&lt;/code&gt; header:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;xhr.setRequestHeader(&lt;span class=&quot;attribute&quot;&gt;'Content&lt;/span&gt;-&lt;span class=&quot;keyword&quot;&gt;Type&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'application&lt;/span&gt;/json');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is especially important if you&amp;#39;re using ASP.Net MVC as your end point, it will detect the &lt;code&gt;Content-Type&lt;/code&gt; and be able to parse it into your model. Next you&amp;#39;ll want to make sure that you set the &lt;code&gt;Content-Length&lt;/code&gt; so your server knows how much data to expect:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;xhr&lt;/span&gt;.setRequestHeader('&lt;span class=&quot;type&quot;&gt;Content&lt;/span&gt;-&lt;span class=&quot;type&quot;&gt;Length'&lt;/span&gt;, &lt;span class=&quot;type&quot;&gt;JSON&lt;/span&gt;.stringify(&lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt;).length);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And finally when you call &lt;code&gt;send&lt;/code&gt; you&amp;#39;ll need to send up a JSON string, not the object:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;&lt;span class=&quot;title&quot;&gt;xhr&lt;/span&gt;.send(&lt;span class=&quot;type&quot;&gt;JSON&lt;/span&gt;.stringify(&lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;data&lt;/span&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;So there we have it, we&amp;#39;ve seen the building blocks of making an AJAX request, the &lt;code&gt;XMLHttpRequest&lt;/code&gt; object. We&amp;#39;ve seen how to make &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; requests, pass up data, manipulate headers and get data back in a response.&lt;/p&gt;
+&lt;p&gt;From these building blocks you can start understanding what is actually happening in your libraries and even avoid them if you don&amp;#39;t want the overhead (say a mobile app).&lt;/p&gt;
+</content>
+            
+            <category>javascript</category>
+            
+            <category>ajax</category>
+            
+            <category>jquery</category>
+            
+        </entry>
     
         <entry>
             <title>Array-like objects</title>
@@ -544,33 +613,6 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
         </entry>
     
         <entry>
-            <title>New blog, less FunnelWeb</title>
-            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
-            <updated>2013-06-10T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
-            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
-&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
-&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
-&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
-&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
-&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
-&lt;h1&gt;The future of FunnelWeb&lt;/h1&gt;
-&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
-</content>
-            
-            <category>funnelweb</category>
-            
-            <category>docpad</category>
-            
-        </entry>
-    
-        <entry>
             <title>From FunnelWeb to Git in a few simple steps</title>
             <link href="http://www.aaron-powell.com/posts/2013-06-11-funnelweb-to-git.html"/>
             <updated>2013-06-10T00:00:00.000Z</updated>
@@ -706,6 +748,33 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
             <category>scriptcs</category>
             
             <category>git</category>
+            
+        </entry>
+    
+        <entry>
+            <title>New blog, less FunnelWeb</title>
+            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
+            <updated>2013-06-10T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
+            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
+&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
+&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
+&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
+&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
+&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
+&lt;h1&gt;The future of FunnelWeb&lt;/h1&gt;
+&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
+</content>
+            
+            <category>funnelweb</category>
+            
+            <category>docpad</category>
             
         </entry>
     
@@ -965,74 +1034,57 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - Introduction</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
+            <title>Flight Mode - local and session storage</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-introduction.html</id>
-            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
-&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
+            <id>http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html</id>
+            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
+&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
+&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
+&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
+&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
+&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
+&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
+&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
+&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
+var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
+localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
+};
+
+Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
+&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
+&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
-&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
-        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
-            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-        }
-
-        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
+&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
 </content>
+            
+            <category>flight-mode</category>
             
             <category>offline-storage</category>
             
-            <category>flight-mode</category>
+            <category>localStorage</category>
+            
+            <category>sessionStorage</category>
             
         </entry>
     
@@ -1105,57 +1157,74 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - local and session storage</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html"/>
+            <title>Flight Mode - Introduction</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html</id>
-            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
-&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
-&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
-&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
-&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
-&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
-&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
-&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
-&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
-var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
-localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
-};
-
-Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
+            <id>http://www.aaron-powell.com/posts/2013-05-23-introduction.html</id>
+            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
+&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
-&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
-&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
+&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
+        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
+            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        }
+
+        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
 </content>
-            
-            <category>flight-mode</category>
             
             <category>offline-storage</category>
             
-            <category>localStorage</category>
-            
-            <category>sessionStorage</category>
+            <category>flight-mode</category>
             
         </entry>
     
@@ -1230,38 +1299,6 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
             <category>speaking</category>
             
             <category>indexeddb</category>
-            
-        </entry>
-    
-        <entry>
-            <title>KnockoutJS plugin for Glimpse</title>
-            <link href="http://www.aaron-powell.com/posts/2013-03-25-knockoutjs.html"/>
-            <updated>2013-03-25T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-03-25-knockoutjs.html</id>
-            <content type="html">&lt;p&gt;When I was recently in Seattle for MVP Summit I was hanging out with &lt;a href=&quot;http://twitter.com/anthony_vdh&quot;&gt;Anthony van der Hoorn&lt;/a&gt; and &lt;a href=&quot;http://twitter.com/nikmd23&quot;&gt;Nik Molnar&lt;/a&gt; of the &lt;a href=&quot;http://getglimpse.com&quot;&gt;Glimpse&lt;/a&gt; fame. Anthony, knowing my passion for JavaScript has been bouncing ideas around the client-side code for Glimpse for a while and wanting me to have a crack at building a client-side plugin for them. Well it seemed like the perfect time to get to it and not just because I had both the guys on hand to bug when things went wrong ;).&lt;/p&gt;
-&lt;p&gt;Having decided to write a plugin I next had to work out what the plugin would be for and I settled on &lt;a href=&quot;http://knockoutjs.com&quot;&gt;KnockoutJS&lt;/a&gt;. While I&amp;#39;ll admit that I&amp;#39;ve had a &lt;a href=&quot;http://www.aaron-powell.com/tagged/knockoutjs&quot;&gt;love-hate relationship with Knockout&lt;/a&gt; the problem space it&amp;#39;s in is very real and it does solve it very well, but when you have Knockout on a page it can be very difficult to work out where you&amp;#39;re actually using it and what&amp;#39;s actually happening in it.&lt;/p&gt;
-&lt;p&gt;To that end I&amp;#39;ve started a &lt;a href=&quot;http://nuget.org/packages/glimpse-knockout&quot;&gt;Glimpse KnockoutJS&lt;/a&gt; plugin. It&amp;#39;s still in its early days (and I&amp;#39;d love feedback &lt;em&gt;hint hint&lt;/em&gt;) but so far what it aims to do is:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Show you what ViewModels are on a page and what DOM element(s) they are bound to&lt;ul&gt;
-&lt;li&gt;The idea here is that you can see if a ViewModel is reused across multiple DOM elements&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Capture new ViewModels being added to the page and show them in the plugin&lt;ul&gt;
-&lt;li&gt;This can be handy if you&amp;#39;re creating ViewModels in popups or from Ajax requests&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Show you the properties of the ViewModels, and if they are observable properties track their changes&lt;ul&gt;
-&lt;li&gt;This should work for any kind of observable, be it a simple observable, an observable array or a computed observable&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Like I said this is a very early release, but it&amp;#39;s more I wanted it out there and to get feedback ASAP to work out what to focus on. I&amp;#39;ve only done some basic testing so if you&amp;#39;re using it on large Knockout VM&amp;#39;s I&amp;#39;d like to hear how it goes.&lt;/p&gt;
-&lt;p&gt;The code is all &lt;a href=&quot;https://github.com/aaronpowell/glimpse-knockout&quot;&gt;up on GitHub&lt;/a&gt; so feel free to send PR&amp;#39;s or raise issues so I can get to work on it!&lt;/p&gt;
-</content>
-            
-            <category>knockoutjs</category>
-            
-            <category>glimpse</category>
             
         </entry>
     

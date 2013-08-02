@@ -28,6 +28,10 @@ docpadConfig = {
     relatedPosts: function(post) {
       var posts;
 
+      if (!post.tags) {
+        return [];
+      }
+
       posts = this.getCollection('posts').findAll({
         url: {
           '$ne': post.url

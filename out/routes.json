@@ -7,21 +7,15 @@
 			]
 		},
 		{
-			"url": "/posts/2009-05-19-query-syntax-vs-method-syntax.html",
-			"redirects": [
-				"/query-syntax-vs-method-syntax"
-			]
-		},
-		{
-			"url": "/posts/2010-04-01-umbraco.html",
-			"redirects": [
-				"/umbraco"
-			]
-		},
-		{
 			"url": "/posts/2009-05-05-creating-jquery-plugins-from-ms-ajax-components.html",
 			"redirects": [
 				"/creating-jquery-plugins-from-ms-ajax-components"
+			]
+		},
+		{
+			"url": "/posts/2009-05-19-query-syntax-vs-method-syntax.html",
+			"redirects": [
+				"/query-syntax-vs-method-syntax"
 			]
 		},
 		{
@@ -31,9 +25,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-06-random.html",
+			"url": "/posts/2009-07-15-recursive-anonymous-functions-the-net-version.html",
 			"redirects": [
-				"/random"
+				"/recursive-anonymous-functions-the-net-version"
+			]
+		},
+		{
+			"url": "/posts/2010-04-01-umbraco.html",
+			"redirects": [
+				"/umbraco"
 			]
 		},
 		{
@@ -43,15 +43,15 @@
 			]
 		},
 		{
-			"url": "/posts/2009-07-15-recursive-anonymous-functions-the-net-version.html",
-			"redirects": [
-				"/recursive-anonymous-functions-the-net-version"
-			]
-		},
-		{
 			"url": "/posts/2010-04-07-building-linq-to-umbraco.html",
 			"redirects": [
 				"/building-linq-to-umbraco"
+			]
+		},
+		{
+			"url": "/posts/2010-04-06-random.html",
+			"redirects": [
+				"/random"
 			]
 		},
 		{
@@ -79,27 +79,27 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-08-are-extension-methods-really-evil.html",
-			"redirects": [
-				"/are-extension-methods-really-evil"
-			]
-		},
-		{
-			"url": "/posts/2010-04-08-problems-with-assembly-trust.html",
-			"redirects": [
-				"/problems-with-assembly-trust"
-			]
-		},
-		{
 			"url": "/posts/2010-04-07-umbraco-members-profiles.html",
 			"redirects": [
 				"/umbraco-members-profiles"
 			]
 		},
 		{
+			"url": "/posts/2010-04-08-are-extension-methods-really-evil.html",
+			"redirects": [
+				"/are-extension-methods-really-evil"
+			]
+		},
+		{
 			"url": "/posts/2010-04-08-linq-to-xml-to-excel.html",
 			"redirects": [
 				"/linq-to-xml-to-excel"
+			]
+		},
+		{
+			"url": "/posts/2010-04-08-problems-with-assembly-trust.html",
+			"redirects": [
+				"/problems-with-assembly-trust"
 			]
 		},
 		{
@@ -139,15 +139,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-14-lucene-net-overview.html",
-			"redirects": [
-				"/lucene-net-overview"
-			]
-		},
-		{
 			"url": "/posts/2010-04-12-webforms-mvp-contrib.html",
 			"redirects": [
 				"/webforms-mvp-contrib"
+			]
+		},
+		{
+			"url": "/posts/2010-04-14-lucene-net-overview.html",
+			"redirects": [
+				"/lucene-net-overview"
 			]
 		},
 		{
@@ -157,15 +157,21 @@
 			]
 		},
 		{
+			"url": "/posts/2010-04-24-linq-in-javascript.html",
+			"redirects": [
+				"/linq-in-javascript"
+			]
+		},
+		{
 			"url": "/posts/2010-04-25-2009-a-year-in-review.html",
 			"redirects": [
 				"/2009-a-year-in-review"
 			]
 		},
 		{
-			"url": "/posts/2010-04-24-linq-in-javascript.html",
+			"url": "/posts/2010-04-25-dealing-with-type-casting-limitations.html",
 			"redirects": [
-				"/linq-in-javascript"
+				"/dealing-with-type-casting-limitations"
 			]
 		},
 		{
@@ -181,12 +187,6 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-25-dealing-with-type-casting-limitations.html",
-			"redirects": [
-				"/dealing-with-type-casting-limitations"
-			]
-		},
-		{
 			"url": "/posts/2010-04-25-oh-woe-is-mobile-me.html",
 			"redirects": [
 				"/oh-woe-is-mobile-me"
@@ -199,15 +199,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-25-working-with-dates-and-linq-to-sql.html",
-			"redirects": [
-				"/working-with-dates-and-linq-to-sql"
-			]
-		},
-		{
 			"url": "/posts/2010-04-25-why-im-not-a-fan-of-xslt.html",
 			"redirects": [
 				"/why-im-not-a-fan-of-xslt"
+			]
+		},
+		{
+			"url": "/posts/2010-04-25-working-with-dates-and-linq-to-sql.html",
+			"redirects": [
+				"/working-with-dates-and-linq-to-sql"
 			]
 		},
 		{
@@ -223,15 +223,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-05-27-lucene-analyzer.html",
-			"redirects": [
-				"/lucene-analyzer"
-			]
-		},
-		{
 			"url": "/posts/2010-05-23-client-event-pool.html",
 			"redirects": [
 				"/client-event-pool"
+			]
+		},
+		{
+			"url": "/posts/2010-05-27-lucene-analyzer.html",
+			"redirects": [
+				"/lucene-analyzer"
 			]
 		},
 		{
@@ -289,12 +289,6 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-07-yes-i-like-webforms.html",
-			"redirects": [
-				"/yes-i-like-webforms"
-			]
-		},
-		{
 			"url": "/posts/2010-07-05-dynamics-library.html",
 			"redirects": [
 				"/dynamics-library"
@@ -304,6 +298,12 @@
 			"url": "/posts/2010-07-10-building-an-application-with-lucene-net.html",
 			"redirects": [
 				"/building-an-application-with-lucene-net"
+			]
+		},
+		{
+			"url": "/posts/2010-08-07-yes-i-like-webforms.html",
+			"redirects": [
+				"/yes-i-like-webforms"
 			]
 		},
 		{
@@ -331,21 +331,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-08-30-http-compression-mvc-fileresult.html",
+			"url": "/posts/2010-08-28-a-linq-observation.html",
 			"redirects": [
-				"/http-compression-mvc-fileresult"
+				"/a-linq-observation"
 			]
 		},
 		{
 			"url": "/posts/2010-08-28-no-value-when-settings-dropdown-with-javascript.html",
 			"redirects": [
 				"/no-value-when-settings-dropdown-with-javascript"
-			]
-		},
-		{
-			"url": "/posts/2010-08-28-a-linq-observation.html",
-			"redirects": [
-				"/a-linq-observation"
 			]
 		},
 		{
@@ -358,6 +352,12 @@
 			"url": "/posts/2010-08-28-testable-email-sending.html",
 			"redirects": [
 				"/testable-email-sending"
+			]
+		},
+		{
+			"url": "/posts/2010-08-30-http-compression-mvc-fileresult.html",
+			"redirects": [
+				"/http-compression-mvc-fileresult"
 			]
 		},
 		{
@@ -415,15 +415,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-11-07-base64-encoding-images-with-powershell.html",
-			"redirects": [
-				"/base64-encoding-images-with-powershell"
-			]
-		},
-		{
 			"url": "/posts/2010-10-23-javascript-functions-are-objects.html",
 			"redirects": [
 				"/javascript-functions-are-objects"
+			]
+		},
+		{
+			"url": "/posts/2010-11-07-base64-encoding-images-with-powershell.html",
+			"redirects": [
+				"/base64-encoding-images-with-powershell"
 			]
 		},
 		{
@@ -445,21 +445,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-12-07-whatkey-net-for-your-javascript-keycode-glory.html",
-			"redirects": [
-				"/whatkey-net-for-your-javascript-keycode-glory"
-			]
-		},
-		{
 			"url": "/posts/2010-12-04-ole.html",
 			"redirects": [
 				"/ole"
 			]
 		},
 		{
-			"url": "/posts/2010-12-13-umbraco-and-mercurial-how-to-contribute.html",
+			"url": "/posts/2010-12-07-whatkey-net-for-your-javascript-keycode-glory.html",
 			"redirects": [
-				"/umbraco-and-mercurial-how-to-contribute"
+				"/whatkey-net-for-your-javascript-keycode-glory"
 			]
 		},
 		{
@@ -469,15 +463,21 @@
 			]
 		},
 		{
-			"url": "/posts/2010-12-22-how-i-developer-umbraco.html",
+			"url": "/posts/2010-12-13-umbraco-and-mercurial-how-to-contribute.html",
 			"redirects": [
-				"/how-i-developer-umbraco"
+				"/umbraco-and-mercurial-how-to-contribute"
 			]
 		},
 		{
 			"url": "/posts/2010-12-20-sydjs-javascript-frameworks.html",
 			"redirects": [
 				"/sydjs-javascript-frameworks"
+			]
+		},
+		{
+			"url": "/posts/2010-12-22-how-i-developer-umbraco.html",
+			"redirects": [
+				"/how-i-developer-umbraco"
 			]
 		},
 		{
@@ -571,15 +571,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-02-09-blinking-marquee.html",
-			"redirects": [
-				"/doing-it-wrong/blinking-marquee"
-			]
-		},
-		{
 			"url": "/posts/2011-02-08-blink.html",
 			"redirects": [
 				"/doing-it-wrong/blink"
+			]
+		},
+		{
+			"url": "/posts/2011-02-09-blinking-marquee.html",
+			"redirects": [
+				"/doing-it-wrong/blinking-marquee"
 			]
 		},
 		{
@@ -619,15 +619,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-02-26-global-install-package.html",
-			"redirects": [
-				"/nuget/global-install-package"
-			]
-		},
-		{
 			"url": "/posts/2011-02-25-in-browser-storage.html",
 			"redirects": [
 				"/web-dev/in-browser-storage"
+			]
+		},
+		{
+			"url": "/posts/2011-02-26-global-install-package.html",
+			"redirects": [
+				"/nuget/global-install-package"
 			]
 		},
 		{
@@ -655,15 +655,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-04-03-mvp11.html",
-			"redirects": [
-				"/mvp11"
-			]
-		},
-		{
 			"url": "/posts/2011-03-30-binding.html",
 			"redirects": [
 				"/expression-tree-fun/binding"
+			]
+		},
+		{
+			"url": "/posts/2011-04-03-mvp11.html",
+			"redirects": [
+				"/mvp11"
 			]
 		},
 		{
@@ -811,15 +811,15 @@
 			]
 		},
 		{
-			"url": "/posts/2011-12-12-building-data-with-tbd.html",
-			"redirects": [
-				"/javascript/building-data-with-tbd"
-			]
-		},
-		{
 			"url": "/posts/2011-10-24-xamlizer-implementing-something-silly-in-javascript.html",
 			"redirects": [
 				"/javascript/xamlizer-implementing-something-silly-in-javascript"
+			]
+		},
+		{
+			"url": "/posts/2011-12-12-building-data-with-tbd.html",
+			"redirects": [
+				"/javascript/building-data-with-tbd"
 			]
 		},
 		{
@@ -847,15 +847,15 @@
 			]
 		},
 		{
-			"url": "/posts/2012-01-05-heroku-sendgrid-nodejs.html",
-			"redirects": [
-				"/nodejs/heroku-sendgrid-nodejs"
-			]
-		},
-		{
 			"url": "/posts/2011-12-29-stubbing-ajax-responses-with-tbd.html",
 			"redirects": [
 				"/javascript/stubbing-ajax-responses-with-tbd"
+			]
+		},
+		{
+			"url": "/posts/2012-01-05-heroku-sendgrid-nodejs.html",
+			"redirects": [
+				"/nodejs/heroku-sendgrid-nodejs"
 			]
 		},
 		{
@@ -871,15 +871,15 @@
 			]
 		},
 		{
-			"url": "/posts/2012-02-21-scripts-are-blocking.html",
-			"redirects": [
-				"/javascript/scripts-are-blocking"
-			]
-		},
-		{
 			"url": "/posts/2012-02-16-kendo-ui-bootstrapper.html",
 			"redirects": [
 				"/kendo-ui-bootstrapper"
+			]
+		},
+		{
+			"url": "/posts/2012-02-21-scripts-are-blocking.html",
+			"redirects": [
+				"/javascript/scripts-are-blocking"
 			]
 		},
 		{
@@ -901,21 +901,21 @@
 			]
 		},
 		{
-			"url": "/posts/2012-03-21-watch-your-os.html",
-			"redirects": [
-				"/nodejs/watch-your-os"
-			]
-		},
-		{
 			"url": "/posts/2012-03-19-owin-responses.html",
 			"redirects": [
 				"/web/owin-responses"
 			]
 		},
 		{
-			"url": "/posts/2012-04-10-owin-conclusion.html",
+			"url": "/posts/2012-03-21-watch-your-os.html",
 			"redirects": [
-				"/web/owin-conclusion"
+				"/nodejs/watch-your-os"
+			]
+		},
+		{
+			"url": "/posts/2012-03-23-owin-view-engines.html",
+			"redirects": [
+				"/web/owin-view-engines"
 			]
 		},
 		{
@@ -925,9 +925,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-03-23-owin-view-engines.html",
+			"url": "/posts/2012-04-10-owin-conclusion.html",
 			"redirects": [
-				"/web/owin-view-engines"
+				"/web/owin-conclusion"
 			]
 		},
 		{
@@ -955,6 +955,12 @@
 			]
 		},
 		{
+			"url": "/posts/2012-06-12-using-mvc-in-umbraco-4.html",
+			"redirects": [
+				"/umbraco/using-mvc-in-umbraco-4"
+			]
+		},
+		{
 			"url": "/posts/2012-06-13-introducing-umbraco-contributor-list.html",
 			"redirects": [
 				"/umbraco/introducing-umbraco-contributor-list"
@@ -967,9 +973,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-06-12-using-mvc-in-umbraco-4.html",
+			"url": "/posts/2012-06-27-hungarian-jquery.html",
 			"redirects": [
-				"/umbraco/using-mvc-in-umbraco-4"
+				"/javascript/hungarian-jquery"
 			]
 		},
 		{
@@ -979,9 +985,9 @@
 			]
 		},
 		{
-			"url": "/posts/2012-06-27-hungarian-jquery.html",
+			"url": "/posts/2012-08-20-xaml-by-a-web-guy.html",
 			"redirects": [
-				"/javascript/hungarian-jquery"
+				"/xaml/xaml-by-a-web-guy"
 			]
 		},
 		{
@@ -991,21 +997,15 @@
 			]
 		},
 		{
-			"url": "/posts/2012-08-20-xaml-by-a-web-guy.html",
+			"url": "/posts/2012-08-31-forcing-windows-8-keyboard-to-hide.html",
 			"redirects": [
-				"/xaml/xaml-by-a-web-guy"
+				"/xaml/forcing-windows-8-keyboard-to-hide"
 			]
 		},
 		{
 			"url": "/posts/2012-09-05-text-casing-and-examine.html",
 			"redirects": [
 				"/text-casing-and-examine"
-			]
-		},
-		{
-			"url": "/posts/2012-08-31-forcing-windows-8-keyboard-to-hide.html",
-			"redirects": [
-				"/xaml/forcing-windows-8-keyboard-to-hide"
 			]
 		},
 		{
@@ -1021,12 +1021,6 @@
 			]
 		},
 		{
-			"url": "/posts/2012-09-26-teched-2012.html",
-			"redirects": [
-				"/speaking/teched-2012"
-			]
-		},
-		{
 			"url": "/posts/2012-09-21-a-simple-git-server-on-windows.html",
 			"redirects": [
 				"/a-simple-git-server-on-windows"
@@ -1036,6 +1030,12 @@
 			"url": "/posts/2012-09-24-check-if-file-exists.html",
 			"redirects": [
 				"/winrt/check-if-file-exists"
+			]
+		},
+		{
+			"url": "/posts/2012-09-26-teched-2012.html",
+			"redirects": [
+				"/speaking/teched-2012"
 			]
 		},
 		{
@@ -1063,15 +1063,15 @@
 			]
 		},
 		{
-			"url": "/posts/2012-10-05-indexeddb-storage.html",
-			"redirects": [
-				"/web/indexeddb-storage"
-			]
-		},
-		{
 			"url": "/posts/2012-10-04-ie10-user-agent-switching.html",
 			"redirects": [
 				"/web/ie10-user-agent-switching"
+			]
+		},
+		{
+			"url": "/posts/2012-10-05-indexeddb-storage.html",
+			"redirects": [
+				"/web/indexeddb-storage"
 			]
 		},
 		{
@@ -1129,15 +1129,15 @@
 			]
 		},
 		{
-			"url": "/posts/2013-04-10-wdc13.html",
-			"redirects": [
-				"/speaking/wdc13"
-			]
-		},
-		{
 			"url": "/posts/2013-03-25-knockoutjs.html",
 			"redirects": [
 				"/glimpse/knockoutjs"
+			]
+		},
+		{
+			"url": "/posts/2013-04-10-wdc13.html",
+			"redirects": [
+				"/speaking/wdc13"
 			]
 		},
 		{
@@ -1153,21 +1153,27 @@
 			]
 		},
 		{
-			"url": "/posts/2013-05-23-introduction.html",
-			"redirects": [
-				"/flight-mode/introduction"
-			]
-		},
-		{
 			"url": "/posts/2013-05-23-cookies.html",
 			"redirects": [
 				"/flight-mode/cookies"
 			]
 		},
 		{
+			"url": "/posts/2013-05-23-introduction.html",
+			"redirects": [
+				"/flight-mode/introduction"
+			]
+		},
+		{
 			"url": "/posts/2013-05-23-local-session-storage.html",
 			"redirects": [
 				"/flight-mode/local-session-storage"
+			]
+		},
+		{
+			"url": "/posts/2013-05-27-indexeddb.html",
+			"redirects": [
+				"/flight-mode/indexeddb"
 			]
 		},
 		{
@@ -1180,12 +1186,6 @@
 			"url": "/posts/2013-05-30-libraries.html",
 			"redirects": [
 				"/flight-mode/libraries"
-			]
-		},
-		{
-			"url": "/posts/2013-05-27-indexeddb.html",
-			"redirects": [
-				"/flight-mode/indexeddb"
 			]
 		}
 	]
