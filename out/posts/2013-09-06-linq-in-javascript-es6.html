@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>LINQ in JavaScript, ES6 style - LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">LINQ in JavaScript, ES6 style</h1>
+                <h2>6th September 2013</h2>
+                <ul class="tags">
+    
+        
+            <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a></li>
+        
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd August 2013</span>
+                            <h3><a href="/posts/2013-08-02-ajax-without-jquery.html">AJAX without jQuery</a></h3>
+                        </header>
+                        <p>When was the last time you wrote an AJAX request?</p>
+<p>When was the last time you did it without relying on jQuery?</p>
+<p>In this article we&#39;ll look at how do do just that, how do make an AJAX request without jQuery to better understand what&#39;s going on.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ajax.html"><span>ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd July 2013</span>
+                            <h3><a href="/posts/2013-07-22-array-like-objects.html">Array-like objects</a></h3>
+                        </header>
+                        <p>Just because it looks like a duck, walks like a duck, quacks like a duck doesn&#39;t mean it&#39;s a duck. There&#39;s dangers with making assumptions of your JavaScript objects based on their surface area.</p>
+<p>That said, a lot of power can be gleamed by these seemingly innocent assumptions.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th July 2013</span>
+                            <h3><a href="/posts/2013-07-14-javascript-new-operator.html">The JavaScript new operator</a></h3>
+                        </header>
+                        <p>Time to revisit something that was overlooked in the last post, the <code>new</code> operator in JavaScript and what it does.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">10th July 2013</span>
+                            <h3><a href="/posts/2013-07-10-implementing-indexers-in-javascript.html">Implementing "indexers" in JavaScript</a></h3>
+                        </header>
+                        <p>My colleague Luke Drumm challenged me to implement C# style indexers in JavaScript.</p>
+<p>So let&#39;s have a look at how you can do that, and how you can make some very interesting JavaScript objects that are self replicating. We&#39;ll build on the knowledge of using <code>bind</code> and <code>apply</code> from the last two posts.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th July 2013</span>
+                            <h3><a href="/posts/2013-07-05-javascript-binding-currying-and-arrows.html">JavaScript bind, currying and arrow functions</a></h3>
+                        </header>
+                        <p>After confusing my colleagues with how to invoke functions with a modifided set of arguments at a single time the next evolutionary point was to confuse them with creating functions that are always called with a different state.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>Back in 2010 I posted about <a href="/posts/2010-04-24-linq-in-javascript.html">implementing LINQ in JavaScript</a> in which I had a look at what would have been involved if you were writing a LINQ style API in JavaScript. Keep in mind that back in 2010 we didn&#39;t have libraries like <a href="http://underscorejs.org">Underscore</a> or <a href="http://lodash.com">LoDash</a> nor were people that aware of the <code>Array.prototype</code> extensions <code>map</code>/<code>filter</code>/<code>reduce</code>. So when it came to collection manipulation the most common approach was via the good ol&#39; <code>for</code> loop but as I&#39;ve said <a href="/posts/2013-07-22-array-like-objects.html">in the past</a> <code>for</code> loops are uncool.</p>
+<p>But with my implementation of LINQ in JavaScript, and the others out there that I&#39;ve come across (including Underscore/LoDash) there is one thing that always annoyed me, they are eager evaluated.</p>
+<p>Let&#39;s say you&#39;re displaying a paged list of records, and also have custom filters that people can apply. So we&#39;d need to do three things for this:</p>
+<ul>
+<li>Apply a filter to a collection</li>
+<li>Transform a collection of objects to a collection of DOM elements (or DOM strings)</li>
+<li>Grab the subset of records required</li>
+</ul>
+<p>This would result in something like this:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> rows = people.filter(<span class="function"><span class="keyword">function</span> <span class="params">(person)</span> {</span>
+    <span class="keyword">return</span> person.age &gt; <span class="number">30</span>;
+}).map(<span class="function"><span class="keyword">function</span> <span class="params">(person)</span> {</span>
+    <span class="comment">//removed for simplicity</span>
+}).slice(<span class="number">0</span>, <span class="number">5</span>);</code></pre>
+<p>So this has to be eger evaluated, if we&#39;ve got 500 records in our <code>people</code> collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the <code>map</code>&#39;s before we take the 5 that we want to show on the current page. Now admittedly we can move the <code>.slice(0, 5)</code> to before the <code>map</code> and then we&#39;d <code>map</code> the subset but you still go into the <code>slice</code> having put the whole collection through the <code>filter</code>.</p>
+<p>And this is where I like LINQ, it&#39;s lazy evaluated, if we did the same thing:</p>
+<pre class="highlighted"><code class="avrasm">var rows = people
+                <span class="preprocessor">.Where</span>(person =&gt; person<span class="preprocessor">.Age</span> &gt; <span class="number">30</span>)
+                <span class="preprocessor">.Select</span>(person =&gt; <span class="comment">/* removed for simplicity */</span>)
+                <span class="preprocessor">.Take</span>(<span class="number">5</span>)<span class="comment">;</span></code></pre>
+<p>Here the collection manipulation is processed only once you iterate over it <code>rows</code>, and only the first 5 that match the <code>Where</code> filter will be used, it will stop once it hits that. And this all comes down to the fact that C# implements <a href="http://en.wikipedia.org/wiki/Iterator">Iterators</a> through the <code>IEnumerable</code> interface.</p>
+<h2>Enter ES6</h2>
+<p>Good news everybody, ECMAScript 6 has a proposal forward to <a href="http://wiki.ecmascript.org/doku.php?id=harmony:iterators">add iterators to ECMAScript/JavaScript</a> which means we can create lazy evaluated objects, more specifically, lazy evaluated collections.</p>
+<p><em>Note: This is a draft spec so what I&#39;m doing only works in Firefox Nightly and may stop working at some random point.</em></p>
+<p>To create an iterator object you need to add a member of <code>__iterator__</code> that is a function that <code>yield</code>s a result, here&#39;s a basic iterator:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> iterator = {
+    __iterator__: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">yield</span> <span class="number">1</span>;
+        <span class="keyword">yield</span> <span class="number">2</span>:
+        <span class="keyword">yield</span> <span class="number">3</span>;
+    }
+};</code></pre>
+<p>We can then iterate over it using a <code>for-in</code> loop like so:</p>
+<pre class="highlighted"><code class="rust"><span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">in</span> iterator) {
+    console.<span class="keyword">log</span>(val);
+}
+<span class="comment">// 1, 2, 3</span></code></pre>
+<p>You could then make an iterater version of an array:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> iteratableArray = <span class="function"><span class="keyword">function</span> <span class="params">(array)</span> {</span>
+    <span class="keyword">return</span> {
+        __iterator__: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) {
+                <span class="keyword">yield</span> array[i];
+            }
+        }
+    };
+};</code></pre>
+<p>So now you can do nothing really any different:</p>
+<pre class="highlighted"><code class="erlang">var arr = iteratable<span class="variable">Array</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+<span class="function"><span class="title">for</span> <span class="params">(let val in arr)</span> {
+    <span class="title">console</span>.<span class="title">log</span><span class="params">(val)</span>;
+}</code></pre>
+<p>But where it gets really powerful is in the lazy evaluation, let&#39;s update to if we have a function passed in we&#39;ll return the evaluation of it:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> iteratableArray = <span class="function"><span class="keyword">function</span> <span class="params">(array)</span> {</span>
+    <span class="keyword">return</span> {
+        __iterator__: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) {
+                <span class="keyword">if</span> (<span class="keyword">typeof</span> array[i] == <span class="string">'function'</span>)
+                    <span class="keyword">yield</span> array[i]();
+                <span class="keyword">else</span>
+                    <span class="keyword">yield</span> array[i];
+            }
+        }
+    };
+};</code></pre>
+<p>Now we&#39;ll create our object:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> arr = iteratableArray([<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> <span class="keyword">throw</span> <span class="string">'Bad'</span>; }]);</code></pre>
+<p>The exception won&#39;t be thrown until we iterate through the collection:</p>
+<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">for</span> <span class="params">(var x in arr)</span> {
+    <span class="title">console</span>.<span class="title">log</span><span class="params">(x)</span>;
+}</code></pre>
+<p><em>(Yes it&#39;s a contrived example but we&#39;ll move on from that.)</em></p>
+<h1>Implementing LINQ</h1>
+<p>Now we&#39;ve seen the basics of how you would create something that&#39;s an iterable collection, and this is the basis of how we could implement LINQ. For this I&#39;m going to create an <code>Enumerable</code> type that we&#39;ll work against:</p>
+<pre class="highlighted"><code class="php"><span class="keyword">var</span> Enumerable = <span class="function"><span class="keyword">function</span> <span class="params">(array)</span> {</span>
+    <span class="keyword">if</span> (typeof <span class="keyword">this</span> === <span class="string">'undefined'</span> || <span class="keyword">this</span>.constructor !== Enumerable) {
+        <span class="keyword">return</span> <span class="keyword">new</span> Enumerable(<span class="keyword">array</span>);
+    }
+    <span class="keyword">this</span>._<span class="keyword">array</span> = <span class="keyword">array</span>;
+};</code></pre>
+<p>This is a <a href="/posts/2013-07-14-javascript-new-operator.html">constructor function</a> (that doesn&#39;t have to be used with the <code>new</code> operator) that we&#39;ll pass an array in (I&#39;m not doing error checking at the moment, be nice :P).</p>
+<p>I&#39;ve then got an <code>__iterator__</code> function:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> __iterator__ = <span class="keyword">function</span>() {
+    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>._array.length; i++) {
+        <span class="keyword">yield</span> <span class="keyword">this</span>._array[i];
+    };
+};</code></pre>
+<p>Which is then added to the <code>Enumerable</code>&#39;s prototype:</p>
+<pre class="highlighted"><code class="markdown">Enumerable.prototype.<span class="strong">__iterator__</span> = <span class="strong">__iterator__</span>;</code></pre>
+<p>And it works the same as our previous function, now we can start implementing more methods on the <code>prototype</code>. Let&#39;s start with the <a href="http://msdn.microsoft.com/en-us/library/system.linq.enumerable.where.aspx"><code>Where</code></a> method so we can filter the collection:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> <span class="keyword">where</span> = function (fn) {
+    <span class="keyword">return</span> <span class="keyword">new</span> WhereEnumerable(<span class="keyword">this</span>, fn);
+};
+Enumerable.prototype.<span class="keyword">where</span> = <span class="keyword">where</span>;
+Enumerable.prototype.filter = <span class="keyword">where</span>; <span class="comment">//just so it's more JavaScript-y</span></code></pre>
+<p>Wait, what&#39;s this <code>WhereEnumerable</code> that we&#39;re creating? Well since we want to chain this up and not have a really complex object that we keep modifying I&#39;ve created another &quot;class&quot; to handle the filtering concept. This is similar to what LINQ does, it has a number of internal types that handle the different iterator concepts. Let&#39;s start implementing it:</p>
+<pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> WhereEnumerable = (<span class="function"><span class="keyword">function</span> <span class="params">(__super)</span> {</span>
+    __<span class="keyword">extends</span>(WhereEnumerable, __<span class="keyword">super</span>);
+
+    <span class="function"><span class="keyword">function</span> <span class="title">WhereEnumerable</span><span class="params">(enumerable, fn)</span> {</span>
+        __<span class="keyword">super</span>.call(<span class="keyword">this</span>, enumerable._array);
+        <span class="keyword">this</span>._enumerable = enumerable;
+        <span class="keyword">this</span>._fn = fn;
+    };
+
+    <span class="keyword">return</span> WhereEnumerable;
+})(Enumerable);</code></pre>
+<p>I&#39;m using one of the fairly common <em>class</em> patterns in JavaScript and I was lazy and grabbed some auto-generated code from a TypeScript project for doing class inheritance, but basically what I&#39;m doing is:</p>
+<ul>
+<li>Creating a new constructor function that will invoke the <code>Enumerable</code> constructor function</li>
+<li>Capture the &quot;parent&quot; enumerable object</li>
+<li>Store the filtering function</li>
+</ul>
+<p>Now we&#39;d better implement the <code>__iterator__</code> method:</p>
+<pre class="highlighted"><code class="javascript">WhereEnumerable.prototype.__iterator__ = <span class="keyword">function</span>() {
+    <span class="keyword">var</span> index = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">in</span> <span class="keyword">this</span>._enumerable) {
+        <span class="keyword">if</span> (<span class="keyword">this</span>._fn(item, index)) {
+            <span class="keyword">yield</span> item;
+        }
+        index++;
+    }
+};</code></pre>
+<p>It&#39;s a pretty simple method to understand we:</p>
+<ul>
+<li>Use a <code>for-in</code> loop to step through each value of the <em>parent enumerable</em></li>
+<li>Apply the function to the value and it&#39;s index</li>
+<li>If the function returns truthy yield the item, else skip it</li>
+</ul>
+<p>Neat now we can do this:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> enumerable = Enumerable([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+<span class="keyword">var</span> odds = enumerable.<span class="keyword">where</span>(x =&gt; x % <span class="number">2</span>);</code></pre>
+<p>Now we have an unevaluated collection filter, and until we <em>step into</em> the collection it&#39;ll stay that way.</p>
+<h1>Stepping it up with chaining</h1>
+<p>The really powerful aspect of LINQ is its chaining capability, that you can apply multiple &quot;query&quot; operations to get a result, like our original example. So now let&#39;s add a <code>Count</code> method:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> count = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="keyword">var</span> count = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">in</span> <span class="keyword">this</span>) {
+        count++;
+    }
+    <span class="keyword">return</span> count;
+};
+Enumerable.prototype.count = count;</code></pre>
+<p>This means we could do this:</p>
+<pre class="highlighted"><code class="objectivec">console<span class="variable">.log</span>(enumerable<span class="variable">.count</span>()); <span class="comment">//4</span>
+console<span class="variable">.log</span>(odds<span class="variable">.count</span>()); <span class="comment">//2</span></code></pre>
+<p>Because our <code>WhereEnumerable</code> type inherits from the <code>Enumerable</code> class, when we augment that prototype it filters through. Neat! Now we could even do this:</p>
+<pre class="highlighted"><code class="avrasm">var notOne = odds<span class="preprocessor">.where</span>(<span class="built_in">x</span> =&gt; <span class="built_in">x</span> &gt; <span class="number">1</span>)<span class="comment">;</span>
+console<span class="preprocessor">.log</span>(notOne<span class="preprocessor">.count</span>())<span class="comment">; //1</span></code></pre>
+<p>And if you were to debug through it keeps doing the <code>__iterator__</code> method for the <em>parent</em> <code>Enumerable</code> object, meaning it&#39;ll ask for <code>1</code>, pass it to the initial filter, <code>x =&gt; x % 2</code> and then to <code>x =&gt; x &gt; 1</code> since it passed the first <code>where</code> call. The next item through will fail the first <code>where</code> and won&#39;t be passed to the second. Neat!</p>
+<h1>Select</h1>
+<p>Say we want to implement <code>Select</code> (which is <code>map</code> in JavaScript land), again I&#39;m creating a new <code>Enumerable</code> subclass:</p>
+<pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> SelectEnumerable = (<span class="function"><span class="keyword">function</span> <span class="params">(__super)</span> {</span>
+    __<span class="keyword">extends</span>(SelectEnumerable, __<span class="keyword">super</span>);
+
+    <span class="function"><span class="keyword">function</span> <span class="title">SelectEnumerable</span><span class="params">(enumerable, fn)</span> {</span>
+        __<span class="keyword">super</span>.call(<span class="keyword">this</span>, enumerable._array);
+        <span class="keyword">this</span>._enumerable = enumerable;
+        <span class="keyword">this</span>._fn = fn;
+    };
+
+    SelectEnumerable.prototype.__iterator__ = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">var</span> index = <span class="number">0</span>;
+        <span class="keyword">for</span> (<span class="keyword">var</span> item <span class="keyword">in</span> <span class="keyword">this</span>._enumerable) {
+            yeild <span class="keyword">this</span>._fn(item, index++);
+        }
+    };
+
+    <span class="keyword">return</span> SelectEnumerable;
+})(Enumerable);</code></pre>
+<p>It&#39;s very similar to the <code>WhereEnumeratable</code> but we&#39;re returning the result of the provided function. Once added to the <code>Enumerable</code> prototype it means we can do this:</p>
+<pre class="highlighted"><code class="cs"><span class="keyword">var</span> squares = enumerable.<span class="keyword">select</span>(x =&gt; x ^ x);
+<span class="keyword">var</span> oddSquares = enumerable.<span class="keyword">where</span>(x =&gt; x % <span class="number">2</span>).<span class="keyword">select</span>(x =&gt; x ^ x);</code></pre>
+<h1>.All</h1>
+<p>Not all of the methods we&#39;d want to implement are going to require a new subclass to be made, something like <a href="http://msdn.microsoft.com/en-us/library/bb548541.aspx"><code>All</code></a>, which returns whether or not every item in the Enumerable matches the predicate, will evaluate immediately. It&#39;s reasonably simple to implement as well:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> all = <span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> {</span>
+    <span class="keyword">for</span> (<span class="keyword">let</span> x <span class="keyword">in</span> <span class="keyword">this</span>) {
+        <span class="keyword">if</span> (!fn(x)) {
+            <span class="keyword">return</span> <span class="literal">false</span>;
+        }
+    }
+
+    <span class="keyword">return</span> <span class="literal">true</span>;
+};
+Enumerable.prototype.all = all;</code></pre>
+<p>Here it&#39;ll go over each item and if any of them fail the function it&#39;ll return false, otherwise it&#39;s true. Because we&#39;re using a <code>for-in</code> loop against the <code>this</code>, which is an Enumerable (or subclass of) we step back through all the previous points in the chain.</p>
+<h1>Bringing it all together</h1>
+<p>So now that we&#39;ve got a bunch of lazy evaluation available we could do something like this:</p>
+<pre class="highlighted"><code class="matlab">var range = <span class="transposed_variable">Enumerable.</span>range(<span class="number">100</span>, <span class="number">1000</span>);
+var <span class="built_in">primes</span> = <span class="transposed_variable">range.</span>where(n =&gt; <span class="transposed_variable">Enumerable.</span>range(<span class="number">2</span>, <span class="transposed_variable">Math.</span><span class="built_in">floor</span>(<span class="transposed_variable">Math.</span><span class="built_in">sqrt</span>(n))).all(<span class="built_in">i</span> =&gt; n <span class="comment">% i &gt; 0));</span>
+
+<span class="keyword">for</span> (let prime in <span class="built_in">primes</span>) <span class="cell">{
+    console.log(prime);
+}</span></code></pre>
+<p>That&#39;s a simple prime number generate, using some more extensions that will generate a range between two numbers (100 and 1000). Pretty neat hey, it finds all 143 prime numbers.</p>
+<h1>Conclusion</h1>
+<p>And there we have it, a look at how we can use iterators to create a lazy-evaluated collection API which brings the power of .NET&#39;s LINQ to JavaScript. You&#39;ll find my <a href="https://github.com/aaronpowell/linq-in-javascript/">LINQ in JavaScript repository here</a> and it includes a <a href="https://github.com/aaronpowell/linq-in-javascript/tree/master/tests">bunch of tests</a> for the different parts of the API.</p>
+<p>Like I said this is built against a draft implementation of a spec and is in part another experiment but I think it&#39;s a cool example of what&#39;s coming in the future of JavaScript.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/posts/2013-09-06-linq-in-javascript-es6.html';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

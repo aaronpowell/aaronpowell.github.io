@@ -4,13 +4,226 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-08-01T23:24:46.185Z</updated>
+    <updated>2013-09-05T22:53:12.843Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>LINQ in JavaScript, ES6 style</title>
+            <link href="http://www.aaron-powell.com/posts/2013-09-06-linq-in-javascript-es6.html"/>
+            <updated>2013-09-06T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-09-06-linq-in-javascript-es6.html</id>
+            <content type="html">&lt;p&gt;Back in 2010 I posted about &lt;a href=&quot;/posts/2010-04-24-linq-in-javascript.html&quot;&gt;implementing LINQ in JavaScript&lt;/a&gt; in which I had a look at what would have been involved if you were writing a LINQ style API in JavaScript. Keep in mind that back in 2010 we didn&amp;#39;t have libraries like &lt;a href=&quot;http://underscorejs.org&quot;&gt;Underscore&lt;/a&gt; or &lt;a href=&quot;http://lodash.com&quot;&gt;LoDash&lt;/a&gt; nor were people that aware of the &lt;code&gt;Array.prototype&lt;/code&gt; extensions &lt;code&gt;map&lt;/code&gt;/&lt;code&gt;filter&lt;/code&gt;/&lt;code&gt;reduce&lt;/code&gt;. So when it came to collection manipulation the most common approach was via the good ol&amp;#39; &lt;code&gt;for&lt;/code&gt; loop but as I&amp;#39;ve said &lt;a href=&quot;/posts/2013-07-22-array-like-objects.html&quot;&gt;in the past&lt;/a&gt; &lt;code&gt;for&lt;/code&gt; loops are uncool.&lt;/p&gt;
+&lt;p&gt;But with my implementation of LINQ in JavaScript, and the others out there that I&amp;#39;ve come across (including Underscore/LoDash) there is one thing that always annoyed me, they are eager evaluated.&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s say you&amp;#39;re displaying a paged list of records, and also have custom filters that people can apply. So we&amp;#39;d need to do three things for this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Apply a filter to a collection&lt;/li&gt;
+&lt;li&gt;Transform a collection of objects to a collection of DOM elements (or DOM strings)&lt;/li&gt;
+&lt;li&gt;Grab the subset of records required&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This would result in something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; rows = people.filter(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(person)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; person.age &amp;gt; &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;;
+}).map(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(person)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;comment&quot;&gt;//removed for simplicity&lt;/span&gt;
+}).slice(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So this has to be eger evaluated, if we&amp;#39;ve got 500 records in our &lt;code&gt;people&lt;/code&gt; collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the &lt;code&gt;map&lt;/code&gt;&amp;#39;s before we take the 5 that we want to show on the current page. Now admittedly we can move the &lt;code&gt;.slice(0, 5)&lt;/code&gt; to before the &lt;code&gt;map&lt;/code&gt; and then we&amp;#39;d &lt;code&gt;map&lt;/code&gt; the subset but you still go into the &lt;code&gt;slice&lt;/code&gt; having put the whole collection through the &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And this is where I like LINQ, it&amp;#39;s lazy evaluated, if we did the same thing:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var rows = people
+                &lt;span class=&quot;preprocessor&quot;&gt;.Where&lt;/span&gt;(person =&amp;gt; person&lt;span class=&quot;preprocessor&quot;&gt;.Age&lt;/span&gt; &amp;gt; &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;)
+                &lt;span class=&quot;preprocessor&quot;&gt;.Select&lt;/span&gt;(person =&amp;gt; &lt;span class=&quot;comment&quot;&gt;/* removed for simplicity */&lt;/span&gt;)
+                &lt;span class=&quot;preprocessor&quot;&gt;.Take&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here the collection manipulation is processed only once you iterate over it &lt;code&gt;rows&lt;/code&gt;, and only the first 5 that match the &lt;code&gt;Where&lt;/code&gt; filter will be used, it will stop once it hits that. And this all comes down to the fact that C# implements &lt;a href=&quot;http://en.wikipedia.org/wiki/Iterator&quot;&gt;Iterators&lt;/a&gt; through the &lt;code&gt;IEnumerable&lt;/code&gt; interface.&lt;/p&gt;
+&lt;h2&gt;Enter ES6&lt;/h2&gt;
+&lt;p&gt;Good news everybody, ECMAScript 6 has a proposal forward to &lt;a href=&quot;http://wiki.ecmascript.org/doku.php?id=harmony:iterators&quot;&gt;add iterators to ECMAScript/JavaScript&lt;/a&gt; which means we can create lazy evaluated objects, more specifically, lazy evaluated collections.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: This is a draft spec so what I&amp;#39;m doing only works in Firefox Nightly and may stop working at some random point.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;To create an iterator object you need to add a member of &lt;code&gt;__iterator__&lt;/code&gt; that is a function that &lt;code&gt;yield&lt;/code&gt;s a result, here&amp;#39;s a basic iterator:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; iterator = {
+    __iterator__: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;:
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;;
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can then iterate over it using a &lt;code&gt;for-in&lt;/code&gt; loop like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;rust&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; val &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; iterator) {
+    console.&lt;span class=&quot;keyword&quot;&gt;log&lt;/span&gt;(val);
+}
+&lt;span class=&quot;comment&quot;&gt;// 1, 2, 3&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You could then make an iterater version of an array:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; iteratableArray = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(array)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; {
+        __iterator__: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+            &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; array.length; i++) {
+                &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; array[i];
+            }
+        }
+    };
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So now you can do nothing really any different:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;var arr = iteratable&lt;span class=&quot;variable&quot;&gt;Array&lt;/span&gt;([&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;]);
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(let val in arr)&lt;/span&gt; {
+    &lt;span class=&quot;title&quot;&gt;console&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(val)&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But where it gets really powerful is in the lazy evaluation, let&amp;#39;s update to if we have a function passed in we&amp;#39;ll return the evaluation of it:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; iteratableArray = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(array)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; {
+        __iterator__: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+            &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; array.length; i++) {
+                &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt; array[i] == &lt;span class=&quot;string&quot;&gt;'function'&lt;/span&gt;)
+                    &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; array[i]();
+                &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;
+                    &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; array[i];
+            }
+        }
+    };
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we&amp;#39;ll create our object:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; arr = iteratableArray([&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'Bad'&lt;/span&gt;; }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The exception won&amp;#39;t be thrown until we iterate through the collection:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(var x in arr)&lt;/span&gt; {
+    &lt;span class=&quot;title&quot;&gt;console&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x)&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;(Yes it&amp;#39;s a contrived example but we&amp;#39;ll move on from that.)&lt;/em&gt;&lt;/p&gt;
+&lt;h1&gt;Implementing LINQ&lt;/h1&gt;
+&lt;p&gt;Now we&amp;#39;ve seen the basics of how you would create something that&amp;#39;s an iterable collection, and this is the basis of how we could implement LINQ. For this I&amp;#39;m going to create an &lt;code&gt;Enumerable&lt;/code&gt; type that we&amp;#39;ll work against:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;php&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; Enumerable = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(array)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (typeof &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; === &lt;span class=&quot;string&quot;&gt;'undefined'&lt;/span&gt; || &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.constructor !== Enumerable) {
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Enumerable(&lt;span class=&quot;keyword&quot;&gt;array&lt;/span&gt;);
+    }
+    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._&lt;span class=&quot;keyword&quot;&gt;array&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;array&lt;/span&gt;;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is a &lt;a href=&quot;/posts/2013-07-14-javascript-new-operator.html&quot;&gt;constructor function&lt;/a&gt; (that doesn&amp;#39;t have to be used with the &lt;code&gt;new&lt;/code&gt; operator) that we&amp;#39;ll pass an array in (I&amp;#39;m not doing error checking at the moment, be nice :P).&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve then got an &lt;code&gt;__iterator__&lt;/code&gt; function:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; __iterator__ = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._array.length; i++) {
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._array[i];
+    };
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which is then added to the &lt;code&gt;Enumerable&lt;/code&gt;&amp;#39;s prototype:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;markdown&quot;&gt;Enumerable.prototype.&lt;span class=&quot;strong&quot;&gt;__iterator__&lt;/span&gt; = &lt;span class=&quot;strong&quot;&gt;__iterator__&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And it works the same as our previous function, now we can start implementing more methods on the &lt;code&gt;prototype&lt;/code&gt;. Let&amp;#39;s start with the &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.linq.enumerable.where.aspx&quot;&gt;&lt;code&gt;Where&lt;/code&gt;&lt;/a&gt; method so we can filter the collection:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = function (fn) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; WhereEnumerable(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, fn);
+};
+Enumerable.prototype.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;;
+Enumerable.prototype.filter = &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;//just so it's more JavaScript-y&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Wait, what&amp;#39;s this &lt;code&gt;WhereEnumerable&lt;/code&gt; that we&amp;#39;re creating? Well since we want to chain this up and not have a really complex object that we keep modifying I&amp;#39;ve created another &amp;quot;class&amp;quot; to handle the filtering concept. This is similar to what LINQ does, it has a number of internal types that handle the different iterator concepts. Let&amp;#39;s start implementing it:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; WhereEnumerable = (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(__super)&lt;/span&gt; {&lt;/span&gt;
+    __&lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt;(WhereEnumerable, __&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;);
+
+    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;WhereEnumerable&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(enumerable, fn)&lt;/span&gt; {&lt;/span&gt;
+        __&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.call(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, enumerable._array);
+        &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._enumerable = enumerable;
+        &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._fn = fn;
+    };
+
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; WhereEnumerable;
+})(Enumerable);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;#39;m using one of the fairly common &lt;em&gt;class&lt;/em&gt; patterns in JavaScript and I was lazy and grabbed some auto-generated code from a TypeScript project for doing class inheritance, but basically what I&amp;#39;m doing is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Creating a new constructor function that will invoke the &lt;code&gt;Enumerable&lt;/code&gt; constructor function&lt;/li&gt;
+&lt;li&gt;Capture the &amp;quot;parent&amp;quot; enumerable object&lt;/li&gt;
+&lt;li&gt;Store the filtering function&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we&amp;#39;d better implement the &lt;code&gt;__iterator__&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;WhereEnumerable.prototype.__iterator__ = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._enumerable) {
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._fn(item, index)) {
+            &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; item;
+        }
+        index++;
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;#39;s a pretty simple method to understand we:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use a &lt;code&gt;for-in&lt;/code&gt; loop to step through each value of the &lt;em&gt;parent enumerable&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Apply the function to the value and it&amp;#39;s index&lt;/li&gt;
+&lt;li&gt;If the function returns truthy yield the item, else skip it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Neat now we can do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; enumerable = Enumerable([&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;]);
+&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; odds = enumerable.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;(x =&amp;gt; x % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we have an unevaluated collection filter, and until we &lt;em&gt;step into&lt;/em&gt; the collection it&amp;#39;ll stay that way.&lt;/p&gt;
+&lt;h1&gt;Stepping it up with chaining&lt;/h1&gt;
+&lt;p&gt;The really powerful aspect of LINQ is its chaining capability, that you can apply multiple &amp;quot;query&amp;quot; operations to get a result, like our original example. So now let&amp;#39;s add a &lt;code&gt;Count&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; count = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; count = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;) {
+        count++;
+    }
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; count;
+};
+Enumerable.prototype.count = count;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This means we could do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;console&lt;span class=&quot;variable&quot;&gt;.log&lt;/span&gt;(enumerable&lt;span class=&quot;variable&quot;&gt;.count&lt;/span&gt;()); &lt;span class=&quot;comment&quot;&gt;//4&lt;/span&gt;
+console&lt;span class=&quot;variable&quot;&gt;.log&lt;/span&gt;(odds&lt;span class=&quot;variable&quot;&gt;.count&lt;/span&gt;()); &lt;span class=&quot;comment&quot;&gt;//2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because our &lt;code&gt;WhereEnumerable&lt;/code&gt; type inherits from the &lt;code&gt;Enumerable&lt;/code&gt; class, when we augment that prototype it filters through. Neat! Now we could even do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var notOne = odds&lt;span class=&quot;preprocessor&quot;&gt;.where&lt;/span&gt;(&lt;span class=&quot;built_in&quot;&gt;x&lt;/span&gt; =&amp;gt; &lt;span class=&quot;built_in&quot;&gt;x&lt;/span&gt; &amp;gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(notOne&lt;span class=&quot;preprocessor&quot;&gt;.count&lt;/span&gt;())&lt;span class=&quot;comment&quot;&gt;; //1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And if you were to debug through it keeps doing the &lt;code&gt;__iterator__&lt;/code&gt; method for the &lt;em&gt;parent&lt;/em&gt; &lt;code&gt;Enumerable&lt;/code&gt; object, meaning it&amp;#39;ll ask for &lt;code&gt;1&lt;/code&gt;, pass it to the initial filter, &lt;code&gt;x =&amp;gt; x % 2&lt;/code&gt; and then to &lt;code&gt;x =&amp;gt; x &amp;gt; 1&lt;/code&gt; since it passed the first &lt;code&gt;where&lt;/code&gt; call. The next item through will fail the first &lt;code&gt;where&lt;/code&gt; and won&amp;#39;t be passed to the second. Neat!&lt;/p&gt;
+&lt;h1&gt;Select&lt;/h1&gt;
+&lt;p&gt;Say we want to implement &lt;code&gt;Select&lt;/code&gt; (which is &lt;code&gt;map&lt;/code&gt; in JavaScript land), again I&amp;#39;m creating a new &lt;code&gt;Enumerable&lt;/code&gt; subclass:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; SelectEnumerable = (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(__super)&lt;/span&gt; {&lt;/span&gt;
+    __&lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt;(SelectEnumerable, __&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;);
+
+    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;SelectEnumerable&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(enumerable, fn)&lt;/span&gt; {&lt;/span&gt;
+        __&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.call(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, enumerable._array);
+        &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._enumerable = enumerable;
+        &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._fn = fn;
+    };
+
+    SelectEnumerable.prototype.__iterator__ = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; item &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._enumerable) {
+            yeild &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;._fn(item, index++);
+        }
+    };
+
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; SelectEnumerable;
+})(Enumerable);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&amp;#39;s very similar to the &lt;code&gt;WhereEnumeratable&lt;/code&gt; but we&amp;#39;re returning the result of the provided function. Once added to the &lt;code&gt;Enumerable&lt;/code&gt; prototype it means we can do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; squares = enumerable.&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;(x =&amp;gt; x ^ x);
+&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; oddSquares = enumerable.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;(x =&amp;gt; x % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;).&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;(x =&amp;gt; x ^ x);&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;.All&lt;/h1&gt;
+&lt;p&gt;Not all of the methods we&amp;#39;d want to implement are going to require a new subclass to be made, something like &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/bb548541.aspx&quot;&gt;&lt;code&gt;All&lt;/code&gt;&lt;/a&gt;, which returns whether or not every item in the Enumerable matches the predicate, will evaluate immediately. It&amp;#39;s reasonably simple to implement as well:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; all = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(fn)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;) {
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!fn(x)) {
+            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;
+        }
+    }
+
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;;
+};
+Enumerable.prototype.all = all;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here it&amp;#39;ll go over each item and if any of them fail the function it&amp;#39;ll return false, otherwise it&amp;#39;s true. Because we&amp;#39;re using a &lt;code&gt;for-in&lt;/code&gt; loop against the &lt;code&gt;this&lt;/code&gt;, which is an Enumerable (or subclass of) we step back through all the previous points in the chain.&lt;/p&gt;
+&lt;h1&gt;Bringing it all together&lt;/h1&gt;
+&lt;p&gt;So now that we&amp;#39;ve got a bunch of lazy evaluation available we could do something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;var range = &lt;span class=&quot;transposed_variable&quot;&gt;Enumerable.&lt;/span&gt;range(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;);
+var &lt;span class=&quot;built_in&quot;&gt;primes&lt;/span&gt; = &lt;span class=&quot;transposed_variable&quot;&gt;range.&lt;/span&gt;where(n =&amp;gt; &lt;span class=&quot;transposed_variable&quot;&gt;Enumerable.&lt;/span&gt;range(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;floor&lt;/span&gt;(&lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;sqrt&lt;/span&gt;(n))).all(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; =&amp;gt; n &lt;span class=&quot;comment&quot;&gt;% i &amp;gt; 0));&lt;/span&gt;
+
+&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let prime in &lt;span class=&quot;built_in&quot;&gt;primes&lt;/span&gt;) &lt;span class=&quot;cell&quot;&gt;{
+    console.log(prime);
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;#39;s a simple prime number generate, using some more extensions that will generate a range between two numbers (100 and 1000). Pretty neat hey, it finds all 143 prime numbers.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;And there we have it, a look at how we can use iterators to create a lazy-evaluated collection API which brings the power of .NET&amp;#39;s LINQ to JavaScript. You&amp;#39;ll find my &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript/&quot;&gt;LINQ in JavaScript repository here&lt;/a&gt; and it includes a &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript/tree/master/tests&quot;&gt;bunch of tests&lt;/a&gt; for the different parts of the API.&lt;/p&gt;
+&lt;p&gt;Like I said this is built against a draft implementation of a spec and is in part another experiment but I think it&amp;#39;s a cool example of what&amp;#39;s coming in the future of JavaScript.&lt;/p&gt;
+</content>
+            
+            <category>javascript</category>
+            
+            <category>linq</category>
+            
+            <category>es6</category>
+            
+        </entry>
     
         <entry>
             <title>AJAX without jQuery</title>
@@ -613,6 +826,33 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
         </entry>
     
         <entry>
+            <title>New blog, less FunnelWeb</title>
+            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
+            <updated>2013-06-10T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
+            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
+&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
+&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
+&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
+&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
+&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
+&lt;h1&gt;The future of FunnelWeb&lt;/h1&gt;
+&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
+</content>
+            
+            <category>funnelweb</category>
+            
+            <category>docpad</category>
+            
+        </entry>
+    
+        <entry>
             <title>From FunnelWeb to Git in a few simple steps</title>
             <link href="http://www.aaron-powell.com/posts/2013-06-11-funnelweb-to-git.html"/>
             <updated>2013-06-10T00:00:00.000Z</updated>
@@ -748,33 +988,6 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
             <category>scriptcs</category>
             
             <category>git</category>
-            
-        </entry>
-    
-        <entry>
-            <title>New blog, less FunnelWeb</title>
-            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
-            <updated>2013-06-10T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
-            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
-&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
-&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
-&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
-&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
-&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
-&lt;h1&gt;The future of FunnelWeb&lt;/h1&gt;
-&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
-</content>
-            
-            <category>funnelweb</category>
-            
-            <category>docpad</category>
             
         </entry>
     
@@ -1034,129 +1247,6 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - local and session storage</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html</id>
-            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
-&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
-&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
-&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
-&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
-&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
-&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
-&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
-&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
-var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
-localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
-};
-
-Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
-&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
-&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
-</content>
-            
-            <category>flight-mode</category>
-            
-            <category>offline-storage</category>
-            
-            <category>localStorage</category>
-            
-            <category>sessionStorage</category>
-            
-        </entry>
-    
-        <entry>
-            <title>Flight Mode - Cookies</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-cookies.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-cookies.html</id>
-            <content type="html">&lt;p&gt;In the beginning there was a simple way to store data offline in an application, or more accurately, across sessions, and that is the HTTP Cookie.&lt;/p&gt;
-&lt;p&gt;Cookies are used for everything, they can &lt;a href=&quot;http://www.nczonline.net/blog/2009/05/12/cookies-and-security/&quot;&gt;track you for spammers&lt;/a&gt;, &lt;a href=&quot;http://www.troyhunt.com/2013/03/c-is-for-cookie-h-is-for-hacker.html&quot;&gt;expose your secure connections for hackers&lt;/a&gt; and they can be used for legitimate purposes which I&amp;#39;m going to look at here.&lt;/p&gt;
-&lt;p&gt;The Cookie is the oldest form of offline storage available on the web, first emerging &lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_cookie&quot;&gt;in the mid 90&amp;#39;s with Netscape&lt;/a&gt;. All browsers support them so it&amp;#39;s your most easily accessible cross-browser storage solution.&lt;/p&gt;
-&lt;h2&gt;Benefits of Cookies for storage&lt;/h2&gt;
-&lt;p&gt;There are a few aspects to cookies that make them appealing for storing offline data so let&amp;#39;s have a look at a few of them.&lt;/p&gt;
-&lt;p&gt;Since cookies are part of the HTTP Header they are included in every request that you make which can be useful if you want to sync the data that&amp;#39;s been created while the application is offline back to the server when the user reconnects. There&amp;#39;s no special AJAX request you&amp;#39;d need to create to handle the sync, any request would do, it&amp;#39;s just up to your server to handle said cookies. This has an obvious downside though, the more you store in cookies the bigger your request/response payload is going to be, so keep that in mind if you want to use cookies for storing data, particularly when limited data connections are applicable, such as on mobile devices).&lt;/p&gt;
-&lt;p&gt;Expiry is another benefit that cookies bring to the table. If you&amp;#39;re storing data offline you may be wanting to get rid of it after a certain time period to prevent it from becoming stale. Cookies have an expiry date built into them when they are created, meaning that when you first set up your stored data you can determine just how long you want it to hang around. Admitted it won&amp;#39;t &amp;quot;magically&amp;quot; disappear if the user is offline at the time, but it will expire through new requests that are done.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of Cookies for storage&lt;/h2&gt;
-&lt;p&gt;Unsurprisingly there are some drawbacks to using cookies, some pretty major ones to be exact too, the first main drawback is that cookies are simply not designed to be used this way. While it might sound great to be able to have your offline data sent to the server without you needing to do anything it really starts to come apart when you want to store much data. Cookies can only handle &lt;info in cookie size&gt; which means that they&amp;#39;re best used for little flags, maybe tracking a simple preference like which theme to use.&lt;/p&gt;
-&lt;p&gt;Another major drawback is that cookies have the laxest cross-origin restrictions of all the offline storage options we&amp;#39;ll be looking at. As I mentioned earlier cookies were a common tool in the spammers toolbox and that was because you could very easy get data out of them without owning the domain, sure you still had to get &lt;strong&gt;your&lt;/strong&gt; code into the page but if your serving ads then you&amp;#39;re part of the way there already.&lt;/p&gt;
-&lt;p&gt;Finally the API for cookies really does leave a lot to be desired. Don&amp;#39;t get me wrong there&amp;#39;s a myriad of wrapper APIs for the &lt;code&gt;document.cookies&lt;/code&gt; object that&amp;#39;ll help you add/remove cookies but it doesn&amp;#39;t solve the fundamental problem, &lt;strong&gt;cookies are only strings&lt;/strong&gt;, meaning if you want to store an object of some description it&amp;#39;s serializing to JSON for you. This really starts to fall over when you want to be able to &lt;em&gt;query&lt;/em&gt; the data. If you&amp;#39;ve got lots of objects you&amp;#39;ll have to get them all back out and do in-memory querying of the data.&lt;/p&gt;
-&lt;h2&gt;Implementing Cookie storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of cookies.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating a new adapter which internally uses &lt;a href=&quot;http://www.quirksmode.org/js/cookies.html&quot;&gt;PPK&amp;#39;s cookie API&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;First things first, how are we storing our data across &lt;strong&gt;two&lt;/strong&gt; types cookies, one is going to be a cookie to track the IDs of the items in the store and the other will be storing the individual items. The reasons for this is we want to &lt;a href=&quot;http://manicode.blogspot.it/2009/08/real-world-cookie-length-limits.html&quot;&gt;avoid exceeding the limits&lt;/a&gt; of what we can store in each cookie and additionally we want to be easily able to look up values based on a key.&lt;/p&gt;
-&lt;p&gt;When we create a new store we&amp;#39;ll check if there&amp;#39;s a &lt;em&gt;tracker&lt;/em&gt; cookie, if not we&amp;#39;ll create one:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var CookieAdapter = function (storeName) {
-    this&lt;span class=&quot;preprocessor&quot;&gt;.storeName&lt;/span&gt; = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    var cookie = readCookie(storeName)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    if (!cookie) {
-        cookie = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-        createCookie(storeName, JSON&lt;span class=&quot;preprocessor&quot;&gt;.stringify&lt;/span&gt;(cookie))&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    } else {
-        cookie = JSON&lt;span class=&quot;preprocessor&quot;&gt;.parse&lt;/span&gt;(cookie)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }
-
-    this&lt;span class=&quot;preprocessor&quot;&gt;.cookie&lt;/span&gt; = cookie&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-}&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now before we create an &lt;code&gt;add&lt;/code&gt; method we&amp;#39;ll need to be able to create IDs, we could do this a couple of ways, we could use the &lt;code&gt;length&lt;/code&gt; of our tracking cookie or instead I&amp;#39;m going to use a GUID, here&amp;#39;s a simple function to generate one:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxx'&lt;/span&gt;.replace(&lt;span class=&quot;regexp&quot;&gt;/[xy]/g&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(c)&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; r = Math.random() * &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; v = c == &lt;span class=&quot;string&quot;&gt;'x'&lt;/span&gt; ? r : (r &amp;amp; &lt;span class=&quot;number&quot;&gt;0x3&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0x8&lt;/span&gt;);
-        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; v.toString(&lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);
-    });
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ultimately all we will be storing is JSON representations of the objects that we push into our store, here&amp;#39;s how an &lt;code&gt;add&lt;/code&gt; method would come together:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;CookieAdapter&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.add&lt;/span&gt; = function(obj) {
-    var &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = guid();
-    createCookie(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(obj));
-    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.push&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;);
-    createCookie(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storeName&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;));
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;;
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First off we&amp;#39;ll generate a new GUID, then insert the record as a new cookie using that ID as the cookie name. Finally we&amp;#39;ll update tracker with the new value.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/cookie.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;In this part we&amp;#39;ve taken a look at the idea of using cookies as a storage model for when our application is offline. We&amp;#39;ve seen that they have the advantage of automatically being sent to our server as they are part of the HTTP header.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ve also seen that there&amp;#39;s some really big warning signs that say using cookies for more than just really simple state is a bad idea, they are all just stored as strings meaning that any manipulation has to be done in memory after deserializing all the data.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of cookies for storage in the wild you can check out &lt;a href=&quot;http://qantas.com.au&quot;&gt;Qantas&lt;/a&gt;, they use cookies to store information like your recent search options. There&amp;#39;s a &lt;code&gt;usercontext&lt;/code&gt; cookie that contains the information about where you are that could be wanting to start a flight from.&lt;/p&gt;
-&lt;p&gt;All in all cookies are not really a good option when it comes to store data for our offline application.&lt;/p&gt;
-</content>
-            
-            <category>offline-storage</category>
-            
-            <category>flight-mode</category>
-            
-            <category>cookies</category>
-            
-        </entry>
-    
-        <entry>
             <title>Flight Mode - Introduction</title>
             <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
@@ -1229,6 +1319,129 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
         </entry>
     
         <entry>
+            <title>Flight Mode - Cookies</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-cookies.html"/>
+            <updated>2013-05-23T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-05-23-cookies.html</id>
+            <content type="html">&lt;p&gt;In the beginning there was a simple way to store data offline in an application, or more accurately, across sessions, and that is the HTTP Cookie.&lt;/p&gt;
+&lt;p&gt;Cookies are used for everything, they can &lt;a href=&quot;http://www.nczonline.net/blog/2009/05/12/cookies-and-security/&quot;&gt;track you for spammers&lt;/a&gt;, &lt;a href=&quot;http://www.troyhunt.com/2013/03/c-is-for-cookie-h-is-for-hacker.html&quot;&gt;expose your secure connections for hackers&lt;/a&gt; and they can be used for legitimate purposes which I&amp;#39;m going to look at here.&lt;/p&gt;
+&lt;p&gt;The Cookie is the oldest form of offline storage available on the web, first emerging &lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_cookie&quot;&gt;in the mid 90&amp;#39;s with Netscape&lt;/a&gt;. All browsers support them so it&amp;#39;s your most easily accessible cross-browser storage solution.&lt;/p&gt;
+&lt;h2&gt;Benefits of Cookies for storage&lt;/h2&gt;
+&lt;p&gt;There are a few aspects to cookies that make them appealing for storing offline data so let&amp;#39;s have a look at a few of them.&lt;/p&gt;
+&lt;p&gt;Since cookies are part of the HTTP Header they are included in every request that you make which can be useful if you want to sync the data that&amp;#39;s been created while the application is offline back to the server when the user reconnects. There&amp;#39;s no special AJAX request you&amp;#39;d need to create to handle the sync, any request would do, it&amp;#39;s just up to your server to handle said cookies. This has an obvious downside though, the more you store in cookies the bigger your request/response payload is going to be, so keep that in mind if you want to use cookies for storing data, particularly when limited data connections are applicable, such as on mobile devices).&lt;/p&gt;
+&lt;p&gt;Expiry is another benefit that cookies bring to the table. If you&amp;#39;re storing data offline you may be wanting to get rid of it after a certain time period to prevent it from becoming stale. Cookies have an expiry date built into them when they are created, meaning that when you first set up your stored data you can determine just how long you want it to hang around. Admitted it won&amp;#39;t &amp;quot;magically&amp;quot; disappear if the user is offline at the time, but it will expire through new requests that are done.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of Cookies for storage&lt;/h2&gt;
+&lt;p&gt;Unsurprisingly there are some drawbacks to using cookies, some pretty major ones to be exact too, the first main drawback is that cookies are simply not designed to be used this way. While it might sound great to be able to have your offline data sent to the server without you needing to do anything it really starts to come apart when you want to store much data. Cookies can only handle &lt;info in cookie size&gt; which means that they&amp;#39;re best used for little flags, maybe tracking a simple preference like which theme to use.&lt;/p&gt;
+&lt;p&gt;Another major drawback is that cookies have the laxest cross-origin restrictions of all the offline storage options we&amp;#39;ll be looking at. As I mentioned earlier cookies were a common tool in the spammers toolbox and that was because you could very easy get data out of them without owning the domain, sure you still had to get &lt;strong&gt;your&lt;/strong&gt; code into the page but if your serving ads then you&amp;#39;re part of the way there already.&lt;/p&gt;
+&lt;p&gt;Finally the API for cookies really does leave a lot to be desired. Don&amp;#39;t get me wrong there&amp;#39;s a myriad of wrapper APIs for the &lt;code&gt;document.cookies&lt;/code&gt; object that&amp;#39;ll help you add/remove cookies but it doesn&amp;#39;t solve the fundamental problem, &lt;strong&gt;cookies are only strings&lt;/strong&gt;, meaning if you want to store an object of some description it&amp;#39;s serializing to JSON for you. This really starts to fall over when you want to be able to &lt;em&gt;query&lt;/em&gt; the data. If you&amp;#39;ve got lots of objects you&amp;#39;ll have to get them all back out and do in-memory querying of the data.&lt;/p&gt;
+&lt;h2&gt;Implementing Cookie storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of cookies.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating a new adapter which internally uses &lt;a href=&quot;http://www.quirksmode.org/js/cookies.html&quot;&gt;PPK&amp;#39;s cookie API&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First things first, how are we storing our data across &lt;strong&gt;two&lt;/strong&gt; types cookies, one is going to be a cookie to track the IDs of the items in the store and the other will be storing the individual items. The reasons for this is we want to &lt;a href=&quot;http://manicode.blogspot.it/2009/08/real-world-cookie-length-limits.html&quot;&gt;avoid exceeding the limits&lt;/a&gt; of what we can store in each cookie and additionally we want to be easily able to look up values based on a key.&lt;/p&gt;
+&lt;p&gt;When we create a new store we&amp;#39;ll check if there&amp;#39;s a &lt;em&gt;tracker&lt;/em&gt; cookie, if not we&amp;#39;ll create one:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var CookieAdapter = function (storeName) {
+    this&lt;span class=&quot;preprocessor&quot;&gt;.storeName&lt;/span&gt; = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var cookie = readCookie(storeName)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    if (!cookie) {
+        cookie = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        createCookie(storeName, JSON&lt;span class=&quot;preprocessor&quot;&gt;.stringify&lt;/span&gt;(cookie))&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    } else {
+        cookie = JSON&lt;span class=&quot;preprocessor&quot;&gt;.parse&lt;/span&gt;(cookie)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }
+
+    this&lt;span class=&quot;preprocessor&quot;&gt;.cookie&lt;/span&gt; = cookie&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+}&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now before we create an &lt;code&gt;add&lt;/code&gt; method we&amp;#39;ll need to be able to create IDs, we could do this a couple of ways, we could use the &lt;code&gt;length&lt;/code&gt; of our tracking cookie or instead I&amp;#39;m going to use a GUID, here&amp;#39;s a simple function to generate one:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxx'&lt;/span&gt;.replace(&lt;span class=&quot;regexp&quot;&gt;/[xy]/g&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(c)&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; r = Math.random() * &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; v = c == &lt;span class=&quot;string&quot;&gt;'x'&lt;/span&gt; ? r : (r &amp;amp; &lt;span class=&quot;number&quot;&gt;0x3&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0x8&lt;/span&gt;);
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; v.toString(&lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);
+    });
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ultimately all we will be storing is JSON representations of the objects that we push into our store, here&amp;#39;s how an &lt;code&gt;add&lt;/code&gt; method would come together:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;CookieAdapter&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.add&lt;/span&gt; = function(obj) {
+    var &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = guid();
+    createCookie(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(obj));
+    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.push&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;);
+    createCookie(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storeName&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;));
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First off we&amp;#39;ll generate a new GUID, then insert the record as a new cookie using that ID as the cookie name. Finally we&amp;#39;ll update tracker with the new value.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/cookie.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;In this part we&amp;#39;ve taken a look at the idea of using cookies as a storage model for when our application is offline. We&amp;#39;ve seen that they have the advantage of automatically being sent to our server as they are part of the HTTP header.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ve also seen that there&amp;#39;s some really big warning signs that say using cookies for more than just really simple state is a bad idea, they are all just stored as strings meaning that any manipulation has to be done in memory after deserializing all the data.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of cookies for storage in the wild you can check out &lt;a href=&quot;http://qantas.com.au&quot;&gt;Qantas&lt;/a&gt;, they use cookies to store information like your recent search options. There&amp;#39;s a &lt;code&gt;usercontext&lt;/code&gt; cookie that contains the information about where you are that could be wanting to start a flight from.&lt;/p&gt;
+&lt;p&gt;All in all cookies are not really a good option when it comes to store data for our offline application.&lt;/p&gt;
+</content>
+            
+            <category>offline-storage</category>
+            
+            <category>flight-mode</category>
+            
+            <category>cookies</category>
+            
+        </entry>
+    
+        <entry>
+            <title>Flight Mode - local and session storage</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html"/>
+            <updated>2013-05-23T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html</id>
+            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
+&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
+&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
+&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
+&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
+&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
+&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
+&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
+&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
+var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
+localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
+};
+
+Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
+&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
+&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
+</content>
+            
+            <category>flight-mode</category>
+            
+            <category>offline-storage</category>
+            
+            <category>localStorage</category>
+            
+            <category>sessionStorage</category>
+            
+        </entry>
+    
+        <entry>
             <title>Firefox, jQuery and the case of the Document response</title>
             <link href="http://www.aaron-powell.com/posts/2013-05-07-firefox-jquery-missing-datatype.html"/>
             <updated>2013-05-07T00:00:00.000Z</updated>
@@ -1284,21 +1497,6 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
             <category>internet-explorer</category>
             
             <category>web</category>
-            
-        </entry>
-    
-        <entry>
-            <title>IndexedDB at Web Directions Code 13</title>
-            <link href="http://www.aaron-powell.com/posts/2013-04-10-wdc13.html"/>
-            <updated>2013-04-10T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-04-10-wdc13.html</id>
-            <content type="html">&lt;p&gt;I&amp;#39;m going to be speaking at the upcoming &lt;a href=&quot;http://code13.webdirections.org/#AaronPowell&quot;&gt;Web Directions Code&lt;/a&gt; in Melbourne (2nd &amp;amp; 3rd May) on the topic of IndexedDB. I&amp;#39;m pretty stoked to be invited to speak as there&amp;#39;s a lot of heavy weights of the web development community that are going to be around and I&amp;#39;ll finally have a chance to crack out my IndexedDB talk to a larger audience.&lt;/p&gt;
-&lt;p&gt;So do yourself a favor, grab a ticket and come on down!&lt;/p&gt;
-</content>
-            
-            <category>speaking</category>
-            
-            <category>indexeddb</category>
             
         </entry>
     

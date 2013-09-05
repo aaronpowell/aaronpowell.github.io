@@ -43,15 +43,15 @@
 			]
 		},
 		{
-			"url": "/posts/2010-04-07-building-linq-to-umbraco.html",
-			"redirects": [
-				"/building-linq-to-umbraco"
-			]
-		},
-		{
 			"url": "/posts/2010-04-06-random.html",
 			"redirects": [
 				"/random"
+			]
+		},
+		{
+			"url": "/posts/2010-04-07-building-linq-to-umbraco.html",
+			"redirects": [
+				"/building-linq-to-umbraco"
 			]
 		},
 		{
