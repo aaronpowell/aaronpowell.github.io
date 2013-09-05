@@ -7,11 +7,11 @@
     "npm": "1.2"
   },
   "dependencies": {
-    "docpad": "~6.47.0",
-    "docpad-plugin-text": "~2.2.4",
+    "docpad": "~6.51.6",
+    "docpad-plugin-text": "~2.3.0",
     "docpad-plugin-marked": "~2.1.1",
     "docpad-plugin-eco": "~2.0.2",
-    "docpad-plugin-partials": "~2.7.2",
+    "docpad-plugin-partials": "~2.8.0",
     "marked": "~0.2.9",
     "moment": "~2.0.0",
     "docpad-plugin-paged": "~2.2.2",
