@@ -26,7 +26,7 @@ This would result in something like this:
         //removed for simplicity
     }).slice(0, 5);
 
-So this has to be eger evaluated, if we've got 500 records in our `people` collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the `map`'s before we take the 5 that we want to show on the current page. Now admittedly we can move the `.slice(0, 5)` to before the `map` and then we'd `map` the subset but you still go into the `slice` having put the whole collection through the `filter`.
+So this has to be eager evaluated, if we've got 500 records in our `people` collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the `map`'s before we take the 5 that we want to show on the current page. Now admittedly we can move the `.slice(0, 5)` to before the `map` and then we'd `map` the subset but you still go into the `slice` having put the whole collection through the `filter`.
 
 And this is where I like LINQ, it's lazy evaluated, if we did the same thing:
 

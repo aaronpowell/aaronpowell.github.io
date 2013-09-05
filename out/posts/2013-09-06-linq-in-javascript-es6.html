@@ -172,7 +172,7 @@
 }).map(<span class="function"><span class="keyword">function</span> <span class="params">(person)</span> {</span>
     <span class="comment">//removed for simplicity</span>
 }).slice(<span class="number">0</span>, <span class="number">5</span>);</code></pre>
-<p>So this has to be eger evaluated, if we&#39;ve got 500 records in our <code>people</code> collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the <code>map</code>&#39;s before we take the 5 that we want to show on the current page. Now admittedly we can move the <code>.slice(0, 5)</code> to before the <code>map</code> and then we&#39;d <code>map</code> the subset but you still go into the <code>slice</code> having put the whole collection through the <code>filter</code>.</p>
+<p>So this has to be eager evaluated, if we&#39;ve got 500 records in our <code>people</code> collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the <code>map</code>&#39;s before we take the 5 that we want to show on the current page. Now admittedly we can move the <code>.slice(0, 5)</code> to before the <code>map</code> and then we&#39;d <code>map</code> the subset but you still go into the <code>slice</code> having put the whole collection through the <code>filter</code>.</p>
 <p>And this is where I like LINQ, it&#39;s lazy evaluated, if we did the same thing:</p>
 <pre class="highlighted"><code class="avrasm">var rows = people
                 <span class="preprocessor">.Where</span>(person =&gt; person<span class="preprocessor">.Age</span> &gt; <span class="number">30</span>)
