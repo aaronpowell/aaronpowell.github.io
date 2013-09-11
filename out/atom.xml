@@ -4,13 +4,46 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-09-05T22:53:12.843Z</updated>
+    <updated>2013-09-11T20:39:37.185Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>Using bluesky in Azure Mobile Services</title>
+            <link href="http://www.aaron-powell.com/posts/2013-09-11-using-bluesky-in-azure-mobile-services.html"/>
+            <updated>2013-09-11T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-09-11-using-bluesky-in-azure-mobile-services.html</id>
+            <content type="html">&lt;p&gt;I&amp;#39;ve been doing some work with &lt;a href=&quot;http://www.windowsazure.com/en-us/solutions/mobile/&quot;&gt;Azure Mobile Services&lt;/a&gt; where I&amp;#39;m storing data in tables and blobs. For a task I need to have a custom API which will remove some data from a table and then the blobs associated with it.&lt;/p&gt;
+&lt;p&gt;For this I&amp;#39;m creating a new &lt;a href=&quot;http://www.windowsazure.com/en-us/develop/mobile/tutorials/call-custom-api-dotnet/#define-custom-api&quot;&gt;custom API&lt;/a&gt; and because it&amp;#39;s just a Node.js app I&amp;#39;d be using the &lt;a href=&quot;https://github.com/WindowsAzure/azure-sdk-for-node&quot;&gt;Node SDK&lt;/a&gt;. When I was getting started I got pointed towards &lt;a href=&quot;https://github.com/pofallon/node-bluesky&quot;&gt;bluesky&lt;/a&gt; which is a nice little wrapper around the Azure SDK to make it a bit easier to work with.&lt;/p&gt;
+&lt;p&gt;So I &lt;code&gt;npm install&lt;/code&gt;&amp;#39;ed it into the git repo for my mobile service, used the API and pushed it up to Azure.&lt;/p&gt;
+&lt;p&gt;And then...&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vbscript&quot;&gt;remote: One &lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; more errors occurred.
+remote: &lt;span class=&quot;keyword&quot;&gt;Error&lt;/span&gt; - Changes committed &lt;span class=&quot;keyword&quot;&gt;to&lt;/span&gt; remote repository but deployment &lt;span class=&quot;keyword&quot;&gt;to&lt;/span&gt; website failed, please check &lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; further details.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Well I spun up the CLI and check my logs but &lt;em&gt;nothing&lt;/em&gt;, there wasn&amp;#39;t anything in there that indicated the problem. In fact my server was still running but it wasn&amp;#39;t running the scripts that I&amp;#39;d just pushed. This is annoying, I&amp;#39;ve got no logs, a failing server and no indication as to why. Deleting the module and pushing the server started up again, but then obviously then I can&amp;#39;t use the module.&lt;/p&gt;
+&lt;p&gt;I put the question to my friend &lt;a href=&quot;http://twitter.com/gblock&quot;&gt;Glenn Block&lt;/a&gt; as he pointed me to the library to see if he knew what the problem might be, or at least how to find the logs. He suggested that the problem might be due to the path length, Windows has limitations on the length of the file paths, and when you start looking at the dependency graph for the module it gets crazy, in particular because it takes a dependency on the Azure SDK (which in turn has its own dependency chain each with dependencies, and so on).&lt;/p&gt;
+&lt;p&gt;After some investigation it turned out that if you don&amp;#39;t include the Azure SDK dependency then it deploys fine, bluesky doesn&amp;#39;t work, but at least the deployment works... Baby steps ;).&lt;/p&gt;
+&lt;p&gt;So how do we work around that? It struck me that when you&amp;#39;ve got these scripts deployed to your AMS instance the Azure SDK is already available, you don&amp;#39;t need to include it in your repository, you just do:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;php&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; azure = &lt;span class=&quot;keyword&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'azure'&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And you have the SDK at your finger tips.&lt;/p&gt;
+&lt;p&gt;Now, conveniently bluesky takes this into account already! Rather than passing your credentials in like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;brainfuck&quot;&gt;&lt;span class=&quot;comment&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;require('bluesky')&lt;/span&gt;.&lt;span class=&quot;comment&quot;&gt;storage({&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;account:&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;'&lt;/span&gt;.&lt;span class=&quot;string&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;'&lt;/span&gt;, &lt;span class=&quot;comment&quot;&gt;key:&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;'&lt;/span&gt;.&lt;span class=&quot;string&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can provide it with Azure services:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;php&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; azure = &lt;span class=&quot;keyword&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'azure'&lt;/span&gt;);
+&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; storage = &lt;span class=&quot;keyword&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'bluesky'&lt;/span&gt;).storage({
+    blobService: azure.createBlobService(&lt;span class=&quot;string&quot;&gt;'account'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'key'&lt;/span&gt;).withFilter(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; azure.LinearRetryPolicyFilter()),
+    tableService: azure.createTableService(&lt;span class=&quot;string&quot;&gt;'account'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'key'&lt;/span&gt;).withFilter(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; azure.LinearRetryPolicyFilter()),
+    queueService = azure.createQueueService(&lt;span class=&quot;string&quot;&gt;'account'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'key'&lt;/span&gt;).withFilter(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; azure.LinearRetryPolicyFilter())
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And there we have it, we can use the Azure SDK that&amp;#39;s already on the server and avoid the path depth problem.&lt;/p&gt;
+</content>
+            
+            <category>azure-mobile-services</category>
+            
+        </entry>
     
         <entry>
             <title>LINQ in JavaScript, ES6 style</title>
@@ -31,7 +64,7 @@
 }).map(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(person)&lt;/span&gt; {&lt;/span&gt;
     &lt;span class=&quot;comment&quot;&gt;//removed for simplicity&lt;/span&gt;
 }).slice(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So this has to be eger evaluated, if we&amp;#39;ve got 500 records in our &lt;code&gt;people&lt;/code&gt; collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the &lt;code&gt;map&lt;/code&gt;&amp;#39;s before we take the 5 that we want to show on the current page. Now admittedly we can move the &lt;code&gt;.slice(0, 5)&lt;/code&gt; to before the &lt;code&gt;map&lt;/code&gt; and then we&amp;#39;d &lt;code&gt;map&lt;/code&gt; the subset but you still go into the &lt;code&gt;slice&lt;/code&gt; having put the whole collection through the &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So this has to be eager evaluated, if we&amp;#39;ve got 500 records in our &lt;code&gt;people&lt;/code&gt; collection and 250 of them are going to match the filter we still have to process all 500 in the filter, then 250 in the &lt;code&gt;map&lt;/code&gt;&amp;#39;s before we take the 5 that we want to show on the current page. Now admittedly we can move the &lt;code&gt;.slice(0, 5)&lt;/code&gt; to before the &lt;code&gt;map&lt;/code&gt; and then we&amp;#39;d &lt;code&gt;map&lt;/code&gt; the subset but you still go into the &lt;code&gt;slice&lt;/code&gt; having put the whole collection through the &lt;code&gt;filter&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;And this is where I like LINQ, it&amp;#39;s lazy evaluated, if we did the same thing:&lt;/p&gt;
 &lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var rows = people
                 &lt;span class=&quot;preprocessor&quot;&gt;.Where&lt;/span&gt;(person =&amp;gt; person&lt;span class=&quot;preprocessor&quot;&gt;.Age&lt;/span&gt; &amp;gt; &lt;span class=&quot;number&quot;&gt;30&lt;/span&gt;)
@@ -1247,78 +1280,6 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - Introduction</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-introduction.html</id>
-            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
-&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
-&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
-        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
-            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-        }
-
-        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
-</content>
-            
-            <category>offline-storage</category>
-            
-            <category>flight-mode</category>
-            
-        </entry>
-    
-        <entry>
             <title>Flight Mode - Cookies</title>
             <link href="http://www.aaron-powell.com/posts/2013-05-23-cookies.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
@@ -1442,6 +1403,78 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
         </entry>
     
         <entry>
+            <title>Flight Mode - Introduction</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
+            <updated>2013-05-23T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-05-23-introduction.html</id>
+            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
+&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
+&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
+        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
+            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        }
+
+        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
+        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
+</content>
+            
+            <category>offline-storage</category>
+            
+            <category>flight-mode</category>
+            
+        </entry>
+    
+        <entry>
             <title>Firefox, jQuery and the case of the Document response</title>
             <link href="http://www.aaron-powell.com/posts/2013-05-07-firefox-jquery-missing-datatype.html"/>
             <updated>2013-05-07T00:00:00.000Z</updated>
@@ -1474,29 +1507,6 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
 </content>
             
             <category>jquery</category>
-            
-        </entry>
-    
-        <entry>
-            <title>Internet Explorer userAgents</title>
-            <link href="http://www.aaron-powell.com/posts/2013-04-19-ie-useragents.html"/>
-            <updated>2013-04-19T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-04-19-ie-useragents.html</id>
-            <content type="html">&lt;p&gt;A few months ago I was asked if I wanted to join a new program that the Internet Explorer team was starting up called &lt;a href=&quot;http://useragents.ie&quot;&gt;IE userAgents&lt;/a&gt;. No isn&amp;#39;t related to the the Internet Explorer userAgent &lt;em&gt;string&lt;/em&gt;, or the fact that in the &lt;a href=&quot;http://www.neowin.net/news/ie11-to-appear-as-firefox-to-avoid-legacy-ie-css&quot;&gt;leaked IE11 builds it has had a makeover&lt;/a&gt;, instead it&amp;#39;s about evangelism of the web platform and shifting peoples perceptions of &lt;a href=&quot;http://browseryoulovedtohate.com/&quot;&gt;IE as a modern browser&lt;/a&gt;. It&amp;#39;s also worth noting that Internet Explorer isn&amp;#39;t the only browser that has a program like this, &lt;a href=&quot;https://reps.mozilla.org/&quot;&gt;Mozilla does too&lt;/a&gt; and I&amp;#39;d expect the other browsers do to.&lt;/p&gt;
-&lt;p&gt;So what do we do? Well ultimately it doesn&amp;#39;t really change anything in my day-to-day live as a web developer, I use IE to varying degrees most days, and since getting a &lt;a href=&quot;http://www.aaron-powell.com/random/a-week-with-a-surface-pro&quot;&gt;Surface Pro&lt;/a&gt; I pretty much exclusively use it. What we (we being the userAgents) tend to do is keep an eye on keywords across the various social media touch points like Twitter. If someone&amp;#39;s complaining about a site not working in IE then we will look to reach out to them and help them resolve their problem. A similar thing goes with StackOverflow, you&amp;#39;ll find a number of the userAgents hanging around on there answering the communities questions. More often than not the problems people have with Internet Explorer often come down to misconceptions about how to approach web development, things like &lt;a href=&quot;http://css-tricks.com/browser-detection-is-bad/&quot;&gt;using userAgent sniffing instead of feature detection&lt;/a&gt; or &lt;a href=&quot;https://twitter.com/jonathansampson/status/323606419611992065&quot;&gt;not realizing the browsers capabilities&lt;/a&gt;. These issues can present in all browsers, not just Internet Explorer, and educating people on developing for modern browsers (in particular avoiding userAgent sniffing) will ultimately benefit everyone.&lt;/p&gt;
-&lt;p&gt;There is another side though, and that&amp;#39;s addressing specific Internet Explorer problems. Fellow userAgent &lt;a href=&quot;https://twitter.com/jonathansampson/&quot;&gt;Johnathan Sampson&lt;/a&gt; has been documenting IE10 specific problems as well as work around for those with the aim to be able to produce a guide on things to watch out for and how best to work around them.&lt;/p&gt;
-&lt;p&gt;Over the coming months you&amp;#39;ll probably see us out and about in the community, helping to ensure that web developers are as well informed as they can be when producing applications for the modern web. If you want to get in touch with us you can:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://twitter.com/IEDevChat/ie-useragents&quot;&gt;Find us on the twitter list&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://twitter.com/IEDevChat&quot;&gt;Ping the @IEDevChat twitter account&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Use the #IEuserAgents hash tag&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;One final note, please stop sniffing userAgents, I promise that I had a shower this morning ;).&lt;/p&gt;
-</content>
-            
-            <category>internet-explorer</category>
-            
-            <category>web</category>
             
         </entry>
     

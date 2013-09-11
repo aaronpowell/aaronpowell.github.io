@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Using bluesky in Azure Mobile Services - LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Using bluesky in Azure Mobile Services</h1>
+                <h2>11th September 2013</h2>
+                <ul class="tags">
+    
+        
+            <li><a class="icon icon-tag" href="/tagged/azure-mobile-services.html"><span>azure-mobile-services</span></a></li>
+        
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>I&#39;ve been doing some work with <a href="http://www.windowsazure.com/en-us/solutions/mobile/">Azure Mobile Services</a> where I&#39;m storing data in tables and blobs. For a task I need to have a custom API which will remove some data from a table and then the blobs associated with it.</p>
+<p>For this I&#39;m creating a new <a href="http://www.windowsazure.com/en-us/develop/mobile/tutorials/call-custom-api-dotnet/#define-custom-api">custom API</a> and because it&#39;s just a Node.js app I&#39;d be using the <a href="https://github.com/WindowsAzure/azure-sdk-for-node">Node SDK</a>. When I was getting started I got pointed towards <a href="https://github.com/pofallon/node-bluesky">bluesky</a> which is a nice little wrapper around the Azure SDK to make it a bit easier to work with.</p>
+<p>So I <code>npm install</code>&#39;ed it into the git repo for my mobile service, used the API and pushed it up to Azure.</p>
+<p>And then...</p>
+<pre class="highlighted"><code class="vbscript">remote: One <span class="keyword">or</span> more errors occurred.
+remote: <span class="keyword">Error</span> - Changes committed <span class="keyword">to</span> remote repository but deployment <span class="keyword">to</span> website failed, please check <span class="built_in">log</span> <span class="keyword">for</span> further details.</code></pre>
+<p>Well I spun up the CLI and check my logs but <em>nothing</em>, there wasn&#39;t anything in there that indicated the problem. In fact my server was still running but it wasn&#39;t running the scripts that I&#39;d just pushed. This is annoying, I&#39;ve got no logs, a failing server and no indication as to why. Deleting the module and pushing the server started up again, but then obviously then I can&#39;t use the module.</p>
+<p>I put the question to my friend <a href="http://twitter.com/gblock">Glenn Block</a> as he pointed me to the library to see if he knew what the problem might be, or at least how to find the logs. He suggested that the problem might be due to the path length, Windows has limitations on the length of the file paths, and when you start looking at the dependency graph for the module it gets crazy, in particular because it takes a dependency on the Azure SDK (which in turn has its own dependency chain each with dependencies, and so on).</p>
+<p>After some investigation it turned out that if you don&#39;t include the Azure SDK dependency then it deploys fine, bluesky doesn&#39;t work, but at least the deployment works... Baby steps ;).</p>
+<p>So how do we work around that? It struck me that when you&#39;ve got these scripts deployed to your AMS instance the Azure SDK is already available, you don&#39;t need to include it in your repository, you just do:</p>
+<pre class="highlighted"><code class="php"><span class="keyword">var</span> azure = <span class="keyword">require</span>(<span class="string">'azure'</span>);</code></pre>
+<p>And you have the SDK at your finger tips.</p>
+<p>Now, conveniently bluesky takes this into account already! Rather than passing your credentials in like so:</p>
+<pre class="highlighted"><code class="brainfuck"><span class="comment">var</span> <span class="comment">storage</span> <span class="comment">=</span> <span class="comment">require('bluesky')</span>.<span class="comment">storage({</span> <span class="comment">account:</span> <span class="comment">'</span>.<span class="string">.</span><span class="string">.</span><span class="comment">'</span>, <span class="comment">key:</span> <span class="comment">'</span>.<span class="string">.</span><span class="string">.</span><span class="comment">'</span> <span class="comment">});</code></pre>
+<p>You can provide it with Azure services:</p>
+<pre class="highlighted"><code class="php"><span class="keyword">var</span> azure = <span class="keyword">require</span>(<span class="string">'azure'</span>);
+<span class="keyword">var</span> storage = <span class="keyword">require</span>(<span class="string">'bluesky'</span>).storage({
+    blobService: azure.createBlobService(<span class="string">'account'</span>, <span class="string">'key'</span>).withFilter(<span class="keyword">new</span> azure.LinearRetryPolicyFilter()),
+    tableService: azure.createTableService(<span class="string">'account'</span>, <span class="string">'key'</span>).withFilter(<span class="keyword">new</span> azure.LinearRetryPolicyFilter()),
+    queueService = azure.createQueueService(<span class="string">'account'</span>, <span class="string">'key'</span>).withFilter(<span class="keyword">new</span> azure.LinearRetryPolicyFilter())
+});</code></pre>
+<p>And there we have it, we can use the Azure SDK that&#39;s already on the server and avoid the path depth problem.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/posts/2013-09-11-using-bluesky-in-azure-mobile-services.html';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>
