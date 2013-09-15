@@ -55,7 +55,7 @@ Lastly I could setup a controller:
 
         }]);
 
-Now we can set about ceating our service. We'll do your typical todo item app, so for that I want to have a method on my service that'll expose all todo items:
+Now we can set about creating our service. We'll do your typical todo item app, so for that I want to have a method on my service that'll expose all todo items:
 
     angular.module('api', ['azure'])
         .factory('services', ['client', function (client) {
@@ -87,7 +87,7 @@ No? Me either, but it won't be called.
 
 And this is where we get to what I'm referring to as **AngularJS's broken promise**. The fact is that the callback *won't* be run, and that's rather annoying, really hard to debug and not obvious at all.
 
-*Before we go much further I just want to clarify that I'm not an AngularJS expert, I've been using it for a grand total of 3 weeks so this is based on my expectaions as a JavaScript developer.*
+*Before we go much further I just want to clarify that I'm not an AngularJS expert, I've been using it for a grand total of 3 weeks so this is based on my expectations as a JavaScript developer.*
 
 Everything in AngularJS is wrapped up in [scopes](http://docs.angularjs.org/guide/scope) and only within the space of a running scope can you interact with an AngularJS model (such as your controller). Anything that breaks out of an AngularJS scope will then need to notify AngularJS that it's completed and you can be on your way.
 
@@ -124,10 +124,10 @@ Here you'll see that we're creating a deferred object, and then returning its pr
 
 So the main problem I was experiencing was supped up in this tweet:
 
-<blockquote class="twitter-tweet"><p><a href="https://twitter.com/slace">@slace</a> normally, you wouldn’t need to do this as a digest cycle would be triggered by angular if you were using its own services.</p>&mdash; James Sadler (@freshtonic) <a href="https://twitter.com/freshtonic/statuses/370784637024337920">August 23, 2013</a></blockquote>
+<blockquote class="twitter-tweet"><p><a href="https://twitter.com/slace">@slace</a> normally, you wouldn't need to do this as a digest cycle would be triggered by angular if you were using its own services.</p>&mdash; James Sadler (@freshtonic) <a href="https://twitter.com/freshtonic/statuses/370784637024337920">August 23, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The problem is _you're not doing in the AngularJS way_. When I was trying to work out why it wasn't working people kept pointing out that "if I just used the built in `$http` service you wouldn't have that problem". But really that's not the case, using the `$http` servie [just handles it for you](https://github.com/angular/angular.js/blob/2bb0e1a6041a079b4c456eb6bae4ec5a206582eb/src/ng/http.js#L967).
+The problem is _you're not doing in the AngularJS way_. When I was trying to work out why it wasn't working people kept pointing out that "if I just used the built in `$http` service you wouldn't have that problem". But really that's not the case, using the `$http` service [just handles it for you](https://github.com/angular/angular.js/blob/2bb0e1a6041a079b4c456eb6bae4ec5a206582eb/src/ng/http.js#L967).
 
 So just be aware that when you're using an opinionated library once you step outside _the norm_ be prepared for things to not work as you'd expect.
 
