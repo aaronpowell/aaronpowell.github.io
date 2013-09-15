@@ -22,7 +22,7 @@ For this project I've been working with [Azure Mobile Services](http://www.windo
         console.log('You have ' + members.length + ' active members');
     });
 
-Under the covers this is a REST API so it's doing HTTP requests out to Azure, handling the response and then using its own Promise API (which conforms to the Promise spec).
+Under the covers this is a REST API so it's doing HTTP requests out to Azure, handling the response and then using its own Promise API (which conforms to the Promise spec) to publish out to listeners.
 
 # Abstracting Azure Mobile Services
 
