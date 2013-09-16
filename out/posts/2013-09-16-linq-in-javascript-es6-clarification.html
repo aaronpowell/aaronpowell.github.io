@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>LINQ in JavaScript, ES6 style clarification - LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">LINQ in JavaScript, ES6 style clarification</h1>
+                <h2>16th September 2013</h2>
+                <ul class="tags">
+    
+        
+            <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a></li>
+        
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd August 2013</span>
+                            <h3><a href="/posts/2013-08-02-ajax-without-jquery.html">AJAX without jQuery</a></h3>
+                        </header>
+                        <p>When was the last time you wrote an AJAX request?</p>
+<p>When was the last time you did it without relying on jQuery?</p>
+<p>In this article we&#39;ll look at how do do just that, how do make an AJAX request without jQuery to better understand what&#39;s going on.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ajax.html"><span>ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd July 2013</span>
+                            <h3><a href="/posts/2013-07-22-array-like-objects.html">Array-like objects</a></h3>
+                        </header>
+                        <p>Just because it looks like a duck, walks like a duck, quacks like a duck doesn&#39;t mean it&#39;s a duck. There&#39;s dangers with making assumptions of your JavaScript objects based on their surface area.</p>
+<p>That said, a lot of power can be gleamed by these seemingly innocent assumptions.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th July 2013</span>
+                            <h3><a href="/posts/2013-07-14-javascript-new-operator.html">The JavaScript new operator</a></h3>
+                        </header>
+                        <p>Time to revisit something that was overlooked in the last post, the <code>new</code> operator in JavaScript and what it does.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">10th July 2013</span>
+                            <h3><a href="/posts/2013-07-10-implementing-indexers-in-javascript.html">Implementing "indexers" in JavaScript</a></h3>
+                        </header>
+                        <p>My colleague Luke Drumm challenged me to implement C# style indexers in JavaScript.</p>
+<p>So let&#39;s have a look at how you can do that, and how you can make some very interesting JavaScript objects that are self replicating. We&#39;ll build on the knowledge of using <code>bind</code> and <code>apply</code> from the last two posts.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th July 2013</span>
+                            <h3><a href="/posts/2013-07-05-javascript-binding-currying-and-arrows.html">JavaScript bind, currying and arrow functions</a></h3>
+                        </header>
+                        <p>After confusing my colleagues with how to invoke functions with a modifided set of arguments at a single time the next evolutionary point was to confuse them with creating functions that are always called with a different state.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>I <a href="/posts/2013-09-06-linq-in-javascript-es6.html">recently blogged about implementing LINQ in JavaScript with ES6 iterators</a>. While I&#39;d done a bunch of research, played around with FireFox (which seemed to have the most up-to-date implementation) and thought it was all well and good.</p>
+<p>Unfortunately it turns out that what I was talking about was the <code>__iterator__</code> syntax which FireFox has implemented but it&#39;s not in line with the <a href="http://domenic.me/2013/09/06/es6-iterators-generators-and-iterables/">current iterator and generator approach</a>.</p>
+<p>So while I did state that the code was against an API that wasn&#39;t set in stone I was a bit further away from where I wanted to be going forward.</p>
+<p>Thanks <a href="https://twitter.com/domenic">Domenic</a> for picking up on it and pointing me in the right direction, I&#39;m in the process of reworking the library to work with what&#39;s actually outlined so far in ES6 and you can <a href="https://github.com/aaronpowell/linq-in-javascript/tree/es6-generators">check out the progress</a>.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/posts/2013-09-16-linq-in-javascript-es6-clarification.html';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>
