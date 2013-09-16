@@ -1,6 +1,6 @@
 --- cson
 title: "Azure Mobile Services, AngularJS and broken promises"
-date: '2013-09-15'
+date: '2013-09-16'
 tags: ['azure-mobile-services', 'angularjs', 'promise']
 description: """A look at how to use Azure Mobile Services with AngularJS and dealing with what I believe is a broken approach to the AngularJS promise API.
 """
