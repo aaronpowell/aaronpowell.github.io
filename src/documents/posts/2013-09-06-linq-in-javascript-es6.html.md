@@ -8,6 +8,10 @@ So let's revisit the idea of it with a look at how you could leverage LINQ in Ja
 """
 ---
 
+## Update #1
+
+The code I've talked about here isn't actually ES6 related, instead it's about an API only in FireFox, read more [here](/posts/2013-09-16-linq-in-javascript-es6-clarification.html).
+
 Back in 2010 I posted about [implementing LINQ in JavaScript](/posts/2010-04-24-linq-in-javascript.html) in which I had a look at what would have been involved if you were writing a LINQ style API in JavaScript. Keep in mind that back in 2010 we didn't have libraries like [Underscore](http://underscorejs.org) or [LoDash](http://lodash.com) nor were people that aware of the `Array.prototype` extensions `map`/`filter`/`reduce`. So when it came to collection manipulation the most common approach was via the good ol' `for` loop but as I've said [in the past](/posts/2013-07-22-array-like-objects.html) `for` loops are uncool.
 
 But with my implementation of LINQ in JavaScript, and the others out there that I've come across (including Underscore/LoDash) there is one thing that always annoyed me, they are eager evaluated.
