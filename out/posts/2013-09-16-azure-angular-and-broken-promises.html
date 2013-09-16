@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Azure Mobile Services, AngularJS and broken promises - LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Azure Mobile Services, AngularJS and broken promises</h1>
+                <h2>16th September 2013</h2>
+                <ul class="tags">
+    
+        
+            <li><a class="icon icon-tag" href="/tagged/azure-mobile-services.html"><span>azure-mobile-services</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/angularjs.html"><span>angularjs</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/promise.html"><span>promise</span></a></li>
+        
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">11th September 2013</span>
+                            <h3><a href="/posts/2013-09-11-using-bluesky-in-azure-mobile-services.html">Using bluesky in Azure Mobile Services</a></h3>
+                        </header>
+                        <p>A quick tip on how to use <code>bluesky</code> from Azure Mobile Services.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/azure-mobile-services.html"><span>azure-mobile-services</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>There&#39;s no denying it that <a href="http://angularjs.org/">AngularJS</a> is the hot new SPA framework these days as it offers a lot of very nice features out of the box, has a very good programming model behind it and works as advertised. So when a new project was kicking off that I was on I decided to take the opportunity to use it so I could get a feel for it. Overall my feelings have been positive with the exception of what I want to talk about here.</p>
+<h1>Bringing in Azure Mobile Services</h1>
+<p>For this project I&#39;ve been working with <a href="http://www.windowsazure.com/en-us/solutions/mobile/">Azure Mobile Services</a> as I&#39;ve got data coming from some native mobile apps that needs to be managed via the website. So AMS has its own <a href="http://msdn.microsoft.com/en-us/library/windowsazure/jj554207.aspx">JavaScript client</a> to work with that&#39;s quite a nice little library, you do things like so:</p>
+<pre class="highlighted"><code class="matlab"><span class="transposed_variable">client.</span>getTable(<span class="string">'members'</span>).insert(newMember).then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="transposed_variable">console.</span><span class="built_in">log</span>(<span class="string">'member has been inserted with id: '</span> + <span class="transposed_variable">newMmeber.</span>id)
+});
+
+<span class="transposed_variable">client.</span>getTable(<span class="string">'members'</span>).where(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="transposed_variable">this.</span>active;
+}).read().then(<span class="function"><span class="keyword">function</span> <span class="params">(members)</span> {</span>
+    <span class="transposed_variable">console.</span><span class="built_in">log</span>(<span class="string">'You have '</span> + <span class="transposed_variable">members.</span><span class="built_in">length</span> + <span class="string">' active members'</span>);
+});</code></pre>
+<p>Under the covers this is a REST API so it&#39;s doing HTTP requests out to Azure, handling the response and then using its own Promise API (which conforms to the Promise spec) to publish out to listeners.</p>
+<h1>Abstracting Azure Mobile Services</h1>
+<p>AngularJS has <a href="http://docs.angularjs.org/guide/di">support for dependency injection</a> which is a really nice feature when you&#39;re looking to modularize your project. So for this project I decided to create a factory which would expose AMS and then another which would expose friendly methods to wrap up the bits of functionality I wanted, meaning that if you were to unit test it you wouldn&#39;t directly depend on AMS, just an interface.</p>
+<p>So I started with this as a module:</p>
+<pre class="highlighted"><code class="php">angular.module(<span class="string">'azure'</span>, [])
+    .factory(<span class="string">'client'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(<span class="variable">$window</span>)</span> {</span>
+        <span class="keyword">var</span> azureSettings = <span class="comment">//get them how you will</span>
+        <span class="keyword">var</span> client = <span class="keyword">new</span> <span class="variable">$window</span>.WindowsAzure.MobileServiceClient(
+            <span class="string">"https://"</span> + azureSettings.name + <span class="string">".azure-mobile.net/"</span>,
+            azureSettings.key
+        );
+
+        <span class="keyword">return</span> client;
+    }]);</code></pre>
+<p>And now I can create a factory for my &quot;services&quot;, so we&#39;ll start with this:</p>
+<pre class="highlighted"><code class="javascript">angular.module(<span class="string">'api'</span>, [<span class="string">'azure'</span>])
+    .factory(<span class="string">'services'</span>, [<span class="string">'client'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(client)</span> {</span>
+        <span class="comment">//TODO</span>
+    }]);</code></pre>
+<p>Lastly I could setup a controller:</p>
+<pre class="highlighted"><code class="lua">angular.<span class="built_in">module</span>(<span class="string">'app'</span>, [<span class="string">'api'</span>])
+    .controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>, <span class="string">'services'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($scope, services)</span></span> {
+
+    }]);</code></pre>
+<p>Now we can set about creating our service. We&#39;ll do your typical todo item app, so for that I want to have a method on my service that&#39;ll expose all todo items:</p>
+<pre class="highlighted"><code class="lua">angular.<span class="built_in">module</span>(<span class="string">'api'</span>, [<span class="string">'azure'</span>])
+    .factory(<span class="string">'services'</span>, [<span class="string">'client'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(client)</span></span> {
+        <span class="keyword">return</span> {
+            getAll: <span class="function"><span class="keyword">function</span> <span class="params">()</span></span> {
+                <span class="keyword">return</span> client.getTable(<span class="string">'todo'</span>).read();
+            }
+        };
+    }]);</code></pre>
+<p>Because this is promise based we can <code>.then</code> the call and populate our UI:</p>
+<pre class="highlighted"><code class="php">angular.module(<span class="string">'app'</span>, [<span class="string">'api'</span>])
+    .controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>, <span class="string">'services'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(<span class="variable">$scope</span>, services)</span> {</span>
+        <span class="variable">$scope</span>.items = [];
+
+        services.getAll().then(<span class="function"><span class="keyword">function</span> <span class="params">(items)</span> {</span>
+            <span class="variable">$scope</span>.items = items;
+        });
+    }]);</code></pre>
+<h1>AngularJS&#39;s broken promise</h1>
+<p>I quite like the concept of <a href="http://promises-aplus.github.io/promises-spec/">Promises in JavaScript</a>, and I know <a href="http://brianmckenna.org/blog/category_theory_promisesaplus">some people have issues with them</a>, but all-in-all it&#39;s nicer to work with than callback trees, especially when it comes to working with multiple async operations. One of the core principles is that when the operation completes it will either be resolved or rejected and you can provide handlers for the appropriate states.</p>
+<p>Looking back at the code up there, knowing that Azure Mobile Services will return a promise do you see anything wrong in the either the service or the controller which would prevent the success callback from being invoked?</p>
+<p>No? Me either, but it won&#39;t be called.</p>
+<p>And this is where we get to what I&#39;m referring to as <strong>AngularJS&#39;s broken promise</strong>. The fact is that the callback <em>won&#39;t</em> be run, and that&#39;s rather annoying, really hard to debug and not obvious at all.</p>
+<p><em>Before we go much further I just want to clarify that I&#39;m not an AngularJS expert, I&#39;ve been using it for a grand total of 3 weeks so this is based on my expectations as a JavaScript developer.</em></p>
+<p>Everything in AngularJS is wrapped up in <a href="http://docs.angularjs.org/guide/scope">scopes</a> and only within the space of a running scope can you interact with an AngularJS model (such as your controller). Anything that breaks out of an AngularJS scope will then need to notify AngularJS that it&#39;s completed and you can be on your way.</p>
+<p>So the problem that I&#39;m hitting is that I&#39;m creating an XHR, which because it&#39;s asynchronous, will break out of an AngularJS scope and eventually complete. Because you are then &quot;out of the scope&quot; the Promise callbacks are <strong>somehow</strong> blocked by AngularJS (I&#39;ve not been able to work out how they prevent it from firing but they somehow do).</p>
+<h2>Fixing the broken promise</h2>
+<p>The good news is that you can work around this and I&#39;ll admit that this may not be the cleanest solution because it was determined by trial-and-error, but none the less you can solve the problem and that&#39;s by calling <a href="http://docs.angularjs.org/api/ng.$rootScope.Scope#$apply"><code>$apply</code></a> on the root scope before your promise tries to return. Annoyingly this means you have to create your own promise to wrap the AMS promise but AngularJS does ship with a slimmed down version of <a href="https://github.com/kriskowal/q">Q</a> in the form of <a href="http://docs.angularjs.org/api/ng.$q"><code>$q</code></a>.</p>
+<p>The resulting code now looks like this:</p>
+<pre class="highlighted"><code class="php">angular.module(<span class="string">'api'</span>, [<span class="string">'azure'</span>])
+    .factory(<span class="string">'services'</span>, [<span class="string">'client'</span>, <span class="string">'$q'</span>, <span class="string">'$rootScope'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(client, <span class="variable">$q</span>, <span class="variable">$rootScope</span>)</span> {</span>
+        <span class="keyword">return</span> {
+            getAll: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+                <span class="keyword">var</span> d = <span class="variable">$q</span>.defer();
+
+                client.getTable(<span class="string">'todo'</span>).read().then(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+                    d.resolve.apply(<span class="keyword">this</span>, arguments);
+                    <span class="variable">$rootScope</span>.<span class="variable">$apply</span>();
+                }, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+                    d.reject.apply(<span class="keyword">this</span>, arguments);
+                    <span class="variable">$rootScope</span>.<span class="variable">$apply</span>();
+                });
+
+                <span class="keyword">return</span> d.promise().
+            }
+        };
+    }]);</code></pre>
+<p>Here you&#39;ll see that we&#39;re creating a deferred object, and then returning its promise (meaning our controller doesn&#39;t need to be refactored, just our factory). We then add our own success handler (and fail handler) which pass through to <code>.resolve</code> and <code>.reject</code> for success and fail, providing the arguments, meaning that this solution doesn&#39;t need to know about the argument changes. Once that&#39;s done we then call <code>$rootScope.$apply()</code> which will inform AngularJS that our async operation has completed, and now the handlers in our controller will be executed.</p>
+<h1>Beware of opinionated frameworks</h1>
+<p>So the main problem I was experiencing was supped up in this tweet:</p>
+<p><blockquote class="twitter-tweet"><p><a href="https://twitter.com/slace">@slace</a> normally, you wouldn&#39;t need to do this as a digest cycle would be triggered by angular if you were using its own services.</p>&mdash; James Sadler (@freshtonic) <a href="https://twitter.com/freshtonic/statuses/370784637024337920">August 23, 2013</a></blockquote></p>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>The problem is <em>you&#39;re not doing in the AngularJS way</em>. When I was trying to work out why it wasn&#39;t working people kept pointing out that &quot;if you just used the built in <code>$http</code> service you wouldn&#39;t have that problem&quot;. But really that&#39;s not the case, using the <code>$http</code> service <a href="https://github.com/angular/angular.js/blob/2bb0e1a6041a079b4c456eb6bae4ec5a206582eb/src/ng/http.js#L967">just handles it for you</a>, so it&#39;s still a problem with any XHR operations in AngularJS, they just hide some of it from you.</p>
+<p>So just be aware that when you&#39;re using an opinionated library once you step outside &quot;the norm&quot; be prepared for things to not work as you&#39;d expect.</p>
+<h1>Conclusion</h1>
+<p>I&#39;d really like to create a wrapper around the Azure Mobile Services API but they don&#39;t seem to expose their promise API which is where I&#39;d like to wrap, I&#39;m going to keep trying and will update if I can find a cleaner solution.</p>
+<p>In the mean time you&#39;ll need to be aware that when you&#39;re using Azure Mobile Services with AngularJS it&#39;s not quite as simple as you&#39;d expect it to be.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/posts/2013-09-16-azure-angular-and-broken-promises.html';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>

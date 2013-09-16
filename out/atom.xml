@@ -4,13 +4,122 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-09-11T20:39:37.185Z</updated>
+    <updated>2013-09-16T03:58:01.005Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>Azure Mobile Services, AngularJS and broken promises</title>
+            <link href="http://www.aaron-powell.com/posts/2013-09-16-azure-angular-and-broken-promises.html"/>
+            <updated>2013-09-16T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-09-16-azure-angular-and-broken-promises.html</id>
+            <content type="html">&lt;p&gt;There&amp;#39;s no denying it that &lt;a href=&quot;http://angularjs.org/&quot;&gt;AngularJS&lt;/a&gt; is the hot new SPA framework these days as it offers a lot of very nice features out of the box, has a very good programming model behind it and works as advertised. So when a new project was kicking off that I was on I decided to take the opportunity to use it so I could get a feel for it. Overall my feelings have been positive with the exception of what I want to talk about here.&lt;/p&gt;
+&lt;h1&gt;Bringing in Azure Mobile Services&lt;/h1&gt;
+&lt;p&gt;For this project I&amp;#39;ve been working with &lt;a href=&quot;http://www.windowsazure.com/en-us/solutions/mobile/&quot;&gt;Azure Mobile Services&lt;/a&gt; as I&amp;#39;ve got data coming from some native mobile apps that needs to be managed via the website. So AMS has its own &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/windowsazure/jj554207.aspx&quot;&gt;JavaScript client&lt;/a&gt; to work with that&amp;#39;s quite a nice little library, you do things like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;transposed_variable&quot;&gt;client.&lt;/span&gt;getTable(&lt;span class=&quot;string&quot;&gt;'members'&lt;/span&gt;).insert(newMember).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'member has been inserted with id: '&lt;/span&gt; + &lt;span class=&quot;transposed_variable&quot;&gt;newMmeber.&lt;/span&gt;id)
+});
+
+&lt;span class=&quot;transposed_variable&quot;&gt;client.&lt;/span&gt;getTable(&lt;span class=&quot;string&quot;&gt;'members'&lt;/span&gt;).where(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;transposed_variable&quot;&gt;this.&lt;/span&gt;active;
+}).read().then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(members)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'You have '&lt;/span&gt; + &lt;span class=&quot;transposed_variable&quot;&gt;members.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt; + &lt;span class=&quot;string&quot;&gt;' active members'&lt;/span&gt;);
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Under the covers this is a REST API so it&amp;#39;s doing HTTP requests out to Azure, handling the response and then using its own Promise API (which conforms to the Promise spec) to publish out to listeners.&lt;/p&gt;
+&lt;h1&gt;Abstracting Azure Mobile Services&lt;/h1&gt;
+&lt;p&gt;AngularJS has &lt;a href=&quot;http://docs.angularjs.org/guide/di&quot;&gt;support for dependency injection&lt;/a&gt; which is a really nice feature when you&amp;#39;re looking to modularize your project. So for this project I decided to create a factory which would expose AMS and then another which would expose friendly methods to wrap up the bits of functionality I wanted, meaning that if you were to unit test it you wouldn&amp;#39;t directly depend on AMS, just an interface.&lt;/p&gt;
+&lt;p&gt;So I started with this as a module:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;php&quot;&gt;angular.module(&lt;span class=&quot;string&quot;&gt;'azure'&lt;/span&gt;, [])
+    .factory(&lt;span class=&quot;string&quot;&gt;'client'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'$window'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;$window&lt;/span&gt;)&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; azureSettings = &lt;span class=&quot;comment&quot;&gt;//get them how you will&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; client = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;variable&quot;&gt;$window&lt;/span&gt;.WindowsAzure.MobileServiceClient(
+            &lt;span class=&quot;string&quot;&gt;&quot;https://&quot;&lt;/span&gt; + azureSettings.name + &lt;span class=&quot;string&quot;&gt;&quot;.azure-mobile.net/&quot;&lt;/span&gt;,
+            azureSettings.key
+        );
+
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; client;
+    }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And now I can create a factory for my &amp;quot;services&amp;quot;, so we&amp;#39;ll start with this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;angular.module(&lt;span class=&quot;string&quot;&gt;'api'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'azure'&lt;/span&gt;])
+    .factory(&lt;span class=&quot;string&quot;&gt;'services'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'client'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(client)&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;comment&quot;&gt;//TODO&lt;/span&gt;
+    }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Lastly I could setup a controller:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lua&quot;&gt;angular.&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'app'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'api'&lt;/span&gt;])
+    .controller(&lt;span class=&quot;string&quot;&gt;'MyController'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'$scope'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'services'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;($scope, services)&lt;/span&gt;&lt;/span&gt; {
+
+    }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can set about creating our service. We&amp;#39;ll do your typical todo item app, so for that I want to have a method on my service that&amp;#39;ll expose all todo items:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lua&quot;&gt;angular.&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'api'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'azure'&lt;/span&gt;])
+    .factory(&lt;span class=&quot;string&quot;&gt;'services'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'client'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(client)&lt;/span&gt;&lt;/span&gt; {
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; {
+            getAll: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt; {
+                &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; client.getTable(&lt;span class=&quot;string&quot;&gt;'todo'&lt;/span&gt;).read();
+            }
+        };
+    }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because this is promise based we can &lt;code&gt;.then&lt;/code&gt; the call and populate our UI:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;php&quot;&gt;angular.module(&lt;span class=&quot;string&quot;&gt;'app'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'api'&lt;/span&gt;])
+    .controller(&lt;span class=&quot;string&quot;&gt;'MyController'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'$scope'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'services'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;variable&quot;&gt;$scope&lt;/span&gt;, services)&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;variable&quot;&gt;$scope&lt;/span&gt;.items = [];
+
+        services.getAll().then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(items)&lt;/span&gt; {&lt;/span&gt;
+            &lt;span class=&quot;variable&quot;&gt;$scope&lt;/span&gt;.items = items;
+        });
+    }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;AngularJS&amp;#39;s broken promise&lt;/h1&gt;
+&lt;p&gt;I quite like the concept of &lt;a href=&quot;http://promises-aplus.github.io/promises-spec/&quot;&gt;Promises in JavaScript&lt;/a&gt;, and I know &lt;a href=&quot;http://brianmckenna.org/blog/category_theory_promisesaplus&quot;&gt;some people have issues with them&lt;/a&gt;, but all-in-all it&amp;#39;s nicer to work with than callback trees, especially when it comes to working with multiple async operations. One of the core principles is that when the operation completes it will either be resolved or rejected and you can provide handlers for the appropriate states.&lt;/p&gt;
+&lt;p&gt;Looking back at the code up there, knowing that Azure Mobile Services will return a promise do you see anything wrong in the either the service or the controller which would prevent the success callback from being invoked?&lt;/p&gt;
+&lt;p&gt;No? Me either, but it won&amp;#39;t be called.&lt;/p&gt;
+&lt;p&gt;And this is where we get to what I&amp;#39;m referring to as &lt;strong&gt;AngularJS&amp;#39;s broken promise&lt;/strong&gt;. The fact is that the callback &lt;em&gt;won&amp;#39;t&lt;/em&gt; be run, and that&amp;#39;s rather annoying, really hard to debug and not obvious at all.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Before we go much further I just want to clarify that I&amp;#39;m not an AngularJS expert, I&amp;#39;ve been using it for a grand total of 3 weeks so this is based on my expectations as a JavaScript developer.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Everything in AngularJS is wrapped up in &lt;a href=&quot;http://docs.angularjs.org/guide/scope&quot;&gt;scopes&lt;/a&gt; and only within the space of a running scope can you interact with an AngularJS model (such as your controller). Anything that breaks out of an AngularJS scope will then need to notify AngularJS that it&amp;#39;s completed and you can be on your way.&lt;/p&gt;
+&lt;p&gt;So the problem that I&amp;#39;m hitting is that I&amp;#39;m creating an XHR, which because it&amp;#39;s asynchronous, will break out of an AngularJS scope and eventually complete. Because you are then &amp;quot;out of the scope&amp;quot; the Promise callbacks are &lt;strong&gt;somehow&lt;/strong&gt; blocked by AngularJS (I&amp;#39;ve not been able to work out how they prevent it from firing but they somehow do).&lt;/p&gt;
+&lt;h2&gt;Fixing the broken promise&lt;/h2&gt;
+&lt;p&gt;The good news is that you can work around this and I&amp;#39;ll admit that this may not be the cleanest solution because it was determined by trial-and-error, but none the less you can solve the problem and that&amp;#39;s by calling &lt;a href=&quot;http://docs.angularjs.org/api/ng.$rootScope.Scope#$apply&quot;&gt;&lt;code&gt;$apply&lt;/code&gt;&lt;/a&gt; on the root scope before your promise tries to return. Annoyingly this means you have to create your own promise to wrap the AMS promise but AngularJS does ship with a slimmed down version of &lt;a href=&quot;https://github.com/kriskowal/q&quot;&gt;Q&lt;/a&gt; in the form of &lt;a href=&quot;http://docs.angularjs.org/api/ng.$q&quot;&gt;&lt;code&gt;$q&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The resulting code now looks like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;php&quot;&gt;angular.module(&lt;span class=&quot;string&quot;&gt;'api'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'azure'&lt;/span&gt;])
+    .factory(&lt;span class=&quot;string&quot;&gt;'services'&lt;/span&gt;, [&lt;span class=&quot;string&quot;&gt;'client'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'$q'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'$rootScope'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(client, &lt;span class=&quot;variable&quot;&gt;$q&lt;/span&gt;, &lt;span class=&quot;variable&quot;&gt;$rootScope&lt;/span&gt;)&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; {
+            getAll: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+                &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; d = &lt;span class=&quot;variable&quot;&gt;$q&lt;/span&gt;.defer();
+
+                client.getTable(&lt;span class=&quot;string&quot;&gt;'todo'&lt;/span&gt;).read().then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+                    d.resolve.apply(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, arguments);
+                    &lt;span class=&quot;variable&quot;&gt;$rootScope&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;$apply&lt;/span&gt;();
+                }, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+                    d.reject.apply(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, arguments);
+                    &lt;span class=&quot;variable&quot;&gt;$rootScope&lt;/span&gt;.&lt;span class=&quot;variable&quot;&gt;$apply&lt;/span&gt;();
+                });
+
+                &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; d.promise().
+            }
+        };
+    }]);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here you&amp;#39;ll see that we&amp;#39;re creating a deferred object, and then returning its promise (meaning our controller doesn&amp;#39;t need to be refactored, just our factory). We then add our own success handler (and fail handler) which pass through to &lt;code&gt;.resolve&lt;/code&gt; and &lt;code&gt;.reject&lt;/code&gt; for success and fail, providing the arguments, meaning that this solution doesn&amp;#39;t need to know about the argument changes. Once that&amp;#39;s done we then call &lt;code&gt;$rootScope.$apply()&lt;/code&gt; which will inform AngularJS that our async operation has completed, and now the handlers in our controller will be executed.&lt;/p&gt;
+&lt;h1&gt;Beware of opinionated frameworks&lt;/h1&gt;
+&lt;p&gt;So the main problem I was experiencing was supped up in this tweet:&lt;/p&gt;
+&lt;p&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://twitter.com/slace&quot;&gt;@slace&lt;/a&gt; normally, you wouldn&amp;#39;t need to do this as a digest cycle would be triggered by angular if you were using its own services.&lt;/p&gt;&amp;mdash; James Sadler (@freshtonic) &lt;a href=&quot;https://twitter.com/freshtonic/statuses/370784637024337920&quot;&gt;August 23, 2013&lt;/a&gt;&lt;/blockquote&gt;&lt;/p&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;The problem is &lt;em&gt;you&amp;#39;re not doing in the AngularJS way&lt;/em&gt;. When I was trying to work out why it wasn&amp;#39;t working people kept pointing out that &amp;quot;if you just used the built in &lt;code&gt;$http&lt;/code&gt; service you wouldn&amp;#39;t have that problem&amp;quot;. But really that&amp;#39;s not the case, using the &lt;code&gt;$http&lt;/code&gt; service &lt;a href=&quot;https://github.com/angular/angular.js/blob/2bb0e1a6041a079b4c456eb6bae4ec5a206582eb/src/ng/http.js#L967&quot;&gt;just handles it for you&lt;/a&gt;, so it&amp;#39;s still a problem with any XHR operations in AngularJS, they just hide some of it from you.&lt;/p&gt;
+&lt;p&gt;So just be aware that when you&amp;#39;re using an opinionated library once you step outside &amp;quot;the norm&amp;quot; be prepared for things to not work as you&amp;#39;d expect.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;I&amp;#39;d really like to create a wrapper around the Azure Mobile Services API but they don&amp;#39;t seem to expose their promise API which is where I&amp;#39;d like to wrap, I&amp;#39;m going to keep trying and will update if I can find a cleaner solution.&lt;/p&gt;
+&lt;p&gt;In the mean time you&amp;#39;ll need to be aware that when you&amp;#39;re using Azure Mobile Services with AngularJS it&amp;#39;s not quite as simple as you&amp;#39;d expect it to be.&lt;/p&gt;
+</content>
+            
+            <category>azure-mobile-services</category>
+            
+            <category>angularjs</category>
+            
+            <category>promise</category>
+            
+        </entry>
     
         <entry>
             <title>Using bluesky in Azure Mobile Services</title>
@@ -1280,129 +1389,6 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
         </entry>
     
         <entry>
-            <title>Flight Mode - Cookies</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-cookies.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-cookies.html</id>
-            <content type="html">&lt;p&gt;In the beginning there was a simple way to store data offline in an application, or more accurately, across sessions, and that is the HTTP Cookie.&lt;/p&gt;
-&lt;p&gt;Cookies are used for everything, they can &lt;a href=&quot;http://www.nczonline.net/blog/2009/05/12/cookies-and-security/&quot;&gt;track you for spammers&lt;/a&gt;, &lt;a href=&quot;http://www.troyhunt.com/2013/03/c-is-for-cookie-h-is-for-hacker.html&quot;&gt;expose your secure connections for hackers&lt;/a&gt; and they can be used for legitimate purposes which I&amp;#39;m going to look at here.&lt;/p&gt;
-&lt;p&gt;The Cookie is the oldest form of offline storage available on the web, first emerging &lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_cookie&quot;&gt;in the mid 90&amp;#39;s with Netscape&lt;/a&gt;. All browsers support them so it&amp;#39;s your most easily accessible cross-browser storage solution.&lt;/p&gt;
-&lt;h2&gt;Benefits of Cookies for storage&lt;/h2&gt;
-&lt;p&gt;There are a few aspects to cookies that make them appealing for storing offline data so let&amp;#39;s have a look at a few of them.&lt;/p&gt;
-&lt;p&gt;Since cookies are part of the HTTP Header they are included in every request that you make which can be useful if you want to sync the data that&amp;#39;s been created while the application is offline back to the server when the user reconnects. There&amp;#39;s no special AJAX request you&amp;#39;d need to create to handle the sync, any request would do, it&amp;#39;s just up to your server to handle said cookies. This has an obvious downside though, the more you store in cookies the bigger your request/response payload is going to be, so keep that in mind if you want to use cookies for storing data, particularly when limited data connections are applicable, such as on mobile devices).&lt;/p&gt;
-&lt;p&gt;Expiry is another benefit that cookies bring to the table. If you&amp;#39;re storing data offline you may be wanting to get rid of it after a certain time period to prevent it from becoming stale. Cookies have an expiry date built into them when they are created, meaning that when you first set up your stored data you can determine just how long you want it to hang around. Admitted it won&amp;#39;t &amp;quot;magically&amp;quot; disappear if the user is offline at the time, but it will expire through new requests that are done.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of Cookies for storage&lt;/h2&gt;
-&lt;p&gt;Unsurprisingly there are some drawbacks to using cookies, some pretty major ones to be exact too, the first main drawback is that cookies are simply not designed to be used this way. While it might sound great to be able to have your offline data sent to the server without you needing to do anything it really starts to come apart when you want to store much data. Cookies can only handle &lt;info in cookie size&gt; which means that they&amp;#39;re best used for little flags, maybe tracking a simple preference like which theme to use.&lt;/p&gt;
-&lt;p&gt;Another major drawback is that cookies have the laxest cross-origin restrictions of all the offline storage options we&amp;#39;ll be looking at. As I mentioned earlier cookies were a common tool in the spammers toolbox and that was because you could very easy get data out of them without owning the domain, sure you still had to get &lt;strong&gt;your&lt;/strong&gt; code into the page but if your serving ads then you&amp;#39;re part of the way there already.&lt;/p&gt;
-&lt;p&gt;Finally the API for cookies really does leave a lot to be desired. Don&amp;#39;t get me wrong there&amp;#39;s a myriad of wrapper APIs for the &lt;code&gt;document.cookies&lt;/code&gt; object that&amp;#39;ll help you add/remove cookies but it doesn&amp;#39;t solve the fundamental problem, &lt;strong&gt;cookies are only strings&lt;/strong&gt;, meaning if you want to store an object of some description it&amp;#39;s serializing to JSON for you. This really starts to fall over when you want to be able to &lt;em&gt;query&lt;/em&gt; the data. If you&amp;#39;ve got lots of objects you&amp;#39;ll have to get them all back out and do in-memory querying of the data.&lt;/p&gt;
-&lt;h2&gt;Implementing Cookie storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of cookies.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating a new adapter which internally uses &lt;a href=&quot;http://www.quirksmode.org/js/cookies.html&quot;&gt;PPK&amp;#39;s cookie API&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;First things first, how are we storing our data across &lt;strong&gt;two&lt;/strong&gt; types cookies, one is going to be a cookie to track the IDs of the items in the store and the other will be storing the individual items. The reasons for this is we want to &lt;a href=&quot;http://manicode.blogspot.it/2009/08/real-world-cookie-length-limits.html&quot;&gt;avoid exceeding the limits&lt;/a&gt; of what we can store in each cookie and additionally we want to be easily able to look up values based on a key.&lt;/p&gt;
-&lt;p&gt;When we create a new store we&amp;#39;ll check if there&amp;#39;s a &lt;em&gt;tracker&lt;/em&gt; cookie, if not we&amp;#39;ll create one:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var CookieAdapter = function (storeName) {
-    this&lt;span class=&quot;preprocessor&quot;&gt;.storeName&lt;/span&gt; = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    var cookie = readCookie(storeName)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    if (!cookie) {
-        cookie = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-        createCookie(storeName, JSON&lt;span class=&quot;preprocessor&quot;&gt;.stringify&lt;/span&gt;(cookie))&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    } else {
-        cookie = JSON&lt;span class=&quot;preprocessor&quot;&gt;.parse&lt;/span&gt;(cookie)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }
-
-    this&lt;span class=&quot;preprocessor&quot;&gt;.cookie&lt;/span&gt; = cookie&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-}&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now before we create an &lt;code&gt;add&lt;/code&gt; method we&amp;#39;ll need to be able to create IDs, we could do this a couple of ways, we could use the &lt;code&gt;length&lt;/code&gt; of our tracking cookie or instead I&amp;#39;m going to use a GUID, here&amp;#39;s a simple function to generate one:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxx'&lt;/span&gt;.replace(&lt;span class=&quot;regexp&quot;&gt;/[xy]/g&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(c)&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; r = Math.random() * &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; v = c == &lt;span class=&quot;string&quot;&gt;'x'&lt;/span&gt; ? r : (r &amp;amp; &lt;span class=&quot;number&quot;&gt;0x3&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0x8&lt;/span&gt;);
-        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; v.toString(&lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);
-    });
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ultimately all we will be storing is JSON representations of the objects that we push into our store, here&amp;#39;s how an &lt;code&gt;add&lt;/code&gt; method would come together:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;CookieAdapter&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.add&lt;/span&gt; = function(obj) {
-    var &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = guid();
-    createCookie(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(obj));
-    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.push&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;);
-    createCookie(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storeName&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;));
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;;
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First off we&amp;#39;ll generate a new GUID, then insert the record as a new cookie using that ID as the cookie name. Finally we&amp;#39;ll update tracker with the new value.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/cookie.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;In this part we&amp;#39;ve taken a look at the idea of using cookies as a storage model for when our application is offline. We&amp;#39;ve seen that they have the advantage of automatically being sent to our server as they are part of the HTTP header.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ve also seen that there&amp;#39;s some really big warning signs that say using cookies for more than just really simple state is a bad idea, they are all just stored as strings meaning that any manipulation has to be done in memory after deserializing all the data.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of cookies for storage in the wild you can check out &lt;a href=&quot;http://qantas.com.au&quot;&gt;Qantas&lt;/a&gt;, they use cookies to store information like your recent search options. There&amp;#39;s a &lt;code&gt;usercontext&lt;/code&gt; cookie that contains the information about where you are that could be wanting to start a flight from.&lt;/p&gt;
-&lt;p&gt;All in all cookies are not really a good option when it comes to store data for our offline application.&lt;/p&gt;
-</content>
-            
-            <category>offline-storage</category>
-            
-            <category>flight-mode</category>
-            
-            <category>cookies</category>
-            
-        </entry>
-    
-        <entry>
-            <title>Flight Mode - local and session storage</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html</id>
-            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
-&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
-&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
-&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
-&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
-&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
-&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
-&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
-&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
-&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
-&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
-&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
-var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
-localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
-};
-
-Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
-&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
-&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
-&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
-</content>
-            
-            <category>flight-mode</category>
-            
-            <category>offline-storage</category>
-            
-            <category>localStorage</category>
-            
-            <category>sessionStorage</category>
-            
-        </entry>
-    
-        <entry>
             <title>Flight Mode - Introduction</title>
             <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
             <updated>2013-05-23T00:00:00.000Z</updated>
@@ -1475,38 +1461,125 @@ Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span clas
         </entry>
     
         <entry>
-            <title>Firefox, jQuery and the case of the Document response</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-07-firefox-jquery-missing-datatype.html"/>
-            <updated>2013-05-07T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-07-firefox-jquery-missing-datatype.html</id>
-            <content type="html">&lt;p&gt;I recently tweeted that I was having this problem:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://www.aaron-powell.com/get/firefox-vs-chrome-ajax-strangeness.PNG&quot; alt=&quot;Something&amp;#39;s not right&quot;&gt;&lt;/p&gt;
-&lt;p&gt;As you can see something&amp;#39;s not right there, Chrome is not getting anything back from my AJAX request (or at least a falsey value) where as Firefox seems to be having a &lt;code&gt;Document&lt;/code&gt; object.&lt;/p&gt;
-&lt;p&gt;I was stumped.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Why are you seeing two different responses from the exact same bit of code?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;So the response we&amp;#39;re getting back has a 0 content length and that was my first point of call, something must be causing the browsers to behave differently when you&amp;#39;ve not got any content.&lt;/p&gt;
-&lt;p&gt;I ended up &lt;a href=&quot;https://github.com/jquery/jquery/blob/1.9-stable/src/ajax/xhr.js#L172&quot;&gt;here&lt;/a&gt; and what I found was that when this is called:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;( status, status&lt;span class=&quot;variable&quot;&gt;Text&lt;/span&gt;, responses, response&lt;span class=&quot;variable&quot;&gt;Headers&lt;/span&gt; )&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;response&lt;/code&gt; object has different properties depending on the browser, in Chrome (and IE) it has a single &lt;code&gt;text&lt;/code&gt; property but in Firefox it has a &lt;code&gt;text&lt;/code&gt; &lt;em&gt;and&lt;/em&gt; &lt;code&gt;xml&lt;/code&gt; property. I think we&amp;#39;ve found our problem boss, we&amp;#39;ve somehow got different objects. But still, why are we ending up with a &lt;code&gt;document&lt;/code&gt; object not the text like Chrome?&lt;/p&gt;
-&lt;p&gt;Well next we end up through &lt;a href=&quot;https://github.com/jquery/jquery/blob/1.9-stable/src/ajax.js#L735&quot;&gt;this logic&lt;/a&gt;. Here jQuery works out what &lt;code&gt;dataType&lt;/code&gt; you&amp;#39;re response is and it gives you the appropriate data.&lt;/p&gt;
-&lt;p&gt;Now the astute reader may have noticed &lt;em&gt;I wasn&amp;#39;t setting a &lt;code&gt;dataType&lt;/code&gt; in my request&lt;/em&gt; which means that jQuery will have to do it&amp;#39;s &lt;em&gt;best guess&lt;/em&gt; at what to give me, and that is done through this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;haskell&quot;&gt;// &lt;span class=&quot;type&quot;&gt;Try&lt;/span&gt; convertible &lt;span class=&quot;typedef&quot;&gt;dataTypes&lt;/span&gt;
-&lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; ( &lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;type&lt;/span&gt; in responses ) &lt;span class=&quot;container&quot;&gt;{
-    &lt;span class=&quot;title&quot;&gt;if&lt;/span&gt; ( !&lt;span class=&quot;title&quot;&gt;dataTypes&lt;/span&gt;[ 0 ] || &lt;span class=&quot;title&quot;&gt;s&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;converters&lt;/span&gt;[ &lt;span class=&quot;title&quot;&gt;type&lt;/span&gt; + &quot; &quot; + &lt;span class=&quot;title&quot;&gt;dataTypes&lt;/span&gt;[0] ] ) {
-        &lt;span class=&quot;title&quot;&gt;finalDataType&lt;/span&gt; = &lt;span class=&quot;title&quot;&gt;type&lt;/span&gt;;
-        &lt;span class=&quot;title&quot;&gt;break&lt;/span&gt;;
-    }&lt;/span&gt;&lt;/span&gt;
-    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ( !firstDataType ) {
-        firstDataType = &lt;span class=&quot;typedef&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;type&lt;/span&gt;;&lt;/span&gt;
-    }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It uses a &lt;code&gt;for in&lt;/code&gt; loop of all the properties of the response and settles on the last one if it can&amp;#39;t find anything else. Guess what the last one is... &lt;code&gt;xml&lt;/code&gt;!&lt;/p&gt;
-&lt;p&gt;Well that makes for an easy solution, once you set a &lt;code&gt;dataType&lt;/code&gt; on your jQuery ajax settings you&amp;#39;re all good to go, which leads me to my conclusion:&lt;/p&gt;
-&lt;h2&gt;If &lt;code&gt;null&lt;/code&gt; is valid from your response make sure you tell jQuery what &lt;code&gt;dataType&lt;/code&gt; you want it to be.&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/aaronpowell/jquery-ajax-datatype-issue&quot;&gt;There&amp;#39;s an example repository available here.&lt;/a&gt;&lt;/p&gt;
+            <title>Flight Mode - local and session storage</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html"/>
+            <updated>2013-05-23T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-05-23-local-session-storage.html</id>
+            <content type="html">&lt;p&gt;Last time we looked a &lt;a href=&quot;/flight-mode/cookies&quot;&gt;using cookies to store offline data&lt;/a&gt; and we also saw that there&amp;#39;s a number of problems with that approach. So let&amp;#39;s move forward, let&amp;#39;s look at what our next option would be when it comes to offline storage in our multi-dollar application.&lt;/p&gt;
+&lt;p&gt;Today it&amp;#39;s time for the next level of offline storage, &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; which is sometimes referred to as &lt;code&gt;DOM storage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m going to talk about both of these options together as they share a lot of similarities.&lt;/p&gt;
+&lt;p&gt;There&amp;#39;s a bit of a misconception around these two APIs, people often refer to them as &lt;em&gt;HTML5 storage&lt;/em&gt; but in truth they have been available much longer than that, in fact they can be used in &lt;a href=&quot;http://caniuse.com/#search=localstorage&quot;&gt;browsers as low as IE8&lt;/a&gt; which is not much of a HTML5 browser, and there&amp;#39;s a lot more interesting storage options for &amp;quot;HTML5 browsers&amp;quot; that we&amp;#39;ll look at later.&lt;/p&gt;
+&lt;h2&gt;Benefits of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; store key/value pairs of data, but they have a much nicer API to work with than you find when trying to work with cookies; it has explicit methods for getting, setting and removing data.&lt;/p&gt;
+&lt;p&gt;I keep referring to these two storage models together as they share a common root API but they are different. &lt;code&gt;sessionStorage&lt;/code&gt; is designed for storing data for the life of a browser session (until the window/tab is closed). This can make it ideal if you&amp;#39;ve got data that you want to temporarily store until the user leaves your application. But this obviously makes it a dangerous one to use in our scenario, because if the browser was to crash while the user is offline you&amp;#39;re likely to loose the data.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;localStorage&lt;/code&gt; on the other hand is a long-term persistent storage, meaning that the data will stay between browser restarts, making it much more ideal for persisting data when we&amp;#39;re offline.&lt;/p&gt;
+&lt;p&gt;But ultimately you need to select the right one for the right scenario so there are valid use cases for both and it&amp;#39;s good to have that option.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of local/session storage&lt;/h2&gt;
+&lt;p&gt;Like cookies these stores are only capable of storing string values. This has the obvious drawback of being difficult to use if we&amp;#39;ve got a complex object that we&amp;#39;re going to want to store for our application state.&lt;/p&gt;
+&lt;p&gt;The other main drawback is that there&amp;#39;s no &amp;quot;magic sync to server&amp;quot; like with cookies. The data stored in either of these stores is &lt;strong&gt;only&lt;/strong&gt; available to the client application, if you need to get the data back up to the server then you&amp;#39;ll need to perform your own data sync. Now that does have the benefit of not having extra data added to a HTTP request so it&amp;#39;s both a pro and a con.&lt;/p&gt;
+&lt;h2&gt;Implementing local/session storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of both &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating two new adapters, one for each of the stores.&lt;/p&gt;
+&lt;p&gt;As I mentioned they have a nice API to work with and we get data in/out like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vhdl&quot;&gt;localStorage.setItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;', &lt;span class=&quot;attribute&quot;&gt;'bar&lt;/span&gt;');
+var item = localStorage.getItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');
+localStorage.removeItem(&lt;span class=&quot;attribute&quot;&gt;'foo&lt;/span&gt;');&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But like cookies it can only store string values meaning that we&amp;#39;ll be doing a lot of JSON serialization/deserialization, for example here&amp;#39;s how we would do a &lt;code&gt;get&lt;/code&gt;/&lt;code&gt;getAll&lt;/code&gt; method:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt; = function(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;) {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; JSON&lt;span class=&quot;variable&quot;&gt;.parse&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storage&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getItem&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;));
+};
+
+Store&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.getAll&lt;/span&gt; = function() {
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.store&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.map&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.get&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bind&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And like the cookie implementation we&amp;#39;re tracking the IDs of all known objects which also adds overhead to out interactions as we need to add/remove items from the tracking object.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/local-session-storage.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;While it might seem that there&amp;#39;s quite a number of downsides for &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; over cookies when looking at offline storage options. But really &lt;code&gt;localStorage&lt;/code&gt; and &lt;code&gt;sessionStorage&lt;/code&gt; are much better options as they:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Don&amp;#39;t pollute the HTTP headers and thus increases the request/response size&lt;/li&gt;
+&lt;li&gt;It&amp;#39;s designed for storing medium-sized bits of data&lt;/li&gt;
+&lt;li&gt;Getting items in/out has a cleaner API, and it&amp;#39;s better designed than relying on string splitting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So if you&amp;#39;re needing to store only really simple data structures across browser sessions then &lt;code&gt;localStorage&lt;/code&gt; is a good option especially if the data you&amp;#39;re working with can be indexed by a single property (which would represent your key). If you&amp;#39;re only really focused on single-session cache then &lt;code&gt;sessionStorage&lt;/code&gt; can be a good option but it has a much narrower use-case and is less than ideal for offline applications.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of using &lt;code&gt;localStorage&lt;/code&gt; for storing data then check out &lt;a href=&quot;http://twitter.com&quot;&gt;twitter.com&lt;/a&gt; and use your browsers dev tools to inspect &lt;code&gt;localStorage&lt;/code&gt;. If you start writing a tweet and then close the tab the contents of that tweet are stored in an item keyed &lt;code&gt;__draft_tweets__:home&lt;/code&gt; (there&amp;#39;s also a &lt;code&gt;__draft_tweets__:profile&lt;/code&gt; for doing it on your profile page). And there&amp;#39;s a bunch of other useful data stored in there. While this data isn&amp;#39;t synced across instances it&amp;#39;s good for when you use a browser and then come back later.&lt;/p&gt;
 </content>
             
-            <category>jquery</category>
+            <category>flight-mode</category>
+            
+            <category>offline-storage</category>
+            
+            <category>localStorage</category>
+            
+            <category>sessionStorage</category>
+            
+        </entry>
+    
+        <entry>
+            <title>Flight Mode - Cookies</title>
+            <link href="http://www.aaron-powell.com/posts/2013-05-23-cookies.html"/>
+            <updated>2013-05-23T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-05-23-cookies.html</id>
+            <content type="html">&lt;p&gt;In the beginning there was a simple way to store data offline in an application, or more accurately, across sessions, and that is the HTTP Cookie.&lt;/p&gt;
+&lt;p&gt;Cookies are used for everything, they can &lt;a href=&quot;http://www.nczonline.net/blog/2009/05/12/cookies-and-security/&quot;&gt;track you for spammers&lt;/a&gt;, &lt;a href=&quot;http://www.troyhunt.com/2013/03/c-is-for-cookie-h-is-for-hacker.html&quot;&gt;expose your secure connections for hackers&lt;/a&gt; and they can be used for legitimate purposes which I&amp;#39;m going to look at here.&lt;/p&gt;
+&lt;p&gt;The Cookie is the oldest form of offline storage available on the web, first emerging &lt;a href=&quot;http://en.wikipedia.org/wiki/HTTP_cookie&quot;&gt;in the mid 90&amp;#39;s with Netscape&lt;/a&gt;. All browsers support them so it&amp;#39;s your most easily accessible cross-browser storage solution.&lt;/p&gt;
+&lt;h2&gt;Benefits of Cookies for storage&lt;/h2&gt;
+&lt;p&gt;There are a few aspects to cookies that make them appealing for storing offline data so let&amp;#39;s have a look at a few of them.&lt;/p&gt;
+&lt;p&gt;Since cookies are part of the HTTP Header they are included in every request that you make which can be useful if you want to sync the data that&amp;#39;s been created while the application is offline back to the server when the user reconnects. There&amp;#39;s no special AJAX request you&amp;#39;d need to create to handle the sync, any request would do, it&amp;#39;s just up to your server to handle said cookies. This has an obvious downside though, the more you store in cookies the bigger your request/response payload is going to be, so keep that in mind if you want to use cookies for storing data, particularly when limited data connections are applicable, such as on mobile devices).&lt;/p&gt;
+&lt;p&gt;Expiry is another benefit that cookies bring to the table. If you&amp;#39;re storing data offline you may be wanting to get rid of it after a certain time period to prevent it from becoming stale. Cookies have an expiry date built into them when they are created, meaning that when you first set up your stored data you can determine just how long you want it to hang around. Admitted it won&amp;#39;t &amp;quot;magically&amp;quot; disappear if the user is offline at the time, but it will expire through new requests that are done.&lt;/p&gt;
+&lt;h2&gt;Drawbacks of Cookies for storage&lt;/h2&gt;
+&lt;p&gt;Unsurprisingly there are some drawbacks to using cookies, some pretty major ones to be exact too, the first main drawback is that cookies are simply not designed to be used this way. While it might sound great to be able to have your offline data sent to the server without you needing to do anything it really starts to come apart when you want to store much data. Cookies can only handle &lt;info in cookie size&gt; which means that they&amp;#39;re best used for little flags, maybe tracking a simple preference like which theme to use.&lt;/p&gt;
+&lt;p&gt;Another major drawback is that cookies have the laxest cross-origin restrictions of all the offline storage options we&amp;#39;ll be looking at. As I mentioned earlier cookies were a common tool in the spammers toolbox and that was because you could very easy get data out of them without owning the domain, sure you still had to get &lt;strong&gt;your&lt;/strong&gt; code into the page but if your serving ads then you&amp;#39;re part of the way there already.&lt;/p&gt;
+&lt;p&gt;Finally the API for cookies really does leave a lot to be desired. Don&amp;#39;t get me wrong there&amp;#39;s a myriad of wrapper APIs for the &lt;code&gt;document.cookies&lt;/code&gt; object that&amp;#39;ll help you add/remove cookies but it doesn&amp;#39;t solve the fundamental problem, &lt;strong&gt;cookies are only strings&lt;/strong&gt;, meaning if you want to store an object of some description it&amp;#39;s serializing to JSON for you. This really starts to fall over when you want to be able to &lt;em&gt;query&lt;/em&gt; the data. If you&amp;#39;ve got lots of objects you&amp;#39;ll have to get them all back out and do in-memory querying of the data.&lt;/p&gt;
+&lt;h2&gt;Implementing Cookie storage&lt;/h2&gt;
+&lt;p&gt;While it&amp;#39;s an exercise in &lt;a href=&quot;http://www.codinghorror.com/blog/2009/02/dont-reinvent-the-wheel-unless-you-plan-on-learning-more-about-wheels.html&quot;&gt;reinventing the wheel&lt;/a&gt; we&amp;#39;ll have a look at how to create a very simple key/value storage API on top of cookies.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ll be using our &lt;code&gt;FlightMode&lt;/code&gt; API and creating a new adapter which internally uses &lt;a href=&quot;http://www.quirksmode.org/js/cookies.html&quot;&gt;PPK&amp;#39;s cookie API&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First things first, how are we storing our data across &lt;strong&gt;two&lt;/strong&gt; types cookies, one is going to be a cookie to track the IDs of the items in the store and the other will be storing the individual items. The reasons for this is we want to &lt;a href=&quot;http://manicode.blogspot.it/2009/08/real-world-cookie-length-limits.html&quot;&gt;avoid exceeding the limits&lt;/a&gt; of what we can store in each cookie and additionally we want to be easily able to look up values based on a key.&lt;/p&gt;
+&lt;p&gt;When we create a new store we&amp;#39;ll check if there&amp;#39;s a &lt;em&gt;tracker&lt;/em&gt; cookie, if not we&amp;#39;ll create one:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var CookieAdapter = function (storeName) {
+    this&lt;span class=&quot;preprocessor&quot;&gt;.storeName&lt;/span&gt; = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var cookie = readCookie(storeName)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    if (!cookie) {
+        cookie = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        createCookie(storeName, JSON&lt;span class=&quot;preprocessor&quot;&gt;.stringify&lt;/span&gt;(cookie))&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    } else {
+        cookie = JSON&lt;span class=&quot;preprocessor&quot;&gt;.parse&lt;/span&gt;(cookie)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    }
+
+    this&lt;span class=&quot;preprocessor&quot;&gt;.cookie&lt;/span&gt; = cookie&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+}&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now before we create an &lt;code&gt;add&lt;/code&gt; method we&amp;#39;ll need to be able to create IDs, we could do this a couple of ways, we could use the &lt;code&gt;length&lt;/code&gt; of our tracking cookie or instead I&amp;#39;m going to use a GUID, here&amp;#39;s a simple function to generate one:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;guid&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxx'&lt;/span&gt;.replace(&lt;span class=&quot;regexp&quot;&gt;/[xy]/g&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(c)&lt;/span&gt; {&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; r = Math.random() * &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; v = c == &lt;span class=&quot;string&quot;&gt;'x'&lt;/span&gt; ? r : (r &amp;amp; &lt;span class=&quot;number&quot;&gt;0x3&lt;/span&gt; | &lt;span class=&quot;number&quot;&gt;0x8&lt;/span&gt;);
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; v.toString(&lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;);
+    });
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ultimately all we will be storing is JSON representations of the objects that we push into our store, here&amp;#39;s how an &lt;code&gt;add&lt;/code&gt; method would come together:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;CookieAdapter&lt;span class=&quot;variable&quot;&gt;.prototype&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.add&lt;/span&gt; = function(obj) {
+    var &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt; = guid();
+    createCookie(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(obj));
+    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.push&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;);
+    createCookie(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.storeName&lt;/span&gt;, JSON&lt;span class=&quot;variable&quot;&gt;.stringify&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.cookie&lt;/span&gt;));
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First off we&amp;#39;ll generate a new GUID, then insert the record as a new cookie using that ID as the cookie name. Finally we&amp;#39;ll update tracker with the new value.&lt;/p&gt;
+&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/cookie.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;In this part we&amp;#39;ve taken a look at the idea of using cookies as a storage model for when our application is offline. We&amp;#39;ve seen that they have the advantage of automatically being sent to our server as they are part of the HTTP header.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ve also seen that there&amp;#39;s some really big warning signs that say using cookies for more than just really simple state is a bad idea, they are all just stored as strings meaning that any manipulation has to be done in memory after deserializing all the data.&lt;/p&gt;
+&lt;p&gt;If you&amp;#39;re curious to see an implementation of cookies for storage in the wild you can check out &lt;a href=&quot;http://qantas.com.au&quot;&gt;Qantas&lt;/a&gt;, they use cookies to store information like your recent search options. There&amp;#39;s a &lt;code&gt;usercontext&lt;/code&gt; cookie that contains the information about where you are that could be wanting to start a flight from.&lt;/p&gt;
+&lt;p&gt;All in all cookies are not really a good option when it comes to store data for our offline application.&lt;/p&gt;
+</content>
+            
+            <category>offline-storage</category>
+            
+            <category>flight-mode</category>
+            
+            <category>cookies</category>
             
         </entry>
     
