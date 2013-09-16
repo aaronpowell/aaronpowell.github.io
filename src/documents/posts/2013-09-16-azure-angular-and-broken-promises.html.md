@@ -81,7 +81,7 @@ Because this is promise based we can `.then` the call and populate our UI:
 
 I quite like the concept of [Promises in JavaScript](http://promises-aplus.github.io/promises-spec/), and I know [some people have issues with them](http://brianmckenna.org/blog/category_theory_promisesaplus), but all-in-all it's nicer to work with than callback trees, especially when it comes to working with multiple async operations. One of the core principles is that when the operation completes it will either be resolved or rejected and you can provide handlers for the appropriate states.
 
-Looking back at the code up there, knowing that AMS will return a promise do you see anything wrong in the either the service or the controller which would prevent the success callback from being invoked?
+Looking back at the code up there, knowing that Azure Mobile Services will return a promise do you see anything wrong in the either the service or the controller which would prevent the success callback from being invoked?
 
 No? Me either, but it won't be called.
 
@@ -95,7 +95,7 @@ So the problem that I'm hitting is that I'm creating an XHR, which because it's 
 
 ## Fixing the broken promise
 
-The good news is that you can work around this and I'll admit that this may not be the cleanest solution because it was determined by trial-and-error, but none the less you can solve the problem and that's by calling [`$apply`](http://docs.angularjs.org/api/ng.$rootScope.Scope#$apply) on the root scope before your promise tries to return. Annoyingly this means you have to create your own promise to wrap the AMS promise but AngularJS does ship with a slimmed down version [Q](https://github.com/kriskowal/q) in the form of [`$q`](http://docs.angularjs.org/api/ng.$q).
+The good news is that you can work around this and I'll admit that this may not be the cleanest solution because it was determined by trial-and-error, but none the less you can solve the problem and that's by calling [`$apply`](http://docs.angularjs.org/api/ng.$rootScope.Scope#$apply) on the root scope before your promise tries to return. Annoyingly this means you have to create your own promise to wrap the AMS promise but AngularJS does ship with a slimmed down version of [Q](https://github.com/kriskowal/q) in the form of [`$q`](http://docs.angularjs.org/api/ng.$q).
 
 The resulting code now looks like this:
 
@@ -127,9 +127,9 @@ So the main problem I was experiencing was supped up in this tweet:
 <blockquote class="twitter-tweet"><p><a href="https://twitter.com/slace">@slace</a> normally, you wouldn't need to do this as a digest cycle would be triggered by angular if you were using its own services.</p>&mdash; James Sadler (@freshtonic) <a href="https://twitter.com/freshtonic/statuses/370784637024337920">August 23, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-The problem is _you're not doing in the AngularJS way_. When I was trying to work out why it wasn't working people kept pointing out that "if I just used the built in `$http` service you wouldn't have that problem". But really that's not the case, using the `$http` service [just handles it for you](https://github.com/angular/angular.js/blob/2bb0e1a6041a079b4c456eb6bae4ec5a206582eb/src/ng/http.js#L967).
+The problem is _you're not doing in the AngularJS way_. When I was trying to work out why it wasn't working people kept pointing out that "if you just used the built in `$http` service you wouldn't have that problem". But really that's not the case, using the `$http` service [just handles it for you](https://github.com/angular/angular.js/blob/2bb0e1a6041a079b4c456eb6bae4ec5a206582eb/src/ng/http.js#L967), so it's still a problem with any XHR operations in AngularJS, they just hide some of it from you.
 
-So just be aware that when you're using an opinionated library once you step outside _the norm_ be prepared for things to not work as you'd expect.
+So just be aware that when you're using an opinionated library once you step outside "the norm" be prepared for things to not work as you'd expect.
 
 # Conclusion
 
