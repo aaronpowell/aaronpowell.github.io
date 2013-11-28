@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Accessing the Location header in a CORS-enabled API - LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Accessing the Location header in a CORS-enabled API</h1>
+                <h2>28th November 2013</h2>
+                <ul class="tags">
+    
+        
+            <li><a class="icon icon-tag" href="/tagged/asp-net.html"><span>asp-net</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/ajax.html"><span>ajax</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/cors.html"><span>cors</span></a></li>
+        
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd August 2013</span>
+                            <h3><a href="/posts/2013-08-02-ajax-without-jquery.html">AJAX without jQuery</a></h3>
+                        </header>
+                        <p>When was the last time you wrote an AJAX request?</p>
+<p>When was the last time you did it without relying on jQuery?</p>
+<p>In this article we&#39;ll look at how do do just that, how do make an AJAX request without jQuery to better understand what&#39;s going on.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ajax.html"><span>ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">23rd May 2010</span>
+                            <h3><a href="/posts/2010-05-23-client-event-pool.html">Client Event Pool</a></h3>
+                        </header>
+                        <p>Client event pools are great to have disconnected AJAX components on a page</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ajax.html"><span>ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ms-ajax.html"><span>ms-ajax</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>Today I hit a problem, we&#39;ve got an ASP.Net WebAPI 2 project which is providing a series of REST services for a web app. These services are hosted on a different domain to the app will be hosted on so to perform the requests to them we&#39;ve gone ahead and <a href="http://enable-cors.org/">enabled CORS</a>.</p>
+<p>Up until now most of our work has been doing read-only endpoints in the API, but I just finished off implementing a POST route. Now in a RESTful API a POST should return a <code>201 Created</code> response along with the location which which you&#39;ll find the newly created resource. So in WebAPI I have something like this:</p>
+<pre class="highlighted"><code class="avrasm">var response = Request<span class="preprocessor">.CreateResponse</span>(HttpStatusCode<span class="preprocessor">.OK</span>, createdItemId)<span class="comment">;</span>
+response<span class="preprocessor">.Headers</span><span class="preprocessor">.Location</span> = new Uri(Url<span class="preprocessor">.Link</span>(<span class="string">"SomeRoutes"</span>, new { id = createdItem }))<span class="comment">;</span></code></pre>
+<p>Which sees me having a <code>Location</code> header in my response.</p>
+<p>Next I want to read out the <code>Location</code> header and then follow it to get the data and display it on screen. I&#39;m using AngularJS for this but the principle is the same for any way you&#39;re performing an AJAX request:</p>
+<pre class="highlighted"><code class="matlab">$<span class="transposed_variable">http.</span>post(someUrl, someData)
+    .then(<span class="function"><span class="keyword">function</span> <span class="params">(response)</span> {</span>
+        var location = <span class="transposed_variable">response.</span>headers(<span class="string">'Location'</span>);
+
+        <span class="keyword">return</span> $<span class="transposed_variable">http.</span>get(location);
+    })
+    .then(<span class="function"><span class="keyword">function</span> <span class="params">(response)</span> {</span>
+        <span class="transposed_variable">console.</span>dir(<span class="transposed_variable">response.</span>data);
+    });</code></pre>
+<p>Only there&#39;s a problem, <code>location</code> is always <code>undefined</code>! I&#39;m looking in my network tab in the dev tools and I can clearly see that there is a <code>Location</code> header returned but when I try and read it in JavaScript it&#39;s never there.</p>
+<p>Frustrated I turned to the googles and was not having much luck, everyone just said <code>response.headers(&#39;Location&#39;)</code> and you&#39;ll have your header, but I was never seeing it from Angular, or even in the raw <code>xhr</code> object. Something must be wrong.</p>
+<p>After some more digging I came across <a href="http://stackoverflow.com/a/14755417/11388">this</a>. Little did I know that if you&#39;re enabling CORS it will only expose a small number of the available headers by default, if you want more <a href="http://www.w3.org/TR/cors/#access-control-expose-headers-response-header">you have to expose them</a>.</p>
+<p>So back to our WebAPI controller action I added the following:</p>
+<pre class="highlighted"><code class="avrasm">var corsResult = new CorsResult()<span class="comment">;</span>
+corsResult<span class="preprocessor">.AllowedExposedHeaders</span><span class="preprocessor">.Add</span>(<span class="string">"Location"</span>)<span class="comment">;</span>
+response<span class="preprocessor">.WriteCorsHeaders</span>(corsResult)<span class="comment">;</span></code></pre>
+<p>My API is already CORS enabled, all I&#39;m doing is telling it that it&#39;s a CORS response and I want some additional headers exposed cross-origin.</p>
+<p>And now I&#39;m able to read my <code>Location</code> header in JavaScript.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/posts/2013-11-28-accessing-location-header-in-cors-response.html';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>
