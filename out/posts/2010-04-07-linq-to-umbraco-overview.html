@@ -144,7 +144,7 @@
                     <article class="is-excerpt">
                         <header>
                             <span class="date">27th August 2010</span>
-                            <h3><a href="/posts/2010-08-27-creating-custom-dataprovider-for-linq-to-umbraco.html">Creating custom DataProviders for LINQ to Umbraco</a></h3>
+                            <h3><a href="/posts/2010-08-27-rssdataprovider-for-linq-to-umbraco.html">Creating a RssDataProvider for LINQ to Umbraco</a></h3>
                         </header>
                         <p>Creating custom DataProviders for LINQ to Umbraco</p>
 
@@ -166,20 +166,20 @@
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <h1>What?</h1>
+                            <h1 id="what-">What?</h1>
 <p>Anyone who has had to do a lot of work with the Umbraco API and interacting with nodes will know that using the .NET API isn&#39;t <em>great</em>. It&#39;s not bad, but in a strongly typed world a loosely typed objects are no where near as much fun.</p>
 <p>Especially if you want to move around those items!</p>
 <p>Umbraco is more than just a content management system, Umbraco a great application framework. If you start looking conceptually at Document Types in Umbraco you&#39;re realise that they are really just a way of <em>describing</em> data. So to this end they are actually really great at <em>describing</em> .NET types.</p>
 <p>LINQ to Umbraco aims to take these meta-types which you are defining within the CMS and generate strongly typed representations of them which you can work with at a .NET level.</p>
 <p>Become the types defined in Umbraco can be easily used to represent any data. To this end LINQ to Umbraco is <strong>provider based</strong>, allowing the underling data source to be defined by the developer.</p>
-<h2>Provider Based?</h2>
+<h2 id="provider-based-">Provider Based?</h2>
 <p>Because of the way LINQ to Umbraco is designed it is possible to swap-out the way that the data is access within itself. This is what the UmbracoDataProvider class is used for.</p>
 <p>Out of the box LINQ to Umbraco supplies a single UmbracoDataProvider implementation, the <strong>NodeDataProvider</strong>.</p>
 <p>The NodeDataProvider is designed to interact with the XML cache of Umbraco, working with published data. This provides read-only operations, <em>despite LINQ to Umbraco providing full CRUD capabilities</em>.</p>
-<h1>When to use it?</h1>
+<h1 id="when-to-use-it-">When to use it?</h1>
 <p>LINQ to Umbraco is not designed to be a replacement for XSLT, nor is it to be a complete replacement for the existing Umbraco API&#39;s.</p>
 <p>That&#39;s not saying it can&#39;t be used in these scenarios, but LINQ to Umbraco is best used when you&#39;re looking at Umbraco data in a site-wide scope.</p>
-<h1>Design</h1>
+<h1 id="design">Design</h1>
 <p>The design of LINQ to Umbraco borrows very heavily from that of LINQ to SQL, by having a DataContext which all interactions flow out from.</p>
 <p>Because of this (and due to the provider model) there is no understanding of the data hierarchy. With the initial access of the data from the DataContext it looks at the data <em>as a whole picture</em>, allowing you to not concern yourself with the hierarchy, unless you need it.</p>
 <p>In addition to having a LINQ to SQL style DataContext all of the hierarchy of Umbraco is matched by LINQ to Umbraco. This means that you can traverse down a node&#39;s children collections, in a strongly typed manner.</p>

@@ -69,6 +69,46 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">31st December 2013</span>
+                            <h3><a href="/posts/2013-12-31-linq-in-javascript-for-real.html">LINQ in JavaScript, ES6 style, for real this time</a></h3>
+                        </header>
+                        <p>Revisiting how to implement LINQ in JavaScript on top of ES6 but this time it&#39;s actually going to be on top of ES6 features!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">16th September 2013</span>
+                            <h3><a href="/posts/2013-09-16-linq-in-javascript-es6-clarification.html">LINQ in JavaScript, ES6 style clarification</a></h3>
+                        </header>
+                        <p>A quick clarification on my previous post about LINQ in JavaScript using ES6 features.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">6th September 2013</span>
                             <h3><a href="/posts/2013-09-06-linq-in-javascript-es6.html">LINQ in JavaScript, ES6 style</a></h3>
                         </header>
@@ -131,42 +171,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">28th August 2010</span>
-                            <h3><a href="/posts/2010-08-28-a-linq-observation.html">A LINQ observation</a></h3>
-                        </header>
-                        <p>Well I&#39;m making good headway with LINQ to Umbraco, in the next few days I&#39;ll be doing a very interesting check in (which I&#39;ll also blog here about). My tweet-peeps already have an idea of what it e...</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/net.html"><span>.net</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">28th August 2010</span>
-                            <h3><a href="/posts/2010-08-28-testable-email-sending.html">Testable email sending</a></h3>
-                        </header>
-                        <p>Creating an integration test of sending an email</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/c-.html"><span>c#</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -178,7 +182,7 @@
 One problem with the demo, it was using VB 9, and anyone who&#39;s seen VB 9 will know it has a really awesome way of handling XML literals in the IDE. This isn&#39;t a problem if you&#39;re coding in VB 9, but if you&#39;re in C# it can be.</p>
 <p>The VB 9 video can be found here: <a href="http://msdn.microsoft.com/en-us/vbasic/bb927708.aspx"><a href="http://msdn.microsoft.com/en-us/vbasic/bb927708.aspx">http://msdn.microsoft.com/en-us/vbasic/bb927708.aspx</a></a></p>
 <p>I recommend it be watched before progressing as it&#39;ll make a lot more sense against the following post. It&#39;ll also cover how to create the XML file, which I&#39;m going to presume is already done.</p>
-<h2>In the beginning</h2>
+<h2 id="in-the-beginning">In the beginning</h2>
 <p>Because C# doesn&#39;t have a nice way to handle XML literals like VB 9 does we&#39;re going to have to do a lot of manual coding of XML, additionally we need to ensure that the appropriate namespaces are used on the appropriate nodes.</p>
 <p>The Excel XML using 4 distinct namespaces, in 5 declarations (yes, I&#39;ll get to that shortly) so we&#39;ll start off by defining them like so:</p>
 <pre class="highlighted"><code class="avrasm">XNamespace mainNamespace = XNamespace<span class="preprocessor">.Get</span>(<span class="string">"urn:schemas-microsoft-com:office:spreadsheet"</span>)<span class="comment">;</span>
@@ -212,12 +216,12 @@ XNamespace html = XNamespace<span class="preprocessor">.Get</span>(<span class="
     CreateNamespaceAtt(XName.<span class="keyword">Get</span>(<span class="string">"x"</span>, <span class="string">"http://www.w3.org/2000/xmlns/"</span>), x),
     CreateNamespaceAtt(mainNamespace),</code></pre>
 <p>I&#39;m using a helper method to create the namespace attribute (which you&#39;ll be able to find in the attached source), but notice how the &quot;main&quot; namespace is the last one we attach, if we don&#39;t do it this way we&#39;ll end up with the XElement detecting the same namespace and only adding it once. Also, you need to ensure that you&#39;re prefixing the right namespace to the XElement tag!</p>
-<h2>DocumentProperties and ExcelWorkbook</h2>
+<h2 id="documentproperties-and-excelworkbook">DocumentProperties and ExcelWorkbook</h2>
 <p>These two node groups are not overly complex, they hold the various meta-data about the Excel document we are creating, I&#39;ll skip them as they aren&#39;t really interesting and can easily be found in the source.</p>
-<h2>Styles</h2>
+<h2 id="styles">Styles</h2>
 <p>This section is really important and handy for configuring custom looks within the document. There are way to many options to configure here to cover in the demo, it&#39;s easiest to generate the styles in Excel and save the file as an XML document (or read the XSD if you really want!). If you&#39;re doing custom styles make sure you note the ID you give the style so you can use it later in your document.</p>
 <p>Also, these styles are workbook wide, not worksheet so you can reuse them on each worksheet you create. I have a very simple bold header.</p>
-<h2>Generating a Worksheet</h2>
+<h2 id="generating-a-worksheet">Generating a Worksheet</h2>
 <p>Here is where the fun starts, we need to generate our worksheet. There are 4 bits of data we need to output here:</p>
 <ul>
 <li>Number of columns</li>

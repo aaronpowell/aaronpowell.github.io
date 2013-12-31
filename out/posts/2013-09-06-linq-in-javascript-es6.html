@@ -158,7 +158,7 @@
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <h2>Update #1</h2>
+                            <h2 id="update-1">Update #1</h2>
 <p>The code I&#39;ve talked about here isn&#39;t actually ES6 related, instead it&#39;s about an API only in FireFox, read more <a href="/posts/2013-09-16-linq-in-javascript-es6-clarification.html">here</a>.</p>
 <p>Back in 2010 I posted about <a href="/posts/2010-04-24-linq-in-javascript.html">implementing LINQ in JavaScript</a> in which I had a look at what would have been involved if you were writing a LINQ style API in JavaScript. Keep in mind that back in 2010 we didn&#39;t have libraries like <a href="http://underscorejs.org">Underscore</a> or <a href="http://lodash.com">LoDash</a> nor were people that aware of the <code>Array.prototype</code> extensions <code>map</code>/<code>filter</code>/<code>reduce</code>. So when it came to collection manipulation the most common approach was via the good ol&#39; <code>for</code> loop but as I&#39;ve said <a href="/posts/2013-07-22-array-like-objects.html">in the past</a> <code>for</code> loops are uncool.</p>
 <p>But with my implementation of LINQ in JavaScript, and the others out there that I&#39;ve come across (including Underscore/LoDash) there is one thing that always annoyed me, they are eager evaluated.</p>
@@ -181,7 +181,7 @@
                 <span class="preprocessor">.Select</span>(person =&gt; <span class="comment">/* removed for simplicity */</span>)
                 <span class="preprocessor">.Take</span>(<span class="number">5</span>)<span class="comment">;</span></code></pre>
 <p>Here the collection manipulation is processed only once you iterate over it <code>rows</code>, and only the first 5 that match the <code>Where</code> filter will be used, it will stop once it hits that. And this all comes down to the fact that C# implements <a href="http://en.wikipedia.org/wiki/Iterator">Iterators</a> through the <code>IEnumerable</code> interface.</p>
-<h2>Enter ES6</h2>
+<h2 id="enter-es6">Enter ES6</h2>
 <p>Good news everybody, ECMAScript 6 has a proposal forward to <a href="http://wiki.ecmascript.org/doku.php?id=harmony:iterators">add iterators to ECMAScript/JavaScript</a> which means we can create lazy evaluated objects, more specifically, lazy evaluated collections.</p>
 <p><em>Note: This is a draft spec so what I&#39;m doing only works in Firefox Nightly and may stop working at some random point.</em></p>
 <p>To create an iterator object you need to add a member of <code>__iterator__</code> that is a function that <code>yield</code>s a result, here&#39;s a basic iterator:</p>
@@ -232,7 +232,7 @@
     <span class="title">console</span>.<span class="title">log</span><span class="params">(x)</span>;
 }</code></pre>
 <p><em>(Yes it&#39;s a contrived example but we&#39;ll move on from that.)</em></p>
-<h1>Implementing LINQ</h1>
+<h1 id="implementing-linq">Implementing LINQ</h1>
 <p>Now we&#39;ve seen the basics of how you would create something that&#39;s an iterable collection, and this is the basis of how we could implement LINQ. For this I&#39;m going to create an <code>Enumerable</code> type that we&#39;ll work against:</p>
 <pre class="highlighted"><code class="php"><span class="keyword">var</span> Enumerable = <span class="function"><span class="keyword">function</span> <span class="params">(array)</span> {</span>
     <span class="keyword">if</span> (typeof <span class="keyword">this</span> === <span class="string">'undefined'</span> || <span class="keyword">this</span>.constructor !== Enumerable) {
@@ -293,7 +293,7 @@ Enumerable.prototype.filter = <span class="keyword">where</span>; <span class="c
 <pre class="highlighted"><code class="cs"><span class="keyword">var</span> enumerable = Enumerable([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
 <span class="keyword">var</span> odds = enumerable.<span class="keyword">where</span>(x =&gt; x % <span class="number">2</span>);</code></pre>
 <p>Now we have an unevaluated collection filter, and until we <em>step into</em> the collection it&#39;ll stay that way.</p>
-<h1>Stepping it up with chaining</h1>
+<h1 id="stepping-it-up-with-chaining">Stepping it up with chaining</h1>
 <p>The really powerful aspect of LINQ is its chaining capability, that you can apply multiple &quot;query&quot; operations to get a result, like our original example. So now let&#39;s add a <code>Count</code> method:</p>
 <pre class="highlighted"><code class="javascript"><span class="keyword">var</span> count = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
     <span class="keyword">var</span> count = <span class="number">0</span>;
@@ -310,7 +310,7 @@ console<span class="variable">.log</span>(odds<span class="variable">.count</spa
 <pre class="highlighted"><code class="avrasm">var notOne = odds<span class="preprocessor">.where</span>(<span class="built_in">x</span> =&gt; <span class="built_in">x</span> &gt; <span class="number">1</span>)<span class="comment">;</span>
 console<span class="preprocessor">.log</span>(notOne<span class="preprocessor">.count</span>())<span class="comment">; //1</span></code></pre>
 <p>And if you were to debug through it keeps doing the <code>__iterator__</code> method for the <em>parent</em> <code>Enumerable</code> object, meaning it&#39;ll ask for <code>1</code>, pass it to the initial filter, <code>x =&gt; x % 2</code> and then to <code>x =&gt; x &gt; 1</code> since it passed the first <code>where</code> call. The next item through will fail the first <code>where</code> and won&#39;t be passed to the second. Neat!</p>
-<h1>Select</h1>
+<h1 id="select">Select</h1>
 <p>Say we want to implement <code>Select</code> (which is <code>map</code> in JavaScript land), again I&#39;m creating a new <code>Enumerable</code> subclass:</p>
 <pre class="highlighted"><code class="actionscript"><span class="keyword">var</span> SelectEnumerable = (<span class="function"><span class="keyword">function</span> <span class="params">(__super)</span> {</span>
     __<span class="keyword">extends</span>(SelectEnumerable, __<span class="keyword">super</span>);
@@ -333,7 +333,7 @@ console<span class="preprocessor">.log</span>(notOne<span class="preprocessor">.
 <p>It&#39;s very similar to the <code>WhereEnumeratable</code> but we&#39;re returning the result of the provided function. Once added to the <code>Enumerable</code> prototype it means we can do this:</p>
 <pre class="highlighted"><code class="cs"><span class="keyword">var</span> squares = enumerable.<span class="keyword">select</span>(x =&gt; x ^ x);
 <span class="keyword">var</span> oddSquares = enumerable.<span class="keyword">where</span>(x =&gt; x % <span class="number">2</span>).<span class="keyword">select</span>(x =&gt; x ^ x);</code></pre>
-<h1>.All</h1>
+<h1 id="-all">.All</h1>
 <p>Not all of the methods we&#39;d want to implement are going to require a new subclass to be made, something like <a href="http://msdn.microsoft.com/en-us/library/bb548541.aspx"><code>All</code></a>, which returns whether or not every item in the Enumerable matches the predicate, will evaluate immediately. It&#39;s reasonably simple to implement as well:</p>
 <pre class="highlighted"><code class="javascript"><span class="keyword">var</span> all = <span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> {</span>
     <span class="keyword">for</span> (<span class="keyword">let</span> x <span class="keyword">in</span> <span class="keyword">this</span>) {
@@ -346,7 +346,7 @@ console<span class="preprocessor">.log</span>(notOne<span class="preprocessor">.
 };
 Enumerable.prototype.all = all;</code></pre>
 <p>Here it&#39;ll go over each item and if any of them fail the function it&#39;ll return false, otherwise it&#39;s true. Because we&#39;re using a <code>for-in</code> loop against the <code>this</code>, which is an Enumerable (or subclass of) we step back through all the previous points in the chain.</p>
-<h1>Bringing it all together</h1>
+<h1 id="bringing-it-all-together">Bringing it all together</h1>
 <p>So now that we&#39;ve got a bunch of lazy evaluation available we could do something like this:</p>
 <pre class="highlighted"><code class="matlab">var range = <span class="transposed_variable">Enumerable.</span>range(<span class="number">100</span>, <span class="number">1000</span>);
 var <span class="built_in">primes</span> = <span class="transposed_variable">range.</span>where(n =&gt; <span class="transposed_variable">Enumerable.</span>range(<span class="number">2</span>, <span class="transposed_variable">Math.</span><span class="built_in">floor</span>(<span class="transposed_variable">Math.</span><span class="built_in">sqrt</span>(n))).all(<span class="built_in">i</span> =&gt; n <span class="comment">% i &gt; 0));</span>
@@ -355,7 +355,7 @@ var <span class="built_in">primes</span> = <span class="transposed_variable">ran
     console.log(prime);
 }</span></code></pre>
 <p>That&#39;s a simple prime number generate, using some more extensions that will generate a range between two numbers (100 and 1000). Pretty neat hey, it finds all 143 prime numbers.</p>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>And there we have it, a look at how we can use iterators to create a lazy-evaluated collection API which brings the power of .NET&#39;s LINQ to JavaScript. You&#39;ll find my <a href="https://github.com/aaronpowell/linq-in-javascript/">LINQ in JavaScript repository here</a> and it includes a <a href="https://github.com/aaronpowell/linq-in-javascript/tree/master/tests">bunch of tests</a> for the different parts of the API.</p>
 <p>Like I said this is built against a draft implementation of a spec and is in part another experiment but I think it&#39;s a cool example of what&#39;s coming in the future of JavaScript.</p>
 

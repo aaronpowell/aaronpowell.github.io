@@ -67,6 +67,46 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">31st December 2013</span>
+                            <h3><a href="/posts/2013-12-31-linq-in-javascript-for-real.html">LINQ in JavaScript, ES6 style, for real this time</a></h3>
+                        </header>
+                        <p>Revisiting how to implement LINQ in JavaScript on top of ES6 but this time it&#39;s actually going to be on top of ES6 features!</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">16th September 2013</span>
+                            <h3><a href="/posts/2013-09-16-linq-in-javascript-es6-clarification.html">LINQ in JavaScript, ES6 style clarification</a></h3>
+                        </header>
+                        <p>A quick clarification on my previous post about LINQ in JavaScript using ES6 features.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/linq.html"><span>linq</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">6th September 2013</span>
                             <h3><a href="/posts/2013-09-06-linq-in-javascript-es6.html">LINQ in JavaScript, ES6 style</a></h3>
                         </header>
@@ -123,49 +163,13 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">25th June 2012</span>
-                            <h3><a href="/posts/2012-06-25-i-helped-kill-umbraco-5.html">I helped kill Umbraco 5</a></h3>
-                        </header>
-                        <p>Hi, my name&#39;s Aaron Powell and I was involved in killing Umbraco 5.</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/umbraco-5.html"><span>umbraco-5</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/opinionated.html"><span>opinionated</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">13th June 2012</span>
-                            <h3><a href="/posts/2012-06-13-introducing-umbraco-contributor-list.html">Introducing the Umbraco contributor mailing list</a></h3>
-                        </header>
-                        <p>Keen discuss contributing to Umbraco&#39;s core, join the discussion now!</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/umbraco.html"><span>umbraco</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
 
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
-                            <h1>In the beginning</h1>
+                            <h1 id="in-the-beginning">In the beginning</h1>
 <p>LINQ to Umbraco is actually a lot old a project that most people realise, in fact the initial idea of LINQ to Umbraco started when I had a discussion with Niels Hartvig (founder of Umbraco) at the end of 2007 when he was running training in Melbourne.</p>
 <p>Back then C# 3.0 was just released, Visual Studio 2008 was just out and everyone was very excited about this new technology <em>LINQ</em>. I discussed it with him and he really liked the idea of having a LINQ provider, but it was nothing more than a &quot;That would be awesome!&quot; idea. Keep in mind, this is before Umbraco 4.0 had even been released!</p>
 <p>About 6 months later I had got fed up with working directly with the Document API (as we were doing a lot of Document creation at the time) and I decided that I would write a wrapper for it. This project was called <strong>Umbraco Interaction Layer</strong>, and was really just a new way to create/ edit/ delete documents. As an afterthought I decided to add &quot;LINQ&quot; to it, but it was again nothing more than a wrapper on top of the Document API so it was really shit slow (and would <strong>really</strong> hammer a database!).</p>

@@ -175,7 +175,7 @@ Now I mean no disrespect to Chris, but there are a few things which I don&#39;t 
 <p>The second issue I have with it is the naming. All the methods are named with Pascal Casing, which is the standard in .NET land, but every JavaScript library I&#39;ve ever used (and as is standard) uses Camel Casing for methods. Sure Pascal keeps its relationship to .NET valid, but when trying to appeal the JavaScript developers it&#39;s just a bit foreign.</p>
 <p>Lastly I&#39;m a bit bothered by the lack of argument checking. This may be because I&#39;m a very defensive programmer, but I don&#39;t like to allow developers to shoot themselves in the foot. If a parameter should be a function, then the paramter should be checked as a function. If a parameter is required, it should be checked as such.</p>
 <p>This is more of a personal preference than a real design flaw though.</p>
-<h2>My Approach</h2>
+<h2 id="my-approach">My Approach</h2>
 <p>Now that I&#39;ve talked aobut what I don&#39;t like with the JSLINQ project I think it&#39;s only fair to talk about my approach. I&#39;ve gone with a more traditional LINQ approach and added extensions to an existing type, in this case the Array type, via <code>Array.prototype</code>. This means it is closer to the extension-method format of IEnumerable<T> from .NET, you just need to add in a namespace (aka, include the JavaScript file), but does have a problem of allowing the collection to be modified (which does have pros and cons).</p>
 <p>I have also kept with standard JavaScript programming and Camel Cased the method names.</p>
 <p>The following operators are supported:</p>
@@ -228,7 +228,7 @@ Array.prototype.groupBy = function(fn) {
 
     <span class="keyword">return</span> ret;
 }</code></pre>
-<h2>The next stage</h2>
+<h2 id="the-next-stage">The next stage</h2>
 <p>I&#39;ve done a few tweaks within LINQ in JavaScript, and I&#39;ve added a couple of new operators, <code>Skip</code>, <code>SkipWhile</code> and <code>Take</code>, all providing the same functionality that their .NET counterparts provide.</p>
 <p>Lets have a look at the way some of the code works, we&#39;ll look at the where method:</p>
 <pre class="highlighted"><code class="haskell"><span class="type">Array</span>.prototype.<span class="keyword">where</span> = function(fn) {
@@ -248,11 +248,11 @@ Again you&#39;ll notice type checking, this time of the return value of the func
 <p>Ultimately LINQ in JavaScript is nothing more than throught experiment project. It shows that you can quite easily have a client side query language using JavaScript and functional programming.</p>
 <p><strong>But I don&#39;t recommend that anyone acutally use it</strong>. If you&#39;re using a client-side query API such as this (or any of the other LINQ implementations for JavaScript) you&#39;re doing it wrong. Particularly operators like where, skip, take and even select. These operators are designed to lower/ change the data volume you are working with, which on the client side is not a good idea. It means that you&#39;ve returned too much data from the server!
 I see the only real useful reason for this (other than just wanting to prove it can be done) is to manipulate a DOM structure, say client-side reordering of a table.</p>
-<h2>ECMAScript 5</h2>
+<h2 id="ecmascript-5">ECMAScript 5</h2>
 <p>LINQ in JavaScript supports the new Array methods which are part of ECMAScript 5, you can read more about it in the <a href="/linq-in-javascript/html5">announcement post</a>.</p>
-<h2>Source code</h2>
+<h2 id="source-code">Source code</h2>
 <p>I&#39;ve pushed the <a href="https://hg.slace.biz/linq-in-javascript">source code for the LINQ in JavaScript</a> project up to bitbucket. If you&#39;re interested in having a play with it you can grab it from there.</p>
-<h2>NuGet</h2>
+<h2 id="nuget">NuGet</h2>
 <p>I have created a NuGet package for this as well. <a href="http://nuget.org/Packages/Packages/Details/LinqInJavaScript-1-0">You can get it here</a>.</p>
 
                         </article>

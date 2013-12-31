@@ -4,13 +4,160 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-11-28T03:10:05.731Z</updated>
+    <updated>2013-12-31T07:34:51.549Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>LINQ in JavaScript, ES6 style, for real this time</title>
+            <link href="http://www.aaron-powell.com/posts/2013-12-31-linq-in-javascript-for-real.html"/>
+            <updated>2013-12-31T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-12-31-linq-in-javascript-for-real.html</id>
+            <content type="html">&lt;p&gt;In a recent post I talked about writing &lt;a href=&quot;/posts/2013-09-06-linq-in-javascript-es6.html&quot;&gt;LINQ in JavaScript using ES6 iterators&lt;/a&gt; but then had to &lt;a href=&quot;/posts/2013-09-16-linq-in-javascript-es6-clarification.html&quot;&gt;take my words back&lt;/a&gt; after it was pointed out to me that I wasn&amp;#39;t actually using ES6 generators.&lt;/p&gt;
+&lt;p&gt;Well some time has past and I&amp;#39;ve reworked my previous library to actually use the &lt;a href=&quot;http://wiki.ecmascript.org/doku.php?id=harmony:iterators&quot;&gt;iterators and generators&lt;/a&gt; from ES6, so let&amp;#39;s have a look at how to get going with it.&lt;/p&gt;
+&lt;h1 id=&quot;lazy-evaluating-collections&quot;&gt;Lazy evaluating collections&lt;/h1&gt;
+&lt;p&gt;Let&amp;#39;s start simple, let&amp;#39;s take an array and make it lazy evaluated. To do this I&amp;#39;m going to create a &lt;em&gt;generator function&lt;/em&gt; that deals with the iterations through the array:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; lazyArray = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;* (...args) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; args.length; i++) {
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; args[i];
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There&amp;#39;s a few new things here to look at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;function*&lt;/code&gt; - this is a new syntax as part of ES6 and what it is doing is telling the JavaScript runtime that this function is a &lt;em&gt;genreator function&lt;/em&gt;. This is important if we want to use &lt;code&gt;yield&lt;/code&gt; to return values as &lt;code&gt;yield&lt;/code&gt; (and &lt;code&gt;yield*&lt;/code&gt; which I won&amp;#39;t be covering) can only be used inside a generator function. &lt;em&gt;Side note: At the time of writing Firefox Nightly allows you to use &lt;code&gt;yield&lt;/code&gt; outside of generator functions, yay bleeding edge!&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;...args&lt;/code&gt; - I&amp;#39;ve used this mostly for convenience, splats are coming in ES6 and it&amp;#39;s so much easier to get arguments as arrays this way&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;let&lt;/code&gt; - as you should know JavaScript is &lt;em&gt;function scoped&lt;/em&gt; not &lt;em&gt;block scoped&lt;/em&gt; (which C# is) so when you declare a variable, regardless of where you declare it, it&amp;#39;ll always be available in the function. Well that was before we had ES6 and &lt;code&gt;let&lt;/code&gt;. &lt;code&gt;let&lt;/code&gt; allows you to create block scoped variables and as I play with more ES6 I find that I prefer to use &lt;code&gt;let&lt;/code&gt; over &lt;code&gt;var&lt;/code&gt; for declaring variables as it brings a more sane scope to what I&amp;#39;m declaring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now let&amp;#39;s use it:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;nginx&quot;&gt;&lt;span class=&quot;title&quot;&gt;let&lt;/span&gt; arr = lazyArray(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Awesome, we&amp;#39;ve got our lazy array, not quite as nice as using &lt;code&gt;[0,1,2,3...]&lt;/code&gt;, but it&amp;#39;s acceptable, so now we can do stuff with it, like read the values out:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(let x of arr)&lt;/span&gt; {
+    &lt;span class=&quot;title&quot;&gt;console&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x)&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again we&amp;#39;re seeing some new syntax, this time in the form of a &lt;code&gt;for-of&lt;/code&gt; statement. This is used to iterate through the results of a generator function. Since this function is lazy evaluated we don&amp;#39;t have array indexers or anything on it, instead we have a &lt;code&gt;next&lt;/code&gt; method which tells it we want the next iteration of the function which is similar to &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.collections.ienumerator.aspx&quot;&gt;&lt;code&gt;IEnumerator&lt;/code&gt; and it&amp;#39;s &lt;code&gt;MoveNext&lt;/code&gt; method&lt;/a&gt;. In fact we could write something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;console&lt;span class=&quot;variable&quot;&gt;.log&lt;/span&gt;(arr&lt;span class=&quot;variable&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;variable&quot;&gt;.value&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//0&lt;/span&gt;
+console&lt;span class=&quot;variable&quot;&gt;.log&lt;/span&gt;(arr&lt;span class=&quot;variable&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;variable&quot;&gt;.value&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//1&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;//and so on&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result of &lt;code&gt;next()&lt;/code&gt; returns us an object like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;{
+    done: &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;|&lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;keyword&quot;&gt;value&lt;/span&gt;: &lt;span class=&quot;keyword&quot;&gt;value&lt;/span&gt;|undefined
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So to decompose our &lt;code&gt;for-of&lt;/code&gt; look it&amp;#39;s more like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; x;
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(!(x = arr.&lt;span class=&quot;function_name&quot;&gt;next&lt;/span&gt;())&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;done&lt;/span&gt;) {
+    &lt;span class=&quot;title&quot;&gt;console&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x.value)&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What we&amp;#39;re saying is &amp;quot;While the generator isn&amp;#39;t &lt;code&gt;done&lt;/code&gt; get the next and output the value&amp;quot;. Personally I think the &lt;code&gt;for-of&lt;/code&gt; syntax is much nicer, but there&amp;#39;s advantaged to accessing items at your choosing, just like using the &lt;code&gt;IEnumerator&lt;/code&gt; interface in C# has its advantages.&lt;/p&gt;
+&lt;h1 id=&quot;building-filtering-for-our-generator-function&quot;&gt;Building filtering for our generator function&lt;/h1&gt;
+&lt;p&gt;The problem with our &lt;code&gt;lazyArray&lt;/code&gt; is that we have no way which we would be able to filter it, although it&amp;#39;s &lt;em&gt;array like&lt;/em&gt; it&amp;#39;s not an array and we can&amp;#39;t make it an array without loosing our lazy evaluation. So instead we&amp;#39;ll start augmenting the function prototype:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;lazyArray.prototype.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = function* (fn) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; this) {
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (fn(&lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;)) {
+            yield &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;;
+        }
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This works in a very smooth fashion, you&amp;#39;ll see that we&amp;#39;re doing &lt;code&gt;for (let item of this)&lt;/code&gt;, that&amp;#39;s because we&amp;#39;re augmenting a generator function, so we are lazy evaluating our &amp;quot;parent&amp;quot; collection, we can just &lt;code&gt;for-of&lt;/code&gt; loop over that.&lt;/p&gt;
+&lt;p&gt;And ultimately what it means is we can do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let x &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; arr.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;(i =&amp;gt; i % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)) {
+    console.&lt;span class=&quot;command&quot;&gt;log&lt;/span&gt;(x);
+}
+//Note: I'm using &lt;span class=&quot;keyword&quot;&gt;the&lt;/span&gt; fat arrow syntax &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; ES6 &lt;span class=&quot;keyword&quot;&gt;to&lt;/span&gt; make &lt;span class=&quot;keyword&quot;&gt;it&lt;/span&gt; more lambda-esq, &lt;span class=&quot;keyword&quot;&gt;but&lt;/span&gt; you can use a &lt;span class=&quot;string&quot;&gt;&quot;normal function&quot;&lt;/span&gt; instead.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sweet, we&amp;#39;re filtering down to only items that are odd numbers!&lt;/p&gt;
+&lt;h1 id=&quot;transforming-the-items&quot;&gt;Transforming the items&lt;/h1&gt;
+&lt;p&gt;What&amp;#39;s &lt;code&gt;filter&lt;/code&gt; without &lt;code&gt;map&lt;/code&gt; (well... &lt;code&gt;where&lt;/code&gt; without &lt;code&gt;select&lt;/code&gt;)? Again that&amp;#39;s pretty easy to add by just augmenting our &lt;code&gt;lazyArray&lt;/code&gt; prototype:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;lazyArray.prototype.&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; = function* (fn) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; item of &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;) {
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; fn(item);
+    }
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So we could do something like creating squares of everything:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(let x of arr.&lt;span class=&quot;function_name&quot;&gt;select&lt;/span&gt;(i =&amp;gt; i * i))&lt;/span&gt; {
+    &lt;span class=&quot;title&quot;&gt;console&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(x)&lt;/span&gt;;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&quot;chaining&quot;&gt;Chaining&lt;/h1&gt;
+&lt;p&gt;Now being able to do a single manipulation on a collection that is lazy is good, but really you&amp;#39;re more likely to do a &lt;code&gt;filter&lt;/code&gt; then a &lt;code&gt;map&lt;/code&gt;, well let&amp;#39;s go ahead:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let x of &lt;span class=&quot;transposed_variable&quot;&gt;arr.&lt;/span&gt;where(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; =&amp;gt; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;% 2).select(i =&amp;gt; i * i)) {&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(x);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hmm that&amp;#39;s a syntax error, apparently our &lt;code&gt;where&lt;/code&gt; function doesn&amp;#39;t have a &lt;code&gt;select&lt;/code&gt; method, well you&amp;#39;d be right on spotting that. The reason is we&amp;#39;ve been manipulating the &lt;code&gt;lazyArray&lt;/code&gt; prototype, but we also need to manipulate the prototype of these new functions too, but to do that we&amp;#39;ll have to assign them to variables rather than having them as anonymous functions:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = function* &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;(fn) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; item of &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;) {
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (fn(item))
+            &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; item;
+    }
+};
+
+&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; = function* &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;(fn) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; item of &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;) {
+        &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; fn(item);
+    }
+};
+
+lazyArray.prototype.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;;
+lazyArray.prototype.&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;.prototype.&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;.prototype.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;.prototype.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;;
+&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;.prototype.&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then we can:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let x of &lt;span class=&quot;transposed_variable&quot;&gt;arr.&lt;/span&gt;where(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; =&amp;gt; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;% 2).select(i =&amp;gt; i * i)) {&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(x);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or even:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let x of &lt;span class=&quot;transposed_variable&quot;&gt;arr.&lt;/span&gt;select(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; =&amp;gt; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; * &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;).select(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; =&amp;gt; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; * &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;)) &lt;span class=&quot;cell&quot;&gt;{
+    console.log(x);
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now using your imagination you can see how other LINQ methods can be implemented.&lt;/p&gt;
+&lt;h1 id=&quot;multiple-enumerations&quot;&gt;Multiple enumerations&lt;/h1&gt;
+&lt;p&gt;Now this is where it&amp;#39;ll get tricky, unlike C# JavaScript generator functions can&amp;#39;t be iterated over multiple times, once a generator is spent &lt;em&gt;it&amp;#39;s spent&lt;/em&gt;. This will be a problem if you want to do something like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;rust&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (arr.&lt;span class=&quot;keyword&quot;&gt;any&lt;/span&gt;()) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; arr) {
+        &lt;span class=&quot;comment&quot;&gt;//stuff&lt;/span&gt;
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For an &lt;code&gt;any()&lt;/code&gt; to work you need to walk the generator, but when you&amp;#39;ve walked it once you can&amp;#39;t walk it again, so how can do address that? The easiest way is to do what ReSharper suggests to me all the time in C#, get the collection in to an array, but doing so looses the laziness of our collection.&lt;/p&gt;
+&lt;p&gt;Instead what I&amp;#39;ve done with LINQ in JavaScript is wrapped the enumerable in another function so you have to invoke it to get the generator, like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;rust&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (arr.&lt;span class=&quot;keyword&quot;&gt;any&lt;/span&gt;()) {
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; arr()) {
+        &lt;span class=&quot;comment&quot;&gt;//stuff&lt;/span&gt;
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So our &lt;code&gt;arr&lt;/code&gt; object is actually a non-generator function and you have to invoke it to use walk it, but to make it nicer to work with I&amp;#39;ve made functions like &lt;code&gt;any()&lt;/code&gt; take care of that for you so you don&amp;#39;t have to &lt;code&gt;arr().any()&lt;/code&gt; as I think that&amp;#39;d be a code smell. But this does mean that the result of a call to &lt;code&gt;where&lt;/code&gt; or &lt;code&gt;select&lt;/code&gt; will need to be invoked like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;applescript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let &lt;span class=&quot;property&quot;&gt;item&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; arr.&lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt;(x =&amp;gt; x % &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)()) {
+    console.&lt;span class=&quot;command&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;property&quot;&gt;item&lt;/span&gt;);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But really I&amp;#39;m of the opinion you shouldn&amp;#39;t be doing your lambda expressions inside of the &lt;code&gt;for-of&lt;/code&gt; declaration anyway so I think that it&amp;#39;s fine.&lt;/p&gt;
+&lt;h1 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h1&gt;
+&lt;p&gt;Well there we have it, how we can use ES6 generators to create LINQ in JavaScript which is &lt;em&gt;actually&lt;/em&gt; lazy evaluated. I&amp;#39;ve gone ahread and published the code which I&amp;#39;ve been working on &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript&quot;&gt;to my GitHub repo&lt;/a&gt; and you can also get it &lt;a href=&quot;https://npmjs.org/package/linq-es6&quot;&gt;via npm&lt;/a&gt; if you&amp;#39;re using Node.js &lt;code&gt;0.11.4&lt;/code&gt; or higher (and turn on the harmony features of v8). So go one, check out &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript/tree/master/tests&quot;&gt;the tests&lt;/a&gt; for some fun examples of what you can do like:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;describe(&lt;span class=&quot;string&quot;&gt;'Interesting API usages'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+   it(&lt;span class=&quot;string&quot;&gt;'should calc prime numbers'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        var range = &lt;span class=&quot;transposed_variable&quot;&gt;Enumerable.&lt;/span&gt;range(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;);
+
+        var &lt;span class=&quot;built_in&quot;&gt;primes&lt;/span&gt; = &lt;span class=&quot;transposed_variable&quot;&gt;range.&lt;/span&gt;where(n =&amp;gt; &lt;span class=&quot;transposed_variable&quot;&gt;Enumerable.&lt;/span&gt;range(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;floor&lt;/span&gt;(&lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;sqrt&lt;/span&gt;(n))).all(&lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; =&amp;gt; n &lt;span class=&quot;comment&quot;&gt;% i &amp;gt; 0));&lt;/span&gt;
+
+        var expectedPrimes = &lt;span class=&quot;matrix&quot;&gt;[&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;]&lt;/span&gt;;
+        var index = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (let prime of &lt;span class=&quot;built_in&quot;&gt;primes&lt;/span&gt;()) &lt;span class=&quot;cell&quot;&gt;{
+            expect(prime).to.equal(expectedPrimes[index]);
+            index++;
+        }&lt;/span&gt;
+    }); 
+});&lt;/code&gt;&lt;/pre&gt;
+</content>
+            
+            <category>javascript</category>
+            
+            <category>linq</category>
+            
+            <category>es6</category>
+            
+        </entry>
     
         <entry>
             <title>Accessing the Location header in a CORS-enabled API</title>
@@ -48,6 +195,25 @@ response&lt;span class=&quot;preprocessor&quot;&gt;.WriteCorsHeaders&lt;/span&gt
             <category>ajax</category>
             
             <category>cors</category>
+            
+        </entry>
+    
+        <entry>
+            <title>LINQ in JavaScript, ES6 style clarification</title>
+            <link href="http://www.aaron-powell.com/posts/2013-09-16-linq-in-javascript-es6-clarification.html"/>
+            <updated>2013-09-16T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-09-16-linq-in-javascript-es6-clarification.html</id>
+            <content type="html">&lt;p&gt;I &lt;a href=&quot;/posts/2013-09-06-linq-in-javascript-es6.html&quot;&gt;recently blogged about implementing LINQ in JavaScript with ES6 iterators&lt;/a&gt;. While I&amp;#39;d done a bunch of research, played around with FireFox (which seemed to have the most up-to-date implementation) and thought it was all well and good.&lt;/p&gt;
+&lt;p&gt;Unfortunately it turns out that what I was talking about was the &lt;code&gt;__iterator__&lt;/code&gt; syntax which FireFox has implemented but it&amp;#39;s not in line with the &lt;a href=&quot;http://domenic.me/2013/09/06/es6-iterators-generators-and-iterables/&quot;&gt;current iterator and generator approach&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So while I did state that the code was against an API that wasn&amp;#39;t set in stone I was a bit further away from where I wanted to be going forward.&lt;/p&gt;
+&lt;p&gt;Thanks &lt;a href=&quot;https://twitter.com/domenic&quot;&gt;Domenic&lt;/a&gt; for picking up on it and pointing me in the right direction, I&amp;#39;m in the process of reworking the library to work with what&amp;#39;s actually outlined so far in ES6 and you can &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript/tree/es6-generators&quot;&gt;check out the progress&lt;/a&gt;.&lt;/p&gt;
+</content>
+            
+            <category>javascript</category>
+            
+            <category>linq</category>
+            
+            <category>es6</category>
             
         </entry>
     
@@ -157,25 +323,6 @@ response&lt;span class=&quot;preprocessor&quot;&gt;.WriteCorsHeaders&lt;/span&gt
             <category>angularjs</category>
             
             <category>promise</category>
-            
-        </entry>
-    
-        <entry>
-            <title>LINQ in JavaScript, ES6 style clarification</title>
-            <link href="http://www.aaron-powell.com/posts/2013-09-16-linq-in-javascript-es6-clarification.html"/>
-            <updated>2013-09-16T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-09-16-linq-in-javascript-es6-clarification.html</id>
-            <content type="html">&lt;p&gt;I &lt;a href=&quot;/posts/2013-09-06-linq-in-javascript-es6.html&quot;&gt;recently blogged about implementing LINQ in JavaScript with ES6 iterators&lt;/a&gt;. While I&amp;#39;d done a bunch of research, played around with FireFox (which seemed to have the most up-to-date implementation) and thought it was all well and good.&lt;/p&gt;
-&lt;p&gt;Unfortunately it turns out that what I was talking about was the &lt;code&gt;__iterator__&lt;/code&gt; syntax which FireFox has implemented but it&amp;#39;s not in line with the &lt;a href=&quot;http://domenic.me/2013/09/06/es6-iterators-generators-and-iterables/&quot;&gt;current iterator and generator approach&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So while I did state that the code was against an API that wasn&amp;#39;t set in stone I was a bit further away from where I wanted to be going forward.&lt;/p&gt;
-&lt;p&gt;Thanks &lt;a href=&quot;https://twitter.com/domenic&quot;&gt;Domenic&lt;/a&gt; for picking up on it and pointing me in the right direction, I&amp;#39;m in the process of reworking the library to work with what&amp;#39;s actually outlined so far in ES6 and you can &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript/tree/es6-generators&quot;&gt;check out the progress&lt;/a&gt;.&lt;/p&gt;
-</content>
-            
-            <category>javascript</category>
-            
-            <category>linq</category>
-            
-            <category>es6</category>
             
         </entry>
     
@@ -1028,6 +1175,33 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
         </entry>
     
         <entry>
+            <title>New blog, less FunnelWeb</title>
+            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
+            <updated>2013-06-10T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
+            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
+&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
+&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
+&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
+&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
+&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
+&lt;h1 id=&quot;the-future-of-funnelweb&quot;&gt;The future of FunnelWeb&lt;/h1&gt;
+&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
+</content>
+            
+            <category>funnelweb</category>
+            
+            <category>docpad</category>
+            
+        </entry>
+    
+        <entry>
             <title>From FunnelWeb to Git in a few simple steps</title>
             <link href="http://www.aaron-powell.com/posts/2013-06-11-funnelweb-to-git.html"/>
             <updated>2013-06-10T00:00:00.000Z</updated>
@@ -1163,33 +1337,6 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
             <category>scriptcs</category>
             
             <category>git</category>
-            
-        </entry>
-    
-        <entry>
-            <title>New blog, less FunnelWeb</title>
-            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
-            <updated>2013-06-10T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
-            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
-&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
-&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
-&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
-&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
-&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
-&lt;h1 id=&quot;the-future-of-funnelweb&quot;&gt;The future of FunnelWeb&lt;/h1&gt;
-&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
-</content>
-            
-            <category>funnelweb</category>
-            
-            <category>docpad</category>
             
         </entry>
     
@@ -1445,78 +1592,6 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
             <category>offline-storage</category>
             
             <category>indexeddb</category>
-            
-        </entry>
-    
-        <entry>
-            <title>Flight Mode - Introduction</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-23-introduction.html"/>
-            <updated>2013-05-23T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-23-introduction.html</id>
-            <content type="html">&lt;p&gt;So you&amp;#39;ve got an idea to build an amazing new web application, it&amp;#39;s going to make you tens of dollars, hundreds of cents, it&amp;#39;s all web API&amp;#39;ed and SPA. There&amp;#39;s a responsive design so it&amp;#39;s mobile friendly, all the cool stuff. But there&amp;#39;s one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it&amp;#39;s at a basic level, when they are offline.&lt;/p&gt;
-&lt;p&gt;You need to handle &lt;strong&gt;Flight Mode&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Throughout this series we&amp;#39;re going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/cookies&quot;&gt;Cookies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/local-session-storage&quot;&gt;localStorage and sessionStorage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/file-system&quot;&gt;FileSystem APIs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/flight-mode/libraries&quot;&gt;Useful libraries for offline storage&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&amp;#39;m also going to be showing off basic implementations as we&amp;#39;re going along to give a bit of an insight into the way we can implement using these storage models.&lt;/p&gt;
-&lt;p&gt;For that I&amp;#39;ve created a little library which we&amp;#39;ll be interacting via, called &lt;code&gt;FlightMode&lt;/code&gt;. This then allows you to create &lt;em&gt;adapters&lt;/em&gt; which are implementations of an underlying storage layer, here&amp;#39;s our API that we&amp;#39;ll interacting with:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;lisp&quot;&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;global&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-    'use strict'&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    var FlightMode = function &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, adapterName)&lt;/span&gt;&lt;/span&gt; {
-        if &lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;!&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;body&quot;&gt; instanceof FlightMode)&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt; {
-            return new FlightMode&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-        }
-
-        this.storeName = storeName&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        var adapter = FlightMode.adapters[adapterName] || FlightMode.defaultAdapter&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-        this.adapter = adapter.init&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;storeName&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.add = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.add&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.remove = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.remove&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.get = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.get&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getAll = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getAll&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.getBy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.getBy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;, value)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.prototype.destroy = function&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt; {
-        return this.adapter.destroy&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    FlightMode.adapters = []&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-    global.FlightMode = FlightMode&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
-
-})&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;list&quot;&gt;(&lt;span class=&quot;title&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;body&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The code is also available on &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog&quot;&gt;my github&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;So sit back and let&amp;#39;s have a look at how to do Flight Mode capable web applications.&lt;/p&gt;
-</content>
-            
-            <category>offline-storage</category>
-            
-            <category>flight-mode</category>
             
         </entry>
     
