@@ -65,6 +65,26 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">12th January 2014</span>
+                            <h3><a href="/posts/2014-01-12-integration-testing-katana-with-auth.html">Integration testing authenticated Katana applications</a></h3>
+                        </header>
+                        <p>A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/katana.html"><span>katana</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">19th April 2013</span>
                             <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
                         </header>
@@ -142,24 +162,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">8th October 2012</span>
-                            <h3><a href="/posts/2012-10-08-reverse-order-unique-indexes.html">Reverse order unique queries in IndexedDB</a></h3>
-                        </header>
-                        <p>The quirk of reverse index querying in IndexedDB and in turn db.js</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -172,7 +174,7 @@
     <span class="title">return</span> Json(new { <span class="title">FirstName</span> = <span class="string">"Aaron"</span>, LastName = <span class="string">"Powell"</span> });
 }</code></pre>
 <p>Here our Action (which comes from our Route) is defining that we want to output JSON to the response and it gives us a nice way which we can do it. Let&#39;s see about adding something similar to our application.</p>
-<h1>Responding with JSON</h1>
+<h1 id="responding-with-json">Responding with JSON</h1>
 <p>We&#39;ll start with an easy task, we&#39;ll make it easier to respond with JSON. To do this there&#39;s two things which we need to do:</p>
 <ul>
 <li>Ensure the appropriate content type is set on the response</li>
@@ -213,7 +215,7 @@
 }</code></pre>
 <p>See, quite easy. We start by creating a serializer, check the boolean argument and add a contract resolver of <code>CamelCasePropertyNamesContractResolver</code> if we want to do JavaScript naming and finish off by ending the response with a serialized object.</p>
 <p><em>There may be an easier way to do this, I&#39;m hardly a JSON.Net expert this is just the way I&#39;ve come across doing it and it works fine for my needs.</em></p>
-<h1>Sending out JSON</h1>
+<h1 id="sending-out-json">Sending out JSON</h1>
 <p>Once importing the namespace for our extension methods we can get cracking on using it:</p>
 <pre class="highlighted"><code class="avrasm">builder<span class="preprocessor">.Get</span>(<span class="string">"/json"</span>, (req, res) =&gt; {
     res<span class="preprocessor">.Json</span>(new { FirstName = <span class="string">"Aaron"</span>, LastName = <span class="string">"Powell"</span> })<span class="comment">;</span>
@@ -222,7 +224,7 @@
 <pre class="highlighted"><code class="avrasm">builder<span class="preprocessor">.Get</span>(<span class="string">"/json/:name"</span>, (req, res) =&gt; {
     res<span class="preprocessor">.Json</span>(new { Name = req<span class="preprocessor">.UrlSegments</span><span class="preprocessor">.name</span> })<span class="comment">;</span>
 })<span class="comment">;</span></code></pre>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>So this wraps up a quick look at how we can start enriching our responses by adding different response types. Using the method described above you could easily create methods to return text, XML, or even a VCard, basically anything you want from your application.</p>
 <p>It&#39;s all starting to come together nicely but there&#39;s something quite important missing... HTML. In our next instalment we&#39;ll look at producing a View Engine to respond with HTML.</p>
 <p>As always you can check out the full code up on the <a href="https://github.com/aaronpowell/Owin.HelloWorld">GitHub repository</a>.</p>

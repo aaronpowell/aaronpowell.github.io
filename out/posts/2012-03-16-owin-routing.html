@@ -65,6 +65,26 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">12th January 2014</span>
+                            <h3><a href="/posts/2014-01-12-integration-testing-katana-with-auth.html">Integration testing authenticated Katana applications</a></h3>
+                        </header>
+                        <p>A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/katana.html"><span>katana</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">19th April 2013</span>
                             <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
                         </header>
@@ -142,24 +162,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">8th October 2012</span>
-                            <h3><a href="/posts/2012-10-08-reverse-order-unique-indexes.html">Reverse order unique queries in IndexedDB</a></h3>
-                        </header>
-                        <p>The quirk of reverse index querying in IndexedDB and in turn db.js</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -167,7 +169,7 @@
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
                             <p><a href="http://www.aaron-powell.com/web/owin-and-middleware">Last time around</a> we started looking at middleware in OWIN and how to handle different request types. So now comes the next logical step, how do we handle different URLs? Currently we don&#39;t have the facilities to handle different URLs, aka routing, so let&#39;s work on that.</p>
-<h2>Understanding routing</h2>
+<h2 id="understanding-routing">Understanding routing</h2>
 <p>Before we dive into coding our solution it&#39;s a good idea to think about what routing really is. You&#39;re probably familiar with this from ASP.Net MVC with code such as:</p>
 <pre class="highlighted"><code class="objectivec">    routes<span class="variable">.MapRoute</span>(
         <span class="string">"Default"</span>,                                              <span class="comment">// Route name</span>
@@ -181,7 +183,7 @@
 <li>Some URL segments may be useful in the handler</li>
 </ul>
 <p>Ok we understand a bit of <em>how</em> we want to construct our route matching let&#39;s set about implementing it. To do this we&#39;re going to build on top of the extension methods we built last time, but for this we&#39;re going to need to be passing in a URL, well a pattern to match the URLs.</p>
-<h1>Defining our route matching</h1>
+<h1 id="defining-our-route-matching">Defining our route matching</h1>
 <p>The first thing we&#39;ll do is look at the routes systems in other middleware projects like <a href="https://github.com/NancyFx/Nancy/wiki/Defining-routes">Nancy</a>, <a href="http://expressjs.com/guide.html#routing">Express.js</a> on Node and <a href="http://www.sinatrarb.com/intro.html#Routes">Sinatra</a> on Ruby. Something that we can see from these three projects (and other middleware projects out there) is that they support the URL matching scenarios I described above (coincidence?) and they do it is similar ways. All allow you to do:</p>
 <ul>
 <li>A static value</li>
@@ -192,12 +194,12 @@
 <li>A pattern-matched value</li>
 </ul>
 <p>For this example I&#39;m going to use the Sinatra/ Express.js routing style (<code>:name</code> not <code>{name}</code>).</p>
-<h2>Breaking down our route matching</h2>
+<h2 id="breaking-down-our-route-matching">Breaking down our route matching</h2>
 <p>So now that we know what we want to be able <em>do</em> in our URLs let&#39;s think about <em>how</em> we&#39;d do it.</p>
 <p>Static values should be pretty easy, it&#39;s just a string that we want to match against and equality statements should be right to take care of that, let&#39;s move on.</p>
 <p>Named values is next on the list, what we want to do here is take this particular URL segment and then grab the value to provide into our handler, maybe we can get away with just sub-stringing here?</p>
 <p>Pattern matching... hmm that&#39;s an interesting one, but you know what it&#39;s not really that hard, there&#39;s a very simple way to do pattern matching... Regex!</p>
-<h2>Regex ALL the things!</h2>
+<h2 id="regex-all-the-things-">Regex ALL the things!</h2>
 <p>Let&#39;s say we want this URL to match:</p>
 <pre class="highlighted"><code class="coffeescript"><span class="regexp">/users/1234/unsubscribe/</span>email<span class="property">@mail</span>.com</code></pre>
 <p>The URL has two static sections to it, <code>/users/</code> and <code>/unsubscribe/</code>, it also has two dynamic sections, something that we can assume is an id and an email address. Both of these segments likely to be useful within our handler so we&#39;d want to be able to capture them. And if we think about the id segment it&#39;s likely we have some kind of a pattern that could represent it and for the email we just want to capture it (althought it&#39;s true we could also put a pattern in place to match the email <a href="http://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx">but email matching is complex</a> so I don&#39;t want to match it in our URL, that&#39;s for the business logic to validate).</p>
@@ -273,7 +275,7 @@
 <p>Ta-Da! We now have a matching algorithm like so:</p>
 <pre class="highlighted"><code class="javascript">^<span class="regexp">/users/</span>(?<span class="xml"><span class="tag">&lt;<span class="title">id</span>&gt;</span>\d{1,5})/unsubscribe/(?<span class="tag">&lt;<span class="title">email</span>&gt;</span>.+?)$</span></code></pre>
 <p>Paste that into your favourite regex tester and take it for a whirl!</p>
-<h1>Matching our route</h1>
+<h1 id="matching-our-route">Matching our route</h1>
 <p>Now that we <em>can</em> match our route maybe we should expose that. As I said we&#39;ll create an extension method that allows us to do this:</p>
 <pre class="highlighted"><code class="cs"><span class="keyword">public</span> <span class="keyword">static</span> IAppBuilder Get(<span class="keyword">this</span> IAppBuilder builder, <span class="keyword">string</span> route, Action&lt;Request, Response&gt; app)
 {
@@ -312,7 +314,7 @@
     }</code></pre>
 <p>So up front we create our regex and then inside the handler we will match against it as well as checking the Request verb. You&#39;ll see that we&#39;re getting the URL (path) out, again this comes from the OWIN Environment Variables. The only other thing we&#39;re doing is stripping the trailing <code>/</code>. This is more personal preference (and I&#39;m sure some SEO expert can give a good reason for it) but you don&#39;t have to remove it if you don&#39;t want, you&#39;d just have to ensure the regex can handle that scenario.</p>
 <p>But now we&#39;re able to filter the requests by URL and it&#39;s all going to track nicely for us!</p>
-<h1>Capturing our URL segments</h1>
+<h1 id="capturing-our-url-segments">Capturing our URL segments</h1>
 <p>As I said earlier in the post generally when we have a specific URL segment to match we do that because we care about the value and we&#39;ll be wanting it in our handler. Currently though we&#39;re not passing that in are we? Well we should solve that! At the moment I&#39;m using the Gate <code>Request</code> object for the handler but it wont really do what I want here, at least not in an overly discoverable way (since it inherits from a <code>Dictionary&lt;string, object&gt;</code> it&#39;s not too hard but I want to make it easier). Instead I want to extend it, so I&#39;m going to create a superclass called <code>RoutedRequest</code>.</p>
 <p>In the <code>RoutedRequest</code> class I want to surface any of the matched segments and to do this I&#39;m going to use a <a href="http://www.aaron-powell.com/dynamics-library">helper class I wrote a while ago for using Dynamics</a> and pass in a dictionary that represents all matched values. This makes our <code>RoutedRequest</code> class nice and simple:</p>
 <pre class="highlighted"><code class="vala"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RoutedRequest</span> : <span class="title">Request</span>
@@ -336,7 +338,7 @@
                 res<span class="preprocessor">.End</span>(<span class="string">"Email "</span> + req<span class="preprocessor">.UrlSegments</span><span class="preprocessor">.email</span> + <span class="string">" is subscribed.\r\n"</span>)<span class="comment">;</span>
             })<span class="comment">;</span></code></pre>
 <p>You&#39;ll notice that off the <code>req</code> object we can go through the <code>UrlSegments</code> property and use <em>dot-notation</em> to access the email address that was submitted. This is pretty sexy if I do say so myself.</p>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>I&#39;ll admit that this was quite a long post as the subject of routing <em>is a complex one</em>. Hopefully though you&#39;ve seen that without a lot of code we&#39;ve made a phenomenally powerful little route engine (really, it&#39;s quite a simple bit of code in the end).</p>
 <p>While the route that we&#39;ve been looking at is rather complex our little engine is capable of pretty much anything, we don&#39;t <em>need</em> to be putting in regexs, we can get away with routes like <code>/home</code> or <code>/about</code> as well.</p>
 <p>Next time we&#39;ll look at how we can make our responses more powerful with simple helper methods.</p>

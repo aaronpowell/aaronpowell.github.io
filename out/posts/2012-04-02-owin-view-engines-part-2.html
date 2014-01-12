@@ -65,6 +65,26 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">12th January 2014</span>
+                            <h3><a href="/posts/2014-01-12-integration-testing-katana-with-auth.html">Integration testing authenticated Katana applications</a></h3>
+                        </header>
+                        <p>A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/katana.html"><span>katana</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">19th April 2013</span>
                             <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
                         </header>
@@ -142,24 +162,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">8th October 2012</span>
-                            <h3><a href="/posts/2012-10-08-reverse-order-unique-indexes.html">Reverse order unique queries in IndexedDB</a></h3>
-                        </header>
-                        <p>The quirk of reverse index querying in IndexedDB and in turn db.js</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -169,7 +171,7 @@
                             <p>In the last post we had a bit of a look at <a href="http://www.aaron-powell.com/web/owin-view-engines">View Engines for OWIN</a> and in this one I want to take the idea just a little bit further.</p>
 <p>Most web frameworks you come across will allow you to choose your own View Engine. ASP.Net MVC allows for this (although it can be tricky) and frameworks like Express.js or Nancy make it quite easy to drop in your own one.</p>
 <p>You may be wondering why you would want to do this? Apart from the &quot;because you can&quot; and &quot;freedom of choice&quot; reasons there is a slightly more valid reason. Most view engines while being generic often have a level of speciality to them; the developers who write it don&#39;t know about every scenario you&#39;d want to use it in. Let&#39;s say you&#39;re a Node.js programmer who has a love for CoffeeScript. You might want to use the <a href="http://coffeekup.org/">CoffeeKup</a> View Engine since it allows you to write in you <em>native</em> language (I don&#39;t want to debate the merits of this it&#39;s a valid scenario) but the problem with CoffeeKup is it can&#39;t do XML (at least the last time I used it it couldn&#39;t). This may not be really that big a deal for the majority of your application but what if you&#39;ve got an RSS feed? Well then you can&#39;t really expose that through your chosen View Engine so you&#39;d want for that specific route to be able to change to a different View Engine.</p>
-<h1>Teasing out our View Engine</h1>
+<h1 id="teasing-out-our-view-engine">Teasing out our View Engine</h1>
 <p>The first step to making our View Engine more extensible is I&#39;m going to pull out an interface from the <code>RazorViewEngine</code> we have:</p>
 <pre class="highlighted"><code class="vala"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IViewEngine</span>
 {</span>
@@ -178,7 +180,7 @@
 }</code></pre>
 <p>Now I would just have to implement that interface to create a View Engine and not take a dependency on Razor at all.</p>
 <p>You obviously want to update the other references to <code>RazorViewEngine</code> to just be the interface, such as on our singleton and generic argument constraints. Now everywhere we&#39;ll just deal with the interface and never the concrete class.</p>
-<h1>Enabling multiple View Engines</h1>
+<h1 id="enabling-multiple-view-engines">Enabling multiple View Engines</h1>
 <p>Essentially what we&#39;re doing there is enabling multiple View Engines and I&#39;m going to do this via two methods on my <code>ViewEngineActivator</code> called <code>RegisterViewEngine</code> and <code>ResolveViewEngine</code>:</p>
 <pre class="highlighted"><code class="cs"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> RegisterViewEngine(<span class="keyword">string</span> viewEngineId, Func&lt;IViewEngine&gt; viewEngineActivator)
 {
@@ -238,7 +240,7 @@
     .DefaultViewEngine&lt;RazorViewEngine&gt;()
     .RegisterViewEngine(() =&gt; <span class="keyword">new</span> XmlViewEngine(), <span class="string">"xml"</span>)
     <span class="regexp">//</span> <span class="keyword">and</span> so <span class="literal">on</span></code></pre>
-<h1>Accessing the right View Engine</h1>
+<h1 id="accessing-the-right-view-engine">Accessing the right View Engine</h1>
 <p>So we&#39;ve seen how to get a View Engine by an ID but we want to make it easier. Generally speaking you&#39;re going to be only using a single View Engine for most of your routes. To this end I want to have a <em>default</em> View Engine which will be loaded up, which is what our singleton was doing for us before; I&#39;m going to rename it to <code>DefaultViewEngine</code> to make it more discoverable and change it from being a standard get/ set to look like this:</p>
 <pre class="highlighted"><code class="nginx"><span class="title">public</span> static IViewEngine DefaultViewEngine
 {
@@ -255,7 +257,7 @@
     }
 }</code></pre>
 <p>Now I&#39;ve got a backing field and I&#39;m also going to be working under the assumption that there&#39;s a View Engine called <code>defaultViewEngine</code>. This means that you can set it as before or alternatively set it through lazy loading (which the if condition will take care of).</p>
-<h1>Using an alternate View Engine</h1>
+<h1 id="using-an-alternate-view-engine">Using an alternate View Engine</h1>
 <p>We&#39;ve made it to allow you to specify a default View Engine, specify alternate View Engines so let&#39;s look at how to use them.</p>
 <p>There&#39;s two ways you could go about this, you could either add a new parameter to the route registration which is the View Engine to use or you can put it on the actual call to the View Engine. Personally I like approach two more as the View Engine isn&#39;t really related to the route but to the route handler and it also means that as I want to do some overloads for the route methods its not going to mean a lot of duplicate code (which is the same reason that we went with the <code>View</code> extension method to begin with if you remember).</p>
 <p>This gives us an extension method like this:</p>
@@ -274,7 +276,7 @@
     res<span class="preprocessor">.View</span>(<span class="string">"fooEngine"</span>)<span class="comment">;</span>
 })</code></pre>
 <p>While it&#39;s true I&#39;m hard-coding <code>text/html</code> as the content type that&#39;s something you can change yourself, or even make it so that the View Engine knows more about the content type that is being returned; I&#39;ll leave those as your exercises.</p>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>This wrap up our look at View Engines; we&#39;ve seen how to create something simple to support a single View Engine and then expanded on the concept to enable us to use a different View Engine if and when required.</p>
 <p>As always you can check out the full code up on the <a href="https://github.com/aaronpowell/Owin.HelloWorld">GitHub repository</a>.</p>
 

@@ -65,6 +65,26 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">12th January 2014</span>
+                            <h3><a href="/posts/2014-01-12-integration-testing-katana-with-auth.html">Integration testing authenticated Katana applications</a></h3>
+                        </header>
+                        <p>A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/katana.html"><span>katana</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">19th April 2013</span>
                             <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
                         </header>
@@ -142,24 +162,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">8th October 2012</span>
-                            <h3><a href="/posts/2012-10-08-reverse-order-unique-indexes.html">Reverse order unique queries in IndexedDB</a></h3>
-                        </header>
-                        <p>The quirk of reverse index querying in IndexedDB and in turn db.js</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -167,13 +169,13 @@
                     <div id="content" class="8u skel-cell-mainContent">
                         <article class="is-post">
                             <p>In my <a href="http://www.aaron-powell.com/web/hello-owin">last post</a> I looked at getting started with the basics of OWIN and how to create a server which wont do anything overly useful. In this post I want to go a step further and look at how we can start introducing our own layers on top of OWIN (and Gate) to make it nicer to do like <em>web stuff</em>.</p>
-<h1>It&#39;s all about the modules</h1>
+<h1 id="it-s-all-about-the-modules">It&#39;s all about the modules</h1>
 <p>One of the aims of OWIN is to be very lightweight and as we saw in the last post OWIN itself doesn&#39;t really have anything in it and it doesn&#39;t really do anything. This means that you&#39;re entirely responsible for what you do and don&#39;t have included in your server. What this means is that OWIN is very modular, it&#39;s a mix-and-match of what you want to include in your project and if you don&#39;t want something then don&#39;t include the assembly, but it also means that you often have to do something yourself, and this is done through modules.</p>
-<h1>Middleware</h1>
+<h1 id="middleware">Middleware</h1>
 <p>In comes the concept of <a href="http://en.wikipedia.org/wiki/Middleware">Middleware</a>; now this isn&#39;t a new concept in software but it&#39;s probably foreign to most .NET developers, particularly ASP.Net as we&#39;ve always had it built in and never needed to think about it. But with OWIN it&#39;s not so, you&#39;ve kind of got to start from scratch.</p>
 <p><em>Now this isn&#39;t entirely true, there&#39;s already OWIN middleware out there like <a href="http://nancyfx.org/">Nancy</a>, <a href="https://github.com/kayak/kayak">Kayak</a> and <a href="http://nuget.org/packages/gate.middleware">Gate.Middleware</a> to name a few, but I want to introduce the concept and what to do to make a basic middleware. Really you want to be looking at existing libraries to give you what you need.</em></p>
 <p>Back in the last example we had a single method that was handling all the requests that were coming in, be they to <code>/</code> or <code>/favicon.ico</code>, a HTTP GET or POST, everything was handed to this one method. But this isn&#39;t really ideal now is it? You can&#39;t really expect an application to be run out of a single delegate now can you? Let&#39;s start with a simple handler.</p>
-<h1>Handling different verbs</h1>
+<h1 id="handling-different-verbs">Handling different verbs</h1>
 <p>I want to start by making it easy to filter requests by the HTTP verb used, so I can have different handlers for GET, POST, PUT, etc. This is a pretty common scenario we&#39;d want to handle if we&#39;re building a RESTful service so let&#39;s get started.</p>
 <p>To implement this I want to extend the <code>IAppBuilder</code> interface that we came across in our last post through the use of extension methods and I&#39;m also going to build on top of <a href="http://nuget.org/packages/gate">Gate</a> for simplicities sake. So I&#39;ll start with crating our class:</p>
 <pre class="highlighted"><code class="java"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Middleware</span> {</span>
@@ -245,7 +247,7 @@
 <li>Otherwise give it back to your server for someone else to deal with it</li>
 </ul>
 <p>You can then go and create extensions for all the verbs you want supported as well.</p>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>In this post we&#39;ve had a bit of a look at what to do to make it a bit easier to work with OWIN by starting our own layer of middleware. We created a little middleware helper to give us easy methods to provide delegates for the different HTTP verbs and hopefully given you a starting point for where you could build out other middleware features.</p>
 <p>Next time we&#39;ll look at what you need to do to have routing included in your application.</p>
 <p>I&#39;ve decided to create a <a href="https://github.com/aaronpowell/Owin.HelloWorld">GitHub repository</a> which you can see the code and follow the progress of these blog posts.</p>

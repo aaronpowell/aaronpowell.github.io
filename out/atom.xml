@@ -4,13 +4,253 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2013-12-31T07:34:51.549Z</updated>
+    <updated>2014-01-12T10:13:00.809Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>Integration testing authenticated Katana applications</title>
+            <link href="http://www.aaron-powell.com/posts/2014-01-12-integration-testing-katana-with-auth.html"/>
+            <updated>2014-01-12T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2014-01-12-integration-testing-katana-with-auth.html</id>
+            <content type="html">&lt;p&gt;Recently I got to work on a project where we were building an ASP.Net WebAPI project for the client. One of the requirements of this project was that the API which we produced was authenticated, basically everything exposed had to be authenticated, and because it was a brand new project we decided to go down the path of WebAPI 2.0 and use the new Katana/OWIN system along with OAuth for the authentication.&lt;/p&gt;
+&lt;p&gt;Another hurdle we had when putting the API together was that it was to sit on top of a legacy system which contained a lot of business logic which was written in a way which we couldn&amp;#39;t unit test, it was very tightly coupled to the database and as our timeline&amp;#39;s didn&amp;#39;t afford us to rewrite it all from scratch we instead opted to rely on integration testing.&lt;/p&gt;
+&lt;p&gt;But that raises an important question, how do you run your WebAPI end-point to be used in the tests? You could:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start up IIS Express, like you&amp;#39;re &lt;em&gt;F5-ing&lt;/em&gt; from Visual Studio (how we were developing)&lt;/li&gt;
+&lt;li&gt;Deploy to IIS, but then you&amp;#39;re deploying code that hasn&amp;#39;t ticked all the boxes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Neither of these were ideal solutions, while IIS Express is &lt;em&gt;ok&lt;/em&gt; for development it&amp;#39;s not truly IIS so you&amp;#39;re integration tests are already one step removed from the real environment, meaning they are less accurate. As for deploying to IIS, we deemed that to be equally as risky; you&amp;#39;re either requiring the build server to also have IIS running on it or you&amp;#39;re deploying to another server and then you&amp;#39;ve got to handle the deployments, how do you setup/teardown the IIS instance? Do you do it as part of the test run? Again this was feeling like adding risk that we shouldn&amp;#39;t need to have for preconditions.&lt;/p&gt;
+&lt;h1 id=&quot;owin-to-the-rescue&quot;&gt;OWIN to the rescue&lt;/h1&gt;
+&lt;p&gt;I&amp;#39;ve blogged and presented about OWIN in the past, it&amp;#39;s a really cool concept and this was the first time I was looking to do a production deployment using it, and there&amp;#39;s one feature of OWIN that made it really appealing to solve our problems... Self Hosting.&lt;/p&gt;
+&lt;p&gt;Because OWIN is a separation between your code and the hosting platform your code doesn&amp;#39;t care how it&amp;#39;s hosted, only that it is, so you can go from hosting in IIS to self hosting inside an assembly with very little effort and this is what we were enticed by, through the self hosting we could spin up our API project &lt;strong&gt;inside of the test project as a HTTP server&lt;/strong&gt; and then interact with it via HTTP client requests! AWESOME!&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m not going to blog on how to do that, &lt;a href=&quot;http://www.strathweb.com/2013/12/owin-memory-integration-testing/&quot;&gt;Filip W beat me to it&lt;/a&gt; so that solved our first problem, being able to setup an integration test which ran our server.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Side note: You may be thinking that because we&amp;#39;re using Self Host and not IIS (which is the production host) that we&amp;#39;ve got a similar problem to using IIS Express but I&amp;#39;d disagree. We&amp;#39;re still using the full WebAPI stack, we&amp;#39;re still using the full OWIN/Katana stack, we&amp;#39;re just not using IIS and you&amp;#39;re application should be none the wiser. If you&amp;#39;re application knows it&amp;#39;s running on IIS then I&amp;#39;d argue you have a bigger problem.&lt;/em&gt;&lt;/p&gt;
+&lt;h1 id=&quot;handling-authentication&quot;&gt;Handling authentication&lt;/h1&gt;
+&lt;p&gt;As I said one of the main bridges we&amp;#39;d have to cross on this project was that all the API calls were to be authenticated, which means that when you&amp;#39;re running your tests you need to take that into account. So what do you do? Well you could write something to bypass the authentication for the test run, but then you&amp;#39;re integration test is no longer really representative.&lt;/p&gt;
+&lt;p&gt;But what you need to remember is that because you&amp;#39;re running your code through a self hosted WebAPI you&amp;#39;ve got the full WebAPI stack, so the &lt;code&gt;[Authorize]&lt;/code&gt; attribute will be in effect so you&amp;#39;re going to actually have an authenticated request pipeline.&lt;/p&gt;
+&lt;p&gt;Ok, let&amp;#39;s take the starting point that &lt;a href=&quot;http://www.strathweb.com&quot;&gt;Filip W&lt;/a&gt; gave us, and start expanding on it, I&amp;#39;m going to extract my server set up into its own base class:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;axapta&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;BaseServerTest&lt;/span&gt;
+{&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; TestServer &lt;span class=&quot;keyword&quot;&gt;server&lt;/span&gt;;
+
+    [TestInitialize]
+    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; Setup()
+    {
+        &lt;span class=&quot;keyword&quot;&gt;server&lt;/span&gt; = TestServer.Create(app =&amp;gt;
+        {
+            var startup = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Startup();
+            startup.ConfigureAuth(app);
+
+            var config = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; HttpConfiguration();
+            WebApiConfig.Register(config);
+
+            app.UseWebApi(config);
+        });
+    }
+
+    [TestCleanup]
+    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; Teardown()
+    {
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;server&lt;/span&gt; != &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;)
+            &lt;span class=&quot;keyword&quot;&gt;server&lt;/span&gt;.Dispose();
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So what we&amp;#39;ve got here is a call to create a new in-memory OWIN server, it&amp;#39;s using the &lt;code&gt;Startup&lt;/code&gt; class that my WebAPI app would use, as well as the WebAPI configuration (so routes, filters, etc) are configured. Now I want to make it easier to handle the &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; methods. To do this I&amp;#39;m going to add an &lt;code&gt;abstract&lt;/code&gt; property to represent the URI that the tests are for, and two method stubs:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; Uri { &lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt;; }
+
+&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; async Task&amp;lt;HttpResponseMessage&amp;gt; GetAsync()
+{
+    &lt;span class=&quot;keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; NotImplementedException();
+}
+
+&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; async Task&amp;lt;HttpResponseMessage&amp;gt; PostAsync&amp;lt;TModel&amp;gt;(TModel model)
+{
+    &lt;span class=&quot;keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; NotImplementedException
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now I&amp;#39;m going to quickly jump over to writing some integration tests for my user registration because well I&amp;#39;ll need to register a user before I can run and tests:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vala&quot;&gt;[TestClass]
+&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;AccountControllerTests&lt;/span&gt; : &lt;span class=&quot;title&quot;&gt;BaseServerTest&lt;/span&gt;
+{&lt;/span&gt;
+    [TestMethod]
+    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; Task CanRegisterUser()
+    {
+    }
+
+    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; uriBase = &lt;span class=&quot;string&quot;&gt;&quot;/api/account&quot;&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; uri = &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;.Empty;
+
+    &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; Uri
+    {
+        &lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt; { &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; uri; }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;#39;ve split the URI into two parts, there&amp;#39;s the URI base, being &lt;code&gt;/api/account&lt;/code&gt; and the &lt;em&gt;actual&lt;/em&gt; URI for the abstract class implementation. The reason for this is that (at least in the default WebAPI project template) the &lt;code&gt;AccountController&lt;/code&gt; isn&amp;#39;t just a REST interface, but instead has multiple methods on it that I&amp;#39;ll want to hit (things like change password, login and so on which I &lt;strong&gt;won&amp;#39;t&lt;/strong&gt; cover in this post). So let&amp;#39;s go ahead and implement the test method itself:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;[TestMethod]
+public async Task CanRegisterUser()
+{
+    uri = uriBase + &lt;span class=&quot;string&quot;&gt;&quot;/register&quot;&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var model = new RegisterBindingModel
+    {
+        UserName = &lt;span class=&quot;string&quot;&gt;&quot;aaronpowell&quot;&lt;/span&gt; + DateTimeOffset&lt;span class=&quot;preprocessor&quot;&gt;.Now&lt;/span&gt;&lt;span class=&quot;preprocessor&quot;&gt;.Ticks&lt;/span&gt;,
+        Password = &lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;,
+        ConfirmPassword = &lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;
+    }&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    var response = await PostAsync(model)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    Assert&lt;span class=&quot;preprocessor&quot;&gt;.AreEqual&lt;/span&gt;(HttpStatusCode&lt;span class=&quot;preprocessor&quot;&gt;.OK&lt;/span&gt;, response&lt;span class=&quot;preprocessor&quot;&gt;.StatusCode&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What am I doing here? I&amp;#39;m:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Saying that this request is going to hit &lt;code&gt;/api/account/register&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Using the model which the &lt;code&gt;AccountContoller.Register&lt;/code&gt; method is taking as an input argument&lt;/li&gt;
+&lt;li&gt;Calling my &lt;code&gt;PostAsync&lt;/code&gt; method&lt;/li&gt;
+&lt;li&gt;Asserting that we got a successful response&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally you could write an assert that peaks into the database and validates that the user is there, but that&amp;#39;s an exercise for the reader.&lt;/p&gt;
+&lt;p&gt;I really like that you can use the model from WebAPI to do the processing, this gives us the advantage of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Type safety, if the class is refactored our test will also be refactored&lt;/li&gt;
+&lt;li&gt;We leverage model binding and model validation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Side note: You&amp;#39;ll notice I&amp;#39;m appending &lt;code&gt;DateTimeOffset.Now.Ticks&lt;/code&gt; to the username, that&amp;#39;s because we need a unique username each time. Depending on whether you&amp;#39;re creating a new DB for each test run or not you may want to handle this better.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So how does our &lt;code&gt;PostAsync&lt;/code&gt; work? Well let&amp;#39;s implement it:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; async Task&amp;lt;HttpResponseMessage&amp;gt; PostAsync&amp;lt;TModel&amp;gt;(TModel model)
+{
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; await server.CreateRequest(Uri)
+        .And(request =&amp;gt; request.Content = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ObjectContent(&lt;span class=&quot;keyword&quot;&gt;typeof&lt;/span&gt;(TModel), model, &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; JsonMediaTypeFormatter()))
+        .PostAsync();
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Yep it&amp;#39;s really quite simple. You&amp;#39;ll see here that I&amp;#39;m grabbing the &lt;code&gt;Uri&lt;/code&gt; property our class implements, which saves it being passed in, and then we&amp;#39;re just leveraging the methods available from the &lt;code&gt;TestServer&lt;/code&gt; class to build up the request and eventually &lt;code&gt;POST&lt;/code&gt; the content up. But how do we get the content up there? Well we leverage the &lt;code&gt;And&lt;/code&gt; extension method which we have a lambda that can set properties on the request, in this case we setting the request content, serialized as JSON, but you can use any available &lt;code&gt;MediaTypeFormatter&lt;/code&gt; so this can be nifty if you&amp;#39;re working with your own formatters.&lt;/p&gt;
+&lt;p&gt;Now if we run our test it should pass with flying colours.&lt;/p&gt;
+&lt;h2 id=&quot;making-a-get-&quot;&gt;Making a &lt;code&gt;GET&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;We&amp;#39;ve got the &lt;code&gt;POST&lt;/code&gt; sorted, what about &lt;code&gt;GET&lt;/code&gt;? This time I&amp;#39;m going to go for the &lt;code&gt;ValuesController&lt;/code&gt; (which comes in the default project template). Now this is an authenticated controller so we can start off with writing a test that if there&amp;#39;s no credentials we fail our test:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;python&quot;&gt;[TestClass]
+public &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ValuesControllerTests&lt;/span&gt; :&lt;/span&gt; BaseServerTest
+{
+    [TestMethod]
+    public async Task ShouldGetUnauthorizedWithoutLogin()
+    {
+        var response = await GetAsync();
+
+        Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    protected override string Uri
+    {
+        get { &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;/api/values&quot;&lt;/span&gt;; }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So this &lt;code&gt;Assert&lt;/code&gt; should make sense, no credentials, you get a &lt;code&gt;401&lt;/code&gt; response. But what does the &lt;code&gt;GetAsync&lt;/code&gt; method look like?&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; virtual async Task&amp;lt;HttpResponseMessage&amp;gt; GetAsync()
+{
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; await server&lt;span class=&quot;variable&quot;&gt;.CreateRequest&lt;/span&gt;(Uri)&lt;span class=&quot;variable&quot;&gt;.GetAsync&lt;/span&gt;();
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sorry, not very exciting is it! Really all we&amp;#39;re doing is nicely wrapping around the &lt;code&gt;CreateRequest&lt;/code&gt; method call&lt;/p&gt;
+&lt;h1 id=&quot;where-s-the-authentication-&quot;&gt;Where&amp;#39;s the authentication?&lt;/h1&gt;
+&lt;p&gt;Right we&amp;#39;ve got a bunch of unauthenticated requests out of the way, now it&amp;#39;s time to look at how we can do some authenticated requests. For this I&amp;#39;m going to create another base class that extends our &lt;code&gt;BaseServerTest&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vala&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;BaseAuthenticatedTests&lt;/span&gt; : &lt;span class=&quot;title&quot;&gt;BaseServerTest&lt;/span&gt;
+{&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; virtual &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; Username { &lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt; { &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;aaronpowell&quot;&lt;/span&gt;; } }
+    &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; virtual &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; Password { &lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt; { &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;; } }
+
+    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; token;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For the authenticated tests I&amp;#39;m going to do them against a user that is known to exist, you could do it a bunch of different ways, like performing a registration for each test, that really comes down to how complex your registration process is.&lt;/p&gt;
+&lt;p&gt;Also I don&amp;#39;t want the author of authenticated tests to have to worry about the authentication side of things, it should &lt;em&gt;just work&lt;/em&gt; for them. So to do this I&amp;#39;m going to extend my &lt;code&gt;BaseServerTest&lt;/code&gt; class to all me to run something when the server is setup:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;[TestInitialize]
+public void Setup()
+{
+    server = TestServer&lt;span class=&quot;preprocessor&quot;&gt;.Create&lt;/span&gt;(app =&amp;gt;
+    {
+        var startup = new Startup()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        startup&lt;span class=&quot;preprocessor&quot;&gt;.ConfigureAuth&lt;/span&gt;(app)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        var config = new HttpConfiguration()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+        WebApiConfig&lt;span class=&quot;preprocessor&quot;&gt;.Register&lt;/span&gt;(config)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+        app&lt;span class=&quot;preprocessor&quot;&gt;.UseWebApi&lt;/span&gt;(config)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+    })&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+
+    PostSetup(server)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+}
+
+protected virtual void PostSetup(TestServer server)
+{
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What I&amp;#39;ve added here is a virtual method &lt;code&gt;PostSetup&lt;/code&gt; which is called when the server is ready and then we can do additional stuff. Let&amp;#39;s implement it in our &lt;code&gt;BaseAuthenticatedTest&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; PostSetup(TestServer server)
+{
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; tokenDetails = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; List&amp;lt;KeyValuePair&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt;&amp;gt;()
+        {
+            &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; KeyValuePair&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt;(&lt;span class=&quot;string&quot;&gt;&quot;grant_type&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;),
+            &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; KeyValuePair&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt;(&lt;span class=&quot;string&quot;&gt;&quot;username&quot;&lt;/span&gt;, Username),
+            &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; KeyValuePair&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt;(&lt;span class=&quot;string&quot;&gt;&quot;password&quot;&lt;/span&gt;, Password)
+        };
+
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; tokenPostData = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FormUrlEncodedContent(tokenDetails);
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; tokenResult = server.HttpClient.PostAsync(&lt;span class=&quot;string&quot;&gt;&quot;/Token&quot;&lt;/span&gt;, tokenPostData).Result;
+    Assert.AreEqual(HttpStatusCode.OK, tokenResult.StatusCode);
+
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; body = JObject.Parse(tokenResult.Content.ReadAsStringAsync().Result);
+
+    token = (&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;)body[&lt;span class=&quot;string&quot;&gt;&quot;access_token&quot;&lt;/span&gt;];
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Alright, what we&amp;#39;re doing here is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Creating the details which are needed to be &lt;code&gt;POST&lt;/code&gt;ed, this is the standard data you&amp;#39;d provide to an OAuth request&lt;/li&gt;
+&lt;li&gt;URL Encode the data&lt;/li&gt;
+&lt;li&gt;Hit the &lt;code&gt;/Token&lt;/code&gt; route with the data&lt;/li&gt;
+&lt;li&gt;Assert that it was a successful request&lt;/li&gt;
+&lt;li&gt;Extract the token from the response, I&amp;#39;m just reading it out as JSON (which it is) and not worrying about strongly typing it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Side note - you&amp;#39;ll notice that I&amp;#39;m using &lt;code&gt;PostAsync(...).Result&lt;/code&gt; and not &lt;code&gt;async&lt;/code&gt; &amp;amp; &lt;code&gt;await&lt;/code&gt;. The reason for this is a limitation in MSTest (and NUnit), you&amp;#39;re setup can&amp;#39;t have a return type (ie - &lt;code&gt;async Task&lt;/code&gt;) so you&amp;#39;re stuck with &lt;code&gt;async void&lt;/code&gt; which gets dodgy quickly. It&amp;#39;s easier to just do it synchronously.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;With our authentication written now we need to make sure that we are passing it through on the request:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;objectivec&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; override async Task&amp;lt;HttpResponseMessage&amp;gt; GetAsync()
+{
+    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; await server&lt;span class=&quot;variable&quot;&gt;.CreateRequest&lt;/span&gt;(Uri)
+        &lt;span class=&quot;variable&quot;&gt;.AddHeader&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;Authorization&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;Bearer &quot;&lt;/span&gt; + token)
+        &lt;span class=&quot;variable&quot;&gt;.GetAsync&lt;/span&gt;();
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Really the only difference is that the &lt;code&gt;GetAsync&lt;/code&gt; (and &lt;code&gt;PostAsync&lt;/code&gt;) is that we add the &lt;code&gt;Authorization&lt;/code&gt; header and properly format it to contain our bearer token.&lt;/p&gt;
+&lt;p&gt;Easy, we can now write a test like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vala&quot;&gt;[TestClass]
+&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ValuesAuthenticatedControllerTests&lt;/span&gt; : &lt;span class=&quot;title&quot;&gt;BaseAuthenticatedTests&lt;/span&gt;
+{&lt;/span&gt;
+    [TestMethod]
+    &lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; Task ShouldGetValuesWhenAuthenticated()
+    {
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; response = await GetAsync();
+
+        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; values = await response.Content.ReadAsAsync&amp;lt;IEnumerable&amp;lt;&lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt;&amp;gt;&amp;gt;();
+
+        Assert.AreEqual(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, values.Count());
+    }
+
+    &lt;span class=&quot;keyword&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;string&lt;/span&gt; Uri
+    {
+        &lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt; { &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;/api/values&quot;&lt;/span&gt;; }
+    }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we&amp;#39;re done!&lt;/p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;So through this post we&amp;#39;ve seen how we can use OWIN/Katana&amp;#39;s self-hosting feature to host itself and then make requests against and authenticated API. We&amp;#39;ve also abstracted away the authentication part of our integration tests so we don&amp;#39;t need to think about it for each test which we write.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve published the code used for this blog &lt;a href=&quot;https://github.com/aaronpowell/Owin.AuthenticatedTests&quot;&gt;here on GitHub&lt;/a&gt; so feel free to get it and have a play.&lt;/p&gt;
+</content>
+            
+            <category>owin</category>
+            
+            <category>katana</category>
+            
+            <category>testing</category>
+            
+        </entry>
     
         <entry>
             <title>LINQ in JavaScript, ES6 style, for real this time</title>
@@ -1431,167 +1671,6 @@ reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
             <category>offline-storage</category>
             
             <category>file-system</category>
-            
-        </entry>
-    
-        <entry>
-            <title>Flight Mode - IndexedDB</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-27-indexeddb.html"/>
-            <updated>2013-05-27T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-27-indexeddb.html</id>
-            <content type="html">&lt;p&gt;The next stop in our offline storage adventure is to look at the big daddy of offline storage, &lt;a href=&quot;http://www.w3.org/TR/IndexedDB/&quot;&gt;IndexedDB&lt;/a&gt;. Now I&amp;#39;ve &lt;a href=&quot;http://www.aaron-powell.com/tagged/indexeddb&quot;&gt;blogged about &lt;code&gt;IndexedDB&lt;/code&gt; in the past&lt;/a&gt; but today I want to talk about it in a bit higher level and introduce the idea of IndexedDB beyond just how to use the API.&lt;/p&gt;
-&lt;p&gt;IndexedDB is the latest approach to doing offline storage in offline applications, it is designed as a replacement for the &lt;a href=&quot;http://www.w3.org/TR/webdatabase/&quot;&gt;WebSQL spec which is now discontinued&lt;/a&gt;. One of the main reasons that WebSQL was discontinued was because it was tied to a specific version of &lt;a href=&quot;http://www.sqlite.org/&quot;&gt;SQLite&lt;/a&gt; which introduced some problems. Need to change something in the way the API worked you needed to change the SQLite specification first. So IndexedDB was proposed as a replacement to WebSQL and the design was not tied to any particular underlying technology (&lt;a href=&quot;http://www.aaron-powell.com/web/indexeddb-storage&quot;&gt;I&amp;#39;ve previously blogged about how different browsers store their data&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;IndexedDB is quite different to WebSQL where instead of being a dialect of the SQL language IndexedDB much more closely related to a NoSQL, or Document Database (it&amp;#39;s not true document database but I&amp;#39;m not here to argue semantics). Data is stored as the objects that they are (once they&amp;#39;ve been cloned, so you don&amp;#39;t maintain prototype chains), not as strings like we&amp;#39;ve seen in the other options.&lt;/p&gt;
-&lt;h2 id=&quot;benefits-of-indexeddb-for-storage&quot;&gt;Benefits of IndexedDB for storage&lt;/h2&gt;
-&lt;p&gt;There&amp;#39;s several important benefits of IndexedDB over the other storage options we&amp;#39;ve looked at, the first is something that&amp;#39;s a very big break from other options, asynchronicity.&lt;/p&gt;
-&lt;p&gt;Where the other APIs all perform their operations in a synchronous manner IndexedDB doesn&amp;#39;t. This means that we get the benefits of having a non-blocking operation, so if you&amp;#39;re writing a large amount of data, you are on a low powered device, are experiencing high disk I/O, etc then you don&amp;#39;t want to have the user seem like your web application has crashed while you&amp;#39;re storing their data. Asynchronous operations aren&amp;#39;t exactly a new concept on the web so it&amp;#39;s nice to see that it&amp;#39;s come to the storage level.&lt;/p&gt;
-&lt;p&gt;The next benefit is transactions. Anyone who&amp;#39;s done database work will know the benefit of this within an application. Once you start doing lots of read/write options, accepting user input and so on the chance of getting data that you &lt;em&gt;can&amp;#39;t&lt;/em&gt; handle is high. Transactions give you a benefit so that you can group operations and then if they fail roll them all back without getting your data store into a corrupt state. Transactions can also be read-only or read-write meaning that you can more selectively lock your data depending on the kind of operations being undertaken an limit the chance of corruption.&lt;/p&gt;
-&lt;p&gt;And then there&amp;#39;s the way it handles data, where the previous options were storing data as strings, meaning we have to serialize/deserialize IndexedDB stores the data as the objects that were provided (&lt;a href=&quot;http://www.w3.org/TR/IndexedDB/#object-store-storage-operation&quot;&gt;admittedly there&amp;#39;s a few steps it goes through first&lt;/a&gt;). This means that we can do a few smarter things on top of what we could do with strings, firstly we can create indexes. Again if you&amp;#39;re familiar with databases you&amp;#39;ll be familiar with indexes, but basically these allow us a nifty way to produce optimal query points. Say you&amp;#39;ve got people objects and you always query by &lt;code&gt;firstName&lt;/code&gt; so then you can create an index so it&amp;#39;ll optimize that kind of query. Which then leads on to the next part about handling data, querying. Since we&amp;#39;re storing full objects when we want to find data (such as with our &lt;code&gt;getAll&lt;/code&gt; method) we have our full object to then work against rather than just doing it against the full in-memory collection.&lt;/p&gt;
-&lt;h2 id=&quot;drawbacks-of-indexeddb-for-storage&quot;&gt;Drawbacks of IndexedDB for storage&lt;/h2&gt;
-&lt;p&gt;The biggest drawback of IndexedDB is probably going to be a pretty obvious one for an API that is as new as it is and that&amp;#39;s browser support. At the time of writing the following browsers support IndexedDB unprefixed:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Internet Explorer 10+&lt;/li&gt;
-&lt;li&gt;Chrome 25+&lt;/li&gt;
-&lt;li&gt;Firefox 19+&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So you can see that there&amp;#39;s a major limitation when we&amp;#39;re looking to go offline, the mobile space. Because of the browser support Windows Phone 8 is the only phone that supports IndexedDB natively. Luckily there&amp;#39;s hope, there&amp;#39;s a &lt;a href=&quot;http://nparashuram.com/IndexedDBShim/&quot;&gt;shim for IndexedDB&lt;/a&gt; that used WebSQL as the underlying store. This means that iOS Safari (and desktop Safari) as well as Android can have the API exposed to them.&lt;/p&gt;
-&lt;p&gt;The other biggest drawback for me is the API, it&amp;#39;s excessively verbose and generally feels very foreign to front-end development. Things like &lt;code&gt;transaction&lt;/code&gt;, &lt;code&gt;index&lt;/code&gt; and &lt;code&gt;cursor&lt;/code&gt; are not really common concepts when you talk to front-end developers. And then there&amp;#39;s API calls like &lt;code&gt;cursor.continue()&lt;/code&gt; when you&amp;#39;re iterating through a query, while it might look innocuous the problem is that &lt;code&gt;continue&lt;/code&gt; is a reserved word in JavaScript so pretty much every editor I&amp;#39;ve used (and most linters) will raise a squiggly/warning which the ODC-coder in my flinches at, resulting in a lot of code people write like &lt;code&gt;cursor[&amp;#39;continue&amp;#39;]();&lt;/code&gt;. And on the verbosity, say you want to query a store on a non-unique index (our &lt;code&gt;firstName&lt;/code&gt; property for example), to do that you must:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Have an open connection to your database, &lt;code&gt;indexedDB.openDatabase(&amp;#39;my-db&amp;#39;)&lt;/code&gt;, and wait for it to succeed&lt;/li&gt;
-&lt;li&gt;Open a transaction, &lt;code&gt;db.transaction(&amp;#39;my-store&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Open the store from the transaction, &lt;code&gt;transaction.objectStore(&amp;#39;my-store&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Open an index from the store, &lt;code&gt;IDBKeyRange.only(&amp;#39;firstName&amp;#39;, &amp;#39;Aaron&amp;#39;)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Open a cursor with the index, &lt;code&gt;store.openCursor(index)&lt;/code&gt;, and wait for it to succeed&lt;/li&gt;
-&lt;li&gt;In the success method of the query check to see if there was a cursor, if there was get its value and either work with it our push it to an array in the closure then call &lt;code&gt;cursor.continue()&lt;/code&gt; or if there was no cursor ignore it (no cursor is the end of the query)&lt;/li&gt;
-&lt;li&gt;In the success method of the transaction process the captured values, assuming you wanted to work with them all together&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;That&amp;#39;s a lot of steps to get data by a property...&lt;/p&gt;
-&lt;p&gt;This then brings us to how you listen to the asynchronous actions. Generally you&amp;#39;ll see code like this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;r&quot;&gt;request.onsuccess = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (e) { &lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt; };&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To me that feels very reminiscent of the IE6 era where events were registered by &lt;code&gt;on&amp;lt;something&amp;gt;&lt;/code&gt;. Admittedly you can use &lt;code&gt;addEventListener&lt;/code&gt; since IndexedDB uses the DOM3 event specification, but it seems to be the less-used approach in the documentation.&lt;/p&gt;
-&lt;h2 id=&quot;implementing-indexeddb-storage&quot;&gt;Implementing IndexedDB storage&lt;/h2&gt;
-&lt;p&gt;When we have a look at implementing IndexedDB storage on top of our &lt;code&gt;FlightMode&lt;/code&gt; API that we&amp;#39;ve been using there&amp;#39;s an immediate problem, we&amp;#39;ve been only working with synchronous APIs up until now but as I mentioned above one of IndexedDB&amp;#39;s benefits is that it is asynchronous. Because of this we&amp;#39;ll have to approach the API usage a bit differently, first up the &lt;code&gt;FlightMode&lt;/code&gt; constructor now has two new arguments, a &lt;code&gt;migrate&lt;/code&gt; and a &lt;code&gt;ready&lt;/code&gt; callback argument. The &lt;code&gt;ready&lt;/code&gt; argument is the most important one, it will be triggered when our IndexedDB connection is open and we can start using the API. The &lt;code&gt;migrate&lt;/code&gt; callback on the other hand is used to allow you to manipulate the objectStore (such as create indexes) if required. Additionally to make it nicer to work with the asynchronous nature of the API I&amp;#39;ve leverages the &lt;a href=&quot;http://promises-aplus.github.io/promises-spec/&quot;&gt;Promise/A+&lt;/a&gt; specification for handling the events via the &lt;a href=&quot;http://documentup.com/kriskowal/q/&quot;&gt;Q&lt;/a&gt; library.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Side note: If you&amp;#39;re not familiar with Promises have a read through &lt;a href=&quot;http://www.aaron-powell.com/doing-it-wrong/blinking-marquee&quot;&gt;my series on exploring them with jQuery&lt;/a&gt;. It&amp;#39;s not exactly the same as Promise/A+, you can read about the differences &lt;a href=&quot;http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Warning: This is a &lt;strong&gt;really&lt;/strong&gt; basic IndexedDB implementation, it glances over much of the really powerful features, such as complex index queries, for information on that check out my &lt;a href=&quot;http://www.aaron-powell.com/tagged/indexeddb&quot;&gt;other IndexedDB posts&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Our internal &lt;code&gt;Store&lt;/code&gt; object has got a much more complex constructor this time since there&amp;#39;s a few more things we need to do, we must:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Open our connection to the database&lt;/li&gt;
-&lt;li&gt;Create the object store if required&lt;/li&gt;
-&lt;li&gt;Notify the consumer that the API is ready&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;So it will look more like this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;var Store = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(name, onMigrate, onSuccess)&lt;/span&gt; {&lt;/span&gt;
-    var that = this;
-    var request = &lt;span class=&quot;transposed_variable&quot;&gt;indexedDB.&lt;/span&gt;open(&lt;span class=&quot;string&quot;&gt;'flight-mode'&lt;/span&gt;);
-    &lt;span class=&quot;transposed_variable&quot;&gt;this.&lt;/span&gt;storeName = name;
-
-    &lt;span class=&quot;transposed_variable&quot;&gt;request.&lt;/span&gt;onsuccess = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;transposed_variable&quot;&gt;that.&lt;/span&gt;db = &lt;span class=&quot;transposed_variable&quot;&gt;e.&lt;/span&gt;&lt;span class=&quot;transposed_variable&quot;&gt;target.&lt;/span&gt;result;
-
-        onSuccess();
-    };
-
-    &lt;span class=&quot;transposed_variable&quot;&gt;request.&lt;/span&gt;onupgradeneeded = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
-        var db = &lt;span class=&quot;transposed_variable&quot;&gt;e.&lt;/span&gt;&lt;span class=&quot;transposed_variable&quot;&gt;target.&lt;/span&gt;result;
-
-        var store = &lt;span class=&quot;transposed_variable&quot;&gt;db.&lt;/span&gt;createObjectStore(name, &lt;span class=&quot;cell&quot;&gt;{ keyPath: &lt;span class=&quot;string&quot;&gt;'__id__'&lt;/span&gt;, autoIncrement: true }&lt;/span&gt;);
-
-        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (onMigrate) &lt;span class=&quot;cell&quot;&gt;{
-            onMigrate(store);
-        }&lt;/span&gt;
-    };
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;One nice thing about IndexedDB is that it can automatically create an &lt;code&gt;id&lt;/code&gt; for the object, which I&amp;#39;ve turned on (it&amp;#39;ll be stored in the &lt;code&gt;__id__&lt;/code&gt; property) and set to &lt;code&gt;autoIncrement: true&lt;/code&gt; so that it will create a new one for each record.&lt;/p&gt;
-&lt;p&gt;To use this we would do something like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; ready = &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;;
-&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; store = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FlightMode(&lt;span class=&quot;string&quot;&gt;'my-store'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'indexedDB'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt; ready = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;; });&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It is a bit tedious that we&amp;#39;d have to check for the &lt;code&gt;ready&lt;/code&gt; flag before any query or risk the API not being ready to use but that is something you can program around with &lt;code&gt;Promise/A+&lt;/code&gt; pretty easily.&lt;/p&gt;
-&lt;p&gt;As I mentioned in my drawbacks list the API is very verbose, but we can still make it reasonably simple to use as a consumer and hide away that verbosity. Let&amp;#39;s look at the &lt;code&gt;add&lt;/code&gt; method. Again since this is asynchronous we&amp;#39;ll need to take that into consideration. This is where I&amp;#39;m leveraging &lt;code&gt;Q&lt;/code&gt;, I&amp;#39;m creating a deferred object that you then will interact with.&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;Store.prototype.add = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(obj) {
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; transaction = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.db.transaction(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.storeName, &lt;span class=&quot;string&quot;&gt;'readwrite'&lt;/span&gt;);
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; store = transaction.objectStore(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.storeName);
-
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; d = Q.defer();
-    store.add(obj).onsuccess = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
-        d.resolve(e.target.result);
-    };
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; d.promise;
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First things first we need to create a new transaction, this is a &lt;strong&gt;writable&lt;/strong&gt; transaction since we&amp;#39;ll manipulate data. From said transaction we can then go out and get our object store that we&amp;#39;re writing to. Lastly we setup our deferred object from Q which we&amp;#39;ll then return so we can use the Promise. When you add a record into the object store it&amp;#39;ll fire off the &lt;code&gt;success&lt;/code&gt; event when done and an &lt;code&gt;error&lt;/code&gt; event if it was to fail. I&amp;#39;m omitting error handling here to save code, but you&amp;#39;d capture the &lt;code&gt;IDBRequest&lt;/code&gt; from the &lt;code&gt;add&lt;/code&gt; call which you attach other handlers to.&lt;/p&gt;
-&lt;p&gt;When the request is successful the events &lt;em&gt;target&lt;/em&gt; will be the &lt;code&gt;id&lt;/code&gt; that was generated by IndexedDB for us. If you&amp;#39;re &lt;em&gt;not&lt;/em&gt; using auto-incrementing IDs the value will be what ever you defined as your &lt;code&gt;keyPath&lt;/code&gt; anyway. I&amp;#39;m then resolving that out via our Promise resulting in an API usage like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;transposed_variable&quot;&gt;store.&lt;/span&gt;add(&lt;span class=&quot;cell&quot;&gt;{ firstName: &lt;span class=&quot;string&quot;&gt;'Aaron'&lt;/span&gt;, lastName: &lt;span class=&quot;string&quot;&gt;'Powell'&lt;/span&gt; }&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(id)&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'Object stored with id'&lt;/span&gt;, id);
-});&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Getting a record out by it&amp;#39;s &lt;code&gt;id&lt;/code&gt; is also reasonably trivial once you understand the basis of IndexedDB, here&amp;#39;s the code:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;actionscript&quot;&gt;Store.prototype.&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(id) {
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; transaction = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.db.transaction(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.storeName);
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; store = transaction.objectStore(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.storeName);
-
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; d = Q.defer();
-    store.&lt;span class=&quot;keyword&quot;&gt;get&lt;/span&gt;(id).onsuccess = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; obj = e.target.result;
-        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (obj) {
-            d.resolve(obj);
-        } &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; {
-            d.reject(&lt;span class=&quot;string&quot;&gt;'No item matching id &quot;'&lt;/span&gt; + id + &lt;span class=&quot;string&quot;&gt;'&quot; was found'&lt;/span&gt;);
-        }
-
-    };
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; d.promise;
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We have a few things in common with the &lt;code&gt;add&lt;/code&gt; method, but this time we don&amp;#39;t specify what type of &lt;code&gt;transaction&lt;/code&gt; we want. If you &lt;em&gt;don&amp;#39;t&lt;/em&gt; specify a type it will be read-only as transactions are read-only by default.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note: If you want to be explicit about it pass in &lt;code&gt;readonly&lt;/code&gt; as the second argument.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Like &lt;code&gt;add&lt;/code&gt; the &lt;code&gt;store.get&lt;/code&gt; method returns an &lt;code&gt;IDBRequest&lt;/code&gt; which we listen for events on. When the object doesn&amp;#39;t exist in our store it won&amp;#39;t raise an error as this isn&amp;#39;t really an error state, instead we&amp;#39;ll have the request succeed and the &lt;code&gt;target&lt;/code&gt; of the event will be &lt;code&gt;null&lt;/code&gt;. This means that we have to do the check inside the &lt;code&gt;success&lt;/code&gt; handler and in this case I&amp;#39;m rejecting the Promise with an error message to consumers.&lt;/p&gt;
-&lt;p&gt;We end up with a usage like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;&lt;span class=&quot;transposed_variable&quot;&gt;store.&lt;/span&gt;get(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(obj)&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'Object found'&lt;/span&gt;, obj);
-}, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(msg);
-});&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The final thing that really gets the power out of IndexedDB is that we can produce indexed queries, so finding items is more optimal. To do this we need to leverage the &lt;code&gt;migrate&lt;/code&gt; callback so we can create ourselves an index for the &lt;code&gt;objectStore&lt;/code&gt;. it would look something like this:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; store = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FlightMode(&lt;span class=&quot;string&quot;&gt;'my-store'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'indexedDB'&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    ready = &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;;
-}, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(store)&lt;/span&gt; {&lt;/span&gt;
-    store.createIndex(&lt;span class=&quot;string&quot;&gt;'firstName'&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;'firstName'&lt;/span&gt;);
-});&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;migrate&lt;/code&gt; method receives an instance of our &lt;code&gt;objectStore&lt;/code&gt; which we can then create indexes from using the &lt;code&gt;createIndex&lt;/code&gt; method. This takes a &lt;code&gt;name&lt;/code&gt; for the index and a &lt;code&gt;keyPath&lt;/code&gt; for the property of the object we want to index. Optionally you can pass in some options such as whether it should be a unique index.&lt;/p&gt;
-&lt;p&gt;With the index created we can then use it within the &lt;code&gt;getBy&lt;/code&gt; method, like so:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;javascript&quot;&gt;Store.prototype.getBy = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(property, value) {
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; transaction = &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.db.transaction(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.storeName);
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; store = transaction.objectStore(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.storeName);
-
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; d = Q.defer();
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; items = [];
-
-    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; index = index = store.index(property);
-
-    index.openCursor().onsuccess = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; cursor = e.target.result;
-        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (cursor) {
-            items.push(cursor.value);
-            cursor[&lt;span class=&quot;string&quot;&gt;'continue'&lt;/span&gt;]();
-        }
-    };
-    transaction.oncomplete = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-        d.resolve(items);
-    };
-    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; d.promise;
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To query the &lt;code&gt;index&lt;/code&gt; we need to use a &lt;code&gt;cursor&lt;/code&gt; (and as I mentioned above the &lt;code&gt;continue&lt;/code&gt; method is annoying...). Next we listen to the &lt;code&gt;success&lt;/code&gt; event of the cursor request, extracting the items out as we navigate through the cursor.&lt;/p&gt;
-&lt;p&gt;Once the cursor is exhausted the &lt;code&gt;transaction&lt;/code&gt; will be completed and then we can resolve all the items which we wanted from it.&lt;/p&gt;
-&lt;p&gt;You can find the rest of the implementation &lt;a href=&quot;https://github.com/aaronpowell/flight-mode-blog/src/adapters/indexeddb.js&quot;&gt;in the github repository&lt;/a&gt;.&lt;/p&gt;
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;IndexedDB is still rather new a technology so it&amp;#39;s something that needs to be used with a certain bit of caution, if you can&amp;#39;t target only the latest browsers then it might not be possible to use it in your application.&lt;/p&gt;
-&lt;p&gt;That said it is a &lt;strong&gt;really&lt;/strong&gt; powerful API, the fact that it is asynchronous is alone a reason that it should be chosen over pretty much any other storage option when storing large amounts of data.&lt;/p&gt;
-&lt;p&gt;While there are drawbacks with the API design, particularly the fact that it can be very verbose &lt;em&gt;and&lt;/em&gt; very foreign to web developers it isn&amp;#39;t that difficult to hide away the bulk of the API with your own façade, using libraries like &lt;code&gt;Q&lt;/code&gt; to make it easier to interact with the API and only exposing the features that you really need in your application.&lt;/p&gt;
-&lt;p&gt;Definitely keep an eye on IndexedDB in the coming years, especially when doing Windows 8 applications, as it&amp;#39;ll be more available and more important for building offline applications.&lt;/p&gt;
-</content>
-            
-            <category>flight-mode</category>
-            
-            <category>offline-storage</category>
-            
-            <category>indexeddb</category>
             
         </entry>
     

@@ -65,6 +65,26 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">12th January 2014</span>
+                            <h3><a href="/posts/2014-01-12-integration-testing-katana-with-auth.html">Integration testing authenticated Katana applications</a></h3>
+                        </header>
+                        <p>A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/katana.html"><span>katana</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">19th April 2013</span>
                             <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
                         </header>
@@ -142,24 +162,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">8th October 2012</span>
-                            <h3><a href="/posts/2012-10-08-reverse-order-unique-indexes.html">Reverse order unique queries in IndexedDB</a></h3>
-                        </header>
-                        <p>The quirk of reverse index querying in IndexedDB and in turn db.js</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -168,10 +170,10 @@
                         <article class="is-post">
                             <p>In the <a href="http://www.aaron-powell.com/web/owin-responses">last post</a> we looked at improving our responses in OWIN by adding some extensions methods to the response object and the next logical step for this is to think about HTML. While what we&#39;ve brought together thus far is useful if you&#39;re creating something that is just a web API if  you want to create an actual web site you probably need to respond with some HTML.</p>
 <p>To this end we&#39;re going to need to think about creating a <em>View Engine</em> that will be responsible for our HTML generation. The reason I want to go down this path is it makes it nicer if we want to add some level of dynamic data to the HTML we&#39;re serving, say insert a user name or other things like that.</p>
-<h1>Picking our language</h1>
+<h1 id="picking-our-language">Picking our language</h1>
 <p>HTML isn&#39;t a language that has dynamic features to it so we need to look at a templating language to leverage for this. If you look around there&#39;s plenty of different HTML templating languages like HAML, Spark, Jade or even Razor.</p>
 <p>Since I want to make it something easy to understand for the .NET developer I&#39;m going to use Razor as my templating language, and I&#39;m going to use the <a href="http://razorengine.codeplex.com/">RazorEngine</a> project to help me out (it saves me writing all the bootstrapping code).</p>
-<h1>Approaching the View Engine</h1>
+<h1 id="approaching-the-view-engine">Approaching the View Engine</h1>
 <p>So we&#39;re going to use Razor but <em>how</em> are we going to use it? We need some way to &quot;create&quot; our View Engine and then we will want to interact with it.</p>
 <p>Since the View Engine could be a little bit complex I&#39;m going to create a class which will represent the engine. This will also mean that I can do some caching within the View Engine to ensure optimal performance.</p>
 <p>With that in mind how are we going to interact with the View Engine? We obviously don&#39;t want to spin it up every single time, instead I want it to always be available. So this means that I&#39;m going to have a static that lives <em>somewhere</em> which I&#39;ll want to interact with.</p>
@@ -182,7 +184,7 @@
 <li>Have a <code>ViewEngineActivator</code> which we access it through</li>
 <li>The user must explicitly register the <code>ViewEngine</code> they want to use in code</li>
 </ul>
-<h2>Coding the View Engine</h2>
+<h2 id="coding-the-view-engine">Coding the View Engine</h2>
 <p>Thinking about the View Engine there&#39;s not a lot that the class would have to publicly expose, in fact I really think you only want two methods, one that takes a view name, one which takes a view name and a model.</p>
 <p>So the View Engine will look something like this:</p>
 <pre class="highlighted"><code class="cs"><span class="keyword">public</span> <span class="keyword">class</span> RazorViewEngine
@@ -261,7 +263,7 @@ builder.UseViewEngine&lt;RazorViewEngine&gt;();</code></pre>
 <p>One convention I&#39;m adding myself is that the &quot;body&quot; (aka, the current view) will be rendered where ever you place an <code>@Body</code> directive. This is because we&#39;re using Razor <em>the language</em> which is slightly different to MVC&#39;s Razor. The language doesn&#39;t include the <code>RenderBody</code> method, that&#39;s specific for the implementation. When creating your own view engine though you&#39;re at liberty to do this how ever you want. You could alternatively create your own base class that handles the body better, me, I&#39;m lazy and want a quick demo.</p>
 <p>I finish off caching the generated template so that next time we can skip a bunch of the lookup steps and then get RazorEngine to parse the template and send back the HTML*.</p>
 <p><em>*I&#39;m not sure if this is the best way to do it with RazorEngine, I think you can do it better for caching but meh. Also, you don&#39;t have to return HTML, you could use this engine to output any angled-bracket content.</em></p>
-<h1>Using our View Engine</h1>
+<h1 id="using-our-view-engine">Using our View Engine</h1>
 <p>Now that we have our View Engine written we need to work out how we&#39;ll actually use it. Like we did in the last post I&#39;m going to use extension methods on the Response object to provide the functionality:</p>
 <pre class="highlighted"><code class="objectivec"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> View(<span class="keyword">this</span> Response res, string view)
 {
@@ -281,7 +283,7 @@ builder.UseViewEngine&lt;RazorViewEngine&gt;();</code></pre>
     res<span class="variable">.End</span>(output);
 }</code></pre>
 <p>This is pretty simple, we&#39;re really just acting as a bridge between the response and the view engine. Sure I&#39;m also making the assumption that it&#39;s <code>text/html</code> that we&#39;re returning despite saying above we can do any angled-bracket response, changing that can be your exercise dear reader.</p>
-<h1>Bringing it all together</h1>
+<h1 id="bringing-it-all-together">Bringing it all together</h1>
 <p>So we&#39;ve got everything written let&#39;s start using it:</p>
 <pre class="highlighted"><code class="avrasm">builder
     <span class="preprocessor">.UseViewEngine</span>&lt;RazorViewEngine&gt;()
@@ -290,7 +292,7 @@ builder.UseViewEngine&lt;RazorViewEngine&gt;();</code></pre>
         res<span class="preprocessor">.View</span>(<span class="string">"Basic"</span>)<span class="comment">;</span>
     })<span class="comment">;</span></code></pre>
 <p>Pretty simple to use our View Engine now isn&#39;t it!</p>
-<h1>Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 <p>In this post we&#39;ve had a look at what it&#39;d take to produce a basic View Engine on top of OWIN, building on top of the knowledge and concepts of the last few posts.</p>
 <p>In the next post I&#39;m going to take the idea of a View Engine one step further and give the user a lot more power.</p>
 <p>As always you can check out the full code up on the <a href="https://github.com/aaronpowell/Owin.HelloWorld">GitHub repository</a>.</p>

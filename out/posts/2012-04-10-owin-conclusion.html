@@ -65,6 +65,26 @@
                 <li>
                     <article class="is-excerpt">
                         <header>
+                            <span class="date">12th January 2014</span>
+                            <h3><a href="/posts/2014-01-12-integration-testing-katana-with-auth.html">Integration testing authenticated Katana applications</a></h3>
+                        </header>
+                        <p>A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/owin.html"><span>owin</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/katana.html"><span>katana</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/testing.html"><span>testing</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
                             <span class="date">19th April 2013</span>
                             <h3><a href="/posts/2013-04-19-ie-useragents.html">Internet Explorer userAgents</a></h3>
                         </header>
@@ -142,24 +162,6 @@
                     </article>
                 </li>
             
-                <li>
-                    <article class="is-excerpt">
-                        <header>
-                            <span class="date">8th October 2012</span>
-                            <h3><a href="/posts/2012-10-08-reverse-order-unique-indexes.html">Reverse order unique queries in IndexedDB</a></h3>
-                        </header>
-                        <p>The quirk of reverse index querying in IndexedDB and in turn db.js</p>
-
-                        <div class="tags">
-                            
-                                <a class="icon icon-tag" href="/tagged/indexeddb.html"><span>indexeddb</span></a>
-                            
-                                <a class="icon icon-tag" href="/tagged/web.html"><span>web</span></a>
-                            
-                        </div>
-                    </article>
-                </li>
-            
         </ul>
     </section>
 </div>
@@ -177,12 +179,12 @@
 <li>A <a href="https://github.com/aaronpowell/Owin.HelloWorld">github</a> repository with all the code</li>
 </ul>
 <p>I started look at OWIN after bitching at <a href="https://twitter.com/#!/damianedwards">Damian Edwards</a> over the poor documentation and he told me to stop bitching and work it out. So I did and while doing it I though I&#39;d do my best to contribute back so that others have a better starting point.</p>
-<h2>Major take away points</h2>
+<h2 id="major-take-away-points">Major take away points</h2>
 <p>I had a lot of fun playing with OWIN but most importantly I think I&#39;ve learnt a thing or two and here are my major take away points from the last few weeks:</p>
 <p><strong>Learn your web stack.</strong> This is something that I found really important; while WebForms is a very high level abstraction on the web MVC has really changed that, it&#39;s quite close to the wire. But even then it&#39;s sometimes not close enough. I&#39;ve worked on projects where we&#39;ve had to work around the gates put up by MVC to protect developers from doing something really stupid so sometimes you want something else. I can see where OWIN would fit in there, especially if you combine it with something like Nancyfx you can still get all the ASP.Net powers but also skip around it when required.</p>
 <p><strong>Middleware is your friend.</strong> Sure I&#39;d <a href="http://www.aaron-powell.com/ole">done it before</a> when it comes to middleware but I&#39;ve always been interested as to how you&#39;d approach it in .NET. JavaScript is a very nice language especially when it comes to functional-esq programming so being able to try a similar idea in .NET and compare the experience was interesting. Generics and delegates can be a <strong>bitch</strong> in .NET, but it&#39;s generally a problem you wont have to face.</p>
 <p><strong>You don&#39;t need everything up front.</strong> While it may seems very convenient that I had a series of blogs that expanded on the ideas of the ones before it that was initially an accident. I started with the intention of just doing the first post but as I wrote the code our I could see it evolving. I didn&#39;t even think about a View Engine until I&#39;d already exhausted the routes and response sections, both of which somewhat relied upon an understanding of middleware. You can easily cut out sections of the series of you don&#39;t need an application that has a View Engine (say a RESTful service). Modularity is power, it&#39;s something that the Node.js and Ruby guys have known for a long time but projects like OWIN as making it more accessible in .NET.</p>
-<h2>Wrapping up</h2>
+<h2 id="wrapping-up">Wrapping up</h2>
 <p>Hopefully you&#39;ve enjoyed the journey too and learnt a thing or two along the way. This series has been by no means an extensive dive into all parts OWIN, I&#39;ll freely admit there&#39;s things I ignored as I didn&#39;t think them interesting enough (like how do you serve out statics like CSS and JavaScript?) and there&#39;s other things that I didn&#39;t even work out (like how Firefly works!). My goal was to give anyone who wants to play with OWIN a starting location and I think I&#39;ve done that.</p>
 
                         </article>
