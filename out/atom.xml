@@ -4,13 +4,246 @@
     <subtitle>.net, C#, asp.net, umbraco</subtitle>
     <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
     <link href="http://www.aaron-powell.com" />
-    <updated>2014-01-12T10:13:00.809Z</updated>
+    <updated>2014-01-13T02:59:45.665Z</updated>
     <id>http://www.aaron-powell.com</id>
     <author>
         <name>Aaron Powell</name>
         <email>me@aaron-powell.com</email>
     </author>
 
+    
+        <entry>
+            <title>Functions that yield multiple times</title>
+            <link href="http://www.aaron-powell.com/posts/2014-01-13-functions-that-yield-mutliple-times.html"/>
+            <updated>2014-01-13T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2014-01-13-functions-that-yield-mutliple-times.html</id>
+            <content type="html">&lt;p&gt;I &lt;a href=&quot;&amp;#39;/posts/2013-12-13-linq-in-javascript-for-real.html&amp;#39;&quot;&gt;recently introduced you to JavaScript generators&lt;/a&gt; which I think are a really interesting feature that we should look at for the future of JavaScript. In that blog post I was talking about &lt;a href=&quot;https://github.com/aaronpowell/linq-in-javascript&quot;&gt;LINQ in JavaScript&lt;/a&gt; and kind of glanced over an important part of generators, and that&amp;#39;s how you use them &lt;em&gt;if you&amp;#39;re not using a &lt;code&gt;for-of&lt;/code&gt; loop&lt;/em&gt;. While generators make a lot of sense in the scope of managing datasets that isn&amp;#39;t their only usage, in reality generators are quite useful if you want to lazily execute &lt;em&gt;any&lt;/em&gt; function.&lt;/p&gt;
+&lt;h1 id=&quot;eager-functions&quot;&gt;Eager functions&lt;/h1&gt;
+&lt;p&gt;Before we dive into lazy functions let&amp;#39;s talk about eager functions. What do I mean when I say something is an eager function? Let&amp;#39;s take the following function:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;var ticTacToe = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(size)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'Shall we begin?'&lt;/span&gt;);
+    var blank = &lt;span class=&quot;string&quot;&gt;'-'&lt;/span&gt;;
+    var board = &lt;span class=&quot;matrix&quot;&gt;[
+    ]&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var width = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; width &amp;lt; &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;; width++) &lt;span class=&quot;cell&quot;&gt;{
+        board[width] = [
+        ];
+        for (var height = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; height &amp;lt; size; height++) {
+            board[width][height] = blank;
+        }&lt;/span&gt;
+    }
+    var area = &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt; * &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;;
+    var findMove = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        var base = &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;trunc(area / &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;);
+        var move = &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;trunc(&lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;random() * (base + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) * &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;);
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; move;
+    };
+    var playMove = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(player)&lt;/span&gt; {&lt;/span&gt;
+        var move = findMove();
+        &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (move &amp;gt; area - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) &lt;span class=&quot;cell&quot;&gt;{
+            move = findMove();
+        }&lt;/span&gt;
+        var row = &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;trunc(move / &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;);
+        var segment = board&lt;span class=&quot;matrix&quot;&gt;[row]&lt;/span&gt;;
+        move = move - (row * &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;);
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (segment&lt;span class=&quot;matrix&quot;&gt;[move]&lt;/span&gt; === blank) &lt;span class=&quot;cell&quot;&gt;{
+            segment[move] = player;
+        }&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;cell&quot;&gt;{
+            return playMove(player);
+        }&lt;/span&gt;
+    };
+    var printBoard = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        var boardLayout = &lt;span class=&quot;transposed_variable&quot;&gt;board.&lt;/span&gt;reduce(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(str, segment)&lt;/span&gt; {&lt;/span&gt;
+            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; str + &lt;span class=&quot;transposed_variable&quot;&gt;segment.&lt;/span&gt;join(&lt;span class=&quot;string&quot;&gt;' '&lt;/span&gt;) + &lt;span class=&quot;string&quot;&gt;'\n'&lt;/span&gt;;
+        }, &lt;span class=&quot;string&quot;&gt;'\n'&lt;/span&gt;);
+        &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(boardLayout);
+    };
+    var players = &lt;span class=&quot;string&quot;&gt;'XO'&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &amp;lt; area; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;++) &lt;span class=&quot;cell&quot;&gt;{
+        playMove(players[i % players.length]);
+    }&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'Game over'&lt;/span&gt;);
+    printBoard();
+    var rowWinner = &lt;span class=&quot;transposed_variable&quot;&gt;board.&lt;/span&gt;filter(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(row)&lt;/span&gt; {&lt;/span&gt;
+        var first = row&lt;span class=&quot;matrix&quot;&gt;[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &amp;lt; &lt;span class=&quot;transposed_variable&quot;&gt;row.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;++) &lt;span class=&quot;cell&quot;&gt;{
+            if (row[i] !== first) {
+                return false;
+            }&lt;/span&gt;
+        }
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; true;
+    });
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;transposed_variable&quot;&gt;rowWinner.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;) &lt;span class=&quot;cell&quot;&gt;{
+        console.log(&lt;span class=&quot;string&quot;&gt;'The row winner was...'&lt;/span&gt;, rowWinner[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;][&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]);
+    }&lt;/span&gt;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ok so what we&amp;#39;ve got here is a very crappy automated tic-tac-toe game, it just randomly places the &lt;code&gt;X&lt;/code&gt; and &lt;code&gt;O&lt;/code&gt; on the board (of what ever size you want) and occasionally someone wins (but generally not). While how this code works is not particularly interesting (and to be honest I&amp;#39;ve just whipped it up quickly while on an international flight, so it&amp;#39;s not my &lt;strong&gt;best&lt;/strong&gt; code!) what it represents &lt;strong&gt;is&lt;/strong&gt; interesting, it represents something happening that &lt;em&gt;could&lt;/em&gt; be time consuming, but more importantly it&amp;#39;s something that you kind of want to watch unfold. If you run this code the game is immediately completed because this is an eager function, it executes, you wait for it do be done and only then can you see what&amp;#39;s happened; there&amp;#39;s no way to &lt;em&gt;pause&lt;/em&gt; the game at a particular point and see it in action. Alternatively if we took the code a bit further and added a simple AI to it each move would take subsequently longer than the last one to play as the program works out where would be the best place to play its move.&lt;/p&gt;
+&lt;p&gt;Now that&amp;#39;d be less than ideal, it might seem like our game has frozen, and as soon as a user believes that we&amp;#39;ve really shot ourselves in the foot.&lt;/p&gt;
+&lt;p&gt;This is the problem of eager functions, we start them and we have to wait for them to finish, even if we are concerned they are taking too long. There are JavaScript design patterns you can leverage to get around this, splitting a function up over &lt;code&gt;setTimeout&lt;/code&gt; or &lt;code&gt;requestAnimationFrame&lt;/code&gt;, but these can be hard to implement as your function has to know what is/isn&amp;#39;t acceptable for its execution duration.&lt;/p&gt;
+&lt;h1 id=&quot;lazy-functions&quot;&gt;Lazy functions&lt;/h1&gt;
+&lt;p&gt;So hopefully you&amp;#39;ve got a bit of an idea what an eager function is, if you run the above code you&amp;#39;ll see it can take a while, especially when you make the board size large (so far no game as been won at 20x20, and it kept having recursion errors above that). What&amp;#39;d be nice is if we could pause the game at any point and see what the board looks like, but the function doesn&amp;#39;t know to stop, it just keeps executing line after line until there&amp;#39;s no more lines of code to execute.&lt;/p&gt;
+&lt;p&gt;Well this is where a generator function comes in. Let&amp;#39;s start really simple:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vbscript&quot;&gt;var fn = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;* () {
+    console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;comment&quot;&gt;'start');&lt;/span&gt;
+    yield console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;comment&quot;&gt;'doing');&lt;/span&gt;
+    console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;comment&quot;&gt;'done');&lt;/span&gt;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So what do you think would happen when you run that function?&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Well nothing happened, we got no console messages logged out. Ok, that&amp;#39;s not true something &lt;strong&gt;did&lt;/strong&gt;, we created a new iterator instance from our function because &lt;a href=&quot;http://wiki.ecmascript.org/doku.php?id=harmony:generators&quot;&gt;generators are iterators&lt;/a&gt;. So to actually do something we need to capture the iterator:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;rust&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; iterator = &lt;span class=&quot;keyword&quot;&gt;fn&lt;/span&gt;();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Right so still nothing &lt;em&gt;observable&lt;/em&gt; has happened and that&amp;#39;s because we haven&amp;#39;t moved through our iterator. To do that we call the &lt;code&gt;next&lt;/code&gt; method on it:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;iterator&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we&amp;#39;ll see this in our output:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;sql&quot;&gt;&quot;&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;
+&quot;&lt;/span&gt;doing&lt;span class=&quot;string&quot;&gt;&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that we&amp;#39;ve output &lt;code&gt;start&lt;/code&gt; and &lt;code&gt;doing&lt;/code&gt; but not &lt;code&gt;done&lt;/code&gt;. Here&amp;#39;s were we have gotten to making a lazy function and our function has run as far as we&amp;#39;ve told it to run. There might be more to the function, we&amp;#39;ve just put it on hold. If we were to call &lt;code&gt;next&lt;/code&gt; again we&amp;#39;d have the final &lt;code&gt;console.log&lt;/code&gt; statement executed and the function would complete as there&amp;#39;s no more yielding to be done.&lt;/p&gt;
+&lt;h2 id=&quot;knowing-your-iterator-is-done&quot;&gt;Knowing your iterator is done&lt;/h2&gt;
+&lt;p&gt;It&amp;#39;s all well and good in our example up there to know that we need to call &lt;code&gt;next()&lt;/code&gt; twice because we know the make-up of the function, but what if we didn&amp;#39;t? How would you know when you stop calling &lt;code&gt;next()&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;Conveniently the &lt;code&gt;next()&lt;/code&gt; method will tell you that, it returns an object like so:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;cs&quot;&gt;{
+    &lt;span class=&quot;keyword&quot;&gt;value&lt;/span&gt;: &lt;span class=&quot;keyword&quot;&gt;value&lt;/span&gt;|undefined,
+    done: &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;|&lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By looking at the &lt;code&gt;done&lt;/code&gt; property of this object we can work out whether there are any more &lt;em&gt;steps&lt;/em&gt; to be executed. In fact this is what the &lt;code&gt;for-of&lt;/code&gt; loop does, in fact &lt;code&gt;for-of&lt;/code&gt; can be decomposed to look like this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;erlang&quot;&gt;var x;
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(!(x = it.&lt;span class=&quot;function_name&quot;&gt;next&lt;/span&gt;())&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;done&lt;/span&gt;) {
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You might be thinking &amp;quot;well wouldn&amp;#39;t you just use the &lt;code&gt;for-of&lt;/code&gt; loop then?&amp;quot; and that&amp;#39;s a good question, the &lt;code&gt;for-of&lt;/code&gt; loop nicely takes care of stepping over each &lt;code&gt;yield&lt;/code&gt; and executing them.&lt;/p&gt;
+&lt;h2 id=&quot;controlling-yielded-values&quot;&gt;Controlling yielded values&lt;/h2&gt;
+&lt;p&gt;Not every instance of using &lt;code&gt;yield&lt;/code&gt; will be for the purpose of yielding statements, sometimes you might want to yield a value. Here&amp;#39;s a slightly updated version of our function from above:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;vbscript&quot;&gt;var fn = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;* () {
+    console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;comment&quot;&gt;'start');&lt;/span&gt;
+    yield console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;comment&quot;&gt;'doing');&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; x = yield &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;
+    console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;comment&quot;&gt;'done', x);&lt;/span&gt;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Alright, so a &lt;code&gt;for-of&lt;/code&gt; loop can walk that for us right:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;coffeescript&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;reserved&quot;&gt;var&lt;/span&gt; x &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; fn()) {
+    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt; nothing
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;sql&quot;&gt;&quot;&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;
+&quot;&lt;/span&gt;doing&lt;span class=&quot;string&quot;&gt;&quot;
+&quot;&lt;/span&gt;done&lt;span class=&quot;string&quot;&gt;&quot; undefined&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Oh, that&amp;#39;s not right, why is the value of &lt;code&gt;x&lt;/code&gt; &lt;code&gt;undefined&lt;/code&gt;? Well to understand that you need to understand how we yield values, this is part of the returned object from calling &lt;code&gt;next()&lt;/code&gt;, so let&amp;#39;s do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(it&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;())&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(it&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;())&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(it&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;())&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now our output looks like:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;css&quot;&gt;&quot;&lt;span class=&quot;tag&quot;&gt;start&lt;/span&gt;&quot;
+&quot;&lt;span class=&quot;tag&quot;&gt;doing&lt;/span&gt;&quot;
+&lt;span class=&quot;rules&quot;&gt;{&lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;value&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; undefined, done: false}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;rules&quot;&gt;{&lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;value&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, done: false}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+&quot;&lt;span class=&quot;tag&quot;&gt;done&lt;/span&gt;&quot; &lt;span class=&quot;tag&quot;&gt;undefined&lt;/span&gt;
+&lt;span class=&quot;rules&quot;&gt;{&lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;value&lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; undefined, done: true}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ahh, notice the &lt;code&gt;value: 1&lt;/code&gt; in there, you probably want to do something with that.&lt;/p&gt;
+&lt;p&gt;What you want to do with it is pass it as the first argument to the &lt;code&gt;next()&lt;/code&gt; method call for you see &lt;code&gt;next&lt;/code&gt; takes an argument with is the result of the &lt;code&gt;yield&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s do this:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;it&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+it&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+it&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;42&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We now get:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;sql&quot;&gt;&quot;&lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;
+&quot;&lt;/span&gt;doing&lt;span class=&quot;string&quot;&gt;&quot;
+&quot;&lt;/span&gt;done&lt;span class=&quot;string&quot;&gt;&quot; 42&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Wait... but we said &lt;code&gt;let x = yield 1&lt;/code&gt; not &lt;code&gt;let x = yield 42&lt;/code&gt;, so why did it use the &lt;code&gt;42&lt;/code&gt; we passed as an argument rather than the value we actually yielded? Well it turns out that yield doesn&amp;#39;t work that way, what yield does is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Provides the yielded value to the iterator&lt;/li&gt;
+&lt;li&gt;Takes the argument provided to &lt;code&gt;next&lt;/code&gt; and passes that through to the assignment (or in the case of no assignment it&amp;#39;ll just ignore it)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So this gives us the power to manipulate the iterator at any yielded point from the outside, we can set up new values at yielded points, or stop processing the iterator if a particular value is yielded. This is also why &lt;code&gt;for-of&lt;/code&gt; doesn&amp;#39;t work, it will call &lt;code&gt;next&lt;/code&gt; but not provide any arguments so you can&amp;#39;t yield values for assignment inside of a &lt;code&gt;for-of&lt;/code&gt; loop.&lt;/p&gt;
+&lt;h1 id=&quot;making-our-game-lazy&quot;&gt;Making our game lazy&lt;/h1&gt;
+&lt;p&gt;So what points during our game do you think we&amp;#39;d want to pause? Maybe when the board has been created (hey, you could make that something to manipulate!) and after each move, that all seems reasonable. Here&amp;#39;s our updated game:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;var ticTacToe = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;* (&lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;) &lt;span class=&quot;cell&quot;&gt;{
+    console.log(&lt;span class=&quot;string&quot;&gt;'Shall we begin?'&lt;/span&gt;);
+    var blank = &lt;span class=&quot;string&quot;&gt;'-'&lt;/span&gt;;
+    var board = [
+    ];
+    for (var width = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; width &amp;lt; size; width++) {
+        board[width] = [
+        ];
+        for (var height = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; height &amp;lt; size; height++) {
+            board[width][height] = blank;
+        }&lt;/span&gt;
+    }
+    yield board;
+    var area = &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt; * &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;;
+    var findMove = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        var base = &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;trunc(area / &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;);
+        var move = &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;trunc(&lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;random() * (base + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) * &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;);
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; move;
+    };
+    var playMove = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(player)&lt;/span&gt; {&lt;/span&gt;
+        var move = findMove();
+        &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (move &amp;gt; area - &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) &lt;span class=&quot;cell&quot;&gt;{
+            move = findMove();
+        }&lt;/span&gt;
+        var row = &lt;span class=&quot;transposed_variable&quot;&gt;Math.&lt;/span&gt;trunc(move / &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;);
+        var segment = board&lt;span class=&quot;matrix&quot;&gt;[row]&lt;/span&gt;;
+        move = move - (row * &lt;span class=&quot;built_in&quot;&gt;size&lt;/span&gt;);
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (segment&lt;span class=&quot;matrix&quot;&gt;[move]&lt;/span&gt; === blank) &lt;span class=&quot;cell&quot;&gt;{
+            segment[move] = player;
+        }&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;cell&quot;&gt;{
+            return playMove(player);
+        }&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;matrix&quot;&gt;[board, move, move + (row * size), segment]&lt;/span&gt;;
+    };
+    var printBoard = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+        var boardLayout = &lt;span class=&quot;transposed_variable&quot;&gt;board.&lt;/span&gt;reduce(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(str, segment)&lt;/span&gt; {&lt;/span&gt;
+            &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; str + &lt;span class=&quot;transposed_variable&quot;&gt;segment.&lt;/span&gt;join(&lt;span class=&quot;string&quot;&gt;' '&lt;/span&gt;) + &lt;span class=&quot;string&quot;&gt;'\n'&lt;/span&gt;;
+        }, &lt;span class=&quot;string&quot;&gt;'\n'&lt;/span&gt;);
+        &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(boardLayout);
+    };
+    var players = &lt;span class=&quot;string&quot;&gt;'XO'&lt;/span&gt;;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &amp;lt; area; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;++) &lt;span class=&quot;cell&quot;&gt;{
+        yield playMove(players[i % players.length]);
+    }&lt;/span&gt;
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;'Game over'&lt;/span&gt;);
+    printBoard();
+    var rowWinner = &lt;span class=&quot;transposed_variable&quot;&gt;board.&lt;/span&gt;filter(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(row)&lt;/span&gt; {&lt;/span&gt;
+        var first = row&lt;span class=&quot;matrix&quot;&gt;[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]&lt;/span&gt;;
+        &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (var &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt; &amp;lt; &lt;span class=&quot;transposed_variable&quot;&gt;row.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;i&lt;/span&gt;++) &lt;span class=&quot;cell&quot;&gt;{
+            if (row[i] !== first) {
+                return false;
+            }&lt;/span&gt;
+        }
+        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; true;
+    });
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;transposed_variable&quot;&gt;rowWinner.&lt;/span&gt;&lt;span class=&quot;built_in&quot;&gt;length&lt;/span&gt;) &lt;span class=&quot;cell&quot;&gt;{
+        console.log(&lt;span class=&quot;string&quot;&gt;'The row winner was...'&lt;/span&gt;, rowWinner[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;][&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]);
+    }&lt;/span&gt;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;#39;m not doing any assignment from the yielded values, you can play with that yourself, but we can now look at the state of the board after each move:&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;var game  = ticTacToe(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+game&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+let [board] = game&lt;span class=&quot;preprocessor&quot;&gt;.next&lt;/span&gt;()&lt;span class=&quot;preprocessor&quot;&gt;.value&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;
+console&lt;span class=&quot;preprocessor&quot;&gt;.log&lt;/span&gt;(board)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And there we go, we can see the state of the board as we are going along. &lt;em&gt;I&amp;#39;m also using &lt;a href=&quot;http://wiki.ecmascript.org/doku.php?id=harmony:destructuring&quot;&gt;destructuring&lt;/a&gt; to get the board out of the value, which is an array.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Now we can start placing bets on who is likely to win, with the odds getting smaller as the board fills up, by us calling &lt;code&gt;next()&lt;/code&gt;. Although it&amp;#39;d be crappy odds to start with since the whole thing is based off a random number generator!&lt;/p&gt;
+&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;matlab&quot;&gt;var game  = ticTacToe(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);
+&lt;span class=&quot;transposed_variable&quot;&gt;game.&lt;/span&gt;next();
+var done = false;
+
+setTimeout(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    let obj = &lt;span class=&quot;transposed_variable&quot;&gt;game.&lt;/span&gt;next();
+    done = &lt;span class=&quot;transposed_variable&quot;&gt;obj.&lt;/span&gt;done;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (done) &lt;span class=&quot;cell&quot;&gt;{
+        return;
+    }&lt;/span&gt;
+    printBoard(&lt;span class=&quot;transposed_variable&quot;&gt;obj.&lt;/span&gt;value&lt;span class=&quot;matrix&quot;&gt;[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]&lt;/span&gt;);
+    &lt;span class=&quot;transposed_variable&quot;&gt;console.&lt;/span&gt;info(&lt;span class=&quot;string&quot;&gt;'place your bets'&lt;/span&gt;);
+    setTimeout(step, &lt;span class=&quot;number&quot;&gt;5000&lt;/span&gt;);
+});&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Throughout this post we&amp;#39;ve seen how standard JavaScript functions can have some limitations when their logic is complex and time consuming (or dumb but time consuming). We then took a look at how to use generator functions to make a function lazy so we can step through it at a desired pace. We&amp;#39;ve then seen how to determine when an interator has completed and how we can manipulate the values which we are yielding. Finally we rewrote our initial function to be a generator function and we ran through it in a delayed fashion.&lt;/p&gt;
+</content>
+            
+            <category>javascript</category>
+            
+            <category>es6</category>
+            
+        </entry>
     
         <entry>
             <title>Integration testing authenticated Katana applications</title>
@@ -1415,33 +1648,6 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
         </entry>
     
         <entry>
-            <title>New blog, less FunnelWeb</title>
-            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
-            <updated>2013-06-10T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
-            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
-&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
-&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
-&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
-&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
-&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
-&lt;h1 id=&quot;the-future-of-funnelweb&quot;&gt;The future of FunnelWeb&lt;/h1&gt;
-&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
-</content>
-            
-            <category>funnelweb</category>
-            
-            <category>docpad</category>
-            
-        </entry>
-    
-        <entry>
             <title>From FunnelWeb to Git in a few simple steps</title>
             <link href="http://www.aaron-powell.com/posts/2013-06-11-funnelweb-to-git.html"/>
             <updated>2013-06-10T00:00:00.000Z</updated>
@@ -1581,6 +1787,33 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
         </entry>
     
         <entry>
+            <title>New blog, less FunnelWeb</title>
+            <link href="http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html"/>
+            <updated>2013-06-10T00:00:00.000Z</updated>
+            <id>http://www.aaron-powell.com/posts/2013-06-10-new-blog-less-funnelweb.html</id>
+            <content type="html">&lt;p&gt;If you&amp;#39;re not viewing this via the website (ie - you&amp;#39;re reading it in a RSS reader) you&amp;#39;re probably not going to notice but &lt;a href=&quot;http://www.aaron-powell.com&quot;&gt;I&amp;#39;ve just done a new design&lt;/a&gt; and as a side project I&amp;#39;ve also decided that it&amp;#39;s time to do a shift in the platform.&lt;/p&gt;
+&lt;p&gt;You see, I&amp;#39;ve been using &lt;a href=&quot;https://github.com/funnelweblog/funnelweb&quot;&gt;FunnelWeb&lt;/a&gt; for a few years now, and it&amp;#39;s been going smoothly, sitting there chugging along doing all that I&amp;#39;ve really needed from it, but in recent months I&amp;#39;ve decided that there was something that didn&amp;#39;t really want anymore... a database.&lt;/p&gt;
+&lt;p&gt;Since all the content for my blog was stored in a database I was at the mercy of my hosting provider, if something happened to them, they had hardware failures, a security breach, etc, I had no copy of my content that I could easily shunt somewhere else and get back online. Admittedly &lt;strong&gt;this has never happened&lt;/strong&gt; but still, I felt that the lack of real ownership of my content, ultimately &lt;strong&gt;I&lt;/strong&gt; didn&amp;#39;t have a copy of it... anywhere.&lt;/p&gt;
+&lt;p&gt;Over the last 12 to 18 months there&amp;#39;s been a real shift in how to manage content, especially for simple sites such as what my blog is. The idea is to use a static site generator and flat files for the content input. This then results in a bunch of HTML files that can then be served out for your site, I mean really it&amp;#39;s not like the content of my blog changes all that frequently so the idea of it being constantly generated on the fly doesn&amp;#39;t really make sense. Something like FunnelWeb seems like an overkill for what I need, a series of HTML files.&lt;/p&gt;
+&lt;p&gt;So what are your options? Well there&amp;#39;s a few out there:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a popular choice which is written in Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; if you want to stick with a .NET base&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docpad.org/&quot;&gt;DocPad&lt;/a&gt; is an implementation in Node.js, and this is what I went with (for no reason other than I used DocPad when it was v1 and wanted to see what&amp;#39;d changed).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All my content is now stored in a GitHub repo as a combination of Markdown and Eco templates (with a design from &lt;a href=&quot;http://html5up.net/strongly-typed/&quot;&gt;HTML5UP&lt;/a&gt;) and it gives me a lot of freedom about the content layout, more importantly I have copies of my content stored on my various devices, I have full history of the changes and it can be stored on any number of git hosts.&lt;/p&gt;
+&lt;p&gt;So as you read this you&amp;#39;re reading something that has been served from a static HTML file generated by DocPad, rather than some content pulled from a database that is parsed on request and a HTML result generated.&lt;/p&gt;
+&lt;h1 id=&quot;the-future-of-funnelweb&quot;&gt;The future of FunnelWeb&lt;/h1&gt;
+&lt;p&gt;With the move of my blog off FunnelWeb someone is bound to ask the question about the future of FunnelWeb. In fact &lt;a href=&quot;https://groups.google.com/forum/?fromgroups#!topic/funnelweblog/WY2VKuc1OOA&quot;&gt;the question recently came up on the mailing list&lt;/a&gt;, ultimately it comes down to that Jake and I &lt;a href=&quot;http://blog.tatham.oddie.com.au/2013/02/20/dead-vs-done/&quot;&gt;consider it done&lt;/a&gt;. I plan to keep an eye on pull requests but at present there&amp;#39;s no plan to add new features going forward.&lt;/p&gt;
+</content>
+            
+            <category>funnelweb</category>
+            
+            <category>docpad</category>
+            
+        </entry>
+    
+        <entry>
             <title>Flight Mode - Libraries</title>
             <link href="http://www.aaron-powell.com/posts/2013-05-30-libraries.html"/>
             <updated>2013-05-30T00:00:00.000Z</updated>
@@ -1625,52 +1858,6 @@ app.listen(process.env.PORT || &lt;span class=&quot;number&quot;&gt;3000&lt;/spa
             <category>sessionStorage</category>
             
             <category>offline-storage</category>
-            
-        </entry>
-    
-        <entry>
-            <title>Flight Mode - FileSystem API</title>
-            <link href="http://www.aaron-powell.com/posts/2013-05-28-file-system.html"/>
-            <updated>2013-05-28T00:00:00.000Z</updated>
-            <id>http://www.aaron-powell.com/posts/2013-05-28-file-system.html</id>
-            <content type="html">&lt;p&gt;The last piece of the puzzle when looking at offline storage options is a bit of a shift from what we&amp;#39;ve been looking at so far. Generally speaking we&amp;#39;ve been looking at how to store plain data, either through key/value stores or as objects. This time we&amp;#39;re going to look at the other kind of data you might want to store, files.&lt;/p&gt;
-&lt;p&gt;There&amp;#39;s two way we might want to store files, as binary data in IndexedDB or using the &lt;a href=&quot;http://dev.w3.org/2009/dap/file-system/file-dir-sys.html&quot;&gt;FileSystem API&lt;/a&gt;. Since we looked at &lt;a href=&quot;/flight-mode/indexeddb&quot;&gt;IndexedDB last time&lt;/a&gt; (although didn&amp;#39;t cover how to store Blobs, but the principle is the same as we looked at) this time we&amp;#39;ll look at the FileSystem API.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Side note: At the time of writing the only browser supporting this API is Chrome so this is more of a &amp;quot;watch this space&amp;quot; style post than a &amp;quot;go use it now&amp;quot; one.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;The idea of the FileSystem API is to give browsers the ability to persist files either temporarily or permanent. Temporary persistence means that the browser is free to decide when it wants to get ride of the file system that has created where as permanent persistence means that it will not do an automatic cleanup of the files and folders.&lt;/p&gt;
-&lt;p&gt;Essentially what you end up with from the API is an ability to create files and folders in a sandboxed scenario. You don&amp;#39;t have access to the real file system of the device, so no access to &lt;code&gt;My Documents&lt;/code&gt; or &lt;code&gt;Program Files&lt;/code&gt;, just an isolated little location to work in. So this can be really quite useful if you&amp;#39;re say building a game, chances are you have a few assets that are required (audio, video, graphics) and the ability to retrieve them without web requests can be advantageous.&lt;/p&gt;
-&lt;h2 id=&quot;benefits-of-the-filesystem-for-storage&quot;&gt;Benefits of the FileSystem for storage&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;As mentioned this API is serving a different purpose to the other storage APIs we&amp;#39;ve looked at, with the exception of IndexedDB (in a limited scenario at least) so some of the benefits are unfair comparisions.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Like IndexedDB the FileSystem API is an asynchronous API which has the obvious benefits when it comes to working with the kind of data it is designed for, storing large files you do ideally want that to be done asynchronously so that you aren&amp;#39;t blocking the users interactions.&lt;/p&gt;
-&lt;p&gt;Another benefit is that the file system you create is completely sandboxed, meaning you don&amp;#39;t have to worry about what others may try and do to it. The only thing you need to take into account is the persistence level of the file system, as mentioned above temporary file systems are at the browsers mercy for clean-up, but it&amp;#39;s an opt-in to be using temporary persistence.&lt;/p&gt;
-&lt;p&gt;As with other storage options there are size limitations on the file system that is created, the difference is (at least at the time of writing) you can specify the size of the file system you want. Chrome will then determine whether the user needs to approve this storage level and if so request permission like other device-sensitive APIs (&lt;code&gt;getUserMedia&lt;/code&gt; for example).&lt;/p&gt;
-&lt;p&gt;The API itself is quite nice to work with, especially if you&amp;#39;re coming from a server background, creating new files is handled through writer streams while you have separate streams for reading files. You can store files of different types with different encodings and have a lot of flexibility to create a directory structure that suites your needs.&lt;/p&gt;
-&lt;h2 id=&quot;drawbacks-of-the-filesystem-for-storage&quot;&gt;Drawbacks of the FileSystem for storage&lt;/h2&gt;
-&lt;p&gt;The main drawback is browser support, as mentioned Chrome is the only browser at present that implements the FileSystem API and it seems that one of their main drivers is use within their extension system. While there&amp;#39;s nothing wrong with that it does mean that it&amp;#39;s not really possible to utilize this API is a cross-browser scenario. There is a &lt;a href=&quot;https://github.com/ebidel/idb.filesystem.js&quot;&gt;shim available that uses IndexedDB&lt;/a&gt; but it does require your IndexedDB implementation to support &lt;code&gt;Blob&lt;/code&gt; storage which can be a problem in Internet Explorer 10.&lt;/p&gt;
-&lt;p&gt;Another drawback is the API interactions, while it&amp;#39;s not quite as verbose as working with IndexedDB the API itself partially relies on the DOM Level 3 events and partially relies on callbacks being provided. This means that in some instances you&amp;#39;ll be attaching event handlers, like when you&amp;#39;re using a &lt;code&gt;FileReader&lt;/code&gt;:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;r&quot;&gt;var reader = new FileReader();
-reader.onloadend = &lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (e) { &lt;span class=&quot;keyword&quot;&gt;...&lt;/span&gt; };
-reader.readAsText(file);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And other times you&amp;#39;ll have to pass a callback:&lt;/p&gt;
-&lt;pre class=&quot;highlighted&quot;&gt;&lt;code class=&quot;avrasm&quot;&gt;window&lt;span class=&quot;preprocessor&quot;&gt;.requestFileSystem&lt;/span&gt;(window&lt;span class=&quot;preprocessor&quot;&gt;.TEMPORARY&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt;*&lt;span class=&quot;number&quot;&gt;1024&lt;/span&gt;, onInit, onError)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;API inconsistence can be annoying for developers to work with and something that you need to be mindful of.&lt;/p&gt;
-&lt;p&gt;The final drawback I see is that there&amp;#39;s no file system querying available, meaning you have to know where your files are stored, which can be a bit tricky when you&amp;#39;re working with directories in your file system. Admittedly this is a minor problem, you probably shouldn&amp;#39;t be storing files that you don&amp;#39;t know the location of in the file system but it can still be something that you&amp;#39;d want.&lt;/p&gt;
-&lt;h2 id=&quot;implementing-filesystem-storage&quot;&gt;Implementing FileSystem storage&lt;/h2&gt;
-&lt;p&gt;Unlike the other storage options I&amp;#39;ve decided to &lt;strong&gt;not&lt;/strong&gt; cover off how to implement this API because:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;It really wouldn&amp;#39;t fit with the &lt;code&gt;FlightMode&lt;/code&gt; API we&amp;#39;ve got so far, that&amp;#39;s designed for non-hierarchical data&lt;/li&gt;
-&lt;li&gt;This is more of a &lt;em&gt;watch this space&lt;/em&gt; post than a &lt;em&gt;go use it&lt;/em&gt; one since the browser support is quite lacking&lt;/li&gt;
-&lt;li&gt;There is a &lt;a href=&quot;http://www.html5rocks.com/en/tutorials/file/filesystem/&quot;&gt;great article on HTML5 Rocks&lt;/a&gt; that&amp;#39;ll do it more justice than I can give it&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;The idea of being able to store files, complete files, in a structured manner on the client is a really exciting one. Admittedly there&amp;#39;s a much narrower use-case for such an API compared to other storage options we&amp;#39;ve discussed the problems that it solves are very real and will likely become more valid as more true web applications rise.&lt;/p&gt;
-&lt;p&gt;The API itself is not back to work against, if it is a bit inconsistent and keep in mind that the specification is still in draft status so it may change in the future.&lt;/p&gt;
-</content>
-            
-            <category>flight-mode</category>
-            
-            <category>offline-storage</category>
-            
-            <category>file-system</category>
             
         </entry>
     

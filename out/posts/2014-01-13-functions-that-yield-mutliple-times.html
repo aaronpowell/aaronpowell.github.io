@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<!--
+    Strongly Typed 1.0 by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+  <meta charset="utf-8">
+  <title>Functions that yield multiple times - LINQ to Fail</title>
+  <meta name="author" content="Aaron Powell">
+  <meta name="viewport" content="width=1040" />
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700" rel="stylesheet" type="text/css" />
+  <link href="/css/highlightjs/solarized_light.css" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-1.9.1.min.js"></script>
+  <script src="/js/jquery.dropotron-1.3.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/skel.min.js"></script>
+  <script src="/js/skel-ui.min.js"></script>
+  <noscript>
+    <link rel="stylesheet" href="/css/skel-noscript.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style-desktop.css" />
+  </noscript>
+  <!--[if lte IE 8]><script src="/js/html5shiv.js"></script><![endif]-->
+
+</head>
+
+    <body class="left-sidebar">
+
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <h1 id="logo">Functions that yield multiple times</h1>
+                <h2>13th January 2014</h2>
+                <ul class="tags">
+    
+        
+            <li><a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a></li>
+        
+            <li><a class="icon icon-tag" href="/tagged/es6.html"><span>es6</span></a></li>
+        
+    
+</ul>
+                <!-- Nav -->
+<nav id="nav">
+    <ul>
+        <li><a class="icon icon-home" href="/"><span>Home</span></a></li>
+        <li><a class="icon icon-github" href="https://github.com/aaronpowell"><span>aaronpowell</span></a></li>
+        <li><a class="icon icon-twitter" href="http://twitter.com/slace"><span>@slace</span></a></li>
+        <li><a class="icon icon-book" href="/about"><span>About Me</span></a></li>
+        <li><a class="icon icon-rss" href="/feed"><span>Feed</span></a></li>
+    </ul>
+</nav>
+
+            </div>
+        </div>
+
+        <div id="main-wrapper">
+            <div id="main" class="container">
+                <div class="row">
+                    <div id="sidebar" class="4u">
+    <section>
+        <ul class="divided">
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">2nd August 2013</span>
+                            <h3><a href="/posts/2013-08-02-ajax-without-jquery.html">AJAX without jQuery</a></h3>
+                        </header>
+                        <p>When was the last time you wrote an AJAX request?</p>
+<p>When was the last time you did it without relying on jQuery?</p>
+<p>In this article we&#39;ll look at how do do just that, how do make an AJAX request without jQuery to better understand what&#39;s going on.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/ajax.html"><span>ajax</span></a>
+                            
+                                <a class="icon icon-tag" href="/tagged/jquery.html"><span>jquery</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">22nd July 2013</span>
+                            <h3><a href="/posts/2013-07-22-array-like-objects.html">Array-like objects</a></h3>
+                        </header>
+                        <p>Just because it looks like a duck, walks like a duck, quacks like a duck doesn&#39;t mean it&#39;s a duck. There&#39;s dangers with making assumptions of your JavaScript objects based on their surface area.</p>
+<p>That said, a lot of power can be gleamed by these seemingly innocent assumptions.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">14th July 2013</span>
+                            <h3><a href="/posts/2013-07-14-javascript-new-operator.html">The JavaScript new operator</a></h3>
+                        </header>
+                        <p>Time to revisit something that was overlooked in the last post, the <code>new</code> operator in JavaScript and what it does.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">10th July 2013</span>
+                            <h3><a href="/posts/2013-07-10-implementing-indexers-in-javascript.html">Implementing "indexers" in JavaScript</a></h3>
+                        </header>
+                        <p>My colleague Luke Drumm challenged me to implement C# style indexers in JavaScript.</p>
+<p>So let&#39;s have a look at how you can do that, and how you can make some very interesting JavaScript objects that are self replicating. We&#39;ll build on the knowledge of using <code>bind</code> and <code>apply</code> from the last two posts.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+                <li>
+                    <article class="is-excerpt">
+                        <header>
+                            <span class="date">5th July 2013</span>
+                            <h3><a href="/posts/2013-07-05-javascript-binding-currying-and-arrows.html">JavaScript bind, currying and arrow functions</a></h3>
+                        </header>
+                        <p>After confusing my colleagues with how to invoke functions with a modifided set of arguments at a single time the next evolutionary point was to confuse them with creating functions that are always called with a different state.</p>
+
+                        <div class="tags">
+                            
+                                <a class="icon icon-tag" href="/tagged/javascript.html"><span>javascript</span></a>
+                            
+                        </div>
+                    </article>
+                </li>
+            
+        </ul>
+    </section>
+</div>
+
+                    <div id="content" class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <p>I <a href="&#39;/posts/2013-12-13-linq-in-javascript-for-real.html&#39;">recently introduced you to JavaScript generators</a> which I think are a really interesting feature that we should look at for the future of JavaScript. In that blog post I was talking about <a href="https://github.com/aaronpowell/linq-in-javascript">LINQ in JavaScript</a> and kind of glanced over an important part of generators, and that&#39;s how you use them <em>if you&#39;re not using a <code>for-of</code> loop</em>. While generators make a lot of sense in the scope of managing datasets that isn&#39;t their only usage, in reality generators are quite useful if you want to lazily execute <em>any</em> function.</p>
+<h1 id="eager-functions">Eager functions</h1>
+<p>Before we dive into lazy functions let&#39;s talk about eager functions. What do I mean when I say something is an eager function? Let&#39;s take the following function:</p>
+<pre class="highlighted"><code class="matlab">var ticTacToe = <span class="function"><span class="keyword">function</span> <span class="params">(size)</span> {</span>
+    <span class="transposed_variable">console.</span><span class="built_in">log</span>(<span class="string">'Shall we begin?'</span>);
+    var blank = <span class="string">'-'</span>;
+    var board = <span class="matrix">[
+    ]</span>;
+    <span class="keyword">for</span> (var width = <span class="number">0</span>; width &lt; <span class="built_in">size</span>; width++) <span class="cell">{
+        board[width] = [
+        ];
+        for (var height = <span class="number">0</span>; height &lt; size; height++) {
+            board[width][height] = blank;
+        }</span>
+    }
+    var area = <span class="built_in">size</span> * <span class="built_in">size</span>;
+    var findMove = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        var base = <span class="transposed_variable">Math.</span>trunc(area / <span class="number">10</span>);
+        var move = <span class="transposed_variable">Math.</span>trunc(<span class="transposed_variable">Math.</span>random() * (base + <span class="number">1</span>) * <span class="number">10</span>);
+        <span class="keyword">return</span> move;
+    };
+    var playMove = <span class="function"><span class="keyword">function</span> <span class="params">(player)</span> {</span>
+        var move = findMove();
+        <span class="keyword">while</span> (move &gt; area - <span class="number">1</span>) <span class="cell">{
+            move = findMove();
+        }</span>
+        var row = <span class="transposed_variable">Math.</span>trunc(move / <span class="built_in">size</span>);
+        var segment = board<span class="matrix">[row]</span>;
+        move = move - (row * <span class="built_in">size</span>);
+        <span class="keyword">if</span> (segment<span class="matrix">[move]</span> === blank) <span class="cell">{
+            segment[move] = player;
+        }</span> <span class="keyword">else</span> <span class="cell">{
+            return playMove(player);
+        }</span>
+    };
+    var printBoard = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        var boardLayout = <span class="transposed_variable">board.</span>reduce(<span class="function"><span class="keyword">function</span> <span class="params">(str, segment)</span> {</span>
+            <span class="keyword">return</span> str + <span class="transposed_variable">segment.</span>join(<span class="string">' '</span>) + <span class="string">'\n'</span>;
+        }, <span class="string">'\n'</span>);
+        <span class="transposed_variable">console.</span><span class="built_in">log</span>(boardLayout);
+    };
+    var players = <span class="string">'XO'</span>;
+    <span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; area; <span class="built_in">i</span>++) <span class="cell">{
+        playMove(players[i % players.length]);
+    }</span>
+    <span class="transposed_variable">console.</span><span class="built_in">log</span>(<span class="string">'Game over'</span>);
+    printBoard();
+    var rowWinner = <span class="transposed_variable">board.</span>filter(<span class="function"><span class="keyword">function</span> <span class="params">(row)</span> {</span>
+        var first = row<span class="matrix">[<span class="number">0</span>]</span>;
+        <span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt; <span class="transposed_variable">row.</span><span class="built_in">length</span>; <span class="built_in">i</span>++) <span class="cell">{
+            if (row[i] !== first) {
+                return false;
+            }</span>
+        }
+        <span class="keyword">return</span> true;
+    });
+    <span class="keyword">if</span> (<span class="transposed_variable">rowWinner.</span><span class="built_in">length</span>) <span class="cell">{
+        console.log(<span class="string">'The row winner was...'</span>, rowWinner[<span class="number">0</span>][<span class="number">0</span>]);
+    }</span>
+};</code></pre>
+<p>Ok so what we&#39;ve got here is a very crappy automated tic-tac-toe game, it just randomly places the <code>X</code> and <code>O</code> on the board (of what ever size you want) and occasionally someone wins (but generally not). While how this code works is not particularly interesting (and to be honest I&#39;ve just whipped it up quickly while on an international flight, so it&#39;s not my <strong>best</strong> code!) what it represents <strong>is</strong> interesting, it represents something happening that <em>could</em> be time consuming, but more importantly it&#39;s something that you kind of want to watch unfold. If you run this code the game is immediately completed because this is an eager function, it executes, you wait for it do be done and only then can you see what&#39;s happened; there&#39;s no way to <em>pause</em> the game at a particular point and see it in action. Alternatively if we took the code a bit further and added a simple AI to it each move would take subsequently longer than the last one to play as the program works out where would be the best place to play its move.</p>
+<p>Now that&#39;d be less than ideal, it might seem like our game has frozen, and as soon as a user believes that we&#39;ve really shot ourselves in the foot.</p>
+<p>This is the problem of eager functions, we start them and we have to wait for them to finish, even if we are concerned they are taking too long. There are JavaScript design patterns you can leverage to get around this, splitting a function up over <code>setTimeout</code> or <code>requestAnimationFrame</code>, but these can be hard to implement as your function has to know what is/isn&#39;t acceptable for its execution duration.</p>
+<h1 id="lazy-functions">Lazy functions</h1>
+<p>So hopefully you&#39;ve got a bit of an idea what an eager function is, if you run the above code you&#39;ll see it can take a while, especially when you make the board size large (so far no game as been won at 20x20, and it kept having recursion errors above that). What&#39;d be nice is if we could pause the game at any point and see what the board looks like, but the function doesn&#39;t know to stop, it just keeps executing line after line until there&#39;s no more lines of code to execute.</p>
+<p>Well this is where a generator function comes in. Let&#39;s start really simple:</p>
+<pre class="highlighted"><code class="vbscript">var fn = <span class="keyword">function</span>* () {
+    console.<span class="built_in">log</span>(<span class="comment">'start');</span>
+    yield console.<span class="built_in">log</span>(<span class="comment">'doing');</span>
+    console.<span class="built_in">log</span>(<span class="comment">'done');</span>
+};</code></pre>
+<p>So what do you think would happen when you run that function?</p>
+<pre class="highlighted"><code class="erlang"><span class="function"><span class="title">fn</span><span class="params">()</span>;</code></pre>
+<p>Well nothing happened, we got no console messages logged out. Ok, that&#39;s not true something <strong>did</strong>, we created a new iterator instance from our function because <a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators">generators are iterators</a>. So to actually do something we need to capture the iterator:</p>
+<pre class="highlighted"><code class="rust"><span class="keyword">let</span> iterator = <span class="keyword">fn</span>();</code></pre>
+<p>Right so still nothing <em>observable</em> has happened and that&#39;s because we haven&#39;t moved through our iterator. To do that we call the <code>next</code> method on it:</p>
+<pre class="highlighted"><code class="avrasm">iterator<span class="preprocessor">.next</span>()<span class="comment">;</span></code></pre>
+<p>Now we&#39;ll see this in our output:</p>
+<pre class="highlighted"><code class="sql">"<span class="operator"><span class="keyword">start</span><span class="string">"
+"</span>doing<span class="string">"</code></pre>
+<p>Notice that we&#39;ve output <code>start</code> and <code>doing</code> but not <code>done</code>. Here&#39;s were we have gotten to making a lazy function and our function has run as far as we&#39;ve told it to run. There might be more to the function, we&#39;ve just put it on hold. If we were to call <code>next</code> again we&#39;d have the final <code>console.log</code> statement executed and the function would complete as there&#39;s no more yielding to be done.</p>
+<h2 id="knowing-your-iterator-is-done">Knowing your iterator is done</h2>
+<p>It&#39;s all well and good in our example up there to know that we need to call <code>next()</code> twice because we know the make-up of the function, but what if we didn&#39;t? How would you know when you stop calling <code>next()</code>?</p>
+<p>Conveniently the <code>next()</code> method will tell you that, it returns an object like so:</p>
+<pre class="highlighted"><code class="cs">{
+    <span class="keyword">value</span>: <span class="keyword">value</span>|undefined,
+    done: <span class="keyword">true</span>|<span class="keyword">false</span>
+}</code></pre>
+<p>By looking at the <code>done</code> property of this object we can work out whether there are any more <em>steps</em> to be executed. In fact this is what the <code>for-of</code> loop does, in fact <code>for-of</code> can be decomposed to look like this:</p>
+<pre class="highlighted"><code class="erlang">var x;
+<span class="function"><span class="title">while</span> <span class="params">(!(x = it.<span class="function_name">next</span>())</span>.<span class="title">done</span>) {
+}</code></pre>
+<p>You might be thinking &quot;well wouldn&#39;t you just use the <code>for-of</code> loop then?&quot; and that&#39;s a good question, the <code>for-of</code> loop nicely takes care of stepping over each <code>yield</code> and executing them.</p>
+<h2 id="controlling-yielded-values">Controlling yielded values</h2>
+<p>Not every instance of using <code>yield</code> will be for the purpose of yielding statements, sometimes you might want to yield a value. Here&#39;s a slightly updated version of our function from above:</p>
+<pre class="highlighted"><code class="vbscript">var fn = <span class="keyword">function</span>* () {
+    console.<span class="built_in">log</span>(<span class="comment">'start');</span>
+    yield console.<span class="built_in">log</span>(<span class="comment">'doing');</span>
+    <span class="keyword">let</span> x = yield <span class="number">1</span>;
+    console.<span class="built_in">log</span>(<span class="comment">'done', x);</span>
+};</code></pre>
+<p>Alright, so a <code>for-of</code> loop can walk that for us right:</p>
+<pre class="highlighted"><code class="coffeescript"><span class="keyword">for</span> (<span class="reserved">var</span> x <span class="keyword">of</span> fn()) {
+    <span class="regexp">//</span><span class="keyword">do</span> nothing
+}</code></pre>
+<p>Outputs:</p>
+<pre class="highlighted"><code class="sql">"<span class="operator"><span class="keyword">start</span><span class="string">"
+"</span>doing<span class="string">"
+"</span>done<span class="string">" undefined</code></pre>
+<p>Oh, that&#39;s not right, why is the value of <code>x</code> <code>undefined</code>? Well to understand that you need to understand how we yield values, this is part of the returned object from calling <code>next()</code>, so let&#39;s do this:</p>
+<pre class="highlighted"><code class="avrasm">console<span class="preprocessor">.log</span>(it<span class="preprocessor">.next</span>())<span class="comment">;</span>
+console<span class="preprocessor">.log</span>(it<span class="preprocessor">.next</span>())<span class="comment">;</span>
+console<span class="preprocessor">.log</span>(it<span class="preprocessor">.next</span>())<span class="comment">;</span></code></pre>
+<p>Now our output looks like:</p>
+<pre class="highlighted"><code class="css">"<span class="tag">start</span>"
+"<span class="tag">doing</span>"
+<span class="rules">{<span class="rule"><span class="attribute">value</span>:<span class="value"> undefined, done: false}</span></span></span>
+<span class="rules">{<span class="rule"><span class="attribute">value</span>:<span class="value"> <span class="number">1</span>, done: false}</span></span></span>
+"<span class="tag">done</span>" <span class="tag">undefined</span>
+<span class="rules">{<span class="rule"><span class="attribute">value</span>:<span class="value"> undefined, done: true}</span></span></span></code></pre>
+<p>Ahh, notice the <code>value: 1</code> in there, you probably want to do something with that.</p>
+<p>What you want to do with it is pass it as the first argument to the <code>next()</code> method call for you see <code>next</code> takes an argument with is the result of the <code>yield</code>.</p>
+<p>Let&#39;s do this:</p>
+<pre class="highlighted"><code class="avrasm">it<span class="preprocessor">.next</span>()<span class="comment">;</span>
+it<span class="preprocessor">.next</span>()<span class="comment">;</span>
+it<span class="preprocessor">.next</span>(<span class="number">42</span>)<span class="comment">;</span></code></pre>
+<p>We now get:</p>
+<pre class="highlighted"><code class="sql">"<span class="operator"><span class="keyword">start</span><span class="string">"
+"</span>doing<span class="string">"
+"</span>done<span class="string">" 42</code></pre>
+<p>Wait... but we said <code>let x = yield 1</code> not <code>let x = yield 42</code>, so why did it use the <code>42</code> we passed as an argument rather than the value we actually yielded? Well it turns out that yield doesn&#39;t work that way, what yield does is:</p>
+<ul>
+<li>Provides the yielded value to the iterator</li>
+<li>Takes the argument provided to <code>next</code> and passes that through to the assignment (or in the case of no assignment it&#39;ll just ignore it)</li>
+</ul>
+<p>So this gives us the power to manipulate the iterator at any yielded point from the outside, we can set up new values at yielded points, or stop processing the iterator if a particular value is yielded. This is also why <code>for-of</code> doesn&#39;t work, it will call <code>next</code> but not provide any arguments so you can&#39;t yield values for assignment inside of a <code>for-of</code> loop.</p>
+<h1 id="making-our-game-lazy">Making our game lazy</h1>
+<p>So what points during our game do you think we&#39;d want to pause? Maybe when the board has been created (hey, you could make that something to manipulate!) and after each move, that all seems reasonable. Here&#39;s our updated game:</p>
+<pre class="highlighted"><code class="matlab">var ticTacToe = <span class="keyword">function</span>* (<span class="built_in">size</span>) <span class="cell">{
+    console.log(<span class="string">'Shall we begin?'</span>);
+    var blank = <span class="string">'-'</span>;
+    var board = [
+    ];
+    for (var width = <span class="number">0</span>; width &lt; size; width++) {
+        board[width] = [
+        ];
+        for (var height = <span class="number">0</span>; height &lt; size; height++) {
+            board[width][height] = blank;
+        }</span>
+    }
+    yield board;
+    var area = <span class="built_in">size</span> * <span class="built_in">size</span>;
+    var findMove = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        var base = <span class="transposed_variable">Math.</span>trunc(area / <span class="number">10</span>);
+        var move = <span class="transposed_variable">Math.</span>trunc(<span class="transposed_variable">Math.</span>random() * (base + <span class="number">1</span>) * <span class="number">10</span>);
+        <span class="keyword">return</span> move;
+    };
+    var playMove = <span class="function"><span class="keyword">function</span> <span class="params">(player)</span> {</span>
+        var move = findMove();
+        <span class="keyword">while</span> (move &gt; area - <span class="number">1</span>) <span class="cell">{
+            move = findMove();
+        }</span>
+        var row = <span class="transposed_variable">Math.</span>trunc(move / <span class="built_in">size</span>);
+        var segment = board<span class="matrix">[row]</span>;
+        move = move - (row * <span class="built_in">size</span>);
+        <span class="keyword">if</span> (segment<span class="matrix">[move]</span> === blank) <span class="cell">{
+            segment[move] = player;
+        }</span> <span class="keyword">else</span> <span class="cell">{
+            return playMove(player);
+        }</span>
+        <span class="keyword">return</span> <span class="matrix">[board, move, move + (row * size), segment]</span>;
+    };
+    var printBoard = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        var boardLayout = <span class="transposed_variable">board.</span>reduce(<span class="function"><span class="keyword">function</span> <span class="params">(str, segment)</span> {</span>
+            <span class="keyword">return</span> str + <span class="transposed_variable">segment.</span>join(<span class="string">' '</span>) + <span class="string">'\n'</span>;
+        }, <span class="string">'\n'</span>);
+        <span class="transposed_variable">console.</span><span class="built_in">log</span>(boardLayout);
+    };
+    var players = <span class="string">'XO'</span>;
+    <span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; area; <span class="built_in">i</span>++) <span class="cell">{
+        yield playMove(players[i % players.length]);
+    }</span>
+    <span class="transposed_variable">console.</span><span class="built_in">log</span>(<span class="string">'Game over'</span>);
+    printBoard();
+    var rowWinner = <span class="transposed_variable">board.</span>filter(<span class="function"><span class="keyword">function</span> <span class="params">(row)</span> {</span>
+        var first = row<span class="matrix">[<span class="number">0</span>]</span>;
+        <span class="keyword">for</span> (var <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt; <span class="transposed_variable">row.</span><span class="built_in">length</span>; <span class="built_in">i</span>++) <span class="cell">{
+            if (row[i] !== first) {
+                return false;
+            }</span>
+        }
+        <span class="keyword">return</span> true;
+    });
+    <span class="keyword">if</span> (<span class="transposed_variable">rowWinner.</span><span class="built_in">length</span>) <span class="cell">{
+        console.log(<span class="string">'The row winner was...'</span>, rowWinner[<span class="number">0</span>][<span class="number">0</span>]);
+    }</span>
+};</code></pre>
+<p>I&#39;m not doing any assignment from the yielded values, you can play with that yourself, but we can now look at the state of the board after each move:</p>
+<pre class="highlighted"><code class="avrasm">var game  = ticTacToe(<span class="number">3</span>)<span class="comment">;</span>
+game<span class="preprocessor">.next</span>()<span class="comment">;</span>
+let [board] = game<span class="preprocessor">.next</span>()<span class="preprocessor">.value</span><span class="comment">;</span>
+console<span class="preprocessor">.log</span>(board)<span class="comment">;</span></code></pre>
+<p>And there we go, we can see the state of the board as we are going along. <em>I&#39;m also using <a href="http://wiki.ecmascript.org/doku.php?id=harmony:destructuring">destructuring</a> to get the board out of the value, which is an array.</em></p>
+<p>Now we can start placing bets on who is likely to win, with the odds getting smaller as the board fills up, by us calling <code>next()</code>. Although it&#39;d be crappy odds to start with since the whole thing is based off a random number generator!</p>
+<pre class="highlighted"><code class="matlab">var game  = ticTacToe(<span class="number">3</span>);
+<span class="transposed_variable">game.</span>next();
+var done = false;
+
+setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">step</span><span class="params">()</span> {</span>
+    let obj = <span class="transposed_variable">game.</span>next();
+    done = <span class="transposed_variable">obj.</span>done;
+    <span class="keyword">if</span> (done) <span class="cell">{
+        return;
+    }</span>
+    printBoard(<span class="transposed_variable">obj.</span>value<span class="matrix">[<span class="number">0</span>]</span>);
+    <span class="transposed_variable">console.</span>info(<span class="string">'place your bets'</span>);
+    setTimeout(step, <span class="number">5000</span>);
+});</code></pre>
+<h1 id="conclusion">Conclusion</h1>
+<p>Throughout this post we&#39;ve seen how standard JavaScript functions can have some limitations when their logic is complex and time consuming (or dumb but time consuming). We then took a look at how to use generator functions to make a function lazy so we can step through it at a desired pace. We&#39;ve then seen how to determine when an interator has completed and how we can manipulate the values which we are yielding. Finally we rewrote our initial function to be a generator function and we ran through it in a delayed fashion.</p>
+
+                        </article>
+                    </div>
+                    <div class="8u skel-cell-mainContent">
+                        <article class="is-post">
+                            <div id="disqus_thread"></div>
+<script>
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+window.disqus_shortname = 'aaronpowell'; // required: replace example with your forum shortname
+window.disqus_identifier = document.title || 'Home';
+window.disqus_developer = !! ~document.location.href.indexOf("localhost") ? 1 : 0;
+window.disqus_url = document.location.origin + '/posts/2014-01-13-functions-that-yield-mutliple-times.html';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by</a>
+<span class="logo-disqus"> Disqus</span>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-wrapper">
+
+    <!-- Copyright -->
+        <div id="copyright" class="container">
+            <ul class="links">
+                <li>&copy; Aaron Powell. All rights reserved</li>
+                <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6399564-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+  })();
+
+</script>
+
+    </body>
+</html>
