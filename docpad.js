@@ -8,6 +8,8 @@ path = require('path');
 
 docpadConfig = {
   ignorePaths: [path.join(__dirname, 'src', 'files', 'get')],
+  outPath: path.join(__dirname, 'out'),
+  srcPath: path.join(__dirname, 'src'),
   templateData: {
     site: {
       title: 'LINQ to Fail',
@@ -85,6 +87,12 @@ docpadConfig = {
     generateSummary: function (post) {
       var description = post.description;
       return description ? this.parseMarkdown(description) : this.parseMarkdown(this.contentTrim(post.content));
+    },
+    getTagUrl: function(tag) {
+      var doc = docpad.getFile({
+        tag: tag
+      });
+      return (doc != null ? doc.get('url') : void 0) || '';
     }
   },
   collections: {
@@ -125,8 +133,15 @@ docpadConfig = {
     }
   },
   plugins: {
-    tagging: {
-      indexPagePath: 'tagged'
+    tags: {
+      extension: '.html.eco',
+      injectDocumentHelper: function (document) {
+        document.setMeta({
+          layout: 'tags',
+          data: "<%- @partial('tags', @) %>"
+        })
+      },
+      relativeDirPath: 'tagged'
     }
   }
 };
