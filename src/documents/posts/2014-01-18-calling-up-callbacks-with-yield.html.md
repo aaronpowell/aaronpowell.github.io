@@ -82,6 +82,7 @@ Here what I'll be doing is:
 * Get the iterator
 * Start the recursion
 
+
     let next = function (arg) {
         var result = it.next(arg);
     };
@@ -116,18 +117,18 @@ And now our function will run through all steps of an iterator quite happily as 
 
 For this to work we better go update our Thunk:
 
-let get = function (url) {
-    return function (cont) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.addEventListener('load', function (e) {
-            var o = JSON.parse(xhr.responseText);
-            if (cont)
-                cont(o);
-        });
-        xhr.send();
+    let get = function (url) {
+        return function (cont) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.addEventListener('load', function (e) {
+                var o = JSON.parse(xhr.responseText);
+                if (cont)
+                    cont(o);
+            });
+            xhr.send();
+        };
     };
-};
 
 So what's going on here?
 
