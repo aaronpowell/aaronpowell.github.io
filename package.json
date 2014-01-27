@@ -16,7 +16,8 @@
     "moment": "~2.0.0",
     "docpad-plugin-paged": "~2.2.4",
     "docpad-plugin-highlightjs": "~2.2.0",
-    "express": "~3.2.6"
+    "express": "~3.2.6",
+    "docpad-plugin-tags": "~2.0.7"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "devDependencies": {
