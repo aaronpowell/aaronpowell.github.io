@@ -30,7 +30,7 @@ Right-o so our event handlers are hidden away behind a wrapper that triggers the
 
 Conveniently jQuery offers a bit of a backdoor into its internals which we can leverage for this purpose, and that's `$._data`.
 
-**It's worth pointing out that `$._data` is an "intenral" jQuery API which is undocumented, it might be removed one day so use it with caution.**
+**It's worth pointing out that `$._data` is an "internal" jQuery API which is undocumented, it might be removed one day so use it with caution.**
 
 This method takes 3 arguments, but for our purpose we're really only interested in the first, which is a DOM element. Not that this is a **DOM element** and not a jQuery element, passing in a jQuery element will not yield the results you desire.
 
