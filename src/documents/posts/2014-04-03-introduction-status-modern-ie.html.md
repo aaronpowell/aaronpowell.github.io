@@ -1,7 +1,7 @@
 --- cson
 title: "Introducing status.modern.ie"
 date: '2014-04-03'
-tags: ['css']
+tags: ['internet-explorer']
 description: """Introducing a new website to help track the development status of features in Internet Explorer
 """
 ---
