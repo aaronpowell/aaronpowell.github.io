@@ -4,6 +4,7 @@ date: '2014-12-04'
 tags: ['owin', 'katana', 'webapi, 'testing']
 description: """Have you ever wondered how you would go about hosting multiple WebAPI servers within a single process?
 """
+---
 
 I'm currently working on a project which consists of three different ASP.Net applications that comunication in sequence, Server to Server to Server (to database if you want to get technical).
 
