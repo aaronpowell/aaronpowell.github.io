@@ -1,7 +1,7 @@
 --- cson
 title: "Hosting multiple WebAPI servers in a single process"
 date: '2014-12-04'
-tags: ['owin', 'katana', 'webapi, 'testing']
+tags: ['owin', 'katana', 'webapi', 'testing']
 description: """Have you ever wondered how you would go about hosting multiple WebAPI servers within a single process?
 """
 ---
