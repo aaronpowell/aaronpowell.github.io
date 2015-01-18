@@ -4,6 +4,7 @@ date: '2015-01-03'
 tags: ['aspnet', 'aspnet5']
 description: """There's a new config system in ASPNet5, so when you use an Azure Website how can you read the values stored in the Azure config?
 """
+urls: ["/posts/2015-01-03-reading-azure-config-in-aspnet5.html"]
 ---
 
 In my rush to make the awesome website [What the Commit?](http://whatthecommit.azurewebsites.net) live I completely forgot that I'd committed the GitHub private key to the git repository. Whoops!
