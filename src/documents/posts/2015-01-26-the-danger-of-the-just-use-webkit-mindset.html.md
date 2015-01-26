@@ -34,7 +34,7 @@ In this era the web stagnated, there was no innovation going on, there was no in
 
 The belief that one browser engine is superior to another is a very subjective belief, for example check out the current ES6 compatibility table (sorted by number of features):
 
-[![ES6 support](/get/es6-support.png)](http://kangax.github.io/compat-table/es6/)
+[![ES6 support](/get/es6-compatibility.png)](http://kangax.github.io/compat-table/es6/)
 
 Currently IE vNext (which will be the core of Project Spartan) and Firefox 37 (currently nightly) are on par with Chrome 41 lacking a bit (although Chrome 42 which is the latest Canary has 52% coverage). Dropping Chakra for v8 would be a bit of a backwards step in terms of ES6 support wouldn't it?
 
