@@ -22,6 +22,8 @@ When a lot of people say this to me most of the time they are actually saying th
 
 Right, if Chrome isn't WebKit then when you're using WebKit you must be using Safari right? Well... close but not quite. [Paul Irish](http://www.paulirish.com/) has a good write up [about the breakdown of WebKit](http://www.paulirish.com/2013/webkit-for-developers/). It's a bit old, pre-Chromium's fork, but a lot of it holds true still, most browsers still swap out parts and let's not forget that Safari's work is done in private before being pushed downstream to the OSS project, or at least that's the expectation.
 
+*Editor note: Just to clarify Safari isn't WebKit, Safari is just a port of WebKit (see the link above). Apple (who produces Safari) is one of the primary contributors to WebKit, but that's not to say that everything in Safari is in WebKit, Safari uses a different JavaScript engine for example, nor is everything in WebKit in Safari. What I meant be 'Safari's work is done in private' is about Safair the browser, when features are included, etc, not that WebKit is developed in private by Apple.*
+
 Alright, maybe I'm getting hung up on WebKit specifically, let's get back to the common point "be Chrome".
 
 # The browser monoculture
