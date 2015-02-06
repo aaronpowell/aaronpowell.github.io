@@ -20,7 +20,9 @@ The primary advantage here is that it's done at the compiler level, types are ge
 
 When writing a Type Provider you can probably generate something without any external dependencies. Unfortunately that is a hell of a lot of code to write to build some of the stuff out, code that you're likely to get wrong or is just painful to write. If you look at any of the samples out there or existing Type Providers you'll see two files named something like `ProvidedTypes.fsi` and `ProvidedTypes.fs`. What these contains is some nice base classes for starting your implementations.
 
-*Note: Presently I don't know exactly where you get them from, there seems to be no NuGet package or anything, instead what I will be doing for this walkthrough is copying them from the [F# Samples](http://fsharp3sample.codeplex.com/) project. If someone knows where you get the "master" copy from or a NuGet package to reference I'm all ears!*
+~~*Note: Presently I don't know exactly where you get them from, there seems to be no NuGet package or anything, instead what I will be doing for this walkthrough is copying them from the [F# Samples](http://fsharp3sample.codeplex.com/) project. If someone knows where you get the "master" copy from or a NuGet package to reference I'm all ears!*~~
+
+*Edit: As has been pointed out in the comments there is a NuGet package which will include the appropriate base classes, [FSharp TypeProviders Starter Pack](http://www.nuget.org/packages/FSharp.TypeProviders.StarterPack/). I haven't updated the code below to work with it so there may be some minor differences.*
 
 We'll start be creating a new F# library project then copy in our `ProvidedTypes.fs/fsi` files and deleting `Library1.fs`.
 
