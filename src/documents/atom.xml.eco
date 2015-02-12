@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><%= @site.title %></title>
     <subtitle><%= @site.description %></subtitle>
-    <link href="http://www.aaron-powell.com/atom.xml" rel="self" />
-    <link href="http://www.aaron-powell.com" />
+    <link href="http://www.aaron-powell.com/feed" rel="self" />
+    <link href="http://www.aaron-powell.com/" />
     <updated><%= @site.date.toISOString() %></updated>
     <id><%= @site.url %></id>
     <author>
@@ -19,7 +19,7 @@
             <id><%= @site.url %><%= document.url %></id>
             <content type="html"><%= document.contentRenderedWithoutLayouts %></content>
             <% for tag in document.tags: %>
-            <category><%= tag %></category>
+            <category><%= tag.replace('#', '') %></category>
             <% end %>
         </entry>
     <% end %>

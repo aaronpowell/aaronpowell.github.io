@@ -18,7 +18,7 @@ docpadConfig = {
       github: 'aaronpowell',
       twitter: 'slace',
       description: '.net, C#, asp.net, umbraco',
-      url: 'http://www.aaron-powell.com'
+      url: 'http://www.aaron-powell.com/'
     },
     contentTrim: function(str) {
       if (str.length > 200) {
