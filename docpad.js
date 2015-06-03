@@ -84,6 +84,9 @@ docpadConfig = {
     formatDate: function(date) {
       return moment(date).format('Do MMMM YYYY');
     },
+    formatDateRss: function(date) {
+      return moment(date).format('YYYY-MM-DD[T]hh:mm:ss[Z]');
+    },
     generateSummary: function (post) {
       var description = post.description;
       return description ? this.parseMarkdown(description) : this.parseMarkdown(this.contentTrim(post.content));

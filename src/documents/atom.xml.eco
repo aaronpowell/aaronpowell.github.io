@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title><%= @site.title %></title>
-    <subtitle><%= @site.description %></subtitle>
-    <link href="http://www.aaron-powell.com/feed" rel="self" />
-    <link href="http://www.aaron-powell.com/" />
-    <updated><%= @site.date.toISOString() %></updated>
+    <title type="text"><%= @site.title %></title>
+    <subtitle type="text"><%= @site.description %></subtitle>
     <id><%= @site.url %></id>
+    <updated><%= @formatDateRss(@site.date) %></updated>
+    <link href="<%= @site.url %>feed" rel="self" title="Aaron Powell's blog" type="application/rss+xml" />
+    <link href="<%= @site.url %>feed" rel="alternate" />
+
     <author>
         <name><%= @site.author %></name>
         <email><%= @site.email %></email>
     </author>
 
+    <generator>docpad+custom app</generator>
+
     <% for document in @getCollection('posts').toJSON().slice(0, 20): %>
-        <entry>
-            <title><%= document.title or document.name or @title.title %></title>
-            <link href="<%= @site.url %><%= document.url %>"/>
-            <updated><%= document.date.toISOString() %></updated>
-            <id><%= @site.url %><%= document.url %></id>
-            <content type="html"><%= document.contentRenderedWithoutLayouts %></content>
-            <% for tag in document.tags: %>
-            <category><%= tag.replace('#', '') %></category>
-            <% end %>
-        </entry>
+    <entry>
+        <id><%= @site.url %><%= document.url %></id>
+        <title type="text"><%= document.title or document.name or @title.title %></title>
+        <link href="<%= @site.url %><%= document.url %>" rel="alternate" />
+        <published><%= @formatDateRss(document.date) %></published>
+        <updated><%= @formatDateRss(document.date) %></updated>
+
+        <summary type="html"><![CDATA[<%= document.decription %>]]></summary>
+
+        <content type="html"><![CDATA[<%= document.contentRenderedWithoutLayouts %>]]></content>
+    </entry>
     <% end %>
 </feed>
