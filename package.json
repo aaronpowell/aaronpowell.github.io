@@ -8,16 +8,17 @@
   },
   "dependencies": {
     "docpad": "=6.59.6",
-    "docpad-plugin-text": "=2.3.2",
-    "docpad-plugin-marked": "=2.2.0",
     "docpad-plugin-eco": "=2.0.3",
-    "docpad-plugin-partials": "=2.8.1",
-    "marked": "=0.2.9",
-    "moment": "=2.0.0",
-    "docpad-plugin-paged": "=2.2.4",
     "docpad-plugin-highlightjs": "=2.2.0",
+    "docpad-plugin-marked": "=2.2.0",
+    "docpad-plugin-paged": "=2.2.4",
+    "docpad-plugin-partials": "=2.8.1",
+    "docpad-plugin-tags": "=2.0.7",
+    "docpad-plugin-text": "=2.3.2",
     "express": "=3.2.6",
-    "docpad-plugin-tags": "=2.0.7"
+    "gulp": "^3.9.0",
+    "marked": "=0.2.9",
+    "moment": "=2.0.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "devDependencies": {
@@ -29,5 +30,8 @@
     "docpad-plugin-highlightjs": "=2.2.0",
     "docpad": "=6.63.3",
     "docpad-plugin-tags": "=2.0.7"
+  },
+  "scripts": {
+    "postinstall": "gulp docpad"
   }
 }
