@@ -3,6 +3,7 @@ title: "Sometimes you just want a hamburger"
 date: '2015-06-11'
 tags: ['web-dev']
 description: """A tongue in cheek look at JavaScript framework analogies.
+urls: ["/posts/2015-06-11-sometims-you-just-want-a-hamburger.html"]
 """
 ---
 
@@ -18,7 +19,7 @@ _My friend [Chris Love](http://twitter.com/chrislove) wrote an article stating t
 * Garlic
 * Oregano
 
-* Lectus
+* Lettuce
 * 1 tomato
 * 2 eggs
 * Bacon
