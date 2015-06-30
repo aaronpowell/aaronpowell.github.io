@@ -3,8 +3,8 @@ title: "Sometimes you just want a hamburger"
 date: '2015-06-11'
 tags: ['web-dev']
 description: """A tongue in cheek look at JavaScript framework analogies.
-urls: ["/posts/2015-06-11-sometims-you-just-want-a-hamburger.html"]
 """
+urls: ["/posts/2015-06-11-sometims-you-just-want-a-hamburger.html"]
 ---
 
 _My friend [Chris Love](http://twitter.com/chrislove) wrote an article stating that [Large JavaScript Frameworks are like Fast Food Resturants](http://love2dev.com/#!article/Large-JavaScript-Frameworks-Are-Like-Fast-Food-Restaurants) and a related article [Why Micro JavaScript Should Be Used In Your Next Application](http://www.codemag.com/Article/1501101). I want to write a bit of a rebuttal to these posts but it'll be in my typical serious manner :P._
