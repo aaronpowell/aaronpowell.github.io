@@ -24,7 +24,7 @@
 
         <summary type="html"><![CDATA[<%= document.decription %>]]></summary>
 
-        <content type="html"><![CDATA[<%= document.contentRenderedWithoutLayouts %>]]></content>
+        <content type="html"><%= document.contentRenderedWithoutLayouts %></content>
     </entry>
     <% end %>
 </feed>
