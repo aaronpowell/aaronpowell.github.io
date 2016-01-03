@@ -1,6 +1,6 @@
 --- cson
 title: "2015 - A year in review"
-date: '2016-11-01'
+date: '2016-01-01'
 tags: ['random']
 description: """A look back at the year that was.
 """
