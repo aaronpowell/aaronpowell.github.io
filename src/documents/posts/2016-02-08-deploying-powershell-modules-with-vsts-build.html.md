@@ -54,6 +54,6 @@ Some final thoughts:
 
 * I really should write a script that goes into the repository to replace the dodgyness of Step 4
 * I'm not using [Pester](https://github.com/pester/Pester) for testing like a lot of people, but getting that hooked in would be cool
-* The workflow is _not quite right_ as I'm deploying from VSTS Build, that should really happy from VSTS Release Management. To do that you'd remove the last step I have, replace it with a 'copy to artifacts' step, and have RM run the `Publish-Module` step. It might need to redo the path setup steps too
+* The workflow is _not quite right_ as I'm deploying from VSTS Build, that should really happen from VSTS Release Management. To do that you'd remove the last step I have, replace it with a 'copy to artifacts' step, and have RM run the `Publish-Module` step. It might need to redo the path setup steps too
 
 Happy Scripting!
