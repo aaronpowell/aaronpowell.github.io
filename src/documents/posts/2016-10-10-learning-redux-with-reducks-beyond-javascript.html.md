@@ -1,6 +1,6 @@
 --- cson
 title: "Learning redux with reducks - beyond JavaScript"
-date: '2016-08-29'
+date: '2016-10-10'
 tags: ['redux', 'reducks', 'fsharp']
 description: """Exploring how redux can be used as a generic design pattern, not just a JavaScript library
 """
