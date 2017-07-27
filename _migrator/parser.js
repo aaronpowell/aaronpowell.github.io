@@ -7,7 +7,7 @@ const postsPath = path.join(__dirname, '..', 'src', 'documents', 'posts');
 
 fs.readdir(postsPath, (err, paths) => {
     paths.forEach((filename) => {
-        let post = fs.readFileSync(path.join(postsPath, filename), 'utf8').split('\r\n');
+        let post = fs.readFileSync(path.join(postsPath, filename), 'utf8').split('\r\n').map(s => s.split('\n')).reduce((arr, x) => arr.concat(x), []);
         
         let header = [];
         let body = [];
@@ -34,7 +34,7 @@ fs.readdir(postsPath, (err, paths) => {
         const headerObject = cson.parse(header.join('\r\n'));
         
         const newPost =
-            json2yaml.stringify(headerObject) +
+            json2yaml.stringify(headerObject).split('\n').join('\r\n') +
             '---\r\n' +
             body.join('\r\n');
 
