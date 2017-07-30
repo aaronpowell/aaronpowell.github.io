@@ -1,0 +1,39 @@
+{{ partial "header.html" . }}
+
+    <section class="container blog">
+        <section class="content">
+            <h1>{{ if .Params.heading }} {{ .Params.heading }} {{ else }} {{ .Title }} {{ end }}</h1>
+
+            <div class="sub-header">
+                {{ .Date.Format (.Site.Params.dateform | default "1 January 2006") }} · {{ .ReadingTime }} minute read
+
+                {{ range .Params.tags }}
+                · <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+            </div>
+
+            <div class="entry-content">
+                {{ .Content }}
+            </div>
+
+            <div class="links">
+                {{ if .PrevInSection }}
+                    &laquo; <a class="basic-alignment left" href="{{ .PrevInSection.Permalink }}">{{ .PrevInSection.Title }}</a>
+                {{ end }}
+                {{ if .NextInSection }}
+                    <a class="basic-alignment left" href="{{ .NextInSection.Permalink }}">{{ .NextInSection.Title }}</a> &raquo;
+                {{ end }}
+            </div>
+        </section>
+        <br>
+        {{ partial "disqus" . }}
+        {{ if and (.IsPage) (.GitInfo) }}
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}, Version: <a href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}">{{ .GitInfo.AbbreviatedHash }}</a></em></small>
+        {{ else }}
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
+        {{ end }}
+    </section>
+
+
+    {{ partial "footer.html" . }}
+    <script src="/highlightjs/highlight.pack.js"></script>

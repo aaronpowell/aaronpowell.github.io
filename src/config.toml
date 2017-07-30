@@ -1,0 +1,44 @@
+title = "LINQ to Fail"
+baseURL = "https://www.aaron-powell.com"
+tags = ["blog"]
+languageCode = "en-US"
+config = "config.toml"
+theme = "osprey"
+canonifyURLS = true
+googleAnalytics = "UA-6399564-1"
+disqusShortname = "aaronpowell"
+enableGitInfo = "true"
+
+[Params]
+    tagline = "Aaron Powell - LINQ to Fail"
+    author = "Aaron Powell"
+    description = "Readify Principal Consultant"
+    logoBig = "/images/logo.png"
+    logoSmall = "/images/logo.png"
+    favicon = "favicon.ico"
+    opengraphImage = "/images/osprey.png"
+    twitter = "slace"
+    linkedin = "aaron-powell-66038631"
+    github = "aaronpowell"
+    email = "website-contact@aaron-powell.com"
+    googleTagManager = ""
+    highlightJS = false
+    copyright = true
+    credit = true
+    customCSS = true
+    cacheBustCSS = false
+    cacheBustJS = false
+    ajaxFormspree = true
+
+[[menu.main]]
+    name = "About"
+    url  = "/#about"
+    weight = 1
+[[menu.main]]
+    name = "Blog"
+    url  = "/#blog"
+    weight = 2
+[[menu.main]]
+    name = "Speaking"
+    url  = "/#speaking"
+    weight = 3
