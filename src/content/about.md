@@ -1,4 +1,4 @@
-Hi, my name's Aaron Powell and I'm a Principal Consultant at [Readify](https://readify.net), oen of Australia's top software consultancies. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications.
+Hi, my name's Aaron Powell and I'm a Principal Consultant at [Readify](https://readify.net), one of Australia's top software consultancies. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications.
 
 I'm also a passionate Open Source developer, with one of my main pet projects being [Chauffeur](https://github.com/aaronpowell/chauffeur) an automation tool for the [Umbraco CMS](http://umbraco.com).
 
