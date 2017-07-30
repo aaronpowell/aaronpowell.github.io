@@ -1,15 +1,17 @@
---- cson
-title: "Creating Controllers-as-plugins using MVC3"
-metaTitle: "Creating Controllers-as-plugins using MVC3"
-description: "A look at how to make pluggable Controllers using MVC3"
-revised: "2011-01-26"
-date: "2011-01-25"
-tags: ["mvc3","autofac","funnelweb"]
-migrated: "true"
-urls: ["/controller-plugins-with-mvc3"]
-summary: """
-
-"""
+---
+  title: "Creating Controllers-as-plugins using MVC3"
+  metaTitle: "Creating Controllers-as-plugins using MVC3"
+  description: "A look at how to make pluggable Controllers using MVC3"
+  revised: "2011-01-26"
+  date: "2011-01-25"
+  tags: 
+    - "mvc3"
+    - "autofac"
+    - "funnelweb"
+  migrated: "true"
+  urls: 
+    - "/controller-plugins-with-mvc3"
+  summary: ""
 ---
 # Overview
 

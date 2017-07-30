@@ -1,15 +1,16 @@
---- cson
-title: "Adding data attributes to MVC3 forms with HtmlHelpers"
-metaTitle: "Adding data attributes to MVC3 forms with HtmlHelpers"
-description: ""
-revised: "2011-05-26"
-date: "2011-05-26"
-tags: ["mvc3","asp.net-mvc"]
-migrated: "true"
-urls: ["/data-attribute-mvc3-forms"]
-summary: """
-
-"""
+---
+  title: "Adding data attributes to MVC3 forms with HtmlHelpers"
+  metaTitle: "Adding data attributes to MVC3 forms with HtmlHelpers"
+  description: ""
+  revised: "2011-05-26"
+  date: "2011-05-26"
+  tags: 
+    - "mvc3"
+    - "asp.net-mvc"
+  migrated: "true"
+  urls: 
+    - "/data-attribute-mvc3-forms"
+  summary: ""
 ---
 In a site I'm working on I wanted to add a data attribute, you know, `data-*`, to a form that was being generated from a controller action in MVC3. So I have the code like this:
 

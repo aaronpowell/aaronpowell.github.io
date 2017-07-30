@@ -1,15 +1,16 @@
---- cson
-title: "Oh woe is (Mobile)Me"
-metaTitle: "Oh woe is (Mobile)Me"
-description: ""
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: ["mobile-me","fail"]
-migrated: "true"
-urls: ["/oh-woe-is-mobile-me"]
-summary: """
-This post was migrated from my old blog. Originally posted on 07/01/2010
-"""
+---
+  title: "Oh woe is (Mobile)Me"
+  metaTitle: "Oh woe is (Mobile)Me"
+  description: ""
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - "mobile-me"
+    - "fail"
+  migrated: "true"
+  urls: 
+    - "/oh-woe-is-mobile-me"
+  summary: "This post was migrated from my old blog. Originally posted on 07/01/2010"
 ---
 Anyone who is (lucky enough to be) on my msn contact list (and signed in during my work hours) will have seen something curious happening over the past week since I returned back to work.
 

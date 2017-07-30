@@ -1,15 +1,19 @@
---- cson
-title: "Analyzers in Lucene.Net"
-metaTitle: "Analyzers in Lucene.Net"
-description: ""
-revised: "2010-05-27"
-date: "2010-05-27"
-tags: ["lucene.net","c#",".net","examine","umbraco-examine"]
-migrated: "true"
-urls: ["/lucene-analyzer"]
-summary: """
-
-"""
+---
+  title: "Analyzers in Lucene.Net"
+  metaTitle: "Analyzers in Lucene.Net"
+  description: ""
+  revised: "2010-05-27"
+  date: "2010-05-27"
+  tags: 
+    - "lucene.net"
+    - "c#"
+    - ".net"
+    - "examine"
+    - "umbraco-examine"
+  migrated: "true"
+  urls: 
+    - "/lucene-analyzer"
+  summary: ""
 ---
 ##What is an Analyzer?##
 

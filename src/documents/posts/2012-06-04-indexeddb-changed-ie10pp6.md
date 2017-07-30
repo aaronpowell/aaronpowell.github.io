@@ -1,15 +1,17 @@
---- cson
-title: "IndexedDB changed in IE10 PP6"
-metaTitle: "IndexedDB changed in IE10 PP6"
-description: "A subtle change to IndexedDB in IE10 PP6"
-revised: "2012-06-04"
-date: "2012-06-04"
-tags: ["indexeddb","javascript","ie"]
-migrated: "true"
-urls: ["/indexeddb-changed-ie10pp6"]
-summary: """
-
-"""
+---
+  title: "IndexedDB changed in IE10 PP6"
+  metaTitle: "IndexedDB changed in IE10 PP6"
+  description: "A subtle change to IndexedDB in IE10 PP6"
+  revised: "2012-06-04"
+  date: "2012-06-04"
+  tags: 
+    - "indexeddb"
+    - "javascript"
+    - "ie"
+  migrated: "true"
+  urls: 
+    - "/indexeddb-changed-ie10pp6"
+  summary: ""
 ---
 When building [Pinboard for Windows 8](http://www.aaron-powell.com/pinboard-for-win8) I decided to use [IndexedDB](http://www.w3.org/TR/IndexedDB/) as the internal storage for the application since I was writing it using WinJS.
 

@@ -1,9 +1,10 @@
---- cson
-title: "Learning redux with reducks - creating a Store"
-date: '2016-06-09'
-tags: ['redux', 'reducks']
-description: """An introduction to the Store and how to make a simple one.
-"""
+---
+  title: "Learning redux with reducks - creating a Store"
+  date: "2016-06-09"
+  tags: 
+    - "redux"
+    - "reducks"
+  description: "An introduction to the Store and how to make a simple one."
 ---
 
 [Last time](http://www.aaron-powell.com/posts/2016-06-06-learning-redux-with-reducks-intro.html) we learnt the basics of what Redux is and what it does, now it's time to start looking at how it works.

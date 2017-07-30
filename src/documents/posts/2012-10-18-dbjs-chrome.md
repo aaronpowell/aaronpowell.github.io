@@ -1,15 +1,17 @@
---- cson
-title: "Chrome support for db.js"
-metaTitle: "Chrome support for db.js"
-description: "A little word on the db.js support for Chrome"
-revised: "2012-10-18"
-date: "2012-10-18"
-tags: ["indexeddb","chrome","web"]
-migrated: "true"
-urls: ["/web/dbjs-chrome"]
-summary: """
-
-"""
+---
+  title: "Chrome support for db.js"
+  metaTitle: "Chrome support for db.js"
+  description: "A little word on the db.js support for Chrome"
+  revised: "2012-10-18"
+  date: "2012-10-18"
+  tags: 
+    - "indexeddb"
+    - "chrome"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/dbjs-chrome"
+  summary: ""
 ---
 I recently had a [bug opened](https://github.com/aaronpowell/db.js/issues/14) on [db.js](https://github.com/aaronpowell/db.js) which is related to Chrome operating differently to the other browsers.
 

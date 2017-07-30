@@ -1,19 +1,19 @@
---- cson
-title: "An overview of Lucene.Net"
-metaTitle: "Lucene.Net Overview"
-description: "Overview and table-of-contents for Lucene.Net articles"
-revised: "2010-07-26"
-date: "2010-04-14"
-tags: ["lucene.net","c#",".net","examine","umbraco-examine"]
-migrated: "true"
-urls: ["/lucene-net-overview"]
-summary: """
-Useful Links:<br />
-<a href=\"http://lucene.apache.org/java/docs/index.html\" title=\"Lucene\">Lucene</a><br />
-<a href=\"http://lucene.apache.org/lucene.net/\" title=\"Lucene.Net\">Lucene.Net</a><br />
-<a href=\"http://examine.codeplex.com\" title=\"Examine\">Examine</a><br />
-<a href=\"http://wiki.apache.org/lucene-java/LuceneFAQ\" title=\"Lucene FAQ\">Lucene FAQ</a>
-"""
+---
+  title: "An overview of Lucene.Net"
+  metaTitle: "Lucene.Net Overview"
+  description: "Overview and table-of-contents for Lucene.Net articles"
+  revised: "2010-07-26"
+  date: "2010-04-14"
+  tags: 
+    - "lucene.net"
+    - "c#"
+    - ".net"
+    - "examine"
+    - "umbraco-examine"
+  migrated: "true"
+  urls: 
+    - "/lucene-net-overview"
+  summary: "Useful Links:<br />\n<a href=\"http://lucene.apache.org/java/docs/index.html\" title=\"Lucene\">Lucene</a><br />\n<a href=\"http://lucene.apache.org/lucene.net/\" title=\"Lucene.Net\">Lucene.Net</a><br />\n<a href=\"http://examine.codeplex.com\" title=\"Examine\">Examine</a><br />\n<a href=\"http://wiki.apache.org/lucene-java/LuceneFAQ\" title=\"Lucene FAQ\">Lucene FAQ</a>"
 ---
 *Please note, this document is a work in progress and will be expanded over time*
 

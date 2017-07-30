@@ -1,11 +1,11 @@
---- cson
-title: 'From FunnelWeb to Git in a few simple steps'
-date: '2013-06-10'
-description: """With the decision to go to Git from FunnelWeb I wanted to be able to maintain the history of the changes. Since many of my posts have multiple revisions I wanted them to be listed as changesets in Git.
-
-In this post we'll look at how to get the content out of FunnelWeb (or any content database) and into Git as full history.
-""" 
-tags: ['funnelweb', 'scriptcs', 'git']
+---
+  title: "From FunnelWeb to Git in a few simple steps"
+  date: "2013-06-10"
+  description: "With the decision to go to Git from FunnelWeb I wanted to be able to maintain the history of the changes. Since many of my posts have multiple revisions I wanted them to be listed as changesets in Git.\n\nIn this post we'll look at how to get the content out of FunnelWeb (or any content database) and into Git as full history."
+  tags: 
+    - "funnelweb"
+    - "scriptcs"
+    - "git"
 ---
 
 _Prelude: I'm going to assume you've got the database somewhere locally that you can work with, I wouldn't recommend doing it against a production database. We're not doing anything destructive against it but better safe than sorry!._

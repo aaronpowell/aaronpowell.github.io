@@ -1,9 +1,9 @@
---- cson
-title: "What I learned about nth-child selectors"
-date: '2014-03-06'
-tags: ['css']
-description: """Today I learned something important about the `nth-child` CSS selector that seems to be a common misconception.
-"""
+---
+  title: "What I learned about nth-child selectors"
+  date: "2014-03-06"
+  tags: 
+    - "css"
+  description: "Today I learned something important about the `nth-child` CSS selector that seems to be a common misconception."
 ---
 
 Today I learned an interesting fact about how the `nth-child` CSS selector works and it was different to what I expected and what seems to make sense.

@@ -1,15 +1,17 @@
---- cson
-title: "Creating classes in WinJS"
-metaTitle: "Creating classes in WinJS"
-description: "A look at how you can create JavaScript classes in WinJS"
-revised: "2012-09-14"
-date: "2012-09-14"
-tags: ["winjs","windows8","javascript"]
-migrated: "true"
-urls: ["/winjs/creating-classes"]
-summary: """
-
-"""
+---
+  title: "Creating classes in WinJS"
+  metaTitle: "Creating classes in WinJS"
+  description: "A look at how you can create JavaScript classes in WinJS"
+  revised: "2012-09-14"
+  date: "2012-09-14"
+  tags: 
+    - "winjs"
+    - "windows8"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/winjs/creating-classes"
+  summary: ""
 ---
 Sure using classes in JavaScript _may_ not be a great idea, you can't help but argue that there are valid scenarios which you would be wanting to use the class pattern.
 

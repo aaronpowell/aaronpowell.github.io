@@ -1,15 +1,15 @@
---- cson
-title: "Custom Umbraco Macro Engines"
-metaTitle: "custom-umbraco-macro-engines"
-description: "A quick look at the new abstraction layer on top of the Umbraco Macro Engine in Umbraco Juno"
-revised: "2011-01-13"
-date: "2010-12-27"
-tags: ["umbraco"]
-migrated: "true"
-urls: ["/custom-umbraco-macro-engines"]
-summary: """
-
-"""
+---
+  title: "Custom Umbraco Macro Engines"
+  metaTitle: "custom-umbraco-macro-engines"
+  description: "A quick look at the new abstraction layer on top of the Umbraco Macro Engine in Umbraco Juno"
+  revised: "2011-01-13"
+  date: "2010-12-27"
+  tags: 
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/custom-umbraco-macro-engines"
+  summary: ""
 ---
 A new feature coming in Umbraco Juno (4.6) is something that is probably a bit surprising for most people that it has come in after so long, an abstracted macro engine.
 

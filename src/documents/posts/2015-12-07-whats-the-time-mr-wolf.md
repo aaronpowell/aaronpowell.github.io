@@ -1,9 +1,10 @@
---- cson
-title: "What's the time Mr Wolf?"
-date: '2015-12-07'
-tags: ['fsharp', 'FsAdvent']
-description: """Telling the time with F# and ntp.
-"""
+---
+  title: "What's the time Mr Wolf?"
+  date: "2015-12-07"
+  tags: 
+    - "fsharp"
+    - "FsAdvent"
+  description: "Telling the time with F# and ntp."
 ---
 
 > Tis the season, and to get into the festive spirit I'm contributing to the [2015 F# Advent calendar](https://sergeytihon.wordpress.com/2015/10/25/f-advent-calendar-in-english-2015/).

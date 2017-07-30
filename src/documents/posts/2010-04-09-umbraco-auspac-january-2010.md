@@ -1,15 +1,16 @@
---- cson
-title: "Umbraco AUSPAC January 2010"
-metaTitle: "Umbraco AUSPAC January 2010"
-description: ""
-revised: "2010-04-09"
-date: "2010-04-09"
-tags: ["umbraco","user-group"]
-migrated: "true"
-urls: ["/umbraco-auspac-january-2010"]
-summary: """
-
-"""
+---
+  title: "Umbraco AUSPAC January 2010"
+  metaTitle: "Umbraco AUSPAC January 2010"
+  description: ""
+  revised: "2010-04-09"
+  date: "2010-04-09"
+  tags: 
+    - "umbraco"
+    - "user-group"
+  migrated: "true"
+  urls: 
+    - "/umbraco-auspac-january-2010"
+  summary: ""
 ---
 First off I'd like to say thanks to all who attended tonights Umbraco webinar, I think we had mid 20's for most of the session, really excited by the volume.
 

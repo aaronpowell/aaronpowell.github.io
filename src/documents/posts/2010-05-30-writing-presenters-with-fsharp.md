@@ -1,15 +1,17 @@
---- cson
-title: "Writing Presenters with F#"
-metaTitle: "Writing Presenters with F#"
-description: "This may not be the best idea, but hey, why not, let's writing Presenters with F#!"
-revised: "2010-05-30"
-date: "2010-05-30"
-tags: ["webformsmvp","f#","fsharp"]
-migrated: "true"
-urls: ["/writing-presenters-with-fsharp"]
-summary: """
-
-"""
+---
+  title: "Writing Presenters with F#"
+  metaTitle: "Writing Presenters with F#"
+  description: "This may not be the best idea, but hey, why not, let's writing Presenters with F#!"
+  revised: "2010-05-30"
+  date: "2010-05-30"
+  tags: 
+    - "webformsmvp"
+    - "f#"
+    - "fsharp"
+  migrated: "true"
+  urls: 
+    - "/writing-presenters-with-fsharp"
+  summary: ""
 ---
 *Disclaimer: I'm not an F# developer, I'm really only just learning and having a bit of a play around.*
 

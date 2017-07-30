@@ -1,15 +1,17 @@
---- cson
-title: "Why does this code work?"
-metaTitle: "Why does this code work?"
-description: "A neat trick with operators in .NET"
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: [".net","c#","operator-overload"]
-migrated: "true"
-urls: ["/why-does-this-code-work"]
-summary: """
-
-"""
+---
+  title: "Why does this code work?"
+  metaTitle: "Why does this code work?"
+  description: "A neat trick with operators in .NET"
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - ".net"
+    - "c#"
+    - "operator-overload"
+  migrated: "true"
+  urls: 
+    - "/why-does-this-code-work"
+  summary: ""
 ---
 In the discussion on the Umbraco forum about using LINQ to Umbraco I posted a short code snippet of something we write fairly frequently at [TheFARM using our version of LINQ with Umbraco][1].
 

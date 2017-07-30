@@ -1,15 +1,14 @@
---- cson
-title: "Handy extension method for null-coalesing"
-metaTitle: "Handy extension method for null-coalesing"
-description: ""
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: []
-migrated: "true"
-urls: ["/handy-extension-method-for-null-coalesing"]
-summary: """
-
-"""
+---
+  title: "Handy extension method for null-coalesing"
+  metaTitle: "Handy extension method for null-coalesing"
+  description: ""
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: []
+  migrated: "true"
+  urls: 
+    - "/handy-extension-method-for-null-coalesing"
+  summary: ""
 ---
 Today a colleague asked me a question:
 

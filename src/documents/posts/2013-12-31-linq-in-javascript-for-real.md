@@ -1,9 +1,11 @@
---- cson
-title: "LINQ in JavaScript, ES6 style, for real this time"
-date: '2013-12-31'
-tags: ['javascript', 'linq', 'es6']
-description: """Revisiting how to implement LINQ in JavaScript on top of ES6 but this time it's actually going to be on top of ES6 features!
-"""
+---
+  title: "LINQ in JavaScript, ES6 style, for real this time"
+  date: "2013-12-31"
+  tags: 
+    - "javascript"
+    - "linq"
+    - "es6"
+  description: "Revisiting how to implement LINQ in JavaScript on top of ES6 but this time it's actually going to be on top of ES6 features!"
 ---
 
 In a recent post I talked about writing [LINQ in JavaScript using ES6 iterators](/posts/2013-09-06-linq-in-javascript-es6.html) but then had to [take my words back](/posts/2013-09-16-linq-in-javascript-es6-clarification.html) after it was pointed out to me that I wasn't actually using ES6 generators.

@@ -1,9 +1,10 @@
---- cson
-title: "Cleaning up promises with yield"
-date: '2014-01-28'
-tags: ['javascript', 'es6']
-description: """Previously we looked at cleaning up callback hell with thunks and generators, but in this post we'll look at the next approach to managing callbacks, Promises, and how we could clean that up with generators.
-"""
+---
+  title: "Cleaning up promises with yield"
+  date: "2014-01-28"
+  tags: 
+    - "javascript"
+    - "es6"
+  description: "Previously we looked at cleaning up callback hell with thunks and generators, but in this post we'll look at the next approach to managing callbacks, Promises, and how we could clean that up with generators."
 ---
 
 Last time we [cleaned up callback hell with `yield`](/posts/2014-01-18-calling-up-callbacks-with-yield.html) but callbacks in the design which I was talking about are not all that common these days, especially if you're working in the browser. When you're in the browser there's a good chance you're going to be working with Promises, and more accurately [Promise/A+](http://promises-aplus.github.io/).

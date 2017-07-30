@@ -1,15 +1,18 @@
---- cson
-title: "Flight Mode - local and session storage"
-metaTitle: "Flight Mode - local and session storage"
-description: ""
-revised: "2013-05-23"
-date: "2013-05-23"
-tags: ["flight-mode","offline-storage","localStorage","sessionStorage"]
-migrated: "true"
-urls: ["/flight-mode/local-session-storage"]
-summary: """
-
-"""
+---
+  title: "Flight Mode - local and session storage"
+  metaTitle: "Flight Mode - local and session storage"
+  description: ""
+  revised: "2013-05-23"
+  date: "2013-05-23"
+  tags: 
+    - "flight-mode"
+    - "offline-storage"
+    - "localStorage"
+    - "sessionStorage"
+  migrated: "true"
+  urls: 
+    - "/flight-mode/local-session-storage"
+  summary: ""
 ---
 Last time we looked a [using cookies to store offline data](/flight-mode/cookies) and we also saw that there's a number of problems with that approach. So let's move forward, let's look at what our next option would be when it comes to offline storage in our multi-dollar application.
 

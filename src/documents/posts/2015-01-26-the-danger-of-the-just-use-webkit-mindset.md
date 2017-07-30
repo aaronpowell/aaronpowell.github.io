@@ -1,9 +1,11 @@
---- cson
-title: "The danger of the 'Just Use WebKit' mindset"
-date: '2015-01-25'
-tags: ['web', 'browsers', 'internet-explorer']
-description: """Just use WebKit seems to be a common belief in web developers, but there's a danger involved in that mindset.
-"""
+---
+  title: "The danger of the 'Just Use WebKit' mindset"
+  date: "2015-01-25"
+  tags: 
+    - "web"
+    - "browsers"
+    - "internet-explorer"
+  description: "Just use WebKit seems to be a common belief in web developers, but there's a danger involved in that mindset."
 ---
 
 [![Sigh...](/get/just-use-webkit.png)](https://twitter.com/IanCeicys/status/559353740160167938)

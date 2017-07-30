@@ -1,9 +1,9 @@
---- cson
-title: "Versioning Xamarin Android apps"
-date: '2014-09-26'
-tags: ['xamarin']
-description: """When creating Xamarin apps from a CI process like TeamCity it can be useful to generate the version accordingly.
-"""
+---
+  title: "Versioning Xamarin Android apps"
+  date: "2014-09-26"
+  tags: 
+    - "xamarin"
+  description: "When creating Xamarin apps from a CI process like TeamCity it can be useful to generate the version accordingly."
 ---
 
 I'm currently working on a Xamarin application with an Android target. We have setup a CI environment using [TeamCity as Xamarin describes](http://developer.xamarin.com/guides/cross-platform/ci/teamcity/) but what we wanted to do was create an app version accordingly so when we push a CI build you know there's an update and which build it is from.

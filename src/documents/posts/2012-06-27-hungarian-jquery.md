@@ -1,15 +1,17 @@
---- cson
-title: "Stop using Hungarian jQuery!"
-metaTitle: "Stop using Hungarian jQuery!"
-description: "The code smell that's creeping into JavaScript development"
-revised: "2012-06-27"
-date: "2012-06-27"
-tags: ["jquery","rant","javascript"]
-migrated: "true"
-urls: ["/javascript/hungarian-jquery"]
-summary: """
-
-"""
+---
+  title: "Stop using Hungarian jQuery!"
+  metaTitle: "Stop using Hungarian jQuery!"
+  description: "The code smell that's creeping into JavaScript development"
+  revised: "2012-06-27"
+  date: "2012-06-27"
+  tags: 
+    - "jquery"
+    - "rant"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/hungarian-jquery"
+  summary: ""
 ---
 I've been in software development for long enough that I remember a time when [Hungarian Notation](http://en.wikipedia.org/wiki/Hungarian_notation) was all the rage to write `strFirstName`, `iAge` and `objPerson`, I also remember it dying and dying for a good reason.
 

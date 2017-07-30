@@ -1,15 +1,16 @@
---- cson
-title: "Flight Mode - Introduction"
-metaTitle: "Flight Mode - Introduction"
-description: ""
-revised: "2013-05-30"
-date: "2013-05-23"
-tags: ["offline-storage","flight-mode"]
-migrated: "true"
-urls: ["/flight-mode/introduction"]
-summary: """
-
-"""
+---
+  title: "Flight Mode - Introduction"
+  metaTitle: "Flight Mode - Introduction"
+  description: ""
+  revised: "2013-05-30"
+  date: "2013-05-23"
+  tags: 
+    - "offline-storage"
+    - "flight-mode"
+  migrated: "true"
+  urls: 
+    - "/flight-mode/introduction"
+  summary: ""
 ---
 So you've got an idea to build an amazing new web application, it's going to make you tens of dollars, hundreds of cents, it's all web API'ed and SPA. There's a responsive design so it's mobile friendly, all the cool stuff. But there's one last piece of the puzzle you need to sort out, offline data. Your application needs to be able to store data in a way that users and still interact with it, even if it's at a basic level, when they are offline.
 

@@ -1,15 +1,16 @@
---- cson
-title: "WebView, oh you!"
-metaTitle: "WebView, oh you!"
-description: "Oh that WebView control is a funny one"
-revised: "2012-08-29"
-date: "2012-08-28"
-tags: ["xaml","facepalm"]
-migrated: "true"
-urls: ["/xaml/webview-oh-you"]
-summary: """
-
-"""
+---
+  title: "WebView, oh you!"
+  metaTitle: "WebView, oh you!"
+  description: "Oh that WebView control is a funny one"
+  revised: "2012-08-29"
+  date: "2012-08-28"
+  tags: 
+    - "xaml"
+    - "facepalm"
+  migrated: "true"
+  urls: 
+    - "/xaml/webview-oh-you"
+  summary: ""
 ---
 Today can only be summarized by this:
 

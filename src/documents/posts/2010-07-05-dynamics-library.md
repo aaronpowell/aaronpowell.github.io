@@ -1,15 +1,17 @@
---- cson
-title: "Dynamics Library"
-metaTitle: "Dynamics Library"
-description: "A series of helper methods for working with the DLR in C# 4.0"
-revised: "2010-07-05"
-date: "2010-07-05"
-tags: ["dynamic",".net","c#"]
-migrated: "true"
-urls: ["/dynamics-library"]
-summary: """
-
-"""
+---
+  title: "Dynamics Library"
+  metaTitle: "Dynamics Library"
+  description: "A series of helper methods for working with the DLR in C# 4.0"
+  revised: "2010-07-05"
+  date: "2010-07-05"
+  tags: 
+    - "dynamic"
+    - ".net"
+    - "c#"
+  migrated: "true"
+  urls: 
+    - "/dynamics-library"
+  summary: ""
 ---
 When playing with the `dynamic` keyword and the DLR at CodeGarden 10 I realised that I wanted to do more with it so I started to dig deeper into it. This is where I came up with the idea which I covered in [Dynamic Dictionaries with C# 4.0][1].
 

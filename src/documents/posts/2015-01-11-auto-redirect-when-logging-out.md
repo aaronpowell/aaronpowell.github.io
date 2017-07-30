@@ -1,9 +1,9 @@
---- cson
-title: "Authomatic redirection when logging out of a Thinktecture Identity Server"
-date: '2015-01-11'
-tags: ['thinktecture']
-description: """When using the Thinktecture Identity Server you might want to do an automatic redirect upon logout, which doesn't happen OOTB, so here's how to do it.
-"""
+---
+  title: "Authomatic redirection when logging out of a Thinktecture Identity Server"
+  date: "2015-01-11"
+  tags: 
+    - "thinktecture"
+  description: "When using the Thinktecture Identity Server you might want to do an automatic redirect upon logout, which doesn't happen OOTB, so here's how to do it."
 ---
 
 I've been working with the [Thinktecture Identity Server v3](https://github.com/thinktecture/Thinktecture.IdentityServer.v3) recently on a project. If you haven't come across Thinktecture Identity Server before it's an OpenID/OAuth2 server which you can run stand alone or embed in your own application to then do OAuth2 login against any credential store. It's generic enough that you can plug in whatever underlying store you want and really powerful as to what it gives you. If you're wanting to have your own auth server I can't recommend this highly enough.

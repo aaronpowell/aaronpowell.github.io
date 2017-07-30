@@ -1,21 +1,21 @@
---- cson
-title: "Issue with Geolocation in IE9 RC"
-metaTitle: "Issue with Geolocation in IE9 RC"
-description: "A (known) issue with the IE9 RC geolocation API."
-revised: "2011-02-13"
-date: "2011-02-11"
-tags: ["ie9","web"]
-migrated: "true"
-urls: ["/ie9-rc-geolocation-issue"]
-summary: """
-
-"""
+---
+  title: "Issue with Geolocation in IE9 RC"
+  metaTitle: "Issue with Geolocation in IE9 RC"
+  description: "A (known) issue with the IE9 RC geolocation API."
+  revised: "2011-02-13"
+  date: "2011-02-11"
+  tags: 
+    - "ie9"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/ie9-rc-geolocation-issue"
+  summary: ""
 ---
 # Update
 
 Looks like the server-side fix has been implemented and it not works just fine. Feel free to read on if you're interested to know why it didn't work for a period of time.
 
----
 
 You've probably already heard that [IE9 RC is available][1], and one of the features that has been included is the [HTML5 Geolocation API][2].
 

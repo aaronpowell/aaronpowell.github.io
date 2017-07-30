@@ -1,15 +1,17 @@
---- cson
-title: "Flight Mode - IndexedDB"
-metaTitle: "Flight Mode - IndexedDB"
-description: ""
-revised: "2013-05-27"
-date: "2013-05-27"
-tags: ["flight-mode","offline-storage","indexeddb"]
-migrated: "true"
-urls: ["/flight-mode/indexeddb"]
-summary: """
-
-"""
+---
+  title: "Flight Mode - IndexedDB"
+  metaTitle: "Flight Mode - IndexedDB"
+  description: ""
+  revised: "2013-05-27"
+  date: "2013-05-27"
+  tags: 
+    - "flight-mode"
+    - "offline-storage"
+    - "indexeddb"
+  migrated: "true"
+  urls: 
+    - "/flight-mode/indexeddb"
+  summary: ""
 ---
 The next stop in our offline storage adventure is to look at the big daddy of offline storage, [IndexedDB](http://www.w3.org/TR/IndexedDB/). Now I've [blogged about `IndexedDB` in the past](http://www.aaron-powell.com/tagged/indexeddb) but today I want to talk about it in a bit higher level and introduce the idea of IndexedDB beyond just how to use the API.
 

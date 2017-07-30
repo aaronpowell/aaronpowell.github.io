@@ -1,15 +1,16 @@
---- cson
-title: "Hello OWIN"
-metaTitle: "Hello OWIN"
-description: "An introduction to OWIN and building a server."
-revised: "2012-03-14"
-date: "2012-03-14"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/hello-owin"]
-summary: """
-
-"""
+---
+  title: "Hello OWIN"
+  metaTitle: "Hello OWIN"
+  description: "An introduction to OWIN and building a server."
+  revised: "2012-03-14"
+  date: "2012-03-14"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/hello-owin"
+  summary: ""
 ---
 Long time readers of my blog will probably be aware that I've become quite a fan of [Node.js](http://nodejs.org). One of the things that I've liked about working with it is that it's very bare bones so you're working very closely with the HTTP pipeline, something that you don't do with ASP.Net (WebForms in particular, MVC is much closer but still a reasonable abstraction).
 

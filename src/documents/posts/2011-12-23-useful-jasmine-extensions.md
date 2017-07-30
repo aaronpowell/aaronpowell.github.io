@@ -1,15 +1,17 @@
---- cson
-title: "Some useful Jasmine extensions"
-metaTitle: "Some useful Jasmine extensions"
-description: "A few useful match helpers for Jasmine"
-revised: "2011-12-23"
-date: "2011-12-23"
-tags: ["javascript","jasmine","testing"]
-migrated: "true"
-urls: ["/javascript/useful-jasmine-extensions"]
-summary: """
-
-"""
+---
+  title: "Some useful Jasmine extensions"
+  metaTitle: "Some useful Jasmine extensions"
+  description: "A few useful match helpers for Jasmine"
+  revised: "2011-12-23"
+  date: "2011-12-23"
+  tags: 
+    - "javascript"
+    - "jasmine"
+    - "testing"
+  migrated: "true"
+  urls: 
+    - "/javascript/useful-jasmine-extensions"
+  summary: ""
 ---
 For [tbd, a JavaScript helper I've written][1] I've been using [Jasmine][2] for my testing.
 

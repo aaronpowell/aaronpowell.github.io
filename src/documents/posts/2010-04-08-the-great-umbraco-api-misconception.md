@@ -1,15 +1,18 @@
---- cson
-title: "The great Umbraco API misconception"
-metaTitle: "The great Umbraco API misconception"
-description: "Sometimes the truth hurts"
-revised: "2010-10-04"
-date: "2010-04-08"
-tags: ["umbraco","cms",".net","caution"]
-migrated: "true"
-urls: ["/the-great-umbraco-api-misconception"]
-summary: """
-
-"""
+---
+  title: "The great Umbraco API misconception"
+  metaTitle: "The great Umbraco API misconception"
+  description: "Sometimes the truth hurts"
+  revised: "2010-10-04"
+  date: "2010-04-08"
+  tags: 
+    - "umbraco"
+    - "cms"
+    - ".net"
+    - "caution"
+  migrated: "true"
+  urls: 
+    - "/the-great-umbraco-api-misconception"
+  summary: ""
 ---
 When Umbraco 4 was released it was a very exciting that there was an event model around everything in the back-end. This meant you could more powerful ActionHandlers firing on pre and post events (even though they are named against the standard .NET naming conventions).
 

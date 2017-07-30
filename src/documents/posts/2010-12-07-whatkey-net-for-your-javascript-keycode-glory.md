@@ -1,15 +1,18 @@
---- cson
-title: "WhatKey.net, a simple way to find JavaScript keycodes"
-metaTitle: "WhatKey.net, a simple way to find JavaScript keycodes"
-description: "An overview of a simple site which helps JavaScript developers working with keyboard events"
-revised: "2010-12-21"
-date: "2010-12-07"
-tags: ["whatkey","javascript","web","project"]
-migrated: "true"
-urls: ["/whatkey-net-for-your-javascript-keycode-glory"]
-summary: """
-
-"""
+---
+  title: "WhatKey.net, a simple way to find JavaScript keycodes"
+  metaTitle: "WhatKey.net, a simple way to find JavaScript keycodes"
+  description: "An overview of a simple site which helps JavaScript developers working with keyboard events"
+  revised: "2010-12-21"
+  date: "2010-12-07"
+  tags: 
+    - "whatkey"
+    - "javascript"
+    - "web"
+    - "project"
+  migrated: "true"
+  urls: 
+    - "/whatkey-net-for-your-javascript-keycode-glory"
+  summary: ""
 ---
 Today while preparing a set of slides for an upcoming talk I decided that I wanted to do the slides as a series of web pages, the problem is that I still wanted to be able to use my [Logitech clicker][1]. Since it 'just works' when I plug it in I figured it was firing some simple keyboard events, but the question is, what keyboard events is it firing?
 

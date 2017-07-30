@@ -1,9 +1,10 @@
---- cson
-title: "Learning redux with reducks - intro"
-date: '2016-06-06'
-tags: ['redux', 'reducks']
-description: """A start in the series about learning the inner workings of redux
-"""
+---
+  title: "Learning redux with reducks - intro"
+  date: "2016-06-06"
+  tags: 
+    - "redux"
+    - "reducks"
+  description: "A start in the series about learning the inner workings of redux"
 ---
 
 Over the last 18 months I've been working with React and throughout that time I've used a number of different design patterns. For the past 6 months I've been primarily using [Redux](http://redux.js.org) and I've found it's beauty in the utter simplicty of it.

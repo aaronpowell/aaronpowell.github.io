@@ -1,15 +1,17 @@
---- cson
-title: "Extending Umbraco Members"
-metaTitle: "Extending Umbraco Members"
-description: ""
-revised: "2010-08-10"
-date: "2010-04-07"
-tags: ["umbraco","umbraco-3","members"]
-migrated: "true"
-urls: ["/extending-umbraco-members"]
-summary: """
-This article is for working with Members in Umbraco 3.x. If you're looking to work with Members in Umbraco 4.x then refer to <a href=\"/umbraco-members-profiles\">this article</a>.
-"""
+---
+  title: "Extending Umbraco Members"
+  metaTitle: "Extending Umbraco Members"
+  description: ""
+  revised: "2010-08-10"
+  date: "2010-04-07"
+  tags: 
+    - "umbraco"
+    - "umbraco-3"
+    - "members"
+  migrated: "true"
+  urls: 
+    - "/extending-umbraco-members"
+  summary: "This article is for working with Members in Umbraco 3.x. If you're looking to work with Members in Umbraco 4.x then refer to <a href=\"/umbraco-members-profiles\">this article</a>."
 ---
 Recently we've had several projects which have come through in which we are building a solution in Umbraco and the client wants to have memberships within the site.
 

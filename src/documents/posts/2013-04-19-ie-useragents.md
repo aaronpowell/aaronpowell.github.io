@@ -1,15 +1,16 @@
---- cson
-title: "Internet Explorer userAgents"
-metaTitle: "Internet Explorer userAgents"
-description: "A new program from the IE team"
-revised: "2013-04-19"
-date: "2013-04-19"
-tags: ["internet-explorer","web"]
-migrated: "true"
-urls: ["/web/ie-useragents"]
-summary: """
-
-"""
+---
+  title: "Internet Explorer userAgents"
+  metaTitle: "Internet Explorer userAgents"
+  description: "A new program from the IE team"
+  revised: "2013-04-19"
+  date: "2013-04-19"
+  tags: 
+    - "internet-explorer"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/ie-useragents"
+  summary: ""
 ---
 A few months ago I was asked if I wanted to join a new program that the Internet Explorer team was starting up called [IE userAgents](http://useragents.ie). No isn't related to the the Internet Explorer userAgent _string_, or the fact that in the [leaked IE11 builds it has had a makeover](http://www.neowin.net/news/ie11-to-appear-as-firefox-to-avoid-legacy-ie-css), instead it's about evangelism of the web platform and shifting peoples perceptions of [IE as a modern browser](http://browseryoulovedtohate.com/). It's also worth noting that Internet Explorer isn't the only browser that has a program like this, [Mozilla does too](https://reps.mozilla.org/) and I'd expect the other browsers do to.
 

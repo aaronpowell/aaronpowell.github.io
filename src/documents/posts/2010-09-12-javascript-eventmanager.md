@@ -1,15 +1,17 @@
---- cson
-title: "An EventManager in JavaScript"
-metaTitle: "An EventManager in JavaScript"
-description: "Having disconnected eventing in JavaScript using a simple little framework"
-revised: "2010-09-13"
-date: "2010-09-12"
-tags: ["javascript","javascript-eventmanager","web"]
-migrated: "true"
-urls: ["/javascript-eventmanager"]
-summary: """
-
-"""
+---
+  title: "An EventManager in JavaScript"
+  metaTitle: "An EventManager in JavaScript"
+  description: "Having disconnected eventing in JavaScript using a simple little framework"
+  revised: "2010-09-13"
+  date: "2010-09-12"
+  tags: 
+    - "javascript"
+    - "javascript-eventmanager"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/javascript-eventmanager"
+  summary: ""
 ---
 ## Overview
 

@@ -1,15 +1,18 @@
---- cson
-title: "The problem with Assert.IsTrue"
-metaTitle: "The problem with Assert.IsTrue"
-description: "It's time for another rant, this time it's with how some people write their unit tests"
-revised: "2013-01-08"
-date: "2013-01-08"
-tags: ["unit-testing","opinionated","ranting","rant"]
-migrated: "true"
-urls: ["/rant/the-problem-with-assert-istrue"]
-summary: """
-
-"""
+---
+  title: "The problem with Assert.IsTrue"
+  metaTitle: "The problem with Assert.IsTrue"
+  description: "It's time for another rant, this time it's with how some people write their unit tests"
+  revised: "2013-01-08"
+  date: "2013-01-08"
+  tags: 
+    - "unit-testing"
+    - "opinionated"
+    - "ranting"
+    - "rant"
+  migrated: "true"
+  urls: 
+    - "/rant/the-problem-with-assert-istrue"
+  summary: ""
 ---
 Have you ever seen a unit test that looks like this:
 

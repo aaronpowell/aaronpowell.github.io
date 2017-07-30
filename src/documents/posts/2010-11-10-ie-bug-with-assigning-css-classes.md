@@ -1,15 +1,18 @@
---- cson
-title: "Internet Explorer bug with assigning CSS classes"
-metaTitle: "Internet Explorer bug with assigning CSS classes"
-description: "An interesting problem when assigning CSS classes in JavaScript"
-revised: "2010-11-11"
-date: "2010-11-10"
-tags: ["css","javascript","internet-explorer","web"]
-migrated: "true"
-urls: ["/ie-bug-with-assigning-css-classes"]
-summary: """
-
-"""
+---
+  title: "Internet Explorer bug with assigning CSS classes"
+  metaTitle: "Internet Explorer bug with assigning CSS classes"
+  description: "An interesting problem when assigning CSS classes in JavaScript"
+  revised: "2010-11-11"
+  date: "2010-11-10"
+  tags: 
+    - "css"
+    - "javascript"
+    - "internet-explorer"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/ie-bug-with-assigning-css-classes"
+  summary: ""
 ---
 Today I was fixing a problem on a site in which some background images weren't showing up on certain elements in Internet Explorer but they were showing up under Firefox and Chrome.
 

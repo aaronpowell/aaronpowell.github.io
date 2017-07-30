@@ -1,15 +1,17 @@
---- cson
-title: "Why I'm not a fan of XSLT"
-metaTitle: "Why I'm not a fan of XSLT"
-description: "XSLT has a place in development and Umbraco, here's why I think a lot of people miss understand its place"
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: ["umbraco","xslt","linq-to-umbraco"]
-migrated: "true"
-urls: ["/why-im-not-a-fan-of-xslt"]
-summary: """
-Sorry, yet to migrate the comments from my old blog :P
-"""
+---
+  title: "Why I'm not a fan of XSLT"
+  metaTitle: "Why I'm not a fan of XSLT"
+  description: "XSLT has a place in development and Umbraco, here's why I think a lot of people miss understand its place"
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - "umbraco"
+    - "xslt"
+    - "linq-to-umbraco"
+  migrated: "true"
+  urls: 
+    - "/why-im-not-a-fan-of-xslt"
+  summary: "Sorry, yet to migrate the comments from my old blog :P"
 ---
 When I first joined the Umbraco team with the goal of bringing LINQ to Umbraco to the core framework there was some excitement and quite a bit of the early excitement was from Umbraco MVP [Warren Buckley][1].
 And with the recent beta release the focus has come back onto LINQ to Umbraco, myself and XSLT.

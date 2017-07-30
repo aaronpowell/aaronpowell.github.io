@@ -1,15 +1,18 @@
---- cson
-title: "ASP.NET MVC Model binding with implicit operators"
-metaTitle: "ASP.NET MVC Model binding with implicit operators"
-description: "Using implicit operators in model binding with ASP.NET MVC"
-revised: "2010-06-14"
-date: "2010-06-14"
-tags: ["asp.net","asp.net-mvc","c#","model-binding"]
-migrated: "true"
-urls: ["/aspnet-mvc-model-binding-with-implicit-operators"]
-summary: """
-
-"""
+---
+  title: "ASP.NET MVC Model binding with implicit operators"
+  metaTitle: "ASP.NET MVC Model binding with implicit operators"
+  description: "Using implicit operators in model binding with ASP.NET MVC"
+  revised: "2010-06-14"
+  date: "2010-06-14"
+  tags: 
+    - "asp.net"
+    - "asp.net-mvc"
+    - "c#"
+    - "model-binding"
+  migrated: "true"
+  urls: 
+    - "/aspnet-mvc-model-binding-with-implicit-operators"
+  summary: ""
 ---
 In the past I've had a bit of a play around with operators, I looked at [explicit and implicit operators][1] and it's really quite powerful.
 

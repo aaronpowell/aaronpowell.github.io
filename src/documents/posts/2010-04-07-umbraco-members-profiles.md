@@ -1,21 +1,16 @@
---- cson
-title: "Umbraco Members Profiles"
-metaTitle: "umbraco-members-profiles"
-description: ""
-revised: "2010-04-07"
-date: "2010-04-07"
-tags: ['umbraco', 'members']
-migrated: "true"
-urls: ["/umbraco-members-profiles"]
-summary: """
-Useful Links:<br />
-<a href=\"/extending-umbraco-members\">Extending Umbraco Members</a><br />
-<a href=\"http://msdn.microsoft.com/en-us/library/system.web.security.membershipprovider.aspx\">MembershipProvider</a><br />
-<a href=\"http://msdn.microsoft.com/en-us/library/system.web.security.roleprovider.aspx\">RoleProvider</a><br />
-<a href=\"http://msdn.microsoft.com/en-us/library/system.web.profile.profileprovider.aspx\">ProfileProvider</a><br />
-<a href=\"http://msdn.microsoft.com/en-us/library/system.web.profile.profilebase.aspx\">ProfileBase</a><br />
-<a href=\"http://msdn.microsoft.com/en-us/library/system.web.profile.settingsallowanonymousattribute.aspx\">SettingsAllowAnonymousAttribute</a>
-"""
+---
+  title: "Umbraco Members Profiles"
+  metaTitle: "umbraco-members-profiles"
+  description: ""
+  revised: "2010-04-07"
+  date: "2010-04-07"
+  tags: 
+    - "umbraco"
+    - "members"
+  migrated: "true"
+  urls: 
+    - "/umbraco-members-profiles"
+  summary: "Useful Links:<br />\n<a href=\"/extending-umbraco-members\">Extending Umbraco Members</a><br />\n<a href=\"http://msdn.microsoft.com/en-us/library/system.web.security.membershipprovider.aspx\">MembershipProvider</a><br />\n<a href=\"http://msdn.microsoft.com/en-us/library/system.web.security.roleprovider.aspx\">RoleProvider</a><br />\n<a href=\"http://msdn.microsoft.com/en-us/library/system.web.profile.profileprovider.aspx\">ProfileProvider</a><br />\n<a href=\"http://msdn.microsoft.com/en-us/library/system.web.profile.profilebase.aspx\">ProfileBase</a><br />\n<a href=\"http://msdn.microsoft.com/en-us/library/system.web.profile.settingsallowanonymousattribute.aspx\">SettingsAllowAnonymousAttribute</a>"
 ---
 Almost 12 months ago I did a post looking at how to make .NET interaction with Umbraco Members easier (Extending Umbraco Members). This was for Umbraco 3.x, but now with Umbraco 4.x a question that has been coming up a lot on the Umbraco forums of recent is how to work with the Umbraco Membership. When Umbraco 4 was released it brought in the implementation of the ASP.NET Membership classes (MembershipProvider, RoleProvider and ProfileProvider).
 

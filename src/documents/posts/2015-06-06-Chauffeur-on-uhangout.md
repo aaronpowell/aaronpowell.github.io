@@ -1,9 +1,10 @@
---- cson
-title: "Chauffeur on uHangout"
-date: '2015-06-06'
-tags: ['umbraco', 'chauffeur']
-description: """I recently talked about Chauffeur and my thoughts on deployments on uHangout.
-"""
+---
+  title: "Chauffeur on uHangout"
+  date: "2015-06-06"
+  tags: 
+    - "umbraco"
+    - "chauffeur"
+  description: "I recently talked about Chauffeur and my thoughts on deployments on uHangout."
 ---
 
 Last year I introduced a new tool I've been working on called [Chaffeur]('/posts/2014-06-09-introducing-chauffeur.html') which aims to help deployments in Umbraco.

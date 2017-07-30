@@ -1,9 +1,13 @@
---- cson
-title: "Simulating tracepoints in Chrome dev tools"
-date: '2015-08-30'
-tags: ['web-dev', 'javascript', 'f12', 'chrome', 'debugging']
-description: """One of my favorite F12 under appreciated tooling features is tracepoints and I want to look at how to simulate it in Chrome's dev tools.
-"""
+---
+  title: "Simulating tracepoints in Chrome dev tools"
+  date: "2015-08-30"
+  tags: 
+    - "web-dev"
+    - "javascript"
+    - "f12"
+    - "chrome"
+    - "debugging"
+  description: "One of my favorite F12 under appreciated tooling features is tracepoints and I want to look at how to simulate it in Chrome's dev tools."
 ---
 
 There's a very under rated feature in MS Edge's F12 tools called tracepoints. A tracepoint is like a breakpoint but it calls `console.log` with the statement you provide it. This is really useful want to inspect some state as your application runs but don't want to interupt the application flow by adding a breakpoint, or can't modify your code and inject `console.log` statements (eg: production environments).

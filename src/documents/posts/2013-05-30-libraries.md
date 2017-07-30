@@ -1,15 +1,19 @@
---- cson
-title: "Flight Mode - Libraries"
-metaTitle: "Flight Mode - Libraries"
-description: ""
-revised: "2013-05-30"
-date: "2013-05-30"
-tags: ["flight-mode","indexeddb","localStorage","sessionStorage","offline-storage"]
-migrated: "true"
-urls: ["/flight-mode/libraries"]
-summary: """
-
-"""
+---
+  title: "Flight Mode - Libraries"
+  metaTitle: "Flight Mode - Libraries"
+  description: ""
+  revised: "2013-05-30"
+  date: "2013-05-30"
+  tags: 
+    - "flight-mode"
+    - "indexeddb"
+    - "localStorage"
+    - "sessionStorage"
+    - "offline-storage"
+  migrated: "true"
+  urls: 
+    - "/flight-mode/libraries"
+  summary: ""
 ---
 Throughout the last few posts we've looked at the different ways which we can store data offline in browsers and then created a basic little API that will help is with doing that. The `FlightMode` API that we've been working with was though was really quite a simplistic approach to the problem that we were presented with, ultimately the API isn't meant for production use.
 

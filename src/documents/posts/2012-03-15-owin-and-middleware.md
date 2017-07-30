@@ -1,15 +1,16 @@
---- cson
-title: "OWIN and Middleware"
-metaTitle: "OWIN and Middleware"
-description: ""
-revised: "2012-03-15"
-date: "2012-03-15"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/owin-and-middleware"]
-summary: """
-
-"""
+---
+  title: "OWIN and Middleware"
+  metaTitle: "OWIN and Middleware"
+  description: ""
+  revised: "2012-03-15"
+  date: "2012-03-15"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/owin-and-middleware"
+  summary: ""
 ---
 In my [last post](http://www.aaron-powell.com/web/hello-owin) I looked at getting started with the basics of OWIN and how to create a server which wont do anything overly useful. In this post I want to go a step further and look at how we can start introducing our own layers on top of OWIN (and Gate) to make it nicer to do like *web stuff*.
 

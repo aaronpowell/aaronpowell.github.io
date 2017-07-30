@@ -1,15 +1,16 @@
---- cson
-title: "Using ASP.NET MVC in Umbraco 4"
-metaTitle: "Using ASP.NET MVC in Umbraco 4"
-description: "How to combine ASP.Net MVC applications with an Umbraco project"
-revised: "2012-06-22"
-date: "2012-06-12"
-tags: ["umbraco","asp.net-mvc"]
-migrated: "true"
-urls: ["/umbraco/using-mvc-in-umbraco-4"]
-summary: """
-
-"""
+---
+  title: "Using ASP.NET MVC in Umbraco 4"
+  metaTitle: "Using ASP.NET MVC in Umbraco 4"
+  description: "How to combine ASP.Net MVC applications with an Umbraco project"
+  revised: "2012-06-22"
+  date: "2012-06-12"
+  tags: 
+    - "umbraco"
+    - "asp.net-mvc"
+  migrated: "true"
+  urls: 
+    - "/umbraco/using-mvc-in-umbraco-4"
+  summary: ""
 ---
 By now you've probably heard the decision of Umbraco HQ to no longer investing resources in Umbraco MVC and instead the focus (from both HQ and the community) is on making Umbraco 4 a better product.
 

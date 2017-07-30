@@ -1,15 +1,16 @@
---- cson
-title: "My geek origin"
-metaTitle: "My geek origin"
-description: "In the beginning there was..."
-revised: "2011-07-07"
-date: "2011-07-06"
-tags: ["random","about"]
-migrated: "true"
-urls: ["/geek-origin"]
-summary: """
-No, I'm not just sheeple following <a href=\"http://twitter.com/delic8genius\">@delic8genius</a> (<a href=\"http://delicategeniusblog.com/\">Michael Kordahi</a>)... Well maybe I am :P
-"""
+---
+  title: "My geek origin"
+  metaTitle: "My geek origin"
+  description: "In the beginning there was..."
+  revised: "2011-07-07"
+  date: "2011-07-06"
+  tags: 
+    - "random"
+    - "about"
+  migrated: "true"
+  urls: 
+    - "/geek-origin"
+  summary: "No, I'm not just sheeple following <a href=\"http://twitter.com/delic8genius\">@delic8genius</a> (<a href=\"http://delicategeniusblog.com/\">Michael Kordahi</a>)... Well maybe I am :P"
 ---
 In the spirits of [things you never needed to know about me][1] I decided to share my [Geek Origin][2] story with the world.
 

@@ -1,9 +1,10 @@
---- cson
-title: "Easily replacing Assert.IsTrue statements"
-date: '2014-02-12'
-tags: ['unit-testing', 'testing']
-description: """It's time to really address that annoying habbit of developers to use `Assert.IsTrue` in their tests.
-"""
+---
+  title: "Easily replacing Assert.IsTrue statements"
+  date: "2014-02-12"
+  tags: 
+    - "unit-testing"
+    - "testing"
+  description: "It's time to really address that annoying habbit of developers to use `Assert.IsTrue` in their tests."
 ---
 
 I [blogged/ranted about `Assert.IsTrue`](/posts/2013-01-08-the-problem-with-assert-istrue.html) previously, well today I decided to work out a quick way to do bulk conversions of tests.

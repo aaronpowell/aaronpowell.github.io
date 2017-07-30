@@ -1,15 +1,16 @@
---- cson
-title: "jQuery validation, JavaScript form submitting and another bad idea"
-metaTitle: "jQuery validation, JavaScript form submitting and another bad idea"
-description: ""
-revised: "2011-05-22"
-date: "2011-05-21"
-tags: ["jquery","javascript"]
-migrated: "true"
-urls: ["/javascript/jquery-validation-and-javascript-posts"]
-summary: """
-
-"""
+---
+  title: "jQuery validation, JavaScript form submitting and another bad idea"
+  metaTitle: "jQuery validation, JavaScript form submitting and another bad idea"
+  description: ""
+  revised: "2011-05-22"
+  date: "2011-05-21"
+  tags: 
+    - "jquery"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/jquery-validation-and-javascript-posts"
+  summary: ""
 ---
 [In my last post][1] I looked at how to use jQuery validation in a dynamic form and some problems you can have with handling rule sets.
 

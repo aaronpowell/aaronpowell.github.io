@@ -1,15 +1,17 @@
---- cson
-title: "Blink and marquee!"
-metaTitle: "Blink and marquee!"
-description: "Aww yeah, old-skool win"
-revised: "2011-02-10"
-date: "2011-02-09"
-tags: ["jquery","doing-it-wrong","web"]
-migrated: "true"
-urls: ["/doing-it-wrong/blinking-marquee"]
-summary: """
-
-"""
+---
+  title: "Blink and marquee!"
+  metaTitle: "Blink and marquee!"
+  description: "Aww yeah, old-skool win"
+  revised: "2011-02-10"
+  date: "2011-02-09"
+  tags: 
+    - "jquery"
+    - "doing-it-wrong"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/doing-it-wrong/blinking-marquee"
+  summary: ""
 ---
 Recently I've blogged about creating the a [`blink` tag][1] with jQuery, I've also blogged about making a [`marquee` tag][2].
 

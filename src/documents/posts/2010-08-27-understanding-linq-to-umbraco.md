@@ -1,15 +1,16 @@
---- cson
-title: "Understanding LINQ to Umbraco"
-metaTitle: "Understanding LINQ to Umbraco"
-description: "A look what LINQ to Umbraco is and what it isn't"
-revised: "2010-09-06"
-date: "2010-08-27"
-tags: ["umbraco","linq-to-umbraco"]
-migrated: "true"
-urls: ["/understanding-linq-to-umbraco"]
-summary: """
-
-"""
+---
+  title: "Understanding LINQ to Umbraco"
+  metaTitle: "Understanding LINQ to Umbraco"
+  description: "A look what LINQ to Umbraco is and what it isn't"
+  revised: "2010-09-06"
+  date: "2010-08-27"
+  tags: 
+    - "umbraco"
+    - "linq-to-umbraco"
+  migrated: "true"
+  urls: 
+    - "/understanding-linq-to-umbraco"
+  summary: ""
 ---
 When LINQ to Umbraco dropped with Umbraco 4.5.0 there was a lot of excitement around it and everyone started using it. Personally I was thrilled about this, LINQ to Umbraco was the culmination of 6 months of really solid development effort and I was glad to see that it was paying off.
 

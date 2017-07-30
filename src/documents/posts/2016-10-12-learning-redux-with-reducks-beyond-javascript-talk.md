@@ -1,9 +1,11 @@
---- cson
-title: "Learning redux with reducks - beyond JavaScript the movie"
-date: '2016-10-12'
-tags: ['redux', 'reducks', 'fsharp']
-description: """A presentation I gave at the F# Sydney UG on implementing redux in F#
-"""
+---
+  title: "Learning redux with reducks - beyond JavaScript the movie"
+  date: "2016-10-12"
+  tags: 
+    - "redux"
+    - "reducks"
+    - "fsharp"
+  description: "A presentation I gave at the F# Sydney UG on implementing redux in F#"
 ---
 
 In September I was invited to present at the [F# Sydney user group](http://www.meetup.com/en-AU/fsharpsydney/) and I decided to present on what I blogged about in my [last post](/posts/2016-10-10-learning-redux-with-reducks-beyond-javascript.html), implementing redux in F#.

@@ -1,9 +1,10 @@
---- cson
-title: "Learn how to get started with Umbraco on Pluralsight"
-date: '2015-06-15'
-tags: ['umbraco', 'pluralsight']
-description: """My new Pluralsight course, Umbraco Jumpstart is out!
-"""
+---
+  title: "Learn how to get started with Umbraco on Pluralsight"
+  date: "2015-06-15"
+  tags: 
+    - "umbraco"
+    - "pluralsight"
+  description: "My new Pluralsight course, Umbraco Jumpstart is out!"
 ---
 
 **TL;DR** My latest [Pluralsight](http://www.pluralsight.com/) course, [Umbraco Jumpstart](http://www.pluralsight.com/courses/umbraco-jumpstart) is up.

@@ -1,15 +1,16 @@
---- cson
-title: "Documents in Lucene.Net"
-metaTitle: "Documents in Lucene.Net"
-description: ""
-revised: "2011-02-21"
-date: "2010-07-03"
-tags: ["lucene.net","c#"]
-migrated: "true"
-urls: ["/documents-in-lucene-net"]
-summary: """
-
-"""
+---
+  title: "Documents in Lucene.Net"
+  metaTitle: "Documents in Lucene.Net"
+  description: ""
+  revised: "2011-02-21"
+  date: "2010-07-03"
+  tags: 
+    - "lucene.net"
+    - "c#"
+  migrated: "true"
+  urls: 
+    - "/documents-in-lucene-net"
+  summary: ""
 ---
 As you're most likely already aware Lucene.Net is a Document Database, which means that it's essentially a key/ value store, with the crux of the interaction through *Documents*
 

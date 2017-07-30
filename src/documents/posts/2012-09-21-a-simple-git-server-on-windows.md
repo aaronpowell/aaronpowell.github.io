@@ -1,15 +1,15 @@
---- cson
-title: "Running a simple git server on Windows"
-metaTitle: "Running a simple git server on Windows"
-description: "How to setup a basic git server for Windows"
-revised: "2012-09-21"
-date: "2012-09-21"
-tags: ["git"]
-migrated: "true"
-urls: ["/a-simple-git-server-on-windows"]
-summary: """
-
-"""
+---
+  title: "Running a simple git server on Windows"
+  metaTitle: "Running a simple git server on Windows"
+  description: "How to setup a basic git server for Windows"
+  revised: "2012-09-21"
+  date: "2012-09-21"
+  tags: 
+    - "git"
+  migrated: "true"
+  urls: 
+    - "/a-simple-git-server-on-windows"
+  summary: ""
 ---
 While [Mercurial][1] still hold a special place in my heart it can't be denied that [Git][2] has well and truly won the war. Because of this I've been using it more extensively in the projects that I work on.
 

@@ -1,15 +1,16 @@
---- cson
-title: "All good things come to an end"
-metaTitle: "All good things come to an end"
-description: ""
-revised: "2010-08-08"
-date: "2010-08-08"
-tags: ["umbraco","random-stuff"]
-migrated: "true"
-urls: ["/all-good-things-come-to-an-end"]
-summary: """
-
-"""
+---
+  title: "All good things come to an end"
+  metaTitle: "All good things come to an end"
+  description: ""
+  revised: "2010-08-08"
+  date: "2010-08-08"
+  tags: 
+    - "umbraco"
+    - "random-stuff"
+  migrated: "true"
+  urls: 
+    - "/all-good-things-come-to-an-end"
+  summary: ""
 ---
 As you have probably seen we at [TheFarm require a senior .NET developer][1], and there is a some-what sad reason for this... I've decided to move on from TheFarm.
 

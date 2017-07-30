@@ -1,15 +1,18 @@
---- cson
-title: "Making the Internet Explorer JavaScript tools better, again"
-metaTitle: "Making the Internet Explorer JavaScript tools better, again"
-description: "A look at what's changed since I last pointed out the failings of the IE dev tools"
-revised: "2013-01-14"
-date: "2013-01-14"
-tags: ["javascript","web","internet-explorer","web-dev"]
-migrated: "true"
-urls: ["/web-dev/ie10-console-thoughts"]
-summary: """
-
-"""
+---
+  title: "Making the Internet Explorer JavaScript tools better, again"
+  metaTitle: "Making the Internet Explorer JavaScript tools better, again"
+  description: "A look at what's changed since I last pointed out the failings of the IE dev tools"
+  revised: "2013-01-14"
+  date: "2013-01-14"
+  tags: 
+    - "javascript"
+    - "web"
+    - "internet-explorer"
+    - "web-dev"
+  migrated: "true"
+  urls: 
+    - "/web-dev/ie10-console-thoughts"
+  summary: ""
 ---
 Almost two years ago I wrote a blog post about [what I saw as problems in the IE9 developer tools](http://www.aaron-powell.com/web-dev/ie9-console-thoughts).
 

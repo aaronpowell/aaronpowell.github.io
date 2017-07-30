@@ -1,15 +1,15 @@
---- cson
-title: "Tips for travelling as a geek"
-metaTitle: "Tips for travelling as a geek"
-description: ""
-revised: "2011-10-14"
-date: "2011-10-12"
-tags: ["random"]
-migrated: "true"
-urls: ["/tips-for-travelling-as-a-geek"]
-summary: """
-
-"""
+---
+  title: "Tips for travelling as a geek"
+  metaTitle: "Tips for travelling as a geek"
+  description: ""
+  revised: "2011-10-14"
+  date: "2011-10-12"
+  tags: 
+    - "random"
+  migrated: "true"
+  urls: 
+    - "/tips-for-travelling-as-a-geek"
+  summary: ""
 ---
 Anyone who follows me on [twitter][1] will have probably noticed that in the last two weeks I've been tweeting with a geolocation in Vietnam. If you're really smart you may have worked out that I was on holidays over there!
 

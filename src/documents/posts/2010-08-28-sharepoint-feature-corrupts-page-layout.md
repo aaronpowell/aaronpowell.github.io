@@ -1,15 +1,15 @@
---- cson
-title: "SharePoint feature corrupts page layout"
-metaTitle: "SharePoint feature corrupts page layout"
-description: "Are your SharePoint features corrupting your page layout?"
-revised: "2010-08-28"
-date: "2010-08-28"
-tags: ["sharepoint"]
-migrated: "true"
-urls: ["/sharepoint-feature-corrupts-page-layout"]
-summary: """
-
-"""
+---
+  title: "SharePoint feature corrupts page layout"
+  metaTitle: "SharePoint feature corrupts page layout"
+  description: "Are your SharePoint features corrupting your page layout?"
+  revised: "2010-08-28"
+  date: "2010-08-28"
+  tags: 
+    - "sharepoint"
+  migrated: "true"
+  urls: 
+    - "/sharepoint-feature-corrupts-page-layout"
+  summary: ""
 ---
 Something that I've come across a few times when working on SharePoint/ MOSS 2007 features. When importing a Page Layout the ASPX some times becomes corrupt. You end up with additional HTML inserts once it's been imported into SharePoint.
 

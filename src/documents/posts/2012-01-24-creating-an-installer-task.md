@@ -1,15 +1,16 @@
---- cson
-title: "Creating an installer task"
-metaTitle: "Creating an installer task"
-description: "A look at the v5 task system, particularly how to create an installer task"
-revised: "2012-01-24"
-date: "2012-01-24"
-tags: ["umbraco","umbraco-5"]
-migrated: "true"
-urls: ["/umbraco/creating-an-installer-task"]
-summary: """
-
-"""
+---
+  title: "Creating an installer task"
+  metaTitle: "Creating an installer task"
+  description: "A look at the v5 task system, particularly how to create an installer task"
+  revised: "2012-01-24"
+  date: "2012-01-24"
+  tags: 
+    - "umbraco"
+    - "umbraco-5"
+  migrated: "true"
+  urls: 
+    - "/umbraco/creating-an-installer-task"
+  summary: ""
 ---
 As you possibly know I'm working on an extension for Umbraco 5 called [Stats It][1] and I've initially been focusing on making the install process nice and smooth for people who want to get up and running with the package. A good install experience will do wonders for giving your project credibility.
 

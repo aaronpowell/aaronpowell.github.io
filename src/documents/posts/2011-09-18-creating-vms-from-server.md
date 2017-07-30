@@ -1,15 +1,16 @@
---- cson
-title: "Creating a ViewModel from the server"
-metaTitle: "Creating a ViewModel from the server"
-description: ""
-revised: "2011-09-22"
-date: "2011-09-18"
-tags: ["knockoutjs","javascript"]
-migrated: "true"
-urls: ["/javascript/creating-vms-from-server"]
-summary: """
-
-"""
+---
+  title: "Creating a ViewModel from the server"
+  metaTitle: "Creating a ViewModel from the server"
+  description: ""
+  revised: "2011-09-22"
+  date: "2011-09-18"
+  tags: 
+    - "knockoutjs"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/creating-vms-from-server"
+  summary: ""
 ---
 If you've been doing much work with [KnockoutJS][1] you'll probably see examples where the code looks like this:
 

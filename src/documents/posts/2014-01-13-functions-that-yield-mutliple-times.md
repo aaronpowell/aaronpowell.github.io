@@ -1,9 +1,10 @@
---- cson
-title: "Functions that yield multiple times"
-date: '2014-01-13'
-tags: ['javascript', 'es6']
-description: """Generator functions in ES6 don't have to just do a single `yield`, they can `yield` multiple times, but when doing so how do you execute those functions?
-"""
+---
+  title: "Functions that yield multiple times"
+  date: "2014-01-13"
+  tags: 
+    - "javascript"
+    - "es6"
+  description: "Generator functions in ES6 don't have to just do a single `yield`, they can `yield` multiple times, but when doing so how do you execute those functions?"
 ---
 
 I [recently introduced you to JavaScript generators](/posts/2013-12-31-linq-in-javascript-for-real.html) which I think are a really interesting feature that we should look at for the future of JavaScript. In that blog post I was talking about [LINQ in JavaScript](https://github.com/aaronpowell/linq-in-javascript) and kind of glanced over an important part of generators, and that's how you use them _if you're not using a `for-of` loop_. While generators make a lot of sense in the scope of managing datasets that isn't their only usage, in reality generators are quite useful if you want to lazily execute *any* function.

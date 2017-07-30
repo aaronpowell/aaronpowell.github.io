@@ -1,9 +1,9 @@
---- cson
-title: 'JavaScript call and apply'
-date: '2013-07-04'
-tags: ['javascript']
-description: """After having confused one of my colleagues with some code that used the JavaScript `apply` method and giving them an answer that didn't leave them completely bemused I thought I'd share my explanation with the world.
-"""
+---
+  title: "JavaScript call and apply"
+  date: "2013-07-04"
+  tags: 
+    - "javascript"
+  description: "After having confused one of my colleagues with some code that used the JavaScript `apply` method and giving them an answer that didn't leave them completely bemused I thought I'd share my explanation with the world."
 ---
 
 A colleague recently came across this line in our codebase that I wrote:

@@ -1,9 +1,9 @@
---- cson
-title: "2015 - A year in review"
-date: '2016-01-01'
-tags: ['random']
-description: """A look back at the year that was.
-"""
+---
+  title: "2015 - A year in review"
+  date: "2016-01-01"
+  tags: 
+    - "random"
+  description: "A look back at the year that was."
 ---
 
 And just like that another year has come to a close. To me it's felt like I've been really quite quiet compared to past years but a quick count shows that I published 17 posts on here, which is just as many as I did in 2014.

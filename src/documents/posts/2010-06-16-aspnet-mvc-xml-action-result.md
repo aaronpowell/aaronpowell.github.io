@@ -1,15 +1,18 @@
---- cson
-title: "ASP.NET MVC XML Action Result"
-metaTitle: "ASP.NET MVC XML Action Result"
-description: "An easy way to return XML from ASP.NET MVC"
-revised: "2010-06-16"
-date: "2010-06-16"
-tags: ["asp.net","asp.net-mvc","c#","xml"]
-migrated: "true"
-urls: ["/aspnet-mvc-xml-action-result"]
-summary: """
-
-"""
+---
+  title: "ASP.NET MVC XML Action Result"
+  metaTitle: "ASP.NET MVC XML Action Result"
+  description: "An easy way to return XML from ASP.NET MVC"
+  revised: "2010-06-16"
+  date: "2010-06-16"
+  tags: 
+    - "asp.net"
+    - "asp.net-mvc"
+    - "c#"
+    - "xml"
+  migrated: "true"
+  urls: 
+    - "/aspnet-mvc-xml-action-result"
+  summary: ""
 ---
 For my [Location Service in F#][1] I needed a way to be able to return XML from MVC (which powers my site), but I couldn't find a way to do this out of the box with XML.
 

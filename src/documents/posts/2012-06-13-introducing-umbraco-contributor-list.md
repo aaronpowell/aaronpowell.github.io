@@ -1,15 +1,15 @@
---- cson
-title: "Introducing the Umbraco contributor mailing list"
-metaTitle: "Introducing the Umbraco contributor mailing list"
-description: "Keen discuss contributing to Umbraco's core, join the discussion now!"
-revised: "2012-06-13"
-date: "2012-06-13"
-tags: ["umbraco"]
-migrated: "true"
-urls: ["/umbraco/introducing-umbraco-contributor-list"]
-summary: """
-
-"""
+---
+  title: "Introducing the Umbraco contributor mailing list"
+  metaTitle: "Introducing the Umbraco contributor mailing list"
+  description: "Keen discuss contributing to Umbraco's core, join the discussion now!"
+  revised: "2012-06-13"
+  date: "2012-06-13"
+  tags: 
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/umbraco/introducing-umbraco-contributor-list"
+  summary: ""
 ---
 # TL;DR
 

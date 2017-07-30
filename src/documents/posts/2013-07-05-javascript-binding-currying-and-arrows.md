@@ -1,9 +1,9 @@
---- cson
-title: 'JavaScript bind, currying and arrow functions'
-date: '2013-07-05'
-tags: ['javascript']
-description: """After confusing my colleagues with how to invoke functions with a modifided set of arguments at a single time the next evolutionary point was to confuse them with creating functions that are always called with a different state.
-"""
+---
+  title: "JavaScript bind, currying and arrow functions"
+  date: "2013-07-05"
+  tags: 
+    - "javascript"
+  description: "After confusing my colleagues with how to invoke functions with a modifided set of arguments at a single time the next evolutionary point was to confuse them with creating functions that are always called with a different state."
 ---
 
 How many times have you written code like this:

@@ -1,15 +1,15 @@
---- cson
-title: "Pinboard for Windows 8"
-metaTitle: "Pinboard for Windows 8"
-description: "A Windows 8 application for the Pinboard bookmarking service"
-revised: "2012-06-01"
-date: "2012-06-01"
-tags: ["windows8"]
-migrated: "true"
-urls: ["/pinboard-for-win8"]
-summary: """
-
-"""
+---
+  title: "Pinboard for Windows 8"
+  metaTitle: "Pinboard for Windows 8"
+  description: "A Windows 8 application for the Pinboard bookmarking service"
+  revised: "2012-06-01"
+  date: "2012-06-01"
+  tags: 
+    - "windows8"
+  migrated: "true"
+  urls: 
+    - "/pinboard-for-win8"
+  summary: ""
 ---
 With the release of the Windows 8 store today I'm excited to say that you can now download my [Pinboard for Windows 8 application](http://apps.microsoft.com/webpdp/app/pinboard/3ed0b8d9-544e-4242-aaa6-d836c47dd0d1)!
 

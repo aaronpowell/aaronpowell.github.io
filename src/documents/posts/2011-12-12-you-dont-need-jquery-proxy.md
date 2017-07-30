@@ -1,15 +1,16 @@
---- cson
-title: "You don't need to use $.proxy"
-metaTitle: "You don't need to use $.proxy"
-description: "Why you shouldn't use (and don't need to use) the $.proxy method in jQuery"
-revised: "2011-12-12"
-date: "2011-12-12"
-tags: ["jquery","javascript"]
-migrated: "true"
-urls: ["/javascript/you-dont-need-jquery-proxy"]
-summary: """
-
-"""
+---
+  title: "You don't need to use $.proxy"
+  metaTitle: "You don't need to use $.proxy"
+  description: "Why you shouldn't use (and don't need to use) the $.proxy method in jQuery"
+  revised: "2011-12-12"
+  date: "2011-12-12"
+  tags: 
+    - "jquery"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/you-dont-need-jquery-proxy"
+  summary: ""
 ---
 I've been recently going through some extending of a jQuery UI widget which a colleague had written when I came across quite a number of statements that were using the [proxy][1] method from jQuery.
 

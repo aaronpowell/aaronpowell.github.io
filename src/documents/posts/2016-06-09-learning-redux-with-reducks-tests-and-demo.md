@@ -1,9 +1,10 @@
---- cson
-title: "Learning redux with reducks - tests and demo app"
-date: '2016-06-09'
-tags: ['redux', 'reducks']
-description: """Converting our tests and demo across for use with Reducks
-"""
+---
+  title: "Learning redux with reducks - tests and demo app"
+  date: "2016-06-09"
+  tags: 
+    - "redux"
+    - "reducks"
+  description: "Converting our tests and demo across for use with Reducks"
 ---
 
 [Last time](http://www.aaron-powell.com/posts/2016-06-09-learning-redux-with-reducks-creating-a-store.html) we started creating our Reducks library by implementing the `createStore` and while I have all confidence in my ability to write bug free code we do have some tests in the demo app, so let's use them.

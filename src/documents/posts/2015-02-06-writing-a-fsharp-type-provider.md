@@ -1,9 +1,10 @@
---- cson
-title: "Writing a F# Type Provider"
-date: '2015-02-06'
-tags: ['f#', 'fsharp']
-description: """A walkthrough of how to create a F# Type Provider.
-"""
+---
+  title: "Writing a F# Type Provider"
+  date: "2015-02-06"
+  tags: 
+    - "f#"
+    - "fsharp"
+  description: "A walkthrough of how to create a F# Type Provider."
 ---
 
 I was recently asked to give a talk at the [Sydney F# User Group](http://www.meetup.com/fsharpsydney/) about [how to write a Type Provider](https://www.youtube.com/watch?v=sNmKKTq7UCc) (and other things).

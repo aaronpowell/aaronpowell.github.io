@@ -1,15 +1,16 @@
---- cson
-title: "Animating with JavaScript"
-metaTitle: "Animating with JavaScript"
-description: "A look at how to make a simple JavaScript animation library"
-revised: "2011-03-14"
-date: "2011-03-13"
-tags: ["javascript","web"]
-migrated: "true"
-urls: ["/javascript-animation"]
-summary: """
-
-"""
+---
+  title: "Animating with JavaScript"
+  metaTitle: "Animating with JavaScript"
+  description: "A look at how to make a simple JavaScript animation library"
+  revised: "2011-03-14"
+  date: "2011-03-13"
+  tags: 
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/javascript-animation"
+  summary: ""
 ---
 I've always considered the [animation][1] aspect of jQuery to be a bit of black magic (and well I still do :P) but at the same time I want to know how it works.
 

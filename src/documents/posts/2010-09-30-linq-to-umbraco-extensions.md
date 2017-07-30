@@ -1,15 +1,17 @@
---- cson
-title: "A set of extensions for LINQ to Umbraco"
-metaTitle: "A set of extensions for LINQ to Umbraco"
-description: "Making LINQ to Umbraco way more awesome"
-revised: "2010-10-01"
-date: "2010-09-30"
-tags: ["umbraco","linq-to-umbraco","linq-to-umbraco-extensions"]
-migrated: "true"
-urls: ["/linq-to-umbraco-extensions"]
-summary: """
-
-"""
+---
+  title: "A set of extensions for LINQ to Umbraco"
+  metaTitle: "A set of extensions for LINQ to Umbraco"
+  description: "Making LINQ to Umbraco way more awesome"
+  revised: "2010-10-01"
+  date: "2010-09-30"
+  tags: 
+    - "umbraco"
+    - "linq-to-umbraco"
+    - "linq-to-umbraco-extensions"
+  migrated: "true"
+  urls: 
+    - "/linq-to-umbraco-extensions"
+  summary: ""
 ---
 LINQ to Umbraco is awesome, let's not deny it, but I had a thought of how could I make it even more awesome...
 

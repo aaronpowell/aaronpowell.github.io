@@ -1,9 +1,10 @@
---- cson
-title: "Learning redux with reducks - multiple reducers"
-date: '2016-06-27'
-tags: ['redux', 'reducks']
-description: """Working with multiple reducers
-"""
+---
+  title: "Learning redux with reducks - multiple reducers"
+  date: "2016-06-27"
+  tags: 
+    - "redux"
+    - "reducks"
+  description: "Working with multiple reducers"
 ---
 
 [Last time](http://www.aaron-powell.com/posts/2016-06-09-learning-redux-with-reducks-creating-a-store.html) we added some tests to our codebase to illustrate how our implementation of Reducks works against Redux. This time I want to look to expanding the features of Reducks and today it's to support multiple reducers.

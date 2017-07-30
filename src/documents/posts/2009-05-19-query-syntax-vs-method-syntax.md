@@ -1,15 +1,17 @@
---- cson
-title: "Query Syntax vs Method Syntax"
-metaTitle: "Query Syntax vs Method Syntax"
-description: "What's the difference with LINQ to using query syntax to pure lambda expressions?"
-revised: "2010-04-08"
-date: "2009-05-19"
-tags: ["linq","c#",".net"]
-migrated: "true"
-urls: ["/query-syntax-vs-method-syntax"]
-summary: """
-
-"""
+---
+  title: "Query Syntax vs Method Syntax"
+  metaTitle: "Query Syntax vs Method Syntax"
+  description: "What's the difference with LINQ to using query syntax to pure lambda expressions?"
+  revised: "2010-04-08"
+  date: "2009-05-19"
+  tags: 
+    - "linq"
+    - "c#"
+    - ".net"
+  migrated: "true"
+  urls: 
+    - "/query-syntax-vs-method-syntax"
+  summary: ""
 ---
 While working on an IQueryable&lt;T&gt; provider I was having a problem when doing LINQ statements via the Query Syntax that wasn't happening when using the Method Syntax (chained lambda expressions).
 

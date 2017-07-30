@@ -1,19 +1,16 @@
---- cson
-title: "Orchard & Umbraco - The install experience"
-metaTitle: "Orchard & Umbraco - The install experience"
-description: "A comparison between the install experience between Orchard CMS and Umbraco Juno"
-revised: "2011-01-16"
-date: "2011-01-11"
-tags: ["orchard","umbraco"]
-migrated: "true"
-urls: ["/orchard-umbraco/installing"]
-summary: """
-<strong>Official install documentation</strong>
-<br />
-<a href=\"http://orchardproject.net/docs/Installing-Orchard.ashx\" title=\"Orchard Install\">Orchard</a>
-<br />
-<a href=\"http://umbraco.org/help-and-support/video-tutorials/getting-started/installing-with-web-pi\" title=\"Umbraco Install\">Umbraco</a>
-"""
+---
+  title: "Orchard & Umbraco - The install experience"
+  metaTitle: "Orchard & Umbraco - The install experience"
+  description: "A comparison between the install experience between Orchard CMS and Umbraco Juno"
+  revised: "2011-01-16"
+  date: "2011-01-11"
+  tags: 
+    - "orchard"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/orchard-umbraco/installing"
+  summary: "<strong>Official install documentation</strong>\n<br />\n<a href=\"http://orchardproject.net/docs/Installing-Orchard.ashx\" title=\"Orchard Install\">Orchard</a>\n<br />\n<a href=\"http://umbraco.org/help-and-support/video-tutorials/getting-started/installing-with-web-pi\" title=\"Umbraco Install\">Umbraco</a>"
 ---
 # Overview
 

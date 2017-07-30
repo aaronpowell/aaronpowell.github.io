@@ -1,15 +1,17 @@
---- cson
-title: "Going beyond the browser with QUnit - Part 2"
-metaTitle: "Going beyond the browser with QUnit - Part 2"
-description: "Working with the DOM and QUnit from Node.js"
-revised: "2011-09-06"
-date: "2011-09-05"
-tags: ["javascript","nodejs","qunit"]
-migrated: "true"
-urls: ["/javascript/qunit-beyond-the-browser-part-2"]
-summary: """
-
-"""
+---
+  title: "Going beyond the browser with QUnit - Part 2"
+  metaTitle: "Going beyond the browser with QUnit - Part 2"
+  description: "Working with the DOM and QUnit from Node.js"
+  revised: "2011-09-06"
+  date: "2011-09-05"
+  tags: 
+    - "javascript"
+    - "nodejs"
+    - "qunit"
+  migrated: "true"
+  urls: 
+    - "/javascript/qunit-beyond-the-browser-part-2"
+  summary: ""
 ---
 In my [last post][1] I talked about what you need to do if you want to monitor changes and run tests automatically under Node.js but there was a few assumptions in there. One of the main assumptions I had was that you weren't doing any DOM interactions.
 

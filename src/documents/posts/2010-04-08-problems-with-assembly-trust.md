@@ -1,16 +1,18 @@
---- cson
-title: "Problems with Assembly Trust"
-metaTitle: "Problems with Assembly Trust"
-description: "Something to be careful of with downloading assemblies"
-revised: "2010-04-08"
-date: "2010-04-08"
-tags: [".net","trust-level","autofac","fail"]
-migrated: "true"
-urls: ["/problems-with-assembly-trust"]
-summary: """
-Related Links:<br />
-<a href=\"http://www.hanselman.com/blog/FavIconsInternetZonesAndProjectsFromATrustworthySource.aspx\" title=\"FavIcons, Internet Zones and Projects from a Trustworthy Source\">FavIcons, Internet Zones and Projects from a Trustworthy Source</a>
-"""
+---
+  title: "Problems with Assembly Trust"
+  metaTitle: "Problems with Assembly Trust"
+  description: "Something to be careful of with downloading assemblies"
+  revised: "2010-04-08"
+  date: "2010-04-08"
+  tags: 
+    - ".net"
+    - "trust-level"
+    - "autofac"
+    - "fail"
+  migrated: "true"
+  urls: 
+    - "/problems-with-assembly-trust"
+  summary: "Related Links:<br />\n<a href=\"http://www.hanselman.com/blog/FavIconsInternetZonesAndProjectsFromATrustworthySource.aspx\" title=\"FavIcons, Internet Zones and Projects from a Trustworthy Source\">FavIcons, Internet Zones and Projects from a Trustworthy Source</a>"
 ---
 When I was migrating PaulPad to ASP.NET MVC2 I decided that I wanted to also upgrade it to Autofac2. The main reason for it was the type registration is much nicer with it's lambda syntax than it was in the 1.4 release which PaulPad previously used.
 

@@ -1,16 +1,16 @@
---- cson
-title: "ASP.NET WebForms Model-Video-Presenter"
-metaTitle: "ASP.NET WebForms Model-Video-Presenter"
-description: "Articles, links and helpful tidbits for working with Webforms MVP"
-revised: "2010-06-30"
-date: "2010-05-18"
-tags: ["asp.net","webforms-mvp"]
-migrated: "true"
-urls: ["/webforms-mvp"]
-summary: """
-Useful Links:<br />
-<a href=\"http://webformsmvp.com\" title=\"Webforms MVP\">Project Homepage</a>
-"""
+---
+  title: "ASP.NET WebForms Model-Video-Presenter"
+  metaTitle: "ASP.NET WebForms Model-Video-Presenter"
+  description: "Articles, links and helpful tidbits for working with Webforms MVP"
+  revised: "2010-06-30"
+  date: "2010-05-18"
+  tags: 
+    - "asp.net"
+    - "webforms-mvp"
+  migrated: "true"
+  urls: 
+    - "/webforms-mvp"
+  summary: "Useful Links:<br />\n<a href=\"http://webformsmvp.com\" title=\"Webforms MVP\">Project Homepage</a>"
 ---
 ASP.NET WebForms MVP is a really handy project which aims to bring testability to WebForms development.
 

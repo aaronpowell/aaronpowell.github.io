@@ -1,9 +1,11 @@
---- cson
-title: "Introducing Chauffeur"
-date: '2014-06-09'
-tags: ['umbraco', 'chauffeur', 'deployment']
-description: """Introducing Chauffeur, a new classy way to delivery changes around Umbraco instances.
-"""
+---
+  title: "Introducing Chauffeur"
+  date: "2014-06-09"
+  tags: 
+    - "umbraco"
+    - "chauffeur"
+    - "deployment"
+  description: "Introducing Chauffeur, a new classy way to delivery changes around Umbraco instances."
 ---
 
 Over the last few months I've been tweeting out information about a new Open Source project for Umbraco I've been working on called **Chauffeur**. In this post I want to introduce you to what Chauffeur is and what it can do for you and your Umbraco projects.

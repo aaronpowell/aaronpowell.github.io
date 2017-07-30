@@ -1,15 +1,16 @@
---- cson
-title: "Why no IQueryable in LINQ to Umbraco?"
-metaTitle: "Why no IQueryable in LINQ to Umbraco?"
-description: "Why does LINQ to Umbraco not implement the IQueryable interface?"
-revised: "2010-09-06"
-date: "2010-09-06"
-tags: ["umbraco","linqtoumbraco"]
-migrated: "true"
-urls: ["/iqueryable-linq-to-umbraco"]
-summary: """
-
-"""
+---
+  title: "Why no IQueryable in LINQ to Umbraco?"
+  metaTitle: "Why no IQueryable in LINQ to Umbraco?"
+  description: "Why does LINQ to Umbraco not implement the IQueryable interface?"
+  revised: "2010-09-06"
+  date: "2010-09-06"
+  tags: 
+    - "umbraco"
+    - "linqtoumbraco"
+  migrated: "true"
+  urls: 
+    - "/iqueryable-linq-to-umbraco"
+  summary: ""
 ---
 In the theme of blogs answering questions which aren't being asked I though I would have a bit of a look at why LINQ to Umbraco isn't an IQueryable-based LINQ implementation. 
 

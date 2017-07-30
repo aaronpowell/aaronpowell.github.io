@@ -1,15 +1,16 @@
---- cson
-title: "OWIN Responses"
-metaTitle: "OWIN Responses"
-description: "A look at how to give power to our responses by making different response types easier to handle"
-revised: "2012-03-19"
-date: "2012-03-19"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/owin-responses"]
-summary: """
-
-"""
+---
+  title: "OWIN Responses"
+  metaTitle: "OWIN Responses"
+  description: "A look at how to give power to our responses by making different response types easier to handle"
+  revised: "2012-03-19"
+  date: "2012-03-19"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/owin-responses"
+  summary: ""
 ---
 In the last post we looked at [Routing in OWIN](http://www.aaron-powell.com/web/owin-routing) as we built up a simple little route engine. Today I want to look at how to bring power to our responses by making it easier to respond with different types.
 

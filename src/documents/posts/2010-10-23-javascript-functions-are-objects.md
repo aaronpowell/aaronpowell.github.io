@@ -1,15 +1,16 @@
---- cson
-title: "JavaScript functions are objects"
-metaTitle: "JavaScript functions are objects"
-description: "JavaScript functions are more than just functions"
-revised: "2010-10-24"
-date: "2010-10-23"
-tags: ["javascript","web"]
-migrated: "true"
-urls: ["/javascript-functions-are-objects"]
-summary: """
-
-"""
+---
+  title: "JavaScript functions are objects"
+  metaTitle: "JavaScript functions are objects"
+  description: "JavaScript functions are more than just functions"
+  revised: "2010-10-24"
+  date: "2010-10-23"
+  tags: 
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/javascript-functions-are-objects"
+  summary: ""
 ---
 I think it's well known just how much I enjoy JavaScript, especially since there's a few [really][1] [funky][2] [things][3] I've written about in the past.
 

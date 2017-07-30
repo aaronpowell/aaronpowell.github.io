@@ -1,15 +1,15 @@
---- cson
-title: "NHaml Umbraco MacroEngine"
-metaTitle: "NHaml Umbraco MacroEngine"
-description: "How to implement a fully functional custom Umbraco MacroEngine using NHaml language"
-revised: "2010-12-29"
-date: "2010-12-28"
-tags: ["umbraco"]
-migrated: "true"
-urls: ["/nhaml-umbraco-macroengine"]
-summary: """
-
-"""
+---
+  title: "NHaml Umbraco MacroEngine"
+  metaTitle: "NHaml Umbraco MacroEngine"
+  description: "How to implement a fully functional custom Umbraco MacroEngine using NHaml language"
+  revised: "2010-12-29"
+  date: "2010-12-28"
+  tags: 
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/nhaml-umbraco-macroengine"
+  summary: ""
 ---
 In a [previous post][1] I introduced the new `IMacroEngine` interface coming as part of Umbraco Juno (4.6) which will make it possible to create your own Macro Engines. In this article I'll look at what is required to create a custom Macro Engine which is actually useful.
 

@@ -1,15 +1,17 @@
---- cson
-title: "Building an application with Lucene.Net"
-metaTitle: "Building an application with Lucene.Net"
-description: "A more in-depth look at how to use Lucene for storage and building a simple application"
-revised: "2010-07-10"
-date: "2010-07-10"
-tags: ["lucene","lucene.net","c#"]
-migrated: "true"
-urls: ["/building-an-application-with-lucene-net"]
-summary: """
-
-"""
+---
+  title: "Building an application with Lucene.Net"
+  metaTitle: "Building an application with Lucene.Net"
+  description: "A more in-depth look at how to use Lucene for storage and building a simple application"
+  revised: "2010-07-10"
+  date: "2010-07-10"
+  tags: 
+    - "lucene"
+    - "lucene.net"
+    - "c#"
+  migrated: "true"
+  urls: 
+    - "/building-an-application-with-lucene-net"
+  summary: ""
 ---
 For this article we're going to go through building a small application with uses Lucene.Net as a storage model. I read a lot of blogs so I'm often find that when I'm working I want to refer back to a blog that I read in the past. The problem is that finding that particular blog can be tricky, navigating through a few thousand posts can be fairly tedious. So let's build an application which we can quickly search and find the posts that I'm interested in.
 

@@ -1,15 +1,18 @@
---- cson
-title: "How to check if a file exists in Windows 8"
-metaTitle: "How to check if a file exists in Windows 8"
-description: "Ever wondered how to check if a file exists in Windows 8?"
-revised: "2012-09-24"
-date: "2012-09-24"
-tags: ["windows8","winjs","c#","winrt"]
-migrated: "true"
-urls: ["/winrt/check-if-file-exists"]
-summary: """
-
-"""
+---
+  title: "How to check if a file exists in Windows 8"
+  metaTitle: "How to check if a file exists in Windows 8"
+  description: "Ever wondered how to check if a file exists in Windows 8?"
+  revised: "2012-09-24"
+  date: "2012-09-24"
+  tags: 
+    - "windows8"
+    - "winjs"
+    - "c#"
+    - "winrt"
+  migrated: "true"
+  urls: 
+    - "/winrt/check-if-file-exists"
+  summary: ""
 ---
 Sometimes things are simple, sometimes they aren't when you think they should be. One such thing in Windows 8 development is checking if a file exists...
 

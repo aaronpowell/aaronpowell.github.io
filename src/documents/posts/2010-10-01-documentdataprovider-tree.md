@@ -1,15 +1,16 @@
---- cson
-title: "DocumentDataProvider - Creating a custom LINQ to Umbraco Tree"
-metaTitle: "DocumentDataProvider - Creating a custom LINQ to Umbraco Tree"
-description: "Creating a custom LINQ to Umbraco provider - implementing a Tree"
-revised: "2010-10-01"
-date: "2010-10-01"
-tags: ["umbraco","linq-to-umbraco"]
-migrated: "true"
-urls: ["/documentdataprovider-tree"]
-summary: """
-
-"""
+---
+  title: "DocumentDataProvider - Creating a custom LINQ to Umbraco Tree"
+  metaTitle: "DocumentDataProvider - Creating a custom LINQ to Umbraco Tree"
+  description: "Creating a custom LINQ to Umbraco provider - implementing a Tree"
+  revised: "2010-10-01"
+  date: "2010-10-01"
+  tags: 
+    - "umbraco"
+    - "linq-to-umbraco"
+  migrated: "true"
+  urls: 
+    - "/documentdataprovider-tree"
+  summary: ""
 ---
 *This article covers part of the `DocumentDataProvider` from the [LINQ to Umbraco Extensions][1] project.*
 

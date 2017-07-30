@@ -1,15 +1,16 @@
---- cson
-title: "Some tips and tricks for working with IronRuby and Umbraco"
-metaTitle: "Some tips and tricks for working with IronRuby and Umbraco"
-description: "Some things which I've learnt while working with IronRuby in Umbraco"
-revised: "2010-11-30"
-date: "2010-11-27"
-tags: ["umbraco","ironruby"]
-migrated: "true"
-urls: ["/umbraco-ironruby-tips-and-tricks"]
-summary: """
-
-"""
+---
+  title: "Some tips and tricks for working with IronRuby and Umbraco"
+  metaTitle: "Some tips and tricks for working with IronRuby and Umbraco"
+  description: "Some things which I've learnt while working with IronRuby in Umbraco"
+  revised: "2010-11-30"
+  date: "2010-11-27"
+  tags: 
+    - "umbraco"
+    - "ironruby"
+  migrated: "true"
+  urls: 
+    - "/umbraco-ironruby-tips-and-tricks"
+  summary: ""
 ---
 *Note: The following has been tested in Umbraco 4.5.2 on .NET 3.5, and it **works on my machine***
 

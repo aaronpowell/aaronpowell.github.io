@@ -1,15 +1,16 @@
---- cson
-title: "Umbraco Event Improvements"
-metaTitle: "Umbraco Event Improvements"
-description: "A look at the events changes in Umbraco versions"
-revised: "2010-04-11"
-date: "2010-04-11"
-tags: ["umbraco","eventing"]
-migrated: "true"
-urls: ["/umbraco-event-improvments"]
-summary: """
-
-"""
+---
+  title: "Umbraco Event Improvements"
+  metaTitle: "Umbraco Event Improvements"
+  description: "A look at the events changes in Umbraco versions"
+  revised: "2010-04-11"
+  date: "2010-04-11"
+  tags: 
+    - "umbraco"
+    - "eventing"
+  migrated: "true"
+  urls: 
+    - "/umbraco-event-improvments"
+  summary: ""
 ---
 As I mentioned in a previous article [there's a problem with the 4.0 eventing][1]. But not everything is bad news, there's a light at the end of the tunnel!
 

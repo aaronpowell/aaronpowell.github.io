@@ -1,15 +1,16 @@
---- cson
-title: "OWIN routing"
-metaTitle: "OWIN routing"
-description: "Now it's time to do some routing on top of OWIN"
-revised: "2012-03-16"
-date: "2012-03-16"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/owin-routing"]
-summary: """
-
-"""
+---
+  title: "OWIN routing"
+  metaTitle: "OWIN routing"
+  description: "Now it's time to do some routing on top of OWIN"
+  revised: "2012-03-16"
+  date: "2012-03-16"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/owin-routing"
+  summary: ""
 ---
 [Last time around](http://www.aaron-powell.com/web/owin-and-middleware) we started looking at middleware in OWIN and how to handle different request types. So now comes the next logical step, how do we handle different URLs? Currently we don't have the facilities to handle different URLs, aka routing, so let's work on that.
 

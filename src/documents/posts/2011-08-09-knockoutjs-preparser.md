@@ -1,15 +1,16 @@
---- cson
-title: "Introducing the KnockoutJS preparser"
-metaTitle: "Introducing the KnockoutJS preparser"
-description: ""
-revised: "2011-08-09"
-date: "2011-08-09"
-tags: ["javascript","knockoutjs"]
-migrated: "true"
-urls: ["/javascript/knockoutjs-preparser"]
-summary: """
-
-"""
+---
+  title: "Introducing the KnockoutJS preparser"
+  metaTitle: "Introducing the KnockoutJS preparser"
+  description: ""
+  revised: "2011-08-09"
+  date: "2011-08-09"
+  tags: 
+    - "javascript"
+    - "knockoutjs"
+  migrated: "true"
+  urls: 
+    - "/javascript/knockoutjs-preparser"
+  summary: ""
 ---
 In my [previous post][1] I outlined one of the biggest issues I have with [KnockoutJS][2] as being its WPF/ Silverlight binding syntax and how it requires you to put JavaScript into your HTML.
 

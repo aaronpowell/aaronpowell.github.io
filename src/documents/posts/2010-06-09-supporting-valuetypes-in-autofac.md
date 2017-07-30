@@ -1,15 +1,16 @@
---- cson
-title: "Supporting ValueTypes in Autofac"
-metaTitle: "Supporting ValueTypes in Autofac"
-description: "Autofac doesn't support injection of value types as properties, here's how to support it."
-revised: "2010-06-14"
-date: "2010-06-09"
-tags: ["autofac","c#"]
-migrated: "true"
-urls: ["/supporting-valuetypes-in-autofac"]
-summary: """
-
-"""
+---
+  title: "Supporting ValueTypes in Autofac"
+  metaTitle: "Supporting ValueTypes in Autofac"
+  description: "Autofac doesn't support injection of value types as properties, here's how to support it."
+  revised: "2010-06-14"
+  date: "2010-06-09"
+  tags: 
+    - "autofac"
+    - "c#"
+  migrated: "true"
+  urls: 
+    - "/supporting-valuetypes-in-autofac"
+  summary: ""
 ---
 Today I had an interesting problem with Autofac in which I was registering an `Enum` that I wanted to inject into my different objects. Some of the injection was being done on the properties, as this is an ASP.NET project and I wanted to inject into are UserControls.
 

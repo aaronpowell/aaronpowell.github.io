@@ -1,9 +1,11 @@
---- cson
-title: "Accessing the Location header in a CORS-enabled API"
-date: '2013-11-28'
-tags: ['asp-net', 'ajax', 'cors']
-description: """Dealing with the case of the missing Location header in an ASP.Net WebAPI response.
-"""
+---
+  title: "Accessing the Location header in a CORS-enabled API"
+  date: "2013-11-28"
+  tags: 
+    - "asp-net"
+    - "ajax"
+    - "cors"
+  description: "Dealing with the case of the missing Location header in an ASP.Net WebAPI response."
 ---
 
 Today I hit a problem, we've got an ASP.Net WebAPI 2 project which is providing a series of REST services for a web app. These services are hosted on a different domain to the app will be hosted on so to perform the requests to them we've gone ahead and [enabled CORS](http://enable-cors.org/).

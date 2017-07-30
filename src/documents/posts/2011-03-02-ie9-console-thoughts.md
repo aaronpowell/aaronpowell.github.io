@@ -1,15 +1,18 @@
---- cson
-title: "Making the Internet Explorer JavaScript tools better"
-metaTitle: "Making the Internet Explorer JavaScript tools better"
-description: "Some thoughts on how to improve the IE9 JavaScript developer tools"
-revised: "2011-03-03"
-date: "2011-03-02"
-tags: ["ie9","javascript","web","web-dev"]
-migrated: "true"
-urls: ["/web-dev/ie9-console-thoughts"]
-summary: """
-
-"""
+---
+  title: "Making the Internet Explorer JavaScript tools better"
+  metaTitle: "Making the Internet Explorer JavaScript tools better"
+  description: "Some thoughts on how to improve the IE9 JavaScript developer tools"
+  revised: "2011-03-03"
+  date: "2011-03-02"
+  tags: 
+    - "ie9"
+    - "javascript"
+    - "web"
+    - "web-dev"
+  migrated: "true"
+  urls: 
+    - "/web-dev/ie9-console-thoughts"
+  summary: ""
 ---
 Previously I've blogged about a limitation of [console.assert from the IE9 developer tools][1]. Also recently [Tatham Oddie][2] blogged some overall [thoughts on improving IE9 for developers][3] and I decided to elaborate some thoughts I've got around the JavaScript developer tools.
 

@@ -1,9 +1,11 @@
---- cson
-title: "F12 Refresh - The JavaScript Console"
-date: '2014-04-03'
-tags: ['javascript', 'f12', 'internet-explorer']
-description: """A look at the JavaScript console improvements in the F12 tooling refresh
-"""
+---
+  title: "F12 Refresh - The JavaScript Console"
+  date: "2014-04-03"
+  tags: 
+    - "javascript"
+    - "f12"
+    - "internet-explorer"
+  description: "A look at the JavaScript console improvements in the F12 tooling refresh"
 ---
 
 One of the new features in the F12 refresh is some updates to the JavaScript console so let's have a look at those updates.

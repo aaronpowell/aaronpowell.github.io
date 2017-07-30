@@ -1,15 +1,16 @@
---- cson
-title: "How does Umbraco look in IE9 RC?"
-metaTitle: "How does Umbraco look in IE9 RC?"
-description: "How do Umbraco look in IE9 RC?"
-revised: "2011-02-12"
-date: "2011-02-11"
-tags: ["ie9","umbraco"]
-migrated: "true"
-urls: ["/umbraco-ie9rc"]
-summary: """
-
-"""
+---
+  title: "How does Umbraco look in IE9 RC?"
+  metaTitle: "How does Umbraco look in IE9 RC?"
+  description: "How do Umbraco look in IE9 RC?"
+  revised: "2011-02-12"
+  date: "2011-02-11"
+  tags: 
+    - "ie9"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/umbraco-ie9rc"
+  summary: ""
 ---
 Sexy!
 

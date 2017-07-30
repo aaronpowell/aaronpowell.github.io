@@ -1,15 +1,17 @@
---- cson
-title: "Text casing and Examine"
-metaTitle: "Text casing and Examine"
-description: ""
-revised: "2012-09-05"
-date: "2012-09-05"
-tags: ["lucene.net","examine","umbraco"]
-migrated: "true"
-urls: ["/text-casing-and-examine"]
-summary: """
-
-"""
+---
+  title: "Text casing and Examine"
+  metaTitle: "Text casing and Examine"
+  description: ""
+  revised: "2012-09-05"
+  date: "2012-09-05"
+  tags: 
+    - "lucene.net"
+    - "examine"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/text-casing-and-examine"
+  summary: ""
 ---
 A few times I've seen questions posted on the Umbraco forums which ask how to deal with case insensitivity text with Examine, and it’s also something that we've had to handle a few times within our own company.
 

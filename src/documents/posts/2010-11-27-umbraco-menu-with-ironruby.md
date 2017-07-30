@@ -1,17 +1,16 @@
---- cson
-title: "Creating a menu in Umbraco with IronRuby"
-metaTitle: "Creating a menu in Umbraco with IronRuby"
-description: "No more XSLT, DRL for the win"
-revised: "2010-11-29"
-date: "2010-11-27"
-tags: ["umbraco","ironruby"]
-migrated: "true"
-urls: ["/umbraco-menu-with-ironruby"]
-summary: """
-Useful links:<br />
-<a href=\"http://ruby-doc.org\">Ruby Docs</a><br />
-<a href=\"http://ironruby.net\">IronRuby</a>
-"""
+---
+  title: "Creating a menu in Umbraco with IronRuby"
+  metaTitle: "Creating a menu in Umbraco with IronRuby"
+  description: "No more XSLT, DRL for the win"
+  revised: "2010-11-29"
+  date: "2010-11-27"
+  tags: 
+    - "umbraco"
+    - "ironruby"
+  migrated: "true"
+  urls: 
+    - "/umbraco-menu-with-ironruby"
+  summary: "Useful links:<br />\n<a href=\"http://ruby-doc.org\">Ruby Docs</a><br />\n<a href=\"http://ironruby.net\">IronRuby</a>"
 ---
 Recently I've been help a client migrate a number of unmanaged microsites into an Umbraco instance, and since it's well known that [I'm not a fan of XSLT][1] an alternative is in order. While working at [TheFarm][2] I wrote a blog about the different macro options and what [we were doing back then][3]. Since moving on I've been wanting to avoid using XSLT at all.
 

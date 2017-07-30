@@ -1,15 +1,17 @@
---- cson
-title: "Hello db.js"
-metaTitle: "Hello db.js"
-description: "An introduction to db.js, an IndexedDB wrapper."
-revised: "2012-10-28"
-date: "2012-10-01"
-tags: ["indexeddb","web","winjs"]
-migrated: "true"
-urls: ["/web/hello-dbjs"]
-summary: """
-
-"""
+---
+  title: "Hello db.js"
+  metaTitle: "Hello db.js"
+  description: "An introduction to db.js, an IndexedDB wrapper."
+  revised: "2012-10-28"
+  date: "2012-10-01"
+  tags: 
+    - "indexeddb"
+    - "web"
+    - "winjs"
+  migrated: "true"
+  urls: 
+    - "/web/hello-dbjs"
+  summary: ""
 ---
 _I'm going to make the assumption you're somewhat familiar with IndexedDB in this post, if you're not check out [this tutorial](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB)._
 

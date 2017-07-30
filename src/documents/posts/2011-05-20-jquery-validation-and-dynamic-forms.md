@@ -1,15 +1,16 @@
---- cson
-title: "jQuery validation, dynamic forms and a really bad idea"
-metaTitle: "jQuery validation, dynamic forms and a really bad idea"
-description: ""
-revised: "2011-05-21"
-date: "2011-05-20"
-tags: ["jquery","javascript"]
-migrated: "true"
-urls: ["/javascript/jquery-validation-and-dynamic-forms"]
-summary: """
-
-"""
+---
+  title: "jQuery validation, dynamic forms and a really bad idea"
+  metaTitle: "jQuery validation, dynamic forms and a really bad idea"
+  description: ""
+  revised: "2011-05-21"
+  date: "2011-05-20"
+  tags: 
+    - "jquery"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/jquery-validation-and-dynamic-forms"
+  summary: ""
 ---
 Currently at work I'm part of a team that's developing a really JavaScript heavy application and in doing so we're finding problems, challenges and solutions. One such that I was working on recently I thought I'd share with you as it was a majour source of frustration, but ultimately I succeeded in it and that made it all the worth while!
 

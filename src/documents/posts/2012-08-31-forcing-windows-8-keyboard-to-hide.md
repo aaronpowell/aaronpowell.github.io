@@ -1,15 +1,15 @@
---- cson
-title: "Forcing Windows 8 soft keyboard to hide"
-metaTitle: "Forcing Windows 8 soft keyboard to hide"
-description: "Hack of the day goes to how you hide the soft keyboard on a Windows 8 application"
-revised: "2012-08-31"
-date: "2012-08-31"
-tags: ["xaml"]
-migrated: "true"
-urls: ["/xaml/forcing-windows-8-keyboard-to-hide"]
-summary: """
-
-"""
+---
+  title: "Forcing Windows 8 soft keyboard to hide"
+  metaTitle: "Forcing Windows 8 soft keyboard to hide"
+  description: "Hack of the day goes to how you hide the soft keyboard on a Windows 8 application"
+  revised: "2012-08-31"
+  date: "2012-08-31"
+  tags: 
+    - "xaml"
+  migrated: "true"
+  urls: 
+    - "/xaml/forcing-windows-8-keyboard-to-hide"
+  summary: ""
 ---
 We had a bug raised that when the user presses enter on the sign in screen the login process begins but the soft keyboard (the on-screen keyboard) doesn't get dismissed so the user gets the impression they can keep interacting with it. Through some [Monkey Testing][1] this produced a bug where the application would crash because it would fire off multiple requests to log in as they could keep hitting enter and eventually crashing the application.
 

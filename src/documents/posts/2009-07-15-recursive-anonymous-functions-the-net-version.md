@@ -1,15 +1,14 @@
---- cson
-title: "Recursive anonymous functions - the .NET version"
-metaTitle: "Recurvie anonymous functions - the .NET version"
-description: "To know recursion you must first know recursion"
-revised: "2010-04-08"
-date: "2009-07-15"
-tags: []
-migrated: "true"
-urls: ["/recursive-anonymous-functions-the-net-version"]
-summary: """
-
-"""
+---
+  title: "Recursive anonymous functions - the .NET version"
+  metaTitle: "Recurvie anonymous functions - the .NET version"
+  description: "To know recursion you must first know recursion"
+  revised: "2010-04-08"
+  date: "2009-07-15"
+  tags: []
+  migrated: "true"
+  urls: 
+    - "/recursive-anonymous-functions-the-net-version"
+  summary: ""
 ---
 When playing around with JavaScript I decided to have a look at creating [recursive anonymous functions][1], which are a good bit of fun.
 

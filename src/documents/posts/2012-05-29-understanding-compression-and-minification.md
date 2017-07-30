@@ -1,15 +1,15 @@
---- cson
-title: "Understanding compression and minification"
-metaTitle: "Understanding compression and minification"
-description: "An look into what is involved in JavaScript compression and minification as well as where the benefits lie."
-revised: "2012-05-29"
-date: "2012-05-29"
-tags: ["javascript"]
-migrated: "true"
-urls: ["/javascript/understanding-compression-and-minification"]
-summary: """
-
-"""
+---
+  title: "Understanding compression and minification"
+  metaTitle: "Understanding compression and minification"
+  description: "An look into what is involved in JavaScript compression and minification as well as where the benefits lie."
+  revised: "2012-05-29"
+  date: "2012-05-29"
+  tags: 
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/understanding-compression-and-minification"
+  summary: ""
 ---
 One of my colleagues raised a question on our internal discussion system as to why we should use minified JavaScript libraries. Now I'm sure everyone knows that you *should* minimize your libraries but do you *really* understand what the different levels of minification are and the benefits of the different levels? While I strongly recommend that you should ensure that on a production system you always have your JavaScript minified **and** [gzipped](http://en.wikipedia.org/wiki/Gzip) (well and the right caching headers but that's beyond the scope of this blog post) let's have a look as to exactly what differences it makes.
 

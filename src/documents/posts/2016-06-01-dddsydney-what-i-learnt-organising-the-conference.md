@@ -1,9 +1,9 @@
---- cson
-title: "DDD Sydney 2016 - What I learnt organising the conferences"
-date: '2016-06-01'
-tags: ['dddsydney']
-description: """A look back at what I learnt organising DDD Sydney 2016
-"""
+---
+  title: "DDD Sydney 2016 - What I learnt organising the conferences"
+  date: "2016-06-01"
+  tags: 
+    - "dddsydney"
+  description: "A look back at what I learnt organising DDD Sydney 2016"
 ---
 
 On Saturday 28th May we saw the return of DDD Sydney after a 4 year absence. This was also the first year that I took a lead role in organising the event, previously I'd really only done 'on the day' volunteering. DDD Sydney was a team effort, but I want to talk about what **I** personally learnt running this event for the next person silly enough to try and organise a conference!

@@ -1,15 +1,16 @@
---- cson
-title: "Umbraco DataType Design"
-metaTitle: "Umbraco DataType Design"
-description: "Looking into how the DataTypes are designed for Umbraco"
-revised: "2010-04-11"
-date: "2010-04-11"
-tags: ["umbraco","data-type"]
-migrated: "true"
-urls: ["/umbraco-data-type-design"]
-summary: """
-
-"""
+---
+  title: "Umbraco DataType Design"
+  metaTitle: "Umbraco DataType Design"
+  description: "Looking into how the DataTypes are designed for Umbraco"
+  revised: "2010-04-11"
+  date: "2010-04-11"
+  tags: 
+    - "umbraco"
+    - "data-type"
+  migrated: "true"
+  urls: 
+    - "/umbraco-data-type-design"
+  summary: ""
 ---
 ## DataType's in Umbraco 4.x ##
 

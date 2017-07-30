@@ -1,15 +1,15 @@
---- cson
-title: "Why do you care where your packages are?"
-metaTitle: "Why do you care where your packages are?"
-description: "Warning - the following is an opinionated piece and based on my experience. It doesn't reflect that of any of my employers or of any sane human beings"
-revised: "2011-04-28"
-date: "2011-04-27"
-tags: ["nuget"]
-migrated: "true"
-urls: ["/nuget/why-does-package-location-matter"]
-summary: """
-Warning - the following is an opinionated piece and based on my experience. It doesn't reflect that of any of my employers or of any sane human beings
-"""
+---
+  title: "Why do you care where your packages are?"
+  metaTitle: "Why do you care where your packages are?"
+  description: "Warning - the following is an opinionated piece and based on my experience. It doesn't reflect that of any of my employers or of any sane human beings"
+  revised: "2011-04-28"
+  date: "2011-04-27"
+  tags: 
+    - "nuget"
+  migrated: "true"
+  urls: 
+    - "/nuget/why-does-package-location-matter"
+  summary: "Warning - the following is an opinionated piece and based on my experience. It doesn't reflect that of any of my employers or of any sane human beings"
 ---
 As a consultant I've had an opportunity to see the way different project manage their external dependencies, and being an active member of in open source projects has given me a good view on this as well. From all this I've noticed an interesting trend, **there's no agreed standard for where to put external dependencies**.
 

@@ -1,15 +1,17 @@
---- cson
-title: "Are Extension Methods Really Evil?"
-metaTitle: "Are Extension Methods Really Evil?"
-description: ""
-revised: "2010-04-08"
-date: "2010-04-08"
-tags: ["c#",".net","extension-methods"]
-migrated: "true"
-urls: ["/are-extension-methods-really-evil"]
-summary: """
-The blog post referred to is no longer available, I'll see about updating this to not require that
-"""
+---
+  title: "Are Extension Methods Really Evil?"
+  metaTitle: "Are Extension Methods Really Evil?"
+  description: ""
+  revised: "2010-04-08"
+  date: "2010-04-08"
+  tags: 
+    - "c#"
+    - ".net"
+    - "extension-methods"
+  migrated: "true"
+  urls: 
+    - "/are-extension-methods-really-evil"
+  summary: "The blog post referred to is no longer available, I'll see about updating this to not require that"
 ---
 Ruben (of Umbraco fame) recently wrote a post entitled Extension Methods: Silent static slaves which was in response to a comment I'd left on a previous post about static classes and static method being evil.
 

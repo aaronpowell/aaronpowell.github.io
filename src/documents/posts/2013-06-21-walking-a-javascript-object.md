@@ -1,10 +1,9 @@
---- cson
-title: 'Walking a JavaScript object'
-description: """Ever had a path to a path to a property on a JavaScript object that you want to walk? Something along the lines of `foo.bar.baz`.
-
-Recently I was trying to solve this problem and came across a nifty little trick"""
-tags: ['javascript']
-date: '2013-06-21'
+---
+  title: "Walking a JavaScript object"
+  description: "Ever had a path to a path to a property on a JavaScript object that you want to walk? Something along the lines of `foo.bar.baz`.\n\nRecently I was trying to solve this problem and came across a nifty little trick"
+  tags: 
+    - "javascript"
+  date: "2013-06-21"
 ---
 
 Recently I was trying to solve a problem where I had a JSON path to a property on an object, the path was going to be `n` layers deep and the object itself was also `n` layers deep. I needed to solve this problem in a fairly generic manner, as there was a number of different scenarios under which this could would be run.

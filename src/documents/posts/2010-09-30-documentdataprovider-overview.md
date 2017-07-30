@@ -1,15 +1,17 @@
---- cson
-title: "Overview of the DocumentDataProvider"
-metaTitle: "Overview of the DocumentDataProvider"
-description: "What is the DocumentDataProvider, why does it exists, and how can it complete me?"
-revised: "2010-09-30"
-date: "2010-09-30"
-tags: ["umbraco","linq-to-umbraco","linq-to-umbraco-extensions"]
-migrated: "true"
-urls: ["/documentdataprovider-overview"]
-summary: """
-
-"""
+---
+  title: "Overview of the DocumentDataProvider"
+  metaTitle: "Overview of the DocumentDataProvider"
+  description: "What is the DocumentDataProvider, why does it exists, and how can it complete me?"
+  revised: "2010-09-30"
+  date: "2010-09-30"
+  tags: 
+    - "umbraco"
+    - "linq-to-umbraco"
+    - "linq-to-umbraco-extensions"
+  migrated: "true"
+  urls: 
+    - "/documentdataprovider-overview"
+  summary: ""
 ---
 ##Overview
 

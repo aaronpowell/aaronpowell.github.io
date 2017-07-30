@@ -1,15 +1,17 @@
---- cson
-title: "The settings suck"
-metaTitle: "The settings suck"
-description: "Settings in Windows 8 XAML suck. Period."
-revised: "2012-09-14"
-date: "2012-09-14"
-tags: ["xaml","windows8","rant"]
-migrated: "true"
-urls: ["/xaml/settings-suck"]
-summary: """
-
-"""
+---
+  title: "The settings suck"
+  metaTitle: "The settings suck"
+  description: "Settings in Windows 8 XAML suck. Period."
+  revised: "2012-09-14"
+  date: "2012-09-14"
+  tags: 
+    - "xaml"
+    - "windows8"
+    - "rant"
+  migrated: "true"
+  urls: 
+    - "/xaml/settings-suck"
+  summary: ""
 ---
 # Settings problems
 

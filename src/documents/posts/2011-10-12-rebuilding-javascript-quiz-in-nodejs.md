@@ -1,15 +1,16 @@
---- cson
-title: "Rebuilding JavaScript Quiz in Nodejs"
-metaTitle: "Rebuilding JavaScript Quiz in Nodejs"
-description: ""
-revised: "2011-10-13"
-date: "2011-10-12"
-tags: ["nodejs","javascript"]
-migrated: "true"
-urls: ["/javascript/rebuilding-javascript-quiz-in-nodejs"]
-summary: """
-
-"""
+---
+  title: "Rebuilding JavaScript Quiz in Nodejs"
+  metaTitle: "Rebuilding JavaScript Quiz in Nodejs"
+  description: ""
+  revised: "2011-10-13"
+  date: "2011-10-12"
+  tags: 
+    - "nodejs"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/rebuilding-javascript-quiz-in-nodejs"
+  summary: ""
 ---
 A few months back I [announced a new site][1] I was running called [JavaScript Quiz][2]. When I started to site it was to be done quickly so I chose an out-of-the-box blogging platform, that being [Posterous][3].
 

@@ -1,15 +1,15 @@
---- cson
-title: "Firefox, jQuery and the case of the Document response"
-metaTitle: "Firefox, jQuery and the case of the Document response"
-description: "A mystery that resulted in a strange mix of expected responses"
-revised: "2013-05-07"
-date: "2013-05-07"
-tags: ["jquery"]
-migrated: "true"
-urls: ["/firefox-jquery-missing-datatype"]
-summary: """
-
-"""
+---
+  title: "Firefox, jQuery and the case of the Document response"
+  metaTitle: "Firefox, jQuery and the case of the Document response"
+  description: "A mystery that resulted in a strange mix of expected responses"
+  revised: "2013-05-07"
+  date: "2013-05-07"
+  tags: 
+    - "jquery"
+  migrated: "true"
+  urls: 
+    - "/firefox-jquery-missing-datatype"
+  summary: ""
 ---
 I recently tweeted that I was having this problem:
 

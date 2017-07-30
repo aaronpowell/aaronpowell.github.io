@@ -1,15 +1,15 @@
---- cson
-title: "Base64 Encoding of Images via Powershell"
-metaTitle: "Base64 Encoding of Images via Powershell"
-description: "Turning an image into a string... simply"
-revised: "2010-11-07"
-date: "2010-11-07"
-tags: ["powershell"]
-migrated: "true"
-urls: ["/base64-encoding-images-with-powershell"]
-summary: """
-
-"""
+---
+  title: "Base64 Encoding of Images via Powershell"
+  metaTitle: "Base64 Encoding of Images via Powershell"
+  description: "Turning an image into a string... simply"
+  revised: "2010-11-07"
+  date: "2010-11-07"
+  tags: 
+    - "powershell"
+  migrated: "true"
+  urls: 
+    - "/base64-encoding-images-with-powershell"
+  summary: ""
 ---
 Recently I was doing some CSS for a client but there was a bit of a problem with putting stuff into source control, basically there was a release coming up from one section of the source tree that I needed to put some images into for the CSS, but because they weren't approved for this release I couldn't commit them.
 

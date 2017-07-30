@@ -1,15 +1,16 @@
---- cson
-title: "Should Internet Explorer be killed?"
-metaTitle: "Should Internet Explorer be killed?"
-description: "Is it time for the IE brand to end-of-life?"
-revised: "2013-01-17"
-date: "2013-01-17"
-tags: ["internet-explorer","opinionated"]
-migrated: "true"
-urls: ["/should-internet-explorer-be-killed"]
-summary: """
-
-"""
+---
+  title: "Should Internet Explorer be killed?"
+  metaTitle: "Should Internet Explorer be killed?"
+  description: "Is it time for the IE brand to end-of-life?"
+  revised: "2013-01-17"
+  date: "2013-01-17"
+  tags: 
+    - "internet-explorer"
+    - "opinionated"
+  migrated: "true"
+  urls: 
+    - "/should-internet-explorer-be-killed"
+  summary: ""
 ---
 # Warning - Opinions
 

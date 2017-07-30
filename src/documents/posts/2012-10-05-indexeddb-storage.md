@@ -1,15 +1,16 @@
---- cson
-title: "How the browsers store IndexedDB data"
-metaTitle: "How the browsers store IndexedDB data"
-description: "A starting point for learning where and how "
-revised: "2012-10-05"
-date: "2012-10-05"
-tags: ["indexeddb","web"]
-migrated: "true"
-urls: ["/web/indexeddb-storage"]
-summary: """
-
-"""
+---
+  title: "How the browsers store IndexedDB data"
+  metaTitle: "How the browsers store IndexedDB data"
+  description: "A starting point for learning where and how "
+  revised: "2012-10-05"
+  date: "2012-10-05"
+  tags: 
+    - "indexeddb"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/indexeddb-storage"
+  summary: ""
 ---
 As you've probably noticed I've been doing a lot of digging into [IndexedDB](http://www.w3.org/TR/IndexedDB/) across the various browsers but there's one thing that I find quite interesting, _how it all works_. So for the **[TIL](http://www.reddit.com/r/todayilearned/)** session we've going to find out how the browsers store the data for IndexedDB*.
 

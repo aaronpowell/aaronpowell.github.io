@@ -1,15 +1,16 @@
---- cson
-title: "KnockoutJS plugin for Glimpse"
-metaTitle: "KnockoutJS plugin for Glimpse"
-description: "A new release of a KnockoutJS plugin for Glimpse"
-revised: "2013-03-25"
-date: "2013-03-25"
-tags: ["knockoutjs","glimpse"]
-migrated: "true"
-urls: ["/glimpse/knockoutjs"]
-summary: """
-
-"""
+---
+  title: "KnockoutJS plugin for Glimpse"
+  metaTitle: "KnockoutJS plugin for Glimpse"
+  description: "A new release of a KnockoutJS plugin for Glimpse"
+  revised: "2013-03-25"
+  date: "2013-03-25"
+  tags: 
+    - "knockoutjs"
+    - "glimpse"
+  migrated: "true"
+  urls: 
+    - "/glimpse/knockoutjs"
+  summary: ""
 ---
 When I was recently in Seattle for MVP Summit I was hanging out with [Anthony van der Hoorn](http://twitter.com/anthony_vdh) and [Nik Molnar](http://twitter.com/nikmd23) of the [Glimpse](http://getglimpse.com) fame. Anthony, knowing my passion for JavaScript has been bouncing ideas around the client-side code for Glimpse for a while and wanting me to have a crack at building a client-side plugin for them. Well it seemed like the perfect time to get to it and not just because I had both the guys on hand to bug when things went wrong ;).
 

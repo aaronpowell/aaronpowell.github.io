@@ -1,15 +1,16 @@
---- cson
-title: "Watch your OS"
-metaTitle: "Watch your OS"
-description: "Today we got caught out by a recent npm change"
-revised: "2012-03-21"
-date: "2012-03-21"
-tags: ["nodejs","npm"]
-migrated: "true"
-urls: ["/nodejs/watch-your-os"]
-summary: """
-
-"""
+---
+  title: "Watch your OS"
+  metaTitle: "Watch your OS"
+  description: "Today we got caught out by a recent npm change"
+  revised: "2012-03-21"
+  date: "2012-03-21"
+  tags: 
+    - "nodejs"
+    - "npm"
+  migrated: "true"
+  urls: 
+    - "/nodejs/watch-your-os"
+  summary: ""
 ---
 Today some of my colleagues were trying to integrate [csslint][1] into the build process of a project using the [nodejs package][2] but they kept hitting an issue:
 

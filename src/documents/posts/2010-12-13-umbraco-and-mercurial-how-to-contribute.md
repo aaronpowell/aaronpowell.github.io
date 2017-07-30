@@ -1,15 +1,16 @@
---- cson
-title: "Umbraco & Mercurial - How to contribute"
-metaTitle: "Umbraco & Mercurial - How to contribute"
-description: "A quick guide on how to contribute to Umbraco using Mercurial"
-revised: "2010-12-14"
-date: "2010-12-13"
-tags: ["umbraco","mercurial"]
-migrated: "true"
-urls: ["/umbraco-and-mercurial-how-to-contribute"]
-summary: """
-
-"""
+---
+  title: "Umbraco & Mercurial - How to contribute"
+  metaTitle: "Umbraco & Mercurial - How to contribute"
+  description: "A quick guide on how to contribute to Umbraco using Mercurial"
+  revised: "2010-12-14"
+  date: "2010-12-13"
+  tags: 
+    - "umbraco"
+    - "mercurial"
+  migrated: "true"
+  urls: 
+    - "/umbraco-and-mercurial-how-to-contribute"
+  summary: ""
 ---
 # Umbraco & Mercurial - How to contribute
 

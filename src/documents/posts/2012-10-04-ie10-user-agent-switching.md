@@ -1,15 +1,16 @@
---- cson
-title: "Interesting finds in the IE10 UA switcher"
-metaTitle: "Interesting finds in the IE10 UA switcher"
-description: "How had I missed all this before?"
-revised: "2012-10-04"
-date: "2012-10-04"
-tags: ["web","debugging"]
-migrated: "true"
-urls: ["/web/ie10-user-agent-switching"]
-summary: """
-
-"""
+---
+  title: "Interesting finds in the IE10 UA switcher"
+  metaTitle: "Interesting finds in the IE10 UA switcher"
+  description: "How had I missed all this before?"
+  revised: "2012-10-04"
+  date: "2012-10-04"
+  tags: 
+    - "web"
+    - "debugging"
+  migrated: "true"
+  urls: 
+    - "/web/ie10-user-agent-switching"
+  summary: ""
 ---
 I was looking around in the IE10 developer tools today and dug into the `Tools -> Change user agent string` menu and came across some interesting UA options:
 

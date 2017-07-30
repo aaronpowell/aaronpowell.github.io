@@ -1,9 +1,12 @@
---- cson
-title: "Running grunt tasks when deploying ASPNet5 apps to Azure"
-date: '2015-01-02'
-tags: ['aspnet', 'aspnet5', 'grunt', 'gulp']
-description: """How to run grunt (or gulp) tasks when deploying ASPNet5 applications to Azure Websites.
-"""
+---
+  title: "Running grunt tasks when deploying ASPNet5 apps to Azure"
+  date: "2015-01-02"
+  tags: 
+    - "aspnet"
+    - "aspnet5"
+    - "grunt"
+    - "gulp"
+  description: "How to run grunt (or gulp) tasks when deploying ASPNet5 applications to Azure Websites."
 ---
 
 After MVP Summit this year the ASPNet team held a hack-day where we were encouraged to build something using ASPNet5 to help test out the platform. During that time I decided to build a website for when you can't think up your own commit message, instead it'll grab the last 50 commit messages from a GitHub [using GitHub search](https://help.github.com/categories/search/) called [What the Commit](http://whatthecommit.azurewebsites.net).

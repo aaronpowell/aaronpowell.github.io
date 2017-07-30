@@ -1,9 +1,11 @@
---- cson
-title: "Integration testing authenticated Katana applications"
-date: '2014-01-12'
-tags: ['owin', 'katana', 'testing']
-description: """A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer.
-"""
+---
+  title: "Integration testing authenticated Katana applications"
+  date: "2014-01-12"
+  tags: 
+    - "owin"
+    - "katana"
+    - "testing"
+  description: "A look at how you can write integration tests with the new ASP.Net Katana project web applications when they are behind an authentication layer."
 ---
 
 Recently I got to work on a project where we were building an ASP.Net WebAPI project for the client. One of the requirements of this project was that the API which we produced was authenticated, basically everything exposed had to be authenticated, and because it was a brand new project we decided to go down the path of WebAPI 2.0 and use the new Katana/OWIN system along with OAuth for the authentication.

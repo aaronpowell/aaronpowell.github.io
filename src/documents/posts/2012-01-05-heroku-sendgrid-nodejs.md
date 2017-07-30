@@ -1,15 +1,16 @@
---- cson
-title: "Heroku, SendGrid and NodeJS"
-metaTitle: "Heroku, SendGrid and NodeJS"
-description: "A quick guide to sending emails from nodejs on Heroku using SendGrid"
-revised: "2012-01-05"
-date: "2012-01-05"
-tags: ["nodejs","heroku"]
-migrated: "true"
-urls: ["/nodejs/heroku-sendgrid-nodejs"]
-summary: """
-
-"""
+---
+  title: "Heroku, SendGrid and NodeJS"
+  metaTitle: "Heroku, SendGrid and NodeJS"
+  description: "A quick guide to sending emails from nodejs on Heroku using SendGrid"
+  revised: "2012-01-05"
+  date: "2012-01-05"
+  tags: 
+    - "nodejs"
+    - "heroku"
+  migrated: "true"
+  urls: 
+    - "/nodejs/heroku-sendgrid-nodejs"
+  summary: ""
 ---
 Last night I launched the registration site for [Stats It][1], and Umbraco 5 add-on I'm working on and I wanted to get the site out quickly and well... cheaply so I decided that I'd just do a 1 page site in NodeJS.
 

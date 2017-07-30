@@ -1,9 +1,10 @@
---- cson
-title: "Authentication on React components"
-date: '2015-01-16'
-tags: ['react', 'security']
-description: """Here's an approach on how to create React components that have role-based security on them.
-"""
+---
+  title: "Authentication on React components"
+  date: "2015-01-16"
+  tags: 
+    - "react"
+    - "security"
+  description: "Here's an approach on how to create React components that have role-based security on them."
 ---
 
 When building a Web Application, or any application at all, it's often required that you hide/show functionality depending on the permissions which the logged user has associated with them. The Web Application I'm currently working on has this requirement, only users who are in the administrator group will be able to access the administration section of the website.

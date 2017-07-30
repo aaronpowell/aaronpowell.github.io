@@ -1,15 +1,16 @@
---- cson
-title: "Thoughts on TypeScript"
-metaTitle: "Thoughts on TypeScript"
-description: "Some of my impressions from trying to implement something in TypeScript"
-revised: "2013-01-07"
-date: "2013-01-07"
-tags: ["javascript","typescript"]
-migrated: "true"
-urls: ["/javascript/thoughts-on-typescript"]
-summary: """
-
-"""
+---
+  title: "Thoughts on TypeScript"
+  metaTitle: "Thoughts on TypeScript"
+  description: "Some of my impressions from trying to implement something in TypeScript"
+  revised: "2013-01-07"
+  date: "2013-01-07"
+  tags: 
+    - "javascript"
+    - "typescript"
+  migrated: "true"
+  urls: 
+    - "/javascript/thoughts-on-typescript"
+  summary: ""
 ---
 When [TypeScript](http://typescriptlang.org) was announced I was pretty skeptical of it. I've been doing JavaScript development for a while now, I know many of the ins and outs of JavaScript development and I've never seen any problem with the syntax or the lack of type system.
 

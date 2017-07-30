@@ -1,9 +1,11 @@
---- cson
-title: "Implementing security in React with react-router"
-date: '2015-06-08'
-tags: ['react', 'react-router', 'security']
-description: """A look at how to page-based security with React and react-router.
-"""
+---
+  title: "Implementing security in React with react-router"
+  date: "2015-06-08"
+  tags: 
+    - "react"
+    - "react-router"
+    - "security"
+  description: "A look at how to page-based security with React and react-router."
 ---
 
 In the past I've talked about how to do [simple security with React](/posts/2015-01-17-evolving-authentication-on-react-components.html) but the focus has been on how can you conditionally include pieces on a page depending on what the user is allowed to do. Today I want to take this a step further and look at how you would do page-to-page security in a SPA using React. For this I'm going to be using the excellent [react-router](https://github.com/rackt/react-router) navigation framework.

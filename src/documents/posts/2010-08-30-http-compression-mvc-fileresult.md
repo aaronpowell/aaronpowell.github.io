@@ -1,15 +1,17 @@
---- cson
-title: "Using HttpCompression libraries and ASP.NET MVC FileResult"
-metaTitle: "Using HttpCompression libraries and ASP.NET MVC FileResult"
-description: "An interesting quirk I found from ClientDe"
-revised: "2010-09-11"
-date: "2010-08-30"
-tags: ["asp.net-mvc","clientdependency","umbraco"]
-migrated: "true"
-urls: ["/http-compression-mvc-fileresult"]
-summary: """
-
-"""
+---
+  title: "Using HttpCompression libraries and ASP.NET MVC FileResult"
+  metaTitle: "Using HttpCompression libraries and ASP.NET MVC FileResult"
+  description: "An interesting quirk I found from ClientDe"
+  revised: "2010-09-11"
+  date: "2010-08-30"
+  tags: 
+    - "asp.net-mvc"
+    - "clientdependency"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/http-compression-mvc-fileresult"
+  summary: ""
 ---
 While working on some improvements around the way the styles are handled on my blog (and so they don't get trashed whenever I update the code with that of the main repository) I decided that I would use [ClientDependency][1] to handle this.
 

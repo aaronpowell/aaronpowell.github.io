@@ -1,15 +1,16 @@
---- cson
-title: "DDD Melbourne &amp; Umbraco"
-metaTitle: "DDD Melbourne &amp; Umbraco"
-description: "DDD Melbourne is on during May and I'll be there to speak about Umbraco"
-revised: "2010-05-26"
-date: "2010-04-22"
-tags: ["umbraco","dddmelbourne"]
-migrated: "true"
-urls: ["/dddmelbourne-umbraco"]
-summary: """
-
-"""
+---
+  title: "DDD Melbourne &amp; Umbraco"
+  metaTitle: "DDD Melbourne &amp; Umbraco"
+  description: "DDD Melbourne is on during May and I'll be there to speak about Umbraco"
+  revised: "2010-05-26"
+  date: "2010-04-22"
+  tags: 
+    - "umbraco"
+    - "dddmelbourne"
+  migrated: "true"
+  urls: 
+    - "/dddmelbourne-umbraco"
+  summary: ""
 ---
 A few weeks ago I was noticing a lot of tweets from the people I follow about an upcoming event in Melbourne called [Developer Developer Developer][1]. Interested I delved into it and found that I really liked what they had to offer. It's a free conference on the Microsoft stack which is community driven, meaning that anyone can propose a topic and the community would vote for what they wanted to see.
 

@@ -1,16 +1,17 @@
---- cson
-title: "ASP.NET WebForms Model-View-Presenter Contrib Project"
-metaTitle: "WebForms MVP Contrib"
-description: "An overview of WebForms MVP Contrib project"
-revised: "2010-05-30"
-date: "2010-04-12"
-tags: ["asp.net","webforms-mvp","webforms-mvp-contrib"]
-migrated: "true"
-urls: ["/webforms-mvp-contrib"]
-summary: """
-<a href=\"http://webformsmvp.com\" title=\"WebForms MVP\">ASP.NET WebForms MVP</a><br />
-<a href=\"http://webformsmvpcontrib.codeplex.com\" title=\"WebForms MVP Contrib\">ASP.NET WebForms MVP Contrib</a>
-"""
+---
+  title: "ASP.NET WebForms Model-View-Presenter Contrib Project"
+  metaTitle: "WebForms MVP Contrib"
+  description: "An overview of WebForms MVP Contrib project"
+  revised: "2010-05-30"
+  date: "2010-04-12"
+  tags: 
+    - "asp.net"
+    - "webforms-mvp"
+    - "webforms-mvp-contrib"
+  migrated: "true"
+  urls: 
+    - "/webforms-mvp-contrib"
+  summary: "<a href=\"http://webformsmvp.com\" title=\"WebForms MVP\">ASP.NET WebForms MVP</a><br />\n<a href=\"http://webformsmvpcontrib.codeplex.com\" title=\"WebForms MVP Contrib\">ASP.NET WebForms MVP Contrib</a>"
 ---
 ## Overview ##
 

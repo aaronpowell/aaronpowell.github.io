@@ -1,15 +1,17 @@
---- cson
-title: "Creating a location service with F# and Twitter"
-metaTitle: "Creating a location service with F# and Twitter"
-description: "Using Twitter to stalk someone has never been so easy!"
-revised: "2010-06-16"
-date: "2010-06-16"
-tags: ["f#","twitter","geo-location"]
-migrated: "true"
-urls: ["/location-service-with-fsharp-and-twitter"]
-summary: """
-
-"""
+---
+  title: "Creating a location service with F# and Twitter"
+  metaTitle: "Creating a location service with F# and Twitter"
+  description: "Using Twitter to stalk someone has never been so easy!"
+  revised: "2010-06-16"
+  date: "2010-06-16"
+  tags: 
+    - "f#"
+    - "twitter"
+    - "geo-location"
+  migrated: "true"
+  urls: 
+    - "/location-service-with-fsharp-and-twitter"
+  summary: ""
 ---
 A while ago [Tatham Oddie][1] sent me a small app he'd built which allowed you to find recent locations which he had been at, data which is scraped via twitter (you can see it [here][2]). It's rather a nifty little thing and it's done with approximately 50 lines of ruby (although I must point out that he is using some external libraries which do mean that he's got a lot more code, just not all his :P).
 

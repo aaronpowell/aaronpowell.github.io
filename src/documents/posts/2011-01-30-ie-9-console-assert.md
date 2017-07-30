@@ -1,15 +1,17 @@
---- cson
-title: "Tweaking console.assert in IE9"
-metaTitle: "Tweaking console.assert in IE9"
-description: "A small tweak to console.assert in IE9"
-revised: "2011-02-25"
-date: "2011-01-30"
-tags: ["ie9","javascript","web"]
-migrated: "true"
-urls: ["/ie-9-console-assert"]
-summary: """
-
-"""
+---
+  title: "Tweaking console.assert in IE9"
+  metaTitle: "Tweaking console.assert in IE9"
+  description: "A small tweak to console.assert in IE9"
+  revised: "2011-02-25"
+  date: "2011-01-30"
+  tags: 
+    - "ie9"
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/ie-9-console-assert"
+  summary: ""
 ---
 Today while writing some JavaScript I was using the `console.assert` method to work out the state of things at different points in time.
 

@@ -1,15 +1,18 @@
---- cson
-title: "LINQ to XML to... Excel?"
-metaTitle: "LINQ to XML to... Excel?"
-description: "Easily generating Excel documents using LINQ to XML"
-revised: "2010-04-08"
-date: "2010-04-08"
-tags: ["linq","linq-to-xml","excel","c#"]
-migrated: "true"
-urls: ["/linq-to-xml-to-excel"]
-summary: """
-
-"""
+---
+  title: "LINQ to XML to... Excel?"
+  metaTitle: "LINQ to XML to... Excel?"
+  description: "Easily generating Excel documents using LINQ to XML"
+  revised: "2010-04-08"
+  date: "2010-04-08"
+  tags: 
+    - "linq"
+    - "linq-to-xml"
+    - "excel"
+    - "c#"
+  migrated: "true"
+  urls: 
+    - "/linq-to-xml-to-excel"
+  summary: ""
 ---
 The other day one of the guys I work with was trying to work out the best way to generate an Excel document from .NET as the client had some wierd requirements around how the numerical data needed to be formatted (4 decimal places, but Excel treats a CSV to only show 2).
 

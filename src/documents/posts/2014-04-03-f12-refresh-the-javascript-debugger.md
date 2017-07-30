@@ -1,9 +1,12 @@
---- cson
-title: "F12 Refresh - The JavaScript Debugger"
-date: '2014-04-03'
-tags: ['javascript', 'debugging', 'f12', 'internet-explorer']
-description: """A look at the JavaScript console improvements in the F12 tooling refresh
-"""
+---
+  title: "F12 Refresh - The JavaScript Debugger"
+  date: "2014-04-03"
+  tags: 
+    - "javascript"
+    - "debugging"
+    - "f12"
+    - "internet-explorer"
+  description: "A look at the JavaScript console improvements in the F12 tooling refresh"
 ---
 
 One of the new features in the F12 refresh is some improvements to the JavaScript debugger so let's have a look at those updates.

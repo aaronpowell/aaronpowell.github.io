@@ -1,15 +1,16 @@
---- cson
-title: "OWIN series conclusion"
-metaTitle: "OWIN series conclusion"
-description: "Wrapping up the OWIN series"
-revised: "2012-04-10"
-date: "2012-04-10"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/owin-conclusion"]
-summary: """
-
-"""
+---
+  title: "OWIN series conclusion"
+  metaTitle: "OWIN series conclusion"
+  description: "Wrapping up the OWIN series"
+  revised: "2012-04-10"
+  date: "2012-04-10"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/owin-conclusion"
+  summary: ""
 ---
 Over the last few weeks I've done a small series of blog posts looking at the [Open Web Interface for .NET, aka OWIN](http://owin.org/).
 

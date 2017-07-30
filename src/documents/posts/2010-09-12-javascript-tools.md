@@ -1,15 +1,15 @@
---- cson
-title: "JavaScript Tools"
-metaTitle: "JavaScript Tools"
-description: "The home of JavaScript tools I have produced"
-revised: "2011-01-05"
-date: "2010-09-12"
-tags: ["javascript"]
-migrated: "true"
-urls: ["/javascript-tools"]
-summary: """
-
-"""
+---
+  title: "JavaScript Tools"
+  metaTitle: "JavaScript Tools"
+  description: "The home of JavaScript tools I have produced"
+  revised: "2011-01-05"
+  date: "2010-09-12"
+  tags: 
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript-tools"
+  summary: ""
 ---
 ## Overview
 

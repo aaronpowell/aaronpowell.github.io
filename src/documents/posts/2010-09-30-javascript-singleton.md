@@ -1,15 +1,16 @@
---- cson
-title: "JavaScript functions that rewrite themselves for a Singleton pattern"
-metaTitle: "JavaScript functions that rewrite themselves for a Singleton"
-description: "Time for more crazy JavaScript, functions that can rewrite themselves!"
-revised: "2010-10-01"
-date: "2010-09-30"
-tags: ["javascript","web"]
-migrated: "true"
-urls: ["/javascript-singleton"]
-summary: """
-
-"""
+---
+  title: "JavaScript functions that rewrite themselves for a Singleton pattern"
+  metaTitle: "JavaScript functions that rewrite themselves for a Singleton"
+  description: "Time for more crazy JavaScript, functions that can rewrite themselves!"
+  revised: "2010-10-01"
+  date: "2010-09-30"
+  tags: 
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/javascript-singleton"
+  summary: ""
 ---
 Recently I was building a JavaScript application which was quite complex and involved a bit of server interaction with some AJAX requests. The AJAX was just doing some one-time data loading, and the reason I was using AJAX was to lazy-load some of the information on the page.
 

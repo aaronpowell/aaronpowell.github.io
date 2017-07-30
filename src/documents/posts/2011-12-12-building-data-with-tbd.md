@@ -1,15 +1,16 @@
---- cson
-title: "Building data with tbd"
-metaTitle: "Building data with tbd"
-description: "An introduction to tbd, a data generator for JavaScript"
-revised: "2011-12-13"
-date: "2011-12-12"
-tags: ["javascript","nodejs"]
-migrated: "true"
-urls: ["/javascript/building-data-with-tbd"]
-summary: """
-
-"""
+---
+  title: "Building data with tbd"
+  metaTitle: "Building data with tbd"
+  description: "An introduction to tbd, a data generator for JavaScript"
+  revised: "2011-12-13"
+  date: "2011-12-12"
+  tags: 
+    - "javascript"
+    - "nodejs"
+  migrated: "true"
+  urls: 
+    - "/javascript/building-data-with-tbd"
+  summary: ""
 ---
 When building a UI that is driven by JavaScript one of the most tedious tasks is ensuring that you have data which you can populate into the UI to develop against. If you're like me you probably prefer to do the UI component before the server component. Alternatively you could be working in a team where someone else is responsible for developing the server component at the same time as you're developing the UI. Which ever the case is you'll find yourself in a situation where you don't have the data to build out your UI.
 

@@ -1,15 +1,18 @@
---- cson
-title: "Working with dates and LINQ to SQL"
-metaTitle: "Working with dates and LINQ to SQL"
-description: "DateTime.MinValue doesn't match the SQL server minimum date. So how do you deal with it using LINQ to SQL?"
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: ["linq-to-sql","c#","datetime","sql"]
-migrated: "true"
-urls: ["/working-with-dates-and-linq-to-sql"]
-summary: """
-
-"""
+---
+  title: "Working with dates and LINQ to SQL"
+  metaTitle: "Working with dates and LINQ to SQL"
+  description: "DateTime.MinValue doesn't match the SQL server minimum date. So how do you deal with it using LINQ to SQL?"
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - "linq-to-sql"
+    - "c#"
+    - "datetime"
+    - "sql"
+  migrated: "true"
+  urls: 
+    - "/working-with-dates-and-linq-to-sql"
+  summary: ""
 ---
 Something I've heard developers complain about on numerous occasion is that DateTime comparisons between SQL and .NET is a real pain. Often you need to do a comparison of the date against either a Min or Max value.
 

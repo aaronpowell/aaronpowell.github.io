@@ -1,15 +1,15 @@
---- cson
-title: "2010, a year in review"
-metaTitle: "2010, a year in review"
-description: "A look back at what was 2010"
-revised: "2011-01-05"
-date: "2010-12-24"
-tags: ["random"]
-migrated: "true"
-urls: ["/2010-a-year-in-review"]
-summary: """
-
-"""
+---
+  title: "2010, a year in review"
+  metaTitle: "2010, a year in review"
+  description: "A look back at what was 2010"
+  revised: "2011-01-05"
+  date: "2010-12-24"
+  tags: 
+    - "random"
+  migrated: "true"
+  urls: 
+    - "/2010-a-year-in-review"
+  summary: ""
 ---
 Well it's about that time of the year, the time when you look back at the year that was... and what a year 2010 has been.
 

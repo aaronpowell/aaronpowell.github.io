@@ -1,9 +1,10 @@
---- cson
-title: "Cleaning up callbacks with yield"
-date: '2014-01-18'
-tags: ['javascript', 'es6']
-description: """We'll continue our exploration into the new `yield` and have a look at how it can be used to avoid the so-called callback hell which can plague JavaScript applications.
-"""
+---
+  title: "Cleaning up callbacks with yield"
+  date: "2014-01-18"
+  tags: 
+    - "javascript"
+    - "es6"
+  description: "We'll continue our exploration into the new `yield` and have a look at how it can be used to avoid the so-called callback hell which can plague JavaScript applications."
 ---
 
 In my [last post](/posts/2014-01-13-functions-that-yield-mutliple-times.html) we took a journey on how to make a function execute in a delayed fashion by using the new `yield` keyword coming in ES6. But we were still working with what was essentially a synchronous code path, we just used `yield` to halt its execution. By the end of the post we used `setTimeout` to buffer our execution time, making it asynchronous in its execution.

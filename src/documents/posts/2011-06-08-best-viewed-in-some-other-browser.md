@@ -1,15 +1,16 @@
---- cson
-title: "This post is best viewed in some other browser"
-metaTitle: "This post is best viewed in some other browser"
-description: ""
-revised: "2011-06-08"
-date: "2011-06-08"
-tags: ["html5","opinionated"]
-migrated: "true"
-urls: ["/best-viewed-in-some-other-browser"]
-summary: """
-
-"""
+---
+  title: "This post is best viewed in some other browser"
+  metaTitle: "This post is best viewed in some other browser"
+  description: ""
+  revised: "2011-06-08"
+  date: "2011-06-08"
+  tags: 
+    - "html5"
+    - "opinionated"
+  migrated: "true"
+  urls: 
+    - "/best-viewed-in-some-other-browser"
+  summary: ""
 ---
 Does everyone remember the good old days of when websites had the introduction
 

@@ -1,11 +1,9 @@
---- cson
-title: 'Array-like objects'
-date: '2013-07-22'
-tags: ['javascript']
-description: """Just because it looks like a duck, walks like a duck, quacks like a duck doesn't mean it's a duck. There's dangers with making assumptions of your JavaScript objects based on their surface area.
-
-That said, a lot of power can be gleamed by these seemingly innocent assumptions.
-"""
+---
+  title: "Array-like objects"
+  date: "2013-07-22"
+  tags: 
+    - "javascript"
+  description: "Just because it looks like a duck, walks like a duck, quacks like a duck doesn't mean it's a duck. There's dangers with making assumptions of your JavaScript objects based on their surface area.\n\nThat said, a lot of power can be gleamed by these seemingly innocent assumptions."
 ---
 
 You've possibly head the saying

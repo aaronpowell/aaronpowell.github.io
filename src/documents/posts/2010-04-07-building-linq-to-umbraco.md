@@ -1,15 +1,17 @@
---- cson
-title: "Building LINQ to Umbraco"
-metaTitle: "building-linq-to-umbraco"
-description: "Ever wondered how LINQ to Umbraco was build? Well look no further"
-revised: "2010-08-27"
-date: "2010-04-07"
-tags: ["umbraco","linq","linq-to-umbraco"]
-migrated: "true"
-urls: ["/building-linq-to-umbraco"]
-summary: """
-
-"""
+---
+  title: "Building LINQ to Umbraco"
+  metaTitle: "building-linq-to-umbraco"
+  description: "Ever wondered how LINQ to Umbraco was build? Well look no further"
+  revised: "2010-08-27"
+  date: "2010-04-07"
+  tags: 
+    - "umbraco"
+    - "linq"
+    - "linq-to-umbraco"
+  migrated: "true"
+  urls: 
+    - "/building-linq-to-umbraco"
+  summary: ""
 ---
 # In the beginning #
 

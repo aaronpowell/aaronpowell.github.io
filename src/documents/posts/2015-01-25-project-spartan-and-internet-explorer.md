@@ -1,9 +1,9 @@
---- cson
-title: "Microsoft's Project Spartan and speculating Internet Explorer's future"
-date: '2015-01-25'
-tags: ['internet-explorer']
-description: """On the 21st of January Microsoft showed off their new browser code named Project Spartan, so let's have a look at what it's about.
-"""
+---
+  title: "Microsoft's Project Spartan and speculating Internet Explorer's future"
+  date: "2015-01-25"
+  tags: 
+    - "internet-explorer"
+  description: "On the 21st of January Microsoft showed off their new browser code named Project Spartan, so let's have a look at what it's about."
 ---
 
 _Before we dive in, I **don't** work for Microsoft but I am an Internet Explorer MVP and a member of the IE userAgent's, so what I'm discussing here is based on what is publicly available and my own speculations._

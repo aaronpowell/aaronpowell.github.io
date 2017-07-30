@@ -1,15 +1,17 @@
---- cson
-title: "Why I don't like KnockoutJS"
-metaTitle: "Why I don't like KnockoutJS"
-description: ""
-revised: "2011-08-09"
-date: "2011-08-08"
-tags: ["javascript","knockoutjs","rant"]
-migrated: "true"
-urls: ["/javascript/why-i-don-t-like-knockoutjs"]
-summary: """
-
-"""
+---
+  title: "Why I don't like KnockoutJS"
+  metaTitle: "Why I don't like KnockoutJS"
+  description: ""
+  revised: "2011-08-09"
+  date: "2011-08-08"
+  tags: 
+    - "javascript"
+    - "knockoutjs"
+    - "rant"
+  migrated: "true"
+  urls: 
+    - "/javascript/why-i-don-t-like-knockoutjs"
+  summary: ""
 ---
 A few times I've ruffled a few features by making the statement that I am not a fan of [KnockoutJS][1].
 

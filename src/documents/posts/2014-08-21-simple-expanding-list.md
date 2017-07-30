@@ -1,9 +1,9 @@
---- cson
-title: "A simple expanding list in CSS only"
-date: '2014-08-21'
-tags: ['css']
-description: """Here's a simple approach to creating an expanding list with CSS.
-"""
+---
+  title: "A simple expanding list in CSS only"
+  date: "2014-08-21"
+  tags: 
+    - "css"
+  description: "Here's a simple approach to creating an expanding list with CSS."
 ---
 
 Recently I was working on a site that needed to have an expanding list of items, the list is quite long but we wanted part of it hidden until the user clicks an option to expand it fully.

@@ -1,15 +1,15 @@
---- cson
-title: "2011, a year in review"
-metaTitle: "2011, a year in review"
-description: ""
-revised: "2011-12-22"
-date: "2011-12-22"
-tags: ["random"]
-migrated: "true"
-urls: ["/2011-a-year-in-review"]
-summary: """
-
-"""
+---
+  title: "2011, a year in review"
+  metaTitle: "2011, a year in review"
+  description: ""
+  revised: "2011-12-22"
+  date: "2011-12-22"
+  tags: 
+    - "random"
+  migrated: "true"
+  urls: 
+    - "/2011-a-year-in-review"
+  summary: ""
 ---
 As the year wraps up it brings time for the atypical year in review post!
 

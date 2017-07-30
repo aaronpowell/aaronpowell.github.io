@@ -1,10 +1,9 @@
---- cson
-title: 'Solving DocPad\'s excessive memory usage'
-date: '2013-06-18'
-description: """After moving my site to DocPad I found a problem, DocPad is a massive memory hog! The result of this is that I can't even run it on a single Heroku web dyno, a static HTML site can't run on a single web dyno!
-
-So let's have a look at how I went and solved the problem"""
-tags: ['docpad']
+---
+  title: "Solving DocPad's excessive memory usage"
+  date: "2013-06-18"
+  description: "After moving my site to DocPad I found a problem, DocPad is a massive memory hog! The result of this is that I can't even run it on a single Heroku web dyno, a static HTML site can't run on a single web dyno!\n\nSo let's have a look at how I went and solved the problem"
+  tags: 
+    - "docpad"
 ---
 
 Since I decide to [move my site from FunnelWeb to DocPad](/posts/2013-06-10-new-blog-less-funnelweb.html) I also decided to deploy to [Heroku](http://www.heroku.com) since I like them as a host. So I [built my site](https://github.com/aaronpowell/aaronpowell.github.io), [got everything into Git](/posts/2013-06-11-funnelweb-to-git.html) and then I did a `git push heroku master`.

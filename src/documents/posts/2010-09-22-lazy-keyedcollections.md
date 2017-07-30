@@ -1,15 +1,16 @@
---- cson
-title: "Using Lazy<T> with KeyedCollection"
-metaTitle: "Using Lazy<T> with KeyedCollection"
-description: "How to create and return KeyedCollection which use Lazy<T> under the hood"
-revised: "2010-09-22"
-date: "2010-09-22"
-tags: [".net","collections"]
-migrated: "true"
-urls: ["/lazy-keyedcollections"]
-summary: """
-
-"""
+---
+  title: "Using Lazy<T> with KeyedCollection"
+  metaTitle: "Using Lazy<T> with KeyedCollection"
+  description: "How to create and return KeyedCollection which use Lazy<T> under the hood"
+  revised: "2010-09-22"
+  date: "2010-09-22"
+  tags: 
+    - ".net"
+    - "collections"
+  migrated: "true"
+  urls: 
+    - "/lazy-keyedcollections"
+  summary: ""
 ---
 For a project which I'm currently working on I've got a few custom collections which I need to return from various methods on a data repository. There's a bit of heavy lifting that is done in each of the repository methods so I wanted to have a way which each of them could be lazy loading the items into the collection. This would also mean that if you're only wanting a subset of the collection you don't create all the objects.
 

@@ -1,15 +1,15 @@
---- cson
-title: "Storing credentials in Windows 8"
-metaTitle: "Storing credentials in Windows 8"
-description: ""
-revised: "2012-06-04"
-date: "2012-06-04"
-tags: ["windows8"]
-migrated: "true"
-urls: ["/storing-credentials-windows-8"]
-summary: """
-
-"""
+---
+  title: "Storing credentials in Windows 8"
+  metaTitle: "Storing credentials in Windows 8"
+  description: ""
+  revised: "2012-06-04"
+  date: "2012-06-04"
+  tags: 
+    - "windows8"
+  migrated: "true"
+  urls: 
+    - "/storing-credentials-windows-8"
+  summary: ""
 ---
 So you're building a Windows 8 application and you want to authenticate against an external service. For this it's likely that you're going to want to store a username and password for the user so that you can query off to the external service without bugging them constantly.
 

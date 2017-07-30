@@ -1,15 +1,19 @@
---- cson
-title: "A look at browser storage options"
-metaTitle: "A look at browser storage options"
-description: "Looking at localStorage, sessionStorage and the like"
-revised: "2011-02-26"
-date: "2011-02-25"
-tags: ["javascript","ie9","html5","web","web-dev"]
-migrated: "true"
-urls: ["/web-dev/in-browser-storage"]
-summary: """
-
-"""
+---
+  title: "A look at browser storage options"
+  metaTitle: "A look at browser storage options"
+  description: "Looking at localStorage, sessionStorage and the like"
+  revised: "2011-02-26"
+  date: "2011-02-25"
+  tags: 
+    - "javascript"
+    - "ie9"
+    - "html5"
+    - "web"
+    - "web-dev"
+  migrated: "true"
+  urls: 
+    - "/web-dev/in-browser-storage"
+  summary: ""
 ---
 Recently I created a little website, [Doin' Nothin'][1] which has a mostly JavaScript application. This is all well and good, means you don't have any worries about submitting server data (unless you are registered and you want to save sessions). But it has a problem, because it's all JavaScript I kept having a problem, I'd forget to log in before starting my session, meaning that I couldn't save it as navigating to the login page would mean that my session was lost, since it only lived in the memory of the page. Another feature that I was wanting to have was support for leaving the site and coming back to resume a session.
 

@@ -1,15 +1,16 @@
---- cson
-title: "Stubbing AJAX responses with tbd and AmpliyJS"
-metaTitle: "Stubbing AJAX responses with tbd and AmpliyJS"
-description: "Working with tbd to build your requests without backend services"
-revised: "2011-12-29"
-date: "2011-12-29"
-tags: ["javascript","amplifyjs"]
-migrated: "true"
-urls: ["/javascript/stubbing-ajax-responses-with-tbd"]
-summary: """
-
-"""
+---
+  title: "Stubbing AJAX responses with tbd and AmpliyJS"
+  metaTitle: "Stubbing AJAX responses with tbd and AmpliyJS"
+  description: "Working with tbd to build your requests without backend services"
+  revised: "2011-12-29"
+  date: "2011-12-29"
+  tags: 
+    - "javascript"
+    - "amplifyjs"
+  migrated: "true"
+  urls: 
+    - "/javascript/stubbing-ajax-responses-with-tbd"
+  summary: ""
 ---
 A project which I'm working on at the moment I'm using [AmplifyJS][1] to simplify my front-end routing through to my underlying data service calls. The problem is that I haven't got the backend services ready yet (there's some outstanding blockers in the API I'm working against) so I'm focusing my work on the front end.
 

@@ -1,9 +1,9 @@
---- cson
-title: "A consultants approach to painting"
-date: '2015-01-01'
-tags: ['random']
-description: """I recently did some painting of our house and here's how to approach it like an IT consultant.
-"""
+---
+  title: "A consultants approach to painting"
+  date: "2015-01-01"
+  tags: 
+    - "random"
+  description: "I recently did some painting of our house and here's how to approach it like an IT consultant."
 ---
 
 A few months ago my PO, aka wife, pitched a new project, painting our lounge room. She decided to go to market and find the right people to do the project. Since it's my home too I decided to respond to the RFP as c'mon, how hard can painting a room really be?

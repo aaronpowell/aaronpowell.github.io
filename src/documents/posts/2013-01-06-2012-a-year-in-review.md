@@ -1,15 +1,15 @@
---- cson
-title: "2012, a year in review"
-metaTitle: "2012, a year in review"
-description: "Time for yet another year in review"
-revised: "2013-01-06"
-date: "2013-01-06"
-tags: ["random"]
-migrated: "true"
-urls: ["/2012-a-year-in-review"]
-summary: """
-
-"""
+---
+  title: "2012, a year in review"
+  metaTitle: "2012, a year in review"
+  description: "Time for yet another year in review"
+  revised: "2013-01-06"
+  date: "2013-01-06"
+  tags: 
+    - "random"
+  migrated: "true"
+  urls: 
+    - "/2012-a-year-in-review"
+  summary: ""
 ---
 It's about that time again but I'm a bit delayed in getting it done, it's time for a year in review!
 

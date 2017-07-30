@@ -1,15 +1,16 @@
---- cson
-title: "Mercurial 101 as an Umbraco developer"
-metaTitle: "Mercurial 101 as an Umbraco developer"
-description: "A Mercurial primer for Umbraco developers"
-revised: "2010-12-23"
-date: "2010-12-11"
-tags: ["umbraco","mercurial"]
-migrated: "true"
-urls: ["/mercurial-101-for-umbraco-developers"]
-summary: """
-
-"""
+---
+  title: "Mercurial 101 as an Umbraco developer"
+  metaTitle: "Mercurial 101 as an Umbraco developer"
+  description: "A Mercurial primer for Umbraco developers"
+  revised: "2010-12-23"
+  date: "2010-12-11"
+  tags: 
+    - "umbraco"
+    - "mercurial"
+  migrated: "true"
+  urls: 
+    - "/mercurial-101-for-umbraco-developers"
+  summary: ""
 ---
 # Mercurial 101 as an Umbraco developer
 

@@ -1,15 +1,16 @@
---- cson
-title: "Using Razor in Umbraco 4"
-metaTitle: "Using Razor in Umbraco 4"
-description: "A quick look at how to use the Razor support which is coming with Umbraco Juno (4.6)"
-revised: "2010-12-27"
-date: "2010-12-24"
-tags: ["umbraco","razor"]
-migrated: "true"
-urls: ["/umbraco-4-and-razor"]
-summary: """
-<a href=\"http://umbraco.codeplex.com/releases/view/58026\">Umbraco 4.6 download</a>
-"""
+---
+  title: "Using Razor in Umbraco 4"
+  metaTitle: "Using Razor in Umbraco 4"
+  description: "A quick look at how to use the Razor support which is coming with Umbraco Juno (4.6)"
+  revised: "2010-12-27"
+  date: "2010-12-24"
+  tags: 
+    - "umbraco"
+    - "razor"
+  migrated: "true"
+  urls: 
+    - "/umbraco-4-and-razor"
+  summary: "<a href=\"http://umbraco.codeplex.com/releases/view/58026\">Umbraco 4.6 download</a>"
 ---
 If you've been following the development of Umbraco Juno (4.6) you'll have seen that [Niels][1] [released an add-in][2] for early Juno builds to which was for working with [Razor][3], the new syntax for ASP.Net development.
 

@@ -1,15 +1,17 @@
---- cson
-title: "I helped kill Umbraco 5"
-metaTitle: "I helped kill Umbraco 5"
-description: "Hi, my name's Aaron Powell and I was involved in killing Umbraco 5."
-revised: "2012-06-27"
-date: "2012-06-25"
-tags: ["umbraco","umbraco-5","opinionated"]
-migrated: "true"
-urls: ["/umbraco/i-helped-kill-umbraco-5"]
-summary: """
-
-"""
+---
+  title: "I helped kill Umbraco 5"
+  metaTitle: "I helped kill Umbraco 5"
+  description: "Hi, my name's Aaron Powell and I was involved in killing Umbraco 5."
+  revised: "2012-06-27"
+  date: "2012-06-25"
+  tags: 
+    - "umbraco"
+    - "umbraco-5"
+    - "opinionated"
+  migrated: "true"
+  urls: 
+    - "/umbraco/i-helped-kill-umbraco-5"
+  summary: ""
 ---
 Hi, my name's Aaron Powell and I was involved in killing Umbraco 5.
  

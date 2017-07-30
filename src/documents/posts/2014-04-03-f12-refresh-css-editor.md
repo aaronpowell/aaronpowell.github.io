@@ -1,9 +1,11 @@
---- cson
-title: "F12 Refresh - CSS editor"
-date: '2014-04-03'
-tags: ['css', 'f12', 'internet-explorer']
-description: """A look at the CSS editor improvements in the F12 tooling refresh
-"""
+---
+  title: "F12 Refresh - CSS editor"
+  date: "2014-04-03"
+  tags: 
+    - "css"
+    - "f12"
+    - "internet-explorer"
+  description: "A look at the CSS editor improvements in the F12 tooling refresh"
 ---
 
 One of the new features in the F12 refresh is some updates to the CSS editor so let's have a look at those updates.

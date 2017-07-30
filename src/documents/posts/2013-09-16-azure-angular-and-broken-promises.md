@@ -1,9 +1,11 @@
---- cson
-title: "Azure Mobile Services, AngularJS and broken promises"
-date: '2013-09-16'
-tags: ['azure-mobile-services', 'angularjs', 'promise']
-description: """A look at how to use Azure Mobile Services with AngularJS and dealing with what I believe is a broken approach to the AngularJS promise API.
-"""
+---
+  title: "Azure Mobile Services, AngularJS and broken promises"
+  date: "2013-09-16"
+  tags: 
+    - "azure-mobile-services"
+    - "angularjs"
+    - "promise"
+  description: "A look at how to use Azure Mobile Services with AngularJS and dealing with what I believe is a broken approach to the AngularJS promise API."
 ---
 
 There's no denying it that [AngularJS](http://angularjs.org/) is the hot new SPA framework these days as it offers a lot of very nice features out of the box, has a very good programming model behind it and works as advertised. So when a new project was kicking off that I was on I decided to take the opportunity to use it so I could get a feel for it. Overall my feelings have been positive with the exception of what I want to talk about here.

@@ -1,15 +1,17 @@
---- cson
-title: "Using Source Maps with TypeScript"
-metaTitle: "Using Source Maps with TypeScript"
-description: "Another quick look at what you can do with TypeScript"
-revised: "2012-10-03"
-date: "2012-10-03"
-tags: ["typescript","debugging","web"]
-migrated: "true"
-urls: ["/web/typescript-source-maps"]
-summary: """
-
-"""
+---
+  title: "Using Source Maps with TypeScript"
+  metaTitle: "Using Source Maps with TypeScript"
+  description: "Another quick look at what you can do with TypeScript"
+  revised: "2012-10-03"
+  date: "2012-10-03"
+  tags: 
+    - "typescript"
+    - "debugging"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/typescript-source-maps"
+  summary: ""
 ---
 Have you heard of [Source Maps](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/)? Source Maps are an idea that has come out of Mozilla for addressing the debugging issues that are raised by *-to-JavaScript compilers and JavaScript minifiers, the problem is that when you use these you ultimately aren't debugging what you wrote.
 

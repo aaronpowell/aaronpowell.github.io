@@ -1,15 +1,17 @@
---- cson
-title: "Flight Mode - FileSystem API"
-metaTitle: "Flight Mode - FileSystem API"
-description: ""
-revised: "2013-05-28"
-date: "2013-05-28"
-tags: ["flight-mode","offline-storage","file-system"]
-migrated: "true"
-urls: ["/flight-mode/file-system"]
-summary: """
-
-"""
+---
+  title: "Flight Mode - FileSystem API"
+  metaTitle: "Flight Mode - FileSystem API"
+  description: ""
+  revised: "2013-05-28"
+  date: "2013-05-28"
+  tags: 
+    - "flight-mode"
+    - "offline-storage"
+    - "file-system"
+  migrated: "true"
+  urls: 
+    - "/flight-mode/file-system"
+  summary: ""
 ---
 The last piece of the puzzle when looking at offline storage options is a bit of a shift from what we've been looking at so far. Generally speaking we've been looking at how to store plain data, either through key/value stores or as objects. This time we're going to look at the other kind of data you might want to store, files.
 

@@ -1,9 +1,11 @@
---- cson
-title: "Learning redux with reducks - beyond JavaScript"
-date: '2016-10-10'
-tags: ['redux', 'reducks', 'fsharp']
-description: """Exploring how redux can be used as a generic design pattern, not just a JavaScript library
-"""
+---
+  title: "Learning redux with reducks - beyond JavaScript"
+  date: "2016-10-10"
+  tags: 
+    - "redux"
+    - "reducks"
+    - "fsharp"
+  description: "Exploring how redux can be used as a generic design pattern, not just a JavaScript library"
 ---
 
 Over this series we've been looking at how we would write a library which mimics the functionality of Redux from scratch to understand how it works at the most basic of levels. What we've seen is that there's three basic components, a Store which is our central point, Actions which indicate something happening and Reducers which handle something happening.

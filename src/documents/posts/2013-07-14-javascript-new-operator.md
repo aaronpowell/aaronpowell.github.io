@@ -1,9 +1,9 @@
---- cson
-title: 'The JavaScript new operator'
-date: '2013-07-14'
-tags: ['javascript']
-description: """Time to revisit something that was overlooked in the last post, the `new` operator in JavaScript and what it does.
-"""
+---
+  title: "The JavaScript new operator"
+  date: "2013-07-14"
+  tags: 
+    - "javascript"
+  description: "Time to revisit something that was overlooked in the last post, the `new` operator in JavaScript and what it does."
 ---
 
 In the [last post](/posts/2013-07-10-implementing-indexers-in-javascript.html) I was changing some C# code to JavaScript but there was one part that I just _dropped_ and didn't explain why, and that was the use of the new operator.

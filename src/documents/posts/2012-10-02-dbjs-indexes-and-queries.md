@@ -1,15 +1,17 @@
---- cson
-title: "Indexes and Queries in db.js"
-metaTitle: "Indexes and Queries in db.js"
-description: "An overview of how to create indexes and execute powerful queries against them using db.js"
-revised: "2012-10-02"
-date: "2012-10-02"
-tags: ["indexeddb","web","winjs"]
-migrated: "true"
-urls: ["/web/dbjs-indexes-and-queries"]
-summary: """
-
-"""
+---
+  title: "Indexes and Queries in db.js"
+  metaTitle: "Indexes and Queries in db.js"
+  description: "An overview of how to create indexes and execute powerful queries against them using db.js"
+  revised: "2012-10-02"
+  date: "2012-10-02"
+  tags: 
+    - "indexeddb"
+    - "web"
+    - "winjs"
+  migrated: "true"
+  urls: 
+    - "/web/dbjs-indexes-and-queries"
+  summary: ""
 ---
 In my [last post](/web/hello-dbjs) I introduced a new library I've been working on for [IndexedDB](http://www.w3.org/TR/IndexedDB/) called [db.js](https://github.com/aaronpowell/db.js).
 

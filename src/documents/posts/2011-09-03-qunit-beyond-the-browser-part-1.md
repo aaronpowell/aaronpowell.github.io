@@ -1,15 +1,17 @@
---- cson
-title: "Going beyond the browser with QUnit - Part 1"
-metaTitle: "Going beyond the browser with QUnit - Part 1"
-description: "Taking your QUnit tests out of the browser to use your tests with Node.js"
-revised: "2011-09-04"
-date: "2011-09-03"
-tags: ["javascript","nodejs","qunit"]
-migrated: "true"
-urls: ["/javascript/qunit-beyond-the-browser-part-1"]
-summary: """
-
-"""
+---
+  title: "Going beyond the browser with QUnit - Part 1"
+  metaTitle: "Going beyond the browser with QUnit - Part 1"
+  description: "Taking your QUnit tests out of the browser to use your tests with Node.js"
+  revised: "2011-09-04"
+  date: "2011-09-03"
+  tags: 
+    - "javascript"
+    - "nodejs"
+    - "qunit"
+  migrated: "true"
+  urls: 
+    - "/javascript/qunit-beyond-the-browser-part-1"
+  summary: ""
 ---
 When it comes to unit testing my JavaScript my preferred framework is [QUnit][1]. If you're not familiar with QUnit it's the test framework for [jQuery][2] so I think it's reasonably well up to the task of testing JavaScript.
 

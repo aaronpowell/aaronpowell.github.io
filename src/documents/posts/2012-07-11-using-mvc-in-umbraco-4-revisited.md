@@ -1,15 +1,16 @@
---- cson
-title: "Revisiting using ASP.NET MVC in Umbraco 4"
-metaTitle: "Revisiting using ASP.NET MVC in Umbraco 4"
-description: "An update on using ASP.NET MVC with Umbraco 4."
-revised: "2012-07-11"
-date: "2012-07-11"
-tags: ["umbraco","asp.net-mvc"]
-migrated: "true"
-urls: ["/umbraco/using-mvc-in-umbraco-4-revisited"]
-summary: """
-
-"""
+---
+  title: "Revisiting using ASP.NET MVC in Umbraco 4"
+  metaTitle: "Revisiting using ASP.NET MVC in Umbraco 4"
+  description: "An update on using ASP.NET MVC with Umbraco 4."
+  revised: "2012-07-11"
+  date: "2012-07-11"
+  tags: 
+    - "umbraco"
+    - "asp.net-mvc"
+  migrated: "true"
+  urls: 
+    - "/umbraco/using-mvc-in-umbraco-4-revisited"
+  summary: ""
 ---
 A month on I wanted to revisit my post on [using MVC with Umbraco 4][1]. I write the code and draft while driving back from the retreat so it wasn't very *deeply* investigated.
 

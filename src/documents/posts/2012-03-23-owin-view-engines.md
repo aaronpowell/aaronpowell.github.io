@@ -1,15 +1,16 @@
---- cson
-title: "OWIN and View Engines"
-metaTitle: "OWIN and View Engines"
-description: "A look at how you'd put together a View Engine for OWIN."
-revised: "2012-03-23"
-date: "2012-03-23"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/owin-view-engines"]
-summary: """
-
-"""
+---
+  title: "OWIN and View Engines"
+  metaTitle: "OWIN and View Engines"
+  description: "A look at how you'd put together a View Engine for OWIN."
+  revised: "2012-03-23"
+  date: "2012-03-23"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/owin-view-engines"
+  summary: ""
 ---
 In the [last post](http://www.aaron-powell.com/web/owin-responses) we looked at improving our responses in OWIN by adding some extensions methods to the response object and the next logical step for this is to think about HTML. While what we've brought together thus far is useful if you're creating something that is just a web API if  you want to create an actual web site you probably need to respond with some HTML.
 

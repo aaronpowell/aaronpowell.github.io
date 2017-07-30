@@ -1,15 +1,14 @@
---- cson
-title: "Training Vidoes"
-metaTitle: "training-videos"
-description: "Instructional videos to get you up and running with LINQ to Umbraco"
-revised: "2010-04-07"
-date: "2010-04-07"
-tags: []
-migrated: "true"
-urls: ["/training-videos"]
-summary: """
-
-"""
+---
+  title: "Training Vidoes"
+  metaTitle: "training-videos"
+  description: "Instructional videos to get you up and running with LINQ to Umbraco"
+  revised: "2010-04-07"
+  date: "2010-04-07"
+  tags: []
+  migrated: "true"
+  urls: 
+    - "/training-videos"
+  summary: ""
 ---
 In an effort to get everyone up to speed with LINQ to Umbraco I have put together a series of videos. This series looks at how you can use LINQ to Umbraco to create a simple blog engine.
 

@@ -1,15 +1,18 @@
---- cson
-title: "Dynamic Dictionaries with C# 4.0"
-metaTitle: "Dynamic Dictionaries with C# 4.0"
-description: "Using the C# dynamic features to make it easier to work with Dictionary objects"
-revised: "2010-07-27"
-date: "2010-06-28"
-tags: ["c#",".net","dynamic","umbraco"]
-migrated: "true"
-urls: ["/dynamic-dictionaries-with-csharp-4"]
-summary: """
-
-"""
+---
+  title: "Dynamic Dictionaries with C# 4.0"
+  metaTitle: "Dynamic Dictionaries with C# 4.0"
+  description: "Using the C# dynamic features to make it easier to work with Dictionary objects"
+  revised: "2010-07-27"
+  date: "2010-06-28"
+  tags: 
+    - "c#"
+    - ".net"
+    - "dynamic"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/dynamic-dictionaries-with-csharp-4"
+  summary: ""
 ---
 Have you ever been working with the `Dictionary<TKey, TValue>` object in .NET and just wanted to find some way in which you can do this:
 

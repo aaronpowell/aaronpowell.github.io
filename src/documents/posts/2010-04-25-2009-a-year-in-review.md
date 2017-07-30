@@ -1,15 +1,16 @@
---- cson
-title: "2009, a year in review"
-metaTitle: "2009, a year in review"
-description: ""
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: ["random","reflective"]
-migrated: "true"
-urls: ["/2009-a-year-in-review"]
-summary: """
-This post was migrated from my old website. Originally posted on 01/01/2010
-"""
+---
+  title: "2009, a year in review"
+  metaTitle: "2009, a year in review"
+  description: ""
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - "random"
+    - "reflective"
+  migrated: "true"
+  urls: 
+    - "/2009-a-year-in-review"
+  summary: "This post was migrated from my old website. Originally posted on 01/01/2010"
 ---
 So a new decade is upon us and with 2009 wrapped up it's time to look retrospectively at the year that was.
 

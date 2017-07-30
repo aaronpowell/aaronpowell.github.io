@@ -1,15 +1,15 @@
---- cson
-title: "A week with a Surface Pro"
-metaTitle: "A week with a Surface Pro"
-description: "Obligatory post about my experiences to date with a Surface Pro"
-revised: "2013-03-10"
-date: "2013-03-10"
-tags: ["random"]
-migrated: "true"
-urls: ["/random/a-week-with-a-surface-pro"]
-summary: """
-
-"""
+---
+  title: "A week with a Surface Pro"
+  metaTitle: "A week with a Surface Pro"
+  description: "Obligatory post about my experiences to date with a Surface Pro"
+  revised: "2013-03-10"
+  date: "2013-03-10"
+  tags: 
+    - "random"
+  migrated: "true"
+  urls: 
+    - "/random/a-week-with-a-surface-pro"
+  summary: ""
 ---
 So a little a week ago I got myself a Surface Pro and I decided that I'd share my experience with it thus far (because that's what you do with a new device right? :P).
 

@@ -1,15 +1,17 @@
---- cson
-title: "How to get the field name for a model property"
-metaTitle: "How to get the field name for a model property"
-description: "Ever needed to find the name that'll be generated for a property in MVC? Here's how"
-revised: "2011-01-20"
-date: "2011-01-19"
-tags: ["asp.net","mvc","web"]
-migrated: "true"
-urls: ["/mvc/find-name-from-field"]
-summary: """
-
-"""
+---
+  title: "How to get the field name for a model property"
+  metaTitle: "How to get the field name for a model property"
+  description: "Ever needed to find the name that'll be generated for a property in MVC? Here's how"
+  revised: "2011-01-20"
+  date: "2011-01-19"
+  tags: 
+    - "asp.net"
+    - "mvc"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/mvc/find-name-from-field"
+  summary: ""
 ---
 I'm working on a custom EditorTemplate for a [FunnelWeb][1] around the new tagging system that I'm working on.
 

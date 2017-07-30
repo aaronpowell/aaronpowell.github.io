@@ -1,15 +1,17 @@
---- cson
-title: "PubSub in TypeScript"
-metaTitle: "PubSub in TypeScript"
-description: "It's that time again, time for more Pub/Sub!"
-revised: "2012-10-02"
-date: "2012-10-02"
-tags: ["typescript","javascript","web"]
-migrated: "true"
-urls: ["/web/pubsub-in-typescript"]
-summary: """
-
-"""
+---
+  title: "PubSub in TypeScript"
+  metaTitle: "PubSub in TypeScript"
+  description: "It's that time again, time for more Pub/Sub!"
+  revised: "2012-10-02"
+  date: "2012-10-02"
+  tags: 
+    - "typescript"
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/pubsub-in-typescript"
+  summary: ""
 ---
 Pub/Sub is my Hello World, I've done it not [once](http://www.aaron-powell.com/client-event-pool) but [twice](http://www.aaron-powell.com/javascript-eventmanager) in JavaScript and [once](http://www.aaron-powell.com/javascript/postman) in CoffeeScript (although technically that has a 3rd version in JavaScript at the start of the post :P).
 

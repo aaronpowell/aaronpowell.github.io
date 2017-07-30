@@ -1,9 +1,9 @@
---- cson
-title: "Using bluesky in Azure Mobile Services"
-date: '2013-09-11'
-tags: ['azure-mobile-services']
-description: """A quick tip on how to use `bluesky` from Azure Mobile Services.
-"""
+---
+  title: "Using bluesky in Azure Mobile Services"
+  date: "2013-09-11"
+  tags: 
+    - "azure-mobile-services"
+  description: "A quick tip on how to use `bluesky` from Azure Mobile Services."
 ---
 
 I've been doing some work with [Azure Mobile Services](http://www.windowsazure.com/en-us/solutions/mobile/) where I'm storing data in tables and blobs. For a task I need to have a custom API which will remove some data from a table and then the blobs associated with it.

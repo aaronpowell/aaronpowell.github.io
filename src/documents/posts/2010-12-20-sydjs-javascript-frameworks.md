@@ -1,15 +1,16 @@
---- cson
-title: "SydJs talk about JavaScript Frameworks"
-metaTitle: "SydJs talk about JavaScript Frameworks"
-description: "Talk given at SydJs on building JavaScript frameworks"
-revised: "2010-12-21"
-date: "2010-12-20"
-tags: ["javascript","sydjs"]
-migrated: "true"
-urls: ["/sydjs-javascript-frameworks"]
-summary: """
-
-"""
+---
+  title: "SydJs talk about JavaScript Frameworks"
+  metaTitle: "SydJs talk about JavaScript Frameworks"
+  description: "Talk given at SydJs on building JavaScript frameworks"
+  revised: "2010-12-21"
+  date: "2010-12-20"
+  tags: 
+    - "javascript"
+    - "sydjs"
+  migrated: "true"
+  urls: 
+    - "/sydjs-javascript-frameworks"
+  summary: ""
 ---
 Recently I was invited by the lovely (? :P) people of [SydJs][1] to come down as participate in their lightning talks night. I presented on the topic of JavaScript frameworks (although to this day I'm not really sure what my session title was as [Craig Sharkie][2] introduced it as something rather random).
 

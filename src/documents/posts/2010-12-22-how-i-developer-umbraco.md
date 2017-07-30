@@ -1,15 +1,15 @@
---- cson
-title: "How I develop Umbraco"
-metaTitle: "How I develop Umbraco"
-description: "How I do my development of Umbraco web applications."
-revised: "2010-12-26"
-date: "2010-12-22"
-tags: ["umbraco"]
-migrated: "true"
-urls: ["/how-i-developer-umbraco"]
-summary: """
-
-"""
+---
+  title: "How I develop Umbraco"
+  metaTitle: "How I develop Umbraco"
+  description: "How I do my development of Umbraco web applications."
+  revised: "2010-12-26"
+  date: "2010-12-22"
+  tags: 
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/how-i-developer-umbraco"
+  summary: ""
 ---
 ## Overview
 

@@ -1,11 +1,9 @@
---- cson
-title: 'Implementing "indexers" in JavaScript'
-date: '2013-07-10'
-tags: ['javascript']
-description: """My colleague Luke Drumm challenged me to implement C# style indexers in JavaScript.
-
-So let's have a look at how you can do that, and how you can make some very interesting JavaScript objects that are self replicating. We'll build on the knowledge of using `bind` and `apply` from the last two posts.
-"""
+---
+  title: "Implementing \"indexers\" in JavaScript"
+  date: "2013-07-10"
+  tags: 
+    - "javascript"
+  description: "My colleague Luke Drumm challenged me to implement C# style indexers in JavaScript.\n\nSo let's have a look at how you can do that, and how you can make some very interesting JavaScript objects that are self replicating. We'll build on the knowledge of using `bind` and `apply` from the last two posts."
 ---
 
 [Luke](https://twitter.com/lzcd) was wanting to know how to implement this C# code as JavaScript:

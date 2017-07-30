@@ -1,15 +1,16 @@
---- cson
-title: "Testable email sending"
-metaTitle: "Testable email sending"
-description: "Creating an integration test of sending an email"
-revised: "2010-08-28"
-date: "2010-08-28"
-tags: ["c#","testing"]
-migrated: "true"
-urls: ["/testable-email-sending"]
-summary: """
-This article was migrated from my old website, originally dated 17/07/2009
-"""
+---
+  title: "Testable email sending"
+  metaTitle: "Testable email sending"
+  description: "Creating an integration test of sending an email"
+  revised: "2010-08-28"
+  date: "2010-08-28"
+  tags: 
+    - "c#"
+    - "testing"
+  migrated: "true"
+  urls: 
+    - "/testable-email-sending"
+  summary: "This article was migrated from my old website, originally dated 17/07/2009"
 ---
 Yesterday [Shannon][1] finally got with the times and learnt about the `System.Net` and how it can be used to [dump emails to your file system][2].
 

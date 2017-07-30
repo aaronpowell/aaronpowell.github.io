@@ -1,15 +1,15 @@
---- cson
-title: "JavaScript Quiz"
-metaTitle: "JavaScript Quiz"
-description: ""
-revised: "2011-07-11"
-date: "2011-07-10"
-tags: ["javascript"]
-migrated: "true"
-urls: ["/javascript/javascript-quiz"]
-summary: """
-
-"""
+---
+  title: "JavaScript Quiz"
+  metaTitle: "JavaScript Quiz"
+  description: ""
+  revised: "2011-07-11"
+  date: "2011-07-10"
+  tags: 
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/javascript/javascript-quiz"
+  summary: ""
 ---
 Today I released a little website, [http://javascriptquiz.com][1], which was inspired by [http://cssquiz.com][2].
 

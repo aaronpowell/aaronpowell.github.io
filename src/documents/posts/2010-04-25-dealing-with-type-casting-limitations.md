@@ -1,15 +1,20 @@
---- cson
-title: "Dealing with type-casting limitations"
-metaTitle: "Dealing with type-casting limitations"
-description: "Looking at a limit with type casting in .NET 3.5 and how .NET 4.0 can help solve it."
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: [".net","c#","c#-4","dynamic","type-casting","umbraco"]
-migrated: "true"
-urls: ["/dealing-with-type-casting-limitations"]
-summary: """
-
-"""
+---
+  title: "Dealing with type-casting limitations"
+  metaTitle: "Dealing with type-casting limitations"
+  description: "Looking at a limit with type casting in .NET 3.5 and how .NET 4.0 can help solve it."
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - ".net"
+    - "c#"
+    - "c#-4"
+    - "dynamic"
+    - "type-casting"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/dealing-with-type-casting-limitations"
+  summary: ""
 ---
     Well this is the first post involving the .NET 4.0 framework, woo :D.
 

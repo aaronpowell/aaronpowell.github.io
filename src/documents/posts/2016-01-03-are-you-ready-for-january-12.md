@@ -1,9 +1,9 @@
---- cson
-title: "Are you ready for January 12?"
-date: '2016-01-03'
-tags: ['internet-explorer']
-description: """Are you ready for the end of old Internet Explorer?
-"""
+---
+  title: "Are you ready for January 12?"
+  date: "2016-01-03"
+  tags: 
+    - "internet-explorer"
+  description: "Are you ready for the end of old Internet Explorer?"
 ---
 
 [On January 12 all versions of Internet Explorer prior to version 11 will reach end of life](https://www.microsoft.com/en-us/WindowsForBusiness/End-of-IE-support).

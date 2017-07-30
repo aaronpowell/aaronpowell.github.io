@@ -1,15 +1,17 @@
---- cson
-title: "Creating jQuery plugins for MS AJAX components, dynamically!"
-metaTitle: "Creating jQuery plugins for MS AJAX components, dynamically!"
-description: "Bringing jQuery and MS AJAX together"
-revised: "2009-05-05"
-date: "2009-05-05"
-tags: ["javascript","ms-ajax","jquery"]
-migrated: "true"
-urls: ["/creating-jquery-plugins-from-ms-ajax-components"]
-summary: """
-
-"""
+---
+  title: "Creating jQuery plugins for MS AJAX components, dynamically!"
+  metaTitle: "Creating jQuery plugins for MS AJAX components, dynamically!"
+  description: "Bringing jQuery and MS AJAX together"
+  revised: "2009-05-05"
+  date: "2009-05-05"
+  tags: 
+    - "javascript"
+    - "ms-ajax"
+    - "jquery"
+  migrated: "true"
+  urls: 
+    - "/creating-jquery-plugins-from-ms-ajax-components"
+  summary: ""
 ---
 [Bertrand Le Roy][1] had an interesting post entitled [Creating jQuery plug-ins from MicrosoftAjax components][2]. It's not a bad concept, but I miss read it when I first had a read, I thought it was creating all of certain types into a jQuery plug-ins.
 

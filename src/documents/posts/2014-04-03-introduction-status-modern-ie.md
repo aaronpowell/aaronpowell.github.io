@@ -1,9 +1,9 @@
---- cson
-title: "Introducing status.modern.ie"
-date: '2014-04-03'
-tags: ['internet-explorer']
-description: """Introducing a new website to help track the development status of features in Internet Explorer
-"""
+---
+  title: "Introducing status.modern.ie"
+  date: "2014-04-03"
+  tags: 
+    - "internet-explorer"
+  description: "Introducing a new website to help track the development status of features in Internet Explorer"
 ---
 
 Today there was an exciting announcement from the IE Dev relations team, the team behind [IE Dev Chat](http://twitter.com/iedevchat) and [modern.IE](http://modern.ie). At Build they announced a new website to help developers track progress of features, [status.modern.ie](http://status.modern.ie/).

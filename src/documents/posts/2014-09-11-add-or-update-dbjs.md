@@ -1,9 +1,10 @@
---- cson
-title: "Add or update with db.js"
-date: '2014-09-11'
-tags: ['db.js', 'indexeddb']
-description: """A common question with db.js is how to merge data from a remote store into the local store. When doing so you need to think about how you're handling an add vs an update statement.
-"""
+---
+  title: "Add or update with db.js"
+  date: "2014-09-11"
+  tags: 
+    - "db.js"
+    - "indexeddb"
+  description: "A common question with db.js is how to merge data from a remote store into the local store. When doing so you need to think about how you're handling an add vs an update statement."
 ---
 
 A common question with [db.js](https://github.com/aaronpowell/db.js) is how to merge data from a remote store into the local store. When doing so you need to think about how you're handling an add vs an update statement.

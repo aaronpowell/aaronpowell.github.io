@@ -1,15 +1,16 @@
---- cson
-title: "KendoUI Bootstrapper"
-metaTitle: "KendoUI Bootstrapper"
-description: ""
-revised: "2012-02-16"
-date: "2012-02-16"
-tags: ["javascript","kendoui"]
-migrated: "true"
-urls: ["/kendo-ui-bootstrapper"]
-summary: """
-
-"""
+---
+  title: "KendoUI Bootstrapper"
+  metaTitle: "KendoUI Bootstrapper"
+  description: ""
+  revised: "2012-02-16"
+  date: "2012-02-16"
+  tags: 
+    - "javascript"
+    - "kendoui"
+  migrated: "true"
+  urls: 
+    - "/kendo-ui-bootstrapper"
+  summary: ""
 ---
 For my Stats It project I'm using [KendoUI](http://kendoui.com) as my UI widget layer (and charting) as it has several more UI widgets that I'm looking for than jQuery UI offers. But there's one thing I hate having to do, and that's constantly write code like this:
 

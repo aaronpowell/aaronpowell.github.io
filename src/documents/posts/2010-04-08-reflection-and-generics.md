@@ -1,15 +1,17 @@
---- cson
-title: "Reflection And Generics"
-metaTitle: "Reflection And Generics"
-description: "Oh the pain, OH THE PAIN"
-revised: "2010-04-08"
-date: "2010-04-08"
-tags: [".net","reflection","searing-pain"]
-migrated: "true"
-urls: ["/reflection-and-generics"]
-summary: """
-
-"""
+---
+  title: "Reflection And Generics"
+  metaTitle: "Reflection And Generics"
+  description: "Oh the pain, OH THE PAIN"
+  revised: "2010-04-08"
+  date: "2010-04-08"
+  tags: 
+    - ".net"
+    - "reflection"
+    - "searing-pain"
+  migrated: "true"
+  urls: 
+    - "/reflection-and-generics"
+  summary: ""
 ---
 Or to name this another way… **Oh my god the pain**.
 

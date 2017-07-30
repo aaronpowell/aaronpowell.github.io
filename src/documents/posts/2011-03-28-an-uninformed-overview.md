@@ -1,17 +1,15 @@
---- cson
-title: "An uninformed overview of NuGet"
-metaTitle: "An uninformed overview of NuGet"
-description: ""
-revised: "2011-03-29"
-date: "2011-03-28"
-tags: ["nuget"]
-migrated: "true"
-urls: ["/nuget/an-uninformed-overview"]
-summary: """
-This post stems out of a discussion last night with Demis Bellot (<a href=\"http://twitter.com/demisbellot\">@demisbellot</a>) on twitter.
-<br />
-Keep in mind that a) I don't work on the NuGet team (or for Microsoft) and b) these are my opinions alone and possibly wrong :P. I'm just someone who's got opinions and has played around with NuGet a bit.
-"""
+---
+  title: "An uninformed overview of NuGet"
+  metaTitle: "An uninformed overview of NuGet"
+  description: ""
+  revised: "2011-03-29"
+  date: "2011-03-28"
+  tags: 
+    - "nuget"
+  migrated: "true"
+  urls: 
+    - "/nuget/an-uninformed-overview"
+  summary: "This post stems out of a discussion last night with Demis Bellot (<a href=\"http://twitter.com/demisbellot\">@demisbellot</a>) on twitter.\n<br />\nKeep in mind that a) I don't work on the NuGet team (or for Microsoft) and b) these are my opinions alone and possibly wrong :P. I'm just someone who's got opinions and has played around with NuGet a bit."
 ---
 In case you've been living under a rock for the last few months you should have heard about [NuGet][2], and if you have been here's the abridged version.
 

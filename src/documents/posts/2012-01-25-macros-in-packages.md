@@ -1,15 +1,17 @@
---- cson
-title: "Macros in packages"
-metaTitle: "Macros in packages"
-description: "Wanting to include a Macro in your v5 package, where do you start?"
-revised: "2012-01-25"
-date: "2012-01-25"
-tags: ["umbaco","umbraco-5","umbraco"]
-migrated: "true"
-urls: ["/umbraco/macros-in-packages"]
-summary: """
-
-"""
+---
+  title: "Macros in packages"
+  metaTitle: "Macros in packages"
+  description: "Wanting to include a Macro in your v5 package, where do you start?"
+  revised: "2012-01-25"
+  date: "2012-01-25"
+  tags: 
+    - "umbaco"
+    - "umbraco-5"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/umbraco/macros-in-packages"
+  summary: ""
 ---
 So you're working on an Umbraco 5 package and you want to be able to ship your own Macro with it. Seems like a common scenario you want to do yeah? It's something that's possible in v4 right? So how do you go about doing it in v5?
 

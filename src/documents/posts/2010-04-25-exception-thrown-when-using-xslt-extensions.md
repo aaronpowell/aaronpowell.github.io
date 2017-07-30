@@ -1,15 +1,16 @@
---- cson
-title: "Exception thrown when using XSLT extensions"
-metaTitle: "Exception thrown when using XSLT extensions"
-description: "A common problem when writing XSLT extensions"
-revised: "2010-04-25"
-date: "2010-04-25"
-tags: ["umbraco","xslt"]
-migrated: "true"
-urls: ["/exception-thrown-when-using-xslt-extensions"]
-summary: """
-
-"""
+---
+  title: "Exception thrown when using XSLT extensions"
+  metaTitle: "Exception thrown when using XSLT extensions"
+  description: "A common problem when writing XSLT extensions"
+  revised: "2010-04-25"
+  date: "2010-04-25"
+  tags: 
+    - "umbraco"
+    - "xslt"
+  migrated: "true"
+  urls: 
+    - "/exception-thrown-when-using-xslt-extensions"
+  summary: ""
 ---
 This is a question I was asked today but it's also something which I have come across myself when creating XSLT extensions.
 

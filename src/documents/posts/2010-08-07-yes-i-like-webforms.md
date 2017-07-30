@@ -1,15 +1,18 @@
---- cson
-title: "Yes, I LIKE WebForms!"
-metaTitle: "Yes, I LIKE WebForms!"
-description: "I think ASP.Net WebForms is really quite good, and here's some thoughts on the topic"
-revised: "2010-08-08"
-date: "2010-08-07"
-tags: ["webforms-mvp","webforms","web","asp.net"]
-migrated: "true"
-urls: ["/yes-i-like-webforms"]
-summary: """
-
-"""
+---
+  title: "Yes, I LIKE WebForms!"
+  metaTitle: "Yes, I LIKE WebForms!"
+  description: "I think ASP.Net WebForms is really quite good, and here's some thoughts on the topic"
+  revised: "2010-08-08"
+  date: "2010-08-07"
+  tags: 
+    - "webforms-mvp"
+    - "webforms"
+    - "web"
+    - "asp.net"
+  migrated: "true"
+  urls: 
+    - "/yes-i-like-webforms"
+  summary: ""
 ---
 At some of my speaking engagements recently I've made the *astonishing* claim that I quite like ASP.Net WebForms. Why do I say this is an astonishing claim? Quite often when I'm talking to other ASP.Net developers and we end up on the topic of WebForms you can see a look of distaste in their eyes, or there'll be a statement like "I'm stuck working with WebForms".
 

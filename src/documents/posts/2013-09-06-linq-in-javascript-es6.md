@@ -1,11 +1,11 @@
---- cson
-title: "LINQ in JavaScript, ES6 style"
-date: '2013-09-06'
-tags: ['javascript', 'linq', 'es6']
-description: """It's been a few years since I last blogged about the concept of LINQ in JavaScript as a lot has changed in the JavaScript landscape.
-
-So let's revisit the idea of it with a look at how you could leverage LINQ in JavaScript for ES6.
-"""
+---
+  title: "LINQ in JavaScript, ES6 style"
+  date: "2013-09-06"
+  tags: 
+    - "javascript"
+    - "linq"
+    - "es6"
+  description: "It's been a few years since I last blogged about the concept of LINQ in JavaScript as a lot has changed in the JavaScript landscape.\n\nSo let's revisit the idea of it with a look at how you could leverage LINQ in JavaScript for ES6."
 ---
 
 ## Update #1

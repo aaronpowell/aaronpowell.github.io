@@ -1,11 +1,10 @@
---- cson
-title: 'New blog, less FunnelWeb'
-date: '2013-06-10'
-description: """It's time for a refresh, my blog has made a move, this time away from FunnelWeb.
-
-But why, how and what for the future of FunnelWeb?
-""" 
-tags: ['funnelweb', 'docpad']
+---
+  title: "New blog, less FunnelWeb"
+  date: "2013-06-10"
+  description: "It's time for a refresh, my blog has made a move, this time away from FunnelWeb.\n\nBut why, how and what for the future of FunnelWeb?"
+  tags: 
+    - "funnelweb"
+    - "docpad"
 ---
 
 If you're not viewing this via the website (ie - you're reading it in a RSS reader) you're probably not going to notice but [I've just done a new design](http://www.aaron-powell.com) and as a side project I've also decided that it's time to do a shift in the platform.

@@ -1,15 +1,16 @@
---- cson
-title: "OWIN and View Engines, Part 2"
-metaTitle: "OWIN and View Engines, Part 2"
-description: "Taking the View Engine concept one step further"
-revised: "2012-04-02"
-date: "2012-04-02"
-tags: ["owin","web"]
-migrated: "true"
-urls: ["/web/owin-view-engines-part-2"]
-summary: """
-
-"""
+---
+  title: "OWIN and View Engines, Part 2"
+  metaTitle: "OWIN and View Engines, Part 2"
+  description: "Taking the View Engine concept one step further"
+  revised: "2012-04-02"
+  date: "2012-04-02"
+  tags: 
+    - "owin"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/owin-view-engines-part-2"
+  summary: ""
 ---
 In the last post we had a bit of a look at [View Engines for OWIN](http://www.aaron-powell.com/web/owin-view-engines) and in this one I want to take the idea just a little bit further.
 

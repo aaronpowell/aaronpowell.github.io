@@ -1,15 +1,16 @@
---- cson
-title: "Xamlizer - How to implement something silly in JavaScript"
-metaTitle: "Xamlizer - How to implement something silly in JavaScript"
-description: ""
-revised: "2011-10-27"
-date: "2011-10-24"
-tags: ["javascript","doing-it-wrong"]
-migrated: "true"
-urls: ["/javascript/xamlizer-implementing-something-silly-in-javascript"]
-summary: """
-
-"""
+---
+  title: "Xamlizer - How to implement something silly in JavaScript"
+  metaTitle: "Xamlizer - How to implement something silly in JavaScript"
+  description: ""
+  revised: "2011-10-27"
+  date: "2011-10-24"
+  tags: 
+    - "javascript"
+    - "doing-it-wrong"
+  migrated: "true"
+  urls: 
+    - "/javascript/xamlizer-implementing-something-silly-in-javascript"
+  summary: ""
 ---
 I've never done much Xaml development, I started reading a WPF book and played around with it only to realise I didn't have any understanding of this concept of a stateful application or how layouts were going to work. And as a web developer who never saw the appeal of Flash I also never got into Silverlight as there was never a problem in my life that it would solve.
 

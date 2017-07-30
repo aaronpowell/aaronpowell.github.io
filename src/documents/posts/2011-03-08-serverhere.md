@@ -1,15 +1,15 @@
---- cson
-title: "ServerHere - When you just need a webserver"
-metaTitle: "ServerHere - When you just need a webserver"
-description: "A tool for when you just want to server some files."
-revised: "2011-03-09"
-date: "2011-03-08"
-tags: ["web"]
-migrated: "true"
-urls: ["/serverhere"]
-summary: """
-
-"""
+---
+  title: "ServerHere - When you just need a webserver"
+  metaTitle: "ServerHere - When you just need a webserver"
+  description: "A tool for when you just want to server some files."
+  revised: "2011-03-09"
+  date: "2011-03-08"
+  tags: 
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/serverhere"
+  summary: ""
 ---
 I've been doing a lot of JavaScript development recently and as cool as [jsfiddle][1] there's a few things that really irk me about it (which is a topic for another day) and sometimes you just want to run the file locally to see how it goes.
 

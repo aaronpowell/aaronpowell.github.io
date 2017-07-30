@@ -1,9 +1,11 @@
---- cson
-title: "LINQ in JavaScript, ES6 style clarification"
-date: '2013-09-16'
-tags: ['javascript', 'linq', 'es6']
-description: """A quick clarification on my previous post about LINQ in JavaScript using ES6 features.
-"""
+---
+  title: "LINQ in JavaScript, ES6 style clarification"
+  date: "2013-09-16"
+  tags: 
+    - "javascript"
+    - "linq"
+    - "es6"
+  description: "A quick clarification on my previous post about LINQ in JavaScript using ES6 features."
 ---
 
 I [recently blogged about implementing LINQ in JavaScript with ES6 iterators](/posts/2013-09-06-linq-in-javascript-es6.html). While I'd done a bunch of research, played around with FireFox (which seemed to have the most up-to-date implementation) and thought it was all well and good.

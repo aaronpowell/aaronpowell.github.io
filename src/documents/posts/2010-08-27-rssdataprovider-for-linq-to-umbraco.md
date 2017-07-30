@@ -1,15 +1,17 @@
---- cson
-title: "Creating a RssDataProvider for LINQ to Umbraco"
-metaTitle: "Creating a RssDataProvider for LINQ to Umbraco"
-description: "Creating custom DataProviders for LINQ to Umbraco"
-revised: "2010-08-27"
-date: "2010-08-27"
-tags: ["umbraco","linq-to-umbraco","umbracodataprovider"]
-migrated: "true"
-urls: ["/rssdataprovider-for-linq-to-umbraco"]
-summary: """
-This was ported from my old website and it is horribly out of date at the moment. The idea is to give you a bit of a starting point for writing a custom LINQ to Umbraco DataProvider
-"""
+---
+  title: "Creating a RssDataProvider for LINQ to Umbraco"
+  metaTitle: "Creating a RssDataProvider for LINQ to Umbraco"
+  description: "Creating custom DataProviders for LINQ to Umbraco"
+  revised: "2010-08-27"
+  date: "2010-08-27"
+  tags: 
+    - "umbraco"
+    - "linq-to-umbraco"
+    - "umbracodataprovider"
+  migrated: "true"
+  urls: 
+    - "/rssdataprovider-for-linq-to-umbraco"
+  summary: "This was ported from my old website and it is horribly out of date at the moment. The idea is to give you a bit of a starting point for writing a custom LINQ to Umbraco DataProvider"
 ---
 Sorry to all the people who were kind enough to come to my [LINQ to Umbraco session at CodeGarden 09][1], I said I would do this post soon after the session. Sadly I started enjoying Copenhagen too much without the need to be sitting at my laptop and now it's a week later, I'm home and it's time I come good on my promise.
 

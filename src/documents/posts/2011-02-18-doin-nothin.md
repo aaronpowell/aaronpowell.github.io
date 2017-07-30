@@ -1,15 +1,16 @@
---- cson
-title: "Are you Doin' Nothin'?"
-metaTitle: "Are you Doin' Nothin'?"
-description: "Interested in tracking what doing nothing really means to you?"
-revised: "2011-02-19"
-date: "2011-02-18"
-tags: ["ruby","web"]
-migrated: "true"
-urls: ["/doin-nothin"]
-summary: """
-
-"""
+---
+  title: "Are you Doin' Nothin'?"
+  metaTitle: "Are you Doin' Nothin'?"
+  description: "Interested in tracking what doing nothing really means to you?"
+  revised: "2011-02-19"
+  date: "2011-02-18"
+  tags: 
+    - "ruby"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/doin-nothin"
+  summary: ""
 ---
 I've been interested in what the impact low performing computers have on the overall efficiency of my daily output.
 

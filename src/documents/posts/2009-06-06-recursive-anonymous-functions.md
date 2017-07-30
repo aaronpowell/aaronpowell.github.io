@@ -1,15 +1,16 @@
---- cson
-title: "Recursive Anonymous Functions"
-metaTitle: "Recursive Anonymous Functions"
-description: "To know recursion you must first know recursion"
-revised: "2010-04-08"
-date: "2009-06-06"
-tags: ["javascript","black-magic"]
-migrated: "true"
-urls: ["/recursive-anonymous-functions"]
-summary: """
-
-"""
+---
+  title: "Recursive Anonymous Functions"
+  metaTitle: "Recursive Anonymous Functions"
+  description: "To know recursion you must first know recursion"
+  revised: "2010-04-08"
+  date: "2009-06-06"
+  tags: 
+    - "javascript"
+    - "black-magic"
+  migrated: "true"
+  urls: 
+    - "/recursive-anonymous-functions"
+  summary: ""
 ---
 I was on [StackOverflow][1] the other day and I was reading a post about the [strangest programming language you've ever used][2]. While looking at what people have used I realized I haven't worked with anything that strange.
 

@@ -1,9 +1,10 @@
---- cson
-title: "5 years of DDD Melbourne"
-date: '2014-07-22'
-tags: ['dddmelb', 'musing']
-description: """A look back at the 5 years that has been DDD Melbourne
-"""
+---
+  title: "5 years of DDD Melbourne"
+  date: "2014-07-22"
+  tags: 
+    - "dddmelb"
+    - "musing"
+  description: "A look back at the 5 years that has been DDD Melbourne"
 ---
 
 Last weekend saw me attending [DDD Melbourne](http://www.dddmelbourne.com) for the 5th year running and it also was the 5th year that I was attending as a speaker. I feel pretty honered to have been there all 5 years as a speaker, especially since it's a community-voted event. The team even got me a new laptop bag, although I'm not sure what they are implying with the slogan :P

@@ -1,9 +1,10 @@
---- cson
-title: "Evolving authentication on React components"
-date: '2015-01-17'
-tags: ['react', 'security']
-description: """Taking what we learnt in the last post and evolving the approach.
-"""
+---
+  title: "Evolving authentication on React components"
+  date: "2015-01-17"
+  tags: 
+    - "react"
+    - "security"
+  description: "Taking what we learnt in the last post and evolving the approach."
 ---
 
 In my last post I talked about how you can do [Authentication on React components using `mixins`](/posts/2015-01-15-authentication-on-react-components.html).

@@ -1,15 +1,16 @@
---- cson
-title: "A LINQ observation"
-metaTitle: "A LINQ observation"
-description: ""
-revised: "2010-08-28"
-date: "2010-08-28"
-tags: [".net","linq"]
-migrated: "true"
-urls: ["/a-linq-observation"]
-summary: """
-This article was migrated from old website, originally dated 19 March 2009
-"""
+---
+  title: "A LINQ observation"
+  metaTitle: "A LINQ observation"
+  description: ""
+  revised: "2010-08-28"
+  date: "2010-08-28"
+  tags: 
+    - ".net"
+    - "linq"
+  migrated: "true"
+  urls: 
+    - "/a-linq-observation"
+  summary: "This article was migrated from old website, originally dated 19 March 2009"
 ---
 Well I'm making good headway with LINQ to Umbraco, in the next few days I'll be doing a very interesting check in (which I'll also blog here about). My tweet-peeps already have an idea of what it entails, but there's a bit of a problem with it still which I want to address before the commit.
 

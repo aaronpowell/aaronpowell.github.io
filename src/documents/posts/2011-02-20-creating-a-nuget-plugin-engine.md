@@ -1,15 +1,17 @@
---- cson
-title: "Creating a NuGet-based plugin engine"
-metaTitle: "Creating a NuGet-based plugin engine"
-description: "How to create a plugin engine using NuGet as the distribution format"
-revised: "2011-02-21"
-date: "2011-02-20"
-tags: ["nuget","umbraco","funnelweb"]
-migrated: "true"
-urls: ["/creating-a-nuget-plugin-engine"]
-summary: """
-
-"""
+---
+  title: "Creating a NuGet-based plugin engine"
+  metaTitle: "Creating a NuGet-based plugin engine"
+  description: "How to create a plugin engine using NuGet as the distribution format"
+  revised: "2011-02-21"
+  date: "2011-02-20"
+  tags: 
+    - "nuget"
+    - "umbraco"
+    - "funnelweb"
+  migrated: "true"
+  urls: 
+    - "/creating-a-nuget-plugin-engine"
+  summary: ""
 ---
 Two of the main Open Source projects I work on have extensibility aspects to them, [Umbraco][1] and [FunnelWeb][2].
 

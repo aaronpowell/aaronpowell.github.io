@@ -1,15 +1,16 @@
---- cson
-title: "Core JavaScript library"
-metaTitle: "Core JavaScript library"
-description: "A core JavaScript library from my JavaScript Tools"
-revised: "2010-09-13"
-date: "2010-09-12"
-tags: ["javascript","web"]
-migrated: "true"
-urls: ["/slace-core-javascript-library"]
-summary: """
-
-"""
+---
+  title: "Core JavaScript library"
+  metaTitle: "Core JavaScript library"
+  description: "A core JavaScript library from my JavaScript Tools"
+  revised: "2010-09-13"
+  date: "2010-09-12"
+  tags: 
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/slace-core-javascript-library"
+  summary: ""
 ---
 ## Overview
 

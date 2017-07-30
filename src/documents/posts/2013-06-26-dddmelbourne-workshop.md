@@ -1,9 +1,9 @@
---- cson
-title: 'DDDMelbourne workshop'
-date: '2013-06-26'
-tags: ['dddmelbourne']
-description: """I'm going to be presenting a JavaScript workshop at the upcoming DDDMelbourne conference
-"""
+---
+  title: "DDDMelbourne workshop"
+  date: "2013-06-26"
+  tags: 
+    - "dddmelbourne"
+  description: "I'm going to be presenting a JavaScript workshop at the upcoming DDDMelbourne conference"
 ---
 
 It's that time of year again, it's **conference time!**. I'm excited to announce that I'll be coming down for my 4th(!!) [DDDMelbourne](http://wwww.dddmelbourne.com) and the [overall agenda](http://www.dddmelbourne.com/agenda) looks quite exciting!

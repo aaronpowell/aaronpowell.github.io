@@ -1,17 +1,16 @@
---- cson
-title: "Orchard & Umbraco - Introduction"
-metaTitle: "Orchard & Umbraco - Introduction"
-description: "An introduction to a series of looking at comparing Orchard CMS and Umbraco"
-revised: "2011-01-28"
-date: "2011-01-12"
-tags: ["orchard","umbraco"]
-migrated: "true"
-urls: ["/orchard-umbraco"]
-summary: """
-<a href=\"http://orchardproject.net\" title=\"Orchard\">Orchard</a>
-<br />
-<a href=\"http://umbraco.org\" title=\"Umbraco\">Umbraco</a>
-"""
+---
+  title: "Orchard & Umbraco - Introduction"
+  metaTitle: "Orchard & Umbraco - Introduction"
+  description: "An introduction to a series of looking at comparing Orchard CMS and Umbraco"
+  revised: "2011-01-28"
+  date: "2011-01-12"
+  tags: 
+    - "orchard"
+    - "umbraco"
+  migrated: "true"
+  urls: 
+    - "/orchard-umbraco"
+  summary: "<a href=\"http://orchardproject.net\" title=\"Orchard\">Orchard</a>\n<br />\n<a href=\"http://umbraco.org\" title=\"Umbraco\">Umbraco</a>"
 ---
 # Overview
 

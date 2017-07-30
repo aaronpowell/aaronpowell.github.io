@@ -1,15 +1,17 @@
---- cson
-title: "Why no Umbraco on Aaron-Powell.com?"
-metaTitle: "Why no Umbraco on Aaron-Powell.com?"
-description: "Why does the new version of Aaron-Powell.com not use Umbraco?"
-revised: "2010-04-08"
-date: "2010-04-08"
-tags: ["umbraco","blogging","paulpad"]
-migrated: "true"
-urls: ["/why-no-umbraco"]
-summary: """
-
-"""
+---
+  title: "Why no Umbraco on Aaron-Powell.com?"
+  metaTitle: "Why no Umbraco on Aaron-Powell.com?"
+  description: "Why does the new version of Aaron-Powell.com not use Umbraco?"
+  revised: "2010-04-08"
+  date: "2010-04-08"
+  tags: 
+    - "umbraco"
+    - "blogging"
+    - "paulpad"
+  migrated: "true"
+  urls: 
+    - "/why-no-umbraco"
+  summary: ""
 ---
 So unsurprisingly I've had a few people question why I'm not using Umbraco for the latest version of Aaron-Powell.com.
 

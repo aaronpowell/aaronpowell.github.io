@@ -1,15 +1,17 @@
---- cson
-title: "Having fun and digging deep into amplifyjs and the request API"
-metaTitle: "Having fun and digging deep into amplifyjs and the request API"
-description: "Let's have a bit of a fun doing something that's probably a bad idea with the AmplifyJS Request API."
-revised: "2011-07-13"
-date: "2011-07-12"
-tags: ["javascript","amplifyjs","doing-it-wrong"]
-migrated: "true"
-urls: ["/javascript/fun-in-amplifyjs-request"]
-summary: """
-Let's have a bit of a fun doing something that's probably a bad idea with the AmplifyJS Request API.
-"""
+---
+  title: "Having fun and digging deep into amplifyjs and the request API"
+  metaTitle: "Having fun and digging deep into amplifyjs and the request API"
+  description: "Let's have a bit of a fun doing something that's probably a bad idea with the AmplifyJS Request API."
+  revised: "2011-07-13"
+  date: "2011-07-12"
+  tags: 
+    - "javascript"
+    - "amplifyjs"
+    - "doing-it-wrong"
+  migrated: "true"
+  urls: 
+    - "/javascript/fun-in-amplifyjs-request"
+  summary: "Let's have a bit of a fun doing something that's probably a bad idea with the AmplifyJS Request API."
 ---
 Have you played with [amplifyjs][1] yet? Played with it's cool way of handling requests?
 

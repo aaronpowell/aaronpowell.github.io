@@ -1,15 +1,18 @@
---- cson
-title: "Unit Testing with Umbraco"
-metaTitle: "Unit Testing with Umbraco"
-description: "A wrap up from my talk on doing unit tested ASP.NET with Umbraco"
-revised: "2011-01-20"
-date: "2010-06-29"
-tags: ["umbraco","asp.net","unit-testing","webformsmvp"]
-migrated: "true"
-urls: ["/unit-testing-with-umbraco"]
-summary: """
-
-"""
+---
+  title: "Unit Testing with Umbraco"
+  metaTitle: "Unit Testing with Umbraco"
+  description: "A wrap up from my talk on doing unit tested ASP.NET with Umbraco"
+  revised: "2011-01-20"
+  date: "2010-06-29"
+  tags: 
+    - "umbraco"
+    - "asp.net"
+    - "unit-testing"
+    - "webformsmvp"
+  migrated: "true"
+  urls: 
+    - "/unit-testing-with-umbraco"
+  summary: ""
 ---
 At [CodeGarden 10][1] I did a presentation on Unit Testing with Umbraco which was primarily looking at doing Unit Testing with ASP.NET and then have you can take those principles into doing development with Umbraco.
 

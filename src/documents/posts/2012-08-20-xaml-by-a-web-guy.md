@@ -1,15 +1,15 @@
---- cson
-title: "XAML by a web guy"
-metaTitle: "XAML by a web guy"
-description: "So I'm starting to learn XAML..."
-revised: "2012-08-20"
-date: "2012-08-20"
-tags: ["xaml"]
-migrated: "true"
-urls: ["/xaml/xaml-by-a-web-guy"]
-summary: """
-
-"""
+---
+  title: "XAML by a web guy"
+  metaTitle: "XAML by a web guy"
+  description: "So I'm starting to learn XAML..."
+  revised: "2012-08-20"
+  date: "2012-08-20"
+  tags: 
+    - "xaml"
+  migrated: "true"
+  urls: 
+    - "/xaml/xaml-by-a-web-guy"
+  summary: ""
 ---
 A few weeks ago a new project came up at work which I moved onto, a project which is XAML based. More specifically Windows 8 XAML and having built a Windows 8 app using HTML and JavaScript I was keen to give it a crack.
 

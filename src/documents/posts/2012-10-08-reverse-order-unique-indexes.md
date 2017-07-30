@@ -1,15 +1,16 @@
---- cson
-title: "Reverse order unique queries in IndexedDB"
-metaTitle: "Reverse order unique queries in IndexedDB"
-description: "The quirk of reverse index querying in IndexedDB and in turn db.js"
-revised: "2012-10-08"
-date: "2012-10-08"
-tags: ["indexeddb","web"]
-migrated: "true"
-urls: ["/web/reverse-order-unique-indexes"]
-summary: """
-
-"""
+---
+  title: "Reverse order unique queries in IndexedDB"
+  metaTitle: "Reverse order unique queries in IndexedDB"
+  description: "The quirk of reverse index querying in IndexedDB and in turn db.js"
+  revised: "2012-10-08"
+  date: "2012-10-08"
+  tags: 
+    - "indexeddb"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/web/reverse-order-unique-indexes"
+  summary: ""
 ---
 [In my post my db.js querying](http://www.aaron-powell.com/web/dbjs-indexes-and-queries) I covered how to do reverse unique queries with db.js using the `desc().distinct()` method chaining which will query an index for the unique items, but it'll do it in reverse order, essentially it will set a [`IDBCursor` direction of `prevunique`](http://www.w3.org/TR/IndexedDB/#cursor-concept).
 

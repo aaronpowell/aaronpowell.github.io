@@ -1,9 +1,11 @@
---- cson
-title: "Debugging jQuery events"
-date: '2014-03-06'
-tags: ['jquery', 'debugging', 'javascript']
-description: """Ever had an event firing from jQuery but you don't know where in your code they are firing from?
-"""
+---
+  title: "Debugging jQuery events"
+  date: "2014-03-06"
+  tags: 
+    - "jquery"
+    - "debugging"
+    - "javascript"
+  description: "Ever had an event firing from jQuery but you don't know where in your code they are firing from?"
 ---
 
 Every couple of months I see a question come around where someone has a jQuery event handler that's being fired but they don't know where that is in their codebase.

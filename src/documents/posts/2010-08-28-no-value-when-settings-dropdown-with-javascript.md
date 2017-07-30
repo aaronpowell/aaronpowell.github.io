@@ -1,15 +1,15 @@
---- cson
-title: "Not getting DropDownList value when setting it via JavaScript"
-metaTitle: "Not getting DropDownList value when setting it via JavaScript"
-description: ""
-revised: "2010-08-28"
-date: "2010-08-28"
-tags: ["javascript"]
-migrated: "true"
-urls: ["/no-value-when-settings-dropdown-with-javascript"]
-summary: """
-
-"""
+---
+  title: "Not getting DropDownList value when setting it via JavaScript"
+  metaTitle: "Not getting DropDownList value when setting it via JavaScript"
+  description: ""
+  revised: "2010-08-28"
+  date: "2010-08-28"
+  tags: 
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/no-value-when-settings-dropdown-with-javascript"
+  summary: ""
 ---
 So today I had a problem which was doing my head in. I had a form which has a bunch of DropDownLists on it, some of which are disabled (depending on the radio button selection). Regardless of whether the DropDownList was available I needed to read the value (which was often set via JavaScript) back on the server.
 

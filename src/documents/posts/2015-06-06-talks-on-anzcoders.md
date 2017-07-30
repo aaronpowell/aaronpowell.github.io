@@ -1,9 +1,12 @@
---- cson
-title: "Talking about front-end development on ANZCoders"
-date: '2015-06-06'
-tags: ['anzcoders', 'web-dev', 'gulp', 'react']
-description: """I did two talks at ANZCoders on front-end development, covering the toolchain and a look at React.
-"""
+---
+  title: "Talking about front-end development on ANZCoders"
+  date: "2015-06-06"
+  tags: 
+    - "anzcoders"
+    - "web-dev"
+    - "gulp"
+    - "react"
+  description: "I did two talks at ANZCoders on front-end development, covering the toolchain and a look at React."
 ---
 
 Two weeks ago was the first [ANZCoders](http://anzcoders.com) virtual conference and I was lucky enough to present two sessions. Being a virtual conference all the content was recorded an you'll be able to watch them on YouTube if you missed the sessions.

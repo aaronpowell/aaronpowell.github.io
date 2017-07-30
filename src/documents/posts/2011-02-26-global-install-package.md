@@ -1,15 +1,15 @@
---- cson
-title: "How to install a package into all projects of a solution"
-metaTitle: "How to install a package into all projects of a solution"
-description: ""
-revised: "2011-03-24"
-date: "2011-02-26"
-tags: ["nuget"]
-migrated: "true"
-urls: ["/nuget/global-install-package"]
-summary: """
-
-"""
+---
+  title: "How to install a package into all projects of a solution"
+  metaTitle: "How to install a package into all projects of a solution"
+  description: ""
+  revised: "2011-03-24"
+  date: "2011-02-26"
+  tags: 
+    - "nuget"
+  migrated: "true"
+  urls: 
+    - "/nuget/global-install-package"
+  summary: ""
 ---
 This is a script that I've been keeping in my toolbox since [NuGet][1] was first released.
 

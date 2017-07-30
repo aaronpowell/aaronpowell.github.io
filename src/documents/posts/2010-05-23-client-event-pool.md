@@ -1,15 +1,17 @@
---- cson
-title: "Client Event Pool"
-metaTitle: "Client Event Pool"
-description: "Client event pools are great to have disconnected AJAX components on a page"
-revised: "2010-09-13"
-date: "2010-05-23"
-tags: ["javascript","ajax","ms-ajax"]
-migrated: "true"
-urls: ["/client-event-pool"]
-summary: """
-
-"""
+---
+  title: "Client Event Pool"
+  metaTitle: "Client Event Pool"
+  description: "Client event pools are great to have disconnected AJAX components on a page"
+  revised: "2010-09-13"
+  date: "2010-05-23"
+  tags: 
+    - "javascript"
+    - "ajax"
+    - "ms-ajax"
+  migrated: "true"
+  urls: 
+    - "/client-event-pool"
+  summary: ""
 ---
 I read an article last year about implementing a [Client Event Pool][1] and I really liked the concept. Joel shows a very good way to use it but I've been doing my best to find a logical use for it myself.
 

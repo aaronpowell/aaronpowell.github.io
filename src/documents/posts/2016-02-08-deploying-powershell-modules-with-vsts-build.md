@@ -1,9 +1,11 @@
---- cson
-title: "Deploying PowerShell modules with VSTS Build"
-date: '2016-02-08'
-tags: ['powershell', 'cd', 'vsts']
-description: """Automating the publishing of PowerShell modules to the gallery with VSTS Build
-"""
+---
+  title: "Deploying PowerShell modules with VSTS Build"
+  date: "2016-02-08"
+  tags: 
+    - "powershell"
+    - "cd"
+    - "vsts"
+  description: "Automating the publishing of PowerShell modules to the gallery with VSTS Build"
 ---
 
 A few years ago I created a PowerShell module to allow me to install and use multiple versions of [Node.js](http://nodejs.org) on my Windows machine. I realised that this could be useful for other people so I put it up on GitHub, called [ps-nvmw](https://github.com/aaronpowell/ps-nvmw), short for PowerShell Node Version Manager for Windows.

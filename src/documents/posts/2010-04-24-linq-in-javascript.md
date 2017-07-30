@@ -1,15 +1,16 @@
---- cson
-title: "LINQ in JavaScript"
-metaTitle: "LINQ in JavaScript"
-description: "LINQ is just a pattern, this shows you how to produce it in JavaScript"
-revised: "2011-02-26"
-date: "2010-04-24"
-tags: ["linq","javascript"]
-migrated: "true"
-urls: ["/linq-in-javascript"]
-summary: """
-
-"""
+---
+  title: "LINQ in JavaScript"
+  metaTitle: "LINQ in JavaScript"
+  description: "LINQ is just a pattern, this shows you how to produce it in JavaScript"
+  revised: "2011-02-26"
+  date: "2010-04-24"
+  tags: 
+    - "linq"
+    - "javascript"
+  migrated: "true"
+  urls: 
+    - "/linq-in-javascript"
+  summary: ""
 ---
 *Let me start by saying that I am aware that there is a [LINQ to JavaScript project on Codeplex][1] but this was done by me are more of an achidemic exercise/ challange.*
 

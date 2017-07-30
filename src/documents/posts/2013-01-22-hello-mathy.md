@@ -1,15 +1,17 @@
---- cson
-title: "Hello mathy"
-metaTitle: "Hello mathy"
-description: "An introduction to another new library from me, this time it's mathy, a simple formula parser"
-revised: "2013-01-22"
-date: "2013-01-22"
-tags: ["typescript","javascript","web"]
-migrated: "true"
-urls: ["/hello-mathy"]
-summary: """
-
-"""
+---
+  title: "Hello mathy"
+  metaTitle: "Hello mathy"
+  description: "An introduction to another new library from me, this time it's mathy, a simple formula parser"
+  revised: "2013-01-22"
+  date: "2013-01-22"
+  tags: 
+    - "typescript"
+    - "javascript"
+    - "web"
+  migrated: "true"
+  urls: 
+    - "/hello-mathy"
+  summary: ""
 ---
 In a previous post I [laid out some thoughts on TypeScript](http://www.aaron-powell.com/javascript/thoughts-on-typescript) which came from building a little library in TypeScript called [mathy](https://github.com/aaronpowell/mathy.js).
 

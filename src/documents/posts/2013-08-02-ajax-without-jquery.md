@@ -1,13 +1,11 @@
---- cson
-title: 'AJAX without jQuery'
-date: '2013-08-02'
-tags: ['javascript', 'ajax', 'jquery']
-description: """When was the last time you wrote an AJAX request?
-
-When was the last time you did it without relying on jQuery?
-
-In this article we'll look at how do do just that, how do make an AJAX request without jQuery to better understand what's going on.
-"""
+---
+  title: "AJAX without jQuery"
+  date: "2013-08-02"
+  tags: 
+    - "javascript"
+    - "ajax"
+    - "jquery"
+  description: "When was the last time you wrote an AJAX request?\n\nWhen was the last time you did it without relying on jQuery?\n\nIn this article we'll look at how do do just that, how do make an AJAX request without jQuery to better understand what's going on."
 ---
 
 I'm very much of the opinion that the better you know your tools the better you can make intelligent choices about the layers you put over them. One such layer I see constantly used that people tend to use but not really understand is jQuery. Don't get me wrong I'm not anti-jQuery or anything, but like I said I believe you should understand your tools before you try and abstract them away.
