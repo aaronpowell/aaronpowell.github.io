@@ -5,7 +5,7 @@
             <h1>{{ if .Params.heading }} {{ .Params.heading }} {{ else }} {{ .Title }} {{ end }}</h1>
 
             <div class="sub-header">
-                {{ .Date.Format (.Site.Params.dateform | default "1 January 2006") }} · {{ .ReadingTime }} minute read
+                {{ .Date.Format (.Site.Params.dateform | default "2nd January 2006") }} · {{ .ReadingTime }} minute read
 
                 {{ range .Params.tags }}
                 · <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
