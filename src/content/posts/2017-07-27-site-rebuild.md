@@ -1,5 +1,5 @@
 +++
-title = "2017 07 27 Site Rebuild"
+title = "Site Rebuild"
 date = 2017-07-27T07:18:34+10:00
 description = ""
 draft = false
