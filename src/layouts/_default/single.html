@@ -28,7 +28,7 @@
         <br>
         {{ partial "disqus" . }}
         {{ if and (.IsPage) (.GitInfo) }}
-        <small class="gray"><em>Published: {{ .Page.Lastmod }}, Version: <a href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}">{{ .GitInfo.AbbreviatedHash }}</a></em></small>
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}, Version: <a href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}" target="_blank">{{ .GitInfo.AbbreviatedHash }}</a></em></small>
         {{ else }}
         <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
         {{ end }}
