@@ -8,6 +8,7 @@ canonifyURLS = true
 googleAnalytics = "UA-6399564-1"
 disqusShortname = "aaronpowell"
 enableGitInfo = "true"
+enableEmoji = "true"
 
 [Params]
     tagline = "Aaron Powell - LINQ to Fail"
