@@ -1,5 +1,5 @@
 title = "LINQ to Fail"
-baseURL = "/"
+baseURL = "http://www.aaron-powell.com"
 tags = ["blog"]
 languageCode = "en-US"
 config = "config.toml"
