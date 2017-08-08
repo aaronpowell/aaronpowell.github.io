@@ -32,12 +32,12 @@ While attendee growth is important we also saw a growth in speakers, we had arou
 
 ## Listening to Feedback
 
-While there was a bunch of stuff to address just based on what we learnt doing it the first time we did listen to the feedback that our attendees provides us with. One of the main pieces of feedback from the 2016 event was around the food, we only _just_ had enough food last year. This year I decided to listen to my wifes advice and let her take the lead on that, after all she has worked in marketing/sales in the food industry for the last 7-odd years. The main thing she pushed for from our supplier was pre-packed lunchboxes for lunch rather than the traditional sandwich platter/hot trays/etc. and this worked a treat. By having everything pre-packaged lunch was a 'pick a box and go' for attendees and it removed the feeling of inequality ("hey, they took a bigger plate than me!"). Having read this years feedback it the food was a highlight (well, behind content and people obviously :winking:), the only negative food feedback was that we had too much!
+While there was a bunch of stuff to address just based on what we learnt doing it the first time we did listen to the feedback that our attendees provides us with. One of the main pieces of feedback from the 2016 event was around the food, we only _just_ had enough food last year. This year I decided to listen to my wifes advice and let her take the lead on that, after all she has worked in marketing/sales in the food industry for the last 7-odd years. The main thing she pushed for from our supplier was pre-packed lunchboxes for lunch rather than the traditional sandwich platter/hot trays/etc. and this worked a treat. By having everything pre-packaged lunch was a 'pick a box and go' for attendees and it removed the feeling of inequality ("hey, they took a bigger plate than me!"). Having read this years feedback it seems the food was a highlight (well, behind content and people obviously :winking:), the only negative food feedback was that we had too much!
 
 We've got some other feedback we'll be looking to incorporate for next years event, but I'm not sure who the smartass was that submitted this piece though :stuck_out_tongue::
 
 > getting Aaron to shave off his beard as a charity event :-)
 
-That... probably won't happy (I haven't been clean shaven for around 2.5 years now).
+That... probably won't happen (I haven't been clean shaven for around 2.5 years now).
 
 So onwards and upwards, we're taking a well earned break before starting to plan for DDD Sydney 2018.
