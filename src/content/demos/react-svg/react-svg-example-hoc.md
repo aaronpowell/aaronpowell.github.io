@@ -2,7 +2,7 @@
 title: "React SVG Example with Higher Order Components"
 date: 2017-08-08T15:08:13+10:00
 draft: false
-isDemo: true
+hidden: true
 ---
 
 <div id="svg-demo"></div>

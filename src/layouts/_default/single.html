@@ -4,7 +4,6 @@
         <section class="content">
             <h1>{{ if .Params.heading }} {{ .Params.heading }} {{ else }} {{ .Title }} {{ end }}</h1>
 
-            {{ if not .Params.isdemo }}
             <div class="sub-header">
                 {{ .Date.Format (.Site.Params.dateform | default "2nd January 2006") }} · {{ .ReadingTime }} minute read
 
@@ -12,7 +11,6 @@
                 · <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
                 {{ end }}
             </div>
-            {{ end }}
 
             <div class="entry-content">
                 {{ .Content }}
