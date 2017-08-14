@@ -50,6 +50,7 @@
         {{ else if .Summary }}<meta name="og:description" content="{{ .Summary }}">{{ end }}
 
         {{ if .Site.Params.favicon }}
+        <link rel="shortcut icon" href="{{ .Site.Params.favicon }}" type="image/x-icon">
         <link rel="apple-touch-icon" sizes="57x57" href="/images/logo/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/images/logo/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/images/logo/apple-icon-72x72.png">
