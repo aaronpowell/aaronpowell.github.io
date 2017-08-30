@@ -15,7 +15,7 @@
 ---
 The last piece of the puzzle when looking at offline storage options is a bit of a shift from what we've been looking at so far. Generally speaking we've been looking at how to store plain data, either through key/value stores or as objects. This time we're going to look at the other kind of data you might want to store, files.
 
-There's two way we might want to store files, as binary data in IndexedDB or using the [FileSystem API](http://dev.w3.org/2009/dap/file-system/file-dir-sys.html). Since we looked at [IndexedDB last time](/flight-mode/indexeddb) (although didn't cover how to store Blobs, but the principle is the same as we looked at) this time we'll look at the FileSystem API.
+There's two way we might want to store files, as binary data in IndexedDB or using the [FileSystem API](http://dev.w3.org/2009/dap/file-system/file-dir-sys.html). Since we looked at [IndexedDB last time]({{< ref "posts/2013-05-27-indexeddb.md" >}}) (although didn't cover how to store Blobs, but the principle is the same as we looked at) this time we'll look at the FileSystem API.
 
 _Side note: At the time of writing the only browser supporting this API is Chrome so this is more of a "watch this space" style post than a "go use it now" one._
 

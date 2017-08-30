@@ -23,7 +23,7 @@ So when looking at the different storage options what do we have if we did want 
 
 Site: [http://brian.io/lawnchair/](http://brian.io/lawnchair/)
 
-Lawnchair is one of the most fully featured storage options that we've got available to us, and also what I based the concept of `FlightMode` on. Lawnchair offers a variety of ways which you can store data, through its adapter system, you can plug in which ever storage option you want, [and there's a few options](http://brian.io/lawnchair/adapters). The one that doesn't exist is cookies but as I pointed out [in that post](/flight-mode/cookies) they aren't exactly the best option when it comes to storing data.
+Lawnchair is one of the most fully featured storage options that we've got available to us, and also what I based the concept of `FlightMode` on. Lawnchair offers a variety of ways which you can store data, through its adapter system, you can plug in which ever storage option you want, [and there's a few options](http://brian.io/lawnchair/adapters). The one that doesn't exist is cookies but as I pointed out [in that post]({{< ref "posts/2013-05-23-cookies.md" >}}s) they aren't exactly the best option when it comes to storing data.
 
 Another interesting aspect of Lawnchair is it is asynchronous by default, so using adapters like `localStorage` (which they refer to as `DOM storage`) requires a callback argument passed to it. This is nice as it means you have a more consistent API usage when it comes to using actually asynchronous APIs like IndexedDB and FileSystem.
 
@@ -59,7 +59,7 @@ If you're looking for a very full-featured IndexedDB wrapper then PouchDB should
 
 Site: [https://github.com/aaronpowell/db.js](https://github.com/aaronpowell/db.js)
 
-db.js is a library that I wrote with the single goal of improving the programmatic API for IndexedDB. As I mentioned in my [article on IndexedDB](/flight-mode/indexeddb) I find that the API is very verbose and quite foreign to front-end development so I wanted to set out and improve that.
+db.js is a library that I wrote with the single goal of improving the programmatic API for IndexedDB. As I mentioned in my [article on IndexedDB]({{< ref "posts/2013-05-27-indexeddb.md" >}}) I find that the API is very verbose and quite foreign to front-end development so I wanted to set out and improve that.
 
 The other main design goal was to make the event handling better, more specifically to utilize Promises. so that you could assign multiple handlers to events that get raised and interact with them that way. It was also so it could be interoperable with other asynchronous operations and other libraries that implement Promise APIs.
 

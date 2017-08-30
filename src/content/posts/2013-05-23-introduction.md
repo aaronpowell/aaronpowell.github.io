@@ -18,12 +18,12 @@ You need to handle **Flight Mode**.
 
 Throughout this series we're going to be looking at how to do this, how to do offline data storage in your web application. For convenience the series is going to be broken down across the following posts:
 
-* [Introduction](/flight-mode/introduction)
-* [Cookies](/flight-mode/cookies)
-* [localStorage and sessionStorage](/flight-mode/local-session-storage)
-* [IndexedDB](/flight-mode/indexeddb)
-* [FileSystem APIs](/flight-mode/file-system)
-* [Useful libraries for offline storage](/flight-mode/libraries)
+* [Introduction]({{< ref "posts/2013-05-23-introduction.md" >}})
+* [Cookies]({{< ref "posts/2013-05-23-cookies.md" >}})
+* [localStorage and sessionStorage]({{< ref "posts/2013-05-23-local-session-storage.md" >}})
+* [IndexedDB]({{< ref "posts/2013-05-27-indexeddb.md" >}})
+* [FileSystem APIs]({{< ref "posts/2013-05-28-file-system.md" >}})
+* [Useful libraries for offline storage]({{< ref "posts/2013-05-30-libraries.md" >}})
 
 I'm also going to be showing off basic implementations as we're going along to give a bit of an insight into the way we can implement using these storage models.
 
