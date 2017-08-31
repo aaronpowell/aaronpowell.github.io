@@ -15,15 +15,15 @@ What was the key code in JavaScript for that key you just pressed?
 }
 </style>
 
-# `keydown`
+# `keydown` [reference](https://developer.mozilla.org/en-US/docs/Web/Events/keydown)
 
 <div id="kc-keydown" class="key"></div>
 
-# `keypress`
+# `keypress` [reference](https://developer.mozilla.org/en-US/docs/Web/Events/keypress)
 
 <div id="kc-keypress" class="key"></div>
 
-# `keyup`
+# `keyup` [reference](https://developer.mozilla.org/en-US/docs/Web/Events/keyup)
 
 <div id="kc-keyup" class="key"></div>
 
