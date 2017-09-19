@@ -14,7 +14,7 @@
     - "/flight-mode/local-session-storage"
   summary: ""
 ---
-Last time we looked a [using cookies to store offline data](/flight-mode/cookies) and we also saw that there's a number of problems with that approach. So let's move forward, let's look at what our next option would be when it comes to offline storage in our multi-dollar application.
+Last time we looked a [using cookies to store offline data]({{< ref "posts/2013-05-23-cookies.md" >}}) and we also saw that there's a number of problems with that approach. So let's move forward, let's look at what our next option would be when it comes to offline storage in our multi-dollar application.
 
 Today it's time for the next level of offline storage, `localStorage` and `sessionStorage` which is sometimes referred to as `DOM storage`.
 
