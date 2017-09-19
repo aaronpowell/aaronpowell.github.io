@@ -37,3 +37,6 @@
 
     {{ partial "footer.html" . }}
     <script src="/highlightjs/highlight.pack.js"></script>
+    {{ if .Params.hidden }}
+    <script src="/code-print.js"></script>
+    {{ end }}
