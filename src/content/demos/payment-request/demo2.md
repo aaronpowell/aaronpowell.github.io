@@ -1,5 +1,5 @@
 ---
-title: "Really basic demo of using web payments"
+title: "Payments demo with Android Pay and credit cards"
 date: 2017-09-19T10:08:13+10:00
 draft: false
 hidden: true
