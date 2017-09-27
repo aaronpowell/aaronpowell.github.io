@@ -2,7 +2,7 @@
 title = "Readify PC 12 Months On"
 date = 2017-09-27T10:11:55-07:00
 description = "A look back at the last 12 months of being a Readify PC"
-draft = true
+draft = false
 tags = ["readify", "career"]
 +++
 
