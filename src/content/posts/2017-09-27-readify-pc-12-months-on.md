@@ -16,7 +16,7 @@ But as that project got into a more solid place my involvement was less required
 
 ## Growing into the PC role
 
-Being in the new role I was able to spend more time doing some stuff that I found I was really enjoying, and one such thing was pre-sales, going out to quality an opportunity. This kind of work allows me to spread my technology breadth wider, look at more kinds of problems and how to solve them, as well as doing more technical writing.
+Being in the new role I was able to spend more time doing some stuff that I found I was really enjoying, and one such thing was pre-sales, going out to qualify an opportunity. This kind of work allows me to spread my technology breadth wider, look at more kinds of problems and how to solve them, as well as doing more technical writing.
 
 I also got an opportunity to get involved in a digital transformation project for a large multinational project. This was a really great opportunity where I was put in the position to do the Enterprise Architecture, setup a technical architecture, work with a team distributed across 4 cities and 3 countries and start planning out a roadmap for how we'll evolve from what was mostly a PoC to being a platform supporting dozens of delivery teams. Admittedly there were weeks where I'd spend every day in meeting rooms which is tough, but I learnt a heck of a lot on that project and about how to run projects at scale.
 
