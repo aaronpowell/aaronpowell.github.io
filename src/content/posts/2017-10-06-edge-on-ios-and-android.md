@@ -2,7 +2,7 @@
 title = "Edge On iOS And Android"
 date = 2017-10-05T20:14:02+11:00
 description = "Microsoft Edge on iOS and Android, what does it mean?"
-draft = true
+draft = false
 tags = ["ms-edge"]
 +++
 
