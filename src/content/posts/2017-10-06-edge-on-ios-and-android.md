@@ -16,7 +16,7 @@ As an MVP something that I've been asked more times than I can remember is "When
 
 No.
 
-WHen you think about a browser there are really three core pieces that come together to make it work, the browser UI, the JavaScript engine and the Layout engine. In Edge this is a UWP (that as best as I know doesn't have a name of its own), Chakra (extensions on top of ChakraCore) and EdgeHTML (a slimmed down version of Trident).
+When you think about a browser there are really three core pieces that come together to make it work, the browser UI, the JavaScript engine and the Layout engine. In Edge this is a UWP (that as best as I know doesn't have a name of its own), Chakra (extensions on top of ChakraCore) and EdgeHTML (a slimmed down version of Trident).
 
 Another thing that you need to understand is the restrictions on the mobile platforms, particularly iOS. With iOS you're unable to have a default browser other than Safari, nor can you run an application that does its own JIT. If you look at Chrome or Firefox for iOS they both sit on top of the WebView, rather than using Blink or Gecko as the rendering engine.
 
