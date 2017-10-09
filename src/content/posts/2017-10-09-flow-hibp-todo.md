@@ -71,7 +71,7 @@ If you're interested to have a play with it I've exported the Connector:
 
 {{< gist aaronpowell a2f87eefcff320df39645c3570584599 "outlook-tasks-connector.json" >}}
 
-And the Flow itself (although you'll need to re-map the Connector once uploaded):
+And the Flow itself (although you'll need to re-map the Connector once uploaded), make sure you set **your email address** in the step where we call HIBP's API:
 
 {{< gist aaronpowell a2f87eefcff320df39645c3570584599 "flow.json" >}}
 
