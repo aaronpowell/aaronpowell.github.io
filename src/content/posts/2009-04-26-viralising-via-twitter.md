@@ -1,0 +1,15 @@
+﻿+++
+title = "Viralising via twitter"
+date = "2009-04-26T21:33:16.0000000Z"
+tags = ["Random Junk"]
+draft = false
++++
+
+<p>Yet another one of my <a href="/blog/march-2009/i-still-don't-get-twitter.aspx" target="_blank">posts</a> about how I just don't get <a href="http://www.twitter.com" target="_blank" title="Twitter">Twitter</a>, this time it's about the way which sites can go viral via Twitter, and how quickly they spread.</p>
+<p>A while ago a site started going around, called <a href="http://wefollow.com/" target="_blank">WeFollow</a>, which is just a user directory. You can put yourself up on their directory, listing a few <a href="http://twitter.pbwiki.com/Hashtags" target="_blank">hashtags</a> which you are primarily posting under.<br />I listed myself on there, and watch as the people I follow also listing themselves on there as well.</p>
+<p>No big deal, it was kind of cool, maybe I'd pickup a follower or two, or find some people who are useful to follow.</p>
+<p>Not long later some people started tweeting about <a href="http://fast140.com/" target="_blank">Fast140</a>, a typing speed test. It starts with one person, but very quickly everyone is on there. And the virus is out and spreading around.</p>
+<p>The latest site to go viral across the people I follow was <a href="http://www.twibes.com" target="_blank">Twibes</a>. Twibes is basically the same as WebFollow, but slightly better ogranised.</p>
+<p>Like real life viruses in a small group of people they spread quickly. But what makes this really interesting to observe is that I follow two distinct (and very separate) groups on Twitter, Umbraco developers and SharePoint developers. They don't really overlap in their areas (except for a few exceptions such as myself), and this is where viralising via Twitter is interesting to watch.<br />Twibes started in the SharePoint group, first there was the odd few people and then quickly one of the big SharePoint <em>resources</em>&nbsp;does it and bam, everyone starts doing it.<br />And then interestingly, a few hours later (because of time-zone differences I'd say) it starts with Umbraco. And the same format happens, it starts slowly, then gets picked up by the bigger guys and then the wildfire is out of control.</p>
+<p>I got sucked in with WeFollow and Fast140 but I'm starting to wise up to viralising via Twitter. There's a lot of money which can be made with online advertising if you get enough people to check your stuff out. <br />The way viral marketing can spread around the internet these days, thanks to the explosion of social networking sites, it's becoming easier to get the word out.&nbsp;</p>
+<p>But people need to be wary. All it takes is one nasty person to realise the power of virualsing via twitter to exploit it.<br />So if you're interested in watching how quickly a virus can spread, join Twitter and await the next <em>big crazy</em>&nbsp;to hit.&nbsp;</p>
