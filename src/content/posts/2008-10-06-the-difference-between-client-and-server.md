@@ -39,7 +39,7 @@ If you want to do a redirect after showing something in the client scope a <stro
 <pre>Page.ClientScript.RegisterStartupScript(this.GetType(), <span class="string">"js"</span>, <span class="string">"alert('hey!');" setTimeout(2000, function() { window.location.href='/some-page.aspx'; });</span>, <span class="keyword">true</span>);
 </pre>
 <p>
-Why use a <strong>setTimeout</strong>? It means that the rediection is not automatic, so if you're showing something that wont pause page execusion (ie, not an alert) then it'll show your client info before redirecting. 
+Why use a <strong>setTimeout</strong>? It means that the redirection is not automatic, so if you're showing something that wont pause page execusion (ie, not an alert) then it'll show your client info before redirecting. 
 </p>
 <p>
 <strong>Where do I put my client event handlers?</strong>
@@ -79,7 +79,7 @@ Each framework has a different way in which events are attached, the Microsoft A
 This is a massively subjective question it really comes down to what you are familiar with and what you want to do.
 </p>
 <p>
-I'm a Microsoft AJAX and jQuery fan, especially since the past weeks annoucement that Microsoft will be supporting jQuery along side their own framework (sweet!), I like the design pattern of Microsoft AJAX (which is built heavily on the prototype framework) but that comes back to being a .NET developer, I'm use to namespaces, classes and interfaces. All of which the MS framework brings in.
+I'm a Microsoft AJAX and jQuery fan, especially since the past weeks announcement that Microsoft will be supporting jQuery along side their own framework (sweet!), I like the design pattern of Microsoft AJAX (which is built heavily on the prototype framework) but that comes back to being a .NET developer, I'm use to namespaces, classes and interfaces. All of which the MS framework brings in.
 </p>
 <p>
 But jQuery is fantastic in animation, plugin library and an awesome set of selectors.

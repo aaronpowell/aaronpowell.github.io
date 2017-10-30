@@ -38,7 +38,7 @@ You'll notice there's 2 services, one for the returning of the People collection
 Now we need to set up our client side template, jTemplates has its own expression format which is very similar to using an ASP.NET repeater, and it has lots of really nice inbuilt features for executing more functions when the template is being executed. I'm only going to be using a very basic features of jTemplates. Here's the template I've created for the example: 
 </p>
 <p>
-<a href="/get/media/974/015.png"><img src="/get/media/974/015_493x125.jpg" width="493" height="125" alt="015.png"></a><br>
+<a href="/get/media/974/015.png"><img src="/get/media/974/015.png" width="493" height="125" alt="015.png"></a><br>
 (Click for larger version) 
 </p>
 <p>
@@ -79,16 +79,16 @@ Just to make it a bit cleaner I'm also disabling the buttons when they are not r
 Well now that this is all set up, how does it perform? Well I'll just let the pictures do the talking 
 </p>
 <p>
-<img src="/get/media/999/020_494x80.jpg" width="494" height="80" alt="020.png"> 
+<img src="/get/media/999/020.png" width="494" height="80" alt="020.png"> 
 </p>
 <p>
-<img src="/get/media/1004/021_500x95.jpg" width="500" height="95" alt="021.png"> 
+<img src="/get/media/1004/021.png" width="500" height="95" alt="021.png"> 
 </p>
 <p>
 <img src="/get/media/1009/023.png" width="428" height="58" alt="023.png"> 
 </p>
 <p>
-<a href="/get/media/1014/024.png" target="_blank"><img src="/get/media/1014/024_500x63.jpg" width="500" height="63" alt="024.png"></a><br>
+<a href="/get/media/1014/024.png" target="_blank"><img src="/get/media/1014/024.png" width="500" height="63" alt="024.png"></a><br>
 (Click for larger version) 
 </p>
 <p>
@@ -98,20 +98,20 @@ I'm sure you can deduce from the above that it was much more efficient. We've go
 And we don't have the problem of submitting the ViewState either! 
 </p>
 <p>
-<strong>Microsoft AJAX 4.0 Previw 1</strong> 
+<strong>Microsoft AJAX 4.0 Preview 1</strong> 
 </p>
 <p>
 So I'll just look at this briefly, first off we need to define our template: 
 </p>
 <p>
-<a href="/get/media/1019/025.png" target="_blank"><img src="/get/media/1019/025_500x79.jpg" width="500" height="79" alt="025.png"></a><br>
+<a href="/get/media/1019/025.png" target="_blank"><img src="/get/media/1019/025.png" width="500" height="79" alt="025.png"></a><br>
 (Click for larger version) 
 </p>
 <p>
 I really like this template engine of jTemplates, it's much simpler (but evidently less powerful) to implement, there's no really wierd syntax needing to be remembered. The only wierdness is that the template much be a class named <em>sys-template</em> so the engine knows to now display it. 
 </p>
 <p>
-<img src="/get/media/1024/026_500x175.jpg" width="500" height="175" alt="026.png"> 
+<img src="/get/media/1024/026.png" width="500" height="175" alt="026.png"> 
 </p>
 <p>
 As can be seen above the JavaScript is also fairly easy to work with. In the Microsoft AJAX format you define the control then use a pesudo-accessor to add the data and then invoking a render.<br>

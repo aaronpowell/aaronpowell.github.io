@@ -251,7 +251,7 @@ Now we put out the header cells:
 	</p>
 </blockquote>
 <p>
-Then lastly we generate the data cells (note - this can be done like the header, just chose to do it differently to illistrate that it can be done several ways): 
+Then lastly we generate the data cells (note - this can be done like the header, just chose to do it differently to illustrate that it can be done several ways): 
 </p>
 <p>
 <img src="/get/media/1198/linq_to_excel001.png" width="345" height="310" alt="linq_to_excel001.png"> 

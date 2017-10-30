@@ -63,7 +63,7 @@ Obviously this is an important aspect, and by default the framework already has 
 This is also an abstract method called <em>PrepareMemberForSaving</em> which can be used for preparing an Umbraco membership object for saving to the database.
 </p>
 <p>
-<a href="/get/media/756/umbmember03.png" target="_blank"><img src="/get/media/756/umbmember03_499x295.jpg" width="499" height="295" alt="umbmember03.png"></a>  
+<a href="/get/media/756/umbmember03.png" target="_blank"><img src="/get/media/756/umbmember03.png" width="499" height="295" alt="umbmember03.png"></a>  
 </p>
 <p>
 Notice the use of the IsDirty flag to ensure we're only saving what we should save.

@@ -23,7 +23,7 @@ You can specify any location and filename to backup to, provided the Sql Server 
 Note - it only supports MS SQL servers and full database backups. 
 </p>
 <p>
-<a href="/get/media/794/databasebackup01.png" target="_blank"><img src="/get/media/794/databasebackup01_500x59.jpg" width="500" height="59" alt="databaseBackup01.png"></a> 
+<a href="/get/media/794/databasebackup01.png" target="_blank"><img src="/get/media/794/databasebackup01.png" width="500" height="59" alt="databaseBackup01.png"></a> 
 </p>
 <p>
 The above shows how to use the MSBuild task in use. 
@@ -35,7 +35,7 @@ The above shows how to use the MSBuild task in use.
 This task is designed to restore a database from a backup, it is slightly more advanced as it requires a few more parameters, such as where to find the log and data files of the database (full path on the Sql server). 
 </p>
 <p>
-<a href="/get/media/810/databaserestore01.png" target="_blank"><img src="/get/media/810/databaserestore01_491x80.jpg" width="491" height="80" alt="databaseRestore01.png"></a>&nbsp; 
+<a href="/get/media/810/databaserestore01.png" target="_blank"><img src="/get/media/810/databaserestore01.png" width="491" height="80" alt="databaseRestore01.png"></a>&nbsp; 
 </p>
 <p>
 With the above example there are two parameters left out, if the name within the data/ log files within the backup these can be provided within the <em>DataName</em> and <em>LogName</em> properties. 

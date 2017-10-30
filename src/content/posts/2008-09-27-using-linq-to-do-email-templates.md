@@ -9,14 +9,14 @@ tags = ["linq"]
 So recently I was working on project where a client wanted to have customisable email templates which could be merged with data from their database so we store the email as an XML document and have a series of placeholders within it to allow easy editing to customise the wording, layout, etc.
 </p>
 <p>
-But because there's quite a lot of different email "data sources" we wanted a ncie and easy way so we didn't have to constantly write merge methods, having a single method which handles it all is the best idea.<br>
+But because there's quite a lot of different email "data sources" we wanted a nice and easy way so we didn't have to constantly write merge methods, having a single method which handles it all is the best idea.<br>
 But how do we handle all the different data sources, and since the ORM is LINQ to SQL it'd be really nice to not have to constantly write classes and structures to handle all the difference formats. So this is what I come up with.
 </p>
 <p>
 <strong>Step 1, an XML document</strong>
 </p>
 <p>
-This isn't really that complex a step, I've got it really primative and the XML was only storing the subject and body. But it can be as complex as required, storing SMTP details, sender, recipient(s), etc.
+This isn't really that complex a step, I've got it really primitive and the XML was only storing the subject and body. But it can be as complex as required, storing SMTP details, sender, recipient(s), etc.
 </p>
 <p>
 I have just 2 nodes, a Subject and a Body node, the Body of the email being stored in a CDATA to make it easier to parse. 
@@ -51,10 +51,10 @@ Now we need a class for the email template generation, this is what I have:
 &nbsp;
 </p>
 <p>
-So noew we have our class stubbed up, the constructor takes a path to an XML document and then we use a <span class="const">XDocument</span> object to traverse into our XML and find the subject and body. The Subject and Body properties are made with private setters so that you can't edit the subject accidently. Also, so that you can reuse the current loaded template the "Generate" methods will return a string rather than replacing the contents of the current object.
+So now we have our class stubbed up, the constructor takes a path to an XML document and then we use a <span class="const">XDocument</span> object to traverse into our XML and find the subject and body. The Subject and Body properties are made with private setters so that you can't edit the subject accidentally. Also, so that you can reuse the current loaded template the "Generate" methods will return a string rather than replacing the contents of the current object.
 </p>
 <p>
-<strong>Step 3, writing the Generater</strong>
+<strong>Step 3, writing the Generator</strong>
 </p>
 <p>
 This is where the fun bit comes in, we're going to use Reflection to find all the properties of our Generic class and then write it to a source.
@@ -77,7 +77,7 @@ I've found this template to be really effective as it'll allow for easy adding o
 <p>
 I can quite easily use a LINQ to SQL expression like this:
 </p>
-<pre><span class="keyword">var</span> myItems = ctx.MyDataItems.Select(m =&gt; new { Property1 = m.Poperty1, Property2 = m.Property2 });
+<pre><span class="keyword">var</span> myItems = ctx.MyDataItems.Select(m =&gt; new { Property1 = m.Property1, Property2 = m.Property2 });
 </pre>
 <p>
 And pass it straight in. Got to love anonymous types!

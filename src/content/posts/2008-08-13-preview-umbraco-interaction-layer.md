@@ -34,20 +34,20 @@ Quite frequently interacting with this Data content structure is done via .NET a
 At the moment I'm still in early stages of development, but I thought it'd be nice to share. Lets say I have the following document type (it's actually one from my site <em>and</em> used in my Data content tree :P):
 </p>
 <p>
-<img src="/get/media/837/001_494x185.jpg" width="494" height="185" alt="001">
+<img src="/get/media/837/001.png" width="494" height="185" alt="001">
 </p>
 <p>
 Well now I can generate some lovely .NET code, say C#?
 </p>
 <p>
-<img src="/get/media/842/002_500x530.jpg" width="500" height="530" alt="002">
+<img src="/get/media/842/002.png" width="500" height="530" alt="002">
 </p>
 <p>
 Or maybe you're a VB person?<br>
 Well you can join in too!
 </p>
 <p>
-<img src="/get/media/847/003_500x470.jpg" width="500" height="470" alt="003.png">
+<img src="/get/media/847/003.png" width="500" height="470" alt="003.png">
 </p>
 <p>
 You may notice all properties decorated with an <strong>UmbracoInfo</strong> attribute, well that will be used to provide feedback about how the object relates back to it's Umbraco instace.

@@ -18,7 +18,7 @@ There is a breaking change between Preview 2 and Preview 3, but there are also a
 The biggest breaking change with Preview 3 is that I have removed the interface <strong>IDocType</strong>.<strong><em> </em></strong>While working on the UIL I came to realise that having both an abstract base class and an interface was some-what redundant. When ever downcasting is needed it should always be done to the base class, so I have removed the interface to avoid confusion. 
 </p>
 <p>
-Another major change is the dependancies of this release, no longer is the generated code supporting .NET 2+, it's now only supporting .NET 3.5+ (ok, I haven't tested it with .NET 4, but I'm just guessing there :P). 
+Another major change is the dependencies of this release, no longer is the generated code supporting .NET 2+, it's now only supporting .NET 3.5+ (ok, I haven't tested it with .NET 4, but I'm just guessing there :P). 
 </p>
 <p>
 <strong>Juicy new bits</strong> 
@@ -43,13 +43,13 @@ I have done some work to improve the features of the DocTypeBase class to have m
 	</ul>
 </ul>
 <p>
-&nbsp;So now it is even easier to programmtically create Umbraco pages and publish them on your site! 
+&nbsp;So now it is even easier to programmatically create Umbraco pages and publish them on your site! 
 </p>
 <p>
 <em>Support for Umbraco v4</em> 
 </p>
 <p>
-Yep, that's right, I have finally got offical support for the Umbraco v4 API! 
+Yep, that's right, I have finally got official support for the Umbraco v4 API! 
 </p>
 <p>
 If anyone had been brave and tried Preview 2 in an Umbraco 4 site they would have seen the failure which ensued. Turns out that the Umbraco devs have finally upgraded all the GetAll methods to return List, not an array. A nice little change (keep in mind that Umbraco was originally .NET 1.1 so the array was probably a hold over from the pre-generics days), but it did mean that the UIL failed as the property signatures no longer matched what it was compiled against. 

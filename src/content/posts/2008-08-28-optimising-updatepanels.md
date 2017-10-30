@@ -36,13 +36,13 @@ First off we're&nbsp;going to need a data source to display in our UpdatePanel. 
 I'm going to be implementing this&nbsp;in an ASP.NET ListView control,&nbsp;which will&nbsp;be paged. So here's the ASPX: 
 </p>
 <p>
-<a href="/get/media/910/008.png"><img src="/get/media/910/008_500x179.jpg" width="500" height="179" alt="008.png"></a> 
+<a href="/get/media/910/008.png"><img src="/get/media/910/008.png" width="500" height="179" alt="008.png"></a> 
 </p>
 <p>
 And we're going to get the resulting&nbsp;page like this: 
 </p>
 <p>
-<img src="/get/media/915/001_500x143.jpg" width="500" height="143" alt="001.png"> 
+<img src="/get/media/915/001.png" width="500" height="143" alt="001.png"> 
 </p>
 <p>
 <strong>Inspecting the response</strong> 
@@ -51,14 +51,14 @@ And we're going to get the resulting&nbsp;page like this:
 So lets look at what we're transfering back and forth on the server. I'll be using the FireBug plugin for FireFox to look at the request/ response but Http Fiddler would work just as well if you're an IE person. First we hit the page 
 </p>
 <p>
-<a href="/get/media/920/002.png"><img src="/get/media/920/002_466x30.jpg" width="466" height="30" alt="002.png"></a><br>
+<a href="/get/media/920/002.png"><img src="/get/media/920/002.png" width="466" height="30" alt="002.png"></a><br>
 (Click for larger version) 
 </p>
 <p>
 That's not exactly what we want to see. Sure it's not a big amount but 62kb is a lot to have received for such a small page. Now lets go to the next page of the data and get the UpdatePanel to do some work. 
 </p>
 <p>
-<img src="/get/media/925/004_500x79.jpg" width="500" height="79" alt="004.png"> 
+<img src="/get/media/925/004.png" width="500" height="79" alt="004.png"> 
 </p>
 <p>
 Again, that's not exactly appealing, 4kb just to get another 5 rows!? It's also worrying when we look at the time taken 
@@ -70,7 +70,7 @@ Again, that's not exactly appealing, 4kb just to get another 5 rows!? It's also 
 Ouch, 2 seconds is a long time for such a small amount of data... But why is this happening? Well lets inspect the response with FireBug 
 </p>
 <p>
-<a href="/get/media/935/006.png"><img src="/get/media/935/006_498x420.jpg" width="498" height="420" alt="006.png"></a><br>
+<a href="/get/media/935/006.png"><img src="/get/media/935/006.png" width="498" height="420" alt="006.png"></a><br>
 (Click for larger version) 
 </p>
 <p>
@@ -92,19 +92,19 @@ But what else? Well, looking at the response there is a lot, and I mean <em>a lo
 Say I changed my ASPX to look like this
 </p>
 <p>
-<img src="/get/media/940/009_500x155.jpg" width="500" height="155" alt="009.png">
+<img src="/get/media/940/009.png" width="500" height="155" alt="009.png">
 </p>
 <p>
 Sure, it's not overly readable, but how does it perform on the inital page load
 </p>
 <p>
-<img src="/get/media/945/010_500x80.jpg" width="500" height="80" alt="010.png">
+<img src="/get/media/945/010.png" width="500" height="80" alt="010.png">
 </p>
 <p>
 Hmm... down 1kb! How about the UpdatePanel request?
 </p>
 <p>
-<img src="/get/media/950/011_500x90.jpg" width="500" height="90" alt="011.png">
+<img src="/get/media/950/011.png" width="500" height="90" alt="011.png">
 </p>
 <p>
 Down a few more kb, but was it faster?
@@ -116,7 +116,7 @@ Down a few more kb, but was it faster?
 Yes it was. Keep in mind that the time is a little subjective as I'm running this on my laptop so it can have performance fluctations, but none the less you should notice a decrease in the request time. And what does our response look like?
 </p>
 <p>
-<a href="/get/media/960/013.png"><img src="/get/media/960/013_499x215.jpg" width="499" height="215" alt="013.png"></a><br>
+<a href="/get/media/960/013.png"><img src="/get/media/960/013.png" width="499" height="215" alt="013.png"></a><br>
 (Click for larger version)
 </p>
 <p>

@@ -25,27 +25,27 @@ Or you have compiled languages like C# which use ==:
 Or for some wierd reason LINQ uses the keyword <strong>equal</strong> when it does join operations...
 </p>
 <p>
-And then we get to JavaScript. JavaScript actually has 2 equality comparisions, == and === (the same exists for inequality in != and !==), but why?<br>
+And then we get to JavaScript. JavaScript actually has 2 equality comparison, == and === (the same exists for inequality in != and !==), but why?<br>
 You need to remember that JavaScript is an loosly typed language, you don't define a variable type, you define it by the the assignment. This also means you can retype a variable during its life.
 </p>
 <p>
-So what's the got to do with the equality operators? Well the choice of equality comparison depends how strongly checked you want to make your comparision.<br>
+So what's the got to do with the equality operators? Well the choice of equality comparison depends how strongly checked you want to make your comparison.<br>
 Say what?
 </p>
 <p>
-Well, == compairs the values at a primative level, regardless of their types, where as === also does a type comparision. Take the following example:
+Well, == compares the values at a primitive level, regardless of their types, where as === also does a type comparison. Take the following example:
 </p>
 <pre><span class="keyword">var</span> someValue = 1;
 alert(someValue == <span class="string">'1'</span>);
 alert(someValue === <span class="string">'1'</span>);
 </pre>
 <p>
-<strike>Both alerts will show <em>true</em>, but in the first alert we're compairing a number to a string. That's likely to be a problem if you're compairing two variables! It's a good way to get <em>unexpected behaviour</em> from your JavaScript.<br>
+<strike>Both alerts will show <em>true</em>, but in the first alert we're comparing a number to a string. That's likely to be a problem if you're comparing two variables! It's a good way to get <em>unexpected behavior</em> from your JavaScript.<br>
 </strike>
-As Ruben has correctly pointed out below the first alert shows true and the second shows false (note - don't blog while watching TV, you tend to not pay attention :P). Because we are compairing a number to a string we generally do not want it to be true. This is most commonly noticed when compairing two variables and can lead to unexpected behaviour during script execution.
+As Ruben has correctly pointed out below the first alert shows true and the second shows false (note - don't blog while watching TV, you tend to not pay attention :P). Because we are comparing a number to a string we generally do not want it to be true. This is most commonly noticed when comparing two variables and can lead to unexpected behavior during script execution.
 </p>
 <p>
-So should you ever use an untyped equality comparison? Well yes if the type of whats being compaired is either a) definately known (ie - prechecked) b) not going to have bearing on the continued operation of the script.
+So should you ever use an untyped equality comparison? Well yes if the type of whats being compared is either a) definitely known (ie - prechecked) b) not going to have bearing on the continued operation of the script.
 </p>
 <p>
 Well there's something to keep in mind the next time you think JavaScript is out to get you with unexpected operation. 
