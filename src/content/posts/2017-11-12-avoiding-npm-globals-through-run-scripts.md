@@ -41,3 +41,11 @@ But wait, how does it know which version of `webpack` to run? Isn't that just lo
 Actually, no. When a `run-script` is executed npm will append the path of `npm bin` to the `PATH` your scripts environment, and thus it finds your local installed dependency.
 
 **Too easy! :grinning:**
+
+## Update
+
+It seems that this isn't the only way to do it:
+
+{{< tweet 929541326034501633 >}}
+
+Thanks Tim, TIL!
