@@ -27,3 +27,5 @@ It was just a matter of taking [Jessie's VS Code Dockerfile](https://github.com/
 [![Debugging PowerShell on Linux in VS Code in a Docker Container from Windows](/images/2017-11-13-debugging-powershell-from-vscode-on-linux-01.png)](/images/2017-11-13-docker-guis-on-windows-with-reasons-01.png)
 
 Aww yeah! :grinning:
+
+_For the record I did find the cause of the bug, it was a type conversion issue due to the order of precedence in PowerShell equality tests within Pester, as reported [here](https://github.com/pester/Pester/issues/864). Good to know JavaScript isn't the only one with type conversion issues :stuck_out_tongue:_
