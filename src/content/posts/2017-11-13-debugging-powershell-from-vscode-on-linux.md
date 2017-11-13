@@ -1,5 +1,5 @@
 +++
-title = "Docker GUI's On Windows With Reasons"
+title = "Debugging PowerShell from VS Code on Linux using Docker containers"
 date = 2017-11-13T17:08:45+11:00
 description = "A valid(?) use case for using a Docker Linux container to run a GUI application on Windows"
 draft = false
@@ -24,6 +24,6 @@ So I know you can run [PowerShell in a Linux container](https://store.docker.com
 
 It was just a matter of taking [Jessie's VS Code Dockerfile](https://github.com/jessfraz/dockerfiles/tree/master/vscode), changing the `FROM` to be `from microsoft/powershell` and then you're good to go!
 
-[![Debugging PowerShell on Linux in VS Code in a Docker Container from Windows](/images/2017-11-13-docker-guis-on-windows-with-reasons-01.png)](/images/2017-11-13-docker-guis-on-windows-with-reasons-01.png)
+[![Debugging PowerShell on Linux in VS Code in a Docker Container from Windows](/images/2017-11-13-debugging-powershell-from-vscode-on-linux-01.png)](/images/2017-11-13-docker-guis-on-windows-with-reasons-01.png)
 
 Aww yeah! :grinning:
