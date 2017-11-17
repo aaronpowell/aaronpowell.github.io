@@ -6,7 +6,7 @@ draft = false
 tags = ["nodejs", "npm"]
 +++
 
-I was talking with [Richard Banks](https://www.richard-banks.org/) the other day about doing silly things with Docker (because, well [I'm known for that at work]({{< ref "2017-09-21-vscode-linux-docker-windows.md" >}})) and he was saying he wants to create docker containers that contain the global npm modules that he often users to save installing them using `npm install -g`.
+I was talking with [Richard Banks](https://www.richard-banks.org/) the other day about doing silly things with Docker (because, well [I'm known for that at work]({{< ref "2017-09-21-vscode-linux-docker-windows.md" >}})) and he was saying he wants to create docker containers that contain the global npm modules that he often uses to save installing them using `npm install -g`.
 
 I asked him why he was using `npm install -g` and he said it was for build tools (gulp/grunt/webpack/etc.) so that you can easily run them.
 
