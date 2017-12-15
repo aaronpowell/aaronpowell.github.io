@@ -15,7 +15,7 @@
     - "/lucene-analyzer"
   summary: ""
 ---
-##What is an Analyzer?##
+## What is an Analyzer?##
 
 When you want to insert data into a Lucene index, or when you want to get the data back out of the index you will need to use an Analyzer to do this.
 
@@ -23,15 +23,15 @@ Lucene ships with many different Analyzers and picking the right one really come
 
 Because Analyzers are used for both indexing and searching you can use different ones for each operation if you want. It's not generally best practice to use different Analyzers, if you do you may have terms handled differently. If you used a WhitespaceAnalyzer when you do your indexing but a StopAnalyzer for retrieval although the word "and" is fine for indexing it wont be found when searching.
 
-##Common Analyzers##
+## Common Analyzers##
 
 Not all of the Analyzers are useful in common scenarios, hopefully this will help you work out which one to use for your scenarios.
 
-###Keyword Analyzer###
+### Keyword Analyzer###
 
 This Analyzer will treat the string as a single search term, so if you needed to handle say a product name (which has spaces in it) as a single search term then this is likely the one you want. It doesn't concern itself with stop words or anything of the like, but it's not really that good if you've got a large block of text that you want to insert into the index.
 
-###Stop Analyzer & Standard Analyzer###
+### Stop Analyzer & Standard Analyzer###
 
 These are the most common Analyzers you'll come across when working with Lucene, in fact the StandardAnalyzer is the default one which is used within Examine (you can specify in the config the Analyzer for both indexing and searching though).
 
@@ -45,13 +45,13 @@ The StopAnalyzer (which is **kind of** a lesser version of the StandardAnalyzer)
 
 So if I was to search on `this world rocks` then I'd only have matches on `world` or `rocks`, the word `this` is ignored.
 
-###Whitespace Analyzer###
+### Whitespace Analyzer###
 
 The WhitespaceAnalyzer is also a bit of a sub-set of the StandardAnalyzer, where it understands word breaks in English text, based on spaces and line breaks.
 
 This Analyzer is great if  you want to search on any English word, it doesn't ignore stop words so you can search on `a` or `the` if required. This was how I got around the problem I described above.
 
-##Conclusion##
+## Conclusion##
 
 Understanding Analyzers can be a tricky aspect of Lucene, and it can be the cause of some grief if they are not properly handled.
 
