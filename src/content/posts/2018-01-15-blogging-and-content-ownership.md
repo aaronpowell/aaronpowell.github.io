@@ -62,7 +62,7 @@ And thus began the last of my great migrations, this time to a different static 
 
 This is something that it took me a long time to learn, and I learnt it the hard way. Over the years of using a hosted platform, not a SaaS platform but something akin to hosting WordPress yourself, is that you are responsible for owning that content. Sure you've got SLA's in place around the DB being backed up, but have you tested it? What happens if your hosts DB server dies? What happens if something gets corrupted in the DB? Can you get your content back?
 
-I learnt this the hard way. I can tell you that I started blogging approximately 10 years ago. I **know** I published a post on the 6th June 2008, but I don't think that's my first blog post, but I don't know for certain. Late last year while going through some old OSS projects I stumbled on a link to a post on my website that 404'ed. Now this wasn't surprising, I've changed URL schemes many times, but I couldn't find a blog of that title anywhere in my repo. Then I started looking at the timestamps on my posts, there were some huge gaps, gaps that didn't make sense.
+I learnt this the hard way. I can tell you that I started blogging approximately 10 years ago. I **know** I published a post on the 6th June 2008, but I don't think that's my first blog post, but I don't know for certain. Late last year while going through some old OSS projects I stumbled on a link to a post on my website that 404'ed. Now this wasn't surprising, I've changed URL schemes many times, but I couldn't find a blog of that title anywhere in my repo. Then I started looking at the time stamps on my posts, there were some huge gaps, gaps that didn't make sense.
 
 And this is where I found out that I was missing a lot of my early content. In fact I was missing pretty much all content from 2008 and the first half of 2009!
 
@@ -78,7 +78,7 @@ Another advantage of a static site is that you aren't just restricted to it bein
 
 ## Monetisation
 
-While I'm on the train of dissing the way people blog I'm going to talk about ads on blogs. You can run an Azure AppService for ~$10 per month (Basic), which is nothing, or you can run it free easily on places like Heroku or even out of an S3 bucket. So the idea of monetising just seems silly. Maybe when I get to the traffic levels of someone like Scott Hanselman or Troy Hunt I might think differently, but really, invest in yourself. And anyway, most people have ad-blockers on these days so is it realy going to do much?
+While I'm on the train of dissing the way people blog I'm going to talk about ads on blogs. You can run an Azure AppService for ~$10 per month (Basic), which is nothing, or you can run it free easily on places like Heroku or even out of an S3 bucket. So the idea of monetising just seems silly. Maybe when I get to the traffic levels of someone like Scott Hanselman or Troy Hunt I might think differently, but really, invest in yourself. And anyway, most people have ad-blockers on these days so is it really going to do much?
 
 ## Conclusion
 
