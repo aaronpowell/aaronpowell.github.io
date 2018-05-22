@@ -1,1 +1,1 @@
-hugo server -w -b "http://localhost" --source "%cd%\src"  --destination "%cd%\.output" --port 4014 --bind "127.0.0.1"
+hugo server -w -b "http://localhost" --source "%cd%\src"  --destination "%cd%\.output" --port 4014 --bind "127.0.0.1" --buildDrafts
