@@ -101,7 +101,7 @@ And there we have it an example of how we can combine a couple of helpful JavaSc
 
 
   [1]: http://amplifyjs.com/
-  [2]: http://www.aaron-powell.com/javascript/building-data-with-tbd
+  [2]: https://www.aaron-powell.com/javascript/building-data-with-tbd
   [3]: http://amplifyjs.com/api/request/
   [4]: http://amplifyjs.com/api/request/
   [5]: http://amplifyjs.com/api/request/#request_types

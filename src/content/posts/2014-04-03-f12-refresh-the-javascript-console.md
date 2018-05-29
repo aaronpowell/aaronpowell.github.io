@@ -12,7 +12,7 @@ One of the new features in the F12 refresh is some updates to the JavaScript con
 
 # `console.log`
 
-I've previously [complained](http://www.aaron-powell.com/posts/2013-01-14-ie10-console-thoughts.html) about how the `console.log` method in IE doesn't like it when you pass an object to it, it just outputs `[object Object]` meaning it just executed a `toString` on the object.
+I've previously [complained](https://www.aaron-powell.com/posts/2013-01-14-ie10-console-thoughts.html) about how the `console.log` method in IE doesn't like it when you pass an object to it, it just outputs `[object Object]` meaning it just executed a `toString` on the object.
 
 I can happily confirm that this has been fixed! When you pass an object, multiple objects or formatted strings it operates as it does in the other browser dev tools.
 

@@ -12,7 +12,7 @@
     - "/web/owin-routing"
   summary: ""
 ---
-[Last time around](http://www.aaron-powell.com/web/owin-and-middleware) we started looking at middleware in OWIN and how to handle different request types. So now comes the next logical step, how do we handle different URLs? Currently we don't have the facilities to handle different URLs, aka routing, so let's work on that.
+[Last time around](https://www.aaron-powell.com/web/owin-and-middleware) we started looking at middleware in OWIN and how to handle different request types. So now comes the next logical step, how do we handle different URLs? Currently we don't have the facilities to handle different URLs, aka routing, so let's work on that.
 
 ## Understanding routing
 
@@ -204,7 +204,7 @@ But now we're able to filter the requests by URL and it's all going to track nic
 
 As I said earlier in the post generally when we have a specific URL segment to match we do that because we care about the value and we'll be wanting it in our handler. Currently though we're not passing that in are we? Well we should solve that! At the moment I'm using the Gate `Request` object for the handler but it wont really do what I want here, at least not in an overly discoverable way (since it inherits from a `Dictionary<string, object>` it's not too hard but I want to make it easier). Instead I want to extend it, so I'm going to create a superclass called `RoutedRequest`.
 
-In the `RoutedRequest` class I want to surface any of the matched segments and to do this I'm going to use a [helper class I wrote a while ago for using Dynamics](http://www.aaron-powell.com/dynamics-library) and pass in a dictionary that represents all matched values. This makes our `RoutedRequest` class nice and simple:
+In the `RoutedRequest` class I want to surface any of the matched segments and to do this I'm going to use a [helper class I wrote a while ago for using Dynamics](https://www.aaron-powell.com/dynamics-library) and pass in a dictionary that represents all matched values. This makes our `RoutedRequest` class nice and simple:
 
     public class RoutedRequest : Request
     {

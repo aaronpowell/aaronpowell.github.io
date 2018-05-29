@@ -13,7 +13,7 @@
     - "/web/pubsub-in-typescript"
   summary: ""
 ---
-Pub/Sub is my Hello World, I've done it not [once](http://www.aaron-powell.com/client-event-pool) but [twice](http://www.aaron-powell.com/javascript-eventmanager) in JavaScript and [once](http://www.aaron-powell.com/javascript/postman) in CoffeeScript (although technically that has a 3rd version in JavaScript at the start of the post :P).
+Pub/Sub is my Hello World, I've done it not [once](https://www.aaron-powell.com/client-event-pool) but [twice](https://www.aaron-powell.com/javascript-eventmanager) in JavaScript and [once](https://www.aaron-powell.com/javascript/postman) in CoffeeScript (although technically that has a 3rd version in JavaScript at the start of the post :P).
 
 Well you may have heard of Microsoft's answer to application-scale JavaScript called [TypeScript](http://www.typescriptlang.org/) so I thought I'd write a pub/ sub library in it too.
 

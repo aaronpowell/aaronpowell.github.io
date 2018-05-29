@@ -13,7 +13,7 @@
     - "/flight-mode/indexeddb"
   summary: ""
 ---
-The next stop in our offline storage adventure is to look at the big daddy of offline storage, [IndexedDB](http://www.w3.org/TR/IndexedDB/). Now I've [blogged about `IndexedDB` in the past](http://www.aaron-powell.com/tags/indexeddb) but today I want to talk about it in a bit higher level and introduce the idea of IndexedDB beyond just how to use the API.
+The next stop in our offline storage adventure is to look at the big daddy of offline storage, [IndexedDB](http://www.w3.org/TR/IndexedDB/). Now I've [blogged about `IndexedDB` in the past](https://www.aaron-powell.com/tags/indexeddb) but today I want to talk about it in a bit higher level and introduce the idea of IndexedDB beyond just how to use the API.
 
 IndexedDB is the latest approach to doing offline storage in offline applications, it is designed as a replacement for the [WebSQL spec which is now discontinued](http://www.w3.org/TR/webdatabase/). One of the main reasons that WebSQL was discontinued was because it was tied to a specific version of [SQLite](http://www.sqlite.org/) which introduced some problems. Need to change something in the way the API worked you needed to change the SQLite specification first. So IndexedDB was proposed as a replacement to WebSQL and the design was not tied to any particular underlying technology ([I've previously blogged about how different browsers store their data]({{< ref "posts/2012-10-05-indexeddb-storage.md" >}})).
 
@@ -61,9 +61,9 @@ To me that feels very reminiscent of the IE6 era where events were registered by
 
 When we have a look at implementing IndexedDB storage on top of our `FlightMode` API that we've been using there's an immediate problem, we've been only working with synchronous APIs up until now but as I mentioned above one of IndexedDB's benefits is that it is asynchronous. Because of this we'll have to approach the API usage a bit differently, first up the `FlightMode` constructor now has two new arguments, a `migrate` and a `ready` callback argument. The `ready` argument is the most important one, it will be triggered when our IndexedDB connection is open and we can start using the API. The `migrate` callback on the other hand is used to allow you to manipulate the objectStore (such as create indexes) if required. Additionally to make it nicer to work with the asynchronous nature of the API I've leverages the [Promise/A+](http://promises-aplus.github.io/promises-spec/) specification for handling the events via the [Q](http://documentup.com/kriskowal/q/) library.
 
-_Side note: If you're not familiar with Promises have a read through [my series on exploring them with jQuery](http://www.aaron-powell.com/doing-it-wrong/blinking-marquee). It's not exactly the same as Promise/A+, you can read about the differences [here](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/)._
+_Side note: If you're not familiar with Promises have a read through [my series on exploring them with jQuery](https://www.aaron-powell.com/doing-it-wrong/blinking-marquee). It's not exactly the same as Promise/A+, you can read about the differences [here](http://domenic.me/2012/10/14/youre-missing-the-point-of-promises/)._
 
-_Warning: This is a **really** basic IndexedDB implementation, it glances over much of the really powerful features, such as complex index queries, for information on that check out my [other IndexedDB posts](http://www.aaron-powell.com/tagged/indexeddb)._
+_Warning: This is a **really** basic IndexedDB implementation, it glances over much of the really powerful features, such as complex index queries, for information on that check out my [other IndexedDB posts](https://www.aaron-powell.com/tagged/indexeddb)._
 
 Our internal `Store` object has got a much more complex constructor this time since there's a few more things we need to do, we must:
 

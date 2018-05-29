@@ -159,5 +159,5 @@ But hopefully it does give you some interesting things to think about and [if yo
 
   [1]: http://api.jquery.com/animate/
   [2]: http://hg.slace.biz/javascript-tools/src/3322dbbdc2fe/JavaScriptTools/Scripts/slace.animator.js
-  [3]: http://www.aaron-powell.com/doing-it-wrong/blink
+  [3]: https://www.aaron-powell.com/doing-it-wrong/blink
   [4]: http://jsfiddle.net/slace/mVrN2/

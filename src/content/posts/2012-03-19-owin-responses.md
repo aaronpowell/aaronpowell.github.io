@@ -12,7 +12,7 @@
     - "/web/owin-responses"
   summary: ""
 ---
-In the last post we looked at [Routing in OWIN](http://www.aaron-powell.com/web/owin-routing) as we built up a simple little route engine. Today I want to look at how to bring power to our responses by making it easier to respond with different types.
+In the last post we looked at [Routing in OWIN](https://www.aaron-powell.com/web/owin-routing) as we built up a simple little route engine. Today I want to look at how to bring power to our responses by making it easier to respond with different types.
 
 In ASP.Net MVC you're probabily use to write code like this:
 

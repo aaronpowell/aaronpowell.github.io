@@ -7,7 +7,7 @@
   description: "Time to take a look at middleware"
 ---
 
-[Last time](http://www.aaron-powell.com/posts/2016-06-27-learning-redux-with-reducks-multiple-reducers.html) we learnt how multiple reducers worked and today we're going to look at intercepting the pipeline of actions to reducers, through the use of middleware.
+[Last time](https://www.aaron-powell.com/posts/2016-06-27-learning-redux-with-reducks-multiple-reducers.html) we learnt how multiple reducers worked and today we're going to look at intercepting the pipeline of actions to reducers, through the use of middleware.
 
 # What is middleware?
 

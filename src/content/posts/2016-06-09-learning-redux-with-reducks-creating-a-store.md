@@ -7,7 +7,7 @@
   description: "An introduction to the Store and how to make a simple one."
 ---
 
-[Last time](http://www.aaron-powell.com/posts/2016-06-06-learning-redux-with-reducks-intro.html) we learnt the basics of what Redux is and what it does, now it's time to start looking at how it works.
+[Last time](https://www.aaron-powell.com/posts/2016-06-06-learning-redux-with-reducks-intro.html) we learnt the basics of what Redux is and what it does, now it's time to start looking at how it works.
 
 Before we get started, I've created a little app that we'll be using. Because I wanted to illustrate that Redux isn't **just** for React our sample application is _not_ going to be a React application, it's actually going to be a little console application. You'll find the starting point for the code [here](https://github.com/aaronpowell/reducks/tree/demo-app-setup).
 

@@ -131,7 +131,7 @@ Next time we'll look at how to deal with some of the limitations of working in a
 
   [1]: http://docs.jquery.com/Qunit
   [2]: http://jquery.com
-  [3]: http://www.aaron-powell.com/javascript/knockoutjs-preparser
+  [3]: https://www.aaron-powell.com/javascript/knockoutjs-preparser
   [4]: http://bsatrom.github.com/Knockout.Unobtrusive/
   [5]: http://jashkenas.github.com/coffee-script/
   [6]: http://npmjs.org

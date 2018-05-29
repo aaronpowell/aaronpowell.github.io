@@ -7,7 +7,7 @@
     - "docpad"
 ---
 
-If you're not viewing this via the website (ie - you're reading it in a RSS reader) you're probably not going to notice but [I've just done a new design](http://www.aaron-powell.com) and as a side project I've also decided that it's time to do a shift in the platform.
+If you're not viewing this via the website (ie - you're reading it in a RSS reader) you're probably not going to notice but [I've just done a new design](https://www.aaron-powell.com) and as a side project I've also decided that it's time to do a shift in the platform.
 
 You see, I've been using [FunnelWeb](https://github.com/funnelweblog/funnelweb) for a few years now, and it's been going smoothly, sitting there chugging along doing all that I've really needed from it, but in recent months I've decided that there was something that didn't really want anymore... a database.
 

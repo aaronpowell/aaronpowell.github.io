@@ -47,8 +47,8 @@ Generally speaking I've scaled back my Open Source work, I've still tried to be 
 So here's to a more JavaScript filled 2012!
 
 
-  [1]: http://www.aaron-powell.com/2010-a-year-in-review
-  [2]: http://www.aaron-powell.com/mvp11
+  [1]: https://www.aaron-powell.com/2010-a-year-in-review
+  [2]: https://www.aaron-powell.com/mvp11
   [3]: http://twitter.com/#!/gblock
   [4]: http://twitter.com/#!/shanselman
   [5]: http://twitter.com/#!/haacked
@@ -56,14 +56,14 @@ So here's to a more JavaScript filled 2012!
   [7]: http://twitter.com/#!/Encosia
   [8]: http://twitter.com/#!/elijahmanor
   [9]: http://twitter.com/#!/stevegodbold
-  [10]: http://www.aaron-powell.com/remix11
-  [11]: http://www.aaron-powell.com/umbraco/so-long-and-thanks-for-all-the-fish
-  [12]: http://www.aaron-powell.com/umbraco/i-want-you
-  [13]: http://www.aaron-powell.com/speaking/teched-nz-2011
-  [14]: http://www.aaron-powell.com/speaking/teched-nz-2011/slides
-  [15]: http://www.aaron-powell.com/speaking/teched-au-2011
-  [16]: http://www.aaron-powell.com/speaking/teched-au-2011/slides
-  [17]: http://www.aaron-powell.com/javascript/postman
-  [18]: http://www.aaron-powell.com/javascript/javascript-quiz
-  [19]: http://www.aaron-powell.com/javascript/rebuilding-javascript-quiz-in-nodejs
-  [20]: http://www.aaron-powell.com/javascript/building-data-with-tbd
+  [10]: https://www.aaron-powell.com/remix11
+  [11]: https://www.aaron-powell.com/umbraco/so-long-and-thanks-for-all-the-fish
+  [12]: https://www.aaron-powell.com/umbraco/i-want-you
+  [13]: https://www.aaron-powell.com/speaking/teched-nz-2011
+  [14]: https://www.aaron-powell.com/speaking/teched-nz-2011/slides
+  [15]: https://www.aaron-powell.com/speaking/teched-au-2011
+  [16]: https://www.aaron-powell.com/speaking/teched-au-2011/slides
+  [17]: https://www.aaron-powell.com/javascript/postman
+  [18]: https://www.aaron-powell.com/javascript/javascript-quiz
+  [19]: https://www.aaron-powell.com/javascript/rebuilding-javascript-quiz-in-nodejs
+  [20]: https://www.aaron-powell.com/javascript/building-data-with-tbd

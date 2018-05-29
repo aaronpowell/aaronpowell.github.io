@@ -21,11 +21,11 @@ Well while sitting in the Qantas club lounge waiting for my flight back from Rem
 
 ## Getting started
 
-So today I finally got around to finishing the code and deploying it onto my website, in fact you can see it in action via [http://www.aaron-powell.com/findme][3]. I've also made this in a way which you can test with any username, say, Tatham's - [http://www.aaron-powell.com/findme/tathamoddie][4].
+So today I finally got around to finishing the code and deploying it onto my website, in fact you can see it in action via [https://www.aaron-powell.com/findme][3]. I've also made this in a way which you can test with any username, say, Tatham's - [https://www.aaron-powell.com/findme/tathamoddie][4].
 
-I also added support for Twitter lists, so say, readify - [http://www.aaron-powell.com/findme/digory/readify][5].
+I also added support for Twitter lists, so say, readify - [https://www.aaron-powell.com/findme/digory/readify][5].
 
-What you'll see is that this is actually just a redirect to Google Maps, passing in a URL like [http://www.aaron-powell.com/findme/kml/slace][6]. If you hit this URL you'll get back an XML file, well actually you'll get back a *KML* file, which stands for Keyhole Markup Language.
+What you'll see is that this is actually just a redirect to Google Maps, passing in a URL like [https://www.aaron-powell.com/findme/kml/slace][6]. If you hit this URL you'll get back an XML file, well actually you'll get back a *KML* file, which stands for Keyhole Markup Language.
 
 ### KML
 

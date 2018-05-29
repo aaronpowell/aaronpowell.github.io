@@ -39,6 +39,6 @@ So you may be wondering what is the Core now? Well the goals of the Core haven't
 If you're wanting to contribute code but you're not sure about how to go about it then here's a few useful links:
 
 * [Using TortoiseHG with Mercurial](http://shazwazza.com/post/A-UI-guide-to-using-Umbracoe28099s-new-repository-format-Mercurial.aspx)
-* [Using the Mercurial command line](http://www.aaron-powell.com/mercurial-101-for-umbraco-developers) and [another article](http://www.aaron-powell.com/umbraco-and-mercurial-how-to-contribute)
+* [Using the Mercurial command line](https://www.aaron-powell.com/mercurial-101-for-umbraco-developers) and [another article](https://www.aaron-powell.com/umbraco-and-mercurial-how-to-contribute)
 * [Here's a Tekpub video on using Mercurial on CodePlex](http://tekpub.com/view/dotnet-oss/7)
 * [My talk from CodeGarden 11 on collaboration in Umbraco](http://codegarden11.com/sessions/day-2/slot-five/collaboration-in-umbraco.aspx)

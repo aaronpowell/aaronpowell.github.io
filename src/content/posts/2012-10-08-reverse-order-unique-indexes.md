@@ -12,7 +12,7 @@
     - "/web/reverse-order-unique-indexes"
   summary: ""
 ---
-[In my post my db.js querying](http://www.aaron-powell.com/web/dbjs-indexes-and-queries) I covered how to do reverse unique queries with db.js using the `desc().distinct()` method chaining which will query an index for the unique items, but it'll do it in reverse order, essentially it will set a [`IDBCursor` direction of `prevunique`](http://www.w3.org/TR/IndexedDB/#cursor-concept).
+[In my post my db.js querying](https://www.aaron-powell.com/web/dbjs-indexes-and-queries) I covered how to do reverse unique queries with db.js using the `desc().distinct()` method chaining which will query an index for the unique items, but it'll do it in reverse order, essentially it will set a [`IDBCursor` direction of `prevunique`](http://www.w3.org/TR/IndexedDB/#cursor-concept).
 
 When covering off I mentioned that the way it works is a little unusual and here I'll explain why.
 

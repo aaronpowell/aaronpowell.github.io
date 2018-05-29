@@ -12,7 +12,7 @@
     - "/web/owin-view-engines"
   summary: ""
 ---
-In the [last post](http://www.aaron-powell.com/web/owin-responses) we looked at improving our responses in OWIN by adding some extensions methods to the response object and the next logical step for this is to think about HTML. While what we've brought together thus far is useful if you're creating something that is just a web API if  you want to create an actual web site you probably need to respond with some HTML.
+In the [last post](https://www.aaron-powell.com/web/owin-responses) we looked at improving our responses in OWIN by adding some extensions methods to the response object and the next logical step for this is to think about HTML. While what we've brought together thus far is useful if you're creating something that is just a web API if  you want to create an actual web site you probably need to respond with some HTML.
 
 To this end we're going to need to think about creating a *View Engine* that will be responsible for our HTML generation. The reason I want to go down this path is it makes it nicer if we want to add some level of dynamic data to the HTML we're serving, say insert a user name or other things like that.
 

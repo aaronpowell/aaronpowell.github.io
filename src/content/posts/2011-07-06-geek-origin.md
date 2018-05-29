@@ -37,5 +37,5 @@ When the day was done we got to print out our little programs (on a dot matrix p
 And this concludes my trip down memory lane to back where I fell in love with the power over computers programming has given me.
 
 
-  [1]: http://www.aaron-powell.com/about
+  [1]: https://www.aaron-powell.com/about
   [2]: http://delicategeniusblog.com/?p=1292

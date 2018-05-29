@@ -12,7 +12,7 @@
     - "/web/owin-and-middleware"
   summary: ""
 ---
-In my [last post](http://www.aaron-powell.com/web/hello-owin) I looked at getting started with the basics of OWIN and how to create a server which wont do anything overly useful. In this post I want to go a step further and look at how we can start introducing our own layers on top of OWIN (and Gate) to make it nicer to do like *web stuff*.
+In my [last post](https://www.aaron-powell.com/web/hello-owin) I looked at getting started with the basics of OWIN and how to create a server which wont do anything overly useful. In this post I want to go a step further and look at how we can start introducing our own layers on top of OWIN (and Gate) to make it nicer to do like *web stuff*.
 
 # It's all about the modules
 

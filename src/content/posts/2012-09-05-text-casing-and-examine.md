@@ -50,12 +50,12 @@ Now that we've seen why all your content is generally lower case, how can we wor
 
 Well we need some way in which we can have the field data stored without the analyzer screwing around with it.
 
-*Note: This doesn't need to be done if you're using an analyzer which doesn't have a `LowerCaseTokenizer` or `LowercaseFilter`. If you’re using a different analyzer, like `KeywordAnalyzer` then this post wont cover what you're after (since the `KeywordAnalyzer` isn't lowercasing, you're actually using an out-dated version of Examine, I recommend you grab the latest release :)). More information on Analyzers can be found at [http://www.aaron-powell.com/lucene-analyzer][1]*
+*Note: This doesn't need to be done if you're using an analyzer which doesn't have a `LowerCaseTokenizer` or `LowercaseFilter`. If you’re using a different analyzer, like `KeywordAnalyzer` then this post wont cover what you're after (since the `KeywordAnalyzer` isn't lowercasing, you're actually using an out-dated version of Examine, I recommend you grab the latest release :)). More information on Analyzers can be found at [https://www.aaron-powell.com/lucene-analyzer][1]*
 
 Luckily we've got some hooks into Examine to allow us to do what we need here, it's in the form of an event on the `Examine.LuceneEngine.Providers.LuceneIndexer`, called `DocumentWriting`. Note that this event is on the `LuceneIndexer`, not the `BaseIndexProvider`. This event is Lucene.Net specific and not logical on the base class which is agnostic of any other framework.
 
 What we can do with this event is interact directly with Lucene.Net while Examine is working with it. 
-You'll need to have a bit of an understanding of how to work with a Lucene.Net Document (and for that I’d recommend having a read of this article from me: [http://www.aaron-powell.com/documents-in-lucene-net][2]), cuz what you’re able to do is play with Lucene.Net... Feel the power!
+You'll need to have a bit of an understanding of how to work with a Lucene.Net Document (and for that I’d recommend having a read of this article from me: [https://www.aaron-powell.com/documents-in-lucene-net][2]), cuz what you’re able to do is play with Lucene.Net... Feel the power!
 
 So we can attach the event handler the same way as you would do any other event in Umbraco, using an Action Handler:
 
@@ -96,5 +96,5 @@ Lastly we need to display that on the UI, well it's easy, rather accessing the `
 Here we've looked at how we can use the Examine events to interact with the Lucene.Net Document. We’ve decided that we want to push in unanalyzed text, but you could use this idea to really tweak your Lucene.Net document. But really playing with the Document is not recommended unless you *really* know what you’re doing ;).
 
 
-  [1]: http://www.aaron-powell.com/lucene-analyzer
-  [2]: http://www.aaron-powell.com/documents-in-lucene-net
+  [1]: https://www.aaron-powell.com/lucene-analyzer
+  [2]: https://www.aaron-powell.com/documents-in-lucene-net

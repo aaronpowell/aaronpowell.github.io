@@ -60,9 +60,9 @@ Want to hide your soft keyboard in Windows 8 XAML?
 
 
   [1]: http://en.wikipedia.org/wiki/Monkey_test
-  [2]: http://www.aaron-powell.com/xaml/xaml-by-a-web-guy
+  [2]: https://www.aaron-powell.com/xaml/xaml-by-a-web-guy
   [3]: http://msdn.microsoft.com/en-us/library/windows/apps/hh702161.aspx
   [4]: http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.focusstate.aspx
   [5]: http://msdn.microsoft.com/en-us/library/system.windows.input.focusmanager.aspx
   [6]: http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.input.focusmanager.aspx
-  [7]: http://www.aaron-powell.com/get/memes/disable-all-the-things.jpg
+  [7]: https://www.aaron-powell.com/get/memes/disable-all-the-things.jpg

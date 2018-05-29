@@ -33,6 +33,6 @@ Here is the list of articles in the series:
   [2]: http://orchard.codeplex.com/releases/view/50197
   [3]: http://umbraco.codeplex.com/releases/view/59025
   [4]: /orchard-umbraco/installing
-  [5]: http://www.aaron-powell.com/orchard-umbraco/admin
+  [5]: https://www.aaron-powell.com/orchard-umbraco/admin
   [6]: /orchard-umbraco/creating-content
   [7]: /orchard-umbraco/managing-content

@@ -13,7 +13,7 @@
 ---
 So you're building a Windows 8 application and you want to authenticate against an external service. For this it's likely that you're going to want to store a username and password for the user so that you can query off to the external service without bugging them constantly.
 
-This was something that I had to do for my [Pinboard for Windows 8](http://www.aaron-powell.com/pinboard-for-win8) application so I wanted to make sure that I was doing it above board and no one would think I've been sneaky and abused their privacy.
+This was something that I had to do for my [Pinboard for Windows 8](https://www.aaron-powell.com/pinboard-for-win8) application so I wanted to make sure that I was doing it above board and no one would think I've been sneaky and abused their privacy.
 
 # Accessing credentials
 
@@ -83,4 +83,4 @@ And there we go, all stored securely inside the Windows security store. The othe
 Storing credentials in Windows 8 is so simple but it has some strangeness about it. Your main point of call is the [`PasswordVault`](http://msdn.microsoft.com/en-us/library/windows/apps/xaml/br227081.aspx) class, part of the Windows 8 runtime, which gives you a simple programming interface into the Windows security store.
 
 
-  [1]: http://www.aaron-powell.com/get/windows-8-credentials-store.png
+  [1]: https://www.aaron-powell.com/get/windows-8-credentials-store.png

@@ -97,7 +97,7 @@ We've also looked at how to perform CRUD operations against it, using `getItem` 
 We finished up by looking at how to store complex objects into the Web Storage locations, using the JSON API. 
 
 
-  [1]: http://www.aaron-powell.com/doin-nothin
+  [1]: https://www.aaron-powell.com/doin-nothin
   [2]: http://dev.w3.org/html5/webstorage/
   [3]: http://www.w3.org/TR/IndexedDB/
   [4]: https://github.com/douglascrockford/JSON-js

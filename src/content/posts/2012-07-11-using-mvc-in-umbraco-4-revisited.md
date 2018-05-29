@@ -56,4 +56,4 @@ What I've blogged is still very much a proof of concept but it seems that some p
 
 If you learn any more yourself let me know!
 
-  [1]: http://www.aaron-powell.com/umbraco/using-mvc-in-umbraco-4
+  [1]: https://www.aaron-powell.com/umbraco/using-mvc-in-umbraco-4

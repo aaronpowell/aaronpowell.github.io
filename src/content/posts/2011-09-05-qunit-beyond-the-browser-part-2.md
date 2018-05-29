@@ -192,6 +192,6 @@ This will rebuild both the `document` and `window` objects from the original DOM
 
 I'm aware that this has been a bit of a long and complicated post but hopefully it gives you some starting points for how you could approach doing online & offline JavaScript tests.
 
-  [1]: http://www.aaron-powell.com/javascript/qunit-beyond-the-browser-part-1
+  [1]: https://www.aaron-powell.com/javascript/qunit-beyond-the-browser-part-1
   [2]: http://search.npmjs.org/#/jsdom
   [3]: http://search.npmjs.org/#/jquery

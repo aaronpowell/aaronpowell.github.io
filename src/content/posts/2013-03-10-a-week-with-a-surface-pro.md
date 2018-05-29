@@ -57,7 +57,7 @@ Mail is a bit up-and-down with it's interactions. I've come from an Outlook back
 
 That said I do have Outlook installed as well and generally speaking I have both running. I like Outlook for its familiar but the UI isn't really touch optimized so it can be a bit clunky. Mail is nicer for touch but the integration with the GAL is really terrible and I can't for the life of me work out how to add someone as a contact, even if they emailed me first (again where Outlook is much more useful).
 
-IE works fantastically in Metro, the new shell is really slick and the interactions are really nicely designed. So far I haven't even installed another browser, I've found no need (maybe once I start doing some more web dev I'll switch since [I've got some opinions on the dev tools](http://www.aaron-powell.com/web-dev/ie10-console-thoughts)). The only real frustrating thing is there's no plugin support so I can't get my password manager integrated which makes the workflow of hitting somewhere I need to log into a pain.
+IE works fantastically in Metro, the new shell is really slick and the interactions are really nicely designed. So far I haven't even installed another browser, I've found no need (maybe once I start doing some more web dev I'll switch since [I've got some opinions on the dev tools](https://www.aaron-powell.com/web-dev/ie10-console-thoughts)). The only real frustrating thing is there's no plugin support so I can't get my password manager integrated which makes the workflow of hitting somewhere I need to log into a pain.
 
 For twitter I've been trying a variety of clients. Currently I'm using MetroTwit for Win8, I tried Rowi but I really didn't like it (no replies in snapped, full screen has a really strange use of space and a few other issues).
 

@@ -196,5 +196,5 @@ One final note, the Json.NET serializer **does** support the `DataMember` attrib
   [5]: http://json.codeplex.com/
   [6]: http://knockoutjs.com/documentation/plugins-mapping.html
   [7]: http://benalman.com/news/2010/11/immediately-invoked-function-expression/
-  [8]: http://www.aaron-powell.com/slace-core-javascript-library
+  [8]: https://www.aaron-powell.com/slace-core-javascript-library
   [9]: http://hg.apwll.me/knockoutjs-server-viewmodels

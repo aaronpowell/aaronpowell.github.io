@@ -20,5 +20,5 @@ So here's a comic that should explain it.
 
 Click for a larger version.
 
-  [1]: http://www.aaron-powell.com/get/web-dev/comic.png
-  [2]: http://www.aaron-powell.com/get/web-dev/comic-small.png
+  [1]: https://www.aaron-powell.com/get/web-dev/comic.png
+  [2]: https://www.aaron-powell.com/get/web-dev/comic-small.png

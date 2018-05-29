@@ -6,7 +6,7 @@ tags = ["unit testing"]
 +++
 
 <p>
-A month ago I did a <a href="/web/20090127032545/http://www.aaron-powell.com:80/blog.aspx?id=1291" target="_blank">post</a> about the <a href="https://web.archive.org/web/20090127032545/http://www.typemock.com/" target="_blank">TypeMock mocking framework </a>and the nice people at TypeMock were kind enough to give me a 1 year license for their software. Although I haven't really played with it as much as I hoped/ would have liked I have done a bit with it and though I'd share some thoughts.
+A month ago I did a <a href="/web/20090127032545/https://www.aaron-powell.com:80/blog.aspx?id=1291" target="_blank">post</a> about the <a href="https://web.archive.org/web/20090127032545/http://www.typemock.com/" target="_blank">TypeMock mocking framework </a>and the nice people at TypeMock were kind enough to give me a 1 year license for their software. Although I haven't really played with it as much as I hoped/ would have liked I have done a bit with it and though I'd share some thoughts.
 </p>
 <p>
 To have a bit of a base line I was doing my playing with both Typemock and RhinoMocks, just to have an example against a good free mocking framework.

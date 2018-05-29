@@ -67,7 +67,7 @@ Here's how you use them:
 Hopefully this is helpful to someone else :)
 
 
-  [1]: http://www.aaron-powell.com/javascript/building-data-with-tbd
+  [1]: https://www.aaron-powell.com/javascript/building-data-with-tbd
   [2]: http://pivotal.github.com/jasmine/
   [3]: http://pivotal.github.com/jasmine/jsdoc/symbols/jasmine.Matchers.html
   [4]: http://pivotal.github.com/jasmine/jsdoc/symbols/jasmine.Suite.html#beforeEach

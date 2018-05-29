@@ -72,12 +72,12 @@ If you're wanting to know more about NuGet I suggest that you keep an eye on [Da
   [3]: http://www.openwrap.org/
   [4]: http://nuget.org
   [5]: http://odata.org
-  [6]: http://www.aaron-powell.com/nuget/linqpad
+  [6]: https://www.aaron-powell.com/nuget/linqpad
   [7]: http://nuget.org/List/Packages/NuGet.Server
   [8]: http://nuget.org/List/Packages/NuGet.Core
-  [9]: http://www.aaron-powell.com/creating-a-nuget-plugin-engine
+  [9]: https://www.aaron-powell.com/creating-a-nuget-plugin-engine
   [10]: http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c
-  [11]: http://www.aaron-powell.com/nuget/global-install-package
+  [11]: https://www.aaron-powell.com/nuget/global-install-package
   [12]: http://nuget.codeplex.com/documentation?title=Nuspec%20Format
   [13]: http://nuget.codeplex.com/wikipage?title=Package%20Conventions
   [14]: http://nuget.codeplex.com/releases

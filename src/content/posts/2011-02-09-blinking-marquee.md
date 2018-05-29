@@ -38,7 +38,7 @@ Blink & AJAX, how awesome!
 Here's a [jsfiddle][4] if you want to play too.
 
 
-  [1]: http://www.aaron-powell.com/doing-it-wrong/blink
-  [2]: http://www.aaron-powell.com/doing-it-wrong/marquee
+  [1]: https://www.aaron-powell.com/doing-it-wrong/blink
+  [2]: https://www.aaron-powell.com/doing-it-wrong/marquee
   [3]: http://api.jquery.com/category/deferred-object/
   [4]: http://jsfiddle.net/slace/C85VH/

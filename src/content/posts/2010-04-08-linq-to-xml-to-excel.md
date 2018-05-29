@@ -126,5 +126,5 @@ There you have it, how to create an Excel document using LINQ to XML and C#.
 
 
   [1]: http://msdn.microsoft.com/en-us/vbasic/bb927708.aspx
-  [2]: http://www.aaron-powell.com/get/media/1198/linq_to_excel001.png
+  [2]: https://www.aaron-powell.com/get/media/1198/linq_to_excel001.png
   [3]: /get/csharp/excelgenerator.zip

@@ -71,12 +71,12 @@ A really nice feature about deleting content in Umbraco is that it has the idea 
 Again we've seen two different takes on how  to perform a task with the two CMSs, with Orchard staying with it's minimalistic but direct approach to managing content, and Umbraco being a lot more visual about what you're wanting to achieve.
 
 
-  [1]: http://www.aaron-powell.com/orchard-umbraco
-  [2]: http://www.aaron-powell.com/get/orchard-umbraco/orchard-content/008.png
-  [3]: http://www.aaron-powell.com/get/orchard-umbraco/orchard-content/009.png
-  [4]: http://www.aaron-powell.com/orchard-umbraco/creating-content
-  [5]: http://www.aaron-powell.com/get/orchard-umbraco/orchard-content/010.png
-  [6]: http://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/007.png
-  [7]: http://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/008.png
-  [8]: http://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/009.png
-  [9]: http://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/010.png
+  [1]: https://www.aaron-powell.com/orchard-umbraco
+  [2]: https://www.aaron-powell.com/get/orchard-umbraco/orchard-content/008.png
+  [3]: https://www.aaron-powell.com/get/orchard-umbraco/orchard-content/009.png
+  [4]: https://www.aaron-powell.com/orchard-umbraco/creating-content
+  [5]: https://www.aaron-powell.com/get/orchard-umbraco/orchard-content/010.png
+  [6]: https://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/007.png
+  [7]: https://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/008.png
+  [8]: https://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/009.png
+  [9]: https://www.aaron-powell.com/get/orchard-umbraco/umbraco-content/010.png

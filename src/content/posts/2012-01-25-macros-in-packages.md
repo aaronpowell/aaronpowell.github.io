@@ -49,5 +49,5 @@ Seriously, it's so much easier to ship Macros in v5 that v4 and the fact that th
 But I think there's some room for improvements around this still and as I work on my v5 tasks set I'm going to be doing a simpler task for installing Macros, but in the meantime the above will work nicely **today**.
 
 
-  [1]: http://www.aaron-powell.com/umbraco/creating-an-installer-task
+  [1]: https://www.aaron-powell.com/umbraco/creating-an-installer-task
   [2]: http://blog.mattbrailsford.com/2011/09/30/automating-umbraco-v5-package-creation-using-msbuild/

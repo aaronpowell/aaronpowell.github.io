@@ -52,4 +52,4 @@ Well that makes for an easy solution, once you set a `dataType` on your jQuery a
 
 [There's an example repository available here.](https://github.com/aaronpowell/jquery-ajax-datatype-issue)
 
-  [1]: http://www.aaron-powell.com/get/firefox-vs-chrome-ajax-strangeness.PNG
+  [1]: https://www.aaron-powell.com/get/firefox-vs-chrome-ajax-strangeness.PNG

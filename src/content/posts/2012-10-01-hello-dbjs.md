@@ -30,7 +30,7 @@ It really starts getting convoluted when you're working with the events on the d
 
 The other ugliness starts coming into play when you want to hide your database code behind a public facing API, you're constantly having to take in callback arguments and it's Christmas trees all around.
 
-On top of this if you look at the code above it feels very reminiscent of old-IE event wire-ups, `onclick` and all that fun stuff, but today the [Promise](http://wiki.commonjs.org/wiki/Promises) callback pattern is a much more popular one ([you've probably seen it in jQuery](http://www.aaron-powell.com/doing-it-wrong/blinking-marquee)) as it does a great job of standardizing how you provide callbacks.
+On top of this if you look at the code above it feels very reminiscent of old-IE event wire-ups, `onclick` and all that fun stuff, but today the [Promise](http://wiki.commonjs.org/wiki/Promises) callback pattern is a much more popular one ([you've probably seen it in jQuery](https://www.aaron-powell.com/doing-it-wrong/blinking-marquee)) as it does a great job of standardizing how you provide callbacks.
 
 This was my impression when I started with IndexedDB so I decided that I'd address it in my own way.
 

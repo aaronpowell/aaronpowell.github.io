@@ -13,7 +13,7 @@
     - "/hello-mathy"
   summary: ""
 ---
-In a previous post I [laid out some thoughts on TypeScript](http://www.aaron-powell.com/javascript/thoughts-on-typescript) which came from building a little library in TypeScript called [mathy](https://github.com/aaronpowell/mathy.js).
+In a previous post I [laid out some thoughts on TypeScript](https://www.aaron-powell.com/javascript/thoughts-on-typescript) which came from building a little library in TypeScript called [mathy](https://github.com/aaronpowell/mathy.js).
 
 # Hello mathy
 

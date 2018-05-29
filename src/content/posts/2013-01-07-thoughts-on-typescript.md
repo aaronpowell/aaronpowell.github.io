@@ -14,7 +14,7 @@
 ---
 When [TypeScript](http://typescriptlang.org) was announced I was pretty skeptical of it. I've been doing JavaScript development for a while now, I know many of the ins and outs of JavaScript development and I've never seen any problem with the syntax or the lack of type system.
 
-But like a good skeptic I wanted to reserve my opinion until I had a chance to actually use it. This was the same approach [which I took with CoffeeScript](http://www.aaron-powell.com/javascript/postman), you don't really know something until you've made something with it (and for the record I wasn't particularly fussed by CoffeeScript).
+But like a good skeptic I wanted to reserve my opinion until I had a chance to actually use it. This was the same approach [which I took with CoffeeScript](https://www.aaron-powell.com/javascript/postman), you don't really know something until you've made something with it (and for the record I wasn't particularly fussed by CoffeeScript).
 
 Well I decided to do this, I wrote a small library called [mathy](https://github.com/aaronpowell/mathy.js) and I wanted to share some of my thoughts from having made something with it. Keep in mind this is only a small library so it's not exactly extensive, but I feel it's a good start.
 

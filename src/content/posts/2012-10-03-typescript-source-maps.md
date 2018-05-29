@@ -74,8 +74,8 @@ Happy cross-compiling.
 
   [1]: https://gist.github.com/3825576
   [2]: https://gist.github.com/3817035
-  [3]: http://www.aaron-powell.com/web/pubsub-in-typescript
-  [4]: http://www.aaron-powell.com/get/typescript/typescript-sourcemap-01.PNG
-  [5]: http://www.aaron-powell.com/get/typescript/typescript-sourcemap-02.PNG
-  [6]: http://www.aaron-powell.com/get/typescript/typescript-sourcemap-03.PNG
+  [3]: https://www.aaron-powell.com/web/pubsub-in-typescript
+  [4]: https://www.aaron-powell.com/get/typescript/typescript-sourcemap-01.PNG
+  [5]: https://www.aaron-powell.com/get/typescript/typescript-sourcemap-02.PNG
+  [6]: https://www.aaron-powell.com/get/typescript/typescript-sourcemap-03.PNG
   [7]: https://github.com/aaronpowell/typescript-pubsub

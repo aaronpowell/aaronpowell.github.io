@@ -75,13 +75,13 @@ Ideally I'd not be committing the generated files and have part of the app start
 So this is how I've gone about the relaunch of JavaScript Quiz. The new site should be active soon (awaiting the DNS to change over :P). I wont be porting the old comments so the old site will stay active. Hopefully I've got the redirects all sorted out (yes the 404 page is pretty shit so far :P). Hopefully this provides a nice new home for the site.
 
 
-  [1]: http://www.aaron-powell.com/javascript/javascript-quiz
+  [1]: https://www.aaron-powell.com/javascript/javascript-quiz
   [2]: http://javascriptquiz.com
   [3]: http://posterous.com/
   [4]: http://nodejs.org
   [5]: http://jekyllrb.com/
   [6]: http://funnelweblog.com/what-is-markdown
-  [7]: http://www.aaron-powell.com/umbraco/so-long-and-thanks-for-all-the-fish
+  [7]: https://www.aaron-powell.com/umbraco/so-long-and-thanks-for-all-the-fish
   [8]: https://github.com/balupton/docpad
   [9]: http://twitter.com/balupton
   [10]: http://npmjs.org

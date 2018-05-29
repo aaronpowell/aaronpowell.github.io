@@ -6,7 +6,7 @@ tags = ["generic .net", "random"]
 +++
 
 <p>
-Something else I see all too often at work (although not as often as <a href="/web/20090127032545/http://www.aaron-powell.com:80/blog.aspx?id=1251" target="_blank">not understanding the difference between client and server</a>) is the existance of the PDB file on a production web server.
+Something else I see all too often at work (although not as often as <a href="/web/20090127032545/https://www.aaron-powell.com:80/blog.aspx?id=1251" target="_blank">not understanding the difference between client and server</a>) is the existance of the PDB file on a production web server.
 </p>
 <p>
 PDB files are automatically created from Visual Studio through the .NET compilers, so why don't they belong on the production server?
@@ -28,7 +28,7 @@ And that's the vision of the PDB. The PDB maintains the information about where 
 So now that we know <em>what</em> is a PDB, <strong>why shouldn't it be on a production server</strong>?
 </p>
 <p>
-You could be mistaken for thinking that the PDB is a good idea to have on a production system. After all, when ever something does go wrong on a production system you want to get all the information you can, as quickly as you can. The user who generated the error wont often be able to give you all the information you require, and your error-producing method could be very long with several locations where the error may have come from (which kind of leads back to my <a href="/web/20090127032545/http://www.aaron-powell.com:80/blog.aspx?id=1312" target="_blank">previous post on catching System.Exception</a>).
+You could be mistaken for thinking that the PDB is a good idea to have on a production system. After all, when ever something does go wrong on a production system you want to get all the information you can, as quickly as you can. The user who generated the error wont often be able to give you all the information you require, and your error-producing method could be very long with several locations where the error may have come from (which kind of leads back to my <a href="/web/20090127032545/https://www.aaron-powell.com:80/blog.aspx?id=1312" target="_blank">previous post on catching System.Exception</a>).
 </p>
 <p>
 But to produce the additional information comes at a significant cost. Have you ever attached a debugger in Visual Studio onto a process? Next time you do watch the symbol loading list, or try doing it just after restarting IIS and notice the time it takes for a request just to happen. Then compare that to the first request after restarting an IIS without PDB files.

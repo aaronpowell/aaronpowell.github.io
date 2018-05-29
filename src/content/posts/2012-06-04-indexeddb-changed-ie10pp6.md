@@ -13,7 +13,7 @@
     - "/indexeddb-changed-ie10pp6"
   summary: ""
 ---
-When building [Pinboard for Windows 8](http://www.aaron-powell.com/pinboard-for-win8) I decided to use [IndexedDB](http://www.w3.org/TR/IndexedDB/) as the internal storage for the application since I was writing it using WinJS.
+When building [Pinboard for Windows 8](https://www.aaron-powell.com/pinboard-for-win8) I decided to use [IndexedDB](http://www.w3.org/TR/IndexedDB/) as the internal storage for the application since I was writing it using WinJS.
 
 Initially I wrote the application against the Consumer Preview release but when it came time to get it going for the Release Preview I hit a snag, the database layer was completely falling over! I kept getting an `InvalidAccessError` every time I tried to open a transaction. My code was looking like this:
 

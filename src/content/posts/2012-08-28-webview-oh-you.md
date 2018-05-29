@@ -28,7 +28,7 @@ Here's the XAML:
 
     <UserControl>
         <Grid>
-            <WebView Source="http://www.aaron-powell.com" />
+            <WebView Source="https://www.aaron-powell.com" />
         </Grid>
     </UserControl>
 
@@ -45,7 +45,7 @@ This coupled with the WebView's inability to animate with the rest of the contro
 Avoid the WebView control. Avoid it at all costs.
  
 
-  [1]: http://www.aaron-powell.com/get/memes/what-is-this-i-dont-even-spiderman.jpg
-  [2]: http://www.aaron-powell.com/xaml/xaml-by-a-web-guy
+  [1]: https://www.aaron-powell.com/get/memes/what-is-this-i-dont-even-spiderman.jpg
+  [2]: https://www.aaron-powell.com/xaml/xaml-by-a-web-guy
   [3]: http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.controls.webview
   [4]: http://nicksnettravels.builttoroam.com/post/2012/04/21/Limitations-of-the-WebView-in-Windows-8-Metro-Apps.aspx
