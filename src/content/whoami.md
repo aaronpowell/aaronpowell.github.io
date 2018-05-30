@@ -15,7 +15,7 @@ hidden: true
     </ul>
 </aside>
 
-Hi, my name's Aaron Powell and I'm a Technical Pre-sales Consultant at [Readify](https://readify.net) (but have held a number of roles at Readify since 2010), one of Australia's top software consultancies. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications. My background is ASP.NET as a server technology but I've expanded into Node.js, a bit of Go, but ultimately trying to be a polyglot.
+Hi, my name's Aaron Powell and I'm a Technical Pre-Sales Consultant at [Readify](https://readify.net) (but have held a number of roles at Readify since 2010), one of Australia's top software consultancies. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications. My background is ASP.NET as a server technology but I've expanded into Node.js, a bit of Go, but ultimately trying to be a polyglot.
 
 I'm also a passionate Open Source developer, with one of my main pet projects being [Chauffeur](https://github.com/aaronpowell/chauffeur) an automation tool for the [Umbraco CMS](http://umbraco.com).
 
@@ -36,12 +36,13 @@ Expanding on the work on Technical Pre-Sales I was undertaking as a Principal Co
 - Working with the sales team to qualify opportunities
 - Improving the technical skills of the sales team
 - Develop tools and practices to effectively respond to proposals
+- Create material that can be used by the sales team that speaks to the services Readify can deliver
 
 #### August 2016 - August 2017
 
 **Principal Consultant**
 
-This was the end goal of a 6 year journey I'd taken within Readify, that I [blogged about]({{< ref "posts/2016-08-29-SC-to-PC.md" >}}). As a Pricipal Consultant I:
+This was the end goal of a 6 year journey I'd taken within Readify, that I [blogged about]({{< ref "posts/2016-08-29-SC-to-PC.md" >}}). As a Principal Consultant I:
 
 - Worked on Pre-Sales activities such as tender responses and lead qualification
 - Consulted to a multinational FinTech company with producing a front-end web architecture based on React
