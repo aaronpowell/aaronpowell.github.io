@@ -1,1 +1,1 @@
-hugo --source "%cd%\src"  --destination "%cd%\.output" %*
+hugo.exe --source "%cd%\src"  --destination "%cd%\.output" %*
