@@ -6,6 +6,8 @@ draft = false
 tags = ["azure", "dddsydney"]
 +++
 
+> Only a couple of weeks after I posted this article Azure announced that they have support for [static websites in preview](https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/). Obviously this supersedes what I do here, but it doesn't make it any less accurate 😉.
+
 As you likely know, I'm one of the organisers of [DDD Sydney](https://next.dddsydney.com.au), a not for profit conference in Sydney. Being a not for profit I'm always looking at how we can slash our costs because every dollar counts and this year I decided to look at how we can slash our Azure costs.
 
 Why do we need to do this? Well over the last few years we've starts to get compound costs of running the web assets. I like the idea of having all the previous years websites still up and running because it gives people a view on what we've done over the years as an event and it's also useful as a marketing tool when we speak to sponsors.
