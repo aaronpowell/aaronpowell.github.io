@@ -7,7 +7,7 @@
   description: "It's time to really address that annoying habbit of developers to use `Assert.IsTrue` in their tests."
 ---
 
-I [blogged/ranted about `Assert.IsTrue`](/posts/2013-01-08-the-problem-with-assert-istrue.html) previously, well today I decided to work out a quick way to do bulk conversions of tests.
+I [blogged/ranted about `Assert.IsTrue`]({{< ref "2013-01-08-the-problem-with-assert-istrue.md" >}}) previously, well today I decided to work out a quick way to do bulk conversions of tests.
 
 Well the easiest way to go about this is using a good old Regular Expression:
 

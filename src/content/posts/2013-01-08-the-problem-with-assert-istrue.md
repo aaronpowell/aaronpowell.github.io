@@ -9,6 +9,7 @@
     - "opinionated"
     - "ranting"
     - "rant"
+    - "testing"
   migrated: "true"
   urls: 
     - "/rant/the-problem-with-assert-istrue"
@@ -16,6 +17,7 @@
 ---
 Have you ever seen a unit test that looks like this:
 
+```csharp
 	public void SomeTest()
 	{
 		var foo = new Bar();
@@ -24,6 +26,7 @@ Have you ever seen a unit test that looks like this:
 
 		Assert.IsTrue(result.Count() == 1);
 	}
+```
 
 Do you know what's wrong with this test? I'll give you a clue, the developer use `Assert.IsTrue` and by doing so **they've made a bad test**.
 
@@ -35,6 +38,7 @@ Take the above test and what happens when the equality is false? Well obviously 
 
 Here's a tip, use `Assert.AreEqual`! Every testing framework I've worked with has this method, or something that is pretty much that. Then you can write this:
 
+```csharp
 	public void SomeTest()
 	{
 		var foo = new Bar();
@@ -43,6 +47,7 @@ Here's a tip, use `Assert.AreEqual`! Every testing framework I've worked with ha
 
 		Assert.AreEqual(1, result.Count());
 	}
+```
 
 Now when your test fails the runner will tell you something along the lines of `Expected 1 but got 0`. This makes it much easier to work out what's wrong and fix your test.
 
