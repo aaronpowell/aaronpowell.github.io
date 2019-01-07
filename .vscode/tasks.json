@@ -6,8 +6,37 @@
         {
             "label": "run server",
             "type": "shell",
-            "command": "./run.bat",
+            "command": "./run.ps1",
+            "problemMatcher": [],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "powershell.exe"
+                    }
+                }
+            }
+        },
+        {
+            "label": "new post",
+            "type": "shell",
+            "command": "./New-Post.ps1",
+            "args": ["-Title", "${input:postName}"],
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "powershell.exe"
+                    }
+                }
+            },
             "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "postName",
+            "description": "Name of a new post",
+            "type": "promptString",
+            "default": ""
         }
     ]
 }
