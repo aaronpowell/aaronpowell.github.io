@@ -15,7 +15,7 @@ hidden: true
     </ul>
 </aside>
 
-Hi, my name's Aaron Powell and I'm a Technical Pre-Sales Consultant at [Readify](https://readify.net) (but have held a number of roles at Readify since 2010), one of Australia's top software consultancies. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications. My background is ASP.NET as a server technology but I've expanded into Node.js, a bit of Go, but ultimately trying to be a polyglot.
+Hi, my name's Aaron Powell and I'm a Regional Cloud Developer Advocate (CDA) at Microsoft. Prior to that I worked at [Readify](https://readify.net) in a number of different roles. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications. My background is ASP.NET as a server technology but I've expanded into Node.js, a bit of Go, but ultimately trying to be a polyglot.
 
 I'm also a passionate Open Source developer, with one of my main pet projects being [Chauffeur](https://github.com/aaronpowell/chauffeur) an automation tool for the [Umbraco CMS](http://umbraco.com).
 
@@ -25,9 +25,17 @@ Since 2011 I've been awarded a [Microsoft MVP (Front-end Web Development)](https
 
 ## Employment History
 
-### September 2010 - Present - [Readify](https://readify.net)
+### January 2019 - Present - [Microsoft](https://careers.microsoft.com)
 
-#### September 2017 - Present
+#### January 2019 - Present
+
+**Regional [Cloud Developer Advocate (CDA)](https://developer.microsoft.com/en-us/advocates/index.html)**
+
+I work with developer communities to grow, achieve more and be more awesome.
+
+### September 2010 - December 2018 - [Readify](https://readify.net)
+
+#### September 2017 - December 2018
 
 **Technical Pre-sales Consultant**
 
