@@ -12,7 +12,7 @@ With another year done it time to get going on my year in review post. This year
 
 ## Getting Personal
 
-I'll start with the personal side of what made 2018 big, and that was that my wife and I welcomed our 2nd child on March. Unfortunately it was as smooth sailing as we had hoped, with him spending the first 8 days of his life in the neonatal intensive care unit (NICU) at our hospital. He was born just a touch earlier than planned and he had some trouble breathing which resulted in his stay in NICU.
+I'll start with the personal side of what made 2018 big, and that was that my wife and I welcomed our 2nd child in March. Unfortunately it wasn't as smooth sailing as we had hoped, with him spending the first 8 days of his life in the neonatal intensive care unit (NICU) at our hospital. He was born just a touch earlier than planned and he had some trouble breathing which resulted in his stay in NICU.
 
 While he was only in there for a short period of time, relative to what most people there experience, it's really tough to bring your wife home but not your newborn too. But we were lucky that he recovered quickly and now, 10 months on, you wouldn't have any idea that he'd had any issues.
 
