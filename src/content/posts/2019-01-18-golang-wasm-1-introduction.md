@@ -10,9 +10,10 @@ tags = ["golang", "wasm", "javascript"]
 > 
 > The series consists of the following parts:
 > * Part 1 - Introduction and setup (this post)
-> * Part 2 - You first bit of Go
-> * Part 3 - Compiling Go with webpack
-> * Part 4 - Go, WASM, React and TypeScript
+> * [Part 2 - You first bit of Go]({{< ref "posts/2019-01-18-golang-wasm-2-writing-go.md" >}})
+> * Part 3 - Interacting with JavaScript from Go
+> * Part 4 - Compiling Go with webpack
+> * Part 5 - Go, WASM, React and TypeScript
 
 I've always like tinkering with different technology and trying to stay abreast of things that look interesting. One thing that's been on my radar for a while now is [Go, aka Golang](https://golang.org) but as someone who predominately does web development in the browser I was never quite sure _where_ Go could fit into what I tend to build.
 
