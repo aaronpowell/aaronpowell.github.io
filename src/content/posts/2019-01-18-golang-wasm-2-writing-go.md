@@ -1,5 +1,5 @@
 +++
-title = "Golang Learning Golang through WebAssembly - Part 2, Writing your first piece of Go"
+title = "Learning Golang through WebAssembly - Part 2, Writing your first piece of Go"
 date = 2019-01-18T14:55:56+11:00
 description = "Writing your first piece of Go to combine with WASM"
 draft = true
