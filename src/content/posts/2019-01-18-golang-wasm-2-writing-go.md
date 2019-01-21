@@ -6,18 +6,20 @@ draft = true
 tags = ["golang", "wasm", "javascript"]
 +++
 
-> This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development.
-> 
-> The series consists of the following parts:
-> * [Part 1 - Introduction and setup]({{< ref "posts/2019-01-18-golang-wasm-1-introduction.md" >}})
-> * Part 2 - You first bit of Go (this post)
-> * Part 3 - Interacting with JavaScript from Go
-> * Part 4 - Compiling Go with webpack
-> * Part 5 - Go, WASM, React and TypeScript
+_This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
 
-You've got your [Golang dev environment setup]({{< ref "posts/2019-01-18-golang-wasm-1-introduction.md" >}}) and now it's time to put it to good use.
+* _[Part 1 - Introduction and setup]({{< ref "posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
+* _Part 2 - Writing you first piece of Go (this post)_
+* _Part 3 - Interacting with JavaScript from Go_
+* _Part 4 - Compiling Go with webpack_
+* _Part 5 - Go, WASM, React and TypeScript_
+
+***
+
 
 ## Hello WASM, Go style
+
+You've got your [Golang dev environment setup]({{< ref "posts/2019-01-18-golang-wasm-1-introduction.md" >}}) and now it's time to put it to good use.
 
 We're going to start really basic and write what amounts to a Hello World code:
 
