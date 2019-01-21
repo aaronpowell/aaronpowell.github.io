@@ -116,11 +116,13 @@ But why does it take an array? Well apart from the fact that `js.NewCallback` re
 
 Now compile it, launch a browser and call your globally declared function, only to get this error message:
 
-> printMessage("")
-> wasm_exec.js:378 Uncaught Error: bad callback: Go program has already exited
->     at global.Go._resolveCallbackPromise (wasm_exec.js:378)
->     at wasm_exec.js:394
->     at <anonymous>:1:1
+```
+printMessage("")
+ wasm_exec.js:378 Uncaught Error: bad callback: Go program has already exited
+     at global.Go._resolveCallbackPromise (wasm_exec.js:378)
+     at wasm_exec.js:394
+     at <anonymous>:1:1
+```
 
 _sad trombone_
 
