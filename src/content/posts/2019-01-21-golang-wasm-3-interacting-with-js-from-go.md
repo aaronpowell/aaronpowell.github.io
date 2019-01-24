@@ -11,7 +11,7 @@ _This blog is part of a series I'm writing about learning how to write Go (Golan
 * _[Part 1 - Introduction and setup]({{< ref "posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
 * _[Part 2 - Writing you first piece of Go]({{< ref "posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
 * _Part 3 - Interacting with JavaScript from Go (this post)_
-* _Part 4 - Response to JavaScript_
+* _Part 4 - [Sending a Response to JavaScript]({{< ref "posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
 * _Part 5 - Compiling Go with webpack_
 * _Part 6 - Go, WASM, React and TypeScript_
 
