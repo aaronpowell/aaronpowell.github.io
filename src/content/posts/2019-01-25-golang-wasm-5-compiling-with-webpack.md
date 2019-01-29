@@ -299,14 +299,14 @@ function loader(this: webpack.loader.LoaderContext, contents: string) {
 
 Remember how we generated the WASM file into the same location on disk as the original `.go` file? Well that's fine to output as `go build` requires, but we actually want it to go with the rest of the webpack output. To do this we use the [`emitFile`](https://webpack.js.org/api/loaders/#this-emitfile) method on the loader context, providing it the contents of the file as a `Buffer`. That's why I use `readFileSync` to get the file into memory, then I `unlinkSync` to delete it from disk, since the original output isn't needed anymore.
 
-Finally I generate a `require` statement to the `wasm_exec.js` file that is bundled with the loader (I had to make a minor change to it so it worked with webpack). I'm not sure if I'm doing that right as you'll see a warning in the console from webpack:
+Finally I generate a `require` statement to the `wasm_exec.js` file that is bundled with the loader (I had to make a minor change to it so it worked with webpack). You'll see this message in the debugging console:
 
 ```
 ../lib/wasm_exec.js 9:19-26
 Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
 ```
 
-In all my testing it doesn't seem to really impact anything, but you might not get things as optimised as you could because of it.
+This is because the `wasm_exec.js` file is being added as a `require` statement to webpack but we're not explicitly exporting anything from it (since it just augments the `global` scope), meaning webpack is unsure what we're actually using in there and it can't undertake [tree shaking](https://webpack.js.org/guides/tree-shaking/) to remove unneeded code (and thus optimise the application).
 
 ## Conclusion
 
