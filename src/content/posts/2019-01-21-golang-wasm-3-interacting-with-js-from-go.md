@@ -13,7 +13,7 @@ _This blog is part of a series I'm writing about learning how to write Go (Golan
 * _Part 3 - Interacting with JavaScript from Go (this post)_
 * _[Part 4 - Sending a Response to JavaScript]({{< ref "posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
 * _[Part 5 - Compiling Go with webpack]({{< ref "posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
-* _Part 6 - Go, WASM, React and TypeScript_
+* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
 
 ***
 
