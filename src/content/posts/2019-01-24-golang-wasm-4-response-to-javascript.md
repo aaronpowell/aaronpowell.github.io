@@ -8,12 +8,12 @@ tags = ["golang", "wasm", "javascript"]
 
 _This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
 
-* _[Part 1 - Introduction and setup]({{< ref "posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
-* _[Part 2 - Writing you first piece of Go]({{< ref "posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
-* _[Part 3 - Interacting with JavaScript from Go]({{< ref "posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
+* _[Part 1 - Introduction and setup]({{< ref "/posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
+* _[Part 2 - Writing you first piece of Go]({{< ref "/posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
+* _[Part 3 - Interacting with JavaScript from Go]({{< ref "/posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
 * _Part 4 - Sending a Response to JavaScript (this post)_
-* _[Part 5 - Compiling Go with webpack]({{< ref "posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
-* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
+* _[Part 5 - Compiling Go with webpack]({{< ref "/posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
+* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "/posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
 
 ***
 

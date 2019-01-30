@@ -12,7 +12,7 @@ tags = ["chauffeur", "umbraco"]
 
 For a while it's been pretty stable, it did pretty much what I was wanting it to do, so really the only thing missing was the fact that it wasn't a "v1 product".
 
-Well today to celebrate the first Australian Umbraco festival, where I [spoke about Chauffeur]({{< ref "posts/2018-01-21-learn-about-umbraco-cd-at-uduf.md" >}}), I decided it was time to bite the bullet and call it v1.
+Well today to celebrate the first Australian Umbraco festival, where I [spoke about Chauffeur]({{< ref "/posts/2018-01-21-learn-about-umbraco-cd-at-uduf.md" >}}), I decided it was time to bite the bullet and call it v1.
 
 The one big thing that I did add for the new release was a proper [documentation website](https://aaronpowell.github.io/Chauffeur/) where I cover off getting started and different [Deliverables that ship in the box](https://aaronpowell.github.io/Chauffeur/available-deliverables.html).
 

@@ -50,7 +50,7 @@ Expanding on the work on Technical Pre-Sales I was undertaking as a Principal Co
 
 **Principal Consultant**
 
-This was the end goal of a 6 year journey I'd taken within Readify, that I [blogged about]({{< ref "posts/2016-08-29-SC-to-PC.md" >}}). As a Principal Consultant I:
+This was the end goal of a 6 year journey I'd taken within Readify, that I [blogged about]({{< ref "/posts/2016-08-29-SC-to-PC.md" >}}). As a Principal Consultant I:
 
 - Worked on Pre-Sales activities such as tender responses and lead qualification
 - Consulted to a multinational FinTech company with producing a front-end web architecture based on React

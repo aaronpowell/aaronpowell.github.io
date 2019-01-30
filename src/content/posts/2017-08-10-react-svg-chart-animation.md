@@ -6,7 +6,7 @@ draft = false
 tags = ["react", "svg"]
 +++
 
-In my [last post]({{< ref "posts/2017-08-08-react-svg-animations.md" >}}) I talked about animating SVG objects and how to combine that with React. As I talked about the catalyst for it was looking into how we could do charts.
+In my [last post]({{< ref "/posts/2017-08-08-react-svg-animations.md" >}}) I talked about animating SVG objects and how to combine that with React. As I talked about the catalyst for it was looking into how we could do charts.
 
 Well of course after my initial experiments I wanted to actually look at how to do a chart.
 
@@ -160,4 +160,4 @@ And that's all, we have a lovely animated line cart.
 
 Again we've seen that a small bit of code and React components can make a very easy to read animated SVG without any external dependencies.
 
-I've created another example [that you can see here]({{< ref "demos/react-svg/react-svg-line-chart.md" >}}) in action, and the data is randomly generated so reloading the page will get you a new chart each time :smile:.
+I've created another example [that you can see here]({{< ref "/demos/react-svg/react-svg-line-chart.md" >}}) in action, and the data is randomly generated so reloading the page will get you a new chart each time :smile:.

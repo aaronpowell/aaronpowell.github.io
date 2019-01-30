@@ -62,12 +62,12 @@ To not get completely lost with Lucene you need to understand the terms which it
  * AND, OR, NOT all comprise Boolean Operations which can affect how a Term is handled within a Query
 
 
-  [1]: {{< ref "posts/2010-04-14-lucene-net-overview.md" >}}
-  [2]: {{< ref "posts/2010-05-27-lucene-analyzer.md" >}}
-  [3]: {{< ref "posts/2010-07-03-documents-in-lucene-net.md" >}}
-  [4]: {{< ref "posts/2010-07-10-building-an-application-with-lucene-net.md" >}}
+  [1]: {{< ref "/posts/2010-04-14-lucene-net-overview.md" >}}
+  [2]: {{< ref "/posts/2010-05-27-lucene-analyzer.md" >}}
+  [3]: {{< ref "/posts/2010-07-03-documents-in-lucene-net.md" >}}
+  [4]: {{< ref "/posts/2010-07-10-building-an-application-with-lucene-net.md" >}}
   [5]: http://lucene.apache.org/lucene.net/
   [6]: http://lucene.apache.org/java/2_3_2/queryparsersyntax.html
-  [7]: {{< ref "posts/2010-07-03-documents-in-lucene-net.md" >}}
-  [8]: {{< ref "posts/2010-07-03-documents-in-lucene-net.md" >}}
-  [9]: {{< ref "posts/2010-05-27-lucene-analyzer.md" >}}
+  [7]: {{< ref "/posts/2010-07-03-documents-in-lucene-net.md" >}}
+  [8]: {{< ref "/posts/2010-07-03-documents-in-lucene-net.md" >}}
+  [9]: {{< ref "/posts/2010-05-27-lucene-analyzer.md" >}}

@@ -132,7 +132,7 @@ This will get all the latest change sets form the Umbraco core repository. You c
 
 Here we've looked at how the move to Mercurial for Umbraco will make life easier for people outside of the Umbraco core team that want to contribute back. Hopefully this more streamlined process will mean that we see more fixes from the community so we can create even better a product :).
 
-  [1]: {{< ref "posts/2010-12-11-mercurial-101-for-umbraco-developers.md" >}}
+  [1]: {{< ref "/posts/2010-12-11-mercurial-101-for-umbraco-developers.md" >}}
   [2]: http://umbraco.codeplex.com/SourceControl/list/changesets
   [3]: http://tortoisehg.bitbucket.org/
   [4]: http://umbraco.org/follow-us/blog-archive/2010/12/8/heads-up-umbraco-sourcecode-at-codeplex-to-switch-to-mercurial

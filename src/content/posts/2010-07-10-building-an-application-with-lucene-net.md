@@ -153,7 +153,7 @@ But hopefully this gives you a view at how you can use Lucene in your own applic
 
   [1]: /get/csharp/BlogManager/blogmanager001.PNG
   [2]: http://lucene.apache.org/java/2_9_2/api/all/org/apache/lucene/analysis/standard/StandardAnalyzer.html
-  [3]: {{< ref "posts/2010-05-27-lucene-analyzer.md" >}}
+  [3]: {{< ref "/posts/2010-05-27-lucene-analyzer.md" >}}
   [4]: http://lucene.apache.org/java/2_9_2/api/all/index.html?org/apache/lucene/store/SimpleFSDirectory.html
   [5]: http://msdn.microsoft.com/en-us/library/system.servicemodel.syndication.syndicationfeed.aspx
   [6]: /get/csharp/BlogManager/blogmanager002.PNG

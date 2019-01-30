@@ -79,8 +79,8 @@ Use this sparingly, as it can blow out the size of your index if you store every
 So to finish off this time we've looked at the Document side of a Document Database. Understanding Documents and Fields will allow you to start getting the full power out of the Lucene.Net API.
 
 
-  [1]: {{< ref "posts/2010-04-14-lucene-net-overview.md" >}}
+  [1]: {{< ref "/posts/2010-04-14-lucene-net-overview.md" >}}
   [2]: http://ravendb.net/
   [3]: http://examine.codeplex.com
-  [4]: {{< ref "posts/2010-05-27-lucene-analyzer.md" >}}
-  [5]: {{< ref "posts/2010-07-10-building-an-application-with-lucene-net.md" >}}
+  [4]: {{< ref "/posts/2010-05-27-lucene-analyzer.md" >}}
+  [5]: {{< ref "/posts/2010-07-10-building-an-application-with-lucene-net.md" >}}

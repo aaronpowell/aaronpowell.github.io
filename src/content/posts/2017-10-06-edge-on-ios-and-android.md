@@ -36,6 +36,6 @@ What does this all mean as an user browsing the web? Well it means that the vers
 
 ## Conclusion
 
-Unsurprisingly there's been a bunch of internet trolling out on this already, "why don't you just use Blink on desktop" (which I've [blogged about before]({{< ref "posts/2015-01-26-the-danger-of-the-just-use-webkit-mindset.md" >}})), "fix/add/remove feature X" (maybe [vote for it](https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer)), etc. but it's pretty par for the course these days.
+Unsurprisingly there's been a bunch of internet trolling out on this already, "why don't you just use Blink on desktop" (which I've [blogged about before]({{< ref "/posts/2015-01-26-the-danger-of-the-just-use-webkit-mindset.md" >}})), "fix/add/remove feature X" (maybe [vote for it](https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer)), etc. but it's pretty par for the course these days.
 
 Edge of iOS and Android it's meant to be for everyone, it's targeted at people who are already using Edge as their primary browser and want to have their favorites, reading list, passwords, etc. roaming across multiple devices.

@@ -6,7 +6,7 @@ draft = false
 tags = ["random"]
 +++
 
-With another year done it time to get going on my year in review post. This year I've actually managed to get it done a full 3 days earlier than [2017's]({{ < ref "posts/2018-01-11-2017-a-year-in-review.md" >}})!
+With another year done it time to get going on my year in review post. This year I've actually managed to get it done a full 3 days earlier than [2017's]({{ < ref "/posts/2018-01-11-2017-a-year-in-review.md" >}})!
 
 2018 was a pretty quiet year for me on the blogging front, with only 11 posts (including a 'year in review' one), and most of them were meta-posts about blogging or how I run websites. This reflects in my traffic stats, there was a drop in traffic over 2018 vs 2017. But this year was less about blogging and instead it was quite a big year for me both personally and professionally.
 
@@ -20,7 +20,7 @@ Ultimately being a dad of 2 had meant that I had a lot less free time to dedicat
 
 ## Being Professional
 
-Throughout 2018 I continued with my [secondment to the Readify sales team]({{< ref "posts/2017-09-27-readify-pc-12-months-on.md" >}}). Being 'off the tools' did mean that I was having to invest a bit more time out of hours to stay up to date, or take more targeted PD when I wanted to learn something.
+Throughout 2018 I continued with my [secondment to the Readify sales team]({{< ref "/posts/2017-09-27-readify-pc-12-months-on.md" >}}). Being 'off the tools' did mean that I was having to invest a bit more time out of hours to stay up to date, or take more targeted PD when I wanted to learn something.
 
 I used this as a chance to really brush up on Azure, got myself a MCSA so apparently I know all about the Azure!
 

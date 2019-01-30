@@ -1,67 +1,99 @@
-$(document).ready(function() {
+(function() {
+  var $ = document.querySelector.bind(document),
+      $$ = document.querySelectorAll.bind(document),
 
-    // Nav starts at bottom then is fixed to top
-    // Logo and hamburger menus fade in and out
-    $(window).scroll(function() {
-        var scrollPosition = $(this).scrollTop();
-        if( scrollPosition > $(this).height() - $("nav").height() ) {
-            $("nav").addClass("nav-fixed");
-            $("nav > div.logo").css('visibility','visible').fadeIn();
-            $("nav > div.nav-toggle").css('visibility','visible').fadeIn();
-        } else {
-            $("nav").removeClass("nav-fixed");
-            $("nav > div.logo").css('visibility','hidden').fadeOut();
-            $("nav > div.nav-toggle").css('visibility','hidden').fadeOut();
-        }
-        // // TODO Active nav link changes on scroll
-        // $(".section").each(function() {
-        //     var target = $(this).offset().top;
-        //     var id = $(this).attr("id");
-        //     if( scrollPosition >= target ) {
-        //         $("nav > div > h3 > a").removeClass("active");
-        //         $("nav > div > h3 > a[href=#" + id + "]").addClass("active");
-        //     }
-        // });
-    });
+      menuActive = false
 
-    // Full screen nav open on click
-    $(".nav-icon").click(function(){
-        $(".nav-full").toggleClass("active");
-        $("main").toggleClass("active");
-        $(this).find("img").toggle();
-    });
+  // Nav starts at bottom then is fixed to top
+  // Logo and hamburger menus fade in and out
+  window.onscroll = function() {
+    var scrollPosition = window.pageYOffset || document.documentElement.scrollTop,
+        windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+        navHeight = $('nav').clientHeight
 
-    // Full screen nav close on click
-    $(".nav-full").find("a").click(function(){
-        $(".nav-full").toggleClass("active");
-        $("main").toggleClass("active");
-        $(".nav-icon").find("img").toggle();
-    });
+    if (scrollPosition > windowHeight - navHeight) {
+      // Nav is fixed to top
+      $('nav').classList.add('nav-fixed')
+      $$('nav > .logo, nav > .nav-toggle').forEach(function(el) {
+        el.style.visibility = 'visible'
+        el.classList.add('show')
+        el.classList.remove('hide')
+      })
+    } else {
+      // Nav is not fixed
+      $('nav').classList.remove('nav-fixed')
+      $$('nav > .logo, nav > .nav-toggle').forEach(function(el) {
+        el.style.visibility = 'hidden'
+        el.classList.add('hide')
+        el.classList.remove('show')
+      })
+    }
+  }
 
-    // Highlight.js initialization
-    $("pre code").each(function(i, block) {
-        hljs.highlightBlock(block);
-    });
+  // Full screen nav open on click
+  $('.nav-icon').addEventListener('click', function() {
+    $$('.nav-full, main').forEach(function(el) {
+      el.classList.toggle('active')
+    })
+    if (menuActive) {
+      this.querySelector('img:nth-of-type(1)').style.display = 'block'
+      this.querySelector('img:nth-of-type(2)').style.display = 'none'
+      menuActive = false
+    } else {
+      this.querySelector('img:nth-of-type(1)').style.display = 'none'
+      this.querySelector('img:nth-of-type(2)').style.display = 'block'
+      menuActive = true
+    }
+  })
 
-});
+  // Full screen nav close on click
+  $$('.nav-full a').forEach(function(links) {
+    links.addEventListener('click', function() {
+      $$('.nav-full, main').forEach(function(el) {
+        el.classList.toggle('active')
+      })
+    })
+  })
 
-// Mobile browsers viewport height bug fix
-function fullMobileViewport() {
-    var HEIGHT_CHANGE_TOLERANCE = 100; // Approximately URL bar height in Chrome
-    var element = $(this);
-    var viewportHeight = $(window).height();
+  // Fix logoBig drawing over nav when click on logoSmall while nav open
+  $('.logo').addEventListener('click', function() {
+    if ($('.nav-full').classList.contains('active')) {
+      $$('.nav-full, main').forEach(function(el) {
+        el.classList.toggle('active')
+      })
+    }
+  })
 
-    $(window).resize(function () {
-        if (Math.abs(viewportHeight - $(window).height()) > HEIGHT_CHANGE_TOLERANCE) {
-            viewportHeight = $(window).height();
-            update();
-        }
-    });
+  // Disable scroll when full screen nav is open
+  $('body').addEventListener('click', function() {
+    if ($('.nav-full').classList.contains('active')) {
+      $('html').style.overflowY = 'hidden'
+    } else {
+      $('html').style.overflowY = 'scroll'
+    }
+  })
+
+  // Mobile browsers viewport height bug fix
+  function fullMobileViewport() {
+    var element = this,
+        viewportHeight = window.innerHeight,
+        heightChangeTolerance = 100 // Approximate address bar height in Chrome
+
+    $(window).resize(function() {
+      if (Math.abs(viewportHeight - window.innerHeight) > heightChangeTolerance) {
+        viewportHeight = window.innerHeight
+        update()
+      }
+    })
 
     function update() {
-        element.css("height", viewportHeight + "px");
+      element.style.height = (viewportHeight + 'px')
     }
 
-    update();
-}
-$("header").each(fullMobileViewport);
+    update()
+  }
+
+  $$('header').forEach(function() {
+    fullMobileViewport
+  })
+})()

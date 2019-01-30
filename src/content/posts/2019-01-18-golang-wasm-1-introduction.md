@@ -9,11 +9,11 @@ tags = ["golang", "wasm", "javascript"]
 _This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
 
 * _Part 1 - Introduction and setup (this post)_
-* _[Part 2 - Writing you first piece of Go]({{< ref "posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
-* _[Part 3 - Interacting with JavaScript from Go]({{< ref "posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
-* _[Part 4 - Sending a Response to JavaScript]({{< ref "posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
-* _[Part 5 - Compiling Go with webpack]({{< ref "posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
-* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
+* _[Part 2 - Writing you first piece of Go]({{< ref "/posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
+* _[Part 3 - Interacting with JavaScript from Go]({{< ref "/posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
+* _[Part 4 - Sending a Response to JavaScript]({{< ref "/posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
+* _[Part 5 - Compiling Go with webpack]({{< ref "/posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
+* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "/posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
 
 ***
 
@@ -23,7 +23,7 @@ I've always like tinkering with different technology and trying to stay abreast 
 
 Another thing that I'd been meaning to pick up is [Web Assembly, aka WASM](https://webassembly.org/) but again I've never quite had the time to pick it up. If you're not familiar with WASM, it's a new component of the web platform to allow developers to use high level languages like C, C++, Rust, Go, .NET, etc. in the browser in a native way, rather than converted to JavaScript. I'm by no means a WASM expert, but after a week of digging into things I've found some really interesting tidbits I'll share along the way.
 
-As I recently [started a new Developer Relations job]({{< ref "posts/2019-01-14-starting-2019-with-a-new-job.md" >}}) I decided that now was the perfect time for me to start exploring these technologies.
+As I recently [started a new Developer Relations job]({{< ref "/posts/2019-01-14-starting-2019-with-a-new-job.md" >}}) I decided that now was the perfect time for me to start exploring these technologies.
 
 And as it so happens Go's 1.11 release last year includes [experimental WASM support](https://golang.org/doc/go1.11#wasm), so it looks like it's meant to be.
 

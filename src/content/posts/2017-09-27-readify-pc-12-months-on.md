@@ -6,7 +6,7 @@ draft = false
 tags = ["readify", "career"]
 +++
 
-Around 12 months ago I wrote a blog post [about my journey from SD to PC at Readify]({{< ref "posts/2016-08-29-SC-to-PC.md" >}}) and I thought it might be worthwhile doing a follow up to that about how the 12 months since then have gone. If you haven't read the first one you might want to read it, it'll give a bunch of context into what I'm talking about here.
+Around 12 months ago I wrote a blog post [about my journey from SD to PC at Readify]({{< ref "/posts/2016-08-29-SC-to-PC.md" >}}) and I thought it might be worthwhile doing a follow up to that about how the 12 months since then have gone. If you haven't read the first one you might want to read it, it'll give a bunch of context into what I'm talking about here.
 
 ## What's Changed?
 

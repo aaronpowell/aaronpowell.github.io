@@ -13,7 +13,7 @@ enableEmoji = "true"
 [Params]
     tagline = "Aaron Powell - LINQ to Fail"
     author = "Aaron Powell"
-    description = "Readify Principal Consultant"
+    description = "Microsoft Cloud Developer Advocate"
     logoBig = "/images/logo.png"
     logoSmall = "/images/logo.png"
     favicon = "favicon.ico"
@@ -23,13 +23,17 @@ enableEmoji = "true"
     github = "aaronpowell"
     email = "website-contact@aaron-powell.com"
     googleTagManager = ""
-    highlightJS = false
     copyright = true
     credit = true
     customCSS = true
     cacheBustCSS = false
     cacheBustJS = false
     ajaxFormspree = true
+
+    # Code highlighting with highlight.js
+    highlightJS = true
+    highlightJSStyle = "/highlightjs/styles/github.css" # For custom highlight.js styles, add your /path/to/styles/default.css
+    highlightJSScript = "/highlightjs/highlight.pack.js" # For custom highlight.js languages config, add your /path/to/highlight.pack.js
 
 [[menu.main]]
     name = "About"

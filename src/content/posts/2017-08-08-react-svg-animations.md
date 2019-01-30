@@ -34,7 +34,7 @@ Ta-da!
 
 Ok, so that wasn't a particularly hard ey? Well how if we want to add animations? I grabbed an example off [MSDN (example #2)](https://msdn.microsoft.com/en-us/library/gg193979(v=vs.85).aspx#example2) to use as my demo.
 
-I created a demo [that can be found here]({{< ref "demos/react-svg/react-svg-example.md" >}}). Comparing that to the original example code it's a lot cleaner as we no longer need to dive into the DOM ourselves, by using `setState` it's quite easy to set the `transform` attribute.
+I created a demo [that can be found here]({{< ref "/demos/react-svg/react-svg-example.md" >}}). Comparing that to the original example code it's a lot cleaner as we no longer need to dive into the DOM ourselves, by using `setState` it's quite easy to set the `transform` attribute.
 
 Now we're using `requestAnimationFrame` to do the animation (which in turn calls `setState`) which we can use the `componentDidMount` to start and `componentWillUnmount` to stop it.
 
@@ -86,7 +86,7 @@ const rotate = (Component, { angularLimit, thetaDelta }) => {
 
 Basically we've moved the logic for playing with `requestAnimationFrame` up into it, making it really easy to rotate a lot of different SVG elements. Also instead of applying the `transform` to the `rect` element itself we apply it to a wrapping `<g>` element.
 
-I've created a [second example]({{< ref "demos/react-svg/react-svg-example-hoc.md" >}}) to show how this works too.
+I've created a [second example]({{< ref "/demos/react-svg/react-svg-example-hoc.md" >}}) to show how this works too.
 
 ## Conclusion
 

@@ -6,9 +6,9 @@ draft = false
 tags = ["career", "readify", "microsoft"]
 +++
 
-In my [2018 year in review]({{< ref "posts/2019-01-08-2018-a-year-in-review.md" >}}) I mentioned that I wrapped up 2018 by wrapping up at Readify and in January this year I started at Microsoft as a Cloud Developer Advocate.
+In my [2018 year in review]({{< ref "/posts/2019-01-08-2018-a-year-in-review.md" >}}) I mentioned that I wrapped up 2018 by wrapping up at Readify and in January this year I started at Microsoft as a Cloud Developer Advocate.
 
-I've blogged about the [journey]({{< ref "posts/2016-08-29-SC-to-PC.md" >}}) I [took]({{< ref "posts/2017-09-27-readify-pc-12-months-on.md" >}}) at Readify as I moved through the consulting team and into the sales team. But after 8 years, 3 months and 2 days I left Readify for the last time (as an employee).
+I've blogged about the [journey]({{< ref "/posts/2016-08-29-SC-to-PC.md" >}}) I [took]({{< ref "/posts/2017-09-27-readify-pc-12-months-on.md" >}}) at Readify as I moved through the consulting team and into the sales team. But after 8 years, 3 months and 2 days I left Readify for the last time (as an employee).
 
 ## Why now?
 

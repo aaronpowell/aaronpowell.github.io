@@ -6,15 +6,15 @@ draft = false
 tags = ["web", "speaking"]
 +++
 
-I recently blogged [about my experience at MS Edge Web Summit]({{< ref "posts/2017-09-15-msedge-summit-2017.md" >}}). On the back of this I was invited to speak at [ALT.NET Sydney](https://www.meetup.com/en-AU/Sydney-Alt-Net/) to share some of the things I'd learnt about. I covered off three topics, the [Payment Request API](http://www.w3.org/TR/payment-request/), [Sonar](https://sonarwhal.com/) and some new features in F12.
+I recently blogged [about my experience at MS Edge Web Summit]({{< ref "/posts/2017-09-15-msedge-summit-2017.md" >}}). On the back of this I was invited to speak at [ALT.NET Sydney](https://www.meetup.com/en-AU/Sydney-Alt-Net/) to share some of the things I'd learnt about. I covered off three topics, the [Payment Request API](http://www.w3.org/TR/payment-request/), [Sonar](https://sonarwhal.com/) and some new features in F12.
 
 For the Payment Request API I created some demos:
 
-1. [A basic demo]({{< ref "demos/payment-request/demo1.md" >}})
-1. [A demo using multiple payment methods]({{< ref "demos/payment-request/demo2.md" >}})
-1. [Requesting shipping address]({{< ref "demos/payment-request/demo3.md" >}})
-1. [Dynamic shipping options]({{< ref "demos/payment-request/demo4.md" >}})
-1. ["Lazy loading" shipping options]({{< ref "demos/payment-request/demo4.md" >}})
+1. [A basic demo]({{< ref "/demos/payment-request/demo1.md" >}})
+1. [A demo using multiple payment methods]({{< ref "/demos/payment-request/demo2.md" >}})
+1. [Requesting shipping address]({{< ref "/demos/payment-request/demo3.md" >}})
+1. [Dynamic shipping options]({{< ref "/demos/payment-request/demo4.md" >}})
+1. ["Lazy loading" shipping options]({{< ref "/demos/payment-request/demo4.md" >}})
 
 _Note: These demos are purely client side and don't submit card details or anything, you can see the code for each page by following the commit link in their footers._
 

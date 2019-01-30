@@ -6,7 +6,7 @@ draft = false
 tags = ["random"]
 +++
 
-Earlier this year I wrote about my thoughts on [blogging and content ownership]({{< ref "posts/2018-01-15-blogging-and-content-ownership.md" >}}) and I wanted to expand on it with the perspective on a type of publishing that's becoming popular, aggregation sites.
+Earlier this year I wrote about my thoughts on [blogging and content ownership]({{< ref "/posts/2018-01-15-blogging-and-content-ownership.md" >}}) and I wanted to expand on it with the perspective on a type of publishing that's becoming popular, aggregation sites.
 
 Sites like [hackernoon](https://hackernoon.com/) are gaining in popularity and for good reason, they are a great way to get content to a wider audience than just through your own blog (generally speaking). But there's also a risk factor that I think people don't realise with this and it's something that I have been caught with, and that's the lifetime of these sites.
 

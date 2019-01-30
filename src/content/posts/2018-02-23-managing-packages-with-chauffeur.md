@@ -12,7 +12,7 @@ Last year I was working on some Umbraco stuff and needed to install a package fr
 
 Now this poses an issue for me with Chauffeur, I want to script everything, but installing a package from the package feed is a very manual process. So I decided to look into whether I could do it from Chauffeur.
 
-Today on the back of the [Chauffeur 1.0 release]({{< ref "posts/2018-02-23-chauffeur-goes-v1.md" >}}) I released v1.0 of [Chauffeur.ExternalPackages](https://github.com/aaronpowell/Chauffeur.ExternalPackages)!
+Today on the back of the [Chauffeur 1.0 release]({{< ref "/posts/2018-02-23-chauffeur-goes-v1.md" >}}) I released v1.0 of [Chauffeur.ExternalPackages](https://github.com/aaronpowell/Chauffeur.ExternalPackages)!
 
 ![Searching for packages](/images/chauffeur-external-package.gif)
 
