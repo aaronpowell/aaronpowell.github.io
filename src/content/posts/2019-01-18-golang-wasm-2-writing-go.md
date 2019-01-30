@@ -82,7 +82,7 @@ It's time to test our code, we'll use the `go run` command for that:
 Hello WASM from Go!
 ```
 
-Yay we've created and run some Go code, but we've run it on a command line, not in a browser, and after all, we're trying to make WASM, and for that we can't use `go run`, we'll need `go build`. But if we were to just straight up run `go build` it will output a binary file for the OS/architecture you are currently working with, which is OK if you're building an application to run on a device, but not for creating WASM binaries. For that we need to override some properties.
+Yay we've created and run some Go code, but we've run it on a command line, not in a browser, and after all, we're trying to make WASM, and for that we can't use `go run`, we'll need `go build`. But if we were to just straight up run `go build` it will output a binary file for the OS/architecture you are currently working with, which is OK if you're building an application to run on a device, but not for creating WASM binaries. For that we need to override the OS and architecture that we're compiling for.
 
 ## Building Go for WASM
 
@@ -104,7 +104,7 @@ This is because WebAssembly introduces a whole new virtual machine into the brow
 
 _Side note: There are some really great docs on [MDN](https://developer.mozilla.org/en-US/docs/WebAssembly) that covers WebAssembly, how it works, how to compile C/C++/Rust to WASM, the WebAssembly Text Format and all that stuff. If you **really** want to understand WASM have a read through that, in particular the WebAssembly Text Format is very good at explaining how it works._
 
-So because we can use our WASM binary we need to create a WASM module and instantiate the runtime space that WASM will run within.
+So before we can use our WASM binary we need to create a WASM module and instantiate the runtime space that WASM will run within.
 
 To do this we need to get the binary and instantiate it with WASM. MDN covers this [in detail](https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running) but you can do it either synchronously or asynchronously. We'll stick with async for our approach as it seems to be the recommended way going forward.
 
@@ -152,6 +152,7 @@ Next we'll create a webpage to run the JavaScript:
                 let result = await WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject)
                 go.run(result.instance);
             }
+            init();
        </script>
     </head>
     <body></body>
@@ -170,7 +171,7 @@ As you'll see in the little HTML snippet above the was we start WASM for Go is a
 
 This then provides us with an `importObject` to pass to the `instantiateStreaming` function and the result we get back we pass back to the runtimes `run` method.
 
-This is because Go does a bit of funky stuff to treat the WASM binary as an application rather than arbitrary functions like others do.
+This is because Go does a bit of funky stuff to treat the WASM binary as an application rather than arbitrary functions like others do. Over the rest of this series we'll explore this a bit more too.
 
 ## Conclusion
 

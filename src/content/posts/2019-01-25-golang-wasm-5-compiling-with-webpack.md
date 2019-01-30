@@ -19,17 +19,17 @@ _This blog is part of a series I'm writing about learning how to write Go (Golan
 
 ## Bringing in a Web Devs Tool Chain
 
-Up until now we've been writing our Go code and then using the `go build` command to generate our WebAssembly bundle, and sure, this works fine, does what we need it to do, but it doesn't really fit with how _we_ as web developers would be approaching it.
+Up until now we've been writing our Go code and then using the `go build` command to generate our WebAssembly bundle, and sure, this works fine, does what we need it to do, but it doesn't really fit with how _we web developers_ would be approaching it.
 
 Us web developers are not shy of using a compiler step, or at least a build task, whether you're converting from one language to another using TypeScript/Fable/Flow/etc., down-leveling ESNext to ESNow or just doing bundling and minifying of multiple scripts into one, it's rare to find a JavaScript application these days that it's using a tool like gulp, rollup, parcel or webpack.
 
-I prefer webpack these days so I decided to look at incorporating it into my process by writing a custom [Loader](https://webpack.js.org/contribute/writing-a-loader/).
+I prefer webpack so I decided to look at incorporating it into my process by writing a custom [Loader](https://webpack.js.org/contribute/writing-a-loader/).
 
 ## A Quick Intro to webpack
 
 If you're unfamiliar with webpack you really should [check out their docs](https://webpack.js.org/concepts/) as I won't do it justice here. Instead I want to focus on the core part of webpack that we need to leverage and how it works.
 
-Because webpack is designed to be a generic module bundler it doesn't understand how to deal with different languages, whether that's JSX in React, TypeScript or in our case Go. For that we need to bring in a Loader. A Loader, essentially, a JavaScript function that takes the contents of the file you're "loading" and expects you to return some JavaScript that can be run in the generated bundle.
+Because webpack is designed to be a generic module bundler it doesn't understand how to deal with different languages, whether that's JSX in React, TypeScript or in our case Go. For that we need to bring in a Loader. A Loader is essentially a JavaScript function that takes the contents of the file you're "loading" and expects you to return some JavaScript that can be run in the generated bundle.
 
 This means that in our JavaScript file we can write the following:
 
@@ -58,7 +58,7 @@ Now let's look at how we achieve this.
 
 **TL;DR: If you don't really want to see the process you can just check out the [source code for the loader](https://github.com/aaronpowell/webpack-golang-wasm-async-loader) and install it into your own project.**
 
-As I mentioned above, the loader that we create is just a JavaScript function that receives the contents of the file we're loading passed into it, meaning we'll get our raw Go code, which is not particularly helpful.
+As I mentioned above, the loader that we create is just a JavaScript function that receives the contents of the file we're loading passed into it, meaning we'll get our raw Go code, which is not particularly helpful because we need to pass the file path to `go build`, not the file contents.
 
 But never fear, the loader has a [Loader API](https://webpack.js.org/api/loaders/) that we can leverage, and the first thing is that we want to get [`resourcePath`](https://webpack.js.org/api/loaders/#this-resourcepath) which gives us the full path to the file. Fantastic, now we are able to send that over to `go build`!
 
@@ -93,7 +93,7 @@ function loader(this: webpack.loader.LoaderContext, contents: string) {
   const outFile = `${this.resourcePath}.wasm`;
   const args = ["build", "-o", outFile, this.resourcePath];
 
-  execFile(goBin, args, opts, (_, err) => {
+  execFile(goBin, args, opts, (err) => {
       //todo
   });
 }
@@ -336,8 +336,6 @@ import (
 	"github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
 )
 
-var global = js.Global()
-
 func add(i ...js.Value) js.Value {
 	ret := 0
 
@@ -353,7 +351,6 @@ func main() {
 	c := make(chan struct{}, 0)
 	println("Web Assembly is ready")
 	gobridge.RegisterCallback("add", add)
-
 	<-c
 }
 ```

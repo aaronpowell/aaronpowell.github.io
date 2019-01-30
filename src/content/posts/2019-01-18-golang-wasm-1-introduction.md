@@ -19,9 +19,9 @@ _This blog is part of a series I'm writing about learning how to write Go (Golan
 
 ## Introduction
 
-I've always like tinkering with different technology and trying to stay abreast of things that look interesting. One thing that's been on my radar for a while now is [Go, aka Golang](https://golang.org) but as someone who predominately does web development in the browser I was never quite sure _where_ Go could fit into what I tend to build.
+I've always liked tinkering with different technology and trying to stay abreast of things that look interesting. One thing that's been on my radar for a while now is [Go, aka Golang](https://golang.org), but as someone who predominately does web development in the browser I was never quite sure _where_ Go could fit into what I tend to build.
 
-Another thing that I'd been meaning to pick up is [Web Assembly, aka WASM](https://webassembly.org/) but again I've never quite had the time to pick it up. If you're not familiar with WASM, it's a new component of the web platform to allow developers to use high level languages like C, C++, Rust, Go, .NET, etc. in the browser in a native way, rather than converted to JavaScript. I'm by no means a WASM expert, but after a week of digging into things I've found some really interesting tidbits I'll share along the way.
+Another thing that I'd been meaning to pick up is [Web Assembly, aka WASM](https://webassembly.org/), but again I've never quite had the time to pick it up. If you're not familiar with WASM, it's a new component of the web platform to allow developers to use high level languages like C, C++, Rust, Go, .NET, etc. in the browser in a native way, rather than converted to JavaScript. I'm by no means a WASM expert, but after a week of digging into things I've found some really interesting tidbits I'll share along the way.
 
 As I recently [started a new Developer Relations job]({{< ref "/posts/2019-01-14-starting-2019-with-a-new-job.md" >}}) I decided that now was the perfect time for me to start exploring these technologies.
 
@@ -33,7 +33,7 @@ We won't build anything particularly complex, the Go support is experimental at 
 
 ## Getting Setup
 
-The first thing you'll need to do is to setup a development environment. Go works on all major operating systems and I've used Windows + [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about). My colleague Scott Coulton has written how to setup a [WSL dev environment, including Go](https://medium.com/devopslinks/windows-for-a-linux-guy-823276351826) that I followed.
+The first thing you'll need to do is to setup a development environment. Go works on all major operating systems and I've used Windows + [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about?WT.mc_id=aaronpowelldotcom-blog-aapowell). My colleague Scott Coulton has written how to setup a [WSL dev environment, including Go](https://medium.com/devopslinks/windows-for-a-linux-guy-823276351826) that I followed.
 
 One thing I will note is that I haven't managed to get code completion working in VSCode at the moment, something seems incorrect in the way I've setup my `GOPATH` and `GOROOT`, but so far it hasn't been _too_ painful for me to work without code completion.
 
@@ -64,4 +64,4 @@ We will need [Node.js](https://nodejs.org) eventually, but not first up, so go a
 
 Ultimately this was pretty short post to set the stage for what we're about to undertake.
 
-Don't worry if you've never written a line of Go, or you've never heard of Web Assembly, we'll take this journey together.
+Don't worry if you've never written a line of Go, or you've never heard of WebAssembly, we'll take this journey together.

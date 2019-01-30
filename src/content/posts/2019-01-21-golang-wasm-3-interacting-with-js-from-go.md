@@ -29,7 +29,7 @@ And this is where we start seeing that Go's approach to WASM is quite different 
 
 Before we dive into anything too deep I want to look a bit at `syscall/js` so we know how it works.
 
-As you'll see from the API docs this is a very small package exposing a very small set of features. The most important thing that is exposed from the package is the type [`Value`](https://godoc.org/syscall/js#Value) which is how Go represents data getting passed in from the JavaScript runtime, and how we request things in Go from the JavaScript runtime. This is kind of a dynamic type because it could be an `int` or a `string` or a `function` or an `object`, it really depends on how you use it, which does make it a little bit clunky to use.
+As you'll see from the [API docs](https://godoc.org/syscall/js) that this is a very small package exposing a very small set of features. The most important thing that is exposed from the package is the type [`Value`](https://godoc.org/syscall/js#Value) which is how Go represents data getting passed in from the JavaScript runtime, and how we request things in Go from the JavaScript runtime. This is kind of a dynamic type because it could be an `int` or a `string` or a `function` or an `object`, it really depends on how you use it, which does make it a little bit clunky to use.
 
 ## Writing to the DOM
 
@@ -115,7 +115,7 @@ The main addition to this is the `printMessage` function, it takes an array of `
 
 But why does it take an array? Well apart from the fact that `js.NewCallback` requires it to, it's because JavaScript can have as many arguments provided to a function as you like, you just name the ones you care about and handle the magic `arguments` (or define a spread) if you want more. And also, JavaScript has a pretty weak type system compared to Go, so while you might _want_ a string there's nothing stopping the caller passing in a number or a function, so Go forces you to use this boxed `struct` in `js.Value` and then you can unpack it as required using `Value.String` or `Value.Int` or whatever type you want.
 
-Now compile it, launch a browser and call your globally declared function, only to get this error message:
+Now compile it, launch a browser, open the dev tools, call your globally declared function and you'll get this error message:
 
 ```
 printMessage("")
@@ -133,7 +133,7 @@ If you've done much reading on WASM then you'll see that it's intended to be tre
 
 Go takes a different approach, Go treats this as an _application_, meaning that you start a Go runtime, it runs, then exits and you can't interact with it. This, coincidentally, is the error message that you're seeing, our Go application has completed and cleaned up.
 
-To me this feels more closer to the .NET Console Application than it does to a web application. A web application doesn't _really_ end in the same manner.
+To me this feels more closer to the .NET Console Application than it does to a web application. A web application doesn't _really_ end, at least, not in the same manner as a process.
 
 And this leads us to a problem, if we want to be able to call stuff, but the runtime want to shut down, what do we do?
 

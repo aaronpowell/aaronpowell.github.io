@@ -219,7 +219,7 @@ Using the `|` tells TypeScript that the arguments into the function are a string
 
 We're done! It works locally! Now it's time to deploy it somewhere.
 
-I'm going to use [Azure DevOps Pipeliens](https://azure.microsoft.com/en-au/services/devops/?WT.mc_id=aaronpowelldotcom-blog-aapowell) to build and then deploy it as an [Azure Blob Static Website](https://docs.microsoft.com/en-au/azure/storage/blobs/storage-blob-static-website?WT.mc_id=aaronpowelldotcom-blog-aapowell).
+I'm going to use [Azure DevOps Pipelines](https://azure.microsoft.com/en-au/services/devops/?WT.mc_id=aaronpowelldotcom-blog-aapowell) to build and then deploy it as an [Azure Blob Static Website](https://docs.microsoft.com/en-au/azure/storage/blobs/storage-blob-static-website?WT.mc_id=aaronpowelldotcom-blog-aapowell).
 
 ### Building
 

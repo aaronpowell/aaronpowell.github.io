@@ -19,7 +19,7 @@ _This blog is part of a series I'm writing about learning how to write Go (Golan
 
 ## Returning to JavaScript
 
-We've learnt how we can use `syscall/js` to create and manipulate DOM elements from our Go functions, but what it we want to treat Go like a library and execute a function to get a value back? Maybe we have an image processing library we want to use that was written in Go, or we want to use some functionality that our core business application has in it.
+We've learnt how we can use `syscall/js` to create and manipulate DOM elements from our Go functions, but what if we want to treat Go like a library and execute a function to get a value back? Maybe we have an image processing library we want to use that was written in Go, or we want to use some functionality that our core business application has in it.
 
 My first thought was to create a function that returns a value:
 
@@ -48,7 +48,7 @@ fs.readFile('/path/to/file.txt', (err, data) => {
 });
 ```
 
-We pass a function as the large argument that thats two arguments, and error object and the output of the function executing successfully. We'd then test if `err` contained anything, throw if it does, continue if it doesn't.
+We pass a function as the last argument that thats two arguments, and error object and the output of the function executing successfully. We'd then test if `err` contained anything, throw if it does, continue if it doesn't.
 
 This then got me thinking, would it be so bad to implement **that** as a pattern when it comes to talking to Go? It seems logical, because we're shelling out to another runtime, we shouldn't have to wait for it to complete before we continue on in our application, we should treat it like an async operation.
 
@@ -103,7 +103,7 @@ Obviously I'm going pretty simplistic here and just writing a message to the con
 
 We've now seen how we can really break down the barriers between Go and JavaScript and start treating Go functions just like any other function we might use in a JavaScript application, whether they have come from another JavaScript module, the browser or the runtime.
 
-Treating it like an async operation and using the callback pattern really makes it feel like just any old piece of JavaScript that you might be working with. It does become a bit cumbersome in the Go side of things, but so far that's been my experience with Go's approach toe WebAssembly, it's either all in on Go or no Go.
+Treating it like an async operation and using the callback pattern really makes it feel like just any old piece of JavaScript that you might be working with. It does become a bit cumbersome in the Go side of things, but so far that's been my experience with Go's approach to WebAssembly, it's either all in on Go or no Go (zing!).
 
 ### Bonus - Promisifying Go
 
