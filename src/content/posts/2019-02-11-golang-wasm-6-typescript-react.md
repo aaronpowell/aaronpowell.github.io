@@ -1,21 +1,12 @@
 +++
 title = "Learning Golang through WebAssembly - Part 6, Go, WASM, TypeScript and React"
-date = 2019-01-29T12:10:01+11:00
+date = 2019-02-11T12:10:01+11:00
 description = "Time to put all the pieces together and get something built!"
 draft = true
 tags = ["golang", "wasm", "javascript", "webpack", "typescript", "react"]
+series = "golang-wasm"
+series_title = "Go, WASM, React and TypeScript"
 +++
-
-_This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
-
-* _[Part 1 - Introduction and setup]({{< ref "/posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
-* _[Part 2 - Writing you first piece of Go]({{< ref "/posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
-* _[Part 3 - Interacting with JavaScript from Go]({{< ref "/posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
-* _[Part 4 - Sending a Response to JavaScript]({{< ref "/posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
-* _[Part 5 - Compiling Go with webpack]({{< ref "/posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
-* _Part 6 - Go, WASM, React and TypeScript (this post)_
-
-***
 
 ## Building an Application
 

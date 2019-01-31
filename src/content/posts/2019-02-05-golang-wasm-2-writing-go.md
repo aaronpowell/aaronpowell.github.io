@@ -1,26 +1,16 @@
 +++
 title = "Learning Golang through WebAssembly - Part 2, Writing your first piece of Go"
-date = 2019-01-18T14:55:56+11:00
+date = 2019-02-05T14:55:56+11:00
 description = "Writing your first piece of Go to combine with WASM"
 draft = true
 tags = ["golang", "wasm", "javascript"]
+series = "golang-wasm"
+series_title = "Writing your first piece of Go"
 +++
-
-_This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
-
-* _[Part 1 - Introduction and setup]({{< ref "/posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
-* _Part 2 - Writing you first piece of Go (this post)_
-* _[Part 3 - Interacting with JavaScript from Go]({{< ref "/posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
-* _[Part 4 - Sending a Response to JavaScript]({{< ref "/posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
-* _[Part 5 - Compiling Go with webpack]({{< ref "/posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
-* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "/posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
-
-***
-
 
 ## Hello WASM, Go style
 
-You've got your [Golang dev environment setup]({{< ref "/posts/2019-01-18-golang-wasm-1-introduction.md" >}}) and now it's time to put it to good use.
+You've got your [Golang dev environment setup]({{< ref "/posts/2019-02-04-golang-wasm-1-introduction.md" >}}) and now it's time to put it to good use.
 
 We're going to start really basic and write what amounts to a Hello World code:
 

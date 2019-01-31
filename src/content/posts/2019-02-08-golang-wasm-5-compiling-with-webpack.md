@@ -1,21 +1,12 @@
 +++
 title = "Learning Golang through WebAssembly - Part 5, Compiling With Webpack"
-date = 2019-01-25T11:55:06+11:00
+date = 2019-02-08T11:55:06+11:00
 description = "It's time to bring this into a web devs toolchain"
 draft = true
 tags = ["golang", "wasm", "javascript", "webpack"]
+series = "golang-wasm"
+series_title = "Compiling Go with webpack"
 +++
-
-_This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
-
-* _[Part 1 - Introduction and setup]({{< ref "/posts/2019-01-18-golang-wasm-1-introduction.md" >}})_
-* _[Part 2 - Writing you first piece of Go]({{< ref "/posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
-* _[Part 3 - Interacting with JavaScript from Go]({{< ref "/posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
-* _[Part 4 - Sending a Response to JavaScript]({{< ref "/posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
-* _Part 5 - Compiling Go with webpack (this post)_
-* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "/posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
-
-***
 
 ## Bringing in a Web Devs Tool Chain
 

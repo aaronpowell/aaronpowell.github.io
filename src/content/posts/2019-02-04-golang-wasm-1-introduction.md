@@ -1,21 +1,13 @@
 +++
 title = "Learning Golang through WebAssembly - Part 1, Introduction and setup"
-date = 2019-01-18T14:06:00+11:00
+date = 2019-02-04T14:06:00+11:00
 description = "Introducing a new series on learning Go by writing WebAssembly"
-draft = true
+draft = false
 tags = ["golang", "wasm", "javascript"]
+series_intro = "This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:"
+series = "golang-wasm"
+series_title = "Introduction and setup"
 +++
-
-_This blog is part of a series I'm writing about learning how to write Go (Golang) by targeting what I'm familiar with, web development. The series consists of the following parts:_
-
-* _Part 1 - Introduction and setup (this post)_
-* _[Part 2 - Writing you first piece of Go]({{< ref "/posts/2019-01-18-golang-wasm-2-writing-go.md" >}})_
-* _[Part 3 - Interacting with JavaScript from Go]({{< ref "/posts/2019-01-21-golang-wasm-3-interacting-with-js-from-go.md" >}})_
-* _[Part 4 - Sending a Response to JavaScript]({{< ref "/posts/2019-01-24-golang-wasm-4-response-to-javascript.md" >}})_
-* _[Part 5 - Compiling Go with webpack]({{< ref "/posts/2019-01-25-golang-wasm-5-compiling-with-webpack.md" >}})_
-* _[Part 6 - Go, WASM, React and TypeScript]({{< ref "/posts/2019-01-29-golang-wasm-6-typescript-react.md" >}})_
-
-***
 
 ## Introduction
 
