@@ -1,6 +1,6 @@
 +++
 title = "Learning Golang through WebAssembly - Part 1, Introduction and setup"
-date = 2019-02-04T14:06:00+11:00
+date = 2019-02-04T09:00:00+11:00
 description = "Introducing a new series on learning Go by writing WebAssembly"
 draft = false
 tags = ["golang", "wasm", "javascript"]
