@@ -1,8 +1,8 @@
 +++
 title = "Learning Golang through WebAssembly - Part 2, Writing your first piece of Go"
-date = 2019-02-05T14:55:56+11:00
+date = 2019-02-05T09:00:56+11:00
 description = "Writing your first piece of Go to combine with WASM"
-draft = true
+draft = false
 tags = ["golang", "wasm", "javascript"]
 series = "golang-wasm"
 series_title = "Writing your first piece of Go"

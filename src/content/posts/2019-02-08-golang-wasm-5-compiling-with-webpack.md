@@ -1,8 +1,8 @@
 +++
 title = "Learning Golang through WebAssembly - Part 5, Compiling With Webpack"
-date = 2019-02-08T11:55:06+11:00
+date = 2019-02-08T09:00:06+11:00
 description = "It's time to bring this into a web devs toolchain"
-draft = true
+draft = false
 tags = ["golang", "wasm", "javascript", "webpack"]
 series = "golang-wasm"
 series_title = "Compiling Go with webpack"

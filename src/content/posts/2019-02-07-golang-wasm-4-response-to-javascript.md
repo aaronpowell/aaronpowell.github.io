@@ -1,8 +1,8 @@
 +++
 title = "Learning Golang through WebAssembly - Part 4, Sending a Response to JavaScript"
-date = 2019-02-07T14:11:22+11:00
+date = 2019-02-07T09:11:22+11:00
 description = "We've learnt how to write to the DOM, but how about returning values to JavaScript functions?"
-draft = true
+draft = false
 tags = ["golang", "wasm", "javascript"]
 series = "golang-wasm"
 series_title = "Sending a response to JavaScript"

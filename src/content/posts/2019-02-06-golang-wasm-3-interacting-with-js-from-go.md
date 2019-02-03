@@ -1,8 +1,8 @@
 +++
 title = "Learning Golang through WebAssembly - Part 3, Interacting with JavaScript from Go"
-date = 2019-02-06T11:16:07+11:00
+date = 2019-02-06T09:00:07+11:00
 description = "Looking at interop between Go and JavaScript via WASM"
-draft = true
+draft = false
 tags = ["golang", "wasm", "javascript"]
 series = "golang-wasm"
 series_title = "Interacting with JavaScript from Go"
