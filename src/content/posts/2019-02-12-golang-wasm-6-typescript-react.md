@@ -1,6 +1,6 @@
 +++
 title = "Learning Golang through WebAssembly - Part 6, Go, WASM, TypeScript and React"
-date = 2019-02-11T12:09:01+11:00
+date = 2019-02-12T12:09:01+11:00
 description = "Time to put all the pieces together and get something built!"
 draft = false
 tags = ["golang", "wasm", "javascript", "webpack", "typescript", "react"]
