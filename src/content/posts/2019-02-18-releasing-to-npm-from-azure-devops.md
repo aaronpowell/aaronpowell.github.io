@@ -83,11 +83,11 @@ We've now generated a `tgz` file, next we need to attach it as an artifact to th
   displayName: 'Publish npm artifact'
 ```
 
-Using the [Copy Files]() task we can get the files (our `tgz` and our `package.json`) and copy them across to the _artifacts staging location_ defined by the variable `$(Build.ArtifactStagingDirectory)`. This is a special directory that the agent has that's intended to by published as artifacts. Once these files are in the right place we use the [Publish Artifacts]() task to tell our build the files in the folder will be in a _named artifact_ of `npm`. This name is important as we'll use it in the future to access them, so make it something logical. I'll also avoid using spaces in the name of the artifact so that you don't have to do escaping when you try and use them.
+Using the [Copy Files](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/copy-files?view=azure-devops&tabs=yaml&WT.mc_id=aaronpowelldotcom-blog-aapowell) task we can get the files (our `tgz` and our `package.json`) and copy them across to the _artifacts staging location_ defined by the variable `$(Build.ArtifactStagingDirectory)`. This is a special directory that the agent has that's intended to by published as artifacts. Once these files are in the right place we use the [Publish Artifacts](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-build-artifacts?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell) task to tell our build the files in the folder will be in a _named artifact_ of `npm`. This name is important as we'll use it in the future to access them, so make it something logical. I'll also avoid using spaces in the name of the artifact so that you don't have to do escaping when you try and use them.
 
 I'll also copy across the release notes as well as the JavaScript files we generate from the TypeScript compiler as these can be useful for debugging.
 
-When it's all said and done our build definition now looks like [this]().
+When it's all said and done our build definition now looks like [this](https://github.com/aaronpowell/webpack-golang-wasm-async-loader/blob/master/azure-pipelines.yml) and you can see its run history [here](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_build?definitionId=16).
 
 ## Creating a release
 
@@ -103,13 +103,35 @@ Now we need to define the stages that our release will go through. A stage can r
 
 Conveniently there's a `npm` task provided by Azure DevOps that has some common commands defined, including the one we want, `publish`! Specify the path to our linked artifact named `npm` (which we named above) and choose to publish to an **External npm registry** (we use that because Azure DevOps can act as a npm registry).
 
-If you haven't done so previously you'll need to create a connection to the npm registry, use the **New** button for that and enter `https://registry.npmjs.org` as the source and a token that you can generate from the npm website under your profile.
+If you haven't done so previously you'll need to create a [service connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell#sep-npm) to the npm registry, use the **New** button for that and enter `https://registry.npmjs.org` as the source and a token that you can generate from the npm website under your profile.
 
 Now you'd think we'd be ready to roll right? Well... yes you do publish to npm but what you publish is a package that _contains_ you `tgz`, not your `tgz`. You see, the `publish` command is capable of taking a `tgz` and publishing that to npm but there's a [bug in the Azure DevOps task](https://github.com/Microsoft/azure-pipelines-tasks/issues/4958) that means it doesn't work. So unfortunately we'll need a workaround 😦.
 
 Thankfully the workaround is pretty simple, we need to unpack the `tgz` file and use the publish task against its contents. We do that with the Extract Files task, specifing `*.tgz` as what we'll extract (since we don't know the filename) and give if a new folder. I used `$(System.DefaultWorkingDirectory)/npm-publish`. Now we can update our publish command to not use the artifact directory, but the unpacked directory, which in my case is `$(System.DefaultWorkingDirectory)/npm-publish/package`.
 
 Save, run, boom! Releases happening to npm on push to `master`. Just remember, you'll always have to update your `package.json` to have a new version number, else it'll fail to publish to npm, since you can't publish an existing release.
+
+## Adding badges
+
+The last thing you want to do is add a badge to your readme to show off the awesome pipeline work. We can do that from the Build -> menu in the top-right corner and select 'Status Badge' and get some markdown like this:
+
+```markdown
+[![Build Status](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_apis/build/status/aaronpowell.webpack-golang-wasm-async-loader?branchName=master)](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_build/latest?definitionId=16&branchName=master)
+```
+
+And it looks like this:
+
+[![Build Status](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_apis/build/status/aaronpowell.webpack-golang-wasm-async-loader?branchName=master)](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_build/latest?definitionId=16&branchName=master)
+
+### Customising the label
+
+I only recently found out that you can customise the text int he label for the Azure Pipelines badge. To do that add a query string to the image of `label=<something cool>`. It can even support an emoji :wink:!
+
+```markdown
+[![Build Status](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_apis/build/status/aaronpowell.webpack-golang-wasm-async-loader?branchName=master&label=🚢 it)](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_build/latest?definitionId=16&branchName=master)
+```
+
+[![Build Status](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_apis/build/status/aaronpowell.webpack-golang-wasm-async-loader?branchName=master&label=🚢 it)](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_build/latest?definitionId=16&branchName=master)
 
 ## Bonus round, releasing to GitHub
 
@@ -130,8 +152,8 @@ Then we'll use the GitHub Release task (which is in preview at time of writing) 
 
 I choose what GitHub account I'll publish under and the repository to release to (both show be available in the drop down lists), we'll use **Create** for the action (it's a new release after all) the **Target** is `$(Build.SourceVersion)` as that is the SHA of the commit the build was triggered for and that we want to tag, use our variable `$(packageVersion)` as the Tag with a Tag Source of **User specified tag** and then set the assets to the artifacts we want published (I publish the `tgz` and the generated JavaScript). I also chose to add Release Notes which I write into a file called `ReleaseNotes.md` in the git repo and publish as an artifact.
 
-Now when we create a release it not only goes to npm but it also goes to GitHub as a release, tags the commit and links the commits included in the release. Check it out [here]().
+Now when we create a release it not only goes to npm but it also goes to GitHub as a release, tags the commit and links the commits included in the release. Check it out [here](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_release?definitionId=1).
 
 ## Conclusion
 
-And that is how we can do automated build and release of packages to npm and GitHub Releases from Azure DevOps. It really is quite simple.
+And that is how we can do automated build and release of packages to npm and GitHub Releases from Azure DevOps. It really is quite simple!
