@@ -8,11 +8,11 @@ tags = ["javascript", "azure-devops"]
 
 In my recent article about [creating a webpack loader to generate WebAssembly with Go]({{< ref "/posts/2019-02-08-golang-wasm-5-compiling-with-webpack.md" >}}) I decided I wanted to be able to easily release the loader to npm as I was building it.
 
-To do this I decided that I was going to use [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/learn/what-is-devops?WT.mc_id=aaronpowelldotcom-blog-aapowell) as it gives me a nice separation between the build phase and the release phase. Also, a lot of people are unaware that Azure DevOps pipelines are free for open source projects, so again there's a nice little bonus that we can leverage for our project.
+To do this I decided that I was going to use [Azure DevOps](https://azure.microsoft.com/en-au/services/devops/?WT.mc_id=aaronpowelldotcom-blog-aapowell) as it gives me a nice separation between the build phase and the release phase. Also, a lot of people are unaware that Azure DevOps pipelines are free for open source projects, so again there's a nice little bonus that we can leverage for our project.
 
 ## Creating a build
 
-The first step you need to do is create a build definition. We'll do that by installing the Azure DevOps GitHub application (if you haven't already installed it) and activate it for our GitHub repository.
+The first step you need to do is create a build definition. We'll do that by installing the [Azure Pipelines GitHub application](https://azure.microsoft.com/en-au/services/devops/) (if you haven't already installed it) and activate it for our GitHub repository.
 
 When linking them we'll authorise Azure DevOps to have access to our GitHub information and create a pipeline using the Node.js template definition as the base, but we're going to customise it a bit before saving it.
 
@@ -57,7 +57,7 @@ To do that we'll edit our `azure-pipelines.yaml` file. First let's generate a np
   displayName: 'Package for npm release'
 ```
 
-Again we're using the `script` task to do this and we run the `npm pack` command which generates us a `tgz` file that can be sent to the npm package repository (or any other that you so desire). But why are we generating a package and not publishing? Well the reason is that we want to split the **build** phase of our pipeline from the **release** phase, so Continuous Integration then Continuous Delivery. Doing a release from our build step kind of middies the waters on what's responsible for what. Also, by generating the `tgz` file in the build we're saying that this is what'll be released and it can't be changed, so if we had a staging npm repository we could push it to there, like we can do staging sites for applications. Ultimately, it makes the released artifact more immutable.
+Again we're using the `script` task to do this and we run the `npm pack` command which generates us a `tgz` file that can be sent to the npm package repository (or any other that you so desire). But why are we generating a package and not publishing? Well the reason is that we want to split the **build** phase of our pipeline from the **release** phase, so Continuous Integration then Continuous Delivery. Doing a release from our build step kind of muddies the waters on what's responsible for what. Also, by generating the `tgz` file in the build we're saying that this is what'll be released and it can't be changed, so if we had a staging npm repository we could push it to there, like we can do staging sites for applications. Ultimately, it makes the released artifact more immutable.
 
 We've now generated a `tgz` file, next we need to attach it as an artifact to the build. An artifact is the output of a build that can be picked up elsewhere, either by a chained build, by a release, or just manually looking at the build results.
 
@@ -93,21 +93,29 @@ When it's all said and done our build definition now looks like [this](https://g
 
 Our build is passing, we're getting artifacts output, it's time we publish to npm.
 
-Right now the only way to create a release pipeline is using the designer in Azure DevOps, there's no YAML export, but it's a good thing that we have a simple release pipeline then!
+Right now the only way to create a release pipeline is using the designer in Azure Pipeline, there's no YAML export, but it's a good thing that we have a simple release pipeline then!
 
-From within the Azure DevOps portal we'll create a new release and link it to the build definition. We do that by adding an artifact, selecting the build pipeline we created and leaving the defaults.
+Within the Azure DevOps portal we'll create a new release, use the **Empty Job** template and name our release stage (I've called it _Publish_).
 
-_Note: I leave the **Default Version** as **Specify at time of release creation** as that gives the build control over the artifacts going in. For this scenario it doesn't make a huge difference, but it can be useful in more complex setups._
+![Our blank release](/images/npm-azd/blank-release.jpg)
 
-Now we need to define the stages that our release will go through. A stage can represent an environment, so if you are releasing to UAT then Pre Prod and finally Production you'd have them all mapped out in the build. You can also define gates on each stage, whether there are approvers of a stage release, etc. but all of that is beyond what we need here, we've only got one stage, that's releasing to npm. I've called my stage Publish and then it's time to add some tasks.
+Now we need to define what the stages that our release will go through. A stage can represent an environment, so if you are releasing to UAT then Pre Prod and finally Production you'd have them all mapped out in the build. You can also define gates on each stage, whether there are approvers of a stage release, etc. but all of that is beyond what we need here, we've only got one stage, that's releasing to npm. Check out the [docs for more info on Stages](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/environments?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell).
 
 Conveniently there's a `npm` task provided by Azure DevOps that has some common commands defined, including the one we want, `publish`! Specify the path to our linked artifact named `npm` (which we named above) and choose to publish to an **External npm registry** (we use that because Azure DevOps can act as a npm registry).
 
 If you haven't done so previously you'll need to create a [service connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell#sep-npm) to the npm registry, use the **New** button for that and enter `https://registry.npmjs.org` as the source and a token that you can generate from the npm website under your profile.
 
-Now you'd think we'd be ready to roll right? Well... yes you do publish to npm but what you publish is a package that _contains_ you `tgz`, not your `tgz`. You see, the `publish` command is capable of taking a `tgz` and publishing that to npm but there's a [bug in the Azure DevOps task](https://github.com/Microsoft/azure-pipelines-tasks/issues/4958) that means it doesn't work. So unfortunately we'll need a workaround 😦.
+Now you'd think we'd be ready to roll right? Well... yes you do publish to npm but what you publish is a package that _contains_ your `tgz`, not your `tgz`. You see, the `publish` command is capable of taking a `tgz` and publishing that to npm but there's a [bug in the Azure DevOps task](https://github.com/Microsoft/azure-pipelines-tasks/issues/4958) that means it doesn't work. So unfortunately we'll need a workaround 😦.
 
 Thankfully the workaround is pretty simple, we need to unpack the `tgz` file and use the publish task against its contents. We do that with the Extract Files task, specifing `*.tgz` as what we'll extract (since we don't know the filename) and give if a new folder. I used `$(System.DefaultWorkingDirectory)/npm-publish`. Now we can update our publish command to not use the artifact directory, but the unpacked directory, which in my case is `$(System.DefaultWorkingDirectory)/npm-publish/package`.
+
+With our stage complete it's time to link it to the build definition. We do that by adding an artifact, selecting the build pipeline we created and leaving the defaults.
+
+![Adding an artifact](/images/npm-azd/adding-artifact.jpg)
+
+_Note: I leave the **Default Version** as **Specify at time of release creation** as that gives the build control over the artifacts going in. For this scenario it doesn't make a huge difference, but it can be useful in more complex setups._
+
+Because we want a release to go out every time a build completes we'll click the lightning bolt (⚡) on the artifact and enable the Continuous deployment trigger. Without this we'd need to manually trigger a release. If you had certain branches that shouldn't ever cut a release (eg: `gh-pages`) then you can add a filter for them from here too.
 
 Save, run, boom! Releases happening to npm on push to `master`. Just remember, you'll always have to update your `package.json` to have a new version number, else it'll fail to publish to npm, since you can't publish an existing release.
 
@@ -153,6 +161,8 @@ Then we'll use the GitHub Release task (which is in preview at time of writing) 
 I choose what GitHub account I'll publish under and the repository to release to (both show be available in the drop down lists), we'll use **Create** for the action (it's a new release after all) the **Target** is `$(Build.SourceVersion)` as that is the SHA of the commit the build was triggered for and that we want to tag, use our variable `$(packageVersion)` as the Tag with a Tag Source of **User specified tag** and then set the assets to the artifacts we want published (I publish the `tgz` and the generated JavaScript). I also chose to add Release Notes which I write into a file called `ReleaseNotes.md` in the git repo and publish as an artifact.
 
 Now when we create a release it not only goes to npm but it also goes to GitHub as a release, tags the commit and links the commits included in the release. Check it out [here](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_release?definitionId=1).
+
+![Complete pipeline](/images/npm-azd/complete-pipeline-steps.jpg)
 
 ## Conclusion
 
