@@ -1,6 +1,6 @@
 +++
 title = "Releasing to npm From Azure DevOps"
-date = 2019-02-18T10:16:17+11:00
+date = 2019-02-18T09:16:17+11:00
 description = "How to setup CI/CD with Azure DevOps to deploy npm packages"
 draft = false
 tags = ["javascript", "azure-devops"]
