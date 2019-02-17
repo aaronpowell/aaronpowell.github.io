@@ -12,7 +12,7 @@ To do this I decided that I was going to use [Azure DevOps](https://azure.micros
 
 ## Creating a build
 
-The first step you need to do is create a build definition. We'll do that by installing the [Azure Pipelines GitHub application](https://azure.microsoft.com/en-au/services/devops/) (if you haven't already installed it) and activate it for our GitHub repository.
+The first step you need to do is create a build definition. We'll do that by installing the [Azure Pipelines GitHub application](https://github.com/marketplace/azure-pipelines) (if you haven't already installed it) and activate it for our GitHub repository.
 
 When linking them we'll authorise Azure DevOps to have access to our GitHub information and create a pipeline using the Node.js template definition as the base, but we're going to customise it a bit before saving it.
 
