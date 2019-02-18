@@ -167,3 +167,7 @@ Now when we create a release it not only goes to npm but it also goes to GitHub 
 ## Conclusion
 
 And that is how we can do automated build and release of packages to npm and GitHub Releases from Azure DevOps. It really is quite simple!
+
+## Commentary on 2FA for Publish
+
+My colleague [Tierney Cyren](https://twitter.com/bitandbang) pointed out that the above will not work if you're using [2FA on Publish](https://docs.npmjs.com/requiring-2fa-for-package-publishing-and-settings-modification) within npm. One possible workaround would be to have a manual gate on the release where you have to enter the OTP code as a variable before running the release and passing it as the CLI flag on publish. Otherwise, you'll have an error [such as this one](https://dev.azure.com/aaronpowell/webpack-golang-wasm-async-loader/_releaseProgress?_a=release-environment-logs&releaseId=17&environmentId=17) in your release.
