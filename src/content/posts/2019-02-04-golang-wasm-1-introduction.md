@@ -25,7 +25,7 @@ We won't build anything particularly complex, the Go support is experimental at 
 
 ## Getting Setup
 
-The first thing you'll need to do is to setup a development environment. Go works on all major operating systems and I've used Windows + [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about?WT.mc_id=aaronpowelldotcom-blog-aapowell). My colleague Scott Coulton has written how to setup a [WSL dev environment, including Go](https://medium.com/devopslinks/windows-for-a-linux-guy-823276351826) that I followed.
+The first thing you'll need to do is to setup a development environment. Go works on all major operating systems and I've used Windows + [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about?{{< cda >}}). My colleague Scott Coulton has written how to setup a [WSL dev environment, including Go](https://medium.com/devopslinks/windows-for-a-linux-guy-823276351826) that I followed.
 
 ~~One thing I will note is that I haven't managed to get code completion working in VSCode at the moment, something seems incorrect in the way I've setup my `GOPATH` and `GOROOT`, but so far it hasn't been _too_ painful for me to work without code completion.~~ Once I got my `GOPATH` and `GOROOT` set properly and defined as environment variables in both Windows and Linux (WSL) it worked fine.
 

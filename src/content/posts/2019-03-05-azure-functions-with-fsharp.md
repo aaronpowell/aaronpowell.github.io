@@ -6,9 +6,9 @@ draft = false
 tags = ["fsharp", "azure-functions"]
 +++
 
-I'm starting to work on a new project in which I'm going to use [Azure Functions v2](https://docs.microsoft.com/en-us/azure/azure-functions/?WT.mc_id=aaronpowelldotcom-blog-aapowell) for a simple API backend.
+I'm starting to work on a new project in which I'm going to use [Azure Functions v2](https://docs.microsoft.com/en-us/azure/azure-functions/?{{< cda >}}) for a simple API backend.
 
-Azure Functions support a number of different languages such as [Java](https://azure.microsoft.com/en-us/blog/announcing-the-general-availability-of-java-support-in-azure-functions/), [Python (in preview at time of writing)](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-python?WT.mc_id=aaronpowelldotcom-blog-aapowell), [TypeScript (and naturally JavaScript)](https://azure.microsoft.com/en-us/blog/improving-the-typescript-support-in-azure-functions/) and of course C#. So with all those to pick from what would I want to choose?
+Azure Functions support a number of different languages such as [Java](https://azure.microsoft.com/en-us/blog/announcing-the-general-availability-of-java-support-in-azure-functions/), [Python (in preview at time of writing)](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-python?{{< cda >}}), [TypeScript (and naturally JavaScript)](https://azure.microsoft.com/en-us/blog/improving-the-typescript-support-in-azure-functions/) and of course C#. So with all those to pick from what would I want to choose?
 
 Well, naturally I decided to go with F#, which _kind of_ worked in v1. And after all, it's a CLR language so there's no reason it shouldn't work in v2 like C# does.
 
@@ -16,7 +16,7 @@ But unfortunately there's no templates available, so getting started seems to be
 
 ## Creating an F# Functions Application
 
-To create a F# Functions Application the easiest approach is to follow the [Visual Studio Code instructions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code?WT.mc_id=aaronpowelldotcom-blog-aapowell) to get the extensions installed.
+To create a F# Functions Application the easiest approach is to follow the [Visual Studio Code instructions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code?{{< cda >}}) to get the extensions installed.
 
 Once VS Code is ready to go we'll create a new [New Functions Project](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code#create-an-azure-functions-project) choosing C# as the language.
 

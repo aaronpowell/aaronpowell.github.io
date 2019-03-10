@@ -210,7 +210,7 @@ Using the `|` tells TypeScript that the arguments into the function are a string
 
 We're done! It works locally! Now it's time to deploy it somewhere.
 
-I'm going to use [Azure DevOps Pipelines](https://azure.microsoft.com/en-au/services/devops/?WT.mc_id=aaronpowelldotcom-blog-aapowell) to build and then deploy it as an [Azure Blob Static Website](https://docs.microsoft.com/en-au/azure/storage/blobs/storage-blob-static-website?WT.mc_id=aaronpowelldotcom-blog-aapowell).
+I'm going to use [Azure DevOps Pipelines](https://azure.microsoft.com/en-au/services/devops/?{{< cda >}}) to build and then deploy it as an [Azure Blob Static Website](https://docs.microsoft.com/en-au/azure/storage/blobs/storage-blob-static-website?{{< cda >}}).
 
 ### Building
 
@@ -221,7 +221,7 @@ To build you'll need to run the following steps:
 * Run webpack
 * Copy the required files as a build artifact
 
-I've created an [Azure DevOps YAML build](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started-yaml?view=azdevops&WT.mc_id=aaronpowelldotcom-blog-aapowell) that is in the [GitHub repo](https://github.com/aaronpowell/go-wasm-experiments/blob/master/azure-pipelines.yml). It's modeled on the standard Node.js pipeline but I've added the specific Go steps.
+I've created an [Azure DevOps YAML build](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started-yaml?view=azdevops&{{< cda >}}) that is in the [GitHub repo](https://github.com/aaronpowell/go-wasm-experiments/blob/master/azure-pipelines.yml). It's modeled on the standard Node.js pipeline but I've added the specific Go steps.
 
 The things of note are that you'll need to install the appropriate Go packages with `go get`. To use the `gobridge` I created for the loader you'll need to set the `GOOS` and `GOARCH` too:
 
@@ -253,7 +253,7 @@ variables:
 
 ### Release
 
-At the time of writing we don't have support for releases in the YAML file for Azure DevOps Pipelines. I use the [Azure File Copy task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-file-copy?view=azdevops&WT.mc_id=aaronpowelldotcom-blog-aapowell) to copy all the files into the storage account I'm running in, followed by the [Azure CLI task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-cli?view=azdevops&WT.mc_id=aaronpowelldotcom-blog-aapowell) to set the WASM content type on the WASM file, otherwise it won't be served correctly:
+At the time of writing we don't have support for releases in the YAML file for Azure DevOps Pipelines. I use the [Azure File Copy task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-file-copy?view=azdevops&{{< cda >}}) to copy all the files into the storage account I'm running in, followed by the [Azure CLI task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-cli?view=azdevops&{{< cda >}}) to set the WASM content type on the WASM file, otherwise it won't be served correctly:
 
 ```shell
 az storage blob update --container-name "$web" --name "hello.wasm" --content-type "application/wasm" --account-name gowasm

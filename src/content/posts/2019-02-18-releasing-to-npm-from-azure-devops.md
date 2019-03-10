@@ -8,7 +8,7 @@ tags = ["javascript", "azure-devops"]
 
 In my recent article about [creating a webpack loader to generate WebAssembly with Go]({{< ref "/posts/2019-02-08-golang-wasm-5-compiling-with-webpack.md" >}}) I decided I wanted to be able to easily release the loader to npm as I was building it.
 
-To do this I decided that I was going to use [Azure DevOps](https://azure.microsoft.com/en-au/services/devops/?WT.mc_id=aaronpowelldotcom-blog-aapowell) as it gives me a nice separation between the build phase and the release phase. Also, a lot of people are unaware that Azure DevOps pipelines are free for open source projects, so again there's a nice little bonus that we can leverage for our project.
+To do this I decided that I was going to use [Azure DevOps](https://azure.microsoft.com/en-au/services/devops/?{{< cda >}}) as it gives me a nice separation between the build phase and the release phase. Also, a lot of people are unaware that Azure DevOps pipelines are free for open source projects, so again there's a nice little bonus that we can leverage for our project.
 
 ## Creating a build
 
@@ -83,7 +83,7 @@ We've now generated a `tgz` file, next we need to attach it as an artifact to th
   displayName: 'Publish npm artifact'
 ```
 
-Using the [Copy Files](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/copy-files?view=azure-devops&tabs=yaml&WT.mc_id=aaronpowelldotcom-blog-aapowell) task we can get the files (our `tgz` and our `package.json`) and copy them across to the _artifacts staging location_ defined by the variable `$(Build.ArtifactStagingDirectory)`. This is a special directory that the agent has that's intended to by published as artifacts. Once these files are in the right place we use the [Publish Artifacts](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-build-artifacts?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell) task to tell our build the files in the folder will be in a _named artifact_ of `npm`. This name is important as we'll use it in the future to access them, so make it something logical. I'll also avoid using spaces in the name of the artifact so that you don't have to do escaping when you try and use them.
+Using the [Copy Files](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/copy-files?view=azure-devops&tabs=yaml&{{< cda >}}) task we can get the files (our `tgz` and our `package.json`) and copy them across to the _artifacts staging location_ defined by the variable `$(Build.ArtifactStagingDirectory)`. This is a special directory that the agent has that's intended to by published as artifacts. Once these files are in the right place we use the [Publish Artifacts](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/publish-build-artifacts?view=azure-devops&{{< cda >}}) task to tell our build the files in the folder will be in a _named artifact_ of `npm`. This name is important as we'll use it in the future to access them, so make it something logical. I'll also avoid using spaces in the name of the artifact so that you don't have to do escaping when you try and use them.
 
 I'll also copy across the release notes as well as the JavaScript files we generate from the TypeScript compiler as these can be useful for debugging.
 
@@ -99,11 +99,11 @@ Within the Azure DevOps portal we'll create a new release, use the **Empty Job**
 
 ![Our blank release](/images/npm-azd/blank-release.jpg)
 
-Now we need to define what the stages that our release will go through. A stage can represent an environment, so if you are releasing to UAT then Pre Prod and finally Production you'd have them all mapped out in the build. You can also define gates on each stage, whether there are approvers of a stage release, etc. but all of that is beyond what we need here, we've only got one stage, that's releasing to npm. Check out the [docs for more info on Stages](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/environments?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell).
+Now we need to define what the stages that our release will go through. A stage can represent an environment, so if you are releasing to UAT then Pre Prod and finally Production you'd have them all mapped out in the build. You can also define gates on each stage, whether there are approvers of a stage release, etc. but all of that is beyond what we need here, we've only got one stage, that's releasing to npm. Check out the [docs for more info on Stages](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/environments?view=azure-devops&{{< cda >}}).
 
 Conveniently there's a `npm` task provided by Azure DevOps that has some common commands defined, including the one we want, `publish`! Specify the path to our linked artifact named `npm` (which we named above) and choose to publish to an **External npm registry** (we use that because Azure DevOps can act as a npm registry).
 
-If you haven't done so previously you'll need to create a [service connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&WT.mc_id=aaronpowelldotcom-blog-aapowell#sep-npm) to the npm registry, use the **New** button for that and enter `https://registry.npmjs.org` as the source and a token that you can generate from the npm website under your profile.
+If you haven't done so previously you'll need to create a [service connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&{{< cda >}}#sep-npm) to the npm registry, use the **New** button for that and enter `https://registry.npmjs.org` as the source and a token that you can generate from the npm website under your profile.
 
 Now you'd think we'd be ready to roll right? Well... yes you do publish to npm but what you publish is a package that _contains_ your `tgz`, not your `tgz`. You see, the `publish` command is capable of taking a `tgz` and publishing that to npm but there's a [bug in the Azure DevOps task](https://github.com/Microsoft/azure-pipelines-tasks/issues/4958) that means it doesn't work. So unfortunately we'll need a workaround 😦.
 
