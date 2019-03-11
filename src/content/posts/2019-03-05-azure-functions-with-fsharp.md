@@ -18,7 +18,7 @@ But unfortunately there's no templates available, so getting started seems to be
 
 To create a F# Functions Application the easiest approach is to follow the [Visual Studio Code instructions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code?{{< cda >}}) to get the extensions installed.
 
-Once VS Code is ready to go we'll create a new [New Functions Project](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code?{{ < cda >}}#create-an-azure-functions-project) choosing C# as the language.
+Once VS Code is ready to go we'll create a new [New Functions Project](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code?{{< cda >}}#create-an-azure-functions-project) choosing C# as the language.
 
 Now comes the tricky part, rename your `csproj` file to `fsproj` and add a reference to `FSharp.Core`.
 

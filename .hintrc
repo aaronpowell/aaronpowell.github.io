@@ -1,0 +1,11 @@
+{
+    "connector": {
+        "name": "jsdom"
+    },
+    "formatters": [
+        "stylish"
+    ],
+    "hints": {
+        "./hint-cda/dist/src/cda.js": "error"
+    }
+}
