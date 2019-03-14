@@ -1,5 +1,5 @@
 +++
-title = "Pretty JavaScript Console"
+title = "Pretty JavaScript Console Messages"
 date = 2019-03-14T13:44:34+11:00
 description = "Add a bit of flare to your console.log messages"
 draft = false
