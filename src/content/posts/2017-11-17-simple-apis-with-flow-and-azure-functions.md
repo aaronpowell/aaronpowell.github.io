@@ -16,9 +16,9 @@ Well this is really a lot of work for something that is a very minor part of the
 
 ## Enter Microsoft Flow
 
-I've been playing with [Microsoft Flow](https://flow.microsoft.com/) for a while, it's a nice way to do automation, it's similar to [IFTTT](https://ifttt.com/) but integrates nicely with O365 and other MS services. One Connectors of Flow that I like is the HTTP connection which created a HTTP endpoint that you can use to invoke your Flow!
+I've been playing with [Microsoft Flow](https://flow.microsoft.com/?{{< cda >}}) for a while, it's a nice way to do automation, it's similar to [IFTTT](https://ifttt.com/) but integrates nicely with O365 and other MS services. One Connectors of Flow that I like is the HTTP connection which created a HTTP endpoint that you can use to invoke your Flow!
 
-So this sounds like a neat starting point isn't it? I can create a Flow that is a HTTP endpoint and then there's an [Azure Table Storage connector](https://docs.microsoft.com/en-au/connectors/azuretables/) that can write to or read from Table Storage.
+So this sounds like a neat starting point isn't it? I can create a Flow that is a HTTP endpoint and then there's an [Azure Table Storage connector](https://docs.microsoft.com/en-au/connectors/azuretables/?{{< cda >}}) that can write to or read from Table Storage.
 
 Well then, this looks nice and easy doesn't it!
 
@@ -34,7 +34,7 @@ Yeah that's not particularly simple a URL to use. The other problem is that if y
 
 ## Enter Azure Function Proxies
 
-[Azure Functions](https://azure.microsoft.com/en-us/services/functions/) is Microsoft's entry in the Serverless architecture and it has a neat feature of it call [Function Proxies](https://docs.microsoft.com/en-us/azure/azure-functions/functions-proxies).
+[Azure Functions](https://azure.microsoft.com/en-us/services/functions/?{{< cda >}}) is Microsoft's entry in the Serverless architecture and it has a neat feature of it call [Function Proxies](https://docs.microsoft.com/en-us/azure/azure-functions/functions-proxies?{{< cda >}}).
 
 Function Proxies are exactly what they sound like, a proxy to another endpoint (or you can use it to mock an endpoint). Now you can probably see where I'm going with this, creating a proxy to wrap the Flow URL with a proxy!
 
