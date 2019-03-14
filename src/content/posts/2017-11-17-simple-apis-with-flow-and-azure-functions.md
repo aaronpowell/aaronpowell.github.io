@@ -43,3 +43,7 @@ Function Proxies are exactly what they sound like, a proxy to another endpoint (
 This now gives me a nice friendly URL from the Azure Function, I can define a route template (eg: `/api/tasks`) to hang off the hostname I get from the Azure Functions.
 
 Now I'm able hide my Flow URLs be something that's easy to consume from my application, and if my PoC was to become a real application I can just swap out the Flow URL in the Proxies to either be another AppService or to be Azure Functions.
+
+## Conclusion
+
+It's pretty easy to use create an Azure Function Proxy that will wrap around your ugly URL's for testing. I used Flow for this but you could also use [Logic Apps](https://azure.microsoft.com/en-us/services/logic-apps/?{{< cda >}}], which are the same infrastructure as Flow but they are part of the Azure Portal (rather than a separate service) and have easier integration with a CI/CD pipeline, or the Azure CLI.
