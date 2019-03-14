@@ -46,4 +46,4 @@ Now I'm able hide my Flow URLs be something that's easy to consume from my appli
 
 ## Conclusion
 
-It's pretty easy to use create an Azure Function Proxy that will wrap around your ugly URL's for testing. I used Flow for this but you could also use [Logic Apps](https://azure.microsoft.com/en-us/services/logic-apps/?{{< cda >}}], which are the same infrastructure as Flow but they are part of the Azure Portal (rather than a separate service) and have easier integration with a CI/CD pipeline, or the Azure CLI.
+It's pretty easy to use create an Azure Function Proxy that will wrap around your ugly URL's for testing. I used Flow for this but you could also use [Logic Apps](https://azure.microsoft.com/en-us/services/logic-apps/?{{< cda >}}), which are the same infrastructure as Flow but they are part of the Azure Portal (rather than a separate service) and have easier integration with a CI/CD pipeline, or the Azure CLI.
