@@ -10,7 +10,7 @@ tags = ["javascript", "fun"]
 
 If you've ever opened up your browser tools while logged into Facebook you might have noticed the above in it (at least, this is what it looks like at the time of writing).
 
-DOM warning aside, it looks a bit different to most `console.log` messages you're probably generating doesn't it? A bit bit of red text and some other slightly larger text. That's a bit weird isn't it?
+DOM warning aside, it looks a bit different to most `console.log` messages you're probably generating doesn't it? A big bit of red text and some other slightly larger text. That's a bit weird isn't it?
 
 As it turns out the `console` functions have a number of formatting options, so if you want to display numbers to certain decimal places you can use `%.#f` like so:
 
