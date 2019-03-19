@@ -18,9 +18,9 @@ When using the Azure CLI we'll use the `az container` commands, let's start crea
 az container create --resource-group aci-from-scratch-01 --name aci-from-scratch-01-demo --image microsoft/aci-helloworld --dns-name-label aci-from-scratch-01-demo --ports 80
 ```
 
-_I've made the assumption you already created a Resource Group called `aci-from-scratch-01`, which the git repository covers._
+_I've made the assumption you already created a Resource Group called `aci-from-scratch-01`, which the git repository covers. Also remember that the names of the resources we're creating will need to be globally unique, so what I'm using in the demo you might want to change yourself to avoid collisions._
 
-This command, `az container create` is used to create the ACI resource in the resource group you specify. We've given it the name `aci-from-scratch-01-demo`, which is what will appear in the portal, and told it that we'll use an image from the public Docker image repository, `microsoft/aci-helloworld` (the code for the image is [here](https://github.com/Azure-Samples/aci-helloworld)).
+This command, `az container create`, is used to create the ACI resource in the resource group you specify. We've given it the name `aci-from-scratch-01-demo`, which is what will appear in the portal, and told it that we'll use an image from the public Docker image repository, `microsoft/aci-helloworld` (the code for the image is [here](https://github.com/Azure-Samples/aci-helloworld)).
 
 Because this image contains a web server we need to make sure that it's publicly available, to do that we need to give it a DNS name using `--dns-name-label` and bind the port(s) that the container will require. Since this is a web server we're binding port 80.
 
@@ -84,13 +84,13 @@ $> az acr create --resource-group aci-from-scratch-02 --name acifromscratch02 --
 
 _Be aware that the name you give your registry can only have numbers and letters._
 
-This will create us a registry using the cheapest tier, `Basic`, but you can change the `--sku` to be `Standard` or `Premium` if you need. The different sku's mainly represent increased storage, with Premium also including geo replication. We also set `--admin-enabled true` so that we can use a username/password to push to the registry, alternatively you can create a Service Principal and use that for authentication.
+This will create us a registry using the cheapest tier, `Basic`, but you can change the `--sku` to be `Standard` or `Premium` if you need. The different sku's mainly represent increased storage, with Premium also including geo replication. We also set `--admin-enabled true` so that we can use a username/password to push to the registry, alternatively, you can create a Service Principal and use that for authentication.
 
-From the JSON response the most important piece of information is the `loginServer`, we'll need that when it comes to pushing images up to the registry.
+From the JSON response, the most important piece of information is the `loginServer`, we'll need that when it comes to pushing images up to the registry.
 
 Also, before we push images we'll need to log Docker into ACR, you can do that either via the Docker CLI or using `az acr login --name <registry name>`.
 
-Now it's time to set the repository on the images, we do that by prefixing the `loginServer` from above to the image name. Let's say we've previously built an image called `aci-from-scratch-02:v1`, we'll add the registry to it like so:
+Now it's time to set the repository on the images, we do that by prefixing the `loginServer` from above to the image name to give it a fully qualified name. Let's say we've previously built an image called `aci-from-scratch-02:v1`, we'll add the registry to it like so:
 
 ```
 $> docker tag aci-from-scratch-02:v1 acifromscratch02.azurecr.io/aci-from-scratch-02:v1
@@ -120,6 +120,8 @@ It's time to create an ACI that uses the registry. Since we've enabled the admin
 az acr credential show --name acifromscratch02 --query "passwords[0].value"
 ```
 
+_Ideally you'd want to assign this to a variable in your shell (bash/PowerShell/etc.) rather than writing it to stdout. That'd avoid it ending up in the shells history and potentially being compromised._
+
 We've provided a `--query "passwords[0].value"` because there are two passwords and we only need one (there are two passwords so that there's a backup should one be compromised and need resetting).
 
 Now we can provide credentials to ACI:
@@ -144,12 +146,12 @@ Here's how we'd create a SQL connection string for a web application, note that 
 az container create --resource-group aci-from-scratch-03 --name aci-from-scratch-03 --image acifromscratch03.azurecr.io/aci-from-scratch-03:v1 --registry-login-server acifromscratch03.azurecr.io --registry-username acifromscratch03 --registry-password <password> --dns-name-label aci-from-scratch-03 --ports 80 --environment-variables 'SQLAZURECONNSTR_DefaultConnection'='Server=tcp:aci-from-scratch-03-sql.database.windows.net,1433;Database=aci-from-scratch;User ID=aci;Password=<sql password>;Encrypt=true;Connection Timeout=30;'
 ```
 
-The environment variables are `--environment-variables` and you can set multiple by using a space between them. If you were to create a secret one then you'd use the `--secrets` option (but be aware, they will appear in the CLI that executed the command).
+The environment variables are `--environment-variables` and you can set multiple by using a space between them. If you were to create a secret one then you'd use the `--secrets` option (but be aware, they will appear in the CLI that executed the command, so you're better using shell variables to insert them).
 
 If you're planning to use secret variables you're better off using a [file deployment](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-environment-variables?{{< cda >}}#yaml-deployment) or [Resource Manager template](https://docs.microsoft.com/en-au/azure/templates/Microsoft.ContainerInstance/2018-10-01/containerGroups?{{< cda >}}) and inject the values into the file at runtime.
 
 ## Conclusion
 
-[Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/?{{< cda >}}) are the easiest way to run a container, whether it's a web server, a data processing jobs or as part of an event driven architecture with Azure Functions.
+[Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/?{{< cda >}}) is the easiest way to run a container, whether it's a web server, a data processing job or as part of an event-driven architecture with Azure Functions/triggered from a Logic App/etc..
 
 Check out the exercises on my GitHub repository, [ACI from scratch](https://github.com/aaronpowell/aci-from-scratch), and walk through creating your first container instances.
