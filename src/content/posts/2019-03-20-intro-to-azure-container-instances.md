@@ -2,7 +2,7 @@
 title = "Intro to Azure Container Instances"
 date = 2019-03-20T09:00:27+11:00
 description = "A quick lap around how to use Azure Container Instances"
-draft = true
+draft = false
 tags = ["azure", "docker"]
 +++
 
