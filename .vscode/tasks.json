@@ -20,7 +20,10 @@
             "label": "new post",
             "type": "shell",
             "command": "./New-Post.ps1",
-            "args": ["-Title", "${input:postName}"],
+            "args": [
+                "-Title",
+                "${input:postName}"
+            ],
             "windows": {
                 "options": {
                     "shell": {
@@ -28,6 +31,28 @@
                     }
                 }
             },
+            "problemMatcher": []
+        },
+        {
+            "label": "run server (linux)",
+            "type": "shell",
+            "command": [
+                "./hugo",
+                "server",
+                "-w",
+                "-b",
+                "http://localhost",
+                "--source",
+                "./src",
+                "--destination",
+                "../.output",
+                "--port",
+                "4014",
+                "--bind",
+                "127.0.0.1",
+                "--buildDrafts",
+                "--buildFuture"
+            ],
             "problemMatcher": []
         }
     ],
