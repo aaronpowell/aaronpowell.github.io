@@ -80,3 +80,15 @@ And there you have it, you can now use VS Code as your editor of choice and also
 In fact, I'm using this to debug an F# application I'm building to run on .NET Core. 😉
 
 Happy debugging! 😁
+
+## Bonus Idea: Removing the additional layer with volumes
+
+When I shared this post internally my colleague [Shayne Boyer](https://twitter.com/spboyer) brought up an idea on how to tackle this without adding a new layer to your `Dockerfile`, and in fact, making it possible to debug pre-built images (assuming they have the debugging symbols in them).
+
+You can do this by downloading the vsdbg package for the distro your image is based off (Ubuntu, Alpine, ARM, etc.), which you can determine by reading the shell script (or download into a container 😉) onto your machine and then mounting the path as a volume when starting your container:
+
+```sh
+docker run --rm -v c:/path/to/vsdbg:/vsdbg --name my-dotnet-app my-dotnet-app
+```
+
+Now you've inserted the debugger into the container when you start it rather than bundling it into the image.
