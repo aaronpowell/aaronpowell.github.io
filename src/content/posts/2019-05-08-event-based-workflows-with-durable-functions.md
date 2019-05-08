@@ -1,10 +1,10 @@
-+++
-title = "Creating Event-Based Workflows With Azure Durable Functions"
-date = 2019-05-08T08:34:18+10:00
-description = "How to orchestrate event-based workflows using Azure Durable Functions"
-draft = false
-tags = ["azure-functions", "fsharp", "csharp", "javascript"]
-+++
+---
+title: "Creating Event-Based Workflows With Azure Durable Functions"
+date: 2019-05-08T10:37:32+10:00
+description: "How to orchestrate event-based workflows using Azure Durable Functions"
+draft: false
+tags: ["azure-functions", "fsharp", "csharp", "javascript"]
+---
 
 [Durable Functions](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?{{< cda >}}) is an extension of the [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/?{{< cda >}}) serverless stack that introduces state management and orchestration across functions without the need to write the plumbing code yourself.
 
