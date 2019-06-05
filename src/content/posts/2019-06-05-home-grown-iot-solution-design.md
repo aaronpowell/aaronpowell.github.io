@@ -2,7 +2,7 @@
 title = "Home Grown IoT - Solution Design"
 date = 2019-06-05T09:06:59+10:00
 description = "How I came to the solution design for my IoT project"
-draft = true
+draft = false
 tags = ["fsharp", "iot"]
 series = "home-grown-iot"
 series_title = "Solution Design"
