@@ -80,4 +80,4 @@ So far the only solution to this I've found is to log into the Azure portal and 
 
 And that's how we deploy the we assets for DDD Sydney into Blob Storage, in a way that provides us with easy roll-back of changes, and update the CDN to reflect the new content.
 
-Now I'm away that Microsoft released support for [static websites in Azure](https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/) as a feature, but at the time of writing it doesn't support using an `Origin Path` so we can't quite switch over yet. Hopefully in the future, but we'll wait and see.
+Now I'm away that Microsoft released support for [static websites in Azure](https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/?{{< cda >}}) as a feature, but at the time of writing it doesn't support using an `Origin Path` so we can't quite switch over yet. Hopefully in the future, but we'll wait and see.

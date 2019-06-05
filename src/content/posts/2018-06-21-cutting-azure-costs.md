@@ -6,7 +6,7 @@ draft = false
 tags = ["azure", "dddsydney"]
 +++
 
-> Only a couple of weeks after I posted this article Azure announced that they have support for [static websites in preview](https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/). Obviously this supersedes what I do here, but it doesn't make it any less accurate 😉.
+> Only a couple of weeks after I posted this article Azure announced that they have support for [static websites in preview](https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/?{{< cda >}}). Obviously this supersedes what I do here, but it doesn't make it any less accurate 😉.
 
 As you likely know, I'm one of the organisers of [DDD Sydney](https://next.dddsydney.com.au), a not for profit conference in Sydney. Being a not for profit I'm always looking at how we can slash our costs because every dollar counts and this year I decided to look at how we can slash our Azure costs.
 
@@ -32,11 +32,11 @@ Now I've got a bunch of static assets where can I host them? I'd like to **not**
 
 So you've got your site running in Azure Blob Storage but the URL isn't great, it's definitely not `dddsydney.com.au`, so now we need to do something to fix that up.
 
-My first thought was [Azure Function Proxies](https://docs.microsoft.com/en-us/azure/azure-functions/functions-proxies), they are an easy way to front a route with a nice URL and it supports SSL + custom domains, so, win!
+My first thought was [Azure Function Proxies](https://docs.microsoft.com/en-us/azure/azure-functions/functions-proxies?{{< cda >}}), they are an easy way to front a route with a nice URL and it supports SSL + custom domains, so, win!
 
 But it turns out to not be quite as simple as that. I can't for the life of me work out how to do some decent wildcard mapping in the proxy definition to get the pages all mapped. My only solution was to create a proxy for each page which is less than ideal, especially when the blog is thrown into the mix.
 
-My next thought was [Azure CDN](https://azure.microsoft.com/en-us/services/cdn/). Now I have **zero** experience in Azure CDN and in fact I couldn't find anyone I know who had experience with Azure CDN (that I work with, or know externally, I'm sure there are people who use it :stuck_out_tongue:), so there's no time like the present to learn it now is there!
+My next thought was [Azure CDN](https://azure.microsoft.com/en-us/services/cdn/?{{< cda >}}). Now I have **zero** experience in Azure CDN and in fact I couldn't find anyone I know who had experience with Azure CDN (that I work with, or know externally, I'm sure there are people who use it :stuck_out_tongue:), so there's no time like the present to learn it now is there!
 
 Azure CDN as it turns out is really just a front for two other CDN providers, Verizon and Akamai, but integrated into the Azure portal... sort of. I was going to need to use the Premium tier because I need to create custom rules, which means I'm using Verizon under the covers.
 
