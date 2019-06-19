@@ -22,7 +22,7 @@ func printMessage(inputs []js.Value) string {
 }
 ```
 
-And immediately we hit an error because `js.NewCallback` takes a signature of `func(args []js.Value)`, meaning it takes a function that doesn't return anything, a `void` function (if you were to C# it).
+And immediately we hit an error because `js.FuncOf` takes a signature of `func(args []js.Value)`, meaning it takes a function that doesn't return anything, a `void` function (if you were to C# it).
 
 Right, back to the drawing board.
 

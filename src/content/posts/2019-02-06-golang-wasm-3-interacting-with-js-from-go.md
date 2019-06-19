@@ -67,10 +67,10 @@ document.body.appendChild('el');
 
 We're wanting to invoke a function, `someFunction` on the Go/WASM runtime from JavaScript. Ignoring the trivial nature of the code, this is the kind of thing that you'd want to do.
 
-Now in an ideal world of WASM we would get some exports provided to us (see the **A Quick WebAssembly Primer** of the last post), but Go doesn't work that way, that's not how we export functions. Instead we have to register them with the browser using `Set` and a [`NewCallback`](https://godoc.org/syscall/js#NewCallback):
+Now in an ideal world of WASM we would get some exports provided to us (see the **A Quick WebAssembly Primer** of the last post), but Go doesn't work that way, that's not how we export functions. Instead we have to register them with the browser using `Set` and a [`FuncOf`](https://godoc.org/syscall/js#FuncOf):
 
 ```go
-js.Global().Set("someFunction", js.NewCallback(someFunction))
+js.Global().Set("someFunction", js.FuncOf(someFunction))
 ```
 
 This will then create a global function called `someFunction` that you can invoke from JavaScript. Now it doesn't _have_ to be a global function, you could use `js.Global().Get(...)` and nest a bunch of `Get`'s to "namespace" your function, but you'd need to ensure that object exists in JavaScript first.
@@ -88,7 +88,7 @@ import (
     "syscall/js"
 )
 
-func printMessage(inputs []js.Value) {
+func printMessage(this js.Value, inputs []js.Value) interface{} {
     message := inputs[0].String()
 
     document := js.Global().Get("document")
@@ -98,13 +98,13 @@ func printMessage(inputs []js.Value) {
 }
 
 func main() {
-    js.Global().Set("printMessage", js.NewCallback(printMessage))
+    js.Global().Set("printMessage", js.FuncOf(printMessage))
 }
 ```
 
 The main addition to this is the `printMessage` function, it takes an array of `js.Value` for arguments and doesn't return a value.
 
-But why does it take an array? Well apart from the fact that `js.NewCallback` requires it to, it's because JavaScript can have as many arguments provided to a function as you like, you just name the ones you care about and handle the magic `arguments` (or define a spread) if you want more. And also, JavaScript has a pretty weak type system compared to Go, so while you might _want_ a string there's nothing stopping the caller passing in a number or a function, so Go forces you to use this boxed `struct` in `js.Value` and then you can unpack it as required using `Value.String` or `Value.Int` or whatever type you want.
+But why does it take an array? Well apart from the fact that `js.FuncOf` requires it to, it's because JavaScript can have as many arguments provided to a function as you like, you just name the ones you care about and handle the magic `arguments` (or define a spread) if you want more. And also, JavaScript has a pretty weak type system compared to Go, so while you might _want_ a string there's nothing stopping the caller passing in a number or a function, so Go forces you to use this boxed `struct` in `js.Value` and then you can unpack it as required using `Value.String` or `Value.Int` or whatever type you want.
 
 Now compile it, launch a browser, open the dev tools, call your globally declared function and you'll get this error message:
 
@@ -153,7 +153,7 @@ This would make a `main` function look like so:
 ```go
 func main() {
     c := make(chan bool)
-    js.Global().Set("printMessage", js.NewCallback(printMessage))
+    js.Global().Set("printMessage", js.FuncOf(printMessage))
     <-c
 }
 ```
@@ -183,7 +183,7 @@ func init() {
 	c = make(chan bool)
 }
 
-func printMessage(inputs []js.Value) {
+func printMessage(this js.Value, inputs []js.Value) interface{} {
 	message := inputs[0].String()
 
 	document := js.Global().Get("document")
@@ -195,7 +195,7 @@ func printMessage(inputs []js.Value) {
 }
 
 func main() {
-	js.Global().Set("printMessage", js.NewCallback(printMessage))
+	js.Global().Set("printMessage", js.FuncOf(printMessage))
 	<-c
 	println("We are out of here")
 }

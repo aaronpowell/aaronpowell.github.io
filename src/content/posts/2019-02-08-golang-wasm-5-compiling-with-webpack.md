@@ -327,15 +327,15 @@ import (
 	"github.com/aaronpowell/webpack-golang-wasm-async-loader/gobridge"
 )
 
-func add(i ...js.Value) js.Value {
+func add(this js.Value, args []js.Value) (interface{}, error) {
 	ret := 0
 
-	for _, item := range i {
+	for _, item := range args {
 		val, _ := strconv.Atoi(item.String())
 		ret += val
 	}
 
-	return js.ValueOf(ret)
+	return ret, nil
 }
 
 func main() {
@@ -346,7 +346,7 @@ func main() {
 }
 ```
 
-And use `gobridge.RegisterCallback` and not worry about working with `js.NewCallback` or where to register it in the JavaScript object graph.
+And use `gobridge.RegisterCallback` and not worry about working with `js.FuncOf` or where to register it in the JavaScript object graph.
 
 And that latter part is important because I don't want to dump everything on global, I want to namespace it.
 

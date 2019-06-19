@@ -147,12 +147,12 @@ At the top of the file you'll see that we're importing the `main.go` file from a
 Now it's time to complete our `updateValue` method. But it turns out that using the `add` function could be a bit tricky. Sure we can define it as an `any` property of the WASM, but what if we wanted to be more intelligent in the way it is represented?
 
 ```typescript
-    async updateValue(index: number, value: number) {
-        let newValues = this.state.value.slice();
-        newValues[index] = value
-        let result = await add<number, string>(...newValues);
-        this.setState({ value: newValues, result });
-    }
+async updateValue(index: number, value: number) {
+    let newValues = this.state.value.slice();
+    newValues[index] = value
+    let result = await add<number, string>(...newValues);
+    this.setState({ value: newValues, result });
+}
 ```
 
 ## Using Types with our Proxy
