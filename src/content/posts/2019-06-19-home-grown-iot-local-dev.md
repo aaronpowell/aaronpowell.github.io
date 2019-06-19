@@ -4,6 +4,8 @@ date = 2019-06-19T09:24:38+10:00
 description = "A look at how you can do local development with IoT solutions"
 draft = false
 tags = ["fsharp", "iot"]
+series = "home-grown-iot"
+series_title = "Local Dev"
 +++
 
 Now that we're starting to build [our IoT application]({{< ref "/posts/2019-06-12-home-grown-iot-data-downloader.md" >}}) it's time to start talking about the local development experience for the application. At the end of the day I use [IoT Edge](https://docs.microsoft.com/en-us/azure/iot-edge/?{{< cda >}}) to do the deployment onto the device and manage the communication with [IoT Hub](https://docs.microsoft.com/en-us/azure/iot-hub/?{{< cda >}}) and there is a very comprehensive development guide for [Visual Studio Code](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-vs-code-develop-module?{{< cda >}}) and [Visual Studio 2019](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-visual-studio-develop-module?{{< cda >}}). The workflow of this is to create a new IoT Edge project, setup IoT Edge on your machine and do deployments to it that way. This is the way I'd recommend going about it yourself as it gives you the best replication of production and local development.
