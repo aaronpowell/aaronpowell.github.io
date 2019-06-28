@@ -20,16 +20,19 @@
             "label": "new post",
             "type": "shell",
             "command": "./New-Post.ps1",
-            "args": [
-                "-Title",
-                "${input:postName}"
-            ],
+            "args": ["-Title", "${input:postName}"],
             "windows": {
+                "command": "./New-Post.ps1",
                 "options": {
                     "shell": {
-                        "executable": "powershell.exe"
+                        "executable": "powershell.exe",
+                        "args": ["-Title", "${input:postName}"]
                     }
                 }
+            },
+            "linux": {
+                "command": "./new-post.sh",
+                "args": ["${input:postName}"]
             },
             "problemMatcher": []
         },
