@@ -30,19 +30,19 @@ With the disclaimer done let's look at how we'll get the data. The first job for
 
 The approach I took for this was to sit with the network tools in my browser open while I was on the dashboard for the inverter and just watched the XHR network events. Given I'd already determined it to be an AngularJS application it was really just a matter of watching the network traffic to find the things that were most useful. Through doing that I found 4 interesting API endpoints (there were others but either I can't work out what they are for, or they are just keep-alive tests):
 
-* `/v1/specs`
-  * This API describes the devices that are available and returns a JSON payload ([example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/specs.json)) that gives me the information about the `device` (the inverter) and the `logger` (the thing that sends data to ABB's cloud platform)
-  * Ultimately, this API is a metadata endpoint which I don't _need_ to call, but I do because it means I don't have to hard-code anything about my device in the solution
-  * The dashboard seems to invoke this when the AngularJS application first starts up, and never again (I guess the values are in the JavaScript memory)
-* `/v1/livedata/list`
-  * This is one of two API's under `livedata` and it is another metadata endpoint, this time it gives me the information about what sensors are being monitored by the inverter that I can get data from. It also provides information about them like their unit of measure, description (which, generally speaking, isn't actually descriptive!) and decimal precision. Again I have [an example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/live-data-list.json) on GitHub
-  * The dashboard seems to invoke this approximately every 5 minutes. I don't know why it would refresh this, hopefully the sensors don't change that often!
-* `/v1/livedata`
-  * This is the juicy bit, here's where the data is useful, this returns the values for the sensors described by `livedata/list` ([example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/live-data.json))
-  * The dashboard calls this **a lot**, approximately every 30 seconds, which stands to reason as it is the primary data feed
-* `/v1/feeds`
-  * This API confuses me as it is always called with a bunch of query string values that returns the `Pgrid` in 5 minute blocks. By looking at the data it _appears_ that `Pgrid` is to do with the power (watts) to the grid from the inverter (and that stands to reason from the name) but I wasn't able to work out anything else I could adjust on the query string if I wanted to get other metrics. I think I do get this information in `livedata` too, but it can't hurt to have it captured twice, and after all, they made a dedicated API for this for a reason. Anyway, the structure of this response is quite weird ([example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/pgrid-sum.json)) but it's not _too_ hard to consume
-  * The dashboard seems to invoke this approximately every 5 minutes, and given the response is 5 minute time slices, there's no need to call it more frequently than that
+-   `/v1/specs`
+    -   This API describes the devices that are available and returns a JSON payload ([example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/specs.json)) that gives me the information about the `device` (the inverter) and the `logger` (the thing that sends data to ABB's cloud platform)
+    -   Ultimately, this API is a metadata endpoint which I don't _need_ to call, but I do because it means I don't have to hard-code anything about my device in the solution
+    -   The dashboard seems to invoke this when the AngularJS application first starts up, and never again (I guess the values are in the JavaScript memory)
+-   `/v1/livedata/list`
+    -   This is one of two API's under `livedata` and it is another metadata endpoint, this time it gives me the information about what sensors are being monitored by the inverter that I can get data from. It also provides information about them like their unit of measure, description (which, generally speaking, isn't actually descriptive!) and decimal precision. Again I have [an example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/live-data-list.json) on GitHub
+    -   The dashboard seems to invoke this approximately every 5 minutes. I don't know why it would refresh this, hopefully the sensors don't change that often!
+-   `/v1/livedata`
+    -   This is the juicy bit, here's where the data is useful, this returns the values for the sensors described by `livedata/list` ([example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/live-data.json))
+    -   The dashboard calls this **a lot**, approximately every 30 seconds, which stands to reason as it is the primary data feed
+-   `/v1/feeds`
+    -   This API confuses me as it is always called with a bunch of query string values that returns the `Pgrid` in 5 minute blocks. By looking at the data it _appears_ that `Pgrid` is to do with the power (watts) to the grid from the inverter (and that stands to reason from the name) but I wasn't able to work out anything else I could adjust on the query string if I wanted to get other metrics. I think I do get this information in `livedata` too, but it can't hurt to have it captured twice, and after all, they made a dedicated API for this for a reason. Anyway, the structure of this response is quite weird ([example](https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Shared/sample-data/pgrid-sum.json)) but it's not _too_ hard to consume
+    -   The dashboard seems to invoke this approximately every 5 minutes, and given the response is 5 minute time slices, there's no need to call it more frequently than that
 
 Armed with our 4 APIs to call we can start building our application.
 
@@ -192,7 +192,22 @@ Here I call the `livedata` API once every 20 seconds (that way with latency, etc
 
 ### Linking API Calls Together
 
-Each API call is happening in a separate background job, handled by a separate recursive function
+Each API call is happening in a separate background job, handled by a separate recursive function, all running on different threads, which means that it is difficult to know which message is related to which other messages. I wanted to be able to relate all messages back to a time slice centred around the `livedata/list` API call, since it's polled the most infrequently. I do this by using a `CorrelationId` that is stored in a [mutable F# variable](https://github.com/aaronpowell/sunshine/blob/c1005c8bf8ec1d295f05398556bd1bf8dccd7e36/src/Sunshine.Downloader/Program.fs#L33). Each time the `livedata/list` API is called [the variable is updated](https://github.com/aaronpowell/sunshine/blob/c1005c8bf8ec1d295f05398556bd1bf8dccd7e36/src/Sunshine.Downloader/Program.fs#L39) and since the variable is defined before all the recursive functions, each one has access to it via closure scopes.
+
+I then created a [helper function](https://github.com/aaronpowell/sunshine/blob/c1005c8bf8ec1d295f05398556bd1bf8dccd7e36/src/Sunshine.Downloader/Utils.fs#L9-L16) to wrap the call to the IoT client (either `ModuleClient` or `DeviceClient`, via the wrapper type I made):
+
+```fsharp
+let sendIoTMessage<'T> client route correlationId (obj : 'T) =
+    let json = obj |> toS
+    let msg = new Message(Encoding.ASCII.GetBytes json)
+    msg.Properties.Add("__messageType", route)
+    msg.Properties.Add("correlationId", correlationId.ToString())
+    msg.Properties.Add("messageId", Guid.NewGuid().ToString())
+    printfn "Submitting %s with correlationId %A" route correlationId
+    client.SendEventAsync msg
+```
+
+Here we create a new `Message` to sent to IoT Hub with a JSON serialised message, then some metadata is added to it, `__messageType` which is used by the IoT Hub routing to route the message to the right Event Hub, the `correlationId` to link messages and a unique `messageId` so that if a message is processed multiple times we can link those processes together.
 
 ### Keeping the Application Running
 
@@ -213,7 +228,7 @@ Now depending on how our container starts we either wait for a newline character
 
 ## Conclusion
 
-The full codebase for the Downloader is [available on GitHub]((https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Sunshine.Downloader)) (and I've pinned this post to the commit that is `HEAD` at the time of writing).
+The full codebase for the Downloader is [available on GitHub](<(https://github.com/aaronpowell/sunshine/blob/277c31fcb612d3866daf7759beb9525826778c2c/src/Sunshine.Downloader)>) (and I've pinned this post to the commit that is `HEAD` at the time of writing).
 
 We've seen in this post how we can leverage some F# language features like partial application and pattern matching to tackle some of our goals and seen how we can have credentials/secrets provided to a device without the need to embed them in the application.
 
