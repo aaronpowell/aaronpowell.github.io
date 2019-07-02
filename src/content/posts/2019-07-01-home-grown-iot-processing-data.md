@@ -4,6 +4,8 @@ date = 2019-07-01T11:20:18+10:00
 description = "How I go about processing data streams from IoT devices"
 draft = false
 tags = ["fsharp", "iot", "azure-functions"]
+series = "home-grown-iot"
+series_title = "Processing Data"
 +++
 
 [Last Time]({{< ref "/posts/2019-06-19-home-grown-iot-local-dev.md" >}}) we looked at how to get data from an IoT device and start pushing it up to Azure, now it's time for the next step, processing the data as it comes in.
