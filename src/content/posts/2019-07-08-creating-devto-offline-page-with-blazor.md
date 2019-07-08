@@ -24,8 +24,10 @@ I've then deleted all the boilerplate code from the `Pages` and `Shared` folder 
 
 First thing we'll need to do is create the [Layout file](https://docs.microsoft.com/en-gb/aspnet/core/blazor/layouts?view=aspnetcore-3.0&{{< cda >}}). Blazor, like ASP.NET MVC, uses a Layout file as the base template for all pages (well, all pages that use that Layout, you can have multiple layouts). So, create a new file in `Shared` called `MainLayout.razor` and we'll define it. Given that we want it to be full screen it'll be _pretty simple_:
 
-```html
-@inherits LayoutComponentBase @Body
+```csharp-razor
+@inherits LayoutComponentBase
+
+@Body
 ```
 
 This file inherits the Blazor-provided base class for layouts, `LayoutComponentBase` which gives us access to the `@Body` property which allows us to place the page contents within any HTML we want. We don't need anything around it, so we just put `@Body` in the page.
@@ -66,7 +68,7 @@ window.getWindowSize = () => {
 
 Next we'll create a C# `struct` to represent that data (I added a file called `WindowSize.cs` into the project root):
 
-```c#
+```csharp
 namespace Blazor.DevToOffline
 {
     public struct WindowSize
@@ -80,26 +82,30 @@ namespace Blazor.DevToOffline
 
 Lastly, we need to use that in our Blazor component:
 
-```html
-@page "/" @inject IJSRuntime JsRuntime
+```csharp-razor
+@page "/"
+@inject IJSRuntime JsRuntime
 
 <canvas height="@windowSize.Height" width="@windowSize.Width"></canvas>
 
-@code { WindowSize windowSize; protected override async Task OnInitAsync() {
-windowSize = await JsRuntime.InvokeAsync<WindowSize
-    >("getWindowSize"); } }</WindowSize
->
+@code {
+    WindowSize windowSize;
+    protected override async Task OnInitAsync()
+    {
+        windowSize = await JsRuntime.InvokeAsync<WindowSize>("getWindowSize");
+    }
+}
 ```
 
 That's a bit of code added so let's break it down.
 
-```
+```csharp-razor
 @inject IJSRuntime JsRuntime
 ```
 
 Here we use [Dependency Injection](https://docs.microsoft.com/en-gb/aspnet/core/blazor/dependency-injection?view=aspnetcore-3.0&{{< cda >}}) to inject the `IJSRuntime` as a property called `JsRuntime` on our component.
 
-```html
+```csharp-razor
 <canvas height="@windowSize.Height" width="@windowSize.Width"></canvas>
 ```
 
@@ -124,8 +130,9 @@ Congratulations, you now have a full screen canvas! 🎉
 
 We may have our canvas appearing but it doesn't do anything yet, so let's get cracking on that by adding some event handlers:
 
-```html
-@page "/" @inject IJSRuntime JsRuntime
+```csharp-razor
+@page "/"
+@inject IJSRuntime JsRuntime
 
 <canvas
     height="@windowSize.Height"
@@ -136,12 +143,17 @@ We may have our canvas appearing but it doesn't do anything yet, so let's get cr
     @onmouseout="@StopPaint"
 />
 
-@code { WindowSize windowSize; protected override async Task OnInitAsync() {
-windowSize = await JsRuntime.InvokeAsync<WindowSize
-    >("getWindowSize"); } private void StartPaint(UIMouseEventArgs e) { }
-    private async Task Paint(UIMouseEventArgs e) { } private void
-    StopPaint(UIMouseEventArgs e) { } }</WindowSize
->
+@code {
+    WindowSize windowSize;
+    protected override async Task OnInitAsync()
+    {
+        windowSize = await JsRuntime.InvokeAsync<WindowSize>("getWindowSize");
+    }
+
+    private void StartPaint(UIMouseEventArgs e) { }
+    private async Task Paint(UIMouseEventArgs e) { }
+    private void StopPaint(UIMouseEventArgs e) { }
+}
 ```
 
 When you're binding events in Blazor you need to prefix the event name with `@`, like `@onmousedown`, and then provide it the name of the function to invoke when the event happens, e.g. `@StartPaint`. The signature of these functions are to either return a `void` or `Task`, depending on whether it's asynchronous or not. The argument to the function will need to be the appropriate type of event arguments, mapping to the DOM equivalent (`UIMouseEventArgs`, `UIKeyboardEventArgs`, etc.).
@@ -199,7 +211,7 @@ You might also notice that I don't ever call `document.getElementById`, I just s
 
 But this is still all JavaScript, what do we do in C#? Well, we create a C# wrapper class!
 
-```c#
+```csharp
 public class Canvas2DContext
 {
     private readonly IJSRuntime jsRuntime;
@@ -229,7 +241,7 @@ This is a generic class that takes the captured reference and the JavaScript int
 
 We can now wire up our context and prepare to draw lines on the canvas:
 
-```html
+```csharp-razor
 @page "/" @inject IJSRuntime JsRuntime
 
 <canvas
@@ -242,14 +254,19 @@ We can now wire up our context and prepare to draw lines on the canvas:
     @ref="@canvas"
 />
 
-@code { ElementRef canvas; WindowSize windowSize; Canvas2DContext ctx; protected
-override async Task OnInitAsync() { windowSize = await
-JsRuntime.InvokeAsync<WindowSize
-    >("getWindowSize"); ctx = new Canvas2DContext(JsRuntime, canvas); } private
-    void StartPaint(UIMouseEventArgs e) { } private async Task
-    Paint(UIMouseEventArgs e) { } private void StopPaint(UIMouseEventArgs e) { }
-    }</WindowSize
->
+@code {
+    ElementRef canvas;
+    WindowSize windowSize;
+    Canvas2DContext ctx;
+    protected override async Task OnInitAsync() {
+        windowSize = await JsRuntime.InvokeAsync<WindowSize>("getWindowSize");
+        ctx = new Canvas2DContext(JsRuntime, canvas);
+    }
+
+    private void StartPaint(UIMouseEventArgs e) { }
+    private async Task Paint(UIMouseEventArgs e) { }
+    private void StopPaint(UIMouseEventArgs e) { }
+}
 ```
 
 By adding `@ref="@canvas"` to our `<canvas>` element we create the reference we need and then in the `OnInitAsync` function we create the `Canvas2DContext` that we'll use.
@@ -258,34 +275,34 @@ By adding `@ref="@canvas"` to our `<canvas>` element we create the reference we 
 
 We're finally ready to do some drawing on our canvas, which means we need to implement those event handlers:
 
-```c#
-    bool isPainting = false;
-    long x;
-    long y;
-    private void StartPaint(UIMouseEventArgs e)
-    {
-        x = e.ClientX;
-        y = e.ClientY;
-        isPainting = true;
-    }
+```csharp
+bool isPainting = false;
+long x;
+long y;
+private void StartPaint(UIMouseEventArgs e)
+{
+    x = e.ClientX;
+    y = e.ClientY;
+    isPainting = true;
+}
 
-    private async Task Paint(UIMouseEventArgs e)
+private async Task Paint(UIMouseEventArgs e)
+{
+    if (isPainting)
     {
-        if (isPainting)
-        {
-            var eX = e.ClientX;
-            var eY = e.ClientY;
+        var eX = e.ClientX;
+        var eY = e.ClientY;
 
-            await ctx.DrawLine(x, y, eX, eY);
-            x = eX;
-            y = eY;
-        }
+        await ctx.DrawLine(x, y, eX, eY);
+        x = eX;
+        y = eY;
     }
+}
 
-    private void StopPaint(UIMouseEventArgs e)
-    {
-        isPainting = false;
-    }
+private void StopPaint(UIMouseEventArgs e)
+{
+    isPainting = false;
+}
 ```
 
 Admittedly, these aren't that different to the JavaScript implementation, all they have to do is grab the coordinates from the mouse event and then pass them through to the canvas context wrapper, which in turn calls the appropriate JavaScript function.
@@ -304,42 +321,48 @@ There's one thing that we didn't do in the above example, implement the colour p
 
 I want to do this as a generic component so we could do this:
 
-```html
+```csharp-razor
 <ColourPicker OnClick="@SetStrokeColour" Colours="@colours" />
 ```
 
 In a new file, called `ColourPicker.razor` (the file name is important as this is the name of the component) we'll create our component:
 
-```html
+```csharp-razor
 <div class="colours">
     @foreach (var colour in Colours) {
-    <button class="colour" @onclick="@OnClick(colour)" @key="@colour"></button>
+        <button class="colour" @onclick="@OnClick(colour)" @key="@colour"></button>
     }
 </div>
 
-@code { [Parameter] public Func<string, Action<UIMouseEventArgs
-    >> OnClick { get; set; } [Parameter] public IEnumerable<string>
-        Colours { get; set; } }
-    </string></string,
->
+@code {
+    [Parameter] public Func<string, Action<UIMouseEventArgs>> OnClick { get; set; }
+    [Parameter] public IEnumerable<string> Colours { get; set; }
+}
 ```
 
 Our component is going to have 2 parameters that can be set from the parent, the collection of colours and the function to call when you click on the button. For the event handler I've made is so that you pass in a _function that returns an action_, so it's a single function that is "bound" to the name of the colour when the `<button>` element is created.
 
 This means we have a usage like this:
 
-```html
-@page "/" @inject IJSRuntime JsRuntime
+```csharp-razor
+@page "/"
+@inject IJSRuntime JsRuntime
 
 <ColourPicker OnClick="@SetStrokeColour" Colours="@colours" />
 
-// snip @code { IEnumerable<string>
-    colours = new[] { "#F4908E", "#F2F097", "#88B0DC", "#F7B5D1", "#53C4AF",
-    "#FDE38C" }; // snip private Action<UIMouseEventArgs>
-        SetStrokeColour(string colour) { return async _ => { await
-        ctx.SetStrokeStyleAsync(colour); }; } }</UIMouseEventArgs
-    ></string
->
+// snip
+@code {
+    IEnumerable<string> colours = new[] { "#F4908E", "#F2F097", "#88B0DC", "#F7B5D1", "#53C4AF", "#FDE38C" };
+
+    // snip
+
+    private Action<UIMouseEventArgs> SetStrokeColour(string colour)
+    {
+        return async _ => {
+            await ctx.SetStrokeStyleAsync(colour);
+        };
+    }
+}
 ```
 
 Now if you click the colour picker across the top you get a different colour pen.
