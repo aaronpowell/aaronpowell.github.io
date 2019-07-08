@@ -2,7 +2,7 @@
 title = "Creating DEV's offline page using Blazor"
 date = 2019-07-08T14:12:11+10:00
 description = "Let's build something with Blazor!"
-draft = true
+draft = false
 tags = ["webassembly", "dotnet"]
 +++
 
@@ -10,7 +10,7 @@ _This post was [originally published](https://dev.to/azure/creating-dev-s-offlin
 
 I came across a fun post from [Ali Spittel](https://dev.to/aspittel) on [Creating DEV's offline page](https://dev.to/aspittel/how-to-create-the-drawing-interaction-on-dev-s-offline-page-1mbe) (their offline page is [here](https://dev.to/offline)).
 
-Given that I've done some [experiments in the past with WebAssembly]({{< ref "/posts/2019-02-04-golang-wasm-1-introduction.md" >}) I decided to have a crack at my own implementation in WebAssembly, in particular with [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/client?{{< cda >}}).
+Given that I've done some [experiments in the past with WebAssembly]({{< ref "/posts/2019-02-04-golang-wasm-1-introduction.md" >}}) I decided to have a crack at my own implementation in WebAssembly, in particular with [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/client?{{< cda >}}).
 
 ## Getting Started
 
