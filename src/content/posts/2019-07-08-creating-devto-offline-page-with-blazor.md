@@ -24,7 +24,7 @@ I've then deleted all the boilerplate code from the `Pages` and `Shared` folder 
 
 First thing we'll need to do is create the [Layout file](https://docs.microsoft.com/en-gb/aspnet/core/blazor/layouts?view=aspnetcore-3.0&{{< cda >}}). Blazor, like ASP.NET MVC, uses a Layout file as the base template for all pages (well, all pages that use that Layout, you can have multiple layouts). So, create a new file in `Shared` called `MainLayout.razor` and we'll define it. Given that we want it to be full screen it'll be _pretty simple_:
 
-```csharp-razor
+```cshtml-razor
 @inherits LayoutComponentBase
 
 @Body
@@ -82,7 +82,7 @@ namespace Blazor.DevToOffline
 
 Lastly, we need to use that in our Blazor component:
 
-```csharp-razor
+```cshtml-razor
 @page "/"
 @inject IJSRuntime JsRuntime
 
@@ -99,13 +99,13 @@ Lastly, we need to use that in our Blazor component:
 
 That's a bit of code added so let's break it down.
 
-```csharp-razor
+```cshtml-razor
 @inject IJSRuntime JsRuntime
 ```
 
 Here we use [Dependency Injection](https://docs.microsoft.com/en-gb/aspnet/core/blazor/dependency-injection?view=aspnetcore-3.0&{{< cda >}}) to inject the `IJSRuntime` as a property called `JsRuntime` on our component.
 
-```csharp-razor
+```cshtml-razor
 <canvas height="@windowSize.Height" width="@windowSize.Width"></canvas>
 ```
 
@@ -130,7 +130,7 @@ Congratulations, you now have a full screen canvas! 🎉
 
 We may have our canvas appearing but it doesn't do anything yet, so let's get cracking on that by adding some event handlers:
 
-```csharp-razor
+```cshtml-razor
 @page "/"
 @inject IJSRuntime JsRuntime
 
@@ -241,7 +241,7 @@ This is a generic class that takes the captured reference and the JavaScript int
 
 We can now wire up our context and prepare to draw lines on the canvas:
 
-```csharp-razor
+```cshtml-razor
 @page "/" @inject IJSRuntime JsRuntime
 
 <canvas
@@ -321,13 +321,13 @@ There's one thing that we didn't do in the above example, implement the colour p
 
 I want to do this as a generic component so we could do this:
 
-```csharp-razor
+```cshtml-razor
 <ColourPicker OnClick="@SetStrokeColour" Colours="@colours" />
 ```
 
 In a new file, called `ColourPicker.razor` (the file name is important as this is the name of the component) we'll create our component:
 
-```csharp-razor
+```cshtml-razor
 <div class="colours">
     @foreach (var colour in Colours) {
         <button class="colour" @onclick="@OnClick(colour)" @key="@colour"></button>
@@ -344,7 +344,7 @@ Our component is going to have 2 parameters that can be set from the parent, the
 
 This means we have a usage like this:
 
-```csharp-razor
+```cshtml-razor
 @page "/"
 @inject IJSRuntime JsRuntime
 
