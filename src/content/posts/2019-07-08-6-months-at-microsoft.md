@@ -1,8 +1,8 @@
 +++
 title = "6 Months at Microsoft"
 date = 2019-07-08T14:21:49+10:00
-description = ""
-draft = true
+description = "Has it already been 6 months? Or has it only been 6 months?"
+draft = false
 tags = ["career", "microsoft"]
 +++
 
