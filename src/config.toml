@@ -32,7 +32,7 @@ enableEmoji = "true"
 
     # Code highlighting with highlight.js
     highlightJS = true
-    highlightJSStyle = "/highlightjs/styles/github.css" # For custom highlight.js styles, add your /path/to/styles/default.css
+    highlightJSStyle = "/highlightjs/styles/shades-of-purple.css" # For custom highlight.js styles, add your /path/to/styles/default.css
     highlightJSScript = "/highlightjs/highlight.pack.js" # For custom highlight.js languages config, add your /path/to/highlight.pack.js
 
 [[menu.main]]
