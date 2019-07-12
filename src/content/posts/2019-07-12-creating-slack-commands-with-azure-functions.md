@@ -146,7 +146,7 @@ Now that your Function is complete, deploy it to Azure (use a Pipeline, use the 
 
 ## Wiring Up Our Slash Command
 
-With our Function deployed it's time to plug it into our slash command. Before getting started, ensure you have the URL of your Azure Function (you can get it via the portal) as we'll need it to set up the shash command.
+With our Function deployed it's time to plug it into our slash command. Before getting started, ensure you have the URL of your Azure Function (you can get it via the portal) as we'll need it to set up the slash command.
 
 Now that you have your URL head over to Slack App we created earlier and navigate to `Features -> Slash Commands -> Create New Command` and fill out the form.
 
