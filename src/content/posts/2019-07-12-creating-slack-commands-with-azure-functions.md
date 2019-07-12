@@ -136,8 +136,8 @@ let approvedSessionsCommand ([<HttpTrigger(AuthorizationLevel.Function, "post", 
 
 I've introduced a function call `sessionToViewMessage` which takes a session and its presenters and generates a line string like this:
 
-```markdown
-(12345) _My Awesome Session_ by _Aaron Powell_
+```
+(12345) _My Awesome Session_ by *Aaron Powell*
 ```
 
 The result of this is an `seq<string>` which is concatted together with `\r\n` for a new line and returned as an `OkObjectResult`, to represent a `HTTP 200 OK` response to Slack.
