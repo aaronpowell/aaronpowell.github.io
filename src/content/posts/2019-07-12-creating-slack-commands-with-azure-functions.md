@@ -142,7 +142,7 @@ I've introduced a function call `sessionToViewMessage` which takes a session and
 
 The result of this is an `seq<string>` which is concatted together with `\r\n` for a new line and returned as an `OkObjectResult`, to represent a `HTTP 200 OK` response to Slack.
 
-Now that your Function is complete, deploy it to Azure (use a Pipeline, use the [VS Code Tooling](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code{{< cda >}}#publish-the-project-to-azure), etc.) and we're ready to plug it into Slack.
+Now that your Function is complete, deploy it to Azure (use a Pipeline, use the [VS Code Tooling](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code?{{< cda >}}#publish-the-project-to-azure), etc.) and we're ready to plug it into Slack.
 
 ## Wiring Up Our Slash Command
 
