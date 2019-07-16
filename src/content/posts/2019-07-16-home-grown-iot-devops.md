@@ -2,7 +2,7 @@
 title = "Home Grown IoT - Simple DevOps"
 date = 2019-07-16T11:15:32+10:00
 description = "It's time to rub some DevOps on IoT"
-draft = true
+draft = false
 tags = ["fsharp", "iot", "devops"]
 series = "home-grown-iot"
 series_title = "Simple DevOps"
