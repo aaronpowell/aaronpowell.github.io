@@ -8,11 +8,11 @@ series = "home-grown-iot"
 series_title = "Automated DevOps"
 +++
 
-Having had a look at [some tools for deploying IoT applications]({{< ref "/posts/2019-07-16-home-grown-iot-devops.md" >}}) there was one piece of the puzzle that was missing, _automation_. After all, one of my goals is to be able to deploy updates to my project without really any effort, I want the ideal of doing a `git push` and then it just deploying.
+Having had a look at [some tools for deploying IoT applications]({{< ref "/posts/2019-07-16-home-grown-iot-devops.md" >}}) there was one piece of the puzzle that was missing, _automation_. After all, one of my goals is to be able to deploy updates to my project without really any effort, I want the idea of doing a `git push` and then it just deploying.
 
 And that brings us to this post, a look at how we can do automated deployments of IoT projects using IoT Edge and Azure Pipelines.
 
-Before we dive in, it's worth noting that the IoT Edge team [have guidance on how to do this](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-devops-project?{{<cda>}}) on Microsoft Docs already, but it'll generate you a sample project, which means you'd need to retrofit your own project into it. **That** is what we'll cover in this post, so I'd advise you to have a skim of the documentation first.
+Before we dive in, it's worth noting that the IoT Edge team [have guidance on how to do this](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-devops-project?{{<cda>}}) on Microsoft Docs already, but it'll generate you a sample project, which means you'd need to retrofit your project into it. **That** is what we'll cover in this post, so I'd advise you to have a skim of the documentation first.
 
 ## Defining Our Process
 
@@ -49,7 +49,7 @@ variables:
 jobs:
 ```
 
-I only care about the `master` branch, so I'm only triggering code on that branch itself and I'm turning off pull request builds, since I don't really want to automatically build and release PR's (hey, this is _my_ house! 😝). There's a few variables we'll need, mainly related to the Azure resources that we'll generate, so let's define them rather than having magic strings around the place.
+I only care about the `master` branch, so I'm only triggering code on that branch itself and I'm turning off pull request builds, since I don't want to automatically build and release PR's (hey, this is _my_ house! 😝). There are a few variables we'll need, mainly related to the Azure resources that we'll generate, so let's define them rather than having magic strings around the place.
 
 ## Optimising Builds with Jobs
 
@@ -119,7 +119,7 @@ To create the IoT Edge deployment packages we need to do three things, create th
 
 #### Creating a Container Registry
 
-But this means we'll need a container registry to push to. I'm going to use [Azure Container Registry (ACR)](https://azure.microsoft.com/en-us/services/container-registry/?{{<cda>}}) as is integrates easily from a security stand point across my pipeline and IoT Hub, but you can use any registry you wish. And since I'm using ACR I need it to exist. You could do this by clicking through the portal, but instead I want this scripted and part of my git repo so I could rebuild if needed, and for that we'll use a Resource Manager template:
+But this means we'll need a container registry to push to. I'm going to use [Azure Container Registry (ACR)](https://azure.microsoft.com/en-us/services/container-registry/?{{<cda>}}) as it integrates easily from a security standpoint across my pipeline and IoT Hub, but you can use any registry you wish. And since I'm using ACR I need it to exist. You could do this by clicking through the portal, but instead, I want this scripted and part of my git repo so I could rebuild if needed, and for that, we'll use a Resource Manager template:
 
 ```json
 {
@@ -197,7 +197,7 @@ Which we can run from the pipeline with this task:
             deploymentOutputs: ResourceGroupDeploymentOutputs
 ```
 
-Notice here I'm using the variables defined early on for the `-name` and `-location` parameters. This helps me have consistency naming of resources. I'm also putting this into a resource group called `$(azureResourceNamePrefix)-shared` because if I wanted to have the images usable in both a production and non-production scenario (which I could be doing if I had more than just my house that I was building against). The last piece to note in the task is that the `templateLocation` is set to `Linked artifact`, which tells the task that the file exists on disk at the location defined in `csmFile`, rather than pulling it from a URL. This caught me out for a while, so remember, if you want to keep your Resource Manager templates in source control and use the version in the clone, set the `templateLocation` to `Linked artifact` and set a `csmFile` path.
+Notice here I'm using the variables defined early on for the `-name` and `-location` parameters. This helps me have consistency naming of resources. I'm also putting this into a resource group called `$(azureResourceNamePrefix)-shared` because if I wanted to have the images used in both production and non-production scenario (which I could be doing if I had more than just my house that I was building against). The last piece to note in the task is that the `templateLocation` is set to `Linked artifact`, which tells the task that the file exists on disk at the location defined in `csmFile`, rather than pulling it from a URL. This caught me out for a while, so remember, if you want to keep your Resource Manager templates in source control and use the version in the clone, set the `templateLocation` to `Linked artifact` and set a `csmFile` path.
 
 When it comes to creating the IoT Edge deployment template I'm going to need some information about the registry that's just been created, I'll need the name of the registry and the URL of it. To get those I've created some output variables from the template:
 
@@ -268,7 +268,7 @@ parameters:
     azureSubscription: ""
 ```
 
-We'll need a number of bits of information for the tasks within our template, so we'll start by defining a bunch of parameters. Next let's define the Job:
+We'll need a number of bits of information for the tasks within our template, so we'll start by defining a bunch of parameters. Next, let's define the Job:
 
 ```yaml
 jobs:
@@ -288,9 +288,9 @@ jobs:
   steps:
 ```
 
-To access a template parameter you need to use `${{ parameters.<parameter name> }}`. I'm providing the template with a unique name in the `name` parameter, and then creating a display name using the architecture (AMD64, ARM32, etc.).
+To access a template parameter you need to use `${{ parameters.<parameter name> }}`. I'm providing the template with a unique name in the `name` parameter and then creating a display name using the architecture (AMD64, ARM32, etc.).
 
-Next the Job defines a few dependencies, the `Build` and `PrepareAzureACR` Jobs we've seen above and I'll touch on the `PrepareArtifactStorage` shortly. Finally this sets the pool as a Linux VM and converts some parameters to environment variables in the Job.
+Next, the Job defines a few dependencies, the `Build` and `PrepareAzureACR` Jobs we've seen above and I'll touch on the `PrepareArtifactStorage` shortly. Finally, this sets the pool as a Linux VM and converts some parameters to environment variables in the Job.
 
 Let's start looking at the tasks:
 
@@ -308,7 +308,7 @@ Let's start looking at the tasks:
       archiveFilePatterns: $(System.DefaultWorkingDirectory)/Apps/Sunshine.Downloader-$(Build.BuildId).zip
 ```
 
-Since the Job that's running here isn't on the same agent that did the original build of our .NET application we need to get the files, thankfully we published them as an artifact so it's just a matter of downloading it and unpacking it into the right location. I'm unpacking it back to where the publish originally happened, because the Job does do a `git clone` initialy (I need that to get the `module.json` and `deployment.template.json` for IoT Edge) I may as well pretend as I am using the normal structure.
+Since the Job that's running here isn't on the same agent that did the original build of our .NET application we need to get the files, thankfully we published them as an artifact so it's just a matter of downloading it and unpacking it into the right location. I'm unpacking it back to where the publish originally happened, because the Job does do a `git clone` initially (I need that to get the `module.json` and `deployment.template.json` for IoT Edge) I may as well pretend as I am using the normal structure.
 
 Code? ✔. Deployment JSON? ✔. Time to use the IoT Edge tools to create some deployment files. Thankfully, there's an [IoT Edge task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/build/azure-iot-edge?view=azure-devops&{{<cda>}}) for Azure Pipelines, and that will do nicely.
 
@@ -329,11 +329,11 @@ Code? ✔. Deployment JSON? ✔. Time to use the IoT Edge tools to create some d
       defaultPlatform: ${{ parameters.defaultPlatform }}
 ```
 
-The first task will use the `deployment.template.json` file to build the Docker image for the platform that we've specified. As I noted in the last post, if you'll need to have the `CONTAINER_REGISTRY_USERNAME`, `CONTAINER_REGISTRY_PASSWORD` and `CONTAINER_REGISTRY_SERVER` environment variables set so they can be substituted into the template. We get `CONTAINER_REGISTRY_SERVER` from the parameters passed in (unpacked as a variable) but what about the other two? They are provided by the integration between Azure and Azure Pipelines, so you don't need to set them explicity.
+The first task will use the `deployment.template.json` file to build the Docker image for the platform that we've specified. As I noted in the last post if you'll need to have the `CONTAINER_REGISTRY_USERNAME`, `CONTAINER_REGISTRY_PASSWORD` and `CONTAINER_REGISTRY_SERVER` environment variables set so they can be substituted into the template. We get `CONTAINER_REGISTRY_SERVER` from the parameters passed in (unpacked as a variable) but what about the other two? They are provided by the integration between Azure and Azure Pipelines, so you don't need to set them explicitly.
 
 Once the image is built we execute the `Push module images` command on the task which will push the image to our container registry. Since I'm using ACR I need to provide a JSON object which contains the URL for the ACR and the `id` for it. The `id` is a little tricky, you need to generate the full resource identifier which means you need to join each segment together, resulting in this `$(SUBSCRIPTION_ID)/resourceGroups/${{ parameters.azureResourceNamePrefix }}-shared/providers/Microsoft.ContainerRegistry/registries/$(CONTAINER_REGISTRY_SERVER_NAME)` which would become `<some guid>/resourceGroups/sunshine-shared/providers/Microsoft.ContainerRegistry/registries/sunshinecr`.
 
-Finally, we need to publish our `deployment.platform.json` file that the Release phase will execute to deploy a release to a device, but there's something to be careful about here. When the deployment is generated the container registry information is replaced with the credentials needed to talk to the registry. This is so the deployment, when pulled to the device, is able to log into your registry. But there's a downside to this, you have your credentials stored in a file that needs to be attached to the build. The standard template generated [in the docs](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-devops-project?{{<cda>}}) will attach this as a build artifact, just like our compiled application, and this works really well for most scenarios. There is a downside to this though, anyone who has access to your build artifacts will have access to your container registry credentials, which is something that you may not want. This bit me when I realised that, because my pipeline is public, **everyone** had accecss to my container registry credentials! I then quickly deleted that ACR as the credentials were now compromised! 🤦‍♂️
+Finally, we need to publish our `deployment.platform.json` file that the Release phase will execute to deploy a release to a device, but there's something to be careful about here. When the deployment is generated the container registry information is replaced with the credentials needed to talk to the registry. This is so the deployment, when pulled to the device, is able to log into your registry. But there's a downside to this, you have your credentials stored in a file that needs to be attached to the build. The standard template generated [in the docs](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-devops-project?{{<cda>}}) will attach this as a build artifact, just like our compiled application, and this works really well for most scenarios. There is a downside to this though, anyone who has access to your build artifacts will have access to your container registry credentials, which is something that you may not want. This bit me when I realised that, because my pipeline is public, **everyone** had access to my container registry credentials! I then quickly deleted that ACR as the credentials were now compromised! 🤦‍♂️
 
 #### Securing Deployments
 
@@ -468,7 +468,7 @@ We're relying on the outputs from a few other Jobs, and to access those we use `
 
 ### Creating Our Azure Environment
 
-There's only one thing left to do in the build phase, prepare the Azure environment that we'll need. Again we'll use a Resource Manager template to do that, but I won't embed it in the blog post as it's over 400 lines, instead you can [find it here](https://github.com/aaronpowell/sunshine/blob/1a8a2ba6921915bcc82ac0be477330d5e5b4ea95/.build/azure-environment.json).
+There's only one thing left to do in the build phase, prepare the Azure environment that we'll need. Again we'll use a Resource Manager template to do that, but I won't embed it in the blog post as it's over 400 lines, instead, you can [find it here](https://github.com/aaronpowell/sunshine/blob/1a8a2ba6921915bcc82ac0be477330d5e5b4ea95/.build/azure-environment.json).
 
 When creating the IoT Hub resource with the template you can provision the routing like so:
 
@@ -524,7 +524,7 @@ A new Job is created for this template:
             deploymentOutputs: ResourceGroupDeploymentOutputs
 ```
 
-And now you might be wondering "Why is the step to create the _production_ environment in Azure done in a Build phase, not Release phase?", which is a pretty valid question to ask, after all, if I _did_ have mutliple environments, why wouldn't I do the Azure setup as part of the release to that environment?
+And now you might be wondering "Why is the step to create the _production_ environment in Azure done in a Build phase, not Release phase?", which is a pretty valid question to ask, after all, if I _did_ have multiple environments, why wouldn't I do the Azure setup as part of the release to that environment?
 
 Well, the primary reason I took this approach is that I wanted to avoid having to push the Resource Manager template from the Build to Release phase. Since the Build phase does the `git clone` and the Release phase does not I would have had to attach the template as an artifact. Additionally, I want to use some of the variables in both phases, but you can't share variables between Build and Release, which does still pose a problem with the environment setup, I need the name of the Azure Functions and IoT Hub resources.
 
@@ -617,7 +617,7 @@ The command that's of interest to us is [`az iot hub device-identity show`](http
 
 If the device doesn't exist (non-zero exit code, tested with `if [ $? -ne 0 ]`) you can use [`az iot hub device-identity create`](https://docs.microsoft.com/en-us/cli/azure/ext/azure-cli-iot-ext/iot/hub/device-identity?view=azure-cli-latest&{{<cda>}}#ext-azure-cli-iot-ext-az-iot-hub-device-identity-create). Be sure to pass `--edge-enabled` so that the device can be connected with IoT Edge!
 
-The last thing the script will do is export the connection string, if the connection string can be retrieved (not 100% sure on the need for this, it was just in the template!).
+The last thing the script will do is export the connection string if the connection string can be retrieved (not 100% sure on the need for this, it was just in the template!).
 
 #### Preparing the Module Twin
 
@@ -647,13 +647,13 @@ Using the [`az iot hub module-twin update`](https://docs.microsoft.com/en-us/cli
 
 ![Deploy task](/images/home-grown-iot/08-004.png)
 
-We specify the deployment template that we'll execute (the one we got from storage) and it's going to be a **Single Device** deployment (if you were deploying to a fleet of devices then you're change that and specify some way to find the group of devices to target). Under the hood this task will execute the `iotedgedev` tool with the right commands and will result in our deployment going to IoT Edge and eventually our device! 🎉
+We specify the deployment template that we'll execute (the one we got from storage) and it's going to be a **Single Device** deployment (if you were deploying to a fleet of devices then you'd change that and specify some way to find the group of devices to target). Under the hood, this task will execute the `iotedgedev` tool with the right commands and will result in our deployment going to IoT Edge and eventually our device! 🎉
 
 ### Deploying Functions
 
 With our stage defined for IoT devices it's time for the Azure Functions. As it turns out, Azure Pipelines is really good at doing this kind of deployment, there's a [task that we can use](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/azure-rm-web-app-deployment?view=azure-devops&{{<cda>}}) and all we need to do is provide it with the ZIP that contains the functions (which comes from our artifacts).
 
-There's no need to provide the connection strings, [that was setup in the Resource Manager template](https://github.com/aaronpowell/sunshine/blob/1a8a2ba6921915bcc82ac0be477330d5e5b4ea95/.build/azure-environment.json#L7-L22)!
+There's no need to provide the connection strings, [that was set up in the Resource Manager template](https://github.com/aaronpowell/sunshine/blob/1a8a2ba6921915bcc82ac0be477330d5e5b4ea95/.build/azure-environment.json#L7-L22)!
 
 **🎉 Release phase complete!**
 
@@ -665,6 +665,6 @@ Phew, that was a long post, but we've covered a lot! Our deployment has run end-
 
 I've made the Azure Pipeline I use public so you can have a look at what it does, you'll find the [Build phase here](https://dev.azure.com/aaronpowell/Sunshine/_build?definitionId=25&_a=summary) and the [Release phase here](https://dev.azure.com/aaronpowell/Sunshine/_release?definitionId=1&view=mine&_a=releases).
 
-As I said at the start, I'd encourage you to have a read of the information on [Microsoft Docs](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-devops-project?{{<cda>}}) to get an overview on what the process would be and then use this article as a way to suppliment how everything works.
+As I said at the start, I'd encourage you to have a read of the information on [Microsoft Docs](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-devops-project?{{<cda>}}) to get an overview of what the process would be and then use this article as a way to supplement how everything works.
 
 Happy DevOps'ing!
