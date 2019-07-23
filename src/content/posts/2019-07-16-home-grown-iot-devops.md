@@ -206,7 +206,7 @@ With our Image built we can push it to our container registry, again to support 
 
 For us to deploy the image we won't use the `iotedgedev` tool, instead we'll use the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure?{{< cda >}}) and specifically the [IoT Extensions](https://github.com/azure/azure-iot-cli-extension), so grab the Azure CLI (I use the Docker distribution of it), log in to your account and install the IoT Extension.
 
-We're going to use the [`edge deployment create`](https://docs.microsoft.com/en-us/cli/azure/ext/azure-cli-iot-ext/iot/edge/deployment?view=azure-cli-latest#ext-azure-cli-iot-ext-az-iot-edge-deployment-create?{{< cda >}}) command to create a deployment in IoT Hub for our IoT Edge device using the deployment template we specified above.
+We're going to use the [`edge deployment create`](https://docs.microsoft.com/en-us/cli/azure/ext/azure-cli-iot-ext/iot/edge/deployment?view=azure-cli-latest&{{< cda >}}#ext-azure-cli-iot-ext-az-iot-edge-deployment-create) command to create a deployment in IoT Hub for our IoT Edge device using the deployment template we specified above.
 
 ```sh
 $> az iot edge deployment create --deployment-id deployment-01 --hub-name <iot hub name in Azure> --content <path to deployment JSON file> --target-condition deviceId='<name of IoT device in Azure>' --priority 0
