@@ -49,7 +49,8 @@
 .hljs-subst,
 .bash,
 .hljs-function,
-.hljs-params {
+.hljs-params,
+.hljs-selector-id {
     color: #e3dfff;
 }
 
