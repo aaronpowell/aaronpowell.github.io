@@ -53,7 +53,7 @@ You'll find the source code on [GitHub](https://github.com/aaronpowell/dotnet-de
 
 ## A Note on Package Licenses
 
-While I was doing my research into how this works I came across [this NuGet issue](https://github.com/NuGet/Home/issues/4628). This issue raised a concern about the license information in the [nuspec file](https://docs.microsoft.com/en-us/nuget/reference/nuspec?{{<cda>}}) being just the `licenseUrl`. Since the license is external to the packge the URL could conceivably change without changing the package, thus changing the license you agreed to originally without your knowledge.
+While I was doing my research into how this works I came across [this NuGet issue](https://github.com/NuGet/Home/issues/4628). This issue raised a concern about the license information in the [nuspec file](https://docs.microsoft.com/en-us/nuget/reference/nuspec?{{<cda>}}) being just the `licenseUrl`. Since the license is _external to the package_ the URL could conceivably change without changing the package, thus changing the license you agreed to originally without your knowledge.
 
 This resulted in the [deprecation of `licenseUrl` in favour of a `license` property](https://github.com/NuGet/Announcements/issues/32). Now the solution is to store the license expression (ideally in [spdx](https://spdx.org) format) _or_ embed the license file within the package. [Here is how it's set in my project](https://github.com/aaronpowell/dotnet-delice/blob/120cb43096c27739da9cc1cc7d925ee1b5294d38/src/DotNetDelice/DotNetDelice.fsproj#L10).
 
