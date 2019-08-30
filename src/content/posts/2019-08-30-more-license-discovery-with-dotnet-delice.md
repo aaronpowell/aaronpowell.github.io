@@ -2,7 +2,7 @@
 title = "More License Discovery With dotnet-delice"
 date = 2019-08-30T10:16:20+10:00
 description = "A new release of dotnet-delice with even more license discovery support"
-draft = true
+draft = false
 tags = ["dotnet", "fsharp"]
 +++
 
