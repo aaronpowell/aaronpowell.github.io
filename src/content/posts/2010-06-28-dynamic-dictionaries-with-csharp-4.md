@@ -91,4 +91,4 @@ I've rolled the above code (with some improvements mind you) into a new project 
 
   [1]: http://msdn.microsoft.com/en-us/library/system.dynamic.dynamicobject.aspx
   [2]: http://msdn.microsoft.com/en-us/library/system.dynamic.dynamicobject.trygetmember.aspx
-  [3]: /dynamics-library
+  [3]: {{< ref "/posts/2010-07-05-dynamics-library.md" >}}
