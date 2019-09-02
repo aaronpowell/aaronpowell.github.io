@@ -58,6 +58,6 @@ It took me a while to get over the self-doubt that I had but something that I th
 
 I might not have moved to Sydney for the right reasons but there are plenty more wrong reasons that I could've stayed in Melbourne.
 
-And if it'd not been for that I wouldn't have had the opporunities to [grow into a leadership role]({{< ref "/posts/2016-08-29-SC-to-PC.md" >}}), [try my hand at sales]({{< ref "/posts/2017-09-27-readify-pc-12-months-on.md" >}}) or [join Microsoft]({{< ref "/posts/2019-01-14-starting-2019-with-a-new-job.md" >}}).
+And if it'd not been for that I wouldn't have had the opportunities to [grow into a leadership role]({{< ref "/posts/2016-08-29-SC-to-PC.md" >}}), [try my hand at sales]({{< ref "/posts/2017-09-27-readify-pc-12-months-on.md" >}}) or [join Microsoft]({{< ref "/posts/2019-01-14-starting-2019-with-a-new-job.md" >}}).
 
 In the end, you'll never know what you're capable of if you never give it a try. So what are you waiting for?
