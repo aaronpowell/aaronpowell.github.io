@@ -4,6 +4,8 @@ date = 2019-09-11T13:08:28+10:00
 description = "Here's something I learnt about interfaces in .NET while exploring IL"
 draft = false
 tags = ["dotnet", "csharp", "fsharp", "serverless"]
+series = "learning-il"
+series_title = "A Quirk With Implicit vs Explicit Interfaces"
 +++
 
 The other day I got to work and the first thing I did was open an [IL](https://docs.microsoft.com/en-us/dotnet/standard/glossary?{{<cda>}}#il) [disassembler](https://docs.microsoft.com/en-us/dotnet/framework/tools/ildasm-exe-il-disassembler?{{<cda>}}) and got to town reading the IL of some code I was having a problem with.
