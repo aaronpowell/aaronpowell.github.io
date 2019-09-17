@@ -138,11 +138,11 @@ Hopefully you're still with me and have enjoyed dipping your toe into understand
 Count += count;
 ```
 
-With our method implementation we used the [expression body syntax](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods?{{<cda>>}}#expression-body-definitions) rather than a traditional [method signature](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods{{<cda>}}#method-signatures).
+With our method implementation we used the [expression body syntax](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods?{{<cda>}}#expression-body-definitions) rather than a traditional [method signature](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods{{<cda>}}#method-signatures).
 
 What you may be interested to know is that there is no difference in the IL generated for these two method types, since they are functionally equivalent.
 
-The same goes for the use of `Count += count` vs `Count = Count + count`, both generate the same CIL as there's no difference with the [addition assignment operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/addition-operator{{<cda>}}#addition-assignment-operator-) (in our example, there are scenarios when that doesn't always hold true).
+The same goes for the use of `Count += count` vs `Count = Count + count`, both generate the same CIL as there's no difference with the [addition assignment operator](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/addition-operator?{{<cda>}}#addition-assignment-operator-) (in our example, there are scenarios when that doesn't always hold true).
 
 It's important to be able to understand these differences or lack-there-of, so we don't make arbitrary code style decisions based on preconceived beliefs about how the code is executed.
 
