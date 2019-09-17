@@ -1,8 +1,8 @@
 +++
 title = "What is an OpCode?"
-date = 2019-09-16T09:17:10+10:00
+date = 2019-09-17T09:17:10+10:00
 description = "IL is full of these things call OpCodes, but what are they?"
-draft = true
+draft = false
 tags = ["dotnet"]
 series = "learning-il"
 series_title = "What is an OpCode?"
