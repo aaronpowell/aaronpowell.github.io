@@ -12,7 +12,7 @@ When I was getting started I kept hitting problems as either the Hook wasn't upd
 
 After doing some research I came across a post by [Dan Abramov](https://mobile.twitter.com/dan_abramov) on how to implement a Hook to work with [`setInterval`](https://overreacted.io/making-setinterval-declarative-with-react-hooks/). Dan does a great job of explaining the approach that needs to be taken and the reasons for particular approaches, so go ahead and read it before continuing on in my post as I won't do it justice.
 
-Initially, I started using this Hook from Dan as it did what I needed to do, unfortunately, I found that the API I was hitting had an inconsistence response time, which resulted in an explosion of concurrent requests, and I was thrashing the server, not a good idea! But this was to be expected using `setInterval`, it doesn't wait until the last response is completed before starting another interval timer. Instead I should be using `setTimeout` in a recursive way, like so:
+Initially, I started using this Hook from Dan as it did what I needed to do, unfortunately, I found that the API I was hitting had an inconsistence in response time, which resulted in an explosion of concurrent requests, and I was thrashing the server, not a good idea! But this was to be expected using `setInterval`, it doesn't wait until the last response is completed before starting another interval timer. Instead I should be using `setTimeout` in a recursive way, like so:
 
 ```js
 const callback = () => {
@@ -79,7 +79,7 @@ useRecursiveTimeout(() => {
     console.log("I was called recusively, and synchronously");
 }, 1000);
 
-useRecursiveTimtoue(async () => {
+useRecursiveTimeout(async () => {
     await fetch("https://httpstat.us/200");
     console.log("Fetch called!");
 }, 1000);
