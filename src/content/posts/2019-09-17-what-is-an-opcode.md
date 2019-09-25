@@ -128,7 +128,7 @@ nop
 ret
 ```
 
-I'm not sure why the [`nop`](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodes.nop?view=netcore-2.2{{<cda>}}) OpCode is included by the compiler, it doesn't do anything and thus can be omitted.
+I'm not sure why the [`nop`](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodes.nop?view=netcore-2.2&{{<cda>}}) OpCode is included by the compiler, it doesn't do anything and thus can be omitted.
 
 ## Conclusion
 
@@ -138,7 +138,7 @@ Hopefully you're still with me and have enjoyed dipping your toe into understand
 Count += count;
 ```
 
-With our method implementation we used the [expression body syntax](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods?{{<cda>}}#expression-body-definitions) rather than a traditional [method signature](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods{{<cda>}}#method-signatures).
+With our method implementation we used the [expression body syntax](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods?{{<cda>}}#expression-body-definitions) rather than a traditional [method signature](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods?{{<cda>}}#method-signatures).
 
 What you may be interested to know is that there is no difference in the IL generated for these two method types, since they are functionally equivalent.
 
