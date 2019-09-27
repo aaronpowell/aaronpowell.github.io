@@ -1,8 +1,8 @@
 +++
 title = "Using Durable Entities and Orchestrators to Create an Api Cache"
-date = 2019-09-30T09:01:28+10:00
+date = 2019-09-27T09:01:28+10:00
 description = "Let's look at how you can use Entities in Durable Functions v2 to create an API cache"
-draft = true
+draft = false
 tags = ["serverless", "fsharp", "azure-functions"]
 +++
 
@@ -165,7 +165,7 @@ Since this Orchestrator is to be generic we're expecting the `EntityId` to be pa
 
 Now we can create a [Timer](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-timers?{{<cda>}}) for our cache expiry using the context's `CreateTimer` function. As per the guidance in the documentation we're using the `CurrentUtcDateTime` from the context and then adding 1 minute to it, this is when our cache will expire. (I'd consider passing in the timeout duration, rather than hard-coding it like I have, but I kept it simple for this demo.)
 
-We then wait for the timer to elapse (`do! timer`) and once it's done we need to tell the cache Entity to destroy itself, and this is where the `Clear` method on our Entity comes in. It's also worth noting that this time when we signal the Entity it's using a **synchronous** method called `SignalEntity` and it requires you to pass in the name of the method you want to call (this is similar to [untyped signaling](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-bindings{{<cda>}}#client-sample-untyped)).
+We then wait for the timer to elapse (`do! timer`) and once it's done we need to tell the cache Entity to destroy itself, and this is where the `Clear` method on our Entity comes in. It's also worth noting that this time when we signal the Entity it's using a **synchronous** method called `SignalEntity` and it requires you to pass in the name of the method you want to call (this is similar to [untyped signaling](https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-bindings?{{<cda>}}#client-sample-untyped)).
 
 The `Clear` method looks like this:
 
@@ -181,3 +181,7 @@ And it called the `DestructOnExit` method of the current Entity, which isn't act
 This brings us to the end of todays post, we've seen how we can combine Entities and Orchestrators in a single set of functions. We used this to create a cache of responses for HTTP calls, but we could use this on any data access happening within our Serverless application.
 
 Make sure you check out the rest of [#ServerlessSeptember](https://dev.to/azure/serverless-september-content-collection-2fhb) for more Serverless content!
+
+### Bonus Tip
+
+It's likely that when we get an RTM of Durable Entities we won't need to use the Orchestrator for the timer as [they are getting that support](https://github.com/Azure/azure-functions-durable-extension/issues/716).
