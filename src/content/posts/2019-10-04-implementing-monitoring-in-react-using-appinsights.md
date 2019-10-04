@@ -3,7 +3,7 @@ title = "Implementing Monitoring in React Using AppInsights"
 date = 2019-10-04T09:00:02+10:00
 description = "Monitoring of SPA's is important, so let's look at how to do that in a React app using AppInsights"
 draft = false
-tags = ["react", "azure"]
+tags = ["react", "azure", "javascript"]
 # series = "react-monitoring"
 # series_title = "Getting Started with Monitoring React Applications"
 +++
