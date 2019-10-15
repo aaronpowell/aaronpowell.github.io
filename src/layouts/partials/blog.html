@@ -6,17 +6,23 @@
         <div class="row">
             <div class="col-xs-12 posts-list">
                 {{ range first 5 (where .Data.Pages "Section" "posts") }}
-                    <article>
-                        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-                        <div class=sub-header>
-                          {{ .Date.Format (.Site.Params.dateform | default "January 2006") }} · {{ .ReadingTime }} minute read
-                        </div>
-                    </article>
+                <article>
+                    <h2>
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h2>
+                    <div>{{ .Description }}</div>
+                    <div class="sub-header">
+                        {{ .Date.Format (.Site.Params.dateform | default "January 2006") }}
+                        · {{ .ReadingTime }} minute read
+                    </div>
+                </article>
                 {{ end }}
             </div>
         </div>
         <div class="row center-xs">
-            <div class="col-xs-12"><h3><a href="/posts/">View All</a></h3></div>
+            <div class="col-xs-12">
+                <h3><a href="/posts/">View All</a></h3>
+            </div>
         </div>
     </div>
 </section>

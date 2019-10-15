@@ -1,6 +1,18 @@
-{{ partial "header.html" . }}
-{{ partial "about.html" . }}
-{{ partial "gallery.html" . }}
-{{ partial "blog.html" . }}
-{{ partial "speaking.html" . }}
-{{ partial "footer.html" . }}
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    {{ partial "header.html" . }}
+    <body>
+        <main>
+            <!-- About -->
+            {{ partial "about.html" . }}
+
+            <!-- Blog -->
+            {{ partial "blog.html" . }}
+
+            <!-- Speaking -->
+            {{ partial "speaking.html" . }}
+        </main>
+        {{ partial "footer.html" . }}
+        {{ partial "body-bottom" . }}
+    </body>
+</html>

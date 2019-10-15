@@ -1,15 +1,27 @@
-{{ partial "header.html" . }}
-
-    <div class="row full center-xs middle-xs not-found">
-        <div class="col-xs-12">
-            <h1>Aww snap!</h1>
-            <p>
-                <img src="https://frinkiac.com/video/S07E06/eDz71n90xkVTgEoZvhjuSfQ3aAE=.gif" />
-            </p>
-            <p>
-                Want to help me ensure you get to the right place next time? Create a <a href="https://github.com/aaronpowell/aaronpowell.github.io/issues/new" target="_blank">bug for me</a>!
-            </p>
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    {{ partial "header.html" . }}
+    <body>
+        <div class="row full center-xs middle-xs not-found">
+            <div class="col-xs-12">
+                <h1>Aww snap!</h1>
+                <p>
+                    <img
+                        src="https://frinkiac.com/video/S07E06/eDz71n90xkVTgEoZvhjuSfQ3aAE=.gif"
+                    />
+                </p>
+                <p>
+                    Want to help me ensure you get to the right place next time?
+                    Create a
+                    <a
+                        href="https://github.com/aaronpowell/aaronpowell.github.io/issues/new"
+                        target="_blank"
+                        >bug for me</a
+                    >!
+                </p>
+            </div>
         </div>
-    </div>
 
-{{ partial "footer.html" . }}
+        {{ partial "footer.html" . }}
+    </body>
+</html>
