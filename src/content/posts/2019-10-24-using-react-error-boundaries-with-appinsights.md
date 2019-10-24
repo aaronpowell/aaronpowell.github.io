@@ -1,8 +1,8 @@
 +++
 title = "Using React Error Boundaries With AppInsights"
 date = 2019-10-24T09:02:43+11:00
-description = ""
-draft = true
+description = "Combining React Error Boundaries with AppInsights for automatic error logging"
+draft = false
 tags = ["react", "azure", "javascript"]
 series = "react-monitoring"
 series_title = "Automatic Logging with Error Boundaries"
