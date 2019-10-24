@@ -4,8 +4,8 @@ date = 2019-10-04T09:00:02+10:00
 description = "Monitoring of SPA's is important, so let's look at how to do that in a React app using AppInsights"
 draft = false
 tags = ["react", "azure", "javascript"]
-# series = "react-monitoring"
-# series_title = "Getting Started with Monitoring React Applications"
+series = "react-monitoring"
+series_title = "Getting Started with Monitoring React Applications"
 +++
 
 When I was consulting something that was done early on in many projects was to integrate some monitoring/logging platform. This would be used to help give insights into common scenarios such as how long IO took, trace data flows within the application or handling expected and unexpected errors. All of this would be baked into our API endpoints and generally just ran smoothly.
