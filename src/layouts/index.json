@@ -1,0 +1,14 @@
+{
+    "posts": [
+        {{ range $i, $e := where (.Data.Pages) ".Params.hidden" "!=" true }}
+        {{- if and $i (gt $i 0) -}},{{- end }}{
+            "title": {{ .Title | jsonify }},
+            "url": "{{ .Permalink }}",
+            "date": "{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}",
+            "tags": [{{ range $tindex, $tag := $e.Params.tags }}{{ if $tindex }}, {{ end }}"{{ $tag| htmlEscape }}"{{ end }}],
+            "description": {{ .Description | jsonify }},
+            "content": {{$e.Plain | jsonify}}
+        }
+        {{ end }}
+    ]
+}

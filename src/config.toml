@@ -10,6 +10,9 @@ disqusShortname = "aaronpowell"
 enableGitInfo = "true"
 enableEmoji = "true"
 
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
 [Params]
     tagline = "Aaron Powell - LINQ to Fail"
     author = "Aaron Powell"
