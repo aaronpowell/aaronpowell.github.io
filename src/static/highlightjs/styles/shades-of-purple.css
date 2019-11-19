@@ -99,3 +99,7 @@
 .hljs-strong {
     font-weight: bold;
 }
+
+.hljs .xml {
+    color: #e3dfff;
+}
