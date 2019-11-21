@@ -10,26 +10,9 @@ open Lucene.Net.Index
 open Lucene.Net.Documents
 open System.Collections.Generic
 open JsonExtensions
+open System.IO.Compression
 
-[<EntryPoint>]
-let main argv =
-    let searchText = File.ReadAllText <| Path.Combine(Environment.CurrentDirectory, "..", "..", ".output", "index.json")
-
-    let options = JsonSerializerOptions()
-    options.PropertyNameCaseInsensitive <- true
-    options.Converters.Add(JsonFSharpConverter())
-    options.Converters.Add(InvalidDateTimeConverter())
-
-    let searchData = JsonSerializer.Deserialize<SearchData>(searchText, options)
-
-    printfn "Got data from export, there are %d posts" searchData.posts.Length
-
-    let indexPath = Path.Combine(Environment.CurrentDirectory, "lucene")
-
-    if Directory.Exists indexPath then
-        Directory.GetFiles indexPath |> Array.iter File.Delete
-        Directory.Delete indexPath
-
+let makeIndex (indexPath : string) searchData =
     let dir = FSDirectory.Open indexPath
 
     let analyzer = new StandardAnalyzer(LuceneVersion.LUCENE_48)
@@ -57,5 +40,35 @@ let main argv =
         |> Array.iter doc.Add
         doc :> IEnumerable<IIndexableField>)
     |> writer.AddDocuments
+
+let packageIndex indexPath =
+    let packagePath = Path.Combine(Environment.CurrentDirectory, "index.zip")
+    if File.Exists packagePath then
+        File.Delete packagePath
+
+    ZipFile.CreateFromDirectory(indexPath, packagePath, CompressionLevel.Fastest, false)
+
+[<EntryPoint>]
+let main argv =
+    let searchText = File.ReadAllText <| Path.Combine(Environment.CurrentDirectory, "..", "..", ".output", "index.json")
+
+    let options = JsonSerializerOptions()
+    options.PropertyNameCaseInsensitive <- true
+    options.Converters.Add(JsonFSharpConverter())
+    options.Converters.Add(InvalidDateTimeConverter())
+
+    let searchData = JsonSerializer.Deserialize<SearchData>(searchText, options)
+
+    printfn "Got data from export, there are %d posts" searchData.posts.Length
+
+    let indexPath = Path.Combine(Environment.CurrentDirectory, "lucene")
+
+    if Directory.Exists indexPath then
+        Directory.GetFiles indexPath |> Array.iter File.Delete
+        Directory.Delete indexPath
+
+    makeIndex indexPath searchData
+
+    packageIndex indexPath
 
     0
