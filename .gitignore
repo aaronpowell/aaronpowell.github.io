@@ -1,2 +1,6 @@
 .output
 node_modules
+bin
+obj
+.ionide
+lucene
