@@ -27,8 +27,7 @@ let main argv =
     let indexPath = Path.Combine(Environment.CurrentDirectory, "lucene")
 
     if Directory.Exists indexPath then
-        Directory.GetFiles indexPath
-        |> Array.iter File.Delete
+        Directory.GetFiles indexPath |> Array.iter File.Delete
         Directory.Delete indexPath
 
     let dir = FSDirectory.Open indexPath
@@ -49,6 +48,13 @@ let main argv =
         doc.AddStringField
             ("date", DateTools.DateToString(post.date.UtcDateTime, DateTools.Resolution.MINUTE), Field.Store.YES)
         |> ignore
+        post.tags
+        |> Array.map
+            (fun tag ->
+                let f = TextField("tag", tag, Field.Store.YES)
+                f.Boost <- 10.f
+                f)
+        |> Array.iter doc.Add
         doc :> IEnumerable<IIndexableField>)
     |> writer.AddDocuments
 
