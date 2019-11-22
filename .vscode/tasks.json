@@ -4,19 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "run server",
-            "type": "shell",
-            "command": "./run.ps1",
-            "problemMatcher": [],
-            "windows": {
-                "options": {
-                    "shell": {
-                        "executable": "powershell.exe"
-                    }
-                }
-            }
-        },
-        {
             "label": "new post",
             "type": "shell",
             "command": "./New-Post.ps1",
@@ -37,10 +24,10 @@
             "problemMatcher": []
         },
         {
-            "label": "run server (linux)",
+            "label": "run server",
             "type": "shell",
-            "command": [
-                "./hugo",
+            "command": ["./hugo"],
+            "args": [
                 "server",
                 "-w",
                 "-b",
@@ -56,7 +43,86 @@
                 "--buildDrafts",
                 "--buildFuture"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "windows": {
+                "command": "./hugo.exe"
+            }
+        },
+        {
+            "label": "build:debug (hugo)",
+            "type": "shell",
+            "command": ["./hugo"],
+            "args": [
+                "--source",
+                "./src",
+                "--destination",
+                "../.output",
+                "--buildDrafts",
+                "--buildFuture"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "windows": {
+                "command": "./hugo.exe"
+            }
+        },
+        {
+            "label": "build:release (hugo)",
+            "type": "shell",
+            "command": ["./hugo"],
+            "args": ["--source", "./src", "--destination", "../.output"],
+            "problemMatcher": [],
+            "windows": {
+                "command": "./hugo.exe"
+            }
+        },
+        {
+            "label": "build (dotnet)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                // Ask dotnet build to generate full paths for file names.
+                "/property:GenerateFullPaths=true",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile",
+            "options": {
+                "cwd": "${workspaceRoot}/Search"
+            }
+        },
+        {
+            "label": "publish (dotnet)",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                "--configuration",
+                "Release",
+                "--output",
+                "${workspaceRoot}/.output/wasm/search"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile",
+            "options": {
+                "cwd": "${workspaceRoot}/Search"
+            },
+            "dependsOn": ["build (dotnet)"]
+        },
+        {
+            "label": "build",
+            "dependsOn": ["publish (dotnet)", "build:debug (hugo)"],
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            }
         }
     ],
     "inputs": [

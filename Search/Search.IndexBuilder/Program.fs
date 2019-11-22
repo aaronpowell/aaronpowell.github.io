@@ -25,7 +25,7 @@ let makeIndex (indexPath : string) searchData =
         let titleField = doc.AddTextField("title", post.title, Field.Store.YES)
         titleField.Boost <- 5.f
         doc.AddTextField("content", post.content, Field.Store.NO) |> ignore
-        doc.AddTextField("url", post.url, Field.Store.YES) |> ignore
+        doc.AddStringField("url", post.url, Field.Store.YES) |> ignore
         let descField = doc.AddTextField("desc", post.description, Field.Store.YES)
         descField.Boost <- 2.f
         doc.AddStringField
@@ -33,10 +33,7 @@ let makeIndex (indexPath : string) searchData =
         |> ignore
         post.tags
         |> Array.map
-            (fun tag ->
-                let f = TextField("tag", tag, Field.Store.YES)
-                f.Boost <- 10.f
-                f)
+            (fun tag -> StringField("tag", tag, Field.Store.YES))
         |> Array.iter doc.Add
         doc :> IEnumerable<IIndexableField>)
     |> writer.AddDocuments

@@ -1,3 +1,27 @@
 ﻿@page "/"
+@inherits Search.Site.SearchComponent
 
 <h1>Search app!</h1>
+
+@if (!IndexLoaded) {
+    <p>Just building the search index, one moment</p>
+} else {
+    <form @onsubmit="Search">
+        <input type="search" @bind="SearchTerm" /><button type="submit">Search</button>
+
+    </form>
+}
+
+@if (SearchResults.Count() > 0) {
+    <ul>
+        @foreach(var result in SearchResults) {
+            <li>
+                <p><a href="@result.Url" title="@result.Title" target="_blank">@result.Title (score: @result.Score.ToString("P2"))</a></p>
+                <p>@result.Description</p>
+                <p class="tags">Tags: @string.Join(" | ", result.Tags)</p>
+            </li>
+        }
+    </ul>
+} else if (SearchResults.Count() == 0 && !string.IsNullOrEmpty(SearchTerm)) {
+    <p>Nothing matched that query</p>
+}
