@@ -1,42 +1,85 @@
 title = "LINQ to Fail"
 baseURL = "https://www.aaron-powell.com"
-tags = ["blog"]
 languageCode = "en-US"
 config = "config.toml"
-theme = "osprey"
+theme = "timer-hugo"
 canonifyURLS = true
-googleAnalytics = "UA-6399564-1"
-disqusShortname = "aaronpowell"
-enableGitInfo = "true"
-enableEmoji = "true"
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
-[Params]
+# Site Menus
+[menu]
+    # Navbar Menus
+    [[menu.nav]]
+        name    = "About"
+        url     = "about"
+        weight  = 2
+    [[menu.nav]]
+        name    = "Blog"
+        url     = "posts"
+        weight  = 3
+    [[menu.nav]]
+        name    = "Speaking"
+        url     = "speaking"
+        weight  = 4
+    [[menu.nav]]
+        name    = "Contact"
+        url     = "contact"
+        weight  = 5
+
+[params]
     tagline = "Aaron Powell - LINQ to Fail"
     author = "Aaron Powell"
     description = "Microsoft Cloud Developer Advocate"
-    logoBig = "/images/logo.png"
-    logoSmall = "/images/logo.png"
+    logo = "/images/logo-small.png"
     favicon = "favicon.ico"
+    googleAnalytics = "UA-6399564-1"
+    disqusShortname = "aaronpowell"
+    enableGitInfo = "true"
     opengraphImage = "/images/logo.png"
     twitter = "slace"
     linkedin = "aaron-powell-66038631"
     github = "aaronpowell"
     email = "website-contact@aaron-powell.com"
-    googleTagManager = ""
-    copyright = true
-    credit = true
-    customCSS = true
-    cacheBustCSS = false
-    cacheBustJS = false
-    ajaxFormspree = true
 
     # Code highlighting with highlight.js
     highlightJS = false
     highlightJSStyle = "/highlightjs/styles/shades-of-purple.css" # For custom highlight.js styles, add your /path/to/styles/default.css
     highlightJSScript = "/highlightjs/highlight.pack.js" # For custom highlight.js languages config, add your /path/to/highlight.pack.js
+
+    [params.banner]
+        enable  = true
+        bgImage = "images/hero.jpg"
+        heading = "HI, MY NAME IS Aaron & I AM A"
+        description = "WITH OVER 15 YEARS SOFTWARE DEVELOPMENT EXPERIENCE AND 10 YEARS OF PUBLIC SPEAKING. I'M ACTIVE ACROSS A NUMBER OF OPEN SOURCE COMMUNITIES AND THIS SITE SHARES MY EXPERIENCES."
+        [[params.banner.flipText]]
+            title   = "DEVELOPER"
+        [[params.banner.flipText]]
+            title   = "SPEAKER"
+        [[params.banner.flipText]]
+            title   = "BLOGGER"
+
+    # Homepage About Section
+    [params.about]
+        enable  = true
+        title   = "ABOUT ME"
+        content = "Hello 👋, I'm a Cloud Developer Advocate for Microsoft based in Sydney. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications."
+        image   = "images/logo.png"
+
+    [params.footer]
+        [[params.footer.socialIcon]]
+            icon = "ion-social-twitter"
+            url = "https://twitter.com/slace"
+
+        [[params.footer.socialIcon]]
+            icon = "ion-social-github"
+            url = "https://github.com/aaronpowell"
+
+        [[params.footer.socialIcon]]
+            icon = "ion-social-linkedin"
+            url = "https://www.linkedin.com/in/aaron-powell-66038631/"
+
 
 [[menu.main]]
     name = "About"
@@ -69,3 +112,5 @@ home = [ "HTML", "RSS", "JSON"]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+    # Banner Section
+    
