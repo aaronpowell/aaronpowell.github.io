@@ -42,7 +42,7 @@
         margin: 0px;
     }
 
-    @media(print) {
+    @media (print) {
         #toc {
             display: none;
         }
@@ -61,7 +61,7 @@
     }
 
     a code {
-        border-bottom: 2px solid #DA784D;
+        border-bottom: 2px solid #da784d;
     }
 
     /* Styles for series */
@@ -81,7 +81,7 @@
         display: block;
         text-align: center;
         font-size: 0.7em;
-        font-style: italic
+        font-style: italic;
     }
 
     blockquote.twitter-tweet {
@@ -98,6 +98,38 @@
 
     blockquote.twitter-tweet::before,
     blockquote.twitter-tweet::after {
-        content: '';
+        content: "";
+    }
+
+    app input {
+        width: 80%;
+    }
+
+    app button {
+        box-sizing: border-box;
+        margin: 1em;
+        padding: 1px 6px;
+        border-width: 2px;
+        border-style: outset;
+        border-color: rgb(118, 118, 118);
+        border-image: initial;
+    }
+
+    app ul {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    app ul li {
+        list-style-type: none;
+        padding: 10px;
+    }
+
+    app ul li:nth-child(even) {
+        background-color: #eee;
+    }
+
+    app ul li a {
+        text-shadow: none;
     }
 </style>

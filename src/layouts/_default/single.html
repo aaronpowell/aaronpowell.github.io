@@ -9,6 +9,8 @@
           <section class="content">
               <h1>{{ if .Params.heading }} {{ .Params.heading }} {{ else }} {{ .Title }} {{ end }}</h1>
 
+              {{ if eq (.Dir) ("posts/") }}
+
               <div class="sub-header">
                   {{ .Date.Format (.Site.Params.dateform | default "January 2, 2006") }} · {{ .ReadingTime }} minute read
 
@@ -16,6 +18,8 @@
                         · <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
                   {{ end }}
               </div>
+
+              {{ end }}
 
               <article class="entry-content">
                   {{ partial "series.html" . }}

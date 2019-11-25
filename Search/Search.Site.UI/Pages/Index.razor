@@ -1,14 +1,11 @@
-﻿@page "/"
+﻿@page "/search"
 @inherits Search.Site.SearchComponent
-
-<h1>Search app!</h1>
 
 @if (!IndexLoaded) {
     <p>Just building the search index, one moment</p>
 } else {
     <form @onsubmit="Search">
         <input type="search" @bind="SearchTerm" /><button type="submit">Search</button>
-
     </form>
 }
 
