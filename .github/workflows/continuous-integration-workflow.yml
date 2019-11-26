@@ -17,7 +17,7 @@ jobs:
           hugo-version: "0.54.0"
 
       - name: Build
-        run: hugo --minify --source ./src --destination ./.output
+        run: hugo --minify --source ./src --destination ../.output
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
