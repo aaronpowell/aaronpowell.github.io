@@ -97,8 +97,14 @@ jobs:
       - name: Download search UI
         uses: actions/download-artifact@v1
         with:
-          name: json
+          name: search
           path: ./.output-search
+
+      - name: Download search indez
+        uses: actions/download-artifact@v1
+        with:
+          name: search-index
+          path: ./.output
 
       - name: Move Search UI into website
         run: cp -r ./.output-search/search ./.output
