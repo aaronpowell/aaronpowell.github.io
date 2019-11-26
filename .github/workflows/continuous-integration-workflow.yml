@@ -1,11 +1,6 @@
 name: Build and Deploy Website
 env:
-  HUGO_VERSION: "0.54.0"
-  OUTPUT_PATH: ${GITHUB_WORKSPACE}/.output
-  STORAGE_NAME: aaronpowellstaticwebsite
-  CDN_NAME: aaronpowell
-  CDN_PROFILE_NAME: aaronpowell
-  RG_NAME: personal-website
+  OUTPUT_PATH: $GITHUB_WORKSPACE/.output
   DOTNET_VERSION: "3.1.100-preview3-014645"
 
 on:
@@ -22,7 +17,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.3.0
         with:
-          hugo-version: "$HUGO_VERSION"
+          hugo-version: "0.54.0"
 
       - name: Build
         run: hugo --minify --source ./src --destination ${OUTPUT_PATH}
@@ -91,6 +86,12 @@ jobs:
   deploy_website:
     runs-on: ubuntu-latest
     needs: [build_search_ui, build_search_index]
+    env:
+      STORAGE_NAME: aaronpowellstaticwebsite
+      CDN_NAME: aaronpowell
+      CDN_PROFILE_NAME: aaronpowell
+      RG_NAME: personal-website
+
     steps:
       - uses: azure/login@v1
         with:
