@@ -1,12 +1,12 @@
 name: Build and Deploy Website
 env:
-  - HUGO_VERSION: "0.54.0"
-  - OUTPUT_PATH: $GITHUB_WORKSPACE/.output
-  - STORAGE_NAME: aaronpowellstaticwebsite
-  - CDN_NAME: aaronpowell
-  - CDN_PROFILE_NAME: aaronpowell
-  - RG_NAME: personal-website
-  - DOTNET_VERSION: "3.1.100-preview3-014645"
+  HUGO_VERSION: "0.54.0"
+  OUTPUT_PATH: $GITHUB_WORKSPACE/.output
+  STORAGE_NAME: aaronpowellstaticwebsite
+  CDN_NAME: aaronpowell
+  CDN_PROFILE_NAME: aaronpowell
+  RG_NAME: personal-website
+  DOTNET_VERSION: "3.1.100-preview3-014645"
 
 on:
   push:
