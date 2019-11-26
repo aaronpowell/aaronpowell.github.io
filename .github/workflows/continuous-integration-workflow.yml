@@ -25,6 +25,12 @@ jobs:
           name: website
           path: ./.output
 
+      - name: Publish blog json
+        uses: actions/upload-artifact@v1
+        with:
+          name: json
+          path: ./.output/index.json
+
   build_search_ui:
     runs-on: ubuntu-latest
     steps:
@@ -58,8 +64,18 @@ jobs:
         with:
           dotnet-version: "3.1.100-preview3-014645"
 
-      - name: Download site
+      - name: Download index source
         uses: actions/download-artifact@v1
         with:
-          name: website
+          name: json
           path: ./.output
+
+      - name: Build search index
+        run: dotnet run
+        working-directory: ./Search/Search.IndexBuilder
+
+      - name: Publish search index
+        uses: actions/upload-artifact@v1
+        with:
+          name: search-index
+          path: ./Search/Search.IndexBuilder/index.zip
