@@ -17,4 +17,4 @@ jobs:
           hugo-version: "0.54.0"
 
       - name: Build
-        run: hugo --minify --source ./src --output ./output
+        run: hugo --minify --source ./src --destination ./output
