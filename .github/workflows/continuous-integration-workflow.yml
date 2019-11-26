@@ -12,9 +12,9 @@ jobs:
       - uses: actions/checkout@1
 
       - name: Setup Hugo
-          uses: peaceiris/actions-hugo@v2.3.0
-          with:
-              hugo-version: "0.54.0"
+        uses: peaceiris/actions-hugo@v2.3.0
+        with:
+          hugo-version: "0.54.0"
 
       - name: Build
           run: hugo --minify --source ./src --output ./output
