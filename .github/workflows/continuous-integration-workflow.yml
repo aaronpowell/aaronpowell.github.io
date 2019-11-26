@@ -44,9 +44,9 @@ jobs:
 
       - name: Package search UI
         uses: actions/upload-artifact@v1
-          with:
-              name: search
-              path: ./.output/Search.Site.UI/dist/_framework
+        with:
+          name: search
+          path: ./.output/Search.Site.UI/dist/_framework
 
   build_search_index:
     runs-on: ubuntu-latest
