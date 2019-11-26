@@ -1,7 +1,7 @@
 name: Build and Deploy Website
 env:
   HUGO_VERSION: "0.54.0"
-  OUTPUT_PATH: $GITHUB_WORKSPACE/.output
+  OUTPUT_PATH: ${GITHUB_WORKSPACE}/.output
   STORAGE_NAME: aaronpowellstaticwebsite
   CDN_NAME: aaronpowell
   CDN_PROFILE_NAME: aaronpowell
@@ -22,22 +22,22 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.3.0
         with:
-          hugo-version: $HUGO_VERSION
+          hugo-version: ${HUGO_VERSION}
 
       - name: Build
-        run: hugo --minify --source ./src --destination $OUTPUT_PATH
+        run: hugo --minify --source ./src --destination ${OUTPUT_PATH}
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
         with:
           name: website
-          path: $OUTPUT_PATH
+          path: ${OUTPUT_PATH}
 
       - name: Publish blog json
         uses: actions/upload-artifact@v1
         with:
           name: json
-          path: $OUTPUT_PATH/index.json
+          path: ${OUTPUT_PATH}/index.json
 
   build_search_ui:
     runs-on: ubuntu-latest
@@ -46,21 +46,21 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: $DOTNET_VERSION
+          dotnet-version: ${DOTNET_VERSION}
 
       - name: Build search app
         run: dotnet build --configuration Release
         working-directory: ./Search
 
       - name: Publish search UI
-        run: dotnet publish --no-build --configuration Release --output $OUTPUT_PATH
+        run: dotnet publish --no-build --configuration Release --output ${OUTPUT_PATH}
         working-directory: ./Search/Search.Site.UI
 
       - name: Package search UI
         uses: actions/upload-artifact@v1
         with:
           name: search
-          path: $OUTPUT_PATH/Search.Site.UI/dist/_framework
+          path: ${OUTPUT_PATH}/Search.Site.UI/dist/_framework
 
   build_search_index:
     runs-on: ubuntu-latest
@@ -70,13 +70,13 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: $DOTNET_VERSION
+          dotnet-version: ${DOTNET_VERSION}
 
       - name: Download index source
         uses: actions/download-artifact@v1
         with:
           name: json
-          path: $OUTPUT_PATH
+          path: ${OUTPUT_PATH}
 
       - name: Build search index
         run: dotnet run
@@ -100,28 +100,28 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: website
-          path: $OUTPUT_PATH
+          path: ${OUTPUT_PATH}
 
       - name: Download search UI
         uses: actions/download-artifact@v1
         with:
           name: search
-          path: $OUTPUT_PATH/_framework
+          path: ${OUTPUT_PATH}/_framework
 
       - name: Download search index
         uses: actions/download-artifact@v1
         with:
           name: search-index
-          path: $OUTPUT_PATH
+          path: ${OUTPUT_PATH}
 
       - name: Deploy to Azure Storage
-        run: az storage blob upload-batch --source $OUTPUT_PATH --destination \$web/${GITHUB_SHA} --account-name $STORAGE_NAME
+        run: az storage blob upload-batch --source ${OUTPUT_PATH} --destination \$web/${GITHUB_SHA} --account-name ${STORAGE_NAME}
 
       - name: Update wasm pieces
-        run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name $STORAGE_NAME
+        run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name ${STORAGE_NAME}
 
       - name: Update CDN endpoint
-        run: az cdn endpoint update --name $CDN_NAME --origin-path /${GITHUB_SHA} --profile-name $CDN_PROFILE_NAME --resource-group $RG_NAME
+        run: az cdn endpoint update --name ${CDN_NAME} --origin-path /${GITHUB_SHA} --profile-name ${CDN_PROFILE_NAME} --resource-group ${RG_NAME}
 
       - name: Purge CDN
-        run: az cdn endpoint purge --profile-name $CDN_PROFILE_NAME --name $CDN_NAME --resource-group $RG_NAME --content-paths "/*"
+        run: az cdn endpoint purge --profile-name ${CDN_PROFILE_NAME} --name ${CDN_NAME} --resource-group ${RG_NAME} --content-paths "/*"
