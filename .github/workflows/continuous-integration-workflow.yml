@@ -108,3 +108,6 @@ jobs:
 
       - name: Deploy to Azure Storage
         run: az storage blob upload-batch --source ./.output --destination \$web/${GITHUB_SHA} --account-name aaronpowellstaticwebsite
+
+      - name: Update wasm pieces
+        run: az storage blob update --container-name \$web/${GITHUB_SHA}/wasm --name "mono.wasm" --content-type "application/wasm" --account-name aaronpowellstaticwebsite
