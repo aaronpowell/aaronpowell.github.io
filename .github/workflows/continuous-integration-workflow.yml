@@ -6,6 +6,7 @@ env:
   - CDN_NAME: aaronpowell
   - CDN_PROFILE_NAME: aaronpowell
   - RG_NAME: personal-website
+  - DOTNET_VERSION: "3.1.100-preview3-014645"
 
 on:
   push:
@@ -45,7 +46,7 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "3.1.100-preview3-014645"
+          dotnet-version: $DOTNET_VERSION
 
       - name: Build search app
         run: dotnet build --configuration Release
@@ -69,7 +70,7 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: "3.1.100-preview3-014645"
+          dotnet-version: $DOTNET_VERSION
 
       - name: Download index source
         uses: actions/download-artifact@v1
