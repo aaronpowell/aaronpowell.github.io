@@ -26,6 +26,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: website
+        env:
           path: ${OUTPUT_PATH}
 
       - name: Publish blog json
