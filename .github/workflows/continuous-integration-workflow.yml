@@ -88,20 +88,20 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Download website
-      uses: actions/download-artifact@v1
-      with:
-        name: website
-        path: ./.output
+      - name: Download website
+        uses: actions/download-artifact@v1
+        with:
+          name: website
+          path: ./.output
 
-    - name: Download search UI
-      uses: actions/download-artifact@v1
-      with:
-        name: json
-        path: ./.output-search
+      - name: Download search UI
+        uses: actions/download-artifact@v1
+        with:
+          name: json
+          path: ./.output-search
 
-    - name: Move Search UI into website
-      run: cp -r ./.output-search/search ./.output
+      - name: Move Search UI into website
+        run: cp -r ./.output-search/search ./.output
 
-    - name: Deploy to Azure Storage
-      run: az storage blob upload-batch --source ./.output --destination \$web/${GITHUB_SHA} --account-name aaronpowellstaticwebsite
+      - name: Deploy to Azure Storage
+        run: az storage blob upload-batch --source ./.output --destination \$web/${GITHUB_SHA} --account-name aaronpowellstaticwebsite
