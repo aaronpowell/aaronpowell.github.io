@@ -98,7 +98,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: search
-          path: ./.output-search
+          path: ./.output
 
       - name: Download search indez
         uses: actions/download-artifact@v1
@@ -106,8 +106,8 @@ jobs:
           name: search-index
           path: ./.output
 
-      - name: Move Search UI into website
-        run: cp -r ./.output-search/search ./.output
+      # - name: Move Search UI into website
+      #   run: cp -r ./.output-search/search ./.output
 
       - name: Deploy to Azure Storage
         run: az storage blob upload-batch --source ./.output --destination \$web/${GITHUB_SHA} --account-name aaronpowellstaticwebsite
