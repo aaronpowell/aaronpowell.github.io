@@ -20,19 +20,19 @@ jobs:
           hugo-version: "0.54.0"
 
       - name: Build
-        run: hugo --minify --source ./src --destination ${OUTPUT_PATH}
+        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }}
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
         with:
           name: website
-          path: ${OUTPUT_PATH}
+          path: ${{ env.OUTPUT_PATH }}
 
       - name: Publish blog json
         uses: actions/upload-artifact@v1
         with:
           name: json
-          path: ${OUTPUT_PATH}/index.json
+          path: ${{ env.OUTPUT_PATH }}/index.json
 
   build_search_ui:
     runs-on: ubuntu-latest
@@ -48,14 +48,14 @@ jobs:
         working-directory: ./Search
 
       - name: Publish search UI
-        run: dotnet publish --no-build --configuration Release --output ${OUTPUT_PATH}
+        run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
         working-directory: ./Search/Search.Site.UI
 
       - name: Package search UI
         uses: actions/upload-artifact@v1
         with:
           name: search
-          path: ${OUTPUT_PATH}/Search.Site.UI/dist/_framework
+          path: ${{ env.OUTPUT_PATH }}/Search.Site.UI/dist/_framework
 
   build_search_index:
     runs-on: ubuntu-latest
@@ -65,13 +65,13 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${DOTNET_VERSION}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Download index source
         uses: actions/download-artifact@v1
         with:
           name: json
-          path: ${OUTPUT_PATH}
+          path: ${{ env.OUTPUT_PATH }}
 
       - name: Build search index
         run: dotnet run
@@ -101,22 +101,22 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: website
-          path: ${OUTPUT_PATH}
+          path: ${{ env.OUTPUT_PATH }}
 
       - name: Download search UI
         uses: actions/download-artifact@v1
         with:
           name: search
-          path: ${OUTPUT_PATH}/_framework
+          path: ${{ env.OUTPUT_PATH }}/_framework
 
       - name: Download search index
         uses: actions/download-artifact@v1
         with:
           name: search-index
-          path: ${OUTPUT_PATH}
+          path: ${{ env.OUTPUT_PATH }}
 
       - name: Deploy to Azure Storage
-        run: az storage blob upload-batch --source ${OUTPUT_PATH} --destination \$web/${GITHUB_SHA} --account-name ${STORAGE_NAME}
+        run: az storage blob upload-batch --source ${{ env.OUTPUT_PATH }} --destination \$web/${GITHUB_SHA} --account-name ${STORAGE_NAME}
 
       - name: Update wasm pieces
         run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name ${STORAGE_NAME}
