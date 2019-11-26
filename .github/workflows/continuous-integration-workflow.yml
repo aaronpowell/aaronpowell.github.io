@@ -6,7 +6,7 @@ env:
 on:
   push:
     branches:
-      - search
+      - master
 
 jobs:
   build_hugo:
