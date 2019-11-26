@@ -2,6 +2,9 @@
 ; Top-most EditorConfig file
 root = true
 
+[*.yml]
+indent_size = 2
+
 ; Windows newlines
 [*]
 end_of_line = crlf
