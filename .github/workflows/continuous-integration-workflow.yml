@@ -17,13 +17,13 @@ jobs:
           hugo-version: "0.54.0"
 
       - name: Build
-        run: hugo --minify --source ./src --destination ./output
+        run: hugo --minify --source ./src --destination ./.output
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
         with:
-            name: website
-            path: ./.output
+          name: website
+          path: ./.output
 
   build_search_ui:
     runs-on: ubuntu-latest
@@ -32,14 +32,14 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.100-preview3-014645'
+          dotnet-version: "3.1.100-preview3-014645"
 
       - name: Build search app
         run: dotnet build --configuration Release
         working-directory: ./Search
 
       - name: Publish search UI
-        run: dotnet publish --no-build --configuration Release --output ./.output
+        run: dotnet publish --no-build --configuration Release --output ../../.output
         working-directory: ./Search/Search.Site.UI
 
       - name: Package search UI
@@ -56,10 +56,10 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '3.1.100-preview3-014645'
+          dotnet-version: "3.1.100-preview3-014645"
 
       - name: Download site
         uses: actions/download-artifact@v1
         with:
-            name: website
-            path: ./.output
+          name: website
+          path: ./.output
