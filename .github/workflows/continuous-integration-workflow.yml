@@ -1,6 +1,6 @@
 name: Build and Deploy Website
 env:
-  OUTPUT_PATH: $GITHUB_WORKSPACE/.output
+  OUTPUT_PATH: ${{ github.workspace }}/.output
   DOTNET_VERSION: "3.1.100-preview3-014645"
 
 on:
