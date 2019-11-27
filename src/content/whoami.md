@@ -15,7 +15,7 @@ hidden: true
     </ul>
 </aside>
 
-Hi, my name's Aaron Powell and I'm a Regional Cloud Developer Advocate (CDA) at Microsoft. Prior to that I worked at [Readify](https://readify.net) in a number of different roles. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications. My background is ASP.NET as a server technology but I've expanded into Node.js, a bit of Go, but ultimately trying to be a polyglot.
+Hi, my name's Aaron Powell and I'm a Cloud Developer Advocate (CDA) at Microsoft. Prior to that I worked at [Readify](https://readify.net) in a number of different roles. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications. My background is ASP.NET as a server technology but I've expanded into Node.js, a bit of Go, but ultimately trying to be a polyglot.
 
 I'm also a passionate Open Source developer, with one of my main pet projects being [Chauffeur](https://github.com/aaronpowell/chauffeur) an automation tool for the [Umbraco CMS](http://umbraco.com).
 
