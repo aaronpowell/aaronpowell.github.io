@@ -3,7 +3,7 @@ title = "Creating DEV's offline page using Blazor"
 date = 2019-07-08T14:12:11+10:00
 description = "Let's build something with Blazor!"
 draft = false
-tags = ["webassembly", "dotnet"]
+tags = ["wasm", "dotnet"]
 +++
 
 _This post was [originally published](https://dev.to/azure/creating-dev-s-offline-page-using-blazor-29dl) under my [DEV.to](https://dev.to) account._

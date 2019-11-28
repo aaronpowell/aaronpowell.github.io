@@ -35,7 +35,7 @@ This Analyzer will treat the string as a single search term, so if you needed to
 
 These are the most common Analyzers you'll come across when working with Lucene, in fact the StandardAnalyzer is the default one which is used within Examine (you can specify in the config the Analyzer for both indexing and searching though).
 
-The StandardAnalyzer actually combines parts of the StopAnalyzer, StadnardFilter & LowerCaseFilter. The StandardAnalyzer understands English punctuation for breaking down words (hyphens, etc), words to ignore (via the StopAnalyzer) and **technically** case insensitive searching (by doing lowercase comparisons).
+The StandardAnalyzer actually combines parts of the StopAnalyzer, StandardFilter & LowerCaseFilter. The StandardAnalyzer understands English punctuation for breaking down words (hyphens, etc), words to ignore (via the StopAnalyzer) and **technically** case insensitive searching (by doing lowercase comparisons).
 
 The StopAnalyzer (which is **kind of** a lesser version of the StandardAnalyzer) understands standard English words to ignore. This actually got me unstuck at one point, I was trying to search on the letter A in a field (which only contained a single letter) and any match with the letter A was being ignored. This is because the following list of words are skipped over by the Analyzer:
 
