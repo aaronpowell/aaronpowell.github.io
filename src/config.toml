@@ -34,7 +34,7 @@ home = [ "HTML", "RSS", "JSON"]
     ajaxFormspree = true
 
     # Code highlighting with highlight.js
-    highlightJS = true
+    highlightJS = false
     highlightJSStyle = "/highlightjs/styles/shades-of-purple.css" # For custom highlight.js styles, add your /path/to/styles/default.css
     highlightJSScript = "/highlightjs/highlight.pack.js" # For custom highlight.js languages config, add your /path/to/highlight.pack.js
 
@@ -54,3 +54,14 @@ home = [ "HTML", "RSS", "JSON"]
     name = "Search"
     url  = "/search"
     weight = 4
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokailight"
+    tabWidth = 4

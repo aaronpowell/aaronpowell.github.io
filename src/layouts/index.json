@@ -1,6 +1,6 @@
 {
     "posts": [
-        {{ range $i, $e := where (.Data.Pages) ".Params.hidden" "!=" true }}
+        {{ range $i, $e := where (.Site.RegularPages) ".Params.hidden" "!=" true }}
         {{- if and $i (gt $i 0) -}},{{- end }}{
             "title": {{ .Title | jsonify }},
             "url": "{{ .Permalink }}",
