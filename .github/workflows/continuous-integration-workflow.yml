@@ -14,10 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Get Hugo Version
+        id: hugo-version
+        run: |
+          HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
+          echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.3.0
         with:
-          hugo-version: "0.54.0"
+          hugo-version: '${{ steps.hugo-version.outputs.HUGO_VERSION }}'
 
       - name: Build
         run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }}
