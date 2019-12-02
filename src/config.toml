@@ -65,3 +65,7 @@ home = [ "HTML", "RSS", "JSON"]
     noClasses = true
     style = "monokailight"
     tabWidth = 4
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
