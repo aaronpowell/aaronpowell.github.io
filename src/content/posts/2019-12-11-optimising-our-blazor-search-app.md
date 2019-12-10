@@ -6,21 +6,21 @@ draft = false
 tags = ["wasm", "dotnet", "lucene.net", "fsharp"]
 +++
 
-When we [build a search app using Blazor + Lucene.NET]({{<ref "/posts/2019-11-29-implementing-search-in-blazor-webassembly-with-lucenenet.md">}}) it did a good job of creating our search application but when you run it it's kind of slow and that's because we're downloading the JSON representation of my blog and generating the Lucene.NET index each time. Then when we looked at [hosting the Blazor app]({{<ref "/posts/2019-12-10-can-you-use-blazor-for-only-part-of-an-app.md">}}) the main motivation was to use static files rather than getting Blazor to do heavy lifting to generate HTML everytime.
+When we [build a search app using Blazor + Lucene.NET]({{<ref "/posts/2019-11-29-implementing-search-in-blazor-webassembly-with-lucenenet.md">}}) it did a good job of creating our search application but when you run it it's kind of slow and that's because we're downloading the JSON representation of my blog and generating the Lucene.NET index each time. Then when we looked at [hosting the Blazor app]({{<ref "/posts/2019-12-10-can-you-use-blazor-for-only-part-of-an-app.md">}}) the main motivation was to use static files rather than getting Blazor to do heavy lifting to generate HTML every time.
 
 After talking to [Dan Roth](https://twitter.com/danroth27) and Microsoft Ignite I got thinking, could we pre-generate the index and ship it down as a static resource somehow?
 
 ## Lucene Index Primer
 
-If we're going to ship the index to the browser rather than build it there we need to understand what the index is. Since Lucene aims to be as fast a search index as it can it uses a series of binary files to store the data that is indexed. If you look into a generated index you'll find files such as `_0.cfe` or `segments.gen`. The numbered files are kind of like a database, containing the documents that were indexed and the tokens extracted from the fields, whereas the segments files create a map to where everything is stored.
+If we're going to ship the index to the browser rather than build it there we need to understand what the index is. Since Lucene aims to be as fast a search index as it can it uses a series of binary files to store the indexed data. If you look into a generated index you'll find files such as `_0.cfe` or `segments.gen`. The numbered files are kind of like a database, containing the documents that were indexed and the tokens extracted from the fields, whereas the segments files create a map to where everything is stored.
 
-Ultimately though, we're going to have multiple files and the names of them are not really deterministic as indexing and re-indexing can result in newly generated files or old ones not being cleaned up yet, depending on how well you flushed-on-write.
+Ultimately though, we're going to have multiple files and the names of them are not deterministic as indexing and re-indexing can result in newly generated files or old ones not being cleaned up yet, depending on how well you flushed-on-write.
 
 So we're going to need to get creating.
 
 ## Generating Our Index
 
-Before that though we need a way to repeatably generate the index, and to do that we'll add a new project to our solition:
+Before that though we need a way to repeatably generate the index, and to do that we'll add a new project to our solution:
 
 ```sh
 dotnet new console --name Search.IndexBuilder
@@ -129,7 +129,7 @@ That leaves us with one last function, `packageIndex`.
 
 ## Packaging the Index
 
-Remember in the previous post that we noticed that you can use `System.IO` in Blazor and there is a file system available to you (fun fact, it's a Linux file system!)? Well that got me thinking, since we're able to write to it with Lucene.NET we should be able to write **anything** to it, and since we can use any netstandard library we could use a archive as the delivery mechanism!
+Remember in the previous post that we noticed that you can use `System.IO` in Blazor and there is a file system available to you (fun fact, it's a Linux file system!)? Well that got me thinking since we're able to write to it with Lucene.NET we should be able to write **anything** to it, and since we can use any netstandard library we could use an archive as the delivery mechanism!
 
 And that's just what we'll do, we'll use [`System.IO.Compression.ZipFile`](https://docs.microsoft.com/en-us/dotnet/api/system.io.compression.zipfile?view=netcore-3.0&{{<cda>}}):
 
@@ -151,7 +151,7 @@ The `packageIndex` function will take in a starting directory and the path to th
 
 ## Updating the Component
 
-With the logic to build the index pushed off to a console application we can now drastically simplify the component that we've created. First we'll download the zip file as a stream and write it to disk:
+With the logic to build the index pushed off to a console application, we can now drastically simplify the component that we've created. First we'll download the zip file as a stream and write it to disk:
 
 ```fsharp
 let downloadIndex() =
@@ -197,7 +197,7 @@ Look at that, 25 lines down to 12, and since Lucene.NET is very efficient at ope
 
 Like with the original experiment to run Lucene.NET in Blazor WebAssembly I was pretty amazed that this "just worked", especially since it involves downloading a zip file, writing it "to disk" and then unpacking the archive. I remember early in my career that it was nearly impossible to do that on the server and now it's less than 50 lines of code running in the browser!
 
-That aside I think this is a really nifty way to think about optimising Blazor applications. It's very easy to forget that Blazor WASM is going to be running on each and every client that connects, so they are all going to be doing heavy lifting, so if there's an opportunity to offload some of that work and simplify what the client has to do, then it makes sense to do it.
+That aside I think this is a nifty way to think about optimising Blazor applications. It's very easy to forget that Blazor WASM is going to be running on every client that connects, so they are all going to be doing the heavy lifting, so if there's an opportunity to offload some of that work and simplify what the client has to do, then it makes sense to do it.
 
 Here it was a case of generating a Lucene.NET index that we then download, but it could be any number of things that your application would normally "create on startup".
 
