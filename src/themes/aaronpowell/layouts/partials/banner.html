@@ -1,0 +1,15 @@
+<section class="banner" style='background-image: url("{{ .Site.Params.banner.bgImage | absURL }}");'>
+    <blockquote>
+        <p>{{ .Site.Params.banner.heading }}</p>
+        <span class="rotate">
+            {{ range $index, $element := .Site.Params.banner.flipText }}
+                {{ if eq $index 0 }}
+                <span>&nbsp;{{ .title }}</span>
+                {{else}}
+                <span>&nbsp;{{ .title }}</span>
+                {{end}}
+            {{ end }}
+        </span>
+    </blockquote>
+    <blockquote>{{ .Site.Params.banner.description }}</blockquote>
+</section>

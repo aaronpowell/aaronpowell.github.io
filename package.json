@@ -1,0 +1,23 @@
+{
+    "name": "aaronpowell.github.io",
+    "version": "1.0.0",
+    "private": true,
+    "description": "aaronpowell.github.io\r =====================",
+    "main": "index.js",
+    "dependencies": {},
+    "devDependencies": {
+        "prettier": "^1.19.1"
+    },
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aaronpowell/aaronpowell.github.io.git"
+    },
+    "keywords": [],
+    "author": "Aaron Powell",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/aaronpowell/aaronpowell.github.io/issues"
+    },
+    "homepage": "https://github.com/aaronpowell/aaronpowell.github.io#readme"
+}

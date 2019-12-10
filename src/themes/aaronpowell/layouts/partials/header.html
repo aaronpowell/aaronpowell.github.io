@@ -1,0 +1,19 @@
+<header>
+    <nav>
+            <ul>
+                <li class="logo">
+                    <a href="{{ .Site.BaseURL }}"><img src="{{ .Site.Params.logo | absURL }}" alt="logo"></a>
+                </li>
+                <li class="item">
+                    <a href="{{ .Site.BaseURL }}">{{ .Site.Params.home }}</a>
+                </li>
+                {{ range .Site.Menus.nav }}
+                <li class="item">
+                    <a href="{{ .URL | absURL }}" title="{{ .Name }}">{{ .Name }}</a>
+                </li>
+                {{ end }}
+
+                <li class="toggle"><a href="#"><i class="icon ion-md-menu"></i></a></li>
+            </ul>
+        </nav>
+</header>

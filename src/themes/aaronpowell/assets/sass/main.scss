@@ -1,0 +1,23 @@
+@import './scaffolding.scss';
+@import './nav.scss';
+@import './rotate.scss';
+@import './banner.scss';
+
+body {
+    color: #555;
+    font-size: 1.25rem;
+    font-family: "Hel­vetica",Arial,sans-serif;
+
+    line-height: 1.5;
+
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+strong {
+  color: #333;
+}

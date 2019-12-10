@@ -1,0 +1,15 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "aaronpowell"
+license = "MIT"
+licenselink = "https://github.com/aaronpowell/aaronpowell.github.io/blob/master/src/themes/aaronpowell/LICENSE"
+description = "THeme used on my blog"
+homepage = "https://www.aaron-powell.com/"
+tags = []
+features = []
+min_version = "0.60.0"
+
+[author]
+  name = "Aaron Powell"
+  homepage = "https://www.aaron-powell.com"

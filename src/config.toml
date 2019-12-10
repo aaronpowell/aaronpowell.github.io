@@ -2,7 +2,8 @@ title = "LINQ to Fail"
 baseURL = "https://www.aaron-powell.com"
 languageCode = "en-US"
 config = "config.toml"
-theme = "timer-hugo"
+theme = "aaronpowell"
+# theme = "timer-hugo"
 canonifyURLS = true
 
 [outputs]
@@ -29,6 +30,7 @@ home = [ "HTML", "RSS", "JSON"]
         weight  = 5
 
 [params]
+    home = "Home"
     tagline = "Aaron Powell - LINQ to Fail"
     author = "Aaron Powell"
     description = "Microsoft Cloud Developer Advocate"
@@ -43,60 +45,40 @@ home = [ "HTML", "RSS", "JSON"]
     github = "aaronpowell"
     email = "website-contact@aaron-powell.com"
 
-    # Code highlighting with highlight.js
-    highlightJS = false
-    highlightJSStyle = "/highlightjs/styles/shades-of-purple.css" # For custom highlight.js styles, add your /path/to/styles/default.css
-    highlightJSScript = "/highlightjs/highlight.pack.js" # For custom highlight.js languages config, add your /path/to/highlight.pack.js
-
     [params.banner]
         enable  = true
         bgImage = "images/hero.jpg"
-        heading = "HI, MY NAME IS Aaron & I AM A"
-        description = "WITH OVER 15 YEARS SOFTWARE DEVELOPMENT EXPERIENCE AND 10 YEARS OF PUBLIC SPEAKING. I'M ACTIVE ACROSS A NUMBER OF OPEN SOURCE COMMUNITIES AND THIS SITE SHARES MY EXPERIENCES."
+        heading = "Hi, my name is Aaron and I'm a"
+        description = "With over 15 years of software development experience and 10 years of public speaking. I'm active across a number of open source communities and this site shared my experiences."
         [[params.banner.flipText]]
-            title   = "DEVELOPER"
+            title   = "Developer"
         [[params.banner.flipText]]
-            title   = "SPEAKER"
+            title   = "Speaker"
         [[params.banner.flipText]]
-            title   = "BLOGGER"
+            title   = "Blogger"
 
     # Homepage About Section
     [params.about]
         enable  = true
-        title   = "ABOUT ME"
+        title   = "About Me"
         content = "Hello 👋, I'm a Cloud Developer Advocate for Microsoft based in Sydney. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications."
         image   = "images/logo.png"
 
     [params.footer]
         [[params.footer.socialIcon]]
-            icon = "ion-social-twitter"
+            icon = "ion-logo-twitter"
             url = "https://twitter.com/slace"
+            title = "Twitter"
 
         [[params.footer.socialIcon]]
-            icon = "ion-social-github"
+            icon = "ion-logo-github"
             url = "https://github.com/aaronpowell"
+            title = "GitHub"
 
         [[params.footer.socialIcon]]
-            icon = "ion-social-linkedin"
+            icon = "ion-logo-linkedin"
             url = "https://www.linkedin.com/in/aaron-powell-66038631/"
-
-
-[[menu.main]]
-    name = "About"
-    url  = "/about"
-    weight = 1
-[[menu.main]]
-    name = "Blog"
-    url  = "/posts"
-    weight = 2
-[[menu.main]]
-    name = "Speaking"
-    url  = "/speaking"
-    weight = 3
-[[menu.main]]
-    name = "Search"
-    url  = "/search"
-    weight = 4
+            title = "LinkedIn"
 
 [markup]
   [markup.highlight]
@@ -112,5 +94,3 @@ home = [ "HTML", "RSS", "JSON"]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-    # Banner Section
-    

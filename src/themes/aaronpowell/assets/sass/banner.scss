@@ -1,0 +1,26 @@
+.banner {
+    background-color: #263d36;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    line-height: 1.2;
+    padding: 10vw 2em;
+    text-align: center;
+    position: relative;
+
+    &:before {
+        content: '';
+        z-index: 9;
+        background: rgba(255,255,255,.78);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    * {
+        position: relative;
+        z-index: 9;
+    }
+}
