@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SearchResult.fs" />
+    <Compile Include="IndexTools.fs" />
     <Compile Include="SearchComponent.fs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,8 @@
   <ItemGroup>
     <Compile Include="Post.fs" />
     <Compile Include="InvalidDateTimeConverter.fs" />
+    <Compile Include="IndexTools.fs" />
+    <Compile Include="Packager.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
