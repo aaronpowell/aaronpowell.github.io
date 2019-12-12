@@ -64,6 +64,14 @@ home = [ "HTML", "RSS", "JSON"]
         content = "Hello 👋, I'm a Cloud Developer Advocate for Microsoft based in Sydney. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications."
         image   = "images/logo.png"
 
+    [params.speaking]
+        enable  = true
+        title   = "Speaking"
+        content = "Interested in having me speak at an event or private workshop? Get in touch!"
+        noTalks = "No upcoming talks. 😢"
+        talks   = [
+        ]
+
     [params.footer]
         [[params.footer.socialIcon]]
             icon = "ion-logo-twitter"

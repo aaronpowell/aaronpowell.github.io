@@ -1,1 +1,26 @@
-<div>Speaking</div>
+{{ if .Site.Params.speaking.enable }}
+{{ with .Site.Params.speaking }}
+<section id="speaking" class="container">
+    <div>
+        <h2>{{ .title }}</h2>
+        {{ if eq (len .talks) 0 }}
+        <p>No upcoming talks. 😢</p>
+        {{ else }}
+        <ul>
+            {{ range .talks  }}
+            <li>
+                <article>
+                    <h3><a href="{{ .link }}" target="_blank" title="{{ .name }}">{{ .name }}</a></h3>
+                    <time datetime="{{ .date }}">{{ dateFormat "1st January 2006" .date }}</time>
+                </article>
+            </li>
+            {{ end }}
+        </ul>
+        {{ end }}
+    </div>
+    <div>
+        <p>{{ .content }}</p>
+    </div>
+</section>
+{{ end }}
+{{ end }}
