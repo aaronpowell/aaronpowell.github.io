@@ -24,9 +24,10 @@ jobs:
         uses: peaceiris/actions-hugo@v2.3.0
         with:
           hugo-version: '${{ steps.hugo-version.outputs.HUGO_VERSION }}'
+          extended: true
 
       - name: Build
-        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }}
+        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }} -b https://preview.aaron-powell.com
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
@@ -54,7 +55,7 @@ jobs:
         working-directory: ./Search
 
       - name: Publish search UI
-        run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }} -b https://preview.aaron-powell.com
+        run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
         working-directory: ./Search/Search.Site.UI
 
       - name: Package search UI
