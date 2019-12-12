@@ -6,10 +6,17 @@
 @import './speaking.scss';
 @import './footer.scss';
 
+@import url("https://fonts.googleapis.com/css?family=Rubik|Bitter");.col-xs,.col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4,.col-xs-5,.col-xs-6,.col-xs-7,.col-xs-8,.col-xs-9,.col-xs-10,.col-xs-11,.col-xs-12,.col-xs-offset-0,.col-xs-offset-1,.col-xs-offset-2,.col-xs-offset-3,.col-xs-offset-4,.col-xs-offset-5,.col-xs-offset-6,.col-xs-offset-7,.col-xs-offset-8,.col-xs-offset-9,.col-xs-offset-10,.col-xs-offset-11,.col-xs-offset-12 {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem
+}
+
 body {
     color: #555;
     font-size: 1.25rem;
-    font-family: "Hel­vetica",Arial,sans-serif;
+    font-family: "Rubik","Poppins","Hel­vetica",Arial,sans-serif;
 
     line-height: 1.5;
 
@@ -21,7 +28,8 @@ h1,
 h2,
 h3,
 h4,
-strong {
+strong,
+a {
   color: #333;
 }
 
@@ -30,7 +38,6 @@ strong {
         background-color: #02bdd5;
         color: #fff;
         padding: 20px 0px;
-        margin-top: 20px;
         text-align: center;
 
         h1, a {
@@ -50,6 +57,30 @@ strong {
 
         span:last-child:after {
             content: '';
+        }
+    }
+
+    h1 {
+        text-transform: uppercase;
+    }
+
+    .pagination {
+        a {
+            display: inline-block;
+        }
+
+        .prev:before {
+            content: '\00AB';
+            padding-right: 5px;
+        }
+
+        .next {
+            float: right;
+        }
+
+        .next:after {
+            content: '\00BB';
+            padding-left: 5px;
         }
     }
 }

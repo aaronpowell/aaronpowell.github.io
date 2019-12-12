@@ -1,8 +1,21 @@
 @import './variables';
 
+.home {
+    header {
+        nav {
+            background: #222;
+
+            li a {
+                color: #fff;
+            }
+        }
+    }
+}
+
 header {
     nav {
-        background: #222;
+        background-color: transparent;
+        border-bottom: 1px solid #ccc;
         padding: 0px 20px;
 
         ul {
@@ -31,7 +44,6 @@ header {
 
                 a {
                     text-decoration: none;
-                    color: #fff;
 
                     &:hover {
                         text-decoration: underline;

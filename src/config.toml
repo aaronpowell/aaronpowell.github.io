@@ -21,8 +21,8 @@ home = [ "HTML", "RSS", "JSON"]
         url     = "posts"
         weight  = 3
     [[menu.nav]]
-        name    = "Speaking"
-        url     = "speaking"
+        name    = "Talks"
+        url     = "talks"
         weight  = 4
     [[menu.nav]]
         name    = "Contact"

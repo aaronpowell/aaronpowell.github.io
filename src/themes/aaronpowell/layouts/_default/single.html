@@ -32,15 +32,25 @@
         </article>
     </section>
 
+    <section class="pagination container">
+        {{ if .PrevInSection }}
+        <a href="{{ .PrevInSection.Permalink }}" class="prev">{{ .PrevInSection.Title }}</a>
+        {{ end }}
+        {{ if .NextInSection }}
+        <a href="{{ .NextInSection.Permalink }}" class="next">{{ .NextInSection.Title }}</a>
+        {{ end }}
+    </section>
+
     <footer>
         {{ partial "disqus" . }}
-        
+
         {{ if and (.IsPage) (.GitInfo) }}
         <small class="gray"><em>Published: {{ .Page.Lastmod }}, Version: <a href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}" target="_blank">{{ .GitInfo.AbbreviatedHash }}</a></em></small>
         {{ else }}
         <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
         {{ end }}
     </footer>
+
 </section>
 
 
