@@ -24,3 +24,32 @@ h4,
 strong {
   color: #333;
 }
+
+.main {
+    header {
+        background-color: #02bdd5;
+        color: #fff;
+        padding: 20px 0px;
+        margin-top: 20px;
+        text-align: center;
+
+        h1, a {
+            color: #fff;
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        span {
+            font-size: 0.8rem;
+        }
+
+        span:after {
+            content: ' | ';
+        }
+
+        span:last-child:after {
+            content: '';
+        }
+    }
+}
