@@ -33,8 +33,29 @@ a {
     header {
         background-color: $primaryHighlightColour;
         color: #fff;
-        padding: 20px 0px;
+        padding: 100px 0px;
         text-align: center;
+
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        &:before {
+            content: '';
+            z-index: 9;
+            background: rgba(2, 189, 213,.50);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        * {
+            position: relative;
+            z-index: 9;
+        }
 
         h1, a {
             color: #fff;
@@ -44,7 +65,7 @@ a {
         }
 
         span {
-            font-size: 0.8rem;
+            font-size: 1rem;
         }
 
         span:after {
@@ -57,6 +78,7 @@ a {
     }
 
     h1 {
+        font-size: 3rem;
         text-transform: uppercase;
     }
 

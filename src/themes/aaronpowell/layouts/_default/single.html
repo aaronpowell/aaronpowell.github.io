@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <section class="main">
-    <header>
+    <header style="{{ if .Params.bannerImage }}background-image: url('{{ .Params.bannerImage | absURL }}');{{ end }}">
         <div class="container">
             <h1>{{ .Title }}</h1>
             <div>

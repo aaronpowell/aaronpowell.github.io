@@ -4,6 +4,7 @@ date = 2019-12-17T08:50:14+11:00
 description = "A look at how to deploy a Hugo static website to Azure Static Websites and Azure CDN."
 draft = false
 tags = ["devops", "azure"]
+bannerImage = "/images/banners/2019-12-12-implementing-github-actions-for-my-blog.png"
 +++
 
 While I was doing the work to [host my Blazor search app]({{<ref "/posts/2019-12-10-can-you-use-blazor-for-only-part-of-an-app.md">}}) within my website I realised I'd need to update the deployment pipeline I use for my blog. The process being used was very similar to the one [used for the DDD Sydney website]({{<ref "/posts/2018-07-05-automating-deployments-for-dddsydney.md">}}), but tweaked for use with Hugo. As it was setup a while ago I used the UI designer in [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/?{{<cda>}}), not the [YAML approach](https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema&{{<cda>}}) so this seemed like the perfect opportunity for an overhaul.
