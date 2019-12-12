@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<section class="main">
+    <header>
+        <div class="container">
+            <h1>{{ .Title }}</h1>
+        </div>
+    </header>
+
+    <section class="container post-list">
+        {{ range .Data.Pages }}
+        <article>
+            <h3>
+                <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+            </h3>
+            <div>{{ .Params.abstract | truncate 100 | markdownify }}</div>
+            <a href="{{ .Permalink }}" title="Talk Details" class="read-more">Talk Details</a>
+        </article>
+        {{ end }}
+    </section>
+</section>
+
+{{ end }}

@@ -1,0 +1,57 @@
+{{ define "main" }}
+
+<section class="main">
+    <header>
+        <div class="container">
+            <h1>{{ .Title }}</h1>
+            <div>
+                <span class="tags">Tags:
+                    {{ if ne .Params.tags nil }}
+                    {{ range .Params.tags }}
+                    <a href="/tags/{{ . }}" title="Tag: {{ . }}">{{ . }}</a>
+                    {{ end }}
+                    {{ else }}
+                    No tags for this post
+                    {{ end }}
+                </span>
+            </div>
+        </div>
+    </header>
+    <section class="container">
+        <article>
+            <h2>Abstract</h2>
+            {{ .Params.abstract | markdownify }}
+
+            <h3>Duration: {{ .Params.duration }}</h3>
+
+            <h2>Audience Profile</h2>
+            <ul>
+                {{ range .Params.audience }}
+                <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+
+            <h2>Notes</h2>
+            {{ .Params.notes | markdownify }}
+
+            <h2>Additional Resources</h2>
+            <ul>
+                {{ range .Params.resources }}
+                <li><a href="{{ .link }}" target="_blank" title="{{ .name }}">{{ .name }}</a></li>
+                {{ end }}
+            </ul>
+        </article>
+    </section>
+
+    <footer>
+        {{ if and (.IsPage) (.GitInfo) }}
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}, Version: <a href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}" target="_blank">{{ .GitInfo.AbbreviatedHash }}</a></em></small>
+        {{ else }}
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
+        {{ end }}
+    </footer>
+
+</section>
+
+
+{{ end }}
