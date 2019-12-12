@@ -1,1 +1,21 @@
-<div>Latest Posts</div>
+<section id="latest-posts" class="container">
+    <h2>Latest Posts</h2>
+    <div class="post-list">
+        {{ range first 5 (.Site.RegularPages) }}
+        <article>
+            <h3>
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h3>
+            <div>{{ .Description }}</div>
+            <div class="sub-header">
+                {{ .Date.Format (.Site.Params.dateform | default "January 2006") }}
+                · {{ .ReadingTime }} minute read
+            </div>
+        </article>
+        {{ end }}
+    </div>
+
+    <div>
+        <h3><a href="/posts/">View All</a></h3>
+    </div>
+</section>
