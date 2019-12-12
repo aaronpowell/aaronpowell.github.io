@@ -1,9 +1,15 @@
-<footer>
+<footer class="container">
     <ul>
         {{ range .Site.Params.footer.socialIcon }}
         <li><a href="{{ .url }}" target="_blank" title="{{ .title }}"><i class="icon {{ .icon }}"></i></a></li>
         {{ end }}
     </ul>
+    <p>
+        Copyright &copy; Aaron Powell {{ now.Format "2006"}}.
+    </p>
+    <p>
+        Content is licensed under <a href="https://github.com/aaronpowell/aaronpowell.github.io/blob/master/LICENSE" target="_blank" title="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</a> and the theme is licensed under <a href="https://github.com/aaronpowell/aaronpowell.github.io/blob/master/src/themes/aaronpowell/LICENSE" title="MIT License">MIT License</a>.
+    </p>
 </footer>
 
 {{ $js := resources.Get "js/script.js" | minify}}
