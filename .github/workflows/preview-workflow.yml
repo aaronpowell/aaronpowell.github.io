@@ -95,8 +95,8 @@ jobs:
     needs: [build_search_ui, build_search_index]
     env:
       STORAGE_NAME: websitepreview
-      CDN_NAME: preview-cdn
-      CDN_PROFILE_NAME: aaronpowellpreview
+      CDN_ENDPOINT_NAME: aaronpowellpreview
+      CDN_PROFILE_NAME: preview-cdn
       RG_NAME: personal-website
 
     steps:
@@ -129,7 +129,7 @@ jobs:
         run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name ${STORAGE_NAME}
 
       - name: Update CDN endpoint
-        run: az cdn endpoint update --name ${CDN_NAME} --origin-path /${GITHUB_SHA} --profile-name ${CDN_PROFILE_NAME} --resource-group ${RG_NAME}
+        run: az cdn endpoint update --name ${CDN_ENDPOINT_NAME} --origin-path /${GITHUB_SHA} --profile-name ${CDN_PROFILE_NAME} --resource-group ${RG_NAME}
 
       - name: Purge CDN
-        run: az cdn endpoint purge --profile-name ${CDN_PROFILE_NAME} --name ${CDN_NAME} --resource-group ${RG_NAME} --content-paths "/*"
+        run: az cdn endpoint purge --profile-name ${CDN_PROFILE_NAME} --name ${CDN_ENDPOINT_NAME} --resource-group ${RG_NAME} --content-paths "/*"
