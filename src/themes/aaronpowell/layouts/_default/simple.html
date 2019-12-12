@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+<section class="main">
+    <header>
+        <div class="container">
+            <h1>{{ .Title }}</h1>
+        </div>
+    </header>
+    <section class="container">
+        <article>
+            <section>
+            {{ .Content }}
+            </section>
+        </article>
+    </section>
+
+    <footer>
+        {{ if and (.IsPage) (.GitInfo) }}
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}, Version: <a href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}" target="_blank">{{ .GitInfo.AbbreviatedHash }}</a></em></small>
+        {{ else }}
+        <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
+        {{ end }}
+    </footer>
+
+</section>
+
+
+{{ end }}

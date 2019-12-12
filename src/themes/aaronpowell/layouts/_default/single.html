@@ -26,6 +26,7 @@
                 <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt }}" />
             </div>
             {{ end }}
+            {{ partial "series.html" . }}
             <section>
             {{ .Content }}
             </section>

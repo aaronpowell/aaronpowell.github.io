@@ -1,0 +1,23 @@
+{{ if .Params.series }}
+    {{ $.Scratch.Add "current_link" .Permalink }}
+    {{ $.Scratch.Add "series_index" 1 }}
+    <div class="series">
+        <p class="series-intro">
+            {{ range first 1 (where .Site.RegularPages.ByDate "Params.series" .Params.series) }}
+                {{ $.Params.series_intro }}
+            {{ end }}
+        </p>
+        <ul>
+            {{ range where .Site.RegularPages.ByDate "Params.series" .Params.series }} 
+                <li>
+                    {{ if eq ($.Scratch.Get "current_link") .Permalink }}
+                        Part {{ $.Scratch.Get "series_index" }} - {{ .Params.series_title }} (this post)
+                    {{ else }}
+                        <a href="{{ .Permalink }}" title="Part {{ $.Scratch.Get "series_index" }} - {{ .Params.series_title }}">Part {{ $.Scratch.Get "series_index" }} - {{ .Params.series_title }}</a>
+                    {{ end }}
+                    {{ $.Scratch.Add "series_index" 1 }}
+                </li>
+            {{ end }}
+        </ul>
+    </div>
+{{ end }}

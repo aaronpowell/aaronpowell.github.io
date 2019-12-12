@@ -3,6 +3,7 @@ title: "What Key"
 date: 2017-08-30T15:15:13+10:00
 draft: false
 hidden: true
+layout: simple
 ---
 
 What was the key code in JavaScript for that key you just pressed?

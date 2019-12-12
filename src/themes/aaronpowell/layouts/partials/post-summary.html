@@ -7,5 +7,5 @@
         {{ .Date.Format (.Site.Params.dateform | default "January 2006") }}
         · {{ .ReadingTime }} minute read
     </div>
-    <a href="{{ .Permalink }}" title="Read Post">Read Post</a>
+    <a href="{{ .Permalink }}" title="Read Post" class="read-more">Read Post</a>
 </article>

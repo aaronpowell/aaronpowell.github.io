@@ -1,5 +1,7 @@
 ---
 hidden: true
+layout: simple
+title: About Me
 ---
 
 Hi, my name's Aaron Powell and I'm a [Cloud Developer Advocate (CDA) at Microsoft](https://developer.microsoft.com/en-us/advocates/index.html). My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications.
