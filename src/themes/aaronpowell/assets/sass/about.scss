@@ -1,0 +1,27 @@
+#about {
+    display: grid;
+    grid-template-columns: 100px 2fr 2fr 100px;
+    grid-gap: 30px;
+
+    margin-top: 50px;
+
+    :nth-child(1) {
+        grid-column: 1;
+    }
+
+    :nth-child(2) {
+        grid-column: 2;
+    }
+
+    :nth-child(3) {
+        grid-column: 3;
+
+        img {
+            max-width: 400px;
+        }
+    }
+
+    :nth-child(4) {
+        grid-column: 4;
+    }
+}
