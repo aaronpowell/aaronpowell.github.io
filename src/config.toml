@@ -5,6 +5,7 @@ config = "config.toml"
 theme = "aaronpowell"
 # theme = "timer-hugo"
 canonifyURLS = true
+enableGitInfo = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
@@ -38,7 +39,6 @@ home = [ "HTML", "RSS", "JSON"]
     favicon = "favicon.ico"
     googleAnalytics = "UA-6399564-1"
     disqusShortname = "aaronpowell"
-    enableGitInfo = "true"
     opengraphImage = "/images/logo.png"
     email = "website-contact@aaron-powell.com"
 
