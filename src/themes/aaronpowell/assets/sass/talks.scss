@@ -1,0 +1,44 @@
+.talks {
+    section.container {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: 20px;
+    }
+
+    .bio {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 50px;
+
+        img {
+            max-width: 200px;
+            border-radius: 5px;
+        }
+
+        .bios, .calendar {
+            grid-column-start: span 2;
+        }
+
+        .calendar {
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                h3 {
+                    font-size: 1.25rem;
+                    margin: 0;
+
+                    a {
+                        text-decoration: none;
+                        font-weight: normal;
+                    }
+                }
+                time {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}

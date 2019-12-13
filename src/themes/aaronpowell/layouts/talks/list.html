@@ -1,22 +1,70 @@
 {{ define "main" }}
 
-<section class="main">
+<section class="main talks">
     <header>
         <div class="container">
             <h1>{{ .Title }}</h1>
         </div>
     </header>
 
-    <section class="container post-list">
-        {{ range .Data.Pages }}
-        <article>
-            <h3>
-                <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
-            </h3>
-            <div>{{ .Params.abstract | truncate 100 | markdownify }}</div>
-            <a href="{{ .Permalink }}" title="Talk Details" class="read-more">Talk Details</a>
-        </article>
-        {{ end }}
+    <section class="container">
+        {{ with .Site.Params.speaking }}
+        <div class="bio">
+            <div>
+                <img src="{{ .bio.avatar }}" alt="Aaron Powell headshot" />
+            </div>
+            <div>
+                <h3>Aaron Powell</h3>
+                <p>Web Developer, Open Source Tinkerer, Lover of Crazy Ideas.</p>
+                <p><i class="icon ion-logo-twitter"></i> Twitter: <a href="https://twitter.com/{{ .bio.twitter }}" target="_blank" title="Twitter: @{{ .bio.twitter }}">@{{ .bio.twitter }}</a></p>
+            </div>
+            <div class="bios">
+                <h4>Short Bio</h4>
+                {{ .bio.short | markdownify }}
+    
+                <h4>Full Bio</h4>
+                {{ .bio.long | markdownify }}
+            </div>
+
+            <div class="calendar">
+                {{ $upcomingTalks := where .talks "date" ">" now }}
+                <h4>Upcoming Talks</h4>
+                {{ if eq (len $upcomingTalks) 0 }}
+                <p>No upcoming talks. 😢</p>
+                {{ else }}
+                <ul class="talk-list">
+                    {{ range $upcomingTalks }}
+                    <li>
+                        {{ partial "talk" . }}
+                    </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+
+                {{ $pastTalks := where .talks "date" "<=" now }}
+                <h4>Past Talks</h4>
+                <ul class="talk-list">
+                    {{ range $pastTalks }}
+                    <li>
+                        {{ partial "talk" . }}
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="post-list">
+            {{ range .Data.Pages }}
+            <article>
+                <h3>
+                    <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+                </h3>
+                <div>{{ .Params.abstract | truncate 100 | markdownify }}</div>
+                <a href="{{ .Permalink }}" title="Talk Details" class="read-more">Talk Details</a>
+            </article>
+            {{ end }}
+        </div>
     </section>
 </section>
 

@@ -3,16 +3,14 @@
 <section id="speaking" class="container">
     <div>
         <h2>{{ .title }}</h2>
-        {{ if eq (len .talks) 0 }}
+        {{ $talks := where .talks "date" ">" now }}
+        {{ if eq (len $talks) 0 }}
         <p>No upcoming talks. 😢</p>
         {{ else }}
-        <ul>
-            {{ range .talks  }}
+        <ul class="talk-list">
+            {{ range $talks }}
             <li>
-                <article>
-                    <h3><a href="{{ .link }}" target="_blank" title="{{ .name }}">{{ .name }}</a></h3>
-                    <time datetime="{{ .date }}">{{ dateFormat "1st January 2006" .date }}</time>
-                </article>
+                {{ partial "talk" . }}
             </li>
             {{ end }}
         </ul>
@@ -20,6 +18,7 @@
     </div>
     <div>
         <p>{{ .content }}</p>
+        <h3><a href="/talks/" title="Available Talks">My Available Talks</a></h3>
     </div>
 </section>
 {{ end }}
