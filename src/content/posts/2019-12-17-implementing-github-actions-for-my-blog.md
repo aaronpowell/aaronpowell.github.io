@@ -2,7 +2,7 @@
 title = "Implementing GitHub Actions for My Blog"
 date = 2019-12-17T08:50:14+11:00
 description = "A look at how to deploy a Hugo static website to Azure Static Websites and Azure CDN."
-draft = true
+draft = false
 tags = ["devops", "azure"]
 +++
 
