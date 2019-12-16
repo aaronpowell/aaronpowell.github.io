@@ -1,6 +1,6 @@
 +++
 title = "Implementing GitHub Actions for My Blog"
-date = 2019-12-12T13:50:14+11:00
+date = 2019-12-17T08:50:14+11:00
 description = "A look at how to deploy a Hugo static website to Azure Static Websites and Azure CDN."
 draft = true
 tags = ["devops", "azure"]
@@ -8,7 +8,7 @@ tags = ["devops", "azure"]
 
 While I was doing the work to [host my Blazor search app]({{<ref "/posts/2019-12-10-can-you-use-blazor-for-only-part-of-an-app.md">}}) within my website I realised I'd need to update the deployment pipeline I use for my blog. The process being used was very similar to the one [used for the DDD Sydney website]({{<ref "/posts/2018-07-05-automating-deployments-for-dddsydney.md">}}), but tweaked for use with Hugo. As it was setup a while ago I used the UI designer in [Azure Pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/?{{<cda>}}), not the [YAML approach](https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema&{{<cda>}}) so this seemed like the perfect opportunity for an overhaul.
 
-But if I'm going to go in for an overhaul and port to YAML I decided it was time to learn something that'd been on my backlog, [GitHub Actions](https://help.github.com/en/actions?{{<cda>}})  After all, I've used Azure Pipelines extensively, so why not learn something new and compare/contrast the two products?
+But if I'm going to go in for an overhaul and port to YAML I decided it was time to learn something that'd been on my backlog, [GitHub Actions](https://help.github.com/en/actions?{{<cda>}}), after all, I've used Azure Pipelines extensively, so why not learn something new and compare/contrast the two products?
 
 ## The Moving Parts
 
@@ -28,16 +28,16 @@ Environment variables:
 
 ```yml
 env:
-  OUTPUT_PATH: ${{ github.workspace }}/.output
+    OUTPUT_PATH: ${{ github.workspace }}/.output
 ```
 
 And what triggers the Workflow:
 
 ```yml
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 ```
 
 This gives us a starting like so:
@@ -45,22 +45,21 @@ This gives us a starting like so:
 ```yml
 name: Build and Deploy Website
 env:
-  OUTPUT_PATH: ${{ github.workspace }}/.output
+    OUTPUT_PATH: ${{ github.workspace }}/.output
 
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - master
 ```
 
 In which we can then create `jobs`, which are the _things_ our Workflow does.
 
 ```yml
 jobs:
-  job_name:
-    runs-on: <platform>
-    steps:
-      <steps to run>
+    job_name:
+        runs-on: <platform>
+        steps: <steps to run>
 ```
 
 The `runs-on` is similar to the `pool` in Azure Pipelines and is used to specify the platform that the Workflow will run on (Linux, MacOS or Windows). After that, we define some `steps` for what our Job does by specifying Actions to use from the marketplace or commands to run.
@@ -75,11 +74,11 @@ And with the primer handled let's start creating jobs for each piece we need to 
 
 Just to summarise some of the new terms we've been introduced to:
 
-* GitHub Actions - the product we're using from GitHub
-* Actions - things we can get from the marketplace (or build ourself) that defines what we can do
-* Workflow - A series of Environment Variables, Jobs and Steps undertaken when an event happens
-* Jobs - What our Workflow does
-* Steps - A task undertaken by a Job using an Action
+-   GitHub Actions - the product we're using from GitHub
+-   Actions - things we can get from the marketplace (or build ourself) that defines what we can do
+-   Workflow - A series of Environment Variables, Jobs and Steps undertaken when an event happens
+-   Jobs - What our Workflow does
+-   Steps - A task undertaken by a Job using an Action
 
 ## Generating The Static Website
 
@@ -89,8 +88,8 @@ Let's start by defining a Job for this Workflow:
 
 ```yml
 jobs:
-  build_hugo:
-    runs-on: ubuntu-latest
+    build_hugo:
+        runs-on: ubuntu-latest
 ```
 
 The Job name is `build_hugo`, I like to name things with a prefix for their role (`build` or `deploy`) and the role it's performing, but the naming convention is up to you, just make sure it makes enough sense for when you look at it in 2 months!
@@ -101,9 +100,9 @@ This Job is a "Continuous Integration" Job, meaning it needs access to the "stuf
 
 ```yml
 build_hugo:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
 ```
 
 This Action doesn't require anything other than to be used for the checkout to happen on `master`, but if you're using it with a PR you might want to tweak it. For that check out the [Action documentation](https://github.com/actions/checkout).
@@ -118,15 +117,15 @@ When we use the Hugo Action we need to give it the version of Hugo that we want 
 
 ```yml
 build_hugo:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
 
-    - name: Get Hugo Version
-      id: hugo-version
-      run: |
-        HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
-        echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
+        - name: Get Hugo Version
+          id: hugo-version
+          run: |
+              HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
+              echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
 ```
 
 This runs the `./hugo version` command to give me a rather verbose string that is passed to an ugly `sed` regex to generate an environment variable available within this Step. But since we'll need it in a different Step we have to turn it into Step Output, and we do that with this line:
@@ -147,7 +146,7 @@ With the Hugo version in hand we can now generate the HTML output:
 - name: Setup Hugo
   uses: peaceiris/actions-hugo@v2.3.0
   with:
-    hugo-version: '${{ steps.hugo-version.outputs.HUGO_VERSION }}'
+      hugo-version: "${{ steps.hugo-version.outputs.HUGO_VERSION }}"
 
 - name: Build
   run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }}
@@ -163,14 +162,14 @@ A Job is made up of many Steps that are run sequentially, so you could do a buil
 - name: Publish website output
   uses: actions/upload-artifact@v1
   with:
-    name: website
-    path: ${{ env.OUTPUT_PATH }}
+      name: website
+      path: ${{ env.OUTPUT_PATH }}
 
 - name: Publish blog json
   uses: actions/upload-artifact@v1
   with:
-    name: json
-    path: ${{ env.OUTPUT_PATH }}/index.json
+      name: json
+      path: ${{ env.OUTPUT_PATH }}/index.json
 ```
 
 Again using the analogy to Azure Pipelines, this is like the [`PublishPipelineArtifact`](https://docs.microsoft.com/en-us/azure/devops/pipelines/artifacts/pipeline-artifacts?view=azure-devops&tabs=yaml&{{<cda>}}) task, where we specify the name of the artifact and the location on disk to it. Artifacts are packaged as a zip for you, whether they are a single file or a directory, so you don't need to do any archiving yourself unless you want something special, but then you'll end up with it zipped anyway.
@@ -191,9 +190,9 @@ As this is a "Continious Integration" Job, like `build_hugo`, so it'll start wit
 
 ```yml
 build_search_ui:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
 ```
 
 To build with .NET there's a convenient [`actions/setup-dotnet`](https://github.com/actions/setup-dotnet) Action that we can grab, and this one needs to know what version of .NET to download into your Job's VM. I'm going to add a new environment variable to the top of our file (since we'll use the same version in the `build_search_index` Job shortly):
@@ -206,21 +205,21 @@ Then it looks fairly similar to Azure Pipelines:
 
 ```yml
 build_search_ui:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v1
 
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        - uses: actions/setup-dotnet@v1
+          with:
+              dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Build search app
-      run: dotnet build --configuration Release
-      working-directory: ./Search
+        - name: Build search app
+          run: dotnet build --configuration Release
+          working-directory: ./Search
 
-    - name: Publish search UI
-      run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
-      working-directory: ./Search/Search.Site.UI
+        - name: Publish search UI
+          run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
+          working-directory: ./Search/Search.Site.UI
 ```
 
 We have Steps to setup the version of .NET, run `dotnet build` and finally `dotnet publish` (of the UI) and then we can package up the outputs (which we [learn about previously]({{<ref "/posts/2019-12-10-can-you-use-blazor-for-only-part-of-an-app.md">}})):
@@ -229,8 +228,8 @@ We have Steps to setup the version of .NET, run `dotnet build` and finally `dotn
 - name: Package search UI
   uses: actions/upload-artifact@v1
   with:
-    name: search
-    path: ${{ env.OUTPUT_PATH }}/Search.Site.UI/dist/_framework
+      name: search
+      path: ${{ env.OUTPUT_PATH }}/Search.Site.UI/dist/_framework
 ```
 
 Blazor done ([GitHub link](https://github.com/aaronpowell/aaronpowell.github.io/blob/62a16a00f509cd13f6a4be84b6b66677df1d7914/.github/workflows/continuous-integration-workflow.yml#L43-L64)), onto our search index.
@@ -241,34 +240,34 @@ This Job is going to be dependant on an artifact that comes from `build_hugo` so
 
 ```yml {hl_lines=[3]}
 build_search_index:
-  runs-on: ubuntu-latest
-  needs: build_hugo
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    needs: build_hugo
+    steps:
+        - uses: actions/checkout@v1
 
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        - uses: actions/setup-dotnet@v1
+          with:
+              dotnet-version: ${{ env.DOTNET_VERSION }}
 ```
 
 We'll use the same `actions/checkout` and `actions/setup-dotnet` here, since we're ultimately going to use `dotnet run`, but we're going to need to get the JSON file to build the index from. For that we can use [`actions/download-artifact`](https://github.com/actions/download-artifact).
 
 ```yml {hl_lines=["11-15"]}
 build_search_index:
-  runs-on: ubuntu-latest
-  needs: build_hugo
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    needs: build_hugo
+    steps:
+        - uses: actions/checkout@v1
 
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        - uses: actions/setup-dotnet@v1
+          with:
+              dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Download index source
-      uses: actions/download-artifact@v1
-      with:
-        name: json
-        path: ${{ env.OUTPUT_PATH }}
+        - name: Download index source
+          uses: actions/download-artifact@v1
+          with:
+              name: json
+              path: ${{ env.OUTPUT_PATH }}
 ```
 
 What's cool about `actions/download-artifact` is that it will unpack the zip for you too, so the archiving format isn't something you need to concern yourself about!
@@ -277,30 +276,30 @@ Now we can build the index and publish it as an artifact:
 
 ```yml {hl_lines=["17-25"]}
 build_search_index:
-  runs-on: ubuntu-latest
-  needs: build_hugo
-  steps:
-    - uses: actions/checkout@v1
+    runs-on: ubuntu-latest
+    needs: build_hugo
+    steps:
+        - uses: actions/checkout@v1
 
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        - uses: actions/setup-dotnet@v1
+          with:
+              dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Download index source
-      uses: actions/download-artifact@v1
-      with:
-        name: json
-        path: ${{ env.OUTPUT_PATH }}
+        - name: Download index source
+          uses: actions/download-artifact@v1
+          with:
+              name: json
+              path: ${{ env.OUTPUT_PATH }}
 
-    - name: Build search index
-      run: dotnet run
-      working-directory: ./Search/Search.IndexBuilder
+        - name: Build search index
+          run: dotnet run
+          working-directory: ./Search/Search.IndexBuilder
 
-    - name: Publish search index
-      uses: actions/upload-artifact@v1
-      with:
-        name: search-index
-        path: ./Search/Search.IndexBuilder/index.zip
+        - name: Publish search index
+          uses: actions/upload-artifact@v1
+          with:
+              name: search-index
+              path: ./Search/Search.IndexBuilder/index.zip
 ```
 
 You will notice that I am uploading a zip as an artifact, so it will be "double archived", but that is because the archive is what the UI application will download from my website, so it's not a problem.
@@ -317,13 +316,13 @@ Let's start creating the Job:
 
 ```yml
 deploy_website:
-  runs-on: ubuntu-latest
-  needs: [build_search_ui, build_search_index]
-  env:
-    STORAGE_NAME: aaronpowellstaticwebsite
-    CDN_NAME: aaronpowell
-    CDN_PROFILE_NAME: aaronpowell
-    RG_NAME: personal-website
+    runs-on: ubuntu-latest
+    needs: [build_search_ui, build_search_index]
+    env:
+        STORAGE_NAME: aaronpowellstaticwebsite
+        CDN_NAME: aaronpowell
+        CDN_PROFILE_NAME: aaronpowell
+        RG_NAME: personal-website
 ```
 
 This is a "Continuous Delivery" Job so I'm prefixing it with `deploy`, it also has dependencies on the completion of the `build_` jobs, which are defined in the `needs` property. I chose to not put `build_hugo` in the `needs`, since it's enforced by the need to complete `build_search_index`, but I might change that in future so it's a bit less opaque what the dependent Jobs are.
@@ -338,9 +337,9 @@ Microsoft has provided [some Actions](https://github.com/azure/actions) that you
 
 ```yml
 steps:
-  - uses: azure/login@v1
-    with:
-      creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 ```
 
 To use this you need to create an Azure Service Principal and then store it as a [secret variable](https://help.github.com/en/articles/virtual-environments-for-github-actions?{{<cda>}}#creating-and-using-secrets-encrypted-variables) for your Workflow (no, don't inline your Azure credentials, that's just bad).
@@ -349,27 +348,27 @@ Next we need to download some artifacts using [`actions/download-artifact`](http
 
 ```yml
 steps:
-  - uses: azure/login@v1
-    with:
-      creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-  - name: Download website
-    uses: actions/download-artifact@v1
-    with:
-      name: website
-      path: ${{ env.OUTPUT_PATH }}
+    - name: Download website
+      uses: actions/download-artifact@v1
+      with:
+          name: website
+          path: ${{ env.OUTPUT_PATH }}
 
-  - name: Download search UI
-    uses: actions/download-artifact@v1
-    with:
-      name: search
-      path: ${{ env.OUTPUT_PATH }}/_framework
+    - name: Download search UI
+      uses: actions/download-artifact@v1
+      with:
+          name: search
+          path: ${{ env.OUTPUT_PATH }}/_framework
 
-  - name: Download search index
-    uses: actions/download-artifact@v1
-    with:
-      name: search-index
-      path: ${{ env.OUTPUT_PATH }}
+    - name: Download search index
+      uses: actions/download-artifact@v1
+      with:
+          name: search-index
+          path: ${{ env.OUTPUT_PATH }}
 ```
 
 I'm being sneaky and downloading them all to the same folder, and since there aren't any file name collisions my Job's VM will have the website structure just how I want it!
