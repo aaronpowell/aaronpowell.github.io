@@ -1,14 +1,12 @@
-{{ if .Site.Params.speaking.enable }}
-{{ with .Site.Params.speaking }}
+{{ if .Site.Params.speaking.enable }} {{ with .Site.Params.speaking }}
 <section id="speaking" class="container">
     <div>
         <h2>{{ .title }}</h2>
-        {{ $talks := where .talks "date" ">" now }}
-        {{ if eq (len $talks) 0 }}
+        {{ $talks := where .talks "date" ">" now }} {{ if eq (len $talks) 0 }}
         <p>No upcoming talks. 😢</p>
         {{ else }}
         <ul class="talk-list">
-            {{ range $talks }}
+            {{ range sort $talks "date" "desc" }}
             <li>
                 {{ partial "talk" . }}
             </li>
@@ -18,8 +16,9 @@
     </div>
     <div>
         <p>{{ .content }}</p>
-        <h3><a href="/talks/" title="Available Talks">My Available Talks</a></h3>
+        <h3>
+            <a href="/talks/" title="Available Talks">My Available Talks</a>
+        </h3>
     </div>
 </section>
-{{ end }}
-{{ end }}
+{{ end }} {{ end }}

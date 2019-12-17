@@ -15,13 +15,23 @@
             </div>
             <div>
                 <h3>Aaron Powell</h3>
-                <p>Web Developer, Open Source Tinkerer, Lover of Crazy Ideas.</p>
-                <p><i class="icon ion-logo-twitter"></i> Twitter: <a href="https://twitter.com/{{ .bio.twitter }}" target="_blank" title="Twitter: @{{ .bio.twitter }}">@{{ .bio.twitter }}</a></p>
+                <p>
+                    Web Developer, Open Source Tinkerer, Lover of Crazy Ideas.
+                </p>
+                <p>
+                    <i class="icon ion-logo-twitter"></i> Twitter:
+                    <a
+                        href="https://twitter.com/{{ .bio.twitter }}"
+                        target="_blank"
+                        title="Twitter: @{{ .bio.twitter }}"
+                        >@{{ .bio.twitter }}</a
+                    >
+                </p>
             </div>
             <div class="bios">
                 <h4>Short Bio</h4>
                 {{ .bio.short | markdownify }}
-    
+
                 <h4>Full Bio</h4>
                 {{ .bio.long | markdownify }}
             </div>
@@ -33,18 +43,16 @@
                 <p>No upcoming talks. 😢</p>
                 {{ else }}
                 <ul class="talk-list">
-                    {{ range $upcomingTalks }}
+                    {{ range sort $upcomingTalks "date" "desc" }}
                     <li>
                         {{ partial "talk" . }}
                     </li>
                     {{ end }}
                 </ul>
-                {{ end }}
-
-                {{ $pastTalks := where .talks "date" "<=" now }}
+                {{ end }} {{ $pastTalks := where .talks "date" "<=" now }}
                 <h4>Past Talks</h4>
                 <ul class="talk-list">
-                    {{ range $pastTalks }}
+                    {{ range sort $pastTalks "date" "desc" }}
                     <li>
                         {{ partial "talk" . }}
                     </li>
@@ -55,13 +63,20 @@
         </div>
 
         <div class="post-list">
-            {{ range .Data.Pages }}
+            {{ range sort .Data.Pages "Title" "asc" }}
             <article>
                 <h3>
-                    <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+                    <a href="{{ .Permalink }}" title="{{ .Title }}"
+                        >{{ .Title }}</a
+                    >
                 </h3>
                 <div>{{ .Params.abstract | truncate 100 | markdownify }}</div>
-                <a href="{{ .Permalink }}" title="Talk Details" class="read-more">Talk Details</a>
+                <a
+                    href="{{ .Permalink }}"
+                    title="Talk Details"
+                    class="read-more"
+                    >Talk Details</a
+                >
             </article>
             {{ end }}
         </div>
