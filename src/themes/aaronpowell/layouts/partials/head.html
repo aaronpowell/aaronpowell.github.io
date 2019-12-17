@@ -65,8 +65,7 @@
         rel="stylesheet"
     />
 
-    {{ $sass := resources.Get "sass/main.scss" }} {{ $styles := $sass |
-    resources.ToCSS | minify}}
+    {{ $sass := resources.Get "sass/main.scss" }} {{ $styles := $sass | resources.ToCSS | minify}}
     <link
         rel="stylesheet"
         href="{{ $styles.Permalink }}"
