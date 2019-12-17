@@ -29,6 +29,10 @@ home = [ "HTML", "RSS", "JSON"]
         name    = "Contact"
         url     = "contact"
         weight  = 5
+    [[menu.nav]]
+        name    = "Search"
+        url     = "search"
+        weight  = 6
 
 [params]
     home = "Home"
