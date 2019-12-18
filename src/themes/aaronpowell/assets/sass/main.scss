@@ -1,19 +1,19 @@
-@import './scaffolding.scss';
-@import './nav.scss';
-@import './banner.scss';
-@import './about.scss';
-@import './speaking.scss';
-@import './footer.scss';
-@import './series.scss';
-@import './talks.scss';
+@import "./scaffolding.scss";
+@import "./nav.scss";
+@import "./banner.scss";
+@import "./about.scss";
+@import "./speaking.scss";
+@import "./footer.scss";
+@import "./series.scss";
+@import "./talks.scss";
 
 @import url("https://fonts.googleapis.com/css?family=Rubik|Bitter");
-@import url('https://fonts.googleapis.com/css?family=Fira+Code&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Fira+Code&display=swap");
 
 body {
     color: $primaryTextColour;
     font-size: 1.25rem;
-    font-family: "Rubik","Poppins","Hel­vetica",Arial,sans-serif;
+    font-family: "Rubik", "Poppins", "Hel­vetica", Arial, sans-serif;
 
     line-height: 1.5;
 
@@ -27,7 +27,7 @@ h3,
 h4,
 strong,
 a {
-  color: $primaryHeaderColour;
+    color: $primaryHeaderColour;
 }
 
 .main {
@@ -43,9 +43,9 @@ a {
         position: relative;
 
         &:before {
-            content: '';
+            content: "";
             z-index: 9;
-            background: rgba(2, 189, 213,.50);
+            background: rgba(2, 189, 213, 0.5);
             position: absolute;
             top: 0;
             left: 0;
@@ -58,7 +58,8 @@ a {
             z-index: 9;
         }
 
-        h1, a {
+        h1,
+        a {
             color: #fff;
             padding: 0;
             margin: 0;
@@ -70,11 +71,11 @@ a {
         }
 
         span:after {
-            content: ' | ';
+            content: " | ";
         }
 
         span:last-child:after {
-            content: '';
+            content: "";
         }
     }
 
@@ -89,7 +90,7 @@ a {
         }
 
         .prev:before {
-            content: '\00AB';
+            content: "\00AB";
             padding-right: 5px;
         }
 
@@ -98,7 +99,7 @@ a {
         }
 
         .next:after {
-            content: '\00BB';
+            content: "\00BB";
             padding-left: 5px;
         }
     }
@@ -144,10 +145,10 @@ a {
             box-shadow: 0 0 0 1px $primaryHighlightColour;
             background-color: $primaryHighlightColour;
             color: #fff;
-            transition: background-color .2s ease-in;
+            transition: background-color 0.2s ease-in;
 
             &:hover {
-                transition: background-color .2s ease-in;
+                transition: background-color 0.2s ease-in;
                 background-color: darken($primaryHighlightColour, 10%);
             }
         }
@@ -155,6 +156,10 @@ a {
 }
 
 pre {
-    font-family: 'Fira Code', monospace;
+    font-family: "Fira Code", monospace;
     font-variant-ligatures: common-ligatures;
+}
+
+.hidden {
+    display: none;
 }

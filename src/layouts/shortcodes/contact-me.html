@@ -1,0 +1,63 @@
+<form
+    action="https://prod-16.southcentralus.logic.azure.com:443/workflows/85f17f1133ce4161a33d70e53229c9ee/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=qPK9UbAoObFz1yconzDzFM3sZzFF64qgxsRGYhlR35M"
+    method="POST"
+    id="contact"
+>
+    <fieldset>
+        <span>
+            <label for="name">Your Name</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Jane Doe"
+                required
+            />
+        </span>
+
+        <span>
+            <label for="email">Your Email</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="my-email@place.com"
+                required
+            />
+        </span>
+        <span>
+            <label for="message">Message</label>
+            <textarea
+                name="message"
+                id="message"
+                cols="30"
+                rows="10"
+                required
+            ></textarea>
+        </span>
+    </fieldset>
+    <fieldset>
+        <button type="submit">Submit</button>
+        <button type="reset">Clear</button>
+        <p id="bot-thingy" class="hidden">
+            Click again to prove you're not a bot.
+        </p>
+    </fieldset>
+</form>
+
+<script>
+    (() => {
+        const $ = document.querySelector;
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = $("#contact");
+            let attempted = false;
+            form.addEventListener("submit", e => {
+                if (!attempted) {
+                    e.preventDefault();
+                    attempted = true;
+                    $("#bot-thingy").classList.toggle("hidden");
+                }
+            });
+        });
+    })();
+</script>

@@ -26,13 +26,9 @@ home = [ "HTML", "RSS", "JSON"]
         url     = "talks"
         weight  = 4
     [[menu.nav]]
-        name    = "Contact"
-        url     = "contact"
-        weight  = 5
-    [[menu.nav]]
         name    = "Search"
         url     = "search"
-        weight  = 6
+        weight  = 5
 
 [params]
     home = "Home"
