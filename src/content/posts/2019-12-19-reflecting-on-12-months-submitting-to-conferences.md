@@ -4,6 +4,7 @@ date = 2019-12-19T09:52:00+11:00
 description = "You win some, you loose some, but that's how conferences go."
 draft = false
 tags = ["speaking"]
+banner_image = "/images/banners/2019-12-19-reflecting-on-12-months-submitting-to-conferences.jpg"
 +++
 
 A few weeks ago I put up what was intended to be a throw-away tweet.
@@ -58,7 +59,7 @@ Each year I'll produce a couple of new talk ideas, retire some old ones and cont
 
 ## Your Submission
 
-This is the critical piece of the puzzle to getting accepted, if you don't write a submission you're *really* unlikely to get accepted! 🤣
+This is the critical piece of the puzzle to getting accepted, if you don't write a submission you're _really_ unlikely to get accepted! 🤣
 
 But how do we go about writing a good submission? There are countless articles online about this and I'll share what I've learnt over the years.
 
