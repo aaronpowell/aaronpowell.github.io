@@ -1,0 +1,75 @@
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{ .Title }}</title>
+
+    {{ if .Description }}
+    <meta name="description" content="{{ .Description }}" />
+    {{ else if .Site.Params.description }}
+    <meta name="description" content="{{ .Site.Params.description }}" />
+    {{ else if .Summary }}
+    <meta name="description" content="{{ .Summary }}" />
+    {{ end }}
+
+    <meta name="author" content="{{ .Site.Params.author }}" />
+    {{ hugo.Generator }}
+
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+    {{ if .Site.Params.twitter }}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@{{ .Site.Params.twitter }}" />
+    <meta name="twitter:creator" content="@{{ .Site.Params.twitter }}" />
+    {{ end }}
+
+    <meta
+        property="og:title"
+        content="{{ if .IsHome }}{{ .Site.Title }}{{ else if .Params.heading }}{{ .Params.heading }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+
+    {{ if .IsHome }}
+    <meta
+        property="og:image"
+        content="{{ .Site.Params.opengraphImage | absURL }}"
+    />
+    {{ else if .Params.bannerImage }}
+    <meta property="og:image" content="{{ .Params.bannerImage | absURL }}" />
+    {{ else }}
+    <meta
+        property="og:image"
+        content="https://blogimagegenerator.azurewebsites.net/v1/og-image/{{ .File.BaseFileName }}"
+    />
+    {{ end }} {{ if .Description }}
+    <meta name="og:description" content="{{ .Description }}" />
+    {{ else if .Site.Params.description }}
+    <meta property="og:description" content="{{ .Site.Params.description}}" />
+    {{ else if .Summary }}
+    <meta name="og:description" content="{{ .Summary }}" />
+    {{ end }}
+
+    <link rel="canonical" href="{{ .Permalink }}" />
+
+    <link href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}"
+    rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
+
+    <base href="{{ .Site.BaseURL }}" />
+
+    <link rel="icon" href="{{ .Site.Params.favicon | absURL }}" />
+
+    <link
+        href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"
+        rel="stylesheet"
+    />
+
+    {{ $sass := resources.Get "sass/main.scss" }} {{ $styles := $sass | resources.ToCSS | minify}}
+    <link
+        rel="stylesheet"
+        href="{{ $styles.Permalink }}"
+        integrity="{{ $styles.Data.Integrity }}"
+        media="screen"
+    />
+</head>

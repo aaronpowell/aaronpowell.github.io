@@ -1,0 +1,4 @@
+<article>
+    <h3><a href="{{ .link }}" target="_blank" title="{{ .name }}">{{ .name }} @ {{ .event }}</a></h3>
+    <time datetime="{{ .date }}">{{ dateFormat "Mon, 02 Jan 2006" .date }}</time>
+</article>

@@ -1,0 +1,11 @@
+<article>
+    <h3>
+        <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+    </h3>
+    <div>{{ .Description }}</div>
+    <div class="sub-header">
+        {{ .Date.Format (.Site.Params.dateform | default "January 2006") }}
+        · {{ .ReadingTime }} minute read
+    </div>
+    <a href="{{ .Permalink }}" title="Read Post" class="read-more">Read Post</a>
+</article>

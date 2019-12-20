@@ -3,6 +3,7 @@ title: "About Me"
 date: 2017-08-20T15:08:13+10:00
 draft: false
 hidden: true
+layout: simple
 ---
 <a href="#top"></a>
 

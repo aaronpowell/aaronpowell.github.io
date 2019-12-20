@@ -1,0 +1,15 @@
+{{ if .Site.Params.about.enable }}
+{{ "<!-- About Section Start -->" | safeHTML }}
+<section id="about" class="container">
+    <div></div>
+    <div>
+        {{ with .Site.Params.about.title }}<h2>{{ . }}</h2>{{ end }}
+        {{ with .Site.Params.about.content }}<p>{{ . | safeHTML }}</p>{{ end }}
+    </div>
+    <div>
+        {{ with .Site.Params.about.image }}<img src="{{ . | absURL }}" alt="about-image">{{ end }}
+    </div>
+    <div></div>
+</section>
+{{ "<!-- About Section End -->" | safeHTML }}
+{{ end }}

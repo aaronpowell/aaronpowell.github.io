@@ -1,0 +1,10 @@
+#speaking {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.talk-list {
+    article {
+        margin-bottom: 10px;
+    }
+}

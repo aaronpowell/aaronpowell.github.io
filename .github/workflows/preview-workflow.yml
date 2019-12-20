@@ -1,0 +1,135 @@
+name: Build and Deploy Preview Website
+env:
+  OUTPUT_PATH: ${{ github.workspace }}/.output
+  DOTNET_VERSION: "3.1.100-preview3-014645"
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  build_hugo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Get Hugo Version
+        id: hugo-version
+        run: |
+          HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
+          echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.3.0
+        with:
+          hugo-version: '${{ steps.hugo-version.outputs.HUGO_VERSION }}'
+          extended: true
+
+      - name: Build
+        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }} -b https://preview.aaron-powell.com
+
+      - name: Publish website output
+        uses: actions/upload-artifact@v1
+        with:
+          name: website
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Publish blog json
+        uses: actions/upload-artifact@v1
+        with:
+          name: json
+          path: ${{ env.OUTPUT_PATH }}/index.json
+
+  build_search_ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build search app
+        run: dotnet build --configuration Release
+        working-directory: ./Search
+
+      - name: Publish search UI
+        run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
+        working-directory: ./Search/Search.Site.UI
+
+      - name: Package search UI
+        uses: actions/upload-artifact@v1
+        with:
+          name: search
+          path: ${{ env.OUTPUT_PATH }}/Search.Site.UI/dist/_framework
+
+  build_search_index:
+    runs-on: ubuntu-latest
+    needs: build_hugo
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Download index source
+        uses: actions/download-artifact@v1
+        with:
+          name: json
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Build search index
+        run: dotnet run
+        working-directory: ./Search/Search.IndexBuilder
+
+      - name: Publish search index
+        uses: actions/upload-artifact@v1
+        with:
+          name: search-index
+          path: ./Search/Search.IndexBuilder/index.zip
+
+  deploy_website:
+    runs-on: ubuntu-latest
+    needs: [build_search_ui, build_search_index]
+    env:
+      STORAGE_NAME: websitepreview
+      CDN_ENDPOINT_NAME: aaronpowellpreview
+      CDN_PROFILE_NAME: preview-cdn
+      RG_NAME: personal-website
+
+    steps:
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Download website
+        uses: actions/download-artifact@v1
+        with:
+          name: website
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Download search UI
+        uses: actions/download-artifact@v1
+        with:
+          name: search
+          path: ${{ env.OUTPUT_PATH }}/_framework
+
+      - name: Download search index
+        uses: actions/download-artifact@v1
+        with:
+          name: search-index
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Deploy to Azure Storage
+        run: az storage blob upload-batch --source ${{ env.OUTPUT_PATH }} --destination \$web/${GITHUB_SHA} --account-name ${STORAGE_NAME}
+
+      - name: Update wasm pieces
+        run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name ${STORAGE_NAME}
+
+      - name: Update CDN endpoint
+        run: az cdn endpoint update --name ${CDN_ENDPOINT_NAME} --origin-path /${GITHUB_SHA} --profile-name ${CDN_PROFILE_NAME} --resource-group ${RG_NAME}
+
+      - name: Purge CDN
+        run: az cdn endpoint purge --profile-name ${CDN_PROFILE_NAME} --name ${CDN_ENDPOINT_NAME} --resource-group ${RG_NAME} --content-paths "/*"

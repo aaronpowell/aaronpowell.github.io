@@ -1,0 +1,12 @@
+<section id="latest-posts" class="container">
+    <h2>Latest Posts</h2>
+    <div class="post-list">
+        {{ range first 5 (.Site.RegularPages) }}
+        {{ partial "post-summary" . }}
+        {{ end }}
+    </div>
+
+    <div>
+        <h3><a href="/posts/">View All</a></h3>
+    </div>
+</section>

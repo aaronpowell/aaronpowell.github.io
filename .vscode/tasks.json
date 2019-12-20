@@ -41,7 +41,8 @@
                 "--bind",
                 "127.0.0.1",
                 "--buildDrafts",
-                "--buildFuture"
+                "--buildFuture",
+                "--disableFastRender"
             ],
             "problemMatcher": [],
             "windows": {

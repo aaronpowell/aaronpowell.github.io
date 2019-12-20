@@ -6,3 +6,5 @@ obj
 lucene
 index.zip
 .output-search
+
+src/resources/_gen

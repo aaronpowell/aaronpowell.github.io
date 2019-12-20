@@ -1,0 +1,121 @@
+@import './variables';
+
+.home {
+    header {
+        nav {
+            background: #222;
+
+            li a {
+                color: #fff;
+            }
+        }
+    }
+}
+
+header {
+    nav {
+        background-color: transparent;
+        border-bottom: 1px solid #ccc;
+        padding: 0px 20px;
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 0;
+            padding: 0;
+
+            &.active .item {
+                display: block;
+            }
+
+            li {
+                font-size: 16px;
+                padding: 15px 5px;
+                white-space: nowrap;
+
+                &.logo a,
+                &.toggle a {
+                    font-size: 20px;
+                }
+
+                a {
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                &.logo {
+                    a:hover {
+                        text-decoration: none;
+                    }
+                }
+
+                &.item {
+                    width: 100%;
+                    text-align: center;
+                    order: 3;
+                    display: none;
+
+                }
+
+                &.toggle {
+                    order: 1;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: $small) {
+    header {
+        nav {
+            ul {
+                justify-content: center;
+
+                li {
+                    &.logo {
+                        flex: 1;
+                    }
+
+                    &.toggle {
+                        flex: 1;
+                        text-align: right;
+                        order: 2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: $normal) {
+    header {
+        nav {
+            ul {
+                li {
+                    padding: 15px 10px;
+
+                    &.item {
+                        display: block;
+                        width: auto;
+                        order: 1;
+                    }
+
+                    &.toggle {
+                        display: none;
+                    }
+
+                    &.logo {
+                        order: 0;
+                    }
+                }
+            }
+        }
+    }
+}
