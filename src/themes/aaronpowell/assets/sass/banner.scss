@@ -1,6 +1,6 @@
-@import './variables.scss';
-@import './rotate.scss';
-@import './animations.scss';
+@import "./_variables.scss";
+@import "./rotate.scss";
+@import "./animations.scss";
 
 .banner {
     background-color: #263d36;
@@ -16,9 +16,9 @@
     border-bottom: 1px solid #dedede;
 
     &:before {
-        content: '';
+        content: "";
         z-index: 9;
-        background: rgba(255,255,255,.78);
+        background: rgba(255, 255, 255, 0.78);
         position: absolute;
         top: 0;
         left: 0;
