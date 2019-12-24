@@ -30,8 +30,14 @@
     }
 }
 
-@media (max-width: $small) {
+@media (max-width: $xsmall) {
     #about {
         display: block;
+    }
+}
+
+@media (max-width: $small) {
+    #about {
+        grid-template-columns: 10px 1fr 1fr 10px;
     }
 }
