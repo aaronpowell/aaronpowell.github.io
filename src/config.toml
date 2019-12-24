@@ -36,6 +36,7 @@ home = [ "HTML", "RSS", "JSON"]
     author = "Aaron Powell"
     description = "Microsoft Cloud Developer Advocate"
     logo = "/images/logo-xsmall.png"
+    navLogo = "/images/logo-small.png"
     favicon = "favicon.ico"
     googleAnalytics = "UA-6399564-1"
     disqusShortname = "aaronpowell"
