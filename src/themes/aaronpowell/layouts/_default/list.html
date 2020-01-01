@@ -8,7 +8,7 @@
     </header>
 
     <section class="container post-list">
-        {{ range .Site.RegularPages }}
+        {{ range .Data.Pages }}
         {{ partial "post-summary" . }}
         {{ end }}
     </section>
