@@ -6,6 +6,7 @@ theme = "aaronpowell"
 # theme = "timer-hugo"
 canonifyURLS = true
 enableGitInfo = true
+enableEmoji = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
