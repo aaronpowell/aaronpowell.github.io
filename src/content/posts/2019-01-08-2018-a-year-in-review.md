@@ -3,7 +3,7 @@ title = "2018 - A year in review"
 date = 2019-01-08T09:35:09+11:00
 description = "A look back at the year that was"
 draft = false
-tags = ["random"]
+tags = ["year-review"]
 +++
 
 With another year done it time to get going on my year in review post. This year I've actually managed to get it done a full 3 days earlier than [2017's]({{ < ref "/posts/2018-01-11-2017-a-year-in-review.md" >}})!

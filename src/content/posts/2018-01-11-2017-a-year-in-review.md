@@ -3,7 +3,7 @@ title = "2017 - A year in review"
 date = 2018-01-11T09:25:41+11:00
 description = "A look back at the year that was"
 draft = false
-tags = ["random"]
+tags = ["year-review"]
 +++
 
 Another year has come and gone and with that it's time for everyone to write there 'The year that was' posts. I missed doing it in 2016 but though that for 2017 I'd do one as it was an interesting year for me.

@@ -5,8 +5,7 @@
   revised: "2010-04-25"
   date: "2010-04-25"
   tags: 
-    - "random"
-    - "reflective"
+    - "year-review"
   migrated: "true"
   urls: 
     - "/2009-a-year-in-review"

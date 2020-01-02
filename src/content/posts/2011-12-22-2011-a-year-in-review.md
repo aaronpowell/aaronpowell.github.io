@@ -5,7 +5,7 @@
   revised: "2011-12-22"
   date: "2011-12-22"
   tags: 
-    - "random"
+    - "year-review"
   migrated: "true"
   urls: 
     - "/2011-a-year-in-review"

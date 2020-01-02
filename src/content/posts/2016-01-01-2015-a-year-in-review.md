@@ -2,7 +2,7 @@
   title: "2015 - A year in review"
   date: "2016-01-01"
   tags: 
-    - "random"
+    - "year-review"
   description: "A look back at the year that was."
 ---
 
