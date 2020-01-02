@@ -376,7 +376,7 @@ I'm being sneaky and downloading them all to the same folder, and since there ar
 
 It's now time to upload the files to storage:
 
-```yml
+```yaml
 - name: Deploy to Azure Storage
   run: az storage blob upload-batch --source ${{ env.OUTPUT_PATH }} --destination \$web/${GITHUB_SHA} --account-name ${STORAGE_NAME}
 ```
@@ -385,16 +385,18 @@ I'm using the [`upload-batch`](https://docs.microsoft.com/en-us/cli/azure/storag
 
 ### Fixing Our WASM App
 
-When you upload files to Azure Storage it will attempt to work out the mime type of the file and set it appropriately. Most of the time this works, except when it doesn't, and WebAssembly seems to be one of those edge cases at the moment, `.wasm` files are given the mime type of `application/octet-stream` but it needs to be `application/wasm`, otherwise the browser will reject the file.
+**Update:** Since I initially wrote this post the uploader has been improved to set the correct content type onf `.wasm` files, so you don't need to do it manually. But if you have other files you need to change the content type for, this is how you'd do it.
 
-But that's easily fixed with the Azure CLI!
+~~When you upload files to Azure Storage it will attempt to work out the mime type of the file and set it appropriately. Most of the time this works, except when it doesn't, and WebAssembly seems to be one of those edge cases at the moment, `.wasm` files are given the mime type of `application/octet-stream` but it needs to be `application/wasm`, otherwise the browser will reject the file.~~
+
+~~But that's easily fixed with the Azure CLI!~~
 
 ```yml
 - name: Update wasm pieces
   run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name ${STORAGE_NAME}
 ```
 
-We can run a [`blob update`](https://docs.microsoft.com/en-us/cli/azure/storage/blob?view=azure-cli-latest&{{<cda>}}#az-storage-blob-update) and change the `content-type` stored so it gets served correctly.
+~~We can run a [`blob update`](https://docs.microsoft.com/en-us/cli/azure/storage/blob?view=azure-cli-latest&{{<cda>}}#az-storage-blob-update) and change the `content-type` stored so it gets served correctly.~~
 
 ### Updating Azure CDN
 

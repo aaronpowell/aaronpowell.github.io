@@ -118,7 +118,7 @@ home = [ "HTML", "RSS", "JSON"]
     lineNos = true
     lineNumbersInTable = true
     noClasses = true
-    style = "monokailight"
+    style = "manni"
     tabWidth = 4
 
   [markup.goldmark]

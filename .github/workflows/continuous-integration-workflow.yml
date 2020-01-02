@@ -125,9 +125,6 @@ jobs:
       - name: Deploy to Azure Storage
         run: az storage blob upload-batch --source ${{ env.OUTPUT_PATH }} --destination \$web/${GITHUB_SHA} --account-name ${STORAGE_NAME}
 
-      - name: Update wasm pieces
-        run: az storage blob update --container-name \$web/${GITHUB_SHA}/_framework/wasm --name "mono.wasm" --content-type "application/wasm" --account-name ${STORAGE_NAME}
-
       - name: Update CDN endpoint
         run: az cdn endpoint update --name ${CDN_ENDPOINT_NAME} --origin-path /${GITHUB_SHA} --profile-name ${CDN_PROFILE_NAME} --resource-group ${RG_NAME}
 
