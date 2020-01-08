@@ -6,7 +6,7 @@
         <p>No upcoming talks. 😢</p>
         {{ else }}
         <ul class="talk-list">
-            {{ range sort $talks "date" "desc" }}
+            {{ range sort $talks "date" "asc" }}
             <li>
                 {{ partial "talk" . }}
             </li>

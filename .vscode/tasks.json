@@ -29,8 +29,8 @@
             "command": ["./hugo"],
             "args": [
                 "server",
-                "-w",
-                "-b",
+                "--watch",
+                "--baseURL",
                 "http://localhost",
                 "--source",
                 "./src",
@@ -42,7 +42,9 @@
                 "127.0.0.1",
                 "--buildDrafts",
                 "--buildFuture",
-                "--disableFastRender"
+                "--disableFastRender",
+                "--config",
+                "config.toml,config.speaking.toml"
             ],
             "problemMatcher": [],
             "windows": {

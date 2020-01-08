@@ -23,11 +23,11 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2.3.0
         with:
-          hugo-version: '${{ steps.hugo-version.outputs.HUGO_VERSION }}'
+          hugo-version: "${{ steps.hugo-version.outputs.HUGO_VERSION }}"
           extended: true
 
       - name: Build
-        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }}
+        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }} --config config.toml,config.speaking.toml
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
