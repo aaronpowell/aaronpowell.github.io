@@ -3,7 +3,7 @@ title = "Azure Functions With F#"
 date = 2019-03-05T14:24:36+11:00
 description = "How to create an Azure Function using F#"
 draft = false
-tags = ["fsharp", "azure-functions"]
+tags = ["fsharp", "serverless", "azure-functions"]
 +++
 
 I'm starting to work on a new project in which I'm going to use [Azure Functions v2](https://docs.microsoft.com/en-us/azure/azure-functions/?{{< cda >}}) for a simple API backend.

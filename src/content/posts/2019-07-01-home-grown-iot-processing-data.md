@@ -3,7 +3,7 @@ title = "Home Grown IoT - Processing Data"
 date = 2019-07-01T11:20:18+10:00
 description = "How I go about processing data streams from IoT devices"
 draft = false
-tags = ["fsharp", "iot", "azure-functions"]
+tags = ["fsharp", "iot", "azure-functions", "serverless"]
 series = "home-grown-iot"
 series_title = "Processing Data"
 +++

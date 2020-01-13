@@ -3,7 +3,7 @@ title = "Simple APIs With Microsoft Flow And Azure Functions"
 date = 2017-11-17T10:04:08+11:00
 description = "How to use Microsoft Flow and Azure Functions to create simple demo APIs"
 draft = false
-tags = ["flow", "azure-functions"]
+tags = ["flow", "serverless", "azure-functions"]
 +++
 
 When I'm working on demos for a blog post/talk/OSS project/etc. I will tend to just create an ASP.NET Core app or Node.js app and throw it somewhere for hosting. But it's always a little tedious, no matter how many times I do it it requires me to dig up my old boilerplate code and then put it somewhere.
