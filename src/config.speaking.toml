@@ -26,6 +26,7 @@
         { date = 2019-09-19, name = "The Beauty of Stupid Ideas", link = "https://ndcsydney.com.au", event = "NDC Sydney" },
         { date = 2020-05-06, name = "Stateful Serverless through Durable Functions", link  = "https://www.codemania.io/", event = "Codemania 2020" },
         { date = 2020-07-27, name = "React Workshop", link = "https://ndcmelbourne.com", event = "NDC Melbourne" },
+        { date = 2020-01-28, name = "A Home Hackers Guide to IoT", link = "https://https://www.meetup.com/Sydney-Alt-Net/events/jxqsbqybccblc/", event = "Sydney Alt.Net UG" },
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET and whacky ideas."
