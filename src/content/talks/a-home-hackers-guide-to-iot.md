@@ -5,7 +5,7 @@ hidden: true
 tags: ["iot", "azure"]
 duration: 45 minutes
 abstract: |
-    You've bought a Raspberry Pi and made some lights blink, yay, IoT done! But where do we go next? This is the position I found myself in recently but decided that rather than religating the device to a shelf I'd try and make a real project, a project to monitor the power generation from my solar panels inverter.
+    You've bought a Raspberry Pi and made some lights blink, yay, IoT done! But where do we go next? This is the position I found myself in recently but decided that rather than relegating the device to a shelf I'd try and make a real project, a project to monitor the power generation from my solar panels inverter.
 
     Armed with the knowledge of how to scrape the data I decided to set about creating an IoT project that would allow me to pull the data out of my inverter, store it for reporting and answer questions like "How can I compare my power generation today to yesterday or last week?", "If I was able to build up enough data over time what insights could I get into my energy usage patterns?" or "Are there other interesting things I can determine by looking at this data?".
 
