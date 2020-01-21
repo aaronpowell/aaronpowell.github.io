@@ -2,7 +2,7 @@
 title = "12 Months at Microsoft"
 date = 2020-01-22T09:30:56+11:00
 description = "Has it been that long already!"
-draft = true
+draft = false
 tags = ["career", "microsoft"]
 +++
 
