@@ -7,8 +7,6 @@
         { date = 2020-01-30, name = "Serverless Images", link = "https://www.meetup.com/Sydney-Serverless-Meetup-Group/events/266033398/", event = "Serverless Sydney User Group" },
         { date = 2020-02-14, name = "Migrating Web Applications to Azure", link = "https://www.microsoft.com/en-au/ignite-the-tour/sydney", event = "Microsoft Ignite The Tour | Sydney" },
         { date = 2020-02-14, name = "Enhancing Web Applications with Cloud Intelligence", link = "https://www.microsoft.com/en-au/ignite-the-tour/sydney", event = "Microsoft Ignite The Tour | Sydney" },
-        { date = 2020-02-20, name = "Migrating Web Applications to Azure", link = "https://www.microsoft.com/en-sg/ignite-the-tour/singapore", event = "Microsoft Ignite The Tour | Singapore" },
-        { date = 2020-02-20, name = "Enhancing Web Applications with Cloud Intelligence", link = "https://www.microsoft.com/en-sg/ignite-the-tour/singapore", event = "Microsoft Ignite The Tour | Singapore" },
         { date = 2020-03-25, name = "Migrating Web Applications to Azure", link = "https://www.microsoft.com/en-hk/ignite-the-tour/hong-kong", event = "Microsoft Ignite The Tour | Hong Kong" },
         { date = 2020-03-25, name = "Enhancing Web Applications with Cloud Intelligence", link = "https://www.microsoft.com/en-hk/ignite-the-tour/hong-kong", event = "Microsoft Ignite The Tour | Hong Kong" },
         { date = 2019-08-29, name = "Stateful Serverless through Durable Functions", link  = "https://www.serverlessdays.me/", event = "Serverless Days Melbourne" },
