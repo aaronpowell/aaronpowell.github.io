@@ -29,7 +29,7 @@ But now the nervous speaker sweats were setting in and I made a joke that I wish
 
 This is pretty much the worst-case scenario as a speaker, the room power is out (we had emergency lighting on and that's all that lit me on stage), so the projectors are offline and my mic no longer works.
 
-As a speaker you plan for failures. If you're demo breaks you jump to one you prepared earlier. If the connectivity is poor you rely on a video of the demo. If your laptop crashes you wait for a reboot. There's not much that can't be recovered from during a talk if you've done some planning.
+As a speaker you plan for failures. If your demo breaks you jump to one you prepared earlier. If the connectivity is poor you rely on a video of the demo. If your laptop crashes you wait for a reboot. There's not much that can't be recovered from during a talk if you've done some planning.
 
 But the power going out, that's a bit different.
 
