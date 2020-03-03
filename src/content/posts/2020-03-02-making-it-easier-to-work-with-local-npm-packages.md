@@ -12,7 +12,7 @@ So I've got two git repos on my machine, one with my application in it and one w
 
 When you look at npm's docs it says that I should be using [`npm link`](https://docs.npmjs.com/cli-commands/link.html) to setup a symlink between the code I want and the `node_modules` folder in my application, but I've always struggled to get it working right, and that's probably because symlinks on Windows aren't quite as simple as on \*nix (and maybe I've been burnt too many times to trust them! 🤣).
 
-But, I found a simpler solution! It turns out that in your `package.json`'s `dependencies' (and`devDependencies`) rather than specifying a package version you can specify a file system path, like so:
+But, I found a simpler solution! It turns out that in your `package.json`'s `dependencies` (and`devDependencies`) rather than specifying a package version you can specify a file system path, like so:
 
 ```json
 {
