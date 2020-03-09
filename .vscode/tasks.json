@@ -150,6 +150,26 @@
                 "cwd": "${workspaceRoot}/Search/Search.IndexBuilder"
             },
             "dependsOn": ["build (dotnet)"]
+        },
+        {
+            "label": "new talk",
+            "type": "shell",
+            "command": "./New-Post.ps1",
+            "args": ["-Title", "${input:postName}"],
+            "windows": {
+                "command": "./New-Post.ps1",
+                "options": {
+                    "shell": {
+                        "executable": "powershell.exe",
+                        "args": ["-Title", "${input:postName}"]
+                    }
+                }
+            },
+            "linux": {
+                "command": "./new-talk.sh",
+                "args": ["${input:postName}"]
+            },
+            "problemMatcher": []
         }
     ],
     "inputs": [
