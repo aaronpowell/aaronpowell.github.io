@@ -15,6 +15,9 @@
     </header>
     <section class="container">
         <article>
+            <h2>Title</h2>
+            <h3>{{ .Title }}</h3>
+
             <h2>Abstract</h2>
             {{ .Params.abstract | .RenderString }}
 
