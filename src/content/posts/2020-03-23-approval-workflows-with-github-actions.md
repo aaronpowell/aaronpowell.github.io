@@ -1,5 +1,5 @@
 +++
-title = "Approval Workflows With Github Actions"
+title = "Approval Workflows With GitHub Actions"
 date = 2020-03-23T10:27:04+11:00
 description = "How to create an approval-based workflow with GitHub Actions"
 draft = false
@@ -56,10 +56,10 @@ With this read we can add it to the workflow:
 
 ```yml
 - name: Set Version
-    run: dotnet fake run ./build.fsx --target SetVersionForCI
+  run: dotnet fake run ./build.fsx --target SetVersionForCI
 
 - name: Create version file
-    run: echo ${{ env.package_version }} >> ${{ env.OUTPUT_PATH }}/version.txt
+  run: echo ${{ env.package_version }} >> ${{ env.OUTPUT_PATH }}/version.txt
 
 - name: Publish release packages
     uses: actions/upload-artifact@v1
@@ -73,7 +73,7 @@ When I was thinking about how to do approvals I was thinking "What in GitHub wou
 
 If you look on the [Actions Marketplace](https://github.com/marketplace?type=actions&{{<cda>}}) there's plenty of Actions for creating an issue, but I am going to have a few weird requirements so I decided to build my own (also, I hadn't built my own Action so this was another good chance to learn). This (and the others we'll build) are part of my git repo and not on the marketplace, so they'll live in the `.github/actions` folder, alongside the workflows and they'll be written in TypeScript.
 
-First off I'd recommend that you read [how to create an Action](https://help.github.com/en/actions/building-actions/creating-a-javascript-action) if you've not done one before as it'll talk through the setup guide and the files you'll need.
+First off I'd recommend that you read [how to create an Action](https://help.github.com/en/actions/building-actions/creating-a-javascript-action?{{<cda>}}) if you've not done one before as it'll talk through the setup guide and the files you'll need.
 
 Because we'll be working with GitHub Issues we'll need an access token, which is conveniently available as a secret variable of `secrets.GITHUB_TOKEN` and I'm going to pass in two more arguments, the ID of the current action (`github.run_id`) and the version of the release (`env.package_version`).
 
@@ -170,7 +170,7 @@ And now we're done, it's time to plug it into our build workflow:
       package-version: ${{ env.package_version }}
 ```
 
-Since I chose to do these a TypeScript I have to add 2 additional steps to the workflow, one to setup Node.js and one to compile the Action, but the important stuff is in the 3rd Action. Since it's a local Action the `use` points to the directory that it lives in, which is an absolute path from the root of the git repo (so you don't have to use `.github/actions`, but I like to keep them all together).
+Since I chose to do these a TypeScript I have to add 2 additional steps to the workflow, one to setup Node.js and one to compile the Action, but the important stuff is in the 3rd Action. As it's a local Action the `use` points to the directory that it lives in, which is an absolute path from the root of the git repo (so you don't have to use `.github/actions`, but I like to keep them all together).
 
 And there we go, the workflow creates our issue (yes it's closed because I approved it already 😉):
 
