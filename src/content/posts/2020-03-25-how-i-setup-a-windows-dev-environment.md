@@ -92,6 +92,6 @@ And after a little bit more time my script completes and all my stuff is setup.
 
 ## Conclusion
 
-There we have it folks, this is how I setup my dev environment as a Windows user across Windows and WSL. Again, the scripts are [all on GitHub] so feel free to use/fork my scripts as you like.
+There we have it folks, this is how I setup my dev environment as a Windows user across Windows and WSL. Again, the scripts are [all on GitHub](https://github.com/aaronpowell/system-init) so feel free to use/fork my scripts as you like.
 
 I hope it's been helpful to see how you can automate most of the environment setup.
