@@ -1,6 +1,6 @@
 ---
 title: "Github Actions for Node.js Devs"
-hidden: false
+hidden: true
 tags: ["javascript", "devops"]
 duration: 45 minutes
 abstract: |
