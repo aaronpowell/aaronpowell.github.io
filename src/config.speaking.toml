@@ -7,8 +7,6 @@
         { date = 2020-01-30, name = "Serverless Images", link = "https://www.meetup.com/Sydney-Serverless-Meetup-Group/events/266033398/", event = "Serverless Sydney User Group" },
         { date = 2020-02-14, name = "Migrating Web Applications to Azure", link = "https://www.microsoft.com/en-au/ignite-the-tour/sydney", event = "Microsoft Ignite The Tour | Sydney" },
         { date = 2020-02-14, name = "Enhancing Web Applications with Cloud Intelligence", link = "https://www.microsoft.com/en-au/ignite-the-tour/sydney", event = "Microsoft Ignite The Tour | Sydney" },
-        { date = 2020-03-25, name = "Migrating Web Applications to Azure", link = "https://www.microsoft.com/en-hk/ignite-the-tour/hong-kong", event = "Microsoft Ignite The Tour | Hong Kong" },
-        { date = 2020-03-25, name = "Enhancing Web Applications with Cloud Intelligence", link = "https://www.microsoft.com/en-hk/ignite-the-tour/hong-kong", event = "Microsoft Ignite The Tour | Hong Kong" },
         { date = 2019-08-29, name = "Stateful Serverless through Durable Functions", link  = "https://www.serverlessdays.me/", event = "Serverless Days Melbourne" },
         { date = 2019-10-14, name = "React Workshop", link = "https://ndcsydney.com.au", event = "NDC Sydney" },
         { date = 2019-10-16, name = "Being cheap with the cloud", link = "https://ndcsydney.com.au", event = "NDC Sydney" },
@@ -22,9 +20,9 @@
         { date = 2019-02-13, name = "Docker, FROM scratch", link = "https://www.microsoft.com/en-au/ignite-the-tour/sydney", event = "Microsoft Ignite The Tour | Sydney" },
         { date = 2019-09-17, name = "React Workshop", link = "https://ndcsydney.com.au", event = "NDC Sydney" },
         { date = 2019-09-19, name = "The Beauty of Stupid Ideas", link = "https://ndcsydney.com.au", event = "NDC Sydney" },
-        { date = 2020-05-06, name = "Stateful Serverless through Durable Functions", link  = "https://www.codemania.io/", event = "Codemania 2020" },
         { date = 2020-07-27, name = "React Workshop", link = "https://ndcmelbourne.com", event = "NDC Melbourne" },
         { date = 2020-01-28, name = "A Home Hackers Guide to IoT", link = "https://https://www.meetup.com/Sydney-Alt-Net/events/jxqsbqybccblc/", event = "Sydney Alt.Net UG" },
+        { date = 2020-05-07, name = "WebAssembly, your browsers sandbox", link = "https://jsvidcon.com/", event = "JS VidCon" },
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET and whacky ideas."
