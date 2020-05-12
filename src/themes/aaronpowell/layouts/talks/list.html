@@ -29,11 +29,31 @@
                     <br />
                     <i class="icon ion-md-camera"></i> Gravatar:
                     <a
-                        href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}"
+                        href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}?s=500"
                         target="_blank"
                         title="Gravatar Headshot"
                         >Link to headshot</a
                     >
+                    <span style="font-size:0.8rem">
+                        (<a
+                            href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}?s=200"
+                            target="_blank"
+                            title="Gravatar Headshot"
+                            >200px</a
+                        >
+                        <a
+                            href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}?s=500"
+                            target="_blank"
+                            title="Gravatar Headshot"
+                            >500px</a
+                        >
+                        <a
+                            href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}?s=2048"
+                            target="_blank"
+                            title="Gravatar Headshot"
+                            >Full Size</a
+                        >)
+                    </span>
                 </p>
             </div>
             <div class="bios">
