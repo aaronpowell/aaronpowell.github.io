@@ -179,6 +179,15 @@ pre {
     display: none;
 }
 
+.outdated {
+    background-color: rgba(252, 53, 42, 0.34);
+    font-weight: bolder;
+    padding: 10px;
+    font-style: italic;
+    text-align: center;
+    color: darken($color: $primaryTextColour, $amount: 25%);
+}
+
 @media (max-width: $xsmall) {
     .main {
         header {

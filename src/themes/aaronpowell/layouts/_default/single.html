@@ -17,6 +17,12 @@
             </div>
         </div>
     </header>
+    {{ if le (.Date.Year) (sub now.Year 2) }}
+    <div class="outdated">
+        Hey, thanks for the interest in this post, but just letting you know
+        that it is over 2 years old, so the content in here may not be accurate.
+    </div>
+    {{ end }}
     <section class="container">
         <article>
             {{ if isset .Params "image" }}
