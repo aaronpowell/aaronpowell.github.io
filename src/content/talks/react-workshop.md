@@ -8,7 +8,7 @@ abstract: |
 
     Being a declarative user interface library that is un-opinionated about the rest of your application it is easy to reason about it is simpler to learn and master the basics than a full application framework like Angular. Also thanks to the simple nature of React, the patterns and lessons you will learn are transferable to other libraries and frameworks.
 
-    Aaron started using React in its v0.8 days after having worked with a number of other web frameworks, and immediately liked what he saw. From its drive towards componentisation to data management it’s been a great tool for building application dashboards, public websites and native applications. Aaron has introduced it to a number of different projects across a variety of industries through his role as a Readify consultant.
+    Aaron started using React in its v0.8 days after having worked with a number of other web frameworks, and immediately liked what he saw. From its drive towards componentisation to data management it’s been a great tool for building application dashboards, public websites and native applications. Aaron has introduced it to a number of different projects across a variety of industries through his career.
 
     ### Day 1: React fundamentals
 
@@ -26,36 +26,31 @@ abstract: |
         * Hot Reload
     * React with TypeScript
     * Functional patterns and immutability
-    * Routing and Single Page Applications (SPA’s)
-    * Error Handling
-        * Error Boundaries
     * State management patterns
         * Container/Smart components
         * Hooks
         * Redux
+    * Error Handling
+        * Error Boundaries
+    * Routing and Single Page Applications (SPA’s)
 
     ### Day 2: Real world React
 
-    * Architecting a React application
-        * Application structure
+    * Application/source control structure
     * Automated testing
     * Optimising app performance
-    * WebPack
+    * webpack
         * Production configuration
         * Bundling
         * Code splitting/lazy loading
-    * Using React with ASP.NET Core and Node.js
-        * Integrating with a web server
-        * Server side rendering
-    * React Native
+    * Integrating with a web server
 
     ### Pre-requisites:
     * Understanding of JavaScript fundamentals
     * Participants need to bring a laptop
-    * [Latest Node](http://npmjs.com/)
+    * [Latest Node LTS](http://npmjs.com/)
     * [Git](https://git-scm.com/)
-    * npm (Comes with node)
-    * [VSCode](https://code.visualstudio.com/) or other text edior
+    * [VSCode](https://code.visualstudio.com/) or other text editor
 
 audience:
     - Want to learn what all the fuss is about React
