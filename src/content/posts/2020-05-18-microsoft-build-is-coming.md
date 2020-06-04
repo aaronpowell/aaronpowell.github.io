@@ -3,7 +3,9 @@ title = "Microsoft Build Is Coming!"
 date = 2020-05-18T16:16:03+10:00
 description = "Microsoft Build will be coming to you live for 48 hours straight!"
 draft = false
-tags = ["public-speaking"]
+tags = ["speaking"]
+series = "build2020"
+series_title = "Microsoft Build Is Coming!"
 +++
 
 You've likely heard the news by now but Microsoft Build, aka `#MSBuild`, is going to be a virtual event streaming live for 48 hours straight!
