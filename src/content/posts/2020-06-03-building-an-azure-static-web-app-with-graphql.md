@@ -6,6 +6,8 @@ draft = false
 tags = ["javascript", "web", "typescript", "serverless", "azure-functions", "azure"]
 +++
 
+_Update: The stream has come and gone, but you'll find a recording [on YouTube](https://www.youtube.com/watch?v=7CmNSykJNoA) and the [git repo](https://github.com/aaronpowell/aswa-trivia-app) is also live._
+
 At Microsoft Build we launched the preview of a new product, [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/?{{<cda>}}). This is a product I've been wanting for **years** on Azure as I've done a lot of static websites on Azure (see [Cutting Azure Costs for DDD Sydney]({{< ref "2018-06-21-cutting-azure-costs.md" >}})) but they were always been a bit clunky, especially when it comes to integration with a backend. I have it working for some apps, but there's a lot of infrastructure overhead.
 
 But now, with Static Web Apps, it's a whole lot easier as it's designed for this by using a combination of static hosting and Azure Functions. We've got some [fantastic docs](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) (I wrote the Hugo, Gatsby and VuePress docs 😉) that will get you up and running on all things Static Web Apps.
