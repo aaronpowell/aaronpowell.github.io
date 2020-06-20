@@ -14,7 +14,7 @@ But now, with Static Web Apps, it's a whole lot easier as it's designed for this
 
 It's one thing to read the docs, and another thing to learn how to actually build something, so at Build I decided to put myself to the test and try to build and deploy an app in ~30 minutes. You'll find the video in the [Microsoft Build YouTube playlist](https://www.youtube.com/watch?v=GY5NYJDP4k0&list=PLlrxD0HtieHhlbuh4wiUVHGeVw8vY4Rco&index=74) but what you might notice about it is that it's a lot of copy and pasting of code, and not a lot of actually writing code.
 
-Well, it's time to really put my money where my mouth is and go about building the application, and to do that I'm going to try out [Twitch](https://www.twitch.tv/aaron_powell) and do a live stream of how we can build the app.
+Well, it's time to really put my money where my mouth is and go about building the application, and to do that I'm going to try out [Twitch](https://www.twitch.tv/numberoneaaron) and do a live stream of how we can build the app.
 
 I'm going to kick off at **11.30am (Sydney Time) Friday 5th June**, between now and then I'm going to try and work out how to use Twitch, and we'll see if I can do this without resorting to copy/paste all the time! 🤣
 
