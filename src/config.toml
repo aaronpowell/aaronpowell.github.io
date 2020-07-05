@@ -75,6 +75,11 @@ home = [ "HTML", "RSS", "JSON"]
             title = "GitHub"
 
         [[params.footer.socialIcon]]
+            icon = "ion-logo-twitch"
+            url = "https://www.twitch.tv/NumberOneAaron/"
+            title = "Twitch"
+
+        [[params.footer.socialIcon]]
             icon = "ion-logo-linkedin"
             url = "https://www.linkedin.com/in/aaron-powell-66038631/"
             title = "LinkedIn"
