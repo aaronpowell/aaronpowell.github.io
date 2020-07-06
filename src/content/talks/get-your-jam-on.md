@@ -1,16 +1,17 @@
 ---
 title: "Get Your JAM On"
 hidden: true
-tags: ["javascript", "nodejs", "jamstack", "azure", "devops"]
+tags: ["javascript", "nodejs", "jamstack", "azure", "devops", "serverless"]
 duration: 45 minutes
 abstract: |
-    You are embarking on a new project and have decided to give JAMStack a try, after all, a web application really only needs some JavaScript, API's to back it up and Markup to make the pages appear!
+    You are embarking on a new project and have decided to go full Serverless and try out that JAMStack. After all, our application is a web front end and some API's, so Serverless is the perfect model for us.
 
-    But how do we deploy this into Azure? We want to have a DevOps pipeline, so we'll give GitHub Actions a go. Then we're going to need somewhere to run the API, hosting for the static site, domain, SSL, routing and oh my it's becoming complex!
+    But how do we design this solution, tackle local development and most importantly deploy this to the cloud? We want to have a DevOps pipeline, so we'll give GitHub Actions a go. Then we're going to need somewhere to run the API, hosting for the static site, domain, SSL, routing and oh my it's becoming complex!
 
-    Don't fear, we'll go through the steps together, see that we can setup an application with DevOps to deploy with the simplicity of a git push and get you JAM'ing in no time!
+    Don't fear, we'll go through the steps together, see that we can setup a local dev environment, configure a deployment pipeline so we can deploy with the simplicity of a git push (but not straight to master!) and get you JAM'ing in no time!
 
 audience:
+    - People building a full Serverless stack
     - People doing JAMStack
     - People curious about JAMStack
     - Web developers
