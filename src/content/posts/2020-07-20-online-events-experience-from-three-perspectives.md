@@ -4,6 +4,7 @@ date = 2020-07-20T10:09:33+10:00
 description = "Online events are the way of the times, let's touch on a few things I've learnt from them so far"
 draft = false
 tags = ["public-speaking", "conference", "user-group"]
+banner_image = "/images/banners/2020-07-20-online-events-experience-from-three-perspectives.jpg"
 +++
 
 The world has moved to online events for the time being, and over the past few months I've attended and spoken at a number of user groups, conferences and solo live streams so I thought I'd share some insights on what I've learnt from them, so in this post I want to share the views as an attendee _or_ speaker _or_ organiser. My goal here isn't to discuss all the complex tool chains you can setup with NDI, OBS and thousands of dollars' worth of hardware, instead I want to look at things that I've seen working to make a community work in an online space.
