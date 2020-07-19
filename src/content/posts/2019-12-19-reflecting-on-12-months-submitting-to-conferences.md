@@ -4,7 +4,7 @@ date = 2019-12-19T09:52:00+11:00
 description = "You win some, you loose some, but that's how conferences go."
 draft = false
 tags = ["speaking"]
-banner_image = "/images/banners/2019-12-19-reflecting-on-12-months-submitting-to-conferences.jpg"
+cover_image = "/images/banners/2019-12-19-reflecting-on-12-months-submitting-to-conferences.jpg"
 +++
 
 A few weeks ago I put up what was intended to be a throw-away tweet.

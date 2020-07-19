@@ -4,7 +4,7 @@ date = 2020-02-17T11:10:59+11:00
 description = "When a talk goes bad."
 draft = false
 tags = ["speaking"]
-banner_image = "/images/2020-02-17-presenting-in-the-dark-a-speakers-nightmare-banner.jpg"
+cover_image = "/images/2020-02-17-presenting-in-the-dark-a-speakers-nightmare-banner.jpg"
 +++
 
 {{< tweet 1228092104976424963 >}}

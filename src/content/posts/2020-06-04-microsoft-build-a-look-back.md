@@ -6,7 +6,7 @@ draft = false
 tags = ["speaking", "microsoft"]
 series = "build2020"
 series_title = "Microsoft Build, a Look Back"
-banner_image = "/images/build2020-wrapup-post/banner.jpg"
+cover_image = "/images/build2020-wrapup-post/banner.jpg"
 +++
 
 {{<tweet 1262875395218522114>}}

@@ -36,8 +36,8 @@
         property="og:image"
         content="{{ .Site.Params.opengraphImage | absURL }}"
     />
-    {{ else if .Params.banner_image }}
-    <meta property="og:image" content="{{ .Params.banner_image | absURL }}" />
+    {{ else if .Params.cover_image }}
+    <meta property="og:image" content="{{ .Params.cover_image | absURL }}" />
     {{ else }}
     <meta
         property="og:image"
@@ -65,8 +65,8 @@
         rel="stylesheet"
     />
 
-    {{ $sass := resources.Get "sass/main.scss" }}
-    {{ $styles := $sass | resources.ToCSS | minify}}
+    {{ $sass := resources.Get "sass/main.scss" }} {{ $styles := $sass |
+    resources.ToCSS | minify}}
     <link
         rel="stylesheet"
         href="{{ $styles.Permalink }}"
