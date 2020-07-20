@@ -3,7 +3,6 @@ baseURL = "https://www.aaron-powell.com"
 languageCode = "en-US"
 config = "config.toml"
 theme = "aaronpowell"
-# theme = "timer-hugo"
 canonifyURLS = true
 enableGitInfo = true
 enableEmoji = true
@@ -98,3 +97,7 @@ home = [ "HTML", "RSS", "JSON"]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+    [markup.goldmark.parser]
+      attribute = true
+      autoHeadingID = true
+      autoHeadingIDType = "github"

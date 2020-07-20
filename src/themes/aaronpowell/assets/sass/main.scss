@@ -188,6 +188,31 @@ pre {
     color: darken($color: $primaryTextColour, $amount: 25%);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    cursor: pointer;
+
+    .header-link {
+        display: none;
+
+        color: lighten($color: $primaryHeaderColour, $amount: 50%);
+
+        svg {
+            fill: currentColor;
+        }
+    }
+
+    &:hover {
+        .header-link {
+            display: inline;
+        }
+    }
+}
+
 @media (max-width: $xsmall) {
     .main {
         header {
