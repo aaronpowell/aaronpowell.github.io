@@ -1,7 +1,7 @@
 +++
 title = "GraphQL on Azure: Part 2 - dotnet and App Service"
 date = 2020-07-21T08:16:33+10:00
-description = "Let's look at how we can create a dotnetGraphQL server and deploy it to to an AppService"
+description = "Let's look at how we can create a dotnet GraphQL server and deploy it to an AppService"
 draft = false
 tags = ["azure", "serverless", "azure-functions", "dotnet"]
 series = "graphql-azure"
