@@ -241,7 +241,7 @@ With all the code complete, let's look at deploying it to Azure. For this, we'll
 
 To deploy, we'll use [GitHub Actions](https://help.github.com/en/articles/about-github-actions?{{<cda>}}), and you'll find docs on how to do that [already written](https://docs.microsoft.com/azure/app-service/deploy-github-actionshttps://docs.microsoft.com/azure/azure-functions/functions-how-to-github-actions?tabs=javascript&{{<cda>}}), and I've done a [video on this as well]({{<ref "/posts/2020-02-28-using-github-actions-with-azure-functions.md">}}). You'll find the workflow file I've used [in the GitHub repo](https://github.com/aaronpowell/azure-functions-graphql/blob/master/.github/workflows/workflow.yml).
 
-With a workflow committed and pushed to GitHub and our App Service waiting, the Action will run and our application will be deployed. The demo I created [is here](https://graphql-on-azure-appservice.azurewebsites.net/api/graphql).
+With a workflow committed and pushed to GitHub and our App Service waiting, the Action will run and our application will be deployed. The demo I created [is here](https://graphql-on-azure-functions.azurewebsites.net/api/graphql).
 
 ## Conclusion
 
