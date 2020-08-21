@@ -1,30 +1,31 @@
 ---
-  title: "Client Event Pool"
-  metaTitle: "Client Event Pool"
-  description: "Client event pools are great to have disconnected AJAX components on a page"
-  revised: "2010-09-13"
-  date: "2010-05-23"
-  tags: 
+title: "Client Event Pool"
+metaTitle: "Client Event Pool"
+description: "Client event pools are great to have disconnected AJAX components on a page"
+revised: "2010-09-13"
+date: "2010-05-23"
+tags:
     - "javascript"
     - "ajax"
     - "ms-ajax"
-  migrated: "true"
-  urls: 
+migrated: "true"
+urls:
     - "/client-event-pool"
-  summary: ""
+summary: ""
 ---
+
 I read an article last year about implementing a [Client Event Pool][1] and I really liked the concept. Joel shows a very good way to use it but I've been doing my best to find a logical use for it myself.
 
 Anyone not familiar with the concept of a Client Event Pool it's covered in Joel's post, but the short version is that a Client Event Pool is a browser-level event handler which is designed to allow events to be easily passed between unlinked components.
-One component can raise an event which can be chosen to be handled by any other. Inversly events can be listened for even if the component isn't on the page or the event isn't used.
+One component can raise an event which can be chosen to be handled by any other. Inversely events can be listened for even if the component isn't on the page or the event isn't used.
 
-This isn't really a new concept, you can achieve it (to a certain extent) with standard ASP.NET, with the OnClient<EventName> which is on a lot of the standard ASP.NET controls.
+This isn't really a new concept, you can achieve it (to a certain extent) with standard ASP.NET, with the `OnClient<EventName>` which is on a lot of the standard ASP.NET controls.
 
 And in this article I'm going to look at how to integrate a Client Event Pool with the ASP.NET AJAX Control Toolkit's Modal Popup.
 Now, don't get me wrong, this isn't the only way to add the events to a modal popup control, there are a lot of event handlers which can be added without a Client Event Pool.
 
 This all came about when I was tasked with integrating a login, forgotten password and change password component. Each were their own modal popups and each were separate .NET UserControls. I wasn't involved with developing any of them, and I didn't want to really do much to modify any of them too much and introduce more bugs in the system by screwing around with stuff I'm not familiar with.
-Because they are all separate I didn't have a real way to pass the ID of the control that was to make the popup appear. Oh, and to make thing more complicated there were 2 links for each popup, sadly the Modal Popup doesn't support multiple controls to do the poping-up (or as far as I'm aware...)
+Because they are all separate I didn't have a real way to pass the ID of the control that was to make the popup appear. Oh, and to make thing more complicated there were 2 links for each popup, sadly the Modal Popup doesn't support multiple controls to do the popping-up (or as far as I'm aware...)
 
 I also didn't want each of the popups to overlay each other, it doesn't really look that good (as I'll show shortly), so I needed a way to hide the master popup when the child was shown, and then when the child was hidden I want the master to reappear.
 
@@ -83,68 +84,75 @@ And there we have it, a nice little example of how to use a Client Event Pool to
 
 The source code for this article can be found [here][15].
 
-##Framework agnostic##
+## Framework agnostic
 
 So in the above demo I've shown how to play around with it if you're using MS Ajax, but not every site we build will have MS Ajax as part of it.
 
-I was recently doing a build where I wanted to use the event pool concept, but didn't want to use MS Ajax. So I set about simulating the concept in a framework agnostic way. 
+I was recently doing a build where I wanted to use the event pool concept, but didn't want to use MS Ajax. So I set about simulating the concept in a framework agnostic way.
 
-	EventManager = (function () {
-		var events = {};
+```javascript
+EventManager = (function() {
+    var events = {};
 
-		var getEvent = function (id) {
-			if (!events[id]) {
-				events[id] = [];
-			}
-			return events[id];
-		};
+    var getEvent = function(id) {
+        if (!events[id]) {
+            events[id] = [];
+        }
+        return events[id];
+    };
 
-		return {
-			bind: function (name, fn) {
-				var e = getEvent(name);
-				e.push(fn);
-			},
-			trigger: function (name, source, args) {
-				var evt = getEvent(name);
-				if (!evt || (evt.length === 0)) return null;
-				evt = evt.length === 1 ? [evt[0]] : Array.apply(null, evt);
-				for (var i = 0, l = evt.length; i < l; i++) {
-					if (args.constructor !== Array) args = [args];
-					evt[i].apply(source, args);
-				}
-			}
-		};
-
-	})();
+    return {
+        bind: function(name, fn) {
+            var e = getEvent(name);
+            e.push(fn);
+        },
+        trigger: function(name, source, args) {
+            var evt = getEvent(name);
+            if (!evt || evt.length === 0) return null;
+            evt = evt.length === 1 ? [evt[0]] : Array.apply(null, evt);
+            for (var i = 0, l = evt.length; i < l; i++) {
+                if (args.constructor !== Array) args = [args];
+                evt[i].apply(source, args);
+            }
+        }
+    };
+})();
+```
 
 This will create a global `EventManager` object (which sits at the window level) which has a `bind` and `trigger` event (which is the naming convention used by jQuery).
 
 You `bind` to `EventManager` an event name you want to listen for, like so:
 
-    EventManager.bind('hideParent', function(args) { /* do stuff */ });
+```javascript
+EventManager.bind("hideParent", function(args) {
+    /* do stuff */
+});
+```
 
 The `args` property is actually an array of all the arguments passed into the method by the `trigger` method, which is used like so:
 
-    EventManager.trigger('hideParent', this, { Hello: 'World' });
+```javascript
+EventManager.trigger("hideParent", this, { Hello: "World" });
+```
 
 `args` can really be anything, from an object to an array, but I like to use single objects when passing around. You also need to pass in an object into the 2nd parameter which defines what will be used for the `this` scope of the event handlers which are triggered.
 
-##Conclusion##
+## Conclusion
 
 Hopefully this has been a bit of fun looking at how you can use MS Ajax or a generic implementation of a client event pool to have disconnected AJAX functionality.
 
-  [1]: http://seejoelprogram.wordpress.com/2008/07/31/a-client-event-pool-in-javascript/
-  [2]: https://www.aaron-powell.com/get/media/1944/picture%201.jpg
-  [3]: https://www.aaron-powell.com/get/media/1944/picture%201.png
-  [4]: https://www.aaron-powell.com/get/media/1949/picture%202.jpg
-  [5]: https://www.aaron-powell.com/get/media/1949/picture%202.png
-  [6]: https://www.aaron-powell.com/get/media/1954/picture%203.jpg
-  [7]: https://www.aaron-powell.com/get/media/1954/picture%203.png
-  [8]: https://www.aaron-powell.com/get/media/1959/picture%204.png
-  [9]: https://www.aaron-powell.com/get/media/1969/picture%206.jpg
-  [10]: https://www.aaron-powell.com/get/media/1964/picture%205.png
-  [11]: https://www.aaron-powell.com/get/media/1979/picture%207.jpg
-  [12]: https://www.aaron-powell.com/get/media/1979/picture%207.png
-  [13]: https://www.aaron-powell.com/get/media/1974/picture%208.png
-  [14]: https://www.aaron-powell.com/get/media/1984/picture%209.png
-  [15]: /get/web-dev/clienteventpooldemo.zip
+[1]: http://seejoelprogram.wordpress.com/2008/07/31/a-client-event-pool-in-javascript/
+[2]: https://www.aaron-powell.com/get/media/1944/picture%201.jpg
+[3]: https://www.aaron-powell.com/get/media/1944/picture%201.png
+[4]: https://www.aaron-powell.com/get/media/1949/picture%202.jpg
+[5]: https://www.aaron-powell.com/get/media/1949/picture%202.png
+[6]: https://www.aaron-powell.com/get/media/1954/picture%203.jpg
+[7]: https://www.aaron-powell.com/get/media/1954/picture%203.png
+[8]: https://www.aaron-powell.com/get/media/1959/picture%204.png
+[9]: https://www.aaron-powell.com/get/media/1969/picture%206.jpg
+[10]: https://www.aaron-powell.com/get/media/1964/picture%205.png
+[11]: https://www.aaron-powell.com/get/media/1979/picture%207.jpg
+[12]: https://www.aaron-powell.com/get/media/1979/picture%207.png
+[13]: https://www.aaron-powell.com/get/media/1974/picture%208.png
+[14]: https://www.aaron-powell.com/get/media/1984/picture%209.png
+[15]: /get/web-dev/clienteventpooldemo.zip
