@@ -26,6 +26,9 @@
         { date = 2020-05-21, name = "How to be super productive with Node.js and Visual Studio Code", link = "https://mybuild.microsoft.com/sessions/0f743b92-55fd-4c51-8ac5-bc30b56e07e1?source=speakerdetail", event = "Microsoft Build 2020" },
         { date = 2020-05-21, name = "Remote development with Visual Studio Code", link = "https://mybuild.microsoft.com/sessions/98051ab8-b26e-4582-9215-5d21f2b18afd?source=speakerdetail", event = "Microsoft Build 2020" },
         { date = 2020-06-19, name = "Stateful Serverless through Durable Functions", link = "https://ccdays.konfhub.com/", event = "Cloud Community Days" },
+        { date = 2020-09-10, name = "TypeScript and GraphQL", link = "https://www.meetup.com/DDD-Melbourne-By-Night/events/272205392/", event = "DDD Melbourne by Night" },
+        { date = 2020-10-12, name = "React Workshop", link = "https://ndcsydney.com", event = "NDC Sydney" },
+        { date = 2020-10-16, name = "Unleash the power of VS Code", link = "https://ndcsydney.com", event = "NDC Sydney" },
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET and whacky ideas."
