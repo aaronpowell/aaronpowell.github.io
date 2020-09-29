@@ -83,6 +83,11 @@ home = [ "HTML", "RSS", "JSON"]
             url = "https://www.linkedin.com/in/aaron-powell-66038631/"
             title = "LinkedIn"
 
+        [[params.footer.socialIcon]]
+            icon = "ion-logo-youtube"
+            url = "https://www.youtube.com/channel/UCT1QtGr1IzVPNSF_YMrKCAw"
+            title = "YouTube Channel"
+
 [markup]
   [markup.highlight]
     codeFences = true
