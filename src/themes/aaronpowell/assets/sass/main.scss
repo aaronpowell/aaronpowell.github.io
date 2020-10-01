@@ -236,3 +236,20 @@ h6 {
         }
     }
 }
+
+h3:hover .copy,
+h4:hover .copy {
+    display: inline;
+}
+.copy {
+    display: none;
+    padding: 0px;
+    border: transparent;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.copied {
+    display: none;
+    color: #0f0;
+}

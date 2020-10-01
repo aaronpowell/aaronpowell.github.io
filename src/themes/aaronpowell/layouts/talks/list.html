@@ -34,7 +34,7 @@
                         title="Gravatar Headshot"
                         >Link to headshot</a
                     >
-                    <span style="font-size:0.8rem">
+                    <span style="font-size: 0.8rem">
                         (<a
                             href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}?s=200"
                             target="_blank"
@@ -57,11 +57,31 @@
                 </p>
             </div>
             <div class="bios">
-                <h4>Short Bio</h4>
-                {{ .bio.short | markdownify }}
+                <h4>
+                    Short Bio
+                    <button
+                        class="copy"
+                        data-target="#short-bio"
+                        title="Copy short bio"
+                    >
+                        ✂
+                    </button>
+                    <span class="copied">✔</span>
+                </h4>
+                <p id="short-bio">{{ .bio.short | markdownify }}</p>
 
-                <h4>Full Bio</h4>
-                {{ .bio.long | markdownify }}
+                <h4>
+                    Full Bio
+                    <button
+                        class="copy"
+                        data-target="#full-bio"
+                        title="Copy full bio"
+                    >
+                        ✂
+                    </button>
+                    <span class="copied">✔</span>
+                </h4>
+                <p id="full-bio">{{ .bio.long | markdownify }}</p>
             </div>
 
             <div class="calendar">
@@ -72,18 +92,14 @@
                 {{ else }}
                 <ul class="talk-list">
                     {{ range sort $upcomingTalks "date" "asc" }}
-                    <li>
-                        {{ partial "talk" . }}
-                    </li>
+                    <li>{{ partial "talk" . }}</li>
                     {{ end }}
                 </ul>
                 {{ end }} {{ $pastTalks := where .talks "date" "<=" now }}
                 <h4>Past Talks</h4>
                 <ul class="talk-list">
                     {{ range sort $pastTalks "date" "asc" }}
-                    <li>
-                        {{ partial "talk" . }}
-                    </li>
+                    <li>{{ partial "talk" . }}</li>
                     {{ end }}
                 </ul>
             </div>
