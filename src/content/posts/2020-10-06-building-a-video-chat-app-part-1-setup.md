@@ -1,8 +1,8 @@
 +++
 title = "Building a Video Chat App, Part 1 - Setup"
-date = 2020-10-05T09:18:43+10:00
+date = 2020-10-06T09:18:43+10:00
 description = "Let's get started with building our video chat app"
-draft = true
+draft = false
 tags = ["javascript", "azure"]
 series = "building-video-chat"
 series_title = "Setup"
