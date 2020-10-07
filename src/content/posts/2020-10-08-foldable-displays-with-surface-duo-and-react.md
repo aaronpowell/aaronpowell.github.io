@@ -25,7 +25,7 @@ _\*Note: This is still classed as experimental in the browser, so you'll need to
 
 ### Origin Trials
 
-If you're wanting to deploy this out to a wider set of users, but don't want each one to configure their browser directly, you can setup an [Origin Trial](https://developer.microsoft.com/microsoft-edge/origin-trials/?{{<cda>}}), which allows you to create time-boxed periods in which experimental features are enabled for your users. Check out [this article](https://devblogs.microsoft.com/surface-duo/dual-screen-website-edge-origin-trials/) on how to get started, and I've also added it to the demo app.
+If you're wanting to deploy this out to a wider set of users, but don't want each one to configure their browser directly, you can setup an [Origin Trial](https://developer.microsoft.com/microsoft-edge/origin-trials/?{{<cda>}}), which allows you to create time-boxed periods in which experimental features are enabled for your users. Check out [this article](https://devblogs.microsoft.com/surface-duo/dual-screen-website-edge-origin-trials/?{{<cda>}}) on how to get started, and I've also added it to the demo app.
 
 ## Introducing React-Foldable
 
