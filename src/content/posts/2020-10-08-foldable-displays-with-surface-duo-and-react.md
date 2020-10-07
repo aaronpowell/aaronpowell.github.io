@@ -1,10 +1,10 @@
 +++
 title = "Foldable Displays With Surface Duo and React"
-date = 2020-10-01T14:12:28+10:00
+date = 2020-10-08T10:12:28+10:00
 description = "Let's look at how we can make a foldable web experience using React for the Surface Duo"
-draft = true
+draft = false
 tags = ["javascript", "surfaceduo", "react"]
-cover_image = "/images/banners/2020-10-01-foldable-displays-with-surface-duo-and-react.png"
+cover_image = "/images/banners/2020-10-08-foldable-displays-with-surface-duo-and-react.png"
 +++
 
 Last month Microsoft released the long awaited [Surface Duo](https://www.microsoft.com/surface/devices/surface-duo?{{<cda>}}), a foldable, dual-screen mobile device.
@@ -22,6 +22,10 @@ Basically, the browser sees both displays as a single viewport and it's up to yo
 As mentioned above, the Duo isn't available outside of the US (at the time of writing), so how can we get up and running with it? With the browser dev tools of course! [Here's a blog about it all](https://devblogs.microsoft.com/surface-duo/build-and-test-dual-screen-web-apps/?{{<cda>}}), but the way it works is the same way as any other mobile device emulation in Chrome or Edge, it's just available\*, so we can get started building an application.
 
 _\*Note: This is still classed as experimental in the browser, so you'll need to be running Edge or Chrome Canary, and enable it from `edge://flags`. Read more about that [here](https://docs.microsoft.com/dual-screen/web/emulator-device-testing?{{<cda>}})._
+
+### Origin Trials
+
+If you're wanting to deploy this out to a wider set of users, but don't want each one to configure their browser directly, you can setup an [Origin Trial](https://developer.microsoft.com/microsoft-edge/origin-trials/?{{<cda>}}), which allows you to create time-boxed periods in which experimental features are enabled for your users. Check out [this article](https://devblogs.microsoft.com/surface-duo/dual-screen-website-edge-origin-trials/) on how to get started, and I've also added it to the demo app.
 
 ## Introducing React-Foldable
 
