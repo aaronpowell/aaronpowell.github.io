@@ -6,6 +6,8 @@ draft = false
 tags = ["javascript", "azure"]
 series = "building-video-chat"
 series_title = "Setup"
+tracking_area = "javascript"
+tracking_id = "10223"
 +++
 
 Last week I kicked off a [new stream series]({{<ref "/posts/2020-09-29-new-stream-series-building-a-video-calling-app.md">}}) in which we're going to take a look at [Azure Communication Services (ACS)](https://azure.microsoft.com/blog/build-rich-communication-experiences-at-scale-with-azure-communication-services/?{{<cda>}}).

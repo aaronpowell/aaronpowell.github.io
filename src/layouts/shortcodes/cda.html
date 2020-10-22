@@ -1,1 +1,1 @@
-WT.mc_id={{ .Get "area" | default "aaronpowell" }}-{{ .Get "id" | default "blog" }}-aapowell
+WT.mc_id={{ if $.Page.Params.tracking_area }}{{ $.Page.Params.tracking_area }}{{ else }}aaronpowell{{ end }}-{{ if $.Page.Params.tracking_id }}{{ $.Page.Params.tracking_id }}{{ else }}blog{{ end }}-aapowell
