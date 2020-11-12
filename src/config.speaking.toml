@@ -29,6 +29,8 @@
         { date = 2020-09-10, name = "TypeScript and GraphQL", link = "https://www.meetup.com/DDD-Melbourne-By-Night/events/272205392/", event = "DDD Melbourne by Night" },
         { date = 2020-10-12, name = "React Workshop", link = "https://ndcsydney.com", event = "NDC Sydney" },
         { date = 2020-10-16, name = "Unleash the power of VS Code", link = "https://ndcsydney.com", event = "NDC Sydney" },
+        { date = 2020-11-12, name = "Get Your JAM On!", link = "https://www.dotnetconf.net/", event = ".NET Conf 2020" },
+        { date = 2020-11-20, name = "Keynote: 5 Key Highlights of .NET 5", link = "https://aka.ms/devsspeak", event = "Devs Speak" },
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."
