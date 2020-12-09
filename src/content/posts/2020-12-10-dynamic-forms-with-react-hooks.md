@@ -8,7 +8,7 @@ tracking_area = "javascript"
 tracking_id = "11633"
 +++
 
-The other week my friend [Amy Kapernick](https://twitter.com/Amys_Kapers) reached out because she was having a problem tackling a problem. She had a tool that allowed site admins to design a form, the fields in it, the number of pages and conditions that would hide and show fields based on other fields. This would then generate a JSON payload to be pulled into a Gatsby site and needed to be rendered as a React form that the user could walk through. Her problem was trying to work out how to do all the different bits of state management and and update the right things at the right time, and she needed another set of eyes on the problem.
+The other week my friend [Amy Kapernick](https://twitter.com/Amys_Kapers) reached out because she was having a problem with React. She had a tool that allowed site admins to design a form, the fields in it, the number of pages and conditions that would hide and show fields based on other fields. This would then generate a JSON payload to be pulled into a Gatsby site and needed to be rendered as a React form that the user could walk through. Her problem was trying to work out how to do all the different bits of state management and and update the right things at the right time, and she needed another set of eyes on the problem.
 
 Having built dynamic form generators in the past, built systems backed by generic form generators, and generally done a lot with dynamic forms, I knew just the sort of pain she was in for so I was happy to help.
 
