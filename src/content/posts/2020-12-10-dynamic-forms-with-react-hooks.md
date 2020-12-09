@@ -1,8 +1,8 @@
 +++
 title = "Creating Dynamic Forms With React Hooks"
-date = 2020-12-10T14:58:10+11:00
+date = 2020-12-10T07:58:10+11:00
 description = "Dynamically generating forms can be a challenge, so let's break down how to do it with React Hooks"
-draft = true
+draft = false
 tags = ["javascript"]
 tracking_area = "javascript"
 tracking_id = "11633"
