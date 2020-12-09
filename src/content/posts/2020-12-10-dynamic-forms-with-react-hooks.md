@@ -8,7 +8,7 @@ tracking_area = "javascript"
 tracking_id = "11633"
 +++
 
-The other week my friend [Amy Kapernick](https://twitter.com/Amys_Kapers) reached out because she was having a problem with React. She had a tool that allowed site admins to design a form, the fields in it, the number of pages and conditions that would hide and show fields based on other fields. This would then generate a JSON payload to be pulled into a Gatsby site and then rendered as a React form to the users. It was all getting a bit confusion with managing state in React and handling the conditions, so she reached out to get some help with implementing it.
+The other week my friend [Amy Kapernick](https://twitter.com/Amys_Kapers) reached out because she was having a problem with React. She was working on a project that used a headless CMS to build and control multi page forms and the fields in it, including conditional fields/pages that appear/hide depending on the value of other fields. The headless CMS would then generate a JSON payload that was pulled into a Gatsby site and needed to be rendered as a React form that a user could walk through. While the form was building and rendering, her problem was working with different bits of state management and making sure to update the right things at the right time, and she needed another set of eyes on the problem.
 
 Having built dynamic form generators in the past, built systems backed by generic form generators, and generally done a lot with dynamic forms, I knew just the sort of pain she was in for so I was happy to help.
 
