@@ -1,11 +1,12 @@
 +++
 title = "Leveling Up Online Presentations"
 date = 2020-12-15T11:41:34+11:00
-description = ""
-draft = true
+description = "The result of me nerd-sniping myself"
+draft = false
 tags = ["public-speaking"]
 tracking_area = "javascript"
 tracking_id = ""
+cover_image = "/images/banners/2020-12-15-leveling-up-online-presentations.png"
 +++
 
 Like all good [nerd snipes](https://xkcd.com/356/) it starts with a tweet:
