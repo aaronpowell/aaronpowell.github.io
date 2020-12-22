@@ -1,4 +1,7 @@
 name: Azure Static Web Apps CI/CD
+env:
+  OUTPUT_PATH: ${{ github.workspace }}/.output
+  DOTNET_VERSION: "3.1.100-preview3-014645"
 
 on:
   push:
@@ -10,14 +13,110 @@ on:
       - master
 
 jobs:
+  build_hugo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Get Hugo Version
+        id: hugo-version
+        run: |
+          HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
+          echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "${{ steps.hugo-version.outputs.HUGO_VERSION }}"
+          extended: true
+
+      - name: Build
+        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }} --config config.toml,config.speaking.toml
+
+      - name: Publish website output
+        uses: actions/upload-artifact@v1
+        with:
+          name: website
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Publish blog json
+        uses: actions/upload-artifact@v1
+        with:
+          name: json
+          path: ${{ env.OUTPUT_PATH }}/index.json
+
+  build_search_ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build search app
+        run: dotnet build --configuration Release
+        working-directory: ./Search
+
+      - name: Publish search UI
+        run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
+        working-directory: ./Search/Search.Site.UI
+
+      - name: Package search UI
+        uses: actions/upload-artifact@v1
+        with:
+          name: search
+          path: ${{ env.OUTPUT_PATH }}/Search.Site.UI/dist/_framework
+
+  build_search_index:
+    runs-on: ubuntu-latest
+    needs: build_hugo
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Download index source
+        uses: actions/download-artifact@v1
+        with:
+          name: json
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Build search index
+        run: dotnet run
+        working-directory: ./Search/Search.IndexBuilder
+
+      - name: Publish search index
+        uses: actions/upload-artifact@v1
+        with:
+          name: search-index
+          path: ./Search/Search.IndexBuilder/index.zip
+
   build_and_deploy_job:
+    needs: [build_search_ui, build_search_index]
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v2
+      - name: Download website
+        uses: actions/download-artifact@v1
         with:
-          submodules: true
+          name: website
+          path: ${{ env.OUTPUT_PATH }}
+
+      - name: Download search UI
+        uses: actions/download-artifact@v1
+        with:
+          name: search
+          path: ${{ env.OUTPUT_PATH }}/_framework
+
+      - name: Download search index
+        uses: actions/download-artifact@v1
+        with:
+          name: search-index
+          path: ${{ env.OUTPUT_PATH }}
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
@@ -27,9 +126,9 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/src" # App source code path
+          app_location: ${{ env.OUTPUT_PATH }} # App source code path
           api_location: "api" # Api source code path - optional
-          output_location: "public" # Built app content directory - optional
+          output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
