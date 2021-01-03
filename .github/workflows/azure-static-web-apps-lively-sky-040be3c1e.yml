@@ -1,7 +1,6 @@
 name: Azure Static Web Apps CI/CD
 env:
   OUTPUT_FOLDER: .output
-  OUTPUT_PATH: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
   DOTNET_VERSION: "3.1.100-preview3-014645"
 
 on:
@@ -32,19 +31,19 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify --source ./src --destination ${{ env.OUTPUT_PATH }} --config config.toml,config.speaking.toml
+        run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
         with:
           name: website
-          path: ${{ env.OUTPUT_PATH }}
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Publish blog json
         uses: actions/upload-artifact@v1
         with:
           name: json
-          path: ${{ env.OUTPUT_PATH }}/index.json
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
 
   build_search_ui:
     runs-on: ubuntu-latest
@@ -60,14 +59,14 @@ jobs:
         working-directory: ./Search
 
       - name: Publish search UI
-        run: dotnet publish --no-build --configuration Release --output ${{ env.OUTPUT_PATH }}
+        run: dotnet publish --no-build --configuration Release --output ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
         working-directory: ./Search/Search.Site.UI
 
       - name: Package search UI
         uses: actions/upload-artifact@v1
         with:
           name: search
-          path: ${{ env.OUTPUT_PATH }}/Search.Site.UI/dist/_framework
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/Search.Site.UI/dist/_framework
 
   build_search_index:
     runs-on: ubuntu-latest
@@ -83,7 +82,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: json
-          path: ${{ env.OUTPUT_PATH }}
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Build search index
         run: dotnet run
