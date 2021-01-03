@@ -104,19 +104,19 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: website
-          path: ${{ env.OUTPUT_PATH }}
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Download search UI
         uses: actions/download-artifact@v1
         with:
           name: search
-          path: ${{ env.OUTPUT_PATH }}/_framework
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/_framework
 
       - name: Download search index
         uses: actions/download-artifact@v1
         with:
           name: search-index
-          path: ${{ env.OUTPUT_PATH }}
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
