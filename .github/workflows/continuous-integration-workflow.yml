@@ -3,11 +3,6 @@ env:
   OUTPUT_PATH: ${{ github.workspace }}/.output
   DOTNET_VERSION: "3.1.100-preview3-014645"
 
-on:
-  push:
-    branches:
-      - master
-
 jobs:
   build_hugo:
     runs-on: ubuntu-latest
