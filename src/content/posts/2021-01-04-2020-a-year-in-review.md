@@ -24,7 +24,7 @@ Blogging featured heavily in 2020, my goal was to keep around a post-per-week ca
 
 With in-person events on hold, many communities looked to online as an option. I covered topics like [getting started with Docker]({{<ref "/posts/2020-04-06-getting-started-learning-docker.md">}}), [using Blazor with Static Web Apps](https://www.youtube.com/watch?v=9cwOsW5KBm0) and [TypeScript + GraphQL + GitHub Codespaces](https://www.youtube.com/watch?v=z50r9bMAdB0).
 
-I even looked at how to interact with an audience through [PowerPoint automation]({{<ref "/posts/2020-10-19-upping-your-speaker-game-with-auto-posting-from-powerpoint.md>}}), something that I'm hoping to explore more this year as we continue with virtual presentations.
+I even looked at how to interact with an audience through [PowerPoint automation]({{<ref "/posts/2020-10-19-upping-your-speaker-game-with-auto-posting-from-powerpoint.md">}}), something that I'm hoping to explore more this year as we continue with virtual presentations.
 
 And I shared my learnings with [running a virtual workshop]({{<ref "/posts/2020-07-30-a-guide-to-virtual-workshops.md">}}) and [my observations with virtual events]({{<ref "/posts/2020-07-20-online-events-experience-from-three-perspectives.md">}}).
 

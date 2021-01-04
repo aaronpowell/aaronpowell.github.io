@@ -33,7 +33,7 @@
         { date = 2020-11-20, name = "Keynote: 5 Key Highlights of .NET 5", link = "https://aka.ms/devsspeak", event = "Devs Speak" },
         { date = 2020-11-20, name = "The state of modern Blazor", link = "https://www.meetup.com/Sydney-Alt-Net/events/zhdbvrybcpbgc/", event = "ALT.NET Sydney" },
         { date = 2020-12-01, name = "Keynote: 5 Key Highlights of .NET 5", link = "https://www.meetup.com/Melb-NET-Meetup/", event = "Melb.NET" },
-        { date = 2021-01-29, name = "Unleash the power of VS Code", link = "https://ndc-london.com", event = "NDC London 2021" },
+        { date = 2021-01-29, name = "Unleash the power of VS Code", link = "https://ndc-london.com", event = "NDC London 2021" }
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."
