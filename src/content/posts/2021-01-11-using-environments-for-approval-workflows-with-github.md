@@ -6,6 +6,7 @@ draft = false
 tags = ["devops", "javascript"]
 tracking_area = "devops"
 tracking_id = "12576"
+cover_image = "/images/approval-workflows-with-github-actions/environments/banner.png"
 +++
 
 Last year I wrote a post about how I [implemented an overly complex approval workflow with GitHub Actions]({{<ref "/posts/2020-03-23-approval-workflows-with-github-actions.md">}}). While it wasn't the simplest solution, at the time it was a means to an end as we didn't have any built-in way to do approval workflows with GitHub Actions. At the end of last year that changed with the introduction of [Environments](https://docs.github.com/en/free-pro-team@latest/actions/reference/environments?{{<cda>}}) ([announcement post](https://github.blog/changelog/2020-12-15-github-actions-environments-environment-protection-rules-and-environment-secrets-beta/)). Environments bring in the concept of protection rules, which currently supports two types, required reviewers and a wait timer, which is exactly what we need for an approval workflow.
