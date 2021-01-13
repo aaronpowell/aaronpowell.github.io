@@ -1,18 +1,21 @@
 ---
-  title: "Learning redux with reducks - beyond JavaScript"
-  date: "2016-10-10"
-  tags: 
+title: "Learning redux with reducks - beyond JavaScript"
+date: "2016-10-10"
+tags:
+    - "javascript"
     - "redux"
     - "reducks"
     - "fsharp"
-  description: "Exploring how redux can be used as a generic design pattern, not just a JavaScript library"
+description: "Exploring how redux can be used as a generic design pattern, not just a JavaScript library"
+series: "redux"
+series_title: "Redux outside JavaScript"
 ---
 
 Over this series we've been looking at how we would write a library which mimics the functionality of Redux from scratch to understand how it works at the most basic of levels. What we've seen is that there's three basic components, a Store which is our central point, Actions which indicate something happening and Reducers which handle something happening.
 
 Really this is just a simple pattern for data flow, so I wanted now to explore how we could go beyond JavaScript with Redux and create something else.
 
-# Look ma, no JavaScript!
+## Look ma, no JavaScript!
 
 To illustrate this I decided to implement Redux, well, something that does _some_ of what Redux does, in F#. The reason I chose F# was because as we've seen Redux lends itself nicely to functional programming concepts, like that Reducers should be pure functions and that state is immutable, so doing it in a functional programming language seemed to fit nicely (and also it meant I could write more F# :P).
 
@@ -35,13 +38,13 @@ type Store<'State, 'Payload> =
 
 Now you'll see here that we've got two generic arguments to these types, we have one which represents the `state` of the application and the other is `payload`, which is provided to the `dispatch` method. This deviates a bit from how the actions were dispatched in our JavaScript implementation, but we'll come to that in a moment, first off we're going to create the `createStore` function.
 
-# Creating the Store
+## Creating the Store
 
 When creating a store you can provide up to three arguments:
 
-- The root reducer
-- The initial state
-- Middleware
+-   The root reducer
+-   The initial state
+-   Middleware
 
 In JavaScript the last two are optional, so how will we handle them in F#? Well in F# we don't have method overloading so we can't define multiple `createStore` functions (without using different names), so we could go with the `Option` type for them, or we could make them mandatory. I've gone with the final approach, making them mandatory, as this will simplify some of our internal code and avoids the pain that can be introduced with dynamic typing.
 
@@ -66,7 +69,7 @@ let rec createStore<'State, 'Payload> =
 
 Pattern matching FTW! We can use pattern matching to decide if we're going to have middleware or not, and then that results in which branch to take. Let's start making some middleware.
 
-# Implementing a store with middleware
+## Implementing a store with middleware
 
 Here's what it looks like:
 
@@ -95,15 +98,15 @@ let rec createStore<'State, 'Payload> =
 
 Well that's... interesting? if you remember how [we implemented middleware](/posts/2016-07-17-learning-redux-with-reducks-middleware.html) some of the ideas will look familiar, but we'll break it down a little bit. First off we've got the `compose` function which:
 
-- Grabs the last item in the sequence
-- Grabs the rest of the items
-- Uses `List.foldBack` which is the same as `Array.prototype.reduceRight` to walk backwards through the sequence and create a new `dispatch` method
+-   Grabs the last item in the sequence
+-   Grabs the rest of the items
+-   Uses `List.foldBack` which is the same as `Array.prototype.reduceRight` to walk backwards through the sequence and create a new `dispatch` method
 
 Again this broke my brain as I tried to try and work out how it'd come together and while strong typing helps it's still a bit frustrating. Ultimately the way that it works is:
 
-- Creates a function that takes 2 arguments, `func` and `composed`
-- `func` is the current item in the collection
-- `composed` is the item that we're returning
+-   Creates a function that takes 2 arguments, `func` and `composed`
+-   `func` is the current item in the collection
+-   `composed` is the item that we're returning
 
 `List.foldBack` then takes 2 arguments, the collection that we're folding and the initial value (`last arg`).
 
@@ -119,7 +122,7 @@ This is why we made a recursive function, when we have middleware we create a st
 
 Our local variable for `dispatch` is defined as a mutable variable because we want to replace it with the new composed chain!
 
-# Actually making a store
+## Actually making a store
 
 Alright, the hard stuff is out of the way, now we'll, you know, create the store!
 
@@ -152,7 +155,7 @@ Here's the definition of our three core functions, `dispatch`, `subscribe` and `
 
 At the end of the function we create a new store instance with out functions all nice and bound!
 
-# Using our Reducks store
+## Using our Reducks store
 
 Right so we're all ready to go with out implementation, seriously, 53 lines of F# is all it took! Now we want to see about how we would use it in an application.
 
@@ -202,7 +205,7 @@ type Payload =
 
 Is a single type that represents a bunch of different Actions, which then can be combined with pattern matching to dispatch a store-level action (sure we could pass the action directly from the client to the server store, but I wanted to do some data remapping, basically the server becauses an action creator).
 
-## Server side implementation
+### Server side implementation
 
 So what does the server side usage of reducks look like? Let's start with our actions:
 
@@ -275,7 +278,7 @@ So fire up the console application and it's running!
 
 ![Reducks!](/get/reducks/reducks-fsharp-demo.gif)
 
-# Conclusion
+## Conclusion
 
 There you have it, we've taken redux, a library written in JavaScript, pushed it server side and written it in something other that JavaScript.
 

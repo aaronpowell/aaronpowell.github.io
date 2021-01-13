@@ -1,10 +1,13 @@
 ---
-  title: "Learning redux with reducks - creating a Store"
-  date: "2016-06-09"
-  tags: 
+title: "Learning redux with reducks - creating a Store"
+date: "2016-06-09"
+tags:
+    - "javascript"
     - "redux"
     - "reducks"
-  description: "An introduction to the Store and how to make a simple one."
+description: "An introduction to the Store and how to make a simple one."
+series: "redux"
+series_title: "The Store"
 ---
 
 [Last time](https://www.aaron-powell.com/posts/2016-06-06-learning-redux-with-reducks-intro.html) we learnt the basics of what Redux is and what it does, now it's time to start looking at how it works.
@@ -17,37 +20,34 @@ It's (obviously) a todo application, our quintessential demo app, which has a Re
 
 Our first step is to create the store, and this is done by a function exposed by Redux, `createStore`.
 
-# Implemented `createStore`
+## Implemented `createStore`
 
 This function is the core of Redux, it takes three arguments:
 
-- A reducer
-- Initial State
-- Enhancers
+-   A reducer
+-   Initial State
+-   Enhancers
 
 We're going to ignore Enhancers for the moment, we'll look at that later in the series, so we'll focus on supporting the first two arguments.
 
 The return value of calling `createStore` is a Store instance, which has four methods on it:
 
-- `getState`
-- `dispatch`
-- `subscribe`
-- `replaceReducer`
+-   `getState`
+-   `dispatch`
+-   `subscribe`
+-   `replaceReducer`
 
 Again, to keep this article short we'll not cover the `replaceReducer` method, we'll look at that later in the series.
 
 So, our basic code will look like this:
 
 ```js
-const createStore = function (reducer, initialState) {
-    const getState = function () {
-    };
+const createStore = function(reducer, initialState) {
+    const getState = function() {};
 
-    const dispatch = function (action) {
-    };
+    const dispatch = function(action) {};
 
-    const subscribe = function (fn) {
-    };
+    const subscribe = function(fn) {};
 
     return {
         getState,
@@ -61,7 +61,7 @@ export default createStore;
 
 Pretty simplistic huh! Now let's start making those functions do something.
 
-## `getState`
+### `getState`
 
 The `getState` function is our window into what's happening within Redux, our ability to get the data within our application. The `state` in Redux is really just a plain old JavaScript object, you can define it any which way you like, you can use a library like Immutable.js if you want, it's just an object.
 
@@ -86,12 +86,12 @@ Now we have a local `state` variable which we initialise from the consumer, and 
 
 Fantastic, we can now get the state of our Redux store!
 
-## `dispatch`
+### `dispatch`
 
 The `dispatch` function is what we use when we need to fire off an Action in Redux, which is why it takes an `action` argument to it. You'd use it off a store like so:
 
 ```js
-store.dispatch({ type: 'ADD_TODO', payload: 'Todo name' });
+store.dispatch({ type: "ADD_TODO", payload: "Todo name" });
 ```
 
 Internally what it does is invokes the `reducer` which we provided the Store in `createStore`, along with the initial state of the Store, and then the result of that becomes the new state. With an Action there needs to be a `type` property, so you'd probably want to do some validation there as well, making a `dispatch` implementation look like so:
@@ -111,7 +111,7 @@ Internally what it does is invokes the `reducer` which we provided the Store in 
 
 One thing you'll notice about the implementation is that we return the `action` that was passed in. This is so that the place that dispatched the action could do something once it's completed. But running directly after the `dispatch` completes might be a problem, especially when you start working with asynchronous payloads, so for that we'd want to subscribe to the Store.
 
-## `subscribe`
+### `subscribe`
 
 The final piece of the puzzle when working with your Store is knowing when the Reducer has finished, and to do that in a way that is independent of where the `dispatch` was called from. We do this via the `subscribe` method that a Store exposes.
 
@@ -214,7 +214,7 @@ Now one thing you might want to add to the `subscribe` function is mutation hold
 
 So here we have a function `ensureCanMutateNextListeners` that, when invoked, checks if the two arrays are the same array reference, if they are, use `slice` to _clone_ `currentSubscriptions` so that when we modify the `nextSubscriptions` array (adding or removing a listener) it won't impact any currently running `dispatch` pipeline. The goal here is to ensure that the listeners that are used by `dispatch` are a _point in time_, for when the `dispatch` started.
 
-## Initialising your Store
+### Initialising your Store
 
 There's one last thing that the Store does when you call `createStore` and that is to trigger an initialisation action. In Redux this can be observed by the action `redux/@@INIT` being dispatched, but for our Reducks library we'll trigger `reducks/@@INIT`. We'll add this to the very last step before returning the Store object:
 
@@ -234,7 +234,7 @@ There's one last thing that the Store does when you call `createStore` and that 
 
 This will cause the Reducer to be run with the initial state (if provided). Now, you're reducer probably isn't subscribing to `reducks/@@INIT` (or `redux/@@INIT`), so it'll be a noop, but still, it gives you the entry hook if you so desire it.
 
-# Conclusion
+## Conclusion
 
 The Redux store is the core part of the application, but really it's quite simplistic in how it is implemented, but really quite powerful. We've seen how the three core methods, `getState`, `dispatch` and `subscribe` are implemented to make our Store operational.
 
