@@ -34,6 +34,7 @@
         { date = 2020-11-20, name = "The state of modern Blazor", link = "https://www.meetup.com/Sydney-Alt-Net/events/zhdbvrybcpbgc/", event = "ALT.NET Sydney" },
         { date = 2020-12-01, name = "Keynote: 5 Key Highlights of .NET 5", link = "https://www.meetup.com/Melb-NET-Meetup/", event = "Melb.NET" },
         { date = 2021-01-29, name = "Unleash the power of VS Code", link = "https://ndc-london.com", event = "NDC London 2021" },
+        { date = 2021-02-18, name = "Talking React on Web Wednesday", link = "https://www.meetup.com/en-AU/Microsoft-Reactor-Redmond/events/275752897/", event = "Microsoft Reactor" },
         { date = 2021-02-24, name = "Controlling releases with GitHub Actions", link = "https://www.meetup.com/en-AU/Sydney-Serverless-Meetup-Group/events/275958706/", event = "Serverless Sydney UG" },
         { date = 2021-02-24, name = "Type-safe GraphQL apps with TypeScript (workshop)", link = "https://graphql.asia/workshops/type-safe-graphql-apps-with-typescript/", event = "GraphQL Asia 2021" }
     ]
