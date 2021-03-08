@@ -6,6 +6,7 @@ draft = false
 tags = ["vscode", "docker", "oss"]
 tracking_area = "javascript"
 tracking_id = "17914"
+cover_image = "/images/banners/2021-03-08-your-open-source-project-needs-a-dev-container-heres-why.png"
 +++
 
 **TL;DR**: Add a [devcontainer](https://code.visualstudio.com/docs/remote/containers?{{<cda>}}) to your projects now, you'll thank me later.
