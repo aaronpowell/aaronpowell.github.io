@@ -1,6 +1,6 @@
 +++
 title = "Your Open Source Project Needs a devcontainer - Here's Why"
-date = 2021-03-08T05:51:34Z
+date = 2021-03-08T00:04:31Z
 description = "A look at devcontainers and why you should have them on all projects"
 draft = false
 tags = ["vscode", "docker", "oss"]
