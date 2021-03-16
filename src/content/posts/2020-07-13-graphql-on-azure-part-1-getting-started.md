@@ -3,9 +3,11 @@ title = "GraphQL on Azure: Part 1 - Getting Started"
 date = 2020-07-13T14:45:30+10:00
 description = "Let's get started looking at GraphQL on Azure"
 draft = false
-tags = ["azure", "serverless", "azure-functions"]
+tags = ["azure", "serverless", "azure-functions", "graphql"]
 series = "graphql-azure"
 series_title = "Getting Started"
+tracking_area = "javascript"
+tracking_id = "7129"
 +++
 
 I've done a few posts recently around using GraphQL, especially with [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/?{{<cda>}}), and also [on some recent streams](https://www.youtube.com/channel/UCT1QtGr1IzVPNSF_YMrKCAw). This has led to some questions coming my way around the best way to use GraphQL with Azure.

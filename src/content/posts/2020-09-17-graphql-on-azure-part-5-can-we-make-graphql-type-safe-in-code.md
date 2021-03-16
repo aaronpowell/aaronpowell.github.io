@@ -3,9 +3,11 @@ title = "GraphQL on Azure: Part 5 - Can We Make GraphQL Type Safe in Code"
 date = 2020-09-17T15:21:02+10:00
 description = "We're defining a GraphQL schema with a type system, but can we use that type system for our application?"
 draft = false
-tags = ["azure", "serverless", "azure-functions", "javascript"]
+tags = ["azure", "serverless", "azure-functions", "javascript", "graphql"]
 series = "graphql-azure"
 series_title = "Can We Make GraphQL Type Safe in Code?"
+tracking_area = "javascript"
+tracking_id = "7129"
 +++
 
 I've been doing a lot of work recently with GraphQL on [Azure Functions](https://docs.microsoft.com/azure/functions/?WT.mc_id=servsept20-devto-aapowell) and something that I find works nicely is the schema-first approach to designing the GraphQL endpoint.

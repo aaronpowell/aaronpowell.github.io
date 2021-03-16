@@ -3,9 +3,11 @@ title = "GraphQL on Azure: Part 4 - Serverless CosmosDB"
 date = 2020-09-04T11:04:32+10:00
 description = "Let's take a look at how to integrate a data source with GraphQL on Azure"
 draft = false
-tags = ["azure", "serverless", "azure-functions", "dotnet"]
+tags = ["azure", "serverless", "azure-functions", "dotnet", "graphql"]
 series = "graphql-azure"
 series_title = "CosmosDB and GraphQL"
+tracking_area = "dotnet"
+tracking_id = "7129"
 +++
 
 A few months ago [I wrote a post]({{<ref "/posts/2020-04-07-using-graphql-in-azure-functions-to-access-cosmosdb.md">}}) on how to use GraphQL with CosmosDB from Azure Functions, so this post might feel like a bit of a rehash of it, with the main difference being that I want to look at it from the perspective of doing .NET integration between the two.

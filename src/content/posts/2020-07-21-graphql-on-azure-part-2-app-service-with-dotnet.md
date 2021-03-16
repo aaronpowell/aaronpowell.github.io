@@ -3,9 +3,11 @@ title = "GraphQL on Azure: Part 2 - dotnet and App Service"
 date = 2020-07-21T08:16:33+10:00
 description = "Let's look at how we can create a dotnet GraphQL server and deploy it to an AppService"
 draft = false
-tags = ["azure", "serverless", "azure-functions", "dotnet"]
+tags = ["azure", "serverless", "azure-functions", "dotnet", "graphql"]
 series = "graphql-azure"
 series_title = "App Service with dotnet"
+tracking_area = "dotnet"
+tracking_id = "7129"
 +++
 
 In my [introductory post]({{<ref "/posts/2020-07-13-graphql-on-azure-part-1-getting-started.md">}}) we saw that there are many different ways in which you can host a GraphQL service on Azure and today we'll take a deeper look at one such option, [Azure App Service](https://docs.microsoft.com/azure/app-service/?{{<cda>}}), by building a GraphQL server using dotnet. If you're only interested in the Azure deployment, you can jump forward to [that section]({{<relref "#deploying-to-app-service">}}). Also, you'll find the complete sample [on my GitHub](https://github.com/aaronpowell/appservice-graphql-dotnet/).

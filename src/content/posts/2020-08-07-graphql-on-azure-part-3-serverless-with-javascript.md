@@ -3,9 +3,11 @@ title = "GraphQL on Azure: Part 3 - Serverless With JavaScript"
 date = 2020-08-07T11:08:58+10:00
 description = "Let's look at how we can create a JavaScript GraphQL server and deploy it to an Azure Function"
 draft = false
-tags = ["azure", "serverless", "azure-functions", "javascript"]
+tags = ["azure", "serverless", "azure-functions", "javascript", "graphql"]
 series = "graphql-azure"
 series_title = "Serverless with JavaScript"
+tracking_area = "javascript"
+tracking_id = "7129"
 +++
 
 Last time we look at how to get started with [GraphQL on dotnet]({{<ref "/posts/2020-07-21-graphql-on-azure-part-2-app-service-with-dotnet.md">}}) and we looked at the [Azure App Service](https://docs.microsoft.com/azure/app-service/?{{<cda>}}) platform to host our GraphQL server. Today we're going to have a look at a different approach, using [Azure Functions](https://docs.microsoft.com/azure/functions/?{{<cda>}}) to create run GraphQL in a Serverless model. We'll also look at using JavaScript (or specifically, TypeScript) for this codebase, but there's no reason you couldn't deploy a dotnet GraphQL server on Azure Functions or deploy JavaScript to App Service.
