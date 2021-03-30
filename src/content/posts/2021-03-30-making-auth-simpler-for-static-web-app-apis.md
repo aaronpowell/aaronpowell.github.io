@@ -8,7 +8,7 @@ tracking_area = "javascript"
 tracking_id = "17897"
 +++
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) has built-in [Authentication and Authorization](https://docs.microsoft.com/azure/static-web-apps/authentication-authorization?{{<cda>}) for both the web and API part of the application.
+[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) has built-in [Authentication and Authorization](https://docs.microsoft.com/azure/static-web-apps/authentication-authorization?{{<cda>}}) for both the web and API part of the application.
 
 At the end of last year, I wrote about a package [to make it easier in React apps]({{<ref "/posts/2020-12-21-simplifying-auth-with-static-web-apps-and-react.md">}}) to work with auth and get access to the user details. But this still left a gap in the APIs, your APIs need to parse the JSON out of a custom header, which is base64 encoded. All a bit complicated in my book.
 
