@@ -37,6 +37,9 @@
         { date = 2021-02-18, name = "Talking React on Web Wednesday", link = "https://www.meetup.com/en-AU/Microsoft-Reactor-Redmond/events/275752897/", event = "Microsoft Reactor" },
         { date = 2021-02-24, name = "Controlling releases with GitHub Actions", link = "https://www.meetup.com/en-AU/Sydney-Serverless-Meetup-Group/events/275958706/", event = "Serverless Sydney UG" },
         { date = 2021-02-24, name = "Type-safe GraphQL apps with TypeScript (workshop)", link = "https://graphql.asia/workshops/type-safe-graphql-apps-with-typescript/", event = "GraphQL Asia 2021" }
+        { date = 2021-04-21, name = "Blowing your mind with F# and CosmosDB", link = "https://youtu.be/LDkE8-Km9rs", event = "CosmosDB Conf 2021" }
+        { date = 2021-04-21, name = "GraphQL over CosmosDB - where to start", link = "https://youtu.be/EQu4xtAicQg?list=PLmamF3YkHLoLN_24E41jSPVilv5B3GTBg&t=4328", event = "CosmosDB Conf 2021" }
+        { date = 2021-04-27, name = "All Around Azure: DevOps with GitHub", link = "http://aka.ms/AAA-DevOpsGitHub", event = "All Around Azure: DevOps with GitHub" }
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."
