@@ -40,6 +40,7 @@
         { date = 2021-04-21, name = "Blowing your mind with F# and CosmosDB", link = "https://youtu.be/LDkE8-Km9rs", event = "CosmosDB Conf 2021" },
         { date = 2021-04-21, name = "GraphQL over CosmosDB - where to start", link = "https://youtu.be/EQu4xtAicQg?list=PLmamF3YkHLoLN_24E41jSPVilv5B3GTBg&t=4328", event = "CosmosDB Conf 2021" },
         { date = 2021-04-27, name = "All Around Azure: DevOps with GitHub", link = "http://aka.ms/AAA-DevOpsGitHub", event = "All Around Azure: DevOps with GitHub" },
+        { date = 2021-05-24, name = "Supercharing a Web Devs Toolbox", link = "https://www.meetup.com/Microsoft-Reactor-Sydney/events/277846610/", event = "Microsoft Reactor Sydney" },
         { date = 2021-06-03, name = "Type-safe GraphQL with TypeScript", link = "https://openjsworld2021.sched.com/event/izz7/type-safe-graphql-with-typescript-aaron-powell-microsoft", event = "OpenJS World 2021" }
     ]
 [params.speaking.bio]
