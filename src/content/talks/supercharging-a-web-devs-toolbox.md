@@ -1,5 +1,5 @@
 ---
-title: "Supercharging a Web Devs toolbox"
+title: "Supercharging a Web Devs Toolbox"
 hidden: true
 tags: ["web", "javascript", "azure"]
 duration: 45 minutes
