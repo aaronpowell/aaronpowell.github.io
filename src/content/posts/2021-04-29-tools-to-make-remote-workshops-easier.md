@@ -40,7 +40,7 @@ I talked about [Live Share](https://visualstudio.microsoft.com/services/live-sha
 
 If you're unfamiliar with Live Share, it allows you to make your VS Code (or Visual Studio) instance available to anyone you invite in, making a collaborative editor experience, similar to the likes of Google Docs/Word Online/etc. (and with all the chaos that involves). If you don't want other messing with your code, you can make the share read-only.
 
-But it's not just giving people a view into your code, they are also able to access any webserver you run and terminals you open (again, these can be read only), set breakpoints and debug along side you. It even has the same browser-only experience, like you get with Codespaces, meaning that people can join without having to install anything other than a browser.
+But it's not just giving people a view into your code, they are also able to access any webserver you run and terminals you open (again, these can be read only), set breakpoints and debug alongside you. It even has the same browser-only experience, like you get with Codespaces, meaning that people can join without having to install anything other than a browser.
 
 As a participant you are no longer fighting with the limits of technology-over-video. No doubt you've experienced watching code over a video conferencing platform, only to have bandwidth drop and the text become fuzzy, or you missed a step and just want to go to another file. With Live Share you can tweak the editor to how you want to see it, bump the font up, change contrasts, even go to a file you missed.
 
@@ -58,7 +58,7 @@ CodeTour allows you to define a script for someone to follow as they are guided 
 
 The video shows CodeTour giving us a path to follow around our exercise, along with commands to run in the terminal and code to insert. Everything covered in the steps also exists in the README, but this helps put the participant in the right context for where something goes and what to do next.
 
-This can be really useful when you have a self-directed workshop (such as one available as a GitHub repo) or for when people have to tackle an exercise after you have setup the context for but leaving them to "do it themselves". By having these tours in place, if someone gets lost, they have some guide posts that can get them back on track (again, since you can't come and sit with them as easily).
+This can be really useful when you have a self-directed workshop (such as one available as a GitHub repo) or for when people have to tackle an exercise after you have setup the context for but leaving them to "do it themselves". By having these tours in place, if someone gets lost, they have some guideposts that can get them back on track (again, since you can't come and sit with them as easily).
 
 ## Conclusion
 
