@@ -63,11 +63,12 @@
         rel="stylesheet"
     />
 
-    {{ $sass := resources.Get "sass/main.scss" }} {{ $styles := $sass | resources.ToCSS | minify}}
+    {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" true) }}
+    {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $options }}
     <link
         rel="stylesheet"
-        href="{{ $styles.Permalink }}"
-        integrity="{{ $styles.Data.Integrity }}"
+        href="{{ $style.Permalink }}"
+        integrity="{{ $style.Data.Integrity }}"
         media="screen"
     />
 </head>

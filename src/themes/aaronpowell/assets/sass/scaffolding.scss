@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 .container {
     margin: 0 auto;
@@ -21,6 +21,12 @@
 @media (max-width: $normal) {
     .container {
         max-width: 960px;
+    }
+}
+
+@media (max-width: calc(#{$wide} - 1px)) {
+    .container {
+        padding: 10px;
     }
 }
 

@@ -97,7 +97,8 @@
                 </ul>
                 {{ end }} {{ $pastTalks := where .talks "date" "<=" now }}
                 <h4>Past Talks</h4>
-                <ul class="talk-list">
+                <button class="toggle-upcoming">Toggle upcoming</button>
+                <ul class="talk-list upcoming">
                     {{ range sort $pastTalks "date" "desc" }}
                     <li>{{ partial "talk" . }}</li>
                     {{ end }}

@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .talks {
     section.container {
         margin-top: 20px;
@@ -16,7 +18,8 @@
             border-radius: 5px;
         }
 
-        .bios, .calendar {
+        .bios,
+        .calendar {
             grid-column-start: span 2;
         }
 
@@ -37,6 +40,56 @@
                 }
                 time {
                     font-size: 1rem;
+                }
+            }
+
+            .toggle-upcoming {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: $small) {
+    .talks {
+        section.container {
+            grid-template-columns: 1fr;
+        }
+
+        .bio {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            p,
+            h4 {
+                margin: 5px 0px;
+            }
+
+            .calendar {
+                .toggle-upcoming {
+                    text-decoration: none;
+                    text-transform: uppercase;
+
+                    font-size: 0.8rem;
+
+                    display: inline-block;
+                    padding: 10px;
+                    border: 1px solid #fff;
+                    box-shadow: 0 0 0 1px $primaryHighlightColour;
+                    background-color: $primaryHighlightColour;
+                    color: #fff;
+                    transition: background-color 0.2s ease-in;
+
+                    &:hover {
+                        transition: background-color 0.2s ease-in;
+                        background-color: darken($primaryHighlightColour, 10%);
+                    }
+                }
+
+                .upcoming {
+                    display: none;
                 }
             }
         }
