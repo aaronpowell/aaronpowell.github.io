@@ -1,14 +1,14 @@
 +++
 title = "Using Auth0 With Static Web Apps"
-date = 2021-05-13T04:15:20Z
+date = 2021-05-12T22:49:11Z
 description = "With Azure Static Web Apps supporting custom authentication, let's look at how we can use Auth0 as a provider."
-draft = true
+draft = false
 tags = ["javascript", "serverless"]
 tracking_area = "javascript"
 tracking_id = "28110"
 +++
 
-One of my favorite features of (the now General Available) [Azure Static Web Apps (SWA)](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) is that in the Standard Tier you can now provide a custom [OpenID Connect (OIDC) provider](). This gives you a lot more control over who can and can't access your app.
+One of my favorite features of (the now General Available) [Azure Static Web Apps (SWA)](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) is that in the Standard Tier you can now provide a custom [OpenID Connect (OIDC) provider](https://docs.microsoft.com/azure/static-web-apps/authentication-custom?tabs=aad&{{<cda>}}). This gives you a lot more control over who can and can't access your app.
 
 In this post, I want to look at how we can use [Auth0](https://auth0.com/) and an OIDC provider for Static Web Apps.
 
