@@ -48,7 +48,7 @@ From here, we're going to select **Create Application**, give it a name and sele
 
 With your application created, it's time to configure it. We'll skip the **Quick Start** options, as we're really doing something more custom. Instead, head to **Settings** as we are going to need to provide the application with some redirect options for login/logout, so that SWA will know you've logged in and can unpack the basic user information.
 
-For the **Sign-in redirect URIs** you will need to add `https://<hostname>/.auth/login/auth0` for the **Application Login URI**, `https://<hostname>/.auth/login/auth0/callback` for **Allowed Callback URLs** and for **Allowed Logout URLs** add `https://<hostname>/.auth/logout/auth0/callback`. If you haven't yet deployed to Azure, don't worry about this step yet, we'll do it one the SWA is created.
+For the **Sign-in redirect URIs** you will need to add `https://<hostname>/.auth/login/auth0` for the **Application Login URI**, `https://<hostname>/.auth/login/auth0/callback` for **Allowed Callback URLs** and for **Allowed Logout URLs** add `https://<hostname>/.auth/logout/auth0/callback`. If you haven't yet deployed to Azure, don't worry about this step yet, we'll do it once the SWA is created.
 
 _Quick note - the `auth0` value here is going to be how we name the provider in the `staticwebapp.config.json`, so it can be anything you want, I just like to use the provider name so the config is easy to read._
 

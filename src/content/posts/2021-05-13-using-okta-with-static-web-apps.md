@@ -50,7 +50,7 @@ With your application created, it's time to configure it. Give it a name, someth
 
 We are going to need to provide the application with some redirect options for login/logout, so that SWA will know you've logged in and can unpack the basic user information.
 
-For the **Sign-in redirect URIs** you will need to add `https://<hostname>/.auth/login/okta/callback` and for **Sign-out redirect URIs** add `https://<hostname>/.auth/logout/okta/callback`. If you haven't yet deployed to Azure, don't worry about this step yet, we'll do it one the SWA is created.
+For the **Sign-in redirect URIs** you will need to add `https://<hostname>/.auth/login/okta/callback` and for **Sign-out redirect URIs** add `https://<hostname>/.auth/logout/okta/callback`. If you haven't yet deployed to Azure, don't worry about this step yet, we'll do it once the SWA is created.
 
 _Quick note - the `okta` value here is going to be how we name the provider in the `staticwebapp.config.json`, so it can be anything you want, I just like to use the provider name so the config is easy to read._
 
