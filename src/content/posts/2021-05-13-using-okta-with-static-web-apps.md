@@ -124,7 +124,7 @@ With the config ready you can create the SWA in Azure and kick off a deployment 
 
 ## Using the provider
 
-Once the provider is registered in the config file, it is usable just like the other providers SWA offers, with the login being `/.auth/login/<provider_name>`, which in this case the `provider_name` is `okta`. The user information will then be exposed [as standard](<(https://docs.microsoft.com/azure/static-web-apps/user-information?tabs=javascript&{{<cda>}})>) to both the web and API components.
+Once the provider is registered in the config file, it is usable just like the other providers SWA offers, with the login being `/.auth/login/<provider_name>`, which in this case the `provider_name` is `okta`. The user information will then be exposed [as standard](https://docs.microsoft.com/azure/static-web-apps/user-information?tabs=javascript&{{<cda>}}) to both the web and API components.
 
 If you're building a React application, check out [my React auth helper](https://www.npmjs.com/package/@aaronpowell/react-static-web-apps-auth) and for the API [there is a companion](https://www.npmjs.com/package/@aaronpowell/static-web-apps-api-auth).
 
