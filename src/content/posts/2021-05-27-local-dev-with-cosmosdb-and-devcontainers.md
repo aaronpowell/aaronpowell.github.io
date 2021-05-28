@@ -282,3 +282,7 @@ Deleted item with id: 3
 Throughout this post we've seen how we can create a complex environment with VS Code Remote Containers (aka, devcontainers), which uses the CosmosDB emulator to do local dev of a Node.js app against CosmosDB.
 
 You'll find my sample [on GitHub](https://github.com/aaronpowell/azure-cosmos-db-sql-api-nodejs-getting-started), should you want to spin it.
+
+## Alternative solution
+
+After posting this article I got into a Twitter discussion in which it looks like there might be another solution to this that doesn't require disabling TLS. [Noel Bundick](https://twitter.com/acanthamoeba?s=20) has [an example repo](https://github.com/noelbundick/docker-cosmosdb) that uses the `NODE_EXTRA_CA_CERTS` environment variable to add the [cert that comes with the emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/linux-emulator?{{<cda>}}#run-on-linux) to Node.js at runtime, rather than disabling TLS. It's a bit more clunky as you'll need to run a few more steps once the devcontainer starts, but do check it out as an option.
