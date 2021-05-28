@@ -5,7 +5,7 @@ description = "I'm mad about devcontainers, so let's take it to the limits!"
 draft = false
 tags = ["javascript", "vscode", "cosmosdb"]
 tracking_area = "javascript"
-tracking_id = ""
+tracking_id = "30067"
 cover_image = "/images/2021-05-27-local-dev-with-cosmosdb-and-devcontainers_cover.png"
 +++
 
