@@ -3,7 +3,7 @@ title = "Tools to Make Remote Workshops Easier"
 date = 2021-04-29T03:50:26Z
 description = "While remote workshops can be hard, here's a few tools to make them a little easier."
 draft = false
-tags = ["public-speaking", "conferences"]
+tags = ["public-speaking", "conferences", "vscode"]
 tracking_area = "javascript"
 tracking_id = "17914"
 +++
