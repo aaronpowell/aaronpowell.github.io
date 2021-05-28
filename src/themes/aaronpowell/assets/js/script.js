@@ -25,17 +25,20 @@ document.addEventListener("DOMContentLoaded", function() {
         item.addEventListener("click", handleCopy);
     }
 
-    document.querySelector(".toggle-upcoming").addEventListener("click", e => {
-        const sib = e.target.nextElementSibling;
+    const upcoming = document.querySelector(".toggle-upcoming");
+    if (upcoming) {
+        upcoming.addEventListener("click", e => {
+            const sib = e.target.nextElementSibling;
 
-        const display = window
-            .getComputedStyle(sib)
-            .getPropertyValue("display");
+            const display = window
+                .getComputedStyle(sib)
+                .getPropertyValue("display");
 
-        if (display === "none") {
-            sib.style.display = "block";
-        } else {
-            sib.style.display = "none";
-        }
-    });
+            if (display === "none") {
+                sib.style.display = "block";
+            } else {
+                sib.style.display = "none";
+            }
+        });
+    }
 });
