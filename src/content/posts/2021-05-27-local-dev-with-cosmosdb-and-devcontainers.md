@@ -9,7 +9,7 @@ tracking_id = "30067"
 cover_image = "/images/2021-05-27-local-dev-with-cosmosdb-and-devcontainers_cover.png"
 +++
 
-When I was a consultant the nirvana that I tried to achieve on projects was to be able to clone them from source control and have everything ready to go, no wiki pages to follow on what tools to install, no unmaintained setup scripts, just clone + install dependencies. This is why I love
+When I was a consultant the nirvana that I tried to achieve on projects was to be able to clone them from source control and have everything ready to go, no wiki pages to follow on what tools to install, no unmaintained setup scripts, just clone + install dependencies. This is why I love [VS Code Remote Containers](https://code.visualstudio.com/docs/remote/containers?{{<cda>}}), aka devcontainers.
 
 I've previously said [all projects need devcontainers]({{<ref "/posts/2021-03-08-your-open-source-project-needs-a-dev-container-heres-why.md">}}), that they are an [essential tool for workshops]({{<ref "/posts/2021-04-29-tools-to-make-remote-workshops-easier.md">}}) and might go overboard on it locally...
 
