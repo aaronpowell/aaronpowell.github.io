@@ -19,4 +19,6 @@ notes: |
     This session will cover some VS Code extensions such as LiveShare, Intellicode and the Edge DevTool Extension, devcontainers and Codespaces for dev environments, GitHub Actions for CI/CD and Azure Static Web Apps for hosting.
 
 resources:
+    - name: Talk at Microsoft Reactor
+      link: https://www.youtube.com/watch?v=1QQVQ8vTUXU
 ---
