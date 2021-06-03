@@ -23,4 +23,6 @@ resources:
       link: https://github.com/aaronpowell/brisjs-graphql
     - name: Twitch stream
       link: https://www.youtube.com/watch?v=9t-pLcZEmoE
+    - name: Type-Safe GraphQL at OpenJS World 2021
+      link: https://www.youtube.com/watch?v=G2HUgV30EG4
 ---

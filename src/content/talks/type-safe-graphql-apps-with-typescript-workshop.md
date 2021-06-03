@@ -1,5 +1,5 @@
 ---
-title: "Type-Safe Graphql Apps With Typescript - Workshop"
+title: "Type-Safe GraphQL Apps With Typescript - Workshop"
 hidden: true
 tags: ["javascript", "typescript"]
 duration: Half day
