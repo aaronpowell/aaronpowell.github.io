@@ -91,7 +91,7 @@ And now we have our schema ready to use. So let's talk about authentication.
 
 Authentication in GraphQL is an interesting problem, as the language doesn't provide anything for it, but instead relies on the server to provide the authentication and for you to work out how that is applied to the queries and mutations that schema defines.
 
-Apollo provides [some guidance on authentication](https://www.apollographql.com/docs/apollo-server/security/authentication), through the use of a `context` function, that has access to the incoming request. We can use this function to unpack the SWA authentication information and add it to the `context` object. To get some help here, we'll use the [`@aaronpowell/static-web-apps-api-auth`](https://github.com/aaronpowell/static-web-apps-api-auth) library, as it can tell us if someone is logged in and unpack the client principal from the header.
+Apollo provides [some guidance on authentication](https://www.apollographql.com/docs/apollo-server/security/authentication), through the use of a `context` function, that has access to the incoming request. We can use this function to unpack the SWA authentication information and add it to the `context` object. To get some help here, we'll use the [`@aaronpowell/static-web-apps-api-auth`](https://github.com/aaronpowell/azure-static-web-apps-api-auth) library, as it can tell us if someone is logged in and unpack the client principal from the header.
 
 Let's implement a `context` function to add the authentication information from the request (for this post, I'm going to skip over some of the building blocks and implementation details, such as how resolvers work, but you can find them in the complete sample at the end):
 
