@@ -1,0 +1,56 @@
+.github-readme-embed {
+    z-index: 1;
+    position: relative;
+    border: 1px solid $light-medium-gray;
+    border-radius: 3px;
+    box-shadow: $shadow;
+    margin: 1.1em auto 1.3em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+    overflow: hidden;
+    max-width: 620px;
+    padding: 10px;
+    a {
+        color: var(--link-brand-color) !important;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin: 0px 0px 10px;
+        text-transform: none !important;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin: 10px 0px;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        margin: 10px 0px;
+    }
+
+    .contents {
+        max-height: 200px;
+        overflow: hidden;
+    }
+
+    .button {
+        text-align: center;
+        border-top: 1px solid $light-medium-gray;
+
+        a {
+            box-shadow: $shadow;
+            text-decoration: none;
+            margin: 10px 5px 5px;
+            padding: 10px;
+            border: 1px solid $light-medium-gray;
+            border-radius: 10px;
+            display: inline-block;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
