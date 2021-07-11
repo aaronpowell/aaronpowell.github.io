@@ -9,7 +9,7 @@ tracking_id = "33392"
 cover_image = "/images/banners/2021-07-09-creating-static-web-apps-with-fsharp-and-fable.png"
 +++
 
-While I've done [lots of stuff with F#](/tags/fsharp) over the years, it's pretty much all centred around apps on the server. With [Azure Static Web Apps](https://docs.microsoft.com/azure/app-service-static-web/?{{<cda>}}) being a big area for myself these days I've been looking at the role that F# plays with it.
+While I've done [lots of stuff with F#](/tags/fsharp) over the years, it's pretty much all centred around apps on the server. With [Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) being a big area for myself these days I've been looking at the role that F# plays with it.
 
 This led me to have a proper look at [Fable](https://fable.io). Fable is a F# to JavaScript compiler, meaning you can write F# code and have it compiled to JavaScript, which is then run in the browser (or in a Node.js/Electron/etc. but I'm focusing on the browser usage).
 

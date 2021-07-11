@@ -12,7 +12,7 @@ series_title = "Server-Side Authentication"
 
 In our journey into GraphQL on Azure we've only created endpoints that can be accessed by anyone. In this post we'll look at how we can add authentication to our GraphQL server.
 
-For the post, we'll use the [Apollo Server](https://www.apollographql.com/docs/apollo-server/) and [Azure Static Web Apps](https://docs.microsoft.com/azure/app-service/app-service-static-web/app-service-static-web-overview?{{<cda>}}) for hosting the API, mainly because SWA [provides security](https://docs.microsoft.com/azure/static-web-apps/authentication-authorization?{{<cda>}}) (and if you're wondering, this is how I came across the need to write [this last post]({{<ref "/posts/2021-07-02-calling-static-web-apps-authenticated-endpoints.md">}})).
+For the post, we'll use the [Apollo Server](https://www.apollographql.com/docs/apollo-server/) and [Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/?{{<cda>}}) for hosting the API, mainly because SWA [provides security](https://docs.microsoft.com/azure/static-web-apps/authentication-authorization?{{<cda>}}) (and if you're wondering, this is how I came across the need to write [this last post]({{<ref "/posts/2021-07-02-calling-static-web-apps-authenticated-endpoints.md">}})).
 
 If you're new to GraphQL on Azure, I'd encourage you to check out [part 3]({{<ref "/posts/2020-08-07-graphql-on-azure-part-3-serverless-with-javascript.md">}}) in which I go over how we can create a GraphQL server using Apollo and deploy that to an Azure Function, which is the process we'll be using for this post.
 
