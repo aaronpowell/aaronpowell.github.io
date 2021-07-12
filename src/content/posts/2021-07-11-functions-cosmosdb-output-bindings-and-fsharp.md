@@ -1,5 +1,5 @@
 +++
-title = "Azure Functions CosmosDB Output Bindings and F#"
+title = "Azure Functions, F# and CosmosDB Output Bindings"
 date = 2021-07-11T23:25:38Z
 description = "Let's look at how to work with Azure Functions output bindings from F#, specifically for CosmosDB"
 draft = false
