@@ -1,27 +1,11 @@
-<!-- <script>
-    (async () => {
-        const data = await fetch(
-            "https://api.github.com/repos/{{ .Get 0 }}/readme",
-            { headers: { Accept: "application/vnd.github.v3.html" } }
-        );
-        if (data.ok) {
-            const html = await data.text();
+{{ $repo := .Get 0 }}
+{{ $json := getJSON "https://hugo-github-embed.azurewebsites.net/api/html?repo=" $repo }}
 
-            const div = document.getElementById("{{ .Get 0 }}");
-
-            const contents = div.querySelector(".contents");
-
-            contents.innerHTML = html;
-            div.style.display = "block";
-        }
-    })();
-</script>
-
-<div class="github-readme-embed" id="{{ .Get 0 }}" style="display: none">
-    <div class="contents"></div>
-    <div class="button">
-        <a href="https://github.com/{{ .Get 0 }}" target="_blank"
-            >View on GitHub</a
-        >
+<div class="github-readme-embed">
+    <div class="contents">
+        {{ safeHTML $json.html }}
     </div>
-</div> -->
+    <div class="button">
+        <a href="https://github.com/{{ .Get 0 }}" target="_blank">View on GitHub</a>
+    </div>
+</div> 
