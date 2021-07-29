@@ -78,7 +78,6 @@ As a newbie to this space I've gone with two sets of key switches. Currently, I 
 The box arrived and I couldn't believe how small it was!
 
 ![The box!](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/box.jpg)
-![Unboxing](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/unboxed.jpg)
 
 It has a snazzy little carry case for if I take it travelling (_cries in COVID_).
 
