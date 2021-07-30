@@ -9,29 +9,29 @@ tracking_id = "0000"
 cover_image = "/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/cover.jpg"
 +++
 
-Keyboards, as a software developer it's something I use daily, and for extended periods of time. But it's not something that I've ever really spent much time thinking about it or the role that it plays in how I work.
+Keyboards, as software developers it's something we use daily, and for extended periods of time. But it's not something that _I've_ ever really spent much time thinking about it or the role that it plays in how I work.
 
-One of the first keyboards I remember using was a huge beige thing with a curly cable into the 9-pin port. Then as I started working it was just whatever keyboard I had at work, basic keyboards that you're likely familiar with from corporate environments. When I started consulting and speaking, my main machine was a laptop and because I didn't want to drag keyboards around to client sites, I would just use the keyboard on my laptop... and I loved those. Probably my favourite laptop keyboard is the Surface Book 2, followed closely by the Surface Pro type cover.
+One of the first keyboards I remember using was a huge beige thing with a curly cable into the 9-pin port. Then, as I started working it was just whatever keyboard I had at work, basic keyboards that you're likely familiar with from corporate environments. When I started consulting and speaking, my main machine was a laptop and because I didn't want to drag keyboards around to client sites, I would just use the keyboard on my laptop... and I loved those. Probably my favourite laptop keyboard is the Surface Book 2, followed closely by the Surface Pro type cover.
 
-With last year seeing me move to full time working from home I got myself a desktop and with that I needed an external keyboard.
+With last year seeing me move to full time working from home, I got myself a desktop and with that I needed an external keyboard.
 
-Thankfully, I did have one that I'd used on and off, a MS Natural 4000!
+Thankfully, I did have one that I'd used on and off, a Microsoft Natural 4000!
 
 ![My Microsoft Natural 4000 keyboard](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/ms-natural-4000.jpg)
 
 ## My first ergonomic keyboard
 
-I bought this keyboard about a decade ago, on my first trip to Microsoft as an MVP, mainly on a whim, but it's mostly sat on the shelf collecting dust. Anyway, I dusted it off and have been using it for about 12 months now.
+I bought this keyboard about a decade ago, on my first trip to Microsoft as an MVP, mainly on a whim, but it's mostly sat on the shelf collecting dust (due to the above mentioned reasons for not using an external keyboard). Anyway, I dusted it off and have been using it for about 12 months now.
 
-This was the first time I'd used an ergonomic keyboard and I didn't really know why I wanted it other than "seemed like a fun experiment". It took a little bit to get use to but generally speaking it was no different to any other keyboard I'd used. They keys felt nice, but not anything special.
+This was the first time I'd used an ergonomic keyboard and I didn't really know _why_ I wanted it other than "it seemed like a fun experiment". It took a little bit to get use to but, generally speaking, it was no different to any other keyboard I'd used. They keys felt nice, but not anything special.
 
-Unfortunately, this is a 10 year old keyboard and it was starting to wear out, the wrist rests are starting to crack and peal, plus the years of dust collecting have made some of the keys a bit sticky at times.
+Unfortunately, this is a 10 year old keyboard and it was starting to wear out, the wrist rests are starting to crack and peal, plus the years of dust collecting on it have made some of the keys a bit sticky at times.
 
 It was time for a new keyboard.
 
-The MS Natural 4000 is no longer available, except off eBay, so I needed to work out what I'd get as a replacement. Should I one of the current generation MS ergonomic keyboards, or should I go elsewhere?
+The MS Natural 4000 is no longer available, so I needed to work out what I'd get as a replacement. Should I go with one of the current generation MS ergonomic keyboards, or should I go elsewhere?
 
-I'd seen a few people on Twitter talking about split keyboards, and that intrigued me, so I started to look around at them. One model that kept popping up is the [ZSA Moonlander](https://www.zsa.io/moonlander/).
+I'd seen a few people on Twitter talking about split keyboards, and that intrigued me, so I started to look at them. One model that kept popping up is the [ZSA Moonlander](https://www.zsa.io/moonlander/).
 
 After some umm-ing and ahh-ing I decided to take the plunge and ordered it.
 
@@ -51,7 +51,7 @@ Now take a look at the hand position on the MS Natural 4000.
 
 ![Hand position on the Microsoft Natural 4000](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/ms-natural-hand-position.jpg)
 
-Here my hands are a bit more spread and as a result my shoulders are more open, which is a more natural body position, but it's still limited as I can't more the keyboard any further apart than this and my wrists are turned (it looks a bit weird in the photo due to the tenting on the keyboard making it not sit flat like the laptop one).
+Here my hands are a bit more spread and as a result my shoulders are more open, which is a more natural body position, but it's still limited as I can't move the keyboard any further apart than this and my wrists are still turned (it looks a bit weird in the photo due to the tenting on the keyboard making it not sit flat like the laptop one).
 
 In a fully split keyboard, you can completely open up by moving each half of the keyboard to where is the most comfortable position for you.
 
@@ -69,7 +69,7 @@ I'm on day four using it and if you're following my Twitter stream you'll have s
 
 The ZSA Moonlander is a mechanical keyboard, which means you can feel superior to others by talking about different key switches, the pressure required for them, their pre-travel distance, etc.
 
-As a newbie to this space I've gone with two sets of key switches. Currently, I have Kailh Gold in, which are a very light switch, but also a super loud one (clacking on both the up and down motion), so it's probably a good thing I work from home (although right now we're home schooling due to COVID, but my wife hasn't said anything 😅). I also have a set of Cherry MX Brown, which are apparently a great starting key switch, they aren't too noisy, have a good feel, etc. I'll give them a try after a few weeks, once I'm more use to the keyboard.
+As a newbie to this space I've gone with two sets of key switches. Currently, I have Kailh Gold in, which are a very light switch, but also a super loud one (clacking on both the up and down motion), so it's probably a good thing I work from home (~~although right now we're home schooling due to COVID, but my wife hasn't said anything 😅~~ **Update: my wife read this post and said "Oh, you can totally hear them.** 🤣). I also have a set of Cherry MX Brown, which are apparently a great starting key switch, they aren't too noisy, have a good feel, etc. I'll give them a try after a few weeks, once I'm more use to the keyboard.
 
 ![Key switches!](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/switches.jpg)
 
@@ -87,9 +87,9 @@ I slid my old keyboard off to the side and setup the Moonlander, plugged it in a
 
 ![Moonlander on the desk](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/initial-setup.jpg)
 
-The first time I realised is that I wouldn't be able to have it in the full split position, it was just too weird for me, so I brought the two halves a bit closer, more like the MS Natural, and now I could find where the keys were as I tried to type. It's also an ortholinear layout, not staggered, meaning that the keys are lined up in vertical columns, unlike most keyboards, encouraging more up and down movement than side to side ([here's a good video talking of the differences and possible benefits of ortholinear](https://www.youtube.com/watch?v=Ho_CFfdsmc8)).
+The first thing I realised is that I wouldn't be able to have it in the full split position, it was just too weird for me, so I brought the two halves a bit closer, more like the MS Natural, and now I could find where the keys were as I tried to type. It's also an ortholinear layout, not staggered, meaning that the keys are lined up in vertical columns, unlike most keyboards, encouraging more up and down movement than side to side ([here's a good video talking of the differences and possible benefits of ortholinear](https://www.youtube.com/watch?v=Ho_CFfdsmc8)).
 
-One of the things that you can do with the Moonlander is customise the layout of the keyboard. Given I have a heap less keys than before, no function row, no numpad, etc., if I want that functionality back in, I can customise it using their [Oryx](https://configure.zsa.io/) software. This was also useful as I had no idea what the keyboard layout originally was, like, where's my Windows key, or backspace! It also supports the idea of keyboard layers, which is where you have different "modes" the keyboard can shift into, generally hitting some key, and changing what the keys do.
+One of the things that you can do with the Moonlander is customise the layout of the keyboard. Given I have less keys than before, no function row, no numpad, etc., if I want that functionality back in, I can customise it using their [Oryx](https://configure.zsa.io/) software. This was also useful as I had no idea what the keyboard layout originally was, like, where's my Windows key, or backspace! It also supports the idea of keyboard layers, which is where you have different "modes" the keyboard can shift into, generally hitting some key, and changing what the keys do.
 
 This was going to be a challenge...
 
@@ -111,23 +111,23 @@ Yeah, I felt really dumb trying to type, but damnit, I'm going to learn!
 
 ### Day 2 - Feeling better
 
-On day 2 I started playing with the _tenting_, which is how you can raise the keyboard up. I like that the MS Natural 4000 wasn't sitting flat on the desk and curved up at the middle, so I played around a bit with that on my Moonlander to get a position that felt right.
+On day 2 I started playing with the keyboard _tenting_, which is how you can raise the keyboard up. I like that the MS Natural 4000 wasn't sitting flat on the desk and curved up at the middle, so I played around a bit with that on my Moonlander to get a position that felt right.
 
 ![Tenting the keyboard up for better hand position](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/tenting.jpg)
 
-I started doing more typing and it wasn't feeling as horrible. I've got a talk upcoming so I did some work on the slides, which required so typing but nothing long, and I did some updating to my work backlog, general admin stuff, and things were feeling better.
+I started doing more typing and it wasn't feeling as horrible. I've got a talk upcoming so I did some work on the slides, which required some typing but nothing long, and I did some updating to my work backlog, general admin stuff, and things were feeling better.
 
 Here's a video I posted on Twitter towards the end of day 2, showing me typing the tweet:
 
 {{<tweet "1419890805238472709">}}
 
-That tweet took about 45 seconds to type, which didn't feel too bad... You'll see me backspace a few times too!
+That tweet took about 45 seconds to type, which didn't feel too bad... You'll see me backspace a few times though!
 
 ### Day 3 - Coding
 
-After two days I felt like I was getting the hang of this usual typing, it was time to do some coding.
+After two days I felt like I was getting the hang of this usual typing stuff, it was time to do some coding.
 
-And back to square one 🤣.
+Aaaaaaaaaaaaaaaand back to square one 🤣.
 
 I never realised how muscle memory I have in coding, where the symbols are, how to use tools like VS and VS Code, I just use them, I don't even think.
 
@@ -139,7 +139,7 @@ I now have some customised layers on the keyboard for VS Code and VS, containing
 
 ## Conclusion
 
-It's been less than a week but when it comes to _word-centric typing_, I feel like I'm getting my stride back, coding is going to take a bit longer, mainly because there's so many variables (ha!) to that, but I'm sure I'll get there (this week hasn't been a code-centric week for me).
+It's been less than a week but when it comes to _word-centric typing_, I feel like I'm getting my stride back, coding is going to take a bit longer, mainly because there are so many variables (ha!) to that, but I'm sure I'll get there (this week hasn't been a code-centric week for me).
 
 I'm finding the mechanical nature of the keys nice, and I'd probably rate this above the Surface Book 2 keyboard. I'll keep the Kailh Gold's in for a few weeks before trying the Cherry MX Brown, although the clacky sound is growing on me.
 
