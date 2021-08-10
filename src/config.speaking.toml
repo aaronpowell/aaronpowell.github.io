@@ -43,7 +43,10 @@
         { date = 2021-05-24, name = "Supercharing a Web Devs Toolbox", link = "https://www.meetup.com/Microsoft-Reactor-Sydney/events/277846610/", event = "Microsoft Reactor Sydney" },
         { date = 2021-06-03, name = "Type-safe GraphQL with TypeScript", link = "https://openjsworld2021.sched.com/event/izz7/type-safe-graphql-with-typescript-aaron-powell-microsoft", event = "OpenJS World 2021" },
         { date = 2021-07-29, name = "Simplifying Data with CosmosDB and F#", link = "https://focus.dotnetconf.net/", event = ".NET Conf: Focus on F#" },
-        { date = 2021-08-03, name = "F# for Web Developers", link = "https://www.meetup.com/en-AU/Melb-NET-Meetup/events/279602669/", event = "Melb.NET - August 2021" }
+        { date = 2021-08-03, name = "F# for Web Developers", link = "https://www.meetup.com/en-AU/Melb-NET-Meetup/events/279602669/", event = "Melb.NET - August 2021" },
+        { date = 2021-08-31, name = "F# for Web Developers", link = "https://www.meetup.com/en-AU/Melb-NET-Meetup/events/279602669/", event = "ALT.NET Sydney - August 2021" },
+        { date = 2021-09-01, name = "Web Apps in 30 minutes", link = "https://www.microsoft.com/en-au/business/learn/cloud-training-events/developer-cloud-skills-in-a-week?WT.mc_id=javascript-00000-aapowell", event = "Low+Pro-Code Skills Bootcamp" },
+        { date = 2021-08-25, name = "What and How of GitHub Actions", link = "https://www.meetup.com/DevOpsPerth/", event = "DevOps Perth - August 2021" }
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."
