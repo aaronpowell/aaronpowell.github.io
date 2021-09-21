@@ -149,3 +149,4 @@ home = [ "HTML", "RSS", "JSON"]
         avatar  = "/images/logo.png"
         twitter = "slace"
         gravatar= "5d608d8fe9156b0e01b3f224e28409b0"
+        job     = "Principal Cloud Advocate @ Microsoft"
