@@ -52,7 +52,7 @@ In this section we'll use the Azure Portal to create the required resources to h
     - _Operating System_ - `Linux`
     - _Region_ - Select an appropriate region
 
-1. Use the _App Service Plan_ to select the appropriate Sku and size for the level fo scale your app will need (refer to [the Azure docs](https://azure.microsoft.com/pricing/details/app-service/windows/?{{<cda>}}) for more information on the various Sku and sizes)
+1. Use the _App Service Plan_ to select the appropriate Sku and size for the level of scale your app will need (refer to [the Azure docs](https://azure.microsoft.com/pricing/details/app-service/windows/?{{<cda>}}) for more information on the various Sku and sizes)
 
 1. Click **Review + create** then **Create**
 
