@@ -162,7 +162,7 @@ In this section, we'll use the [Azure CLI](https://docs.microsoft.com/cli/azure/
     az mysql db create --resource-group $rgName --name $dbName --server-name $serverName
 
     # Allow Azure resources through the firewall
-    az mysql server firewall-rule create --resource-group $rgName --server-name $serverName --name AllowAllAzureIps --start-ip-range 0.0.0.0 --end-ip-range 0.0.0.0
+    az mysql server firewall-rule create --resource-group $rgName --server-name $serverName --name AllowAllAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
     ```
 
 1. Add configuration values to the Web App
@@ -178,7 +178,7 @@ In this section, we'll use the [Azure CLI](https://docs.microsoft.com/cli/azure/
 
 ## Deploy with an Azure Resource Manager template
 
-To deploy using an Azure Resource Manager template, use the botton below, or upload [this template](https://gist.githubusercontent.com/aaronpowell/f216f119ffe5ed52945b46d0bb55569b/raw/2490a9295ea25c905096dbaae57da6ef8edb0e43/azuredeploy.json) as a custom deployment in Azure.
+To deploy using an Azure Resource Manager template, use the button below, or upload [this template](https://gist.githubusercontent.com/aaronpowell/f216f119ffe5ed52945b46d0bb55569b/raw/2490a9295ea25c905096dbaae57da6ef8edb0e43/azuredeploy.json) as a custom deployment in Azure.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgist.githubusercontent.com%2Faaronpowell%2Ff216f119ffe5ed52945b46d0bb55569b%2Fraw%2F2490a9295ea25c905096dbaae57da6ef8edb0e43%2Fazuredeploy.json)
 
