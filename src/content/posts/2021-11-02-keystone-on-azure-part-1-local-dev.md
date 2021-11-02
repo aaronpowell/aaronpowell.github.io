@@ -1,8 +1,8 @@
 +++
 title = "Keystone on Azure: Part 1 - Local Dev"
-date = 2021-09-29T02:19:08Z
+date = 2021-11-02T02:19:08Z
 description = "It's time to start a new series on using Keystone on Azure. Let's look at how we setup a local dev environment."
-draft = true
+draft = false
 tags = ["azure", "graphql", "javascript"]
 tracking_area = "javascript"
 tracking_id = "38807"
@@ -13,6 +13,8 @@ series_title = "Local Dev"
 As I've been exploring GraphQL on Azure through my [series of the same name]({{<ref "/posts/2020-07-13-graphql-on-azure-part-1-getting-started.md">}}) I wanted to take a look at how we can run applications that provide GraphQL as an endpoint easily, specifically those which we'd class as headless CMSs (Content Management Systems).
 
 So let's start a new series in which we look at one such headless CMS, [Keystone 6](https://keystonejs.com/). Keystone is an open source project created by the folks over at [Thinkmill](https://www.thinkmill.com.au/) and gives you a code-first approach to creating content types (models for the data you store), a web UI to edit the content and a GraphQL API in which you can consume the data via.
+
+_Note: At the time of writing, Keystone 6 is still in pre-release, so some content might change when GA hits._
 
 In this series we're going to create an app using Keystone, look at the services on Azure that we'd need to host it and how to deploy it using GitHub Actions. But first up, let's look at the local development experience and how we can optimise it for the way that (I think) gives you the best bang for buck.
 
