@@ -1,6 +1,6 @@
 +++
 title = "Keystone on Azure: Part 1 - Local Dev"
-date = 2021-11-02T02:19:08Z
+date = 2021-11-02T00:19:08Z
 description = "It's time to start a new series on using Keystone on Azure. Let's look at how we setup a local dev environment."
 draft = false
 tags = ["azure", "graphql", "javascript"]
