@@ -22,7 +22,7 @@ SQLite shouldn't be used for production, so instead, we'll use [Azure Database f
 
 ## Azure AppService
 
-The service in Azure that we're going to want is [AppService](https://docs.microsoft.com/azure/app-service/overview?{{<cda>}}) (it's also called WebApps in some places, but for simplicities sake, I'll use the official service name). AppService gives you a a Platform as a Service (PaaS) hosting model, meaning we're not going to need to worry about underlying hosting infrastructure (OS management, disk management, etc.), we just select the scale that we need and Azure takes care of it.
+The service in Azure that we're going to want is [AppService](https://docs.microsoft.com/azure/app-service/overview?{{<cda>}}) (it's also called WebApps in some places, but for simplicities sake, I'll use the official service name). AppService gives you a Platform as a Service (PaaS) hosting model, meaning we're not going to need to worry about underlying hosting infrastructure (OS management, disk management, etc.), we just select the scale that we need and Azure takes care of it.
 
 My preference for Node.js apps is to host on a Linux AppService, rather than a Windows host, and that's mainly because my experience has suggested that it's a better fit, but at the end of the day, the OS doesn't make any difference, as in a PaaS model, you don't have to care about the host.
 
