@@ -3,7 +3,7 @@ title = "Host Strapi 3 on Azure"
 date = 2021-10-14T23:15:02Z
 description = "Curious on how to run Strapi 3 on Azure without learning about VM's, check this out then!"
 draft = false
-tags = ["javascript", "azure"]
+tags = ["javascript", "azure", "graphql"]
 tracking_area = "javascript"
 tracking_id = "37811"
 +++
