@@ -6,7 +6,7 @@ draft = false
 tags = ["year-review"]
 +++
 
-With another year done it time to get going on my year in review post. This year I've actually managed to get it done a full 3 days earlier than [2017's]({{ < ref "/posts/2018-01-11-2017-a-year-in-review.md" >}})!
+With another year done it time to get going on my year in review post. This year I've actually managed to get it done a full 3 days earlier than [2017's]({{< ref "/posts/2018-01-11-2017-a-year-in-review.md" >}})!
 
 2018 was a pretty quiet year for me on the blogging front, with only 11 posts (including a 'year in review' one), and most of them were meta-posts about blogging or how I run websites. This reflects in my traffic stats, there was a drop in traffic over 2018 vs 2017. But this year was less about blogging and instead it was quite a big year for me both personally and professionally.
 
@@ -28,14 +28,14 @@ I used this as a chance to really brush up on Azure, got myself a MCSA so appare
 
 While I might have been keeping things a bit low-key on the blogging front I had a fairly hectic year speaking, over the course of 2018 I spoke at:
 
-* uduf
-* NDC Security
-* NDC Oslo
-* DDD Perth
-* DDD Sydney (well, I MC'ed it :stuck_out_tongue:)
-* DDD Melbourne
-* NDC Sydney (workshop + talk)
-* ALT.NET Sydney
+-   uduf
+-   NDC Security
+-   NDC Oslo
+-   DDD Perth
+-   DDD Sydney (well, I MC'ed it :stuck_out_tongue:)
+-   DDD Melbourne
+-   NDC Sydney (workshop + talk)
+-   ALT.NET Sydney
 
 I'm pretty stoked at how many events I got to speak at this past year and I'm starting to prepare for the events I want to get to this year. Hopefully I can get a few more in 2019 :wink:.
 
