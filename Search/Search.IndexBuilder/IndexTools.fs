@@ -7,6 +7,7 @@ open Lucene.Net.Index
 open Search
 open Lucene.Net.Documents
 open System.Collections.Generic
+open Lucene.Net.Documents.Extensions
 
 let cleanupIndex baseDir =
     let indexPath = Path.Combine(baseDir, "lucene")

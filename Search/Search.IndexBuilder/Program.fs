@@ -14,7 +14,6 @@ let main argv =
 
     let options = JsonSerializerOptions()
     options.PropertyNameCaseInsensitive <- true
-    options.Converters.Add(JsonFSharpConverter())
     options.Converters.Add(InvalidDateTimeConverter())
 
     let searchData = JsonSerializer.Deserialize<SearchData>(searchText, options)

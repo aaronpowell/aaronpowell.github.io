@@ -1,6 +1,5 @@
 module IndexTools
 
-open FSharp.Control.Tasks.V2.ContextInsensitive
 open System.IO
 open System
 open System.Threading.Tasks

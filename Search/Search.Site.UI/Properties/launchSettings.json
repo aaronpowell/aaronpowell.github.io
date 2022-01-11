@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Search.Site.UI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61277;http://localhost:61278"
+    }
+  }
+}

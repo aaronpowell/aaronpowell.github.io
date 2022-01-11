@@ -3,15 +3,16 @@
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "VARIANT": "5.0",
+            // Options
             "INSTALL_NODE": "true",
             "NODE_VERSION": "lts/*",
-            "INSTALL_AZURE_CLI": "false"
+            "UPGRADE_PACKAGES": "false",
+            "VARIANT": "6.0"
         }
     },
 
     "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash",
+        "terminal.integrated.defaultProfile.linux": "bash",
         "files.defaultLanguage": "markdown"
     },
 
@@ -20,7 +21,8 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "editorconfig.editorconfig",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "ionide.ionide-fsharp"
     ],
 
     "forwardPorts": [4014],

@@ -1,7 +1,6 @@
 ﻿namespace Search.Site
 
 open Microsoft.AspNetCore.Components
-open FSharp.Control.Tasks.V2
 open Lucene.Net.Index
 open Lucene.Net.Store
 open System.Net.Http

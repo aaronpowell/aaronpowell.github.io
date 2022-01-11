@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SearchResult.fs" />
@@ -8,10 +8,9 @@
     <Compile Include="SearchComponent.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.1.0-preview1.19508.20" />
-    <PackageReference Include="TaskBuilder.fs" Version="2.1.0" />
-    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00006" />
-    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00006" />
-    <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00006" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00015" />
+    <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00015" />
+    <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00015" />
   </ItemGroup>
 </Project>
