@@ -1,0 +1,8 @@
+{
+    "CA tracking links": {
+        "scope": "markdown",
+        "prefix": "ca",
+        "body": ["{{<cda>}}"],
+        "description": "CA tracking links"
+    }
+}
