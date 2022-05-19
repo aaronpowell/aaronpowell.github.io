@@ -43,7 +43,7 @@
     {{ else }}
     <meta
         property="og:image"
-        content="https://blogimagegenerator.azurewebsites.net/v1/og-image/{{ .File.BaseFileName }}"
+        content="https://blogimagegenerator.azurewebsites.net/v1/og-image/{{ with .File }}{{ .BaseFileName }}{{ end }}"
     />
     {{ end }} {{ if .Description }}
     <meta name="og:description" content="{{ .Description }}" />
@@ -74,3 +74,4 @@
         media="screen"
     />
 </head>
+

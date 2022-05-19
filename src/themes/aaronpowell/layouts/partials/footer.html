@@ -28,8 +28,8 @@
     </p>
 </footer>
 
-{{ $js := resources.Get "js/script.js" | minify}}
-{{ $secureJS := $js | resources.Fingerprint "sha512" }}
+{{ $js := resources.Get "js/script.js" | minify}} {{ $secureJS := $js |
+resources.Fingerprint "sha512" }}
 <script
     type="text/javascript"
     src="{{ $secureJS.Permalink }}"
@@ -50,3 +50,10 @@
 
     gtag("config", "{{ .Site.Params.googleAnalitycsID }}");
 </script>
+
+{{ if .Page.Store.Get "hasMermaid" }}
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({ startOnLoad: true });
+</script>
+{{ end }}

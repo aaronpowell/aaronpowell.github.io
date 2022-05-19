@@ -8,7 +8,7 @@
             "tags": [{{ range $tindex, $tag := $e.Params.tags }}{{ if $tindex }}, {{ end }}"{{ $tag| htmlEscape }}"{{ end }}],
             "description": {{ .Description | jsonify }},
             "content": {{$e.Plain | jsonify}},
-            "id": "{{ .File.BaseFileName }}"
+            "id": "{{ with .File }}{{ .BaseFileName }}{{ end }}"
         }
         {{ end }}
     ]

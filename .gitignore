@@ -10,3 +10,4 @@ index.zip
 src/resources/_gen
 .fake
 .vs
+.hugo_build.lock
