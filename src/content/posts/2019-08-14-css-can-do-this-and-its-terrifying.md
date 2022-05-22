@@ -6,11 +6,11 @@ draft = false
 tags = ["css"]
 +++
 
-{{< tweet 1161443226580127745 >}}
+{{< tweet user="ThePracticalDev" id="1161443226580127745" >}}
 
 Inspired by today's _#DevDiscuss_ I commented with my favourite misdeeds in CSS.
 
-{{< tweet 1161446544723202048 >}}
+{{< tweet user="slace" id="1161446544723202048" >}}
 
 So let's have a look at how they work.
 

@@ -8,7 +8,7 @@ tags = ["random"]
 
 Earlier this year I was tagged into a Twitter thread by [Amy Kapernick](https://twitter.com/Amys_Kapers) of someone looking to setup a dev environment on Windows:
 
-{{<tweet 1219827746219544576>}}
+{{<tweet user="hayley_codes" id="1219827746219544576">}}
 
 _Aside: Amy [has done one too](https://amygoestoperth.com.au/setting-up-a-windows-computer-for-dev) that you should also check out._
 
@@ -95,3 +95,4 @@ And after a little bit more time my script completes and all my stuff is setup.
 There we have it folks, this is how I setup my dev environment as a Windows user across Windows and WSL. Again, the scripts are [all on GitHub](https://github.com/aaronpowell/system-init) so feel free to use/fork my scripts as you like.
 
 I hope it's been helpful to see how you can automate most of the environment setup.
+

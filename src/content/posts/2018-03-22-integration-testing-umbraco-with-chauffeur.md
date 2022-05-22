@@ -16,13 +16,13 @@ Long story short, yes, yes I can run Umbraco in a test runner! I won't go into t
 
 Last month when I was up at [uduf](https://uduf.net) I was talking with people about testing Umbraco and how I was doing it with Chauffeur. One of the people I chatted to was [Nathan Woulfe](https://twitter.com/nathanwoulfe), author of [Plumber](https://github.com/nathanwoulfe/Plumber), an Umbraco workflow tool. Together we've started working on [Chauffeur integration for Plumber](https://github.com/nathanwoulfe/Plumber/tree/chauffeur), but last week I saw him tweet this:
 
-{{< tweet 974530297176907776 >}}
+{{< tweet user="nathanwoulfe" id="974530297176907776" >}}
 
 Well I saw a challenge, I know I can use Chauffeur to test Chauffeur, but could I use Chauffeur to test someone elses library?
 
 A night on the couch and a beer later I replied with this:
 
-{{< tweet 974598409893044224 >}}
+{{< tweet user="slace" id="974598409893044224" >}}
 
 :tada:
 

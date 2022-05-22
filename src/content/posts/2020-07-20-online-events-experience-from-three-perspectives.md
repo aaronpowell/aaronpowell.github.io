@@ -65,7 +65,7 @@ Being online changes this dynamic, especially while we're all working from home,
 
 My friend Lars put up a poll the other day about online event times:
 
-{{<tweet 1282828866776489985>}}
+{{<tweet user="larsklint" id="1282828866776489985">}}
 
 I'll admit, I was surprised by the response, that people tended to prefer events at the "usual user group time". The reason that I found this interesting is that it means that the second barrier isn't really a concern to as many respondents as I expected. For user groups I've attended recently, I've seen start times ranging from 5.30pm through to 7.30pm and my preference is towards the later side of the equation as this has meant I got time with my kids and wife from when work ended to the event started.
 
@@ -104,3 +104,4 @@ As I said at the start, this wasn't a "here's the tech" style post, but if you'r
 -   [Inject OBS Studio into Microsoft Teams](https://greiginsydney.com/inject-obs-studio-into-microsoft-teams/)
 
 Have you been attending online events? What have **you** seen that's working, or not working well? I'd love to hear your thoughts.
+

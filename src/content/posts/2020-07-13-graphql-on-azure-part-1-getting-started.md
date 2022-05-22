@@ -14,7 +14,7 @@ I've done a few posts recently around using GraphQL, especially with [Azure Stat
 
 Let me start by saying that I'm by no means a GraphQL expert. In fact, I've been quite skeptical of GraphQL over the years.
 
-{{< tweet 677064094784991232 >}}
+{{< tweet user="slace" id="677064094784991232" >}}
 
 This tweet here was my initial observation when I first saw it presented back in 2015 (and now I use it [to poke fun at friends now](https://twitter.com/slace/status/1132145211197411335)) and I still this there are some metis in the comparison, even if it's not 100% valid.
 
@@ -59,3 +59,4 @@ App Service isn't the only way to run a Node.js GraphQL service, and this leads 
 We're just getting started on our journey into running GraphQL on Azure. In this post we touched on the underlying services that we might want to look at when it comes to looking to host a GraphQL server, with my pick being Azure Functions if you're doing a JavaScript implementation, App Service and App Service for Containers for everything else.
 
 As we progress through the series we'll look at each piece that's important when it comes to hosting GraphQL on Azure, and if there's something specific you want me to drill down into in more details, please let me know.
+

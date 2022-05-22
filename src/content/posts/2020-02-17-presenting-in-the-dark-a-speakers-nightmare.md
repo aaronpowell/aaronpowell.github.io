@@ -7,7 +7,7 @@ tags = ["speaking"]
 cover_image = "/images/2020-02-17-presenting-in-the-dark-a-speakers-nightmare-banner.jpg"
 +++
 
-{{< tweet 1228092104976424963 >}}
+{{< tweet user="stillaslifematt" id="1228092104976424963" >}}
 
 **\*Record Scratch\***
 
@@ -62,3 +62,4 @@ I had a few people come up to me and applaud my efforts to keep going given the 
 In the end it was a fun adrenalin rush, I've now had a chance to see how I'd really go under pressure, there's not many other possible failures during a talk that could be worse and hey, it's a good story to tell! And hey, I know I can _power through_ just about anything that goes wrong during a talk. 🤣
 
 But I must admit that the next time I give that talk I do hope to have power for the whole 45 minutes. 😉
+

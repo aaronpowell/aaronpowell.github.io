@@ -10,7 +10,7 @@ Last week I was procrastinating on my talk for [NDC Sydney](https://ndcsydney.co
 
 But I started to wonder, how could I make it a bit more interesting, and then I remembered that a couple of weeks ago I came across this tweet from [Scott Hanselman](https://hanselman.com/)
 
-{{<twitter 1305520517529567233>}}
+{{<twitter user="shanselman" id="1305520517529567233">}}
 
 As someone who's been doing a bunch of stuff with OBS, I liked the idea, it's a nifty way to change up the experience when presenting and giving the audience something different compared to your traditional picture-in-picture view.
 
@@ -21,3 +21,4 @@ So, I built that. You'll find the code on GitHub for [PowerPoint to Places](http
 {{<video "/images/powerpoint-to-slack.mp4">}}
 
 Feel free to give it a try, but be aware that it's written by me, for me, so I make no claims that it'll work for you, but if people think it'd be a useful tool, let's make it more general purpose!
+

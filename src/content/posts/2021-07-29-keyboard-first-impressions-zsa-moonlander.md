@@ -119,7 +119,7 @@ I started doing more typing and it wasn't feeling as horrible. I've got a talk u
 
 Here's a video I posted on Twitter towards the end of day 2, showing me typing the tweet:
 
-{{<tweet "1419890805238472709">}}
+{{<tweet user="slace" id="1419890805238472709">}}
 
 That tweet took about 45 seconds to type, which didn't feel too bad... You'll see me backspace a few times though!
 
@@ -148,3 +148,4 @@ If you're interested in the keyboard layout I'm using, [here it is](https://conf
 And of course, I have some lovely RGB involved, because if there's no RGB, what's the point!
 
 ![Rainbows!](/images/2021-07-29-keyboard-first-impressions-zsa-moonlander/cover.jpg)
+

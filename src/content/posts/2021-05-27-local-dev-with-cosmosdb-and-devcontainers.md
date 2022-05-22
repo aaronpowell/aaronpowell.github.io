@@ -13,7 +13,7 @@ When I was a consultant the nirvana that I tried to achieve on projects was to b
 
 I've previously said [all projects need devcontainers]({{<ref "/posts/2021-03-08-your-open-source-project-needs-a-dev-container-heres-why.md">}}), that they are an [essential tool for workshops]({{<ref "/posts/2021-04-29-tools-to-make-remote-workshops-easier.md">}}) and might go overboard on it locally...
 
-{{<tweet 1391619892852396041>}}
+{{<tweet user="slace" id="1391619892852396041">}}
 
 Yes, I really had 23 devcontainers on my machine. These days I don't do any development on my machine, it all happens inside a container.
 
@@ -286,3 +286,4 @@ You'll find my sample [on GitHub](https://github.com/aaronpowell/azure-cosmos-db
 ## Alternative solution
 
 After posting this article I got into a Twitter discussion in which it looks like there might be another solution to this that doesn't require disabling TLS. [Noel Bundick](https://twitter.com/acanthamoeba?s=20) has [an example repo](https://github.com/noelbundick/docker-cosmosdb) that uses the `NODE_EXTRA_CA_CERTS` environment variable to add the [cert that comes with the emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/linux-emulator?{{<cda>}}#run-on-linux) to Node.js at runtime, rather than disabling TLS. It's a bit more clunky as you'll need to run a few more steps once the devcontainer starts, but do check it out as an option.
+

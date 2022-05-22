@@ -28,7 +28,7 @@ I was [rejected a lot]({{<ref "/posts/2019-12-19-reflecting-on-12-months-submitt
 
 If you're a regular reader via the browser of my site you may notice it looks different to how it use to look. I decided that the design of my blog was a little tired and I wanted to update it. After shopping around the Hugo theme gallery I found one I quite liked and installed it, unfortunately it turned out to rely on around 10 jQuery plugins, some CSS frameworks and a bunch of other bloat that blew me away as to how heavy it was. So that led to this tweet.
 
-{{< tweet 1202159736474390528 >}}
+{{< tweet user="slace" id="1202159736474390528" >}}
 
 Over the course of a few weeks in December I chipped away at a new theme for my website, inspired by themes I liked, that the CSS is written from entirely without a template. This is the first time I've done "from scratch" CSS in a long time and it's been an interesting experience. I know my site isn't 100% perfect so if you hit anything that's broken/ugly/etc. please log a bug on [this GitHub repo](https://github.com/aaronpowell/aaronpowell.github.io/issues).
 
