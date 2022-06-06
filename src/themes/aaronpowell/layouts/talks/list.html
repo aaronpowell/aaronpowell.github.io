@@ -90,7 +90,7 @@
                 {{ $upcomingTalks := where .talks "date" ">" now }}
                 <h4>Upcoming Talks</h4>
                 {{ if eq (len $upcomingTalks) 0 }}
-                <p>No upcoming talks. 😢</p>
+                <p>{{ .noTalks }}</p>
                 {{ else }}
                 <ul class="talk-list">
                     {{ range sort $upcomingTalks "date" "asc" }}

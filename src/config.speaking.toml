@@ -48,7 +48,9 @@
         { date = 2021-09-01, name = "Web Apps in 30 minutes", link = "https://www.microsoft.com/en-au/business/learn/cloud-training-events/developer-cloud-skills-in-a-week?WT.mc_id=javascript-00000-aapowell", event = "Low+Pro-Code Skills Bootcamp" },
         { date = 2021-08-25, name = "What and How of GitHub Actions", link = "https://www.meetup.com/DevOpsPerth/", event = "DevOps Perth - August 2021" },
         { date = 2021-11-05, name = "Type-safe GraphQL with TypeScript", link = "https://ndcsydney.com/agenda/type-safe-graphql-with-typescript-0trj/0er2lsqri5h", event = "NDC Sydney 2021" },
-        { date = 2021-11-10, name = "Panel: State of Serverless", link = "https://summit.graphql.com/", event = "GraphQL Summit 2021" }
+        { date = 2021-11-10, name = "Panel: State of Serverless", link = "https://summit.graphql.com/", event = "GraphQL Summit 2021" },
+        { date = 2022-06-20, name = "End to end GraphQL (workshop)", link = "https://ndcmelbourne.com/agenda/end-to-end-graphql/daba56ef9e98", event = "NDC Melbourne 2022" },
+        { date = 2022-06-24, name = "Type-safe GraphQL with TypeScript", link = "https://ndcmelbourne.com/agenda/type-safe-graphql-with-typescript-0trj/0er2lsqri5h", event = "NDC Melbourne 2022" }
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."

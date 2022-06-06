@@ -3,7 +3,7 @@
     <div>
         <h2>{{ .title }}</h2>
         {{ $talks := where .talks "date" ">" now }} {{ if eq (len $talks) 0 }}
-        <p>No upcoming talks. 😢</p>
+        <p>{{ .noTalks }}</p>
         {{ else }}
         <ul class="talk-list">
             {{ range sort $talks "date" "asc" }}
