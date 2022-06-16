@@ -12,7 +12,7 @@
     },
 
     "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.defaultProfile.linux": "zsh",
         "files.defaultLanguage": "markdown"
     },
 
