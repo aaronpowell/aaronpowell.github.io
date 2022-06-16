@@ -212,7 +212,7 @@ _Note: Please be aware this is preview so there may be some changes before the f
 
 Head over the the [Azure Portal](https://portal.azure.com{{<cda>}}) and create a new APIM instance:
 
-![Create an APIM instance](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tlum6yjlt40busddeilm.png)
+![Create an APIM instance](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/01.png)
 
 Fill in the required fields and click through the other screens (there's nothing more that we need to add to the APIM resource beyond the first screen - unless you want to configure APIM for other uses).
 
@@ -220,11 +220,11 @@ _Note: For the preview, you'll need to use the **Developer** pricing tier._
 
 When the resource has been created, you should see a new **Authorizations (preview)** option under the _APIs_ grouping:
 
-![Navigate to Authorizations](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uxyp5b85jlfsrc6iihwm.png)
+![Navigate to Authorizations](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/02.png)
 
 Click on that and we'll see a list of previously created Authorizations, but since we haven't got any yet, we'll start with the **Create** button to provision it:
 
-![Authorizations landing view](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0ir92y8s8s9a0q1apn4f.png)
+![Authorizations landing view](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/03.png)
 
 From this screen, we can configure the OAuth2 service that we are going to authorize against, and you'll see all that's available in the _Identity provider_ list. Since we're using Dropbox, you'll need to have created a [Dropbox app](https://dropbox.com/developers/apps) and obtained the _client id_ and _client secret_ already (if you haven't done that, head over to [Dropbox](https://dropbox.com/developers/apps) and set that up).
 
@@ -232,30 +232,30 @@ When filling out this form, note down the _Provider name_ and _Authorization nam
 
 Also, ensure that the _Scopes_ you provide match that in Dropbox. Since we're going to be uploading files we're going to need `files.metadata.write files.contents.write files.content.read`, but match those to your applications needs.
 
-![Create an Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/errxu3jp05ex32rx4ru0.png)
+![Create an Authorization](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/04.png)
 Before going to the next screen, copy the _Redirect URL_ and add that to the Dropbox application, so that it can authenticate on the next step:
 
-![Authenticate the Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h04pa5ib67ve8yfsude0.png)
+![Authenticate the Authorization](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/05.png)
 
 On step two of the process, we need to authenticate APIM against our Dropbox application using the OAuth2 application we've created, so click the _Login with DropBox_ button and follow the authorization workflow that it provides.
 
 The last stage of setting up the Authorization is configuring the Access Policy the Authorization will use, you can either link this to users/groups within AAD or you can use a managed identity, such as the one provided by APIM. We're going to use the managed identity:
 
-![Select Managed Identity](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ytbo3qp8fld0oql4szxd.png)
+![Select Managed Identity](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/06.png)
 
 From the fly-in window select **API Management service** for the _Managed identity_ and then pick your service from the listed options.
 
-![Chose the right Managed Identity](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jppcsr4r7r2pw7dv20qa.png)
+![Chose the right Managed Identity](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/07.png)
 
 This will populate the main window and we can finish the setup.
 
-![Created Authorization](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/03yn69x2xhvcfd6mlvqx.png)
+![Created Authorization](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/08.png)
 
 ## Accessing our token
 
 APIM is now acting as our Token Store, and will get new OAuth2 tokens for us as required, but _we_ still need to access them, and for that, we're going to create an API endpoint in API to return it. Head over to the _APIs_ section and we're going to manually define a HTTP API:
 
-![Define a new API](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qirk8s0pj0l3yesrk1mf.png)
+![Define a new API](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/09.png)
 
 The API I've defined will be available at the `/token` route, and since we'll be calling it from another web host, we need to configure a CORS policy. We can do that by clicking on _All operations_ and opening the code editor for policies to replace the default with:
 
@@ -284,7 +284,7 @@ This is defining an _inbound_ policy that allows CORS from all origins (you migh
 
 Now we can create an operation to the API so that we can get back the token:
 
-![Create an API operation](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h0vzrqi2kitu3pca27sm.png)
+![Create an API operation](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/10.png)
 
 I'm calling the operation `Get Dropbox token` and making it a HTTP `GET` at the `/` URL, which is relative to the path of the API that we've defined, meaning it's a GET request against `/token`.
 
@@ -315,7 +315,7 @@ The `get-authorization-context` policy needs two bits of information that we set
 
 Save the policy, click the _Test_ tab at the top and fire off the request:
 
-![Test our API](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cbusw020sp8g57secxqd.png)
+![Test our API](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/12.png)
 
 Success! We can see in the _HTTP response_ that the response body contains our OAuth2 token that we can can provide to the Dropbox SDK.
 
@@ -355,7 +355,7 @@ const accessToken = await accessTokenResponse.text();
 
 Start the application with `npm run dev`, fill out the data in the form and hit submit - you'll see a call to APIM that gets back the access token and then it's provided to the Dropbox SDK to upload the file to Dropbox.
 
-![Sample app in action](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1n7qzv1v07n98genvb44.gif)
+![Sample app in action](/images/2022-06-16-implementing-a-token-store-with-apim-authorizations/token-store.gif)
 
 ## Conclusion
 
