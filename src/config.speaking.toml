@@ -50,7 +50,8 @@
         { date = 2021-11-05, name = "Type-safe GraphQL with TypeScript", link = "https://ndcsydney.com/agenda/type-safe-graphql-with-typescript-0trj/0er2lsqri5h", event = "NDC Sydney 2021" },
         { date = 2021-11-10, name = "Panel: State of Serverless", link = "https://summit.graphql.com/", event = "GraphQL Summit 2021" },
         { date = 2022-06-20, name = "End to end GraphQL (workshop)", link = "https://ndcmelbourne.com/agenda/end-to-end-graphql/daba56ef9e98", event = "NDC Melbourne 2022" },
-        { date = 2022-06-24, name = "Type-safe GraphQL with TypeScript", link = "https://ndcmelbourne.com/agenda/type-safe-graphql-with-typescript-0trj/0er2lsqri5h", event = "NDC Melbourne 2022" }
+        { date = 2022-06-24, name = "Type-safe GraphQL with TypeScript", link = "https://ndcmelbourne.com/agenda/type-safe-graphql-with-typescript-0trj/d46e229ac59d", event = "NDC Melbourne 2022" },
+        { date = 2022-06-24, name = "Unleash the power of VS Code", link = "https://ndcmelbourne.com/agenda/unleash-the-power-of-vs-code/717c7688d191", event = "NDC Melbourne 2022" }
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."
