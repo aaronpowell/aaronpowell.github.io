@@ -165,7 +165,7 @@ jobs:
                   action: "upload"
                   skip_app_build: true
                   skip_api_build: true
-                  cwd: ${{ env.OUTPUT_FOLDER }}
+                  cwd: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
     update_readme:
         needs: [deploy]
