@@ -2,7 +2,7 @@
 title = "Deploy Azure Static Web Apps With Bicep"
 date = 2022-06-29T00:41:50Z
 description = "I'm trying to get better at using Infrastructure as Code, so first up - deployments with SWA!"
-draft = true
+draft = false
 tags = ["azure", "devops"]
 tracking_area = "javascript"
 tracking_id = "70241"
