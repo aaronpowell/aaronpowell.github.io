@@ -1,5 +1,5 @@
 {
-    "defaultHeaders": {
+    "globalHeaders": {
         "Content-Security-Policy": "default-src 'self' c.disquscdn.com disqus.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' disqus.com c.disquscdn.com cdnjs.cloudflare.com www.google-analytics.com code.jquery.com aaronpowell.disqus.com unpkg.com platform.twitter.com gist.github.com fb.me cdn.syndication.twimg.com www.googletagmanager.com; style-src 'self' 'unsafe-inline' c.disquscdn.com fonts.googleapis.com cdnjs.cloudflare.com unpkg.com platform.twitter.com; img-src 'self' data: www.google-analytics.com cdnjs.cloudflare.com frinkiac.com syndication.twitter.com dev.azure.com referrer.disqus.com platform.twitter.com pbs.twimg.com imgs.xkcd.com raw.githubusercontent.com; font-src 'self' fonts.googleapis.com cdnjs.cloudflare.com fonts.gstatic.com unpkg.com; connect-src 'self' links.services.disqus.com; child-src www.google.com; frame-src codesandbox.io disqus.com c.disquscdn.com www.google.com www.youtube.com twitter.com platform.twitter.com syndication.twitter.com; form-action 'self'; upgrade-insecure-requests; report-uri https://aaronpowell.report-uri.com/r/d/csp/enforce;",
         "X-Xss-Protection": "1; mode=block; report=https://aaronpowell.report-uri.com/r/d/xss/enforce",
         "Except-CT": "max-age=0; report=https://aaronpowell.report-uri.com/r/d/xss/enforce",
@@ -10,4 +10,3 @@
         "Referrer-Policy": "strict-origin-when-cross-origin"
     }
 }
-

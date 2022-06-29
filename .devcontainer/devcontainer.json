@@ -22,7 +22,9 @@
         "esbenp.prettier-vscode",
         "editorconfig.editorconfig",
         "streetsidesoftware.code-spell-checker",
-        "ionide.ionide-fsharp"
+        "ionide.ionide-fsharp",
+        "ms-azuretools.vscode-bicep",
+        "GitHub.vscode-pull-request-github"
     ],
 
     "forwardPorts": [4014],
