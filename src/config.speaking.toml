@@ -51,7 +51,9 @@
         { date = 2021-11-10, name = "Panel: State of Serverless", link = "https://summit.graphql.com/", event = "GraphQL Summit 2021" },
         { date = 2022-06-20, name = "End to end GraphQL (workshop)", link = "https://ndcmelbourne.com/agenda/end-to-end-graphql/daba56ef9e98", event = "NDC Melbourne 2022" },
         { date = 2022-06-24, name = "Type-safe GraphQL with TypeScript", link = "https://ndcmelbourne.com/agenda/type-safe-graphql-with-typescript-0trj/d46e229ac59d", event = "NDC Melbourne 2022" },
-        { date = 2022-06-24, name = "Unleash the power of VS Code", link = "https://ndcmelbourne.com/agenda/unleash-the-power-of-vs-code/717c7688d191", event = "NDC Melbourne 2022" }
+        { date = 2022-06-24, name = "Unleash the power of VS Code", link = "https://ndcmelbourne.com/agenda/unleash-the-power-of-vs-code/717c7688d191", event = "NDC Melbourne 2022" },
+        { date = 2022-10-14, name = "Remix, is it more React hype?", link = "https://ndcsydney.com/agenda/remix-is-it-more-react-hype-007s/0pje8s2og0m", event = "NDC Sydney 2022" },
+        { date = 2022-10-12, name = "GraphQL is just APIs for hipsters, right?", link = "https://ndcsydney.com/agenda/graphql-is-just-apis-for-hipsters-right-0b7s/0x7ry93wcih", event = "NDC Sydney 2022" }
     ]
 [params.speaking.bio]
     short   = "Aaron is a Developer Advocate at Microsoft with a passion for JavaScript, .NET, whacky ideas and running long distances."
