@@ -102,7 +102,7 @@ jobs:
                   name: search-index
                   path: ./Search/Search.IndexBuilder/index.zip
 
-    deploy:
+    provision:
         needs: [build_search_ui, build_search_index]
         runs-on: ubuntu-latest
         environment: production
@@ -131,6 +131,19 @@ jobs:
                   template: ./deploy/main.bicep
                   parameters: swaName=${{ secrets.SWA_NAME }}
                   failOnStdErr: false
+
+    deploy:
+        needs: [provision]
+        runs-on: ubuntu-latest
+        environment: production
+        name: Deploy SWA
+        steps:
+            - name: Azure Login
+              uses: azure/login@v1
+              with:
+                  client-id: ${{ secrets.AZURE_CLIENT_ID }}
+                  tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                  subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
             - name: Get SWA deployment token
               uses: azure/CLI@v1
