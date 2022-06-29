@@ -5,7 +5,7 @@ description = "I'm trying to get better at using Infrastructure as Code, so firs
 draft = true
 tags = ["azure", "devops"]
 tracking_area = "javascript"
-tracking_id = ""
+tracking_id = "70241"
 +++
 
 In an effort to constantly tinker with things that _probably_ don't need to be tinkered with, I've decided that it's time to do an upgrade to my CI/CD pipeline so that I can use Bicep to deploy Azure Static Web Apps (I'm also using this as a way to learn more about Bicep as well).
@@ -200,4 +200,4 @@ Throughout this post we looked at how to create a simple Bicep template that wil
 
 Now that this is added, we have a completely reproducable pipeline that can be used to deploy your static web apps, from resource provisioning to deployment, in the case we ever need to start from scratch again.
 
-You can check this out in action by looking at the [GitHub Actions for my blog](https://github.com/aaronpowell/aaronpowell.github.io/actions) which I have refactored to use Bicep.
+You can check this out in action by looking at the [GitHub Actions for my blog](https://github.com/aaronpowell/aaronpowell.github.io/actions) which I have refactored to use Bicep (and it only took half a dozen deployments!).
