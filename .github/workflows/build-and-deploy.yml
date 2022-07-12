@@ -197,7 +197,9 @@ jobs:
               with:
                   name: api
                   path: ${{ github.workspace }}
-            - run: tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
+            - run: |
+                  mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
+                  tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
 
             - name: Deploy frontend
               id: build-deploy
