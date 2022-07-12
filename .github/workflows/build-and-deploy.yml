@@ -200,6 +200,11 @@ jobs:
             - run: |
                   mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
                   tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
+            - name: Download index source
+              uses: actions/download-artifact@v1
+              with:
+                  name: json
+                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
 
             - name: Deploy frontend
               id: build-deploy
