@@ -1,0 +1,21 @@
+scalar Url
+scalar Date
+
+type Post {
+    id: ID!
+    title: String!
+    url: Url!
+    date: Date
+    tags: [String!]!
+    description: String
+    content: String!
+}
+
+type Query {
+    post(id: ID!): Post
+    postsByTag(tag: String!): [Post!]!
+}
+
+schema {
+    query: Query
+}
