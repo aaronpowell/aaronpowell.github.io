@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
         environment: build
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v3
 
             - name: Get Hugo Version
               id: hugo-version
@@ -51,11 +51,32 @@ jobs:
                   name: json
                   path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
 
+    build_api:
+        runs-on: ubuntu-latest
+        environment: build
+        defaults:
+            run:
+                working-directory: api
+        steps:
+            - uses: actions/checkout@v3
+            - use: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - run: npm ci
+            - run: npm run build
+
+            - name: Publish API output
+              uses: actions/upload-artifact@v1
+              with:
+                  name: api
+                  path: ${{ github.workspace }}/api
+
     build_search_ui:
         runs-on: ubuntu-latest
         environment: build
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v3
 
             - uses: actions/setup-dotnet@v1
               with:
@@ -80,7 +101,7 @@ jobs:
         needs: build_hugo
         environment: build
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v3
 
             - uses: actions/setup-dotnet@v1
               with:
@@ -103,7 +124,7 @@ jobs:
                   path: ./Search/Search.IndexBuilder/index.zip
 
     provision:
-        needs: [build_search_ui, build_search_index]
+        needs: [build_search_ui, build_search_index, build_api]
         runs-on: ubuntu-latest
         environment: production
         name: Provision Azure
@@ -169,6 +190,12 @@ jobs:
                   name: search-index
                   path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
+            - name: Download api
+              uses: actions/download-artifact@v1
+              with:
+                  name: api
+                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
+
             - name: Deploy frontend
               id: build-deploy
               uses: Azure/static-web-apps-deploy@v1
@@ -179,6 +206,7 @@ jobs:
                   skip_app_build: true
                   skip_api_build: true
                   app_location: ${{ env.OUTPUT_FOLDER }}
+                  api_location: ${{ env.OUTPUT_FOLDER }}/api
 
     update_readme:
         needs: [deploy]
