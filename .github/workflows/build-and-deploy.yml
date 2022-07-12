@@ -65,6 +65,7 @@ jobs:
 
             - run: npm ci
             - run: npm run build
+            - run: mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
             - run: tar -cvf ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar .
 
             - name: Publish API output
