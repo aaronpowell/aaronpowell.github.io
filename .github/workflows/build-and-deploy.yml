@@ -198,8 +198,8 @@ jobs:
                   name: api
                   path: ${{ github.workspace }}
             - run: |
-                  mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
-                  tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
+                  mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
+                  tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
 
             - name: Deploy frontend
               id: build-deploy
@@ -211,7 +211,7 @@ jobs:
                   skip_app_build: true
                   skip_api_build: true
                   app_location: ${{ env.OUTPUT_FOLDER }}
-                  api_location: ${{ env.OUTPUT_FOLDER }}/api
+                  api_location: ${{ env.OUTPUT_FOLDER }}-api
 
     update_readme:
         needs: [deploy]
