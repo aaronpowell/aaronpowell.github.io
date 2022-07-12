@@ -65,12 +65,13 @@ jobs:
 
             - run: npm ci
             - run: npm run build
+            - run: tar -cvf ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar .
 
             - name: Publish API output
               uses: actions/upload-artifact@v1
               with:
                   name: api
-                  path: ${{ github.workspace }}/api
+                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar
 
     build_search_ui:
         runs-on: ubuntu-latest
@@ -194,7 +195,8 @@ jobs:
               uses: actions/download-artifact@v1
               with:
                   name: api
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
+                  path: ${{ github.workspace }}
+            - run: tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api
 
             - name: Deploy frontend
               id: build-deploy
