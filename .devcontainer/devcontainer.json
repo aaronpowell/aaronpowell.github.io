@@ -31,5 +31,9 @@
 
     "remoteUser": "vscode",
 
-    "postCreateCommand": "npm install"
+    "postCreateCommand": "npm install",
+
+    "features": {
+        "github-cli": "latest"
+    }
 }
