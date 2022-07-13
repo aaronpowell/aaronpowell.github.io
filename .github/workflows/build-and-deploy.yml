@@ -170,9 +170,10 @@ jobs:
 
             - name: Get SWA deployment token
               uses: azure/CLI@v1
+              id: swa-token
               with:
                   inlineScript: |
-                      echo SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey) >> $GITHUB_ENV
+                      echo "::set-secret name=SWA_DEPLOYMENT_TOKEN::$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey)"
 
             - name: Download website
               uses: actions/download-artifact@v1
@@ -210,7 +211,7 @@ jobs:
               id: build-deploy
               uses: Azure/static-web-apps-deploy@v1
               with:
-                  azure_static_web_apps_api_token: ${{ env.SWA_DEPLOYMENT_TOKEN }}
+                  azure_static_web_apps_api_token: ${{ steps.swa-token.outputs.SWA_DEPLOYMENT_TOKEN }}
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
                   action: "upload"
                   skip_app_build: true
@@ -223,6 +224,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Update my readme
         environment: production
+        if: github.event_name != 'pull_request'
         steps:
             - name: Workflow Dispatch
               uses: benc-uk/workflow-dispatch@v1
@@ -230,3 +232,4 @@ jobs:
                   workflow: Update
                   repo: aaronpowell/aaronpowell
                   token: ${{ secrets.PERSONAL_TOKEN }}
+
