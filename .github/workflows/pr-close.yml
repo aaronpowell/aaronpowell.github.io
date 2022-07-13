@@ -9,6 +9,7 @@ jobs:
     close_pull_request_job:
         runs-on: ubuntu-latest
         name: Close Pull Request Job
+        environment: production
         steps:
             - name: Azure Login
               uses: azure/login@v1
