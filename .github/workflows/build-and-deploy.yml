@@ -173,7 +173,9 @@ jobs:
               id: swa-token
               with:
                   inlineScript: |
-                      echo "::set-secret name=SWA_DEPLOYMENT_TOKEN::$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey)"
+                      SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey)
+                      echo "::add-mask::$SWA_DEPLOYMENT_TOKEN"
+                      echo SWA_DEPLOYMENT_TOKEN=$SWA_DEPLOYMENT_TOKEN >> $GITHUB_ENV
 
             - name: Download website
               uses: actions/download-artifact@v1
@@ -211,7 +213,7 @@ jobs:
               id: build-deploy
               uses: Azure/static-web-apps-deploy@v1
               with:
-                  azure_static_web_apps_api_token: ${{ steps.swa-token.outputs.SWA_DEPLOYMENT_TOKEN }}
+                  azure_static_web_apps_api_token: ${{ env.SWA_DEPLOYMENT_TOKEN }}
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
                   action: "upload"
                   skip_app_build: true
@@ -232,4 +234,3 @@ jobs:
                   workflow: Update
                   repo: aaronpowell/aaronpowell
                   token: ${{ secrets.PERSONAL_TOKEN }}
-
