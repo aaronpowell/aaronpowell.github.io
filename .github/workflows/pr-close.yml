@@ -22,7 +22,9 @@ jobs:
               uses: azure/CLI@v1
               with:
                   inlineScript: |
-                      echo SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey) >> $GITHUB_ENV
+                      SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey)
+                      echo "::add-mask::$SWA_DEPLOYMENT_TOKEN"
+                      echo SWA_DEPLOYMENT_TOKEN=$SWA_DEPLOYMENT_TOKEN >> $GITHUB_ENV
 
             - name: Close Pull Request
               id: closepullrequest
