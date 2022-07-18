@@ -106,3 +106,6 @@ home = [ "HTML", "RSS", "JSON"]
             icon = "ion-logo-youtube"
             url = "https://www.youtube.com/channel/UCT1QtGr1IzVPNSF_YMrKCAw"
             title = "YouTube Channel"
+
+[minify]
+    disableXML = true
