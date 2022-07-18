@@ -74,8 +74,8 @@ And here's the raw output from that workflow run (I've truncated to just the job
 
 ```
 2022-07-14T01:27:14.0104402Z ##[group]Run echo '::add-mask::test'
-2022-07-14T01:27:14.0104910Z [36;1mecho '::add-mask::test'[0m
-2022-07-14T01:27:14.0105274Z [36;1mecho This is a test[0m
+2022-07-14T01:27:14.0104910Z [36;1mecho '::add-mask::test'[0m
+2022-07-14T01:27:14.0105274Z [36;1mecho This is a test[0m
 2022-07-14T01:27:14.0906476Z shell: /usr/bin/bash -e {0}
 2022-07-14T01:27:14.0907141Z ##[endgroup]
 2022-07-14T01:27:14.1473068Z This is a ***
