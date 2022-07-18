@@ -73,7 +73,13 @@
             "label": "build:release (hugo)",
             "type": "shell",
             "command": ["./hugo"],
-            "args": ["--source", "./src", "--destination", "../.output"],
+            "args": [
+                "--source",
+                "./src",
+                "--destination",
+                "../.output",
+                "--minify"
+            ],
             "problemMatcher": [],
             "windows": {
                 "command": "./hugo.exe"
@@ -181,3 +187,4 @@
         }
     ]
 }
+
