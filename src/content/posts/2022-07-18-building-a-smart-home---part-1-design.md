@@ -1,6 +1,6 @@
 +++
 title = "Building a Smart Home - Part 1 Design"
-date = 2022-07-19T05:28:52Z
+date = 2022-07-18T05:28:52Z
 description = "I'm building a smart home, so come join my journey"
 draft = false
 tags = ["smart-home"]
