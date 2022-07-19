@@ -2,11 +2,10 @@
     "name": "aaronpowell.github.io",
     "version": "1.0.0",
     "private": true,
-    "description": "aaronpowell.github.io\r =====================",
+    "description": "My blog",
     "main": "index.js",
-    "dependencies": {},
     "devDependencies": {
-        "prettier": "^1.19.1"
+        "prettier": "^2.7.1"
     },
     "scripts": {},
     "repository": {
