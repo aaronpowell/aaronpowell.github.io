@@ -35,11 +35,11 @@ jobs:
           extended: true
 
       - name: Build
-        if: ${{ input.preview }} == false
+        if: ${{ inputs.preview }} == false
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
 
       - name: Build
-        if: ${{ input.preview }} == true
+        if: ${{ inputs.preview }} == true
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture
 
       - name: Publish website output
