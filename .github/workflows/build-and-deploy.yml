@@ -16,224 +16,224 @@ permissions:
   contents: read
 
 jobs:
-    build_hugo:
-        runs-on: ubuntu-latest
-        environment: build
-        steps:
-            - uses: actions/checkout@v3
+  build_hugo:
+    runs-on: ubuntu-latest
+    environment: build
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Get Hugo Version
-              id: hugo-version
-              run: |
-                  HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
-                  echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
+      - name: Get Hugo Version
+        id: hugo-version
+        run: |
+          HUGO_VERSION=$(./hugo version | sed -r 's/^.*v([0-9]*\.[0-9]*\.[0-9]*).*/\1/')
+          echo "::set-output name=HUGO_VERSION::${HUGO_VERSION}"
 
-            - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
-              with:
-                  hugo-version: "${{ steps.hugo-version.outputs.HUGO_VERSION }}"
-                  extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "${{ steps.hugo-version.outputs.HUGO_VERSION }}"
+          extended: true
 
-            - name: Build
-              if: ${{ input.preview }} == false
-              run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
+      - name: Build
+        if: ${{ input.preview }} == false
+        run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
 
-            - name: Build
-            if: ${{ input.preview }} == true
-            run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture
+      - name: Build
+        if: ${{ input.preview }} == true
+        run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture
 
-            - name: Publish website output
-              uses: actions/upload-artifact@v1
-              with:
-                  name: website
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+      - name: Publish website output
+        uses: actions/upload-artifact@v1
+        with:
+          name: website
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
-            - name: Publish blog json
-              uses: actions/upload-artifact@v1
-              with:
-                  name: json
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
+      - name: Publish blog json
+        uses: actions/upload-artifact@v1
+        with:
+          name: json
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
 
-    build_api:
-        runs-on: ubuntu-latest
-        environment: build
-        defaults:
-            run:
-                working-directory: api
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: 16
+  build_api:
+    runs-on: ubuntu-latest
+    environment: build
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
-            - run: npm ci
-            - run: npm run build
-            - run: mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
-            - run: tar -cvf ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar .
+      - run: npm ci
+      - run: npm run build
+      - run: mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+      - run: tar -cvf ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar .
 
-            - name: Publish API output
-              uses: actions/upload-artifact@v1
-              with:
-                  name: api
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar
+      - name: Publish API output
+        uses: actions/upload-artifact@v1
+        with:
+          name: api
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar
 
-    build_search_ui:
-        runs-on: ubuntu-latest
-        environment: build
-        steps:
-            - uses: actions/checkout@v3
+  build_search_ui:
+    runs-on: ubuntu-latest
+    environment: build
+    steps:
+      - uses: actions/checkout@v3
 
-            - uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_VERSION }}
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-            - name: Build search app
-              run: dotnet build --configuration Release
-              working-directory: ./Search
+      - name: Build search app
+        run: dotnet build --configuration Release
+        working-directory: ./Search
 
-            - name: Publish search UI
-              run: dotnet publish --no-build --configuration Release --output ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
-              working-directory: ./Search/Search.Site.UI
+      - name: Publish search UI
+        run: dotnet publish --no-build --configuration Release --output ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+        working-directory: ./Search/Search.Site.UI
 
-            - name: Package search UI
-              uses: actions/upload-artifact@v1
-              with:
-                  name: search
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/wwwroot/_framework
+      - name: Package search UI
+        uses: actions/upload-artifact@v1
+        with:
+          name: search
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/wwwroot/_framework
 
-    build_search_index:
-        runs-on: ubuntu-latest
-        needs: build_hugo
-        environment: build
-        steps:
-            - uses: actions/checkout@v3
+  build_search_index:
+    runs-on: ubuntu-latest
+    needs: build_hugo
+    environment: build
+    steps:
+      - uses: actions/checkout@v3
 
-            - uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_VERSION }}
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-            - name: Download index source
-              uses: actions/download-artifact@v1
-              with:
-                  name: json
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+      - name: Download index source
+        uses: actions/download-artifact@v1
+        with:
+          name: json
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
-            - name: Build search index
-              run: dotnet run
-              working-directory: ./Search/Search.IndexBuilder
+      - name: Build search index
+        run: dotnet run
+        working-directory: ./Search/Search.IndexBuilder
 
-            - name: Publish search index
-              uses: actions/upload-artifact@v1
-              with:
-                  name: search-index
-                  path: ./Search/Search.IndexBuilder/index.zip
+      - name: Publish search index
+        uses: actions/upload-artifact@v1
+        with:
+          name: search-index
+          path: ./Search/Search.IndexBuilder/index.zip
 
-    provision:
-        needs: [build_search_ui, build_search_index, build_api]
-        runs-on: ubuntu-latest
-        environment: production
-        name: Provision Azure
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+  provision:
+    needs: [build_search_ui, build_search_index, build_api]
+    runs-on: ubuntu-latest
+    environment: production
+    name: Provision Azure
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-            - name: Azure Login
-              uses: azure/login@v1
-              with:
-                  client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                  tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-                  subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-            - name: Ensure resource group exists
-              uses: azure/CLI@v1
-              with:
-                  inlineScript: |
-                      az group create -g ${{ secrets.RESOURCE_GROUP }} -l ${{ secrets.RESOURCE_GROUP_LOCATION }}
-            - name: Deploy Bicep
-              uses: azure/arm-deploy@v1
-              with:
-                  resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
-                  subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                  template: ./deploy/main.bicep
-                  parameters: swaName=${{ secrets.SWA_NAME }}
-                  failOnStdErr: false
+      - name: Ensure resource group exists
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az group create -g ${{ secrets.RESOURCE_GROUP }} -l ${{ secrets.RESOURCE_GROUP_LOCATION }}
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          template: ./deploy/main.bicep
+          parameters: swaName=${{ secrets.SWA_NAME }}
+          failOnStdErr: false
 
-    deploy:
-        needs: [provision]
-        runs-on: ubuntu-latest
-        environment: production
-        name: Deploy SWA
-        steps:
-            - name: Azure Login
-              uses: azure/login@v1
-              with:
-                  client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                  tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-                  subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  deploy:
+    needs: [provision]
+    runs-on: ubuntu-latest
+    environment: production
+    name: Deploy SWA
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-            - name: Get SWA deployment token
-              uses: azure/CLI@v1
-              id: swa-token
-              with:
-                  inlineScript: |
-                      SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey)
-                      echo "::add-mask::$SWA_DEPLOYMENT_TOKEN"
-                      echo SWA_DEPLOYMENT_TOKEN=$SWA_DEPLOYMENT_TOKEN >> $GITHUB_ENV
+      - name: Get SWA deployment token
+        uses: azure/CLI@v1
+        id: swa-token
+        with:
+          inlineScript: |
+            SWA_DEPLOYMENT_TOKEN=$(az staticwebapp secrets list -n ${{ secrets.SWA_NAME }} -o tsv --query properties.apiKey)
+            echo "::add-mask::$SWA_DEPLOYMENT_TOKEN"
+            echo SWA_DEPLOYMENT_TOKEN=$SWA_DEPLOYMENT_TOKEN >> $GITHUB_ENV
 
-            - name: Download website
-              uses: actions/download-artifact@v1
-              with:
-                  name: website
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+      - name: Download website
+        uses: actions/download-artifact@v1
+        with:
+          name: website
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
-            - name: Download search UI
-              uses: actions/download-artifact@v1
-              with:
-                  name: search
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/_framework
+      - name: Download search UI
+        uses: actions/download-artifact@v1
+        with:
+          name: search
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/_framework
 
-            - name: Download search index
-              uses: actions/download-artifact@v1
-              with:
-                  name: search-index
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+      - name: Download search index
+        uses: actions/download-artifact@v1
+        with:
+          name: search-index
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
-            - name: Download api
-              uses: actions/download-artifact@v1
-              with:
-                  name: api
-                  path: ${{ github.workspace }}
-            - run: |
-                  mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
-                  tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
-            - name: Download index source
-              uses: actions/download-artifact@v1
-              with:
-                  name: json
-                  path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
+      - name: Download api
+        uses: actions/download-artifact@v1
+        with:
+          name: api
+          path: ${{ github.workspace }}
+      - run: |
+          mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
+          tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
+      - name: Download index source
+        uses: actions/download-artifact@v1
+        with:
+          name: json
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
 
-            - name: Deploy frontend
-              id: build-deploy
-              uses: Azure/static-web-apps-deploy@v1
-              with:
-                  azure_static_web_apps_api_token: ${{ env.SWA_DEPLOYMENT_TOKEN }}
-                  repo_token: ${{ secrets.GITHUB_TOKEN }}
-                  action: "upload"
-                  skip_app_build: true
-                  skip_api_build: true
-                  app_location: ${{ env.OUTPUT_FOLDER }}
-                  api_location: ${{ env.OUTPUT_FOLDER }}-api
+      - name: Deploy frontend
+        id: build-deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ env.SWA_DEPLOYMENT_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          skip_app_build: true
+          skip_api_build: true
+          app_location: ${{ env.OUTPUT_FOLDER }}
+          api_location: ${{ env.OUTPUT_FOLDER }}-api
 
-    update_readme:
-        needs: [deploy]
-        runs-on: ubuntu-latest
-        name: Update my readme
-        environment: production
-        if: github.event_name != 'pull_request'
-        steps:
-            - name: Workflow Dispatch
-              uses: benc-uk/workflow-dispatch@v1
-              with:
-                  workflow: Update
-                  repo: aaronpowell/aaronpowell
-                  token: ${{ secrets.PERSONAL_TOKEN }}
+  update_readme:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    name: Update my readme
+    environment: production
+    if: github.event_name != 'pull_request'
+    steps:
+      - name: Workflow Dispatch
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Update
+          repo: aaronpowell/aaronpowell
+          token: ${{ secrets.PERSONAL_TOKEN }}
