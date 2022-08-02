@@ -9,7 +9,7 @@ on:
 
 jobs:
   exec:
-    uses: ./.github/workflows/build-and-deploy.yaml
+    uses: ./.github/workflows/build-and-deploy.yml
     secrets: inherit
     with:
       preview: true
