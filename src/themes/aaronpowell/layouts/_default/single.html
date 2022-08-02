@@ -5,7 +5,7 @@
         style="{{ if .Params.cover_image }}background-image: url('{{ .Params.cover_image | absURL }}');{{ end }}"
     >
         <div class="container">
-            <h1>{{ .Title }}</h1>
+            <h1>{{ if eq .Draft true }}(Draft) {{ end }}{{ .Title }}</h1>
             <div>
                 <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
                 <span>{{ .ReadingTime }} minute read</span>
@@ -22,6 +22,10 @@
         Hey, thanks for the interest in this post, but just letting you know
         that it is over 3 years old, so the content in here may not be accurate.
     </div>
+    {{ end }} {{ if eq .Draft true }}
+    <div class="outdated">
+        Heads up, this post is a draft, so it's not meant for sharing. 🤫
+    </div>
     {{ end }}
     <section class="container">
         <article>
@@ -33,9 +37,7 @@
                 />
             </div>
             {{ end }} {{ partial "series.html" . }}
-            <section>
-                {{ .Content }}
-            </section>
+            <section>{{ .Content }}</section>
         </article>
     </section>
 
