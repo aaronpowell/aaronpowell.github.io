@@ -1,0 +1,14 @@
+name: Build and deploy (main)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  exec:
+    uses: ./.github/workflows/build-and-deploy.yml
+    secrets: inherit
+    with:
+      preview: false

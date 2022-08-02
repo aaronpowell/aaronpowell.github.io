@@ -1,0 +1,15 @@
+name: Build and deploy (PR)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  exec:
+    uses: ./.github/workflows/build-and-deploy.yml
+    secrets: inherit
+    with:
+      preview: true
