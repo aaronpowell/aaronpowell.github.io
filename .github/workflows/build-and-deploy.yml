@@ -1,21 +1,19 @@
-name: Build and deploy
+name: Build and deploy (Core)
 env:
-    OUTPUT_FOLDER: .output
-    DOTNET_VERSION: "6.x"
+  OUTPUT_FOLDER: .output
+  DOTNET_VERSION: "6.x"
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        types: [opened, synchronize, reopened]
-        branches:
-            - main
-    workflow_dispatch:
+  workflow_call:
+    inputs:
+      preview:
+        required: false
+        type: boolean
+        default: false
 
 permissions:
-    id-token: write
-    contents: read
+  id-token: write
+  contents: read
 
 jobs:
     build_hugo:
@@ -37,7 +35,12 @@ jobs:
                   extended: true
 
             - name: Build
+              if: ${{ input.preview }} == false
               run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
+
+            - name: Build
+            if: ${{ input.preview }} == true
+            run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture
 
             - name: Publish website output
               uses: actions/upload-artifact@v1
