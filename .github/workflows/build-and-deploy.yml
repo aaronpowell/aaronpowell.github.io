@@ -40,7 +40,7 @@ jobs:
 
       - name: Build
         if: ${{ inputs.preview }} == true
-        run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture
+        run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture --baseURL '/'
 
       - name: Publish website output
         uses: actions/upload-artifact@v1
@@ -237,3 +237,4 @@ jobs:
           workflow: Update
           repo: aaronpowell/aaronpowell
           token: ${{ secrets.PERSONAL_TOKEN }}
+
