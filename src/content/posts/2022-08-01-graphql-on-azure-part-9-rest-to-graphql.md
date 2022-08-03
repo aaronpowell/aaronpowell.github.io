@@ -10,7 +10,7 @@ series = "graphql-azure"
 series_title = "REST to GraphQL"
 +++
 
-Throughout this series we've been exploring many different aspects of using GraphQL in Azure but it's always been from the perspective of creating a new API, and while there's a certain class of problems which support you starting from scratch, it's not uncommon to have an existing API that you're bound to, and in that case, GraphQL might not be as easy to tackle.
+Throughout this series we've been exploring many different aspects of using GraphQL in Azure, but it's always been from the perspective of creating a new API. While there are a certain class of problems which support you starting from scratch, it's not uncommon to have an existing API that you're bound to, and in that case, GraphQL might not be as easy to tackle.
 
 Here's a scenario that I want to put forth, you've got an existing API, maybe it's REST, maybe it's a bespoke HTTP API, none the less you're building a new client in which you want to consume the endpoint as GraphQL. We could go down the path of creating an Apollo Server and using the [`RESTDataSource`](https://www.apollographql.com/docs/apollo-server/data/data-sources/#restdatasource-reference), or using HotChocolate's [REST support](https://chillicream.com/docs/hotchocolate/fetching-data/fetching-from-rest), but for both of these approaches we're having to write our own server and deploy some new infrastructure to run it.
 
@@ -18,9 +18,7 @@ What if we could do it without code?
 
 ## Introducing Synthetic GraphQL
 
-At Build 2022 [Azure API Management](https://docs.microsoft.com/azure/api-management?{{<cda>}}) (APIM) release a preview of a new feature called [Synthetic GraphQL](https://azure.microsoft.com/updates/public-preview-synthetic-graphql/?{{<cda>}}) and it'll do what we're after.
-
-The idea behind Synthetic GraphQL is that you can use APIM as the broker between your GraphQL schema and the HTTP endpoints that provide the data for it, allowing you to convert a backend to GraphQL without having to implement a custom server, instead you use APIM policies.
+At Build 2022 [Azure API Management](https://docs.microsoft.com/azure/api-management?{{<cda>}}) (APIM) released a preview of a new feature called [Synthetic GraphQL](https://azure.microsoft.com/updates/public-preview-synthetic-graphql/?{{<cda>}}). Synthetic GraphQL allows you to use APIM as the broker between your GraphQL schema and the HTTP endpoints that provide the data for it, meaning you to convert a backend to GraphQL without having to implement a custom server, instead you use APIM policies.
 
 Let's take a look at how to do this, and for that, I'm going to add an API to my blog.
 
@@ -86,21 +84,21 @@ schema {
 }
 ```
 
-That looks like it'll do, we have a single Object Type, `Post` that has the relevant fields on it, we have some queries, `post(id: ID!)` and `postsByTag(tag: String!)` that cover the main REST endpoints, and we've even got some custom scalar types in there for fun.
+That looks like it'll do, we have a single Object Type, `Post`, that has the relevant fields on it, we have some queries, `post(id: ID!)` and `postsByTag(tag: String!)` that cover the main REST endpoints, and we've even got some custom scalar types in there for fun.
 
 Now let's go and create an APIM endpoint that we can use for this.
 
 ## Setting up Synthetic GraphQL
 
-> Note: At the time of writing, Synthetic GraphQL is in public preview, so the approach I'm showing is subject to change as the preview moves towards General Availability (GA). Also, it may not be in all regions or all SKUs, so for this post I'm using **West US** and the **Developer** SKU.
+> Note: At the time of writing, Synthetic GraphQL is in public preview, so the approach I'm showing is subject to change as the preview moves towards General Availability (GA). Also, it may not be in all regions or all SKUs, so for this post I'm using **West US** as the region and the **Developer** SKU.
 
-First off, you'll need to create an APIM resource, [here's how to do it via the Azure Portal](https://docs.microsoft.com/azure/api-management/get-started-create-service-instance?{{<cda>}}), and the APIM docs will cover other approaches (CLI, Bicep, VS Code, etc.). Once the resource has been provisioned, it's time to setup our Synthetic GraphQL API.
+First off, you'll need to create an APIM resource, [here's how to do it via the Azure Portal](https://docs.microsoft.com/azure/api-management/get-started-create-service-instance?{{<cda>}}) (the APIM docs will cover other approaches (CLI, Bicep, VS Code, etc.)). Once the resource has been provisioned, it's time to setup our Synthetic GraphQL API.
 
-On the APIM resource, navigate to the **APIs** section, click _Add API_ and you'll see the different options, including Synthetic GraphQL.
+On the APIM resource, navigate to the **APIs** section, click _Add API_ and you'll see the different options, including **Synthetic GraphQL**.
 
 ![New API options](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/01.png)
 
-Select Synthetic GraphQL, provide a name and upload your GraphQL schema then click _Create_ (you don't need to provide the other information if you don't want).
+Select **Synthetic GraphQL**, provide a name and upload your GraphQL schema then click _Create_ (you don't need to provide the other information if you don't want, but I have provided an **API URL suffix**, so I could run other APIs in this resource if so desired).
 
 ![Options to set when creating API](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/02.png)
 
@@ -154,7 +152,7 @@ With the policy linked to the GraphQL schema, we need to "implement" the resolve
 
 For our `http-data-source`, we'll define the `http-request` information, in this case we're setting the HTTP method as GET and that we're expecting JSON as the Content-Type header, but the most interesting bit is the `set-url` node, in which we define the URL that our HTTP call will make.
 
-Since the `posts` field takes an argument of `id`, and that's needed in our API call, we run a code snippet that will parse the request body, find the `arguments` property and get the `id` member of it, which we assign to a variable and then generate the API call that we need to make. While this is a simple case of passing something across as a URL parameter, you could do something more dynamic like conditionally choosing a URL based on the arguments, of it it was a HTTP POST you could use [`set-body`](https://docs.microsoft.com/azure/api-management/api-management-transformation-policies?{{<cda>}}#SetBody) instead to build up a request body to POST to the API (which might be more applicable in a mutation than a query).
+Since the `posts` field takes an argument of `id`, and that's needed in our API call, we run a code snippet that will parse the request body, find the `arguments` property and get the `id` member of it, which we assign to a variable and then generate the URL that APIM will need to call. While this is a simple case of passing something across as a URL parameter, you could do something more dynamic like conditionally choosing a URL based on the arguments, or if it was a HTTP POST you could use [`set-body`](https://docs.microsoft.com/azure/api-management/api-management-transformation-policies?{{<cda>}}#SetBody) to build up a request body to POST to the API (which might be more applicable in a mutation than a query).
 
 Let's repeat the same thing for our `postsByTag` field:
 
