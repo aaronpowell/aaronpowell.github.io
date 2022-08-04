@@ -170,7 +170,12 @@ a {
     }
 }
 
+.highlight {
+    overflow: auto;
+}
+
 pre {
+    font-size: 80%;
     font-family: "Fira Code", monospace;
     font-variant-ligatures: common-ligatures;
 }
@@ -247,6 +252,21 @@ h4:hover .copy {
     border: transparent;
     background-color: transparent;
     cursor: pointer;
+
+    &.code {
+        display: inline-block;
+        float: right;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 5px 3px #ccc;
+        margin: 10px;
+
+        + .copied {
+            float: right;
+            margin: 10px;
+        }
+    }
 }
 
 .copied {
