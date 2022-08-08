@@ -132,7 +132,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      pull-requests: write
 
     steps:
       - name: Checkout repository
@@ -164,6 +163,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     name: Deploy SWA
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
     steps:
       - name: Azure Login
         uses: azure/login@v1
