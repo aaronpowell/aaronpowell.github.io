@@ -215,7 +215,7 @@ jobs:
 
       - name: Deploy frontend
         id: build-deploy
-        uses: vivekjilla/staticstiesactionoryx@master
+        uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ env.SWA_DEPLOYMENT_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
