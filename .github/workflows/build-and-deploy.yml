@@ -214,7 +214,7 @@ jobs:
 
       - name: Deploy frontend
         id: build-deploy
-        uses: Azure/static-web-apps-deploy@v1
+        uses: vivekjilla/staticstiesactionoryx@master
         with:
           azure_static_web_apps_api_token: ${{ env.SWA_DEPLOYMENT_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -237,3 +237,4 @@ jobs:
           workflow: Update
           repo: aaronpowell/aaronpowell
           token: ${{ secrets.PERSONAL_TOKEN }}
+
