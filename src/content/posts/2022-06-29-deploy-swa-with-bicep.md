@@ -131,12 +131,14 @@ But before we can deploy that, we're going to need to log into Azure, which we c
 - name: Azure Login
   uses: azure/login@v1
   with:
-      client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    client-id: ${{ secrets.AZURE_CLIENT_ID }}
+    tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+    subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 ```
 
 There's different ways that you can provide credentials to Azure for the Action to authenticate with, my preference is to use the [OIDC Connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-azure?{{<cda>}}) method as its setup is the most straight forward to me.
+
+> Note: Changing the permissions of the `GITHUB_TOKEN` is required but it may cause an unexpected side effect that PR comments won't work. Check out [this post]({{<ref "/posts/2022-08-09-fixing-when-swa-prs-cant-add-comments">}}) for how to address it.
 
 Follow [the guide](https://docs.microsoft.com/azure/developer/github/connect-from-azure?tabs=azure-portal%2Clinux&{{<cda>}}) on setting up via Portal, CLI or PowerShell, I prefer Azure CLI myself:
 
@@ -176,16 +178,16 @@ With a step for `azure/login` setup, the next step needs to run the Bicep templa
 - name: Ensure resource group exists
   uses: azure/CLI@v1
   with:
-      inlineScript: |
-          az group create -g ${{ secrets.RESOURCE_GROUP }} -l ${{ secrets.RESOURCE_GROUP_LOCATION }}
+    inlineScript: |
+      az group create -g ${{ secrets.RESOURCE_GROUP }} -l ${{ secrets.RESOURCE_GROUP_LOCATION }}
 - name: Deploy Bicep
   uses: azure/arm-deploy@v1
   with:
-      resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
-      subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      template: ./deploy/main.bicep
-      parameters: swaName=${{ secrets.SWA_NAME }}
-      failOnStdErr: false
+    resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
+    subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    template: ./deploy/main.bicep
+    parameters: swaName=${{ secrets.SWA_NAME }}
+    failOnStdErr: false
 ```
 
 Well, first we're using `azure/CLI` to ensure that the resource group exists, and then we're using `azure/arm-deploy` to deploy the Bicep template.
