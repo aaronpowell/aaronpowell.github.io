@@ -31,11 +31,11 @@ jobs:
           extended: true
 
       - name: Build
-        if: ${{ inputs.preview }} == false
+        if: ${{ inputs.preview == false }}
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
 
-      - name: Build
-        if: ${{ inputs.preview }} == true
+      - name: Build (preview)
+        if: ${{ inputs.preview == true }}
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture --baseURL '/'
 
       - name: Publish website output
@@ -241,4 +241,3 @@ jobs:
           workflow: Update
           repo: aaronpowell/aaronpowell
           token: ${{ secrets.PERSONAL_TOKEN }}
-
