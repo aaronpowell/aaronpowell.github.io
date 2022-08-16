@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Azure: Part 9 - REST to GraphQL"
-date = 2022-08-16T23:52:22Z
+date = 2022-08-16T00:52:22Z
 description = "It can be a lot of work to rewrite your APIs to GraphQL, but what if we could do that on the fly"
 draft = true
 tags = ["graphql", "azure"]
