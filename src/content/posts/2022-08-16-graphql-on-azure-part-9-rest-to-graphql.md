@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Azure: Part 9 - REST to GraphQL"
-date = 2022-08-01T23:52:22Z
+date = 2022-08-16T23:52:22Z
 description = "It can be a lot of work to rewrite your APIs to GraphQL, but what if we could do that on the fly"
 draft = true
 tags = ["graphql", "azure"]
@@ -96,15 +96,15 @@ First off, you'll need to create an APIM resource, [here's how to do it via the 
 
 On the APIM resource, navigate to the **APIs** section, click _Add API_ and you'll see the different options, including **Synthetic GraphQL**.
 
-![New API options](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/01.png)
+![New API options](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/01.png)
 
 Select **Synthetic GraphQL**, provide a name and upload your GraphQL schema then click _Create_ (you don't need to provide the other information if you don't want, but I have provided an **API URL suffix**, so I could run other APIs in this resource if so desired).
 
-![Options to set when creating API](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/02.png)
+![Options to set when creating API](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/02.png)
 
 You'll now find a new API listed with the name provided (**Blog** in my case) and if you click on it you'll find your GraphQL schema parsed as the API frontend.
 
-![API according to APIM](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/03.png)
+![API according to APIM](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/03.png)
 
 Congratulations, you've setup a GraphQL endpoint in APIM!
 
@@ -114,7 +114,7 @@ While we may have told APIM that we want to create an endpoint that you can quer
 
 The `set-graphql-resolver` policies are added to the `<backend>` section of our APIM policy list and it will require a `parent-type` and the `field` that the resolver is for. Let's start by defining the `post(id: ID!)` field of the `Query`, and we'll do that by opening the **Policy Editor** for our API:
 
-![Policy Editor](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/04.png)
+![Policy Editor](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/04.png)
 
 From here, find the `<backend>` node and start creating our policy:
 
@@ -192,7 +192,7 @@ Let's repeat the same thing for our `postsByTag` field:
 
 Once you're done, hit **Save** and navigate to the **Test** console for the API and we'll be able to execute our queries:
 
-![Executing a test query, with the tag as a variable and results shown](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/05.png)
+![Executing a test query, with the tag as a variable and results shown](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/05.png)
 
 And there we have it, we've created a GraphQL API that is really just fronting our existing REST API.
 
@@ -200,11 +200,11 @@ And there we have it, we've created a GraphQL API that is really just fronting o
 
 The only thing left to do is to make our GraphQL endpoint callable by clients. There's an [easy to follow tutorial](https://docs.microsoft.com/azure/api-management/api-management-howto-add-products?tabs=azure-portal&{{<cda>}}) on the APIM docs (which I followed myself!) and I setup a _Product_ like so:
 
-![My APIM product to call the GraphQL endpoint](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/06.png)
+![My APIM product to call the GraphQL endpoint](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/06.png)
 
 Once the product was setup, I added a subscription for myself, copied the subscription key, opened up Postman and executed a query.
 
-![Calling from Postman](/images/2022-08-01-graphql-on-azure-part-9-rest-to-graphql/07.png)
+![Calling from Postman](/images/2022-08-16-graphql-on-azure-part-9-rest-to-graphql/07.png)
 
 ## Conclusion
 
