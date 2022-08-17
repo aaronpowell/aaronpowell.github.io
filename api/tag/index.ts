@@ -1,23 +1,25 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
 import { loadPosts } from "../postLoader";
 
-const httpTrigger: AzureFunction = async function(
+const httpTrigger: AzureFunction = async function (
     context: Context,
     req: HttpRequest
 ): Promise<void> {
-    const tag = req.params.tag;
+    const tags = req.params.tag.split(",");
 
     const posts = await loadPosts();
 
-    const postsByTag = posts.filter(p => p.tags.some(t => t === tag));
+    const postsByTag = posts.filter((p) =>
+        tags.every((tag) => p.tags.includes(tag))
+    );
 
     if (!postsByTag.length) {
         context.res = {
-            status: 404
+            status: 404,
         };
     } else {
         context.res = {
-            body: postsByTag
+            body: postsByTag,
         };
     }
 };
