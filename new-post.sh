@@ -7,4 +7,6 @@ postName=$(echo $1 | sed -e 's/ /-/g')
 
 ../hugo new posts/$postDate-$postName.md
 
+mkdir static/images/$postDate-$postName
+
 cd ..

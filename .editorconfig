@@ -2,9 +2,6 @@
 ; Top-most EditorConfig file
 root = true
 
-[*.sh]
-end_of_line = lf
-
 ; Windows newlines
 [*]
 end_of_line = crlf
@@ -14,3 +11,6 @@ indent_size = 4
 [*.{yml,yaml,toml,md}]
 indent_style = space
 indent_size = 2
+
+[*.sh]
+end_of_line = lf
