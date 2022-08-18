@@ -5,7 +5,7 @@ description = "It's time to talk authentication, and how we can do that with Gra
 draft = false
 tags = ["azure", "javascript", "graphql"]
 tracking_area = "javascript"
-tracking_id = "12581"
+tracking_id = "7129"
 series = "graphql-azure"
 series_title = "Server-Side Authentication"
 +++

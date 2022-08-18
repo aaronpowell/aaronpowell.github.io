@@ -5,7 +5,7 @@ description = "With Synthetic GraphQL we created resolvers to pass-through to RE
 draft = false
 tags = ["azure", "graphql"]
 tracking_area = "javascript"
-tracking_id = "48108"
+tracking_id = "7129"
 series = "graphql-azure"
 series_title = "Synthetic GraphQL Custom Responses"
 +++

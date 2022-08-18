@@ -5,7 +5,7 @@ description = "It can be a lot of work to rewrite your APIs to GraphQL, but what
 draft = false
 tags = ["graphql", "azure"]
 tracking_area = "javascript"
-tracking_id = "48108"
+tracking_id = "7129"
 series = "graphql-azure"
 series_title = "REST to GraphQL"
 +++

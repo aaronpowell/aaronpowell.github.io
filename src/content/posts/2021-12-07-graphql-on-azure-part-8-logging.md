@@ -5,7 +5,7 @@ description = "Logging and monitoring are important to understand how an app is 
 draft = false
 tags = ["azure", "javascript", "graphql"]
 tracking_area = "javascript"
-tracking_id = "48108"
+tracking_id = "7129"
 series = "graphql-azure"
 series_title = "Logging"
 +++
