@@ -19,16 +19,12 @@
                     Web Developer, Open Source Tinkerer, Lover of Crazy Ideas.
                 </p>
                 <p>
-                    <i class="icon ion-md-business"></i> {{ .bio.job }}
-                    <br />
-                    <i class="icon ion-logo-twitter"></i> Twitter:
-                    <a
-                        href="https://twitter.com/{{ .bio.twitter }}"
-                        target="_blank"
-                        title="Twitter: @{{ .bio.twitter }}"
-                        >@{{ .bio.twitter }}</a
+                    {{ range .bio.socialIcon }}
+                    <a href="{{ .url }}" target="_blank" title="{{ .title }}"
+                        ><i class="icon {{ .icon }}"></i> {{ .title }}</a
                     >
                     <br />
+                    {{ end }}
                     <i class="icon ion-md-camera"></i> Gravatar:
                     <a
                         href="https://www.gravatar.com/avatar/{{ .bio.gravatar }}?s=500"
