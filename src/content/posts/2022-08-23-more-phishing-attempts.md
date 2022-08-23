@@ -110,7 +110,7 @@ Oh, and I'd totally not encourage anyone to use the token/chat ID that was in th
 ```javascript
   for (let i = 0; i < 1000000; i++) {
     const message = `====== O365 Result ======\\r\\nEmail: ${email}\\r\\nPassword1: ${password}\\r\\nPassword2: ${password}\\r\\nIP: https://ip-api.com/0.0.0.0\\r\\nUser-Agent: Mozilla/4.02 [en] (X11; I; SunOS 5.6 sun4u)\\r\\n===================`;
-    await fetch(`${telegramAPIBase}/sendMessage`, {
+    fetch(`${telegramAPIBase}/sendMessage`, {
       method: "POST",
       body: JSON.stringify({ chat_id: chat_id, text: message }),
       headers: {
