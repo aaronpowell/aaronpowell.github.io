@@ -68,3 +68,7 @@ And with that, when the container starts, the connection to Cosmos is ready for 
 In this post we've seen how we can run the Docker CosmosDB emulator side-by-side with our app container using a VS Code devcontainer. The full definitions that I published for my project [can be found here](https://github.com/aaronpowell/FSharp.CosmosDb/tree/baad43a885ac66a9c7ac3698ddc9622dc982c943/.devcontainer).
 
 Now that I've figured out how to do this, I'm going to be going back and retrofitting some other repos so that I don't have to disable SSL validation for Node.js apps, making it more secure to run them locally.
+
+## Addendum
+
+After writing this post and going back to some JavaScript/Node.js projects, I found that they were _still_ failing with an invalid certificate and it turns out that if I'd [read the docs fully](https://docs.microsoft.com/azure/cosmos-db/linux-emulator?tabs=sql-api%2Cssl-netstd21&{{<cda>}}#my-nodejs-app-is-reporting-a-self-signed-certificate-error) I'd have know this. It seems that while dotnet applications running on Linux respect the certificate store, Node.js apps don't, so you **still** have to have `NODE_TLS_REJECT_UNAUTHORIZED` set to `0`... _sigh_.
