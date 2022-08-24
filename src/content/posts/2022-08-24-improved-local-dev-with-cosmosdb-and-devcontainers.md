@@ -1,6 +1,6 @@
 +++
 title = "Improved Local Dev With CosmosDB and devcontainers"
-date = 2022-08-23T00:22:27Z
+date = 2022-08-24T00:22:27Z
 description = "A second take on how to work with CosmosDB's docker-based emulator"
 draft = false
 tags = ["javascript", "vscode", "cosmosdb"]
