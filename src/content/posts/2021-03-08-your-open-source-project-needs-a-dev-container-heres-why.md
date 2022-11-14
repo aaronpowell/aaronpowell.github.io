@@ -73,9 +73,9 @@ So let's make it easier for people to jump into a codebase by giving them a scri
 
 ## Bonus tip - Use with GitHub Codespaces
 
-_At the time of writing [GitHub Codespaces](https://github.com/features/codespaces?{{<cda>}}) is in private preview, so you'll need to request access, or wait until it's publicly available._
+_~At the time of writing [GitHub Codespaces](https://github.com/features/codespaces?{{<cda>}}) is in private preview, so you'll need to request access, or wait until it's publicly available.~ Update: At GitHub Universe 2022 it was announced that you can get [up to 60 hours free Codespaces time](https://github.blog/2022-11-09-everything-new-from-github-universe-2022/) with a Free or Pro GitHub account._
 
-If you have a devcontainer in your GitHub repo, when you open a GitHub Codespace, it'll use that definition. This is really awesome, but I don't think I can do it justice, instead, check out this video my colleague [Alvaro](https://twitter.com/old_sound?s=20) did to show it off. He literally can't contain his excitement.
+If you have a devcontainer in your GitHub repo, when you open a GitHub Codespace, it'll use that definition. This is really awesome, but I don't think I can do it justice, instead, check out this video my colleague [Alvaro](https://twitter.com/old_sound) did to show it off. He literally can't contain his excitement.
 
 {{<youtube B_gtLXvDQhE>}}
 
