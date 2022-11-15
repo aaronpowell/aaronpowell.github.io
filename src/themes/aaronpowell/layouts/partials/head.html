@@ -63,10 +63,10 @@
 
     <link rel="icon" href="{{ .Site.Params.favicon | absURL }}" />
 
-    <link
-        href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css"
-        rel="stylesheet"
-    />
+    <script
+        type="module"
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
 
     {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" true) }}
     {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $options }}
@@ -77,4 +77,3 @@
         media="screen"
     />
 </head>
-

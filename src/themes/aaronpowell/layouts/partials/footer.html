@@ -2,15 +2,13 @@
     <ul>
         {{ range .Site.Params.footer.socialIcon }}
         <li>
-            <a href="{{ .url }}" target="_blank" title="{{ .title }}"
-                ><i class="icon {{ .icon }}"></i
+            <a href="{{ .url }}" target="_blank" ref="me" title="{{ .title }}"
+                ><ion-icon name="{{ .icon }}"></ion-icon
             ></a>
         </li>
         {{ end }}
     </ul>
-    <p>
-        Copyright &copy; Aaron Powell {{ now.Format "2006"}}.
-    </p>
+    <p>Copyright &copy; Aaron Powell {{ now.Format "2006"}}.</p>
     <p>
         Content is licensed under
         <a

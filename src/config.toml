@@ -83,29 +83,34 @@ home = [ "HTML", "RSS", "JSON"]
 
     [params.footer]
         [[params.footer.socialIcon]]
-            icon = "ion-logo-twitter"
+            icon = "logo-twitter"
             url = "https://twitter.com/slace"
             title = "Twitter"
 
         [[params.footer.socialIcon]]
-            icon = "ion-logo-github"
+            icon = "logo-github"
             url = "https://github.com/aaronpowell"
             title = "GitHub"
 
         [[params.footer.socialIcon]]
-            icon = "ion-logo-twitch"
+            icon = "logo-twitch"
             url = "https://www.twitch.tv/NumberOneAaron/"
             title = "Twitch"
 
         [[params.footer.socialIcon]]
-            icon = "ion-logo-linkedin"
+            icon = "logo-linkedin"
             url = "https://www.linkedin.com/in/aaron-powell-66038631/"
             title = "LinkedIn"
 
         [[params.footer.socialIcon]]
-            icon = "ion-logo-youtube"
+            icon = "logo-youtube"
             url = "https://www.youtube.com/channel/UCT1QtGr1IzVPNSF_YMrKCAw"
             title = "YouTube Channel"
+
+        [[params.footer.socialIcon]]
+            icon = "logo-mastodon"
+            url = "https://mastodon.social/@slace"
+            title = "Mastodon"
 
 [minify]
     disableXML = true
