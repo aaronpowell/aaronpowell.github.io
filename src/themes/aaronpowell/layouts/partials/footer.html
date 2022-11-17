@@ -2,7 +2,7 @@
     <ul>
         {{ range .Site.Params.footer.socialIcon }}
         <li>
-            <a href="{{ .url }}" target="_blank" ref="me" title="{{ .title }}"
+            <a href="{{ .url }}" target="_blank" rel="me" title="{{ .title }}"
                 ><span class="hidden">{{ .title }}</span
                 ><ion-icon name="{{ .icon }}"></ion-icon
             ></a>
