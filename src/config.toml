@@ -109,7 +109,7 @@ home = [ "HTML", "RSS", "JSON"]
 
         [[params.footer.socialIcon]]
             icon = "logo-mastodon"
-            url = "https://mastodon.social/@slace"
+            url = "https://hachyderm.io/@slace"
             title = "Mastodon"
 
 [minify]
