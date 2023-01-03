@@ -11,3 +11,4 @@ src/resources/_gen
 .fake
 .vs
 .hugo_build.lock
+*Zone.Identifier
