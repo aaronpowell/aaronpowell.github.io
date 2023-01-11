@@ -1,39 +1,35 @@
 {
-    "name": "Aaron's blog",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "args": {
-            // Options
-            "INSTALL_NODE": "true",
-            "NODE_VERSION": "lts/*",
-            "UPGRADE_PACKAGES": "false",
-            "VARIANT": "6.0"
-        }
+  "name": "Aaron's blog",
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "files.defaultLanguage": "markdown"
+  },
+
+  "extensions": [
+    "ms-dotnettools.csharp",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "ionide.ionide-fsharp",
+    "ms-azuretools.vscode-bicep",
+    "GitHub.vscode-pull-request-github"
+  ],
+
+  "forwardPorts": [4014],
+
+  "remoteUser": "vscode",
+
+  "postCreateCommand": "npm install",
+
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/hugo:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "version": "lts"
     },
-
-    "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "files.defaultLanguage": "markdown"
-    },
-
-    "extensions": [
-        "ms-dotnettools.csharp",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "editorconfig.editorconfig",
-        "streetsidesoftware.code-spell-checker",
-        "ionide.ionide-fsharp",
-        "ms-azuretools.vscode-bicep",
-        "GitHub.vscode-pull-request-github"
-    ],
-
-    "forwardPorts": [4014],
-
-    "remoteUser": "vscode",
-
-    "postCreateCommand": "npm install",
-
-    "features": {
-        "github-cli": "latest"
-    }
+    "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
+  }
 }
