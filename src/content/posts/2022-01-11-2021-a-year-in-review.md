@@ -12,7 +12,7 @@ It's that time of year again, time for reflection on past year and compare that 
 
 ## Blogging
 
-Blogging has always been a mainstay of my online life, and something that's been important to me, but last year was hard. Looking at the raw numbers, I did 29 posts, which is a little over half of what I did in 2021. There's a few things that contributed to this, but one of the main things is that I spent more time trying to tackle some larger ideas that will pay off in longer blog series, rather than a lot of short and sharp posts which I've done a lot of in the past.
+Blogging has always been a mainstay of my online life, and something that's been important to me, but last year was hard. Looking at the raw numbers, I did 29 posts, which is a little over half of what I did in 2020. There's a few things that contributed to this, but one of the main things is that I spent more time trying to tackle some larger ideas that will pay off in longer blog series, rather than a lot of short and sharp posts which I've done a lot of in the past.
 
 I continued on my [GraphQL on Azure]({{<ref "/posts/2020-07-13-graphql-on-azure-part-1-getting-started.md">}}) series, and I've got a few more things that I want to blog about on that topic, it's just a matter of finding the time to dig into them properly.
 
