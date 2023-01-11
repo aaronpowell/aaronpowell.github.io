@@ -44,7 +44,7 @@ Several people have told me that they found it really brave of me to share such 
 
 ## Moving to something new
 
-As I was coming to grips with my burnout and looking at what I wanted to change to help me work through it, I realised that it was time to tackle some new challenges, and I'm excited to announce that that will be happening in 2023. Don't worry, I'm not going far, I'm moving from the JavaScript team to the .NET team without Cloud Advocacy. This feels like a better fit for me, as much as I love JavaScript, .NET is where my heart always has been and I'm looking forward to tackling some of the challenges facing .NET developers in regards to Azure.
+As I was coming to grips with my burnout and looking at what I wanted to change to help me work through it, I realised that it was time to tackle some new challenges, and I'm excited to announce that that will be happening in 2023. Don't worry, I'm not going far, I'm moving from the JavaScript team to the .NET team within Cloud Advocacy. This feels like a better fit for me, as much as I love JavaScript, .NET is where my heart always has been and I'm looking forward to tackling some of the challenges facing .NET developers in regards to Azure.
 
 But yes, I do appreciate the irony that in my burnout post I talked about having a lot of managers to then go and have _yet another manager_ come 2023, but I have already congratulated my new manager on the promotion they'll receive in about 5 months time! 🤣
 
