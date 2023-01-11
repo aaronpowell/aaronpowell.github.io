@@ -54,7 +54,7 @@
         {
             "label": "build:debug (hugo)",
             "type": "shell",
-            "command": ["./hugo"],
+            "command": ["hugo"],
             "args": [
                 "--source",
                 "./src",
@@ -64,15 +64,12 @@
                 "--buildFuture"
             ],
             "group": "build",
-            "problemMatcher": [],
-            "windows": {
-                "command": "./hugo.exe"
-            }
+            "problemMatcher": []
         },
         {
             "label": "build:release (hugo)",
             "type": "shell",
-            "command": ["./hugo"],
+            "command": ["hugo"],
             "args": [
                 "--source",
                 "./src",
@@ -80,10 +77,7 @@
                 "../.output",
                 "--minify"
             ],
-            "problemMatcher": [],
-            "windows": {
-                "command": "./hugo.exe"
-            }
+            "problemMatcher": []
         },
         {
             "label": "build (dotnet)",

@@ -5,7 +5,7 @@ cd src
 postDate=$(date +%Y-%m-%d)
 postName=$(echo $1 | sed -e 's/ /-/g')
 
-../hugo new posts/$postDate-$postName.md
+hugo new posts/$postDate-$postName.md
 
 mkdir static/images/$postDate-$postName
 
