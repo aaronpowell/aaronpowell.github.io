@@ -25,7 +25,9 @@
 
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/hugo:1": {},
+    "ghcr.io/devcontainers/features/hugo:1": {
+        "extended": true
+    },
     "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers/features/dotnet:1": {
       "version": "lts"
