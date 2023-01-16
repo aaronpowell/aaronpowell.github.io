@@ -2,7 +2,7 @@
 title = "Building a Smart Home - Part 7 Motorised Gate"
 date = 2023-01-16T09:51:16Z
 description = "We installed a motorised gate, so guess what, I need to automate it!"
-draft = true
+draft = false
 tags = ["HomeAssistant", "smart-home"]
 tracking_area = "javascript"
 tracking_id = ""
@@ -11,11 +11,11 @@ series_title = "Motorised Gate"
 cover_image = "/images/2023-01-16-building-a-smart-home---part-7-motorised-gate/banner.jpg"
 +++
 
-In building out new house, we decided to add a motorised gate across our driveway.
+In building our new house we decided to add a motorised gate across our driveway.
 
 ![Front gates](/images/2023-01-16-building-a-smart-home---part-7-motorised-gate/00.jpg)
 
-Unsurprisingly, this is a gate running off a remote, which I believe is using RF on some frequency, and this sounds like it's something I can automate with Home Assistant! After all, I've previously [done some RF automations]({{<ref "/posts/2022-10-24-building-a-smart-home-part-4-ceiling-fans.md">}}), so let's get started.
+Unsurprisingly, this is a gate running off a remote, which upon first inspection I believed is using RF on some frequency, and this sounds like it's something I can automate with Home Assistant! After all, I've previously [done some RF automations]({{<ref "/posts/2022-10-24-building-a-smart-home-part-4-ceiling-fans.md">}}), so let's get started.
 
 ## The Controller
 
@@ -29,13 +29,13 @@ With the gate we were provided with some [Mitto](https://www.bft-automation.com/
 
 The only problem is that now I need it to reach yet another location, and it's already running a bit thin in reaching the full length of our house.
 
-But it turns out that it's actually a lot simpler than that. Part of the gate controller is the [Hamal](https://www.bft-automation.com/en_AU/product/hamal/) control board and it has some interesting ports on the board, a 24v DC +/-, as well as headers for external controllers to do things like start the motor. This sounds like a better option, it's direct input to the motor, so we can send a signal directly into the motor, rather than relying on an eternal signal blast.
+But it turns out that it's actually a lot simpler than that. Part of the gate controller is the [Hamal](https://www.bft-automation.com/en_AU/product/hamal/) control board and it has some interesting headers on the board, a 24v DC +/-, as well as headers for external controllers to do things like start the motor. This sounds like a better option, it's direct input to the motor, so we can send a signal directly, rather than relying on an external signal blast.
 
 ## Wiring up the Controller
 
 I've still got some Shelly 1 devices left over from the lighting install, and this is the ideal device to use as it can run on 240v AC _or_ 24v DC, and the motor exposes positive and negative headers for 24v DC (as well as 240v AC, but you don't want to play with 240v AC!).
 
-Using some spare wires I connected the L and N terminals to the 24v DC headers (50 and 51 on the Hamal) and the Shelly is ready to power on, next we need to wire up the IO of the Shelly to the headers 61 and 60 respectively.
+After unplugging the motor I grabbed spare wires to connect the L and N terminals to the 24v DC headers and the Shelly is ready to power on, next we need to wire up the IO of the Shelly to the headers 61 and 60 respectively.
 
 ![Shelly all wired in](/images/2023-01-16-building-a-smart-home---part-7-motorised-gate/01.jpg)
 
@@ -110,6 +110,6 @@ This turned out to be a reasonably easy project to undertake because the BFT con
 
 It's also very similar to wiring up a garage motor, which I've done in the past (and there are plenty of tutorials online for).
 
-Is this really that useful though? Presently, no, not really. I don't really have anything that will intelligently decide if the gate needs to be opened or closed, so it's more a case of "I can do this" than anything else. Sure, there's a basic automation it's wired with to make sure it's closed at the end of the day, but really, that's not running that frequently as we just close it from the remote in the car. Maybe if/when we have a car that's integrated into Home Assistant (our car isn't modern enough for that) there could be some smarts on "you're about to drive, let me open" and have auto close when away/reopen on approach, but that's not going to be happening for a while.
+Is this really that useful though? Presently, no, not really. I don't really have anything that will intelligently decide if the gate needs to be opened or closed, so it's more a case of "I can do this" than anything else. Sure, there's a basic automation it's used with to make sure it's closed at the end of the day, but really, that's not running that frequently as we just close it from the remote in the car. Maybe if/when we have a car that's integrated into Home Assistant (our car isn't modern enough for that) there could be some smarts on "you're about to drive, let me open" and have auto close when away/reopen on approach, but that's not going to be happening for a while.
 
 All in all, it was a fun project that saw a few fist pumps when I realised that it worked first time!
