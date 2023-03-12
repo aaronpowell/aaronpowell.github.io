@@ -16,18 +16,17 @@ I'm really excited because today we launched the first public preview of [Data A
 
 The important links you'll need are:
 
-- [Announcement post]()
-  - [SQL announcement]()
-  - [Cosmos announcement]()
-- [Docs]()
+- [SQL announcement](https://devblogs.microsoft.com/azure-sql/data-api-builder-for-azure-sql-databases-public-preview)
+- [Cosmos announcement]()
+- [Docs](https://aka.ms/dabdocs)
 - [SWA integration docs]()
-- [GitHub Repo]()
+- [GitHub Repo](https://aka.ms/dab)
 
 ## What is DAb
 
 DAb is a joint effort from the Azure SQL, PostgreSQL, MySQL and Cosmos DB teams to provide a simple and easy way to create REST and GraphQL endpoints from your existing database. Now obviously this is something that you've always been able to do, but the difference is that DAb **does it for you** (after all, that's the point of this series 😜) so rather than having to write an ASP.NET application, data layer, authentication and authorisation, and so on, DAb will do all of that for you. Essentially, DAb is a Backend as a Service (BaaS) and this makes it easier to create an application over a database by removing the need to create the backend yourself.
 
-_Quick note: DAb doesn't support REST for Cosmos DB as Cosmos DB [already has a REST API]()._
+_Quick note: DAb doesn't support REST for Cosmos DB as Cosmos DB [already has a REST API](https://learn.microsoft.com/rest/api/cosmos-db/?{{<cda>}})._
 
 ## How does DAb work
 
@@ -45,12 +44,12 @@ Sounds cool doesn't it? Well, let's go ahead and make a DAb server. The first th
 dotnet tool install --global Microsoft.DataApiBuilder
 ```
 
-The CLI is used to help us generate our config file, but also to run a local version of DAb. I'm going to use DAb with a Cosmos DB backend, just to show you how to go about creating a data schema for Cosmos, so you'll either need a [local emulator]() or deployed Cosmos DB instance (I'm going to use the [cross-platform emulator in a devcontainer]({{<ref "/posts/2022-08-24-improved-local-dev-with-cosmosdb-and-devcontainers.md">}})).
+The CLI is used to help us generate our config file, but also to run a local version of DAb. I'm going to use DAb with a Cosmos DB backend, just to show you how to go about creating a data schema for Cosmos, so you'll either need a [local emulator](https://docs.microsoft.com/azure/cosmos-db/local-emulator?tabs=ssl-netstd21&{{<cda>}}) or deployed Cosmos DB instance (I like to use the [cross-platform emulator in a devcontainer]({{<ref "/posts/2022-08-24-improved-local-dev-with-cosmosdb-and-devcontainers.md">}})).
 
 Let's start by initialising the config file:
 
 ```bash
-dab init --config dab-config.json --database-type cosmosdb_nosql --connection-string "..." --host-mode Development --cors-origin "http://localhost:3000" --cosmosdb_nosql-database Trivia --graphql-schema schema.graphql
+dab init --config dab-config.json --database-type cosmosdb_nosql --connection-string "..." --host-mode Development --cors-origin "http://localhost:3000" --cosmosdb_nosql-database trivia --graphql-schema schema.graphql
 ```
 
 This will generate you a config file like so:
@@ -158,4 +157,106 @@ With the config file complete we can now the server:
 dab start
 ```
 
-You can navigate to http://localhost:5000 and see that the 
+Now we can load up the GraphQL endpoint, https://localhost:5001/graphql, in your preferred GraphQL IDE (I like to use [Banana Cake Pop](https://chillicream.com/products/bananacakepop)):
+
+![Connect to GraphQL endpoint](/images/2023-03-16-graphql-on-azure-part-12-graphql-as-a-service/001.png)
+
+You'll then see the whole GraphQL schema that was generated from the config file and GraphQL types provided:
+
+![GraphQL schema](/images/2023-03-16-graphql-on-azure-part-12-graphql-as-a-service/002.png)
+
+It's really cool, we have queries just magically generated for us!
+
+```graphql
+type Query {
+  """
+  Get a list of all the Question items from the database
+  """
+  questions(
+    """
+    The number of items to return from the page start point
+    """
+    first: Int
+
+    """
+    A pagination token from a previous query to continue through a paginated list
+    """
+    after: String
+
+    """
+    Filter options for query
+    """
+    filter: QuestionFilterInput
+
+    """
+    Ordering options for query
+    """
+    orderBy: QuestionOrderByInput
+  ): QuestionConnection!
+
+  """
+  Get a Question from the database by its ID/primary key
+  """
+  question_by_pk(id: ID, _partitionKeyValue: String): Question
+}
+```
+
+This means we could write a query like this:
+
+```graphql
+query {
+  questions {
+    items {
+      id
+      question
+      correct_answer
+      incorrect_answers
+    }
+  }
+}
+```
+
+And when executed it'll return all the documents:
+
+![GraphQL query](/images/2023-03-16-graphql-on-azure-part-12-graphql-as-a-service/003.png)
+
+You can even write complex filter queries that take a subset of the results:
+
+```graphql
+query {
+  questions(filter: { question: { contains: "What" } }, first: 10) {
+    endCursor
+    hasNextPage
+    items {
+      id
+      question
+      correct_answer
+      incorrect_answers
+    }
+  }
+}
+```
+
+Which will then give us an output such as:
+
+```json
+{
+  "data": {
+    "questions": {
+      "endCursor": "W3sidG9rZW4iOiIrUklEOn41anNMQU83WXk4TVhBQUFBQUFBQUFBPT0jUlQ6MSNUUkM6MTAjSVNWOjIjSUVPOjY1NTUxI1FDRjo4I0ZQQzpBZ0VBQUFBT0FCWUFnS0lBb05pUk5nUUxJQXdBIiwicmFuZ2UiOnsibWluIjoiIiwibWF4IjoiRkYifX1d",
+      "hasNextPage": true,
+      "items": [ ... ]
+    }
+  }
+}
+```
+
+The `endCursor` is a token that can be used to get the next page of results, using the `after` input field, and the `hasNextPage` flag tells us if there are any more pages to get.
+
+## Conclusion
+
+In this post we've looked at how to use GraphQL as a service on Azure, using the Data API builder project. It's a really cool project that allows you to quickly get up and running with a GraphQL API (or REST if that's your preference, but this series is **GraphQL** on Azure, not **REST** on Azure 😝).
+
+With a few commands we can scaffold up DAb, define what the data schema we want to export looks like, connect to an existing database and then start serving up data.
+
+Go check out [the official announcement](https://devblogs.microsoft.com/azure-sql/data-api-builder-for-azure-sql-databases-public-preview?{{<cda>}}), and [the GitHub repo](https://aka.ms/dab), the [docs](https://aka.ms/dabdocs) and [the samples](https://github.com/Azure-Samples/data-api-builder) and give it a try!
