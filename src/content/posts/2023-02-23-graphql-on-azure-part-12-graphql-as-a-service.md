@@ -75,9 +75,7 @@ This will generate you a config file like so:
     "host": {
       "mode": "development",
       "cors": {
-        "origins": [
-          "http://localhost:3000"
-        ],
+        "origins": ["http://localhost:3000"],
         "allow-credentials": false
       },
       "authentication": {
@@ -105,5 +103,59 @@ This looks pretty standard as far as a GraphQL type is concerned, with the excep
 With our schema defined, we have to tell DAb how to retrieve documents from Cosmos that match that type, and that's what the `entities` field in the config file is for. Let's use the CLI to define a new entity:
 
 ```bash
-
+dab add Question --source questions --permissions "anonymous:*"
 ```
+
+This command is defining a new `entity` called `Question`, specifying that the collection (`source`) in Cosmos DB is _questions_ and that we want to allow anonymous access to all operations on this entity. I'm being pretty lazy on the security, but if you want to do it properly you can define different roles and the access they have (create, read, update or delete) to the entity.
+
+With this added our config file now looks like this:
+
+```json
+{
+  "$schema": "https://dataapibuilder.azureedge.net/schemas/v0.5.34/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "cosmosdb_nosql",
+    "options": {
+      "database": "Trivia",
+      "schema": "schema.graphql"
+    },
+    "connection-string": "..."
+  },
+  "runtime": {
+    "graphql": {
+      "allow-introspection": true,
+      "enabled": true,
+      "path": "/graphql"
+    },
+    "host": {
+      "mode": "development",
+      "cors": {
+        "origins": ["http://localhost:3000"],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      }
+    }
+  },
+  "entities": {
+    "Question": {
+      "source": "questions",
+      "permissions": [
+        {
+          "role": "*",
+          "actions": ["*"]
+        }
+      ]
+    }
+  }
+}
+```
+
+With the config file complete we can now the server:
+
+```bash
+dab start
+```
+
+You can navigate to http://localhost:5000 and see that the 
