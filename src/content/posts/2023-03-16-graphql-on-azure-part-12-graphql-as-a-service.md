@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Azure: Part 12 - GraphQL as a Service"
-date = 2023-02-23T04:34:09Z
+date = 2023-03-16T00:34:30Z
 description = "It's never been easier to create a GraphQL server on Azure, let's check out what's new"
 draft = true
 tags = ["azure", "graphql", "javascript", "dotnet"]
@@ -17,7 +17,7 @@ I'm really excited because today we launched the first public preview of [Data A
 The important links you'll need are:
 
 - [SQL announcement](https://devblogs.microsoft.com/azure-sql/data-api-builder-for-azure-sql-databases-public-preview)
-- [Cosmos announcement]()
+- [Cosmos announcement](https://devblogs.microsoft.com/cosmosdb/announcing-data-api-builder-for-azure-cosmos-db)
 - [Docs](https://aka.ms/dabdocs)
 - [SWA integration docs]()
 - [GitHub Repo](https://aka.ms/dab)
