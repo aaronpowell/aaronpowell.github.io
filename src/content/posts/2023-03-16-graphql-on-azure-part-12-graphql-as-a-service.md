@@ -10,7 +10,7 @@ series = "graphql-azure"
 series_title = "GraphQL as a Service"
 +++
 
-![It's happening!](/images/2023-02-23-graphql-on-azure-part-12-graphql-as-a-service/its-happening.webp)
+![It's happening!](/images/2023-03-16-graphql-on-azure-part-12-graphql-as-a-service/its-happening.webp)
 
 I'm really excited because today we launched the first public preview of [Data API builder for Azure Databases](https://aka.ms/dabdocs) or DAB for short (the official name is a bit of a mouthful 😅).
 
