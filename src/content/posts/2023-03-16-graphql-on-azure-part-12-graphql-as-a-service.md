@@ -2,7 +2,7 @@
 title = "GraphQL on Azure: Part 12 - GraphQL as a Service"
 date = 2023-03-15T16:00:47Z
 description = "It's never been easier to create a GraphQL server on Azure, let's check out what's new"
-draft = true
+draft = false
 tags = ["azure", "graphql", "javascript", "dotnet"]
 tracking_area = "dotnet"
 tracking_id = "7129"
@@ -12,7 +12,7 @@ series_title = "GraphQL as a Service"
 
 ![It's happening!](/images/2023-02-23-graphql-on-azure-part-12-graphql-as-a-service/its-happening.webp)
 
-I'm really excited because today we launched the first public preview of [Data API builder for Azure Databases]() or DAB for short (the official name is a bit of a mouthful 😅).
+I'm really excited because today we launched the first public preview of [Data API builder for Azure Databases](https://aka.ms/dabdocs) or DAB for short (the official name is a bit of a mouthful 😅).
 
 The important links you'll need are:
 

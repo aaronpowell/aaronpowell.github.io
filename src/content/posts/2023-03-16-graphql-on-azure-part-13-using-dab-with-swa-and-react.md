@@ -1,8 +1,8 @@
 +++
 title = "GraphQL on Azure: Part 13 - Using Data API builder with SWA and React"
 date = 2023-03-15T16:01:47Z
-description = ""
-draft = true
+description = "Want to easily create a GraphQL API for your Azure Database? Well, let's see how easy it is with SWA Database Connections."
+draft = false
 tags = ["azure", "graphql", "javascript", "serverless"]
 tracking_area = "javascript"
 tracking_id = "7129"

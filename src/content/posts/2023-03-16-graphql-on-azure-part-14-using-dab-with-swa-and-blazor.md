@@ -2,7 +2,7 @@
 title = "GraphQL on Azure: Part 14 - Using Data API builder with SWA and Blazor"
 date = 2023-03-15T16:02:47Z
 description = "We've seen how we can use DAB with SWA and React, now let's look at how we can use it with SWA and Blazor"
-draft = true
+draft = false
 tags = ["azure", "graphql", "dotnet"]
 tracking_area = "dotnet"
 tracking_id = "7129"
