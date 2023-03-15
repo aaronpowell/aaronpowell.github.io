@@ -1,6 +1,6 @@
 +++
 title = "GraphQL on Azure: Part 12 - GraphQL as a Service"
-date = 2023-03-16T00:34:30Z
+date = 2023-03-15T16:00:47Z
 description = "It's never been easier to create a GraphQL server on Azure, let's check out what's new"
 draft = true
 tags = ["azure", "graphql", "javascript", "dotnet"]
@@ -12,39 +12,39 @@ series_title = "GraphQL as a Service"
 
 ![It's happening!](/images/2023-02-23-graphql-on-azure-part-12-graphql-as-a-service/its-happening.webp)
 
-I'm really excited because today we launched the first public preview of [Data API builder for Azure Databases]() or DAb for short (the official name is a bit of a mouthful 😅).
+I'm really excited because today we launched the first public preview of [Data API builder for Azure Databases]() or DAB for short (the official name is a bit of a mouthful 😅).
 
 The important links you'll need are:
 
 - [SQL announcement](https://devblogs.microsoft.com/azure-sql/data-api-builder-for-azure-sql-databases-public-preview)
 - [Cosmos announcement](https://devblogs.microsoft.com/cosmosdb/announcing-data-api-builder-for-azure-cosmos-db)
 - [Docs](https://aka.ms/dabdocs)
-- [SWA integration docs]()
+- [SWA integration announcement](https://aka.ms/swa/db/announcement)
 - [GitHub Repo](https://aka.ms/dab)
 
-## What is DAb
+## What is DAB
 
-DAb is a joint effort from the Azure SQL, PostgreSQL, MySQL and Cosmos DB teams to provide a simple and easy way to create REST and GraphQL endpoints from your existing database. Now obviously this is something that you've always been able to do, but the difference is that DAb **does it for you** (after all, that's the point of this series 😜) so rather than having to write an ASP.NET application, data layer, authentication and authorisation, and so on, DAb will do all of that for you. Essentially, DAb is a Backend as a Service (BaaS) and this makes it easier to create an application over a database by removing the need to create the backend yourself.
+DAB is a joint effort from the Azure SQL, PostgreSQL, MySQL and Cosmos DB teams to provide a simple and easy way to create REST and GraphQL endpoints from your existing database. Now obviously this is something that you've always been able to do, but the difference is that DAB **does it for you** (after all, that's the point of this series 😜) so rather than having to write an ASP.NET application, data layer, authentication and authorisation, and so on, DAB will do all of that for you. Essentially, DAB is a Backend as a Service (BaaS) and this makes it easier to create an application over a database by removing the need to create the backend yourself.
 
-_Quick note: DAb doesn't support REST for Cosmos DB as Cosmos DB [already has a REST API](https://learn.microsoft.com/rest/api/cosmos-db/?{{<cda>}})._
+_Quick note: DAB doesn't support REST for Cosmos DB as Cosmos DB [already has a REST API](https://learn.microsoft.com/rest/api/cosmos-db/?{{<cda>}})._
 
-## How does DAb work
+## How does DAB work
 
-DAb is going to need a data schema that describes the entities you want to expose. In the case of a SQL backend, DAb will inspect the database schema and allow you to expose the tables, views and stored procedures as endpoints. With a NoSQL backend (currently Cosmos DB NoSQL) you need to provide a set of GraphQL types which define the entities you want expose, since there's no database schema to work from.
+DAB is going to need a data schema that describes the entities you want to expose. In the case of a SQL backend, DAB will inspect the database schema and allow you to expose the tables, views and stored procedures as endpoints. With a NoSQL backend (currently Cosmos DB NoSQL) you need to provide a set of GraphQL types which define the entities you want expose, since there's no database schema to work from.
 
-You'll also provide DAb with a config file which acts as a mapping between the data schema and how you want those entities exposed. In the config file you'll define entities you want to expose (so you can pick and choose what you want to expose from the available schema), access control and entity relationships. If you're working with a SQL database and have views or stored procedures, you can define how they will be exposed.
+You'll also provide DAB with a config file which acts as a mapping between the data schema and how you want those entities exposed. In the config file you'll define entities you want to expose (so you can pick and choose what you want to expose from the available schema), access control and entity relationships. If you're working with a SQL database and have views or stored procedures, you can define how they will be exposed.
 
-With this information DAb will then generate the appropriate REST endpoints for each entity with REST semantics on how CRUD should work, as well as a full GraphQL schema, including queries for individual items, paginated lists (with filtering) and mutations (create, update and delete).
+With this information DAB will then generate the appropriate REST endpoints for each entity with REST semantics on how CRUD should work, as well as a full GraphQL schema, including queries for individual items, paginated lists (with filtering) and mutations (create, update and delete).
 
-## Your first DAb instance
+## Your first DAB instance
 
-Sounds cool doesn't it? Well, let's go ahead and make a DAb server. The first thing we'll need to do is install the [DAb CLI](https://github.com/Azure/data-api-builder/blob/main/docs/dab-cli.md):
+Sounds cool doesn't it? Well, let's go ahead and make a DAB server. The first thing we'll need to do is install the [DAB CLI](https://github.com/Azure/data-api-builder/blob/main/docs/dab-cli.md):
 
 ```bash
 dotnet tool install --global Microsoft.DataApiBuilder
 ```
 
-The CLI is used to help us generate our config file, but also to run a local version of DAb. I'm going to use DAb with a Cosmos DB backend, just to show you how to go about creating a data schema for Cosmos, so you'll either need a [local emulator](https://docs.microsoft.com/azure/cosmos-db/local-emulator?tabs=ssl-netstd21&{{<cda>}}) or deployed Cosmos DB instance (I like to use the [cross-platform emulator in a devcontainer]({{<ref "/posts/2022-08-24-improved-local-dev-with-cosmosdb-and-devcontainers.md">}})).
+The CLI is used to help us generate our config file, but also to run a local version of DAB. I'm going to use DAB with a Cosmos DB backend, just to show you how to go about creating a data schema for Cosmos, so you'll either need a [local emulator](https://docs.microsoft.com/azure/cosmos-db/local-emulator?tabs=ssl-netstd21&{{<cda>}}) or deployed Cosmos DB instance (I like to use the [cross-platform emulator in a devcontainer]({{<ref "/posts/2022-08-24-improved-local-dev-with-cosmosdb-and-devcontainers.md">}})).
 
 Let's start by initialising the config file:
 
@@ -86,7 +86,7 @@ This will generate you a config file like so:
 }
 ```
 
-Since this is Cosmos DB and we don't have a database schema we can work with, we're going to need to create some types in GraphQL for DAb to use:
+Since this is Cosmos DB and we don't have a database schema we can work with, we're going to need to create some types in GraphQL for DAB to use:
 
 ```graphql
 type Question @model {
@@ -97,9 +97,9 @@ type Question @model {
 }
 ```
 
-This looks pretty standard as far as a GraphQL type is concerned, with the exception of a `@model` directive that's been applied to the type. This directive is required to tell DAb that this is a type that we want to generate a full schema for (queries and mutations), and not a type that is a child of another type (in the case of a nested JavaScript object).
+This looks pretty standard as far as a GraphQL type is concerned, with the exception of a `@model` directive that's been applied to the type. This directive is required to tell DAB that this is a type that we want to generate a full schema for (queries and mutations), and not a type that is a child of another type (in the case of a nested JavaScript object).
 
-With our schema defined, we have to tell DAb how to retrieve documents from Cosmos that match that type, and that's what the `entities` field in the config file is for. Let's use the CLI to define a new entity:
+With our schema defined, we have to tell DAB how to retrieve documents from Cosmos that match that type, and that's what the `entities` field in the config file is for. Let's use the CLI to define a new entity:
 
 ```bash
 dab add Question --source questions --permissions "anonymous:*"
@@ -257,6 +257,6 @@ The `endCursor` is a token that can be used to get the next page of results, usi
 
 In this post we've looked at how to use GraphQL as a service on Azure, using the Data API builder project. It's a really cool project that allows you to quickly get up and running with a GraphQL API (or REST if that's your preference, but this series is **GraphQL** on Azure, not **REST** on Azure 😝).
 
-With a few commands we can scaffold up DAb, define what the data schema we want to export looks like, connect to an existing database and then start serving up data.
+With a few commands we can scaffold up DAB, define what the data schema we want to export looks like, connect to an existing database and then start serving up data.
 
 Go check out [the official announcement](https://devblogs.microsoft.com/azure-sql/data-api-builder-for-azure-sql-databases-public-preview?{{<cda>}}), and [the GitHub repo](https://aka.ms/dab), the [docs](https://aka.ms/dabdocs) and [the samples](https://github.com/Azure-Samples/data-api-builder) and give it a try!

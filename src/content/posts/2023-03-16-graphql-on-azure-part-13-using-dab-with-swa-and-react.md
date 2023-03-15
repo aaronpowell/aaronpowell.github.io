@@ -1,16 +1,16 @@
 +++
-title = "GraphQL on Azure: Part 13 - Using DAb With SWA and React"
-date = 2023-03-16T00:34:31Z
+title = "GraphQL on Azure: Part 13 - Using Data API builder with SWA and React"
+date = 2023-03-15T16:01:47Z
 description = ""
 draft = true
 tags = ["azure", "graphql", "javascript", "serverless"]
 tracking_area = "javascript"
 tracking_id = "7129"
 series = "graphql-azure"
-series_title = "Using React with DAb and SWA"
+series_title = "Using React with DAB and SWA"
 +++
 
-In the last post I introduced you to a new project we've been working on, Data API build for Azure Databases (DAb) and in this post I want to look at how we can use it in Azure, and that will be through one of my favourite Azure services, [Azure Static Web Apps](https://learn.microsoft.com/azure/static-web-apps/overview?{{<cda>}}), for you see, as part of the announcement today of DAb, we've announced that it is [available as a feature of SWA]() (called Database Connections), so let's build a React app!
+In the last post I introduced you to a new project we've been working on, Data API builder for Azure Databases (DAB) and in this post I want to look at how we can use it in Azure, and that will be through one of my favourite Azure services, [Azure Static Web Apps](https://learn.microsoft.com/azure/static-web-apps/overview?{{<cda>}}), for you see, as part of the announcement today of DAB, we've announced that it is [available as a feature of SWA](https://aka.ms/swa/db/announcement) (called Database Connections), so let's build a React app!
 
 ## Local Development
 
@@ -207,4 +207,4 @@ And then use the hook in the `App` component (I'll omit that for brevity, you ca
 
 In this post we've taken a look at how we can use the new Database Connections feature of Azure Static Web Apps to connect to a Cosmos DB database and expose it as a GraphQL endpoint, without having to write the server ourself. We've also seen that this can be done entirely via the local emulator for SWA, allowing us to rapidly iterate over the application without having to deploy it each time.
 
-While we didn't go through the deployment aspect in this post specifically, you can learn how to do that [through our docs]().
+While we didn't go through the deployment aspect in this post specifically, you can learn how to do that [through our docs](https://aka.ms/swa/db/docs).
