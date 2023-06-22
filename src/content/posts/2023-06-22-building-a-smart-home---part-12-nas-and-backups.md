@@ -1,5 +1,5 @@
 +++
-title = "Building a Smart Home - Part 11 NAS and Backups"
+title = "Building a Smart Home - Part 12 NAS and Backups"
 date = 2023-06-22T02:01:19Z
 description = "Let's setup a NAS and backups for our smart home."
 draft = false
@@ -101,13 +101,13 @@ In the [Home Assistant 2023.6 release](https://www.home-assistant.io/blog/2023/0
 
 The other advantage of this is that when you attach the storage to Home Assistant you can select the type of storage that will be used for, with one such option being **backups**, and that will natively integrate with Home Assistant's backup system.
 
-![Storage attached in Home Assistant](/images/2023-06-22-building-a-smart-home---part-11-nas-and-backups/storage.png)
+![Storage attached in Home Assistant](/images/2023-06-22-building-a-smart-home---part-12-nas-and-backups/storage.png)
 
 Since I might want to use the storage for other stuff in the future, I've made a folder on the drive called `ha-backups` and specified that subpath in the storage connection.
 
 From the **Backups** section of Home Assistant you can change the default location for backups to be the new network storage:
 
-![Backups configured to use network storage](/images/2023-06-22-building-a-smart-home---part-11-nas-and-backups/backup-location.png)
+![Backups configured to use network storage](/images/2023-06-22-building-a-smart-home---part-12-nas-and-backups/backup-location.png)
 
 ## Offsite backups
 
@@ -119,7 +119,7 @@ Thankfully there's Home Assitant add-ons that can help us, [Google Drive Backup]
 
 The add-on is pretty simple to setup and the instructions are pretty clear, so I won't go into detail here, but once it's setup you can configure it to run on a schedule, and it will automatically upload your backups to Google Drive. For me, I'm going to run it every night at 11.30pm and keep 20 days worth of backups, as my full backup size is about 550mb and there's 15GB of storage available on the Google account, so a rolling 20 days gives me plenty of runway to restore from a backup if I need to.
 
-![Google Drive Backup add-on configured](/images/2023-06-22-building-a-smart-home---part-11-nas-and-backups/google-drive-backup.png)
+![Google Drive Backup add-on configured](/images/2023-06-22-building-a-smart-home---part-12-nas-and-backups/google-drive-backup.png)
 
 _Note: It lists 9 backups that are ignored, those backups are stored locally on the Pi that Home Assistant runs on, they aren't uploaded to Google Drive._
 
