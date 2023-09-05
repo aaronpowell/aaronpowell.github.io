@@ -5,14 +5,14 @@ description = "It's time to start a new series with everyone's favourite topic o
 draft = false
 tags = ["dotnet", "ai"]
 tracking_area = "dotnet"
-tracking_id = ""
+tracking_id = "100129"
 series = "ai-dotnet"
 series_title = "Intro"
 +++
 
 I've missed a lot of the recent hype trains, I skipped over blockchain, I avoided web3, and I'm not dumb enough to have believed NFT's were anything but a scam, but I'm not going to miss out on the AI hype train! Toot toot!
 
-Over the past few weeks I've been digging into how we can build stuff with .NET and AI, specifically [Generative AI](https://en.wikipedia.org/wiki/Generative_artificial_intelligence) which we see with platforms such as [OpenAI](https://openai.com/), and more specifically [Azure OpenAI Service](https://azure.microsoft.com/services/openai/?{{cda}}).
+Over the past few weeks I've been digging into how we can build stuff with .NET and AI, specifically [Generative AI](https://en.wikipedia.org/wiki/Generative_artificial_intelligence) which we see with platforms such as [OpenAI](https://openai.com/), and more specifically [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?{{cda}}).
 
 While there is heaps of content out there on using these services I've noticed that it tends to be heavy in Python, and while I'm not against Python, it's not a language I'm overly familiar with, so I wanted look at how we can use these services with .NET. Also, a lot of the content is really skewed towards people who are already well versed in the terminology, the concepts, and the tools, so I wanted to try and make this a bit more accessible to people who are new to the space.
 
