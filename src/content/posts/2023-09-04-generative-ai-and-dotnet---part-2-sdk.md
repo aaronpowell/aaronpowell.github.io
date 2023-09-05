@@ -2,7 +2,7 @@
 title = "Generative AI and .NET - Part 2 SDK"
 date = 2023-09-04T23:55:34Z
 description = "Let's take a look at the SDK for OpenAI and have we can use it."
-draft = true
+draft = false
 tags = ["dotnet", "ai"]
 tracking_area = "dotnet"
 tracking_id = "100129"
@@ -59,12 +59,12 @@ foreach (ChatChoice choice in completions.Value.Choices)
 
 This gave me the response of:
 
-```
-The color of the sky can vary depending on factors such as time of day, weather conditions, and location. Generally, during the day when the sun is out, the color of the sky is blue. At sunset or sunrise, the sky can turn shades of red, orange, and pink. At night, the sky can appear black or dark blue with stars visible.
-```
+> The color of the sky can vary depending on factors such as time of day, weather conditions, and location. Generally, during the day when the sun is out, the color of the sky is blue. At sunset or sunrise, the sky can turn shades of red, orange, and pink. At night, the sky can appear black or dark blue with stars visible.
 
 You might be wondering though, what do you provide for the `model` parameter? Well, this will depend on which service you are using, if it's AOAI you will first [deploy a model](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?{{cda}}) and then use the name of that deployment, if it's OpenAI you will use the name of the model, such as `gpt-3.5-turbo`.
 
 ## Conclusion
 
-Congratulations, we have created our very first call to OpenAI and generated a chat completion response from a prompt (that was admittedly hard-coded).
+Congratulations, we have created our very first call to OpenAI and generated a chat completion response from a prompt (that was admittedly hard-coded). If you want to have a play around with this, I've created a [Polyglot Notebook](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode) that you can check out [in my website repo](https://github.com/aaronpowell/aaronpowell.github.io/blob/main/notebooks/2023-09-04-generative-ai-and-dotnet---part-2-sdk.ipynb).
+
+In the next post we'll take a proper look at what chat completions are, and how we can use them.
