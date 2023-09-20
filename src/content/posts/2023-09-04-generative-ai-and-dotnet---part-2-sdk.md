@@ -10,11 +10,11 @@ series = "ai-dotnet"
 series_title = "The SDK"
 +++
 
-It's time to have a look at how we can build the basics of an application using [Azure OpenAI Services](https://learn.microsoft.com/azure/ai-services/openai/overview?{{cda}}) and the .NET SDK. Remember, while I will be using AOAI in here everything is going to be applicable to OpenAI itself as well, so if you're using that you can still follow along (I just happen to use AOAI as then I can test it for the product team).
+It's time to have a look at how we can build the basics of an application using [Azure OpenAI Services](https://learn.microsoft.com/azure/ai-services/openai/overview?{{<cda>}}) and the .NET SDK. Remember, while I will be using AOAI in here everything is going to be applicable to OpenAI itself as well, so if you're using that you can still follow along (I just happen to use AOAI as then I can test it for the product team).
 
 ## Getting Started
 
-Before we install the SDK it's important to know how we work with these services, and that is via the REST API that they publish. Azure OpenAI Service has [docs on their REST API](https://learn.microsoft.com/azure/ai-services/openai/reference?{{cda}}) but I find them a little unfriendly to read (at least, at the time of writing this blog post) compared to the REST API docs from [OpenAI directly](https://platform.openai.com/docs/api-reference).
+Before we install the SDK it's important to know how we work with these services, and that is via the REST API that they publish. Azure OpenAI Service has [docs on their REST API](https://learn.microsoft.com/azure/ai-services/openai/reference?{{<cda>}}) but I find them a little unfriendly to read (at least, at the time of writing this blog post) compared to the REST API docs from [OpenAI directly](https://platform.openai.com/docs/api-reference).
 
 But if you look at them, you'll notice that the Open API spec (swagger) is the same for both, so you can use the OpenAI docs to get a better understanding of the API, the parameters and how to call it. The only real difference is the endpoint, OpenAI or your AOAI instance, and the authentication method.
 
@@ -61,7 +61,7 @@ This gave me the response of:
 
 > The color of the sky can vary depending on factors such as time of day, weather conditions, and location. Generally, during the day when the sun is out, the color of the sky is blue. At sunset or sunrise, the sky can turn shades of red, orange, and pink. At night, the sky can appear black or dark blue with stars visible.
 
-You might be wondering though, what do you provide for the `model` parameter? Well, this will depend on which service you are using, if it's AOAI you will first [deploy a model](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?{{cda}}) and then use the name of that deployment, if it's OpenAI you will use the name of the model, such as `gpt-3.5-turbo`.
+You might be wondering though, what do you provide for the `model` parameter? Well, this will depend on which service you are using, if it's AOAI you will first [deploy a model](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?{{<cda>}}) and then use the name of that deployment, if it's OpenAI you will use the name of the model, such as `gpt-3.5-turbo`.
 
 ## Conclusion
 
