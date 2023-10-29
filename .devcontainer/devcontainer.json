@@ -17,7 +17,8 @@
         "ghcr.io/devcontainers/features/dotnet:1": {
             "version": "lts"
         },
-        "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
+        "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
+        "ghcr.io/devcontainers/features/go:1": {}
     },
 
     "customizations": {

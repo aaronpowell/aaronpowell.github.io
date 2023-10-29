@@ -67,7 +67,12 @@
     [[params.speaking.bio.socialIcon]]
         icon = "ion-logo-twitter"
         url = "https://twitter.com/slace"
-        title = "Twitter"
+        title = "Twitter/X"
+
+    [[params.speaking.bio.socialIcon]]
+        icon = "ion-logo-twitter"
+        url = "https://hachyderm.io/@slace"
+        title = "Mastodon"
 
     [[params.speaking.bio.socialIcon]]
         icon = "ion-logo-github"
@@ -76,7 +81,7 @@
 
     [[params.speaking.bio.socialIcon]]
         icon = "ion-logo-linkedin"
-        url = "https://www.linkedin.com/in/aaron-powell-66038631/"
+        url = "https://www.linkedin.com/in/powell-aaron/"
         title = "LinkedIn"
 
     [[params.speaking.bio.socialIcon]]
