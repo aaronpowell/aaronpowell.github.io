@@ -99,7 +99,7 @@ home = [ "HTML", "RSS", "JSON"]
 
         [[params.footer.socialIcon]]
             icon = "logo-linkedin"
-            url = "https://www.linkedin.com/in/aaron-powell-66038631/"
+            url = "https://www.linkedin.com/in/powell-aaron/"
             title = "LinkedIn"
 
         [[params.footer.socialIcon]]
