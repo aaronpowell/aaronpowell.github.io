@@ -56,7 +56,8 @@
         { date = 2022-10-12, name = "GraphQL is just APIs for hipsters, right?", link = "https://ndcsydney.com/agenda/graphql-is-just-apis-for-hipsters-right-0b7s/0x7ry93wcih", event = "NDC Sydney 2022" },
         { date = 2023-11-16, name = "Generative AI for the .NET Developer", link = "https://www.dotnetconf.net/", event = ".NET Conf 2023" },
         { date = 2023-11-18, name = "A career built on DDD", link = "https://dddadelaide.com/", event = "DDD Adelaide" },
-        { date = 2024-02-07, name = "Breakout sessions", link = "https://envision.microsoft.com/sydney", event = "Microsoft AI Tour - Sydney" },
+        { date = 2024-02-07, name = "Workshop: Learn how to interact with OpenAI models", link = "https://envision.microsoft.com/sydney", event = "Microsoft AI Tour - Sydney" },
+        { date = 2024-02-07, name = "Generate content with Azure AI Studio and OpenAI", link = "https://envision.microsoft.com/sydney", event = "Microsoft AI Tour - Sydney" },
         { date = 2024-02-14, name = "Generative AI for the .NET Developer", link = "https://ndcsydney.com/", event = "NDC Sydney 2024" },
         { date = 2024-03-16, name = "I've burnt out, now what", link = "https://www.dddmelbourne.com/", event = "DDD Melbourne 2024" }
     ]

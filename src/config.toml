@@ -78,7 +78,7 @@ home = [ "HTML", "RSS", "JSON"]
     [params.about]
         enable  = true
         title   = "About Me"
-        content = "Hello 👋, I'm a Cloud Developer Advocate for Microsoft based in Sydney. My area of specialty is front-end web development, focusing on architecture around SPA and other UI-heavy web applications."
+        content = "Hello 👋, I'm a Cloud Advocate for Microsoft based in Sydney. My area of specialty is .NET web development, focusing on the intersection of .NET and JavaScript applications."
         image   = "images/logo.png"
 
     [params.footer]
