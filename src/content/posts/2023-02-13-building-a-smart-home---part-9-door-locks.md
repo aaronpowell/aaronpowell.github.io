@@ -51,7 +51,7 @@ I ended up coming across the [Yale Assure Keyed lock](https://www.yalehome.com/a
 
 But because I wanted it integrated with Home Assistant, I picked up a [ZigBee network module](https://www.yalehome.com/au/en/products/smart-products/assure-lock-series/network-modules) and organised for our locksmith to come out (you can install it yourself, but we have a family friend who's a locksmith and they were going to upgrade all our locks from the ones the builder installed as he said they were all woefully bad 😅):
 
-{{<tweet "slace" "1564154041046683648">}}
+{{<tweet user="slace" id="1564154041046683648">}}
 
 ## Integrating with Home Assistant
 
