@@ -11,7 +11,7 @@ cover_image = "/images/approval-workflows-with-github-actions/environments/banne
 
 Last year I wrote a post about how I [implemented an overly complex approval workflow with GitHub Actions]({{<ref "/posts/2020-03-23-approval-workflows-with-github-actions.md">}}). While it wasn't the simplest solution, at the time it was a means to an end as we didn't have any built-in way to do approval workflows with GitHub Actions. At the end of last year that changed with the introduction of [Environments](https://docs.github.com/en/free-pro-team@latest/actions/reference/environments?{{<cda>}}) ([announcement post](https://github.blog/changelog/2020-12-15-github-actions-environments-environment-protection-rules-and-environment-secrets-beta/)). Environments bring in the concept of protection rules, which currently supports two types, required reviewers and a wait timer, which is exactly what we need for an approval workflow.
 
-So with this available to us, let's look at taking the [workflow to publish GitHub Packages]({{<ref "/2020-11-06-deploy-to-github-packages-with-github-actions.md">}}) and turn it into an approval-based workflow.
+So with this available to us, let's look at taking the [workflow to publish GitHub Packages]({{<ref "/posts/2020-11-06-deploy-to-github-packages-with-github-actions.md">}}) and turn it into an approval-based workflow.
 
 ## Setting up Environments
 
@@ -43,12 +43,12 @@ Let's scaffold the workflow:
 name: Publish a release
 
 on:
-    push:
-        tags:
-            - v* #version is cut
+  push:
+    tags:
+      - v* #version is cut
 
 env:
-    NODE_VERSION: 12
+  NODE_VERSION: 12
 
 jobs:
 ```
@@ -61,15 +61,15 @@ We'll start by associating the `build` job with the Environment:
 
 ```yml
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        defaults:
-            run:
-                working-directory: react-static-web-apps-auth
-        environment:
-            name: build
-            url: ${{ steps.create_release.outputs.html_url }}
-        steps:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: react-static-web-apps-auth
+    environment:
+      name: build
+      url: ${{ steps.create_release.outputs.html_url }}
+    steps:
 ```
 
 _Note: you can ignore the `working-directory` default, I need that due to the structure of my Git repo. It's left in for completeness of the workflow file at the end._
@@ -80,17 +80,17 @@ Now we can add the steps needed:
 
 ```yml
 steps:
-    - uses: actions/checkout@v2
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: true
-          prerelease: false
+  - uses: actions/checkout@v2
+  - name: Create Release
+    id: create_release
+    uses: actions/create-release@v1
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      tag_name: ${{ github.ref }}
+      release_name: Release ${{ github.ref }}
+      draft: true
+      prerelease: false
 ```
 
 Here we're using `actions/create-release` to create a Release on GitHub and setting it to `draft`, as it's not yet approved. This step has an `id` set, `create_release`, which is what we used to get the release URL for the Environment output and will need to upload artifacts shortly.
@@ -100,12 +100,12 @@ You can add the appropriate build/test/etc. steps after this one, again this is 
 ```yml
 - uses: actions/setup-node@v1
   with:
-      node-version: ${{ env.NODE_VERSION }}
+    node-version: ${{ env.NODE_VERSION }}
 - run: |
-      npm ci
-      npm run lint
-      npm run build
-      npm pack
+    npm ci
+    npm run lint
+    npm run build
+    npm pack
 ```
 
 With this step we're generating the package that will go to our package registry, but since we're not publishing yet (that's a future jobs responsibility), we need a way to make it available to the future jobs. For that we'll publish it as an artifact of the workflow, using `actions/upload-artifact`:
@@ -114,8 +114,8 @@ With this step we're generating the package that will go to our package registry
 - name: Upload
   uses: actions/upload-artifact@v2
   with:
-      name: package
-      path: "react-static-web-apps-auth/*.tgz"
+    name: package
+    path: "react-static-web-apps-auth/*.tgz"
 ```
 
 It'd also be good if the Release we're creating had the package attached to it, if people want to download it rather than use a package registry, and we can do that with `actions/upload-release-asset`. The only problem is that we need to find out the full name of the package, including version, but that's dynamic. To tackle this I create an environment variable containing the tag, extracted from `GITHUB_REF` using some [bash magic](https://stackoverflow.com/a/9533099):
@@ -125,12 +125,12 @@ It'd also be good if the Release we're creating had the package attached to it, 
 - name: Upload package to release
   uses: actions/upload-release-asset@v1
   env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      asset_path: "react-static-web-apps-auth/aaronpowell-react-static-web-apps-auth-${{ env.tag }}.tgz"
-      asset_name: "aaronpowell-react-static-web-apps-auth-${{ env.tag }}.tgz"
-      asset_content_type: application/zip
+    upload_url: ${{ steps.create_release.outputs.upload_url }}
+    asset_path: "react-static-web-apps-auth/aaronpowell-react-static-web-apps-auth-${{ env.tag }}.tgz"
+    asset_name: "aaronpowell-react-static-web-apps-auth-${{ env.tag }}.tgz"
+    asset_content_type: application/zip
 ```
 
 Again, we're using the `create_release` step output to get the URL needed to upload the assets, another reason why you need to give that step an `id`.
@@ -142,8 +142,8 @@ The last thing that this job needs to do is let the future ones (in particular `
 - name: Upload
   uses: actions/upload-artifact@v2
   with:
-      name: release_id
-      path: react-static-web-apps-auth/release.txt
+    name: release_id
+    path: react-static-web-apps-auth/release.txt
 ```
 
 `build` is done, time for `release`.
@@ -154,10 +154,10 @@ Like `build`, the `release` stage needs to have an `environment` node that refer
 
 ```yml
 release:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-        name: release
+  needs: build
+  runs-on: ubuntu-latest
+  environment:
+    name: release
 ```
 
 You'll also notice the `needs` property in there as well. This tells us that this job can't run until `build` has completed, which makes sense as we're waiting on some outputs from there.
@@ -166,22 +166,22 @@ This phase of our workflow will only be responsible the draft status from the Gi
 
 ```yml
 steps:
-    - name: Download package
-      uses: actions/download-artifact@v2
-      with:
-          name: release_id
-    - run: echo "release_id=$(cat release.txt)" >> $GITHUB_ENV
-    - name: Publish release
-      uses: actions/github-script@v3
-      with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-              github.repos.updateRelease({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                release_id: process.env.release_id,
-                draft: false
-              })
+  - name: Download package
+    uses: actions/download-artifact@v2
+    with:
+      name: release_id
+  - run: echo "release_id=$(cat release.txt)" >> $GITHUB_ENV
+  - name: Publish release
+    uses: actions/github-script@v3
+    with:
+      github-token: ${{secrets.GITHUB_TOKEN}}
+      script: |
+        github.repos.updateRelease({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          release_id: process.env.release_id,
+          draft: false
+        })
 ```
 
 We download the artifact with `actions/download-artifact` and then export the context of the text file as an environment variable called `release_id`. Then, in the `actions/github-script` step we'll use the [`updateRelease`](https://octokit.github.io/rest.js/v18{{<cda>}}#repos-update-release) operation. Since `actions/github-script` is running as a JavaScript script, to access environment variables we can use `process.env`, and that gives us access to `process.env.release_id` as needed.
@@ -196,21 +196,21 @@ This part of our workflow is rather straight forward since we've already built o
 
 ```yml
 publish-npm:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v2
-        - name: Download package
-          uses: actions/download-artifact@v2
-          with:
-              name: package
-        - uses: actions/setup-node@v1
-          with:
-              node-version: ${{ env.NODE_VERSION }}
-              registry-url: https://registry.npmjs.org/
-        - run: npm publish $(ls *.tgz) --access public
-          env:
-              NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+  needs: release
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v2
+    - name: Download package
+      uses: actions/download-artifact@v2
+      with:
+        name: package
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        registry-url: https://registry.npmjs.org/
+    - run: npm publish $(ls *.tgz) --access public
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 ```
 
 As we have the `tgz` file, we don't need to repack, we'll just pass the filename into `npm publish` (obtained from `ls *.tgz`), and since it's a scoped package that everyone can use, we are setting the access to `public`.
@@ -230,3 +230,4 @@ Throughout this post we've created a new GitHub Action workflow that will build 
 You can find the successful run I demonstrated here [on my own project](https://github.com/aaronpowell/react-static-web-apps-auth/actions/runs/476471783), and the [commit diff](https://github.com/aaronpowell/react-static-web-apps-auth/commit/0bd29ff2f606c64c5efc6d77d53aff14d031a674#diff-aad3b21c2ed02fc778a85762a45f71b12bd5b6ee7732ca75c6cb46d5d73aa485) from a previous project that released to npm automatically.
 
 Have you had a chance to implement anything using the approval process in GitHub Actions? Let me know as I'd love to see what else people are doing with it.
+

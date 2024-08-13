@@ -12,7 +12,7 @@ In years gone by I've done work with [Lucene.NET](https://lucenenet.apache.org/)
 
 ## Blazor
 
-After some conversations at a recent conference, I decided it was time to give [Blazor](https://docs.microsoft.com/en-gb/aspnet/core/blazor/?view=aspnetcore-3.0&{{<cda>}}) another look. I'd [played around with it]({{<ref "/2019-07-08-creating-devto-offline-page-with-blazor.md">}}) in the past but nothing more than poking the Hello World demos, so I decided to try something a bit more complex.
+After some conversations at a recent conference, I decided it was time to give [Blazor](https://docs.microsoft.com/en-gb/aspnet/core/blazor/?view=aspnetcore-3.0&{{<cda>}}) another look. I'd [played around with it]({{<ref "/posts/2019-07-08-creating-devto-offline-page-with-blazor.md">}}) in the past but nothing more than poking the Hello World demos, so I decided to try something a bit more complex.
 
 If you've not come across Blazor before, Blazor is a tool for building web UI's using C# and Razor and with the release of .NET 3.0 [Blazor Server](https://docs.microsoft.com/en-gb/aspnet/core/blazor/?view=aspnetcore-3.0&{{<cda>}}#blazor-server) went GA. Blazor Server works by generating the HTML on the server and pushing it down to the browser using [SignalR](https://docs.microsoft.com/en-gb/aspnet/core/signalr/introduction?view=aspnetcore-3.0&{{<cda>}}) then handling all the JavaScript interop for you. You can wire up JavaScript events through C# and build a dynamic web application without writing a single line of JavaScript!
 
