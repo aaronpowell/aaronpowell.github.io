@@ -1,6 +1,6 @@
 name: Build and deploy (Core)
 env:
-  OUTPUT_FOLDER: .output
+  OUTPUT_FOLDER: hugo-output
   DOTNET_VERSION: "6.x"
 
 on:
@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: website
-          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/
+          path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Publish blog json
         uses: actions/upload-artifact@v4
