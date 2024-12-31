@@ -51,8 +51,8 @@ jobs:
       run:
         working-directory: api
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 16
 
@@ -62,7 +62,7 @@ jobs:
       - run: tar -cvf ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar .
 
       - name: Publish API output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: api
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/api.tar
@@ -71,9 +71,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
@@ -96,14 +96,14 @@ jobs:
     needs: build_hugo
     environment: build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Download index source
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: json
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
@@ -129,7 +129,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Azure Login
         uses: azure/login@v1
@@ -140,18 +140,22 @@ jobs:
           # creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Ensure resource group exists
-        uses: azure/CLI@v1
+        uses: azure/CLI@v2
         with:
           inlineScript: |
             az group create -g ${{ secrets.RESOURCE_GROUP }} -l ${{ secrets.RESOURCE_GROUP_LOCATION }}
       - name: Deploy Bicep
-        uses: azure/arm-deploy@v1
+        uses: azure/bicep-deploy@v1
         with:
-          resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          template: ./deploy/main.bicep
+          resource-group-name	: ${{ secrets.RESOURCE_GROUP }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          template-file: ./deploy/main.bicep
           parameters: swaName=${{ secrets.SWA_NAME }}
-          failOnStdErr: false
+          scope: subscription
+          type: deployment
+          operation: create
+          location: ${{ secrets.RESOURCE_GROUP_LOCATION }}
+          name: ${{ secrets.SWA_NAME }}
 
   deploy:
     needs: [provision]
@@ -164,7 +168,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Azure Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -181,25 +185,25 @@ jobs:
             echo SWA_DEPLOYMENT_TOKEN=$SWA_DEPLOYMENT_TOKEN >> $GITHUB_ENV
 
       - name: Download website
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: website
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Download search UI
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: search
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/_framework
 
       - name: Download search index
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: search-index
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Download api
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: api
           path: ${{ github.workspace }}
@@ -207,7 +211,7 @@ jobs:
           mkdir ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
           tar -xf ${{ github.workspace }}/api.tar -C ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
       - name: Download index source
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: json
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}-api
