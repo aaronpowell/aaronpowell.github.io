@@ -7,26 +7,36 @@
             "label": "new post",
             "type": "shell",
             "command": "./New-Post.ps1",
-            "args": ["-Title", "${input:postName}"],
+            "args": [
+                "-Title",
+                "${input:postName}"
+            ],
             "windows": {
                 "command": "./New-Post.ps1",
                 "options": {
                     "shell": {
                         "executable": "powershell.exe",
-                        "args": ["-Title", "${input:postName}"]
+                        "args": [
+                            "-Title",
+                            "${input:postName}"
+                        ]
                     }
                 }
             },
             "linux": {
                 "command": "./new-post.sh",
-                "args": ["${input:postName}"]
+                "args": [
+                    "${input:postName}"
+                ]
             },
             "problemMatcher": []
         },
         {
             "label": "run server",
             "type": "shell",
-            "command": ["hugo"],
+            "command": [
+                "hugo"
+            ],
             "args": [
                 "server",
                 "--watch",
@@ -54,7 +64,9 @@
         {
             "label": "build:debug (hugo)",
             "type": "shell",
-            "command": ["hugo"],
+            "command": [
+                "hugo"
+            ],
             "args": [
                 "--source",
                 "./src",
@@ -69,7 +81,9 @@
         {
             "label": "build:release (hugo)",
             "type": "shell",
-            "command": ["hugo"],
+            "command": [
+                "hugo"
+            ],
             "args": [
                 "--source",
                 "./src",
@@ -104,9 +118,7 @@
             "args": [
                 "publish",
                 "--configuration",
-                "Release",
-                "--output",
-                "${workspaceRoot}/.output-search"
+                "Release"
             ],
             "presentation": {
                 "reveal": "silent"
@@ -115,14 +127,22 @@
             "options": {
                 "cwd": "${workspaceRoot}/Search"
             },
-            "dependsOn": ["build (dotnet)"]
+            "dependsOn": [
+                "build (dotnet)"
+            ]
         },
         {
             "label": "publish (search)",
             "type": "shell",
             "command": "cp",
-            "args": ["-r", "./_framework", "${workspaceRoot}/.output"],
-            "dependsOn": ["publish (dotnet)"],
+            "args": [
+                "-r",
+                "./_framework",
+                "${workspaceRoot}/.output"
+            ],
+            "dependsOn": [
+                "publish (dotnet)"
+            ],
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceRoot}/.output-search/Search.Site.UI/dist"
@@ -130,7 +150,10 @@
         },
         {
             "label": "build",
-            "dependsOn": ["publish (search)", "build:debug (hugo)"],
+            "dependsOn": [
+                "publish (search)",
+                "build:debug (hugo)"
+            ],
             "group": {
                 "isDefault": true,
                 "kind": "build"
@@ -141,7 +164,10 @@
             "label": "generate search index",
             "command": "dotnet",
             "type": "shell",
-            "args": ["run"],
+            "args": [
+                "run",
+                "../../.output/index.json"
+            ],
             "presentation": {
                 "reveal": "silent"
             },
@@ -149,25 +175,35 @@
             "options": {
                 "cwd": "${workspaceRoot}/Search/Search.IndexBuilder"
             },
-            "dependsOn": ["build (dotnet)"]
+            "dependsOn": [
+                "build (dotnet)"
+            ]
         },
         {
             "label": "new talk",
             "type": "shell",
             "command": "./New-Post.ps1",
-            "args": ["-Title", "${input:postName}"],
+            "args": [
+                "-Title",
+                "${input:postName}"
+            ],
             "windows": {
                 "command": "./New-Post.ps1",
                 "options": {
                     "shell": {
                         "executable": "powershell.exe",
-                        "args": ["-Title", "${input:postName}"]
+                        "args": [
+                            "-Title",
+                            "${input:postName}"
+                        ]
                     }
                 }
             },
             "linux": {
                 "command": "./new-talk.sh",
-                "args": ["${input:postName}"]
+                "args": [
+                    "${input:postName}"
+                ]
             },
             "problemMatcher": []
         }
@@ -181,4 +217,3 @@
         }
     ]
 }
-

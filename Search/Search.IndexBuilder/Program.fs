@@ -10,7 +10,7 @@ open Packager
 [<EntryPoint>]
 let main argv =
     let baseDir = Environment.CurrentDirectory
-    let searchText = File.ReadAllText <| Path.Combine(baseDir, "..", "..", ".output", "index.json")
+    let searchText = File.ReadAllText argv.[0]
 
     let options = JsonSerializerOptions()
     options.PropertyNameCaseInsensitive <- true

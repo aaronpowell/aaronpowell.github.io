@@ -1,7 +1,7 @@
 name: Build and deploy (Core)
 env:
   OUTPUT_FOLDER: hugo-output
-  DOTNET_VERSION: "6.x"
+  DOTNET_VERSION: "9.x"
 
 on:
   workflow_call:
@@ -111,7 +111,7 @@ jobs:
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Build search index
-        run: dotnet run
+        run: dotnet run -- ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
         working-directory: ./Search/Search.IndexBuilder
 
       - name: Publish search index

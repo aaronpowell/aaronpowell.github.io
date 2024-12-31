@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Search/Search.Site.UI/bin/Debug/net6.0/Search.Site.UI.dll",
+            "program": "${workspaceFolder}/Search/Search.Site.UI/bin/Debug/net9.0/Search.Site.UI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Search/Search.Site.UI",
             "stopAtEntry": false,

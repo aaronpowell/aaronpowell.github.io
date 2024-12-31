@@ -1,13 +1,11 @@
 {
     "name": "Aaron's blog",
     "image": "mcr.microsoft.com/devcontainers/base:bullseye",
-
-    "forwardPorts": [4014],
-
+    "forwardPorts": [
+        4014
+    ],
     "remoteUser": "vscode",
-
     "postCreateCommand": "npm install",
-
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {},
         "ghcr.io/devcontainers/features/hugo:1": {
@@ -15,19 +13,17 @@
         },
         "ghcr.io/devcontainers/features/node:1": {},
         "ghcr.io/devcontainers/features/dotnet:2.0.1": {
-            "version": "7.0"
+            "version": "9.0"
         },
         "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
         "ghcr.io/devcontainers/features/go:1": {}
     },
-
     "customizations": {
         "vscode": {
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "zsh",
                 "files.defaultLanguage": "markdown"
             },
-
             "extensions": [
                 "ms-dotnettools.csharp",
                 "dbaeumer.vscode-eslint",

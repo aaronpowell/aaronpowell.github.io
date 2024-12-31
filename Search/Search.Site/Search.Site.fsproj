@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="SearchResult.fs" />
@@ -8,7 +8,7 @@
     <Compile Include="SearchComponent.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
     <PackageReference Include="Lucene.Net" Version="4.8.0-beta00015" />
     <PackageReference Include="Lucene.Net.Analysis.Common" Version="4.8.0-beta00015" />
     <PackageReference Include="Lucene.Net.QueryParser" Version="4.8.0-beta00015" />
