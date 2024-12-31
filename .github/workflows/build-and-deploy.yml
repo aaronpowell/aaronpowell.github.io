@@ -32,19 +32,19 @@ jobs:
         if: ${{ inputs.preview == true }}
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture --baseURL '/'
 
-      - run: ls -la ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
-
       - name: Publish website output
         uses: actions/upload-artifact@v4
         with:
           name: website
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+          if-no-files-found: error
 
       - name: Publish blog json
         uses: actions/upload-artifact@v4
         with:
           name: json
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
+          if-no-files-found: error
 
   build_api:
     runs-on: ubuntu-latest
