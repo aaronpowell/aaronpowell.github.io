@@ -83,34 +83,36 @@ home = [ "HTML", "RSS", "JSON"]
 
     [params.footer]
         [[params.footer.socialIcon]]
-            icon = "logo-twitter"
+            icon = "fa-twitter"
             url = "https://twitter.com/slace"
             title = "Twitter"
 
         [[params.footer.socialIcon]]
-            icon = "logo-github"
+            icon = "fa-github"
             url = "https://github.com/aaronpowell"
             title = "GitHub"
 
         [[params.footer.socialIcon]]
-            icon = "logo-twitch"
-            url = "https://www.twitch.tv/NumberOneAaron/"
-            title = "Twitch"
+            icon = "fa-bluesky"
+            url = "https://bsky.app/profile/aaron-powell.com"
+            title = "Bluesky"
 
         [[params.footer.socialIcon]]
-            icon = "logo-linkedin"
+            icon = "fa-linkedin"
             url = "https://www.linkedin.com/in/powell-aaron/"
             title = "LinkedIn"
 
         [[params.footer.socialIcon]]
-            icon = "logo-youtube"
+            icon = "fa-youtube"
             url = "https://www.youtube.com/channel/UCT1QtGr1IzVPNSF_YMrKCAw"
             title = "YouTube Channel"
 
         [[params.footer.socialIcon]]
-            icon = "logo-mastodon"
+            icon = "fa-mastodon"
             url = "https://hachyderm.io/@slace"
             title = "Mastodon"
 
 [minify]
     disableXML = true
+
+staticDir = ["static"]
