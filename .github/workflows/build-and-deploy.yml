@@ -32,14 +32,16 @@ jobs:
         if: ${{ inputs.preview == true }}
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture --baseURL '/'
 
+      - run: ls -la ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
+
       - name: Publish website output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: website
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}
 
       - name: Publish blog json
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: json
           path: ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}/index.json
@@ -147,7 +149,7 @@ jobs:
       - name: Deploy Bicep
         uses: azure/bicep-deploy@v1
         with:
-          resource-group-name	: ${{ secrets.RESOURCE_GROUP }}
+          resource-group-name: ${{ secrets.RESOURCE_GROUP }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./deploy/main.bicep
           parameters: swaName=${{ secrets.SWA_NAME }}
