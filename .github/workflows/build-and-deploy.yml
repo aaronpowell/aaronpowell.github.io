@@ -156,7 +156,6 @@ jobs:
           scope: resourceGroup
           type: deployment
           operation: create
-          location: ${{ secrets.RESOURCE_GROUP_LOCATION }}
           name: ${{ secrets.SWA_NAME }}
 
   deploy:
