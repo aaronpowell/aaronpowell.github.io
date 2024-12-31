@@ -49,3 +49,4 @@ Add this file to your repo, or add the `globalHeaders` section to your existing 
 And with that, we can control the Blazor environment on our SWA application.
 
 By using the `staticwebapp.config.json` file we're able to set the custom header that Blazor needs to know what environment it's running under, and control the settings that the WASM application will load up when it runs.
+

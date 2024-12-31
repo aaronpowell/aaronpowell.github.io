@@ -69,7 +69,7 @@
     ></script>
 
     {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" true) }}
-    {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $options }}
+    {{ $style := resources.Get "sass/main.scss" | css.Sass $options }}
     <link
         rel="stylesheet"
         href="{{ $style.Permalink }}"
@@ -77,3 +77,4 @@
         media="screen"
     />
 </head>
+
