@@ -152,7 +152,7 @@ jobs:
           resource-group-name: ${{ secrets.RESOURCE_GROUP }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           template-file: ./deploy/main.bicep
-          parameters: swaName=${{ secrets.SWA_NAME }}
+          parameters: '{ "swaName": "${{ secrets.SWA_NAME }}" }'
           scope: subscription
           type: deployment
           operation: create
