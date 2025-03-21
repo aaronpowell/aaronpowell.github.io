@@ -22,7 +22,7 @@
     },
     "devDependencies": {
         "@azure/functions": "^3.2.0",
-        "@graphql-codegen/cli": "2.7.0",
+        "@graphql-codegen/cli": "2.13.5",
         "@graphql-codegen/introspection": "2.1.1",
         "@graphql-codegen/typescript": "2.6.0",
         "@graphql-codegen/typescript-resolvers": "2.6.7",
