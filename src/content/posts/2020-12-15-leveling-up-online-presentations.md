@@ -11,7 +11,7 @@ cover_image = "/images/banners/2020-12-15-leveling-up-online-presentations.png"
 
 Like all good [nerd snipes](https://xkcd.com/356/) it starts with a tweet:
 
-{{<tweet user="slace" id="1318786104221339653">}}
+{{<x user="slace" id="1318786104221339653">}}
 
 But the thing is, you're not meant to do it to yourself... but here we are, 145 likes and 41 comments later, I guess people are interested in this content, so it's time I tackle it.
 

@@ -14,7 +14,7 @@ I've done a few posts recently around using GraphQL, especially with [Azure Stat
 
 Let me start by saying that I'm by no means a GraphQL expert. In fact, I've been quite skeptical of GraphQL over the years.
 
-{{< tweet user="slace" id="677064094784991232" >}}
+{{<x user="slace" id="677064094784991232" >}}
 
 This tweet here was my initial observation when I first saw it presented back in 2015 (and now I use it [to poke fun at friends now](https://twitter.com/slace/status/1132145211197411335)) and I still this there are some metis in the comparison, even if it's not 100% valid.
 

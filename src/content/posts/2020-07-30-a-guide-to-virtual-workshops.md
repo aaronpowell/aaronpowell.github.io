@@ -9,7 +9,7 @@ cover_image = "/images/a-guide-to-virtual-workshops/003.png"
 
 Since the COVID-19 pandemic started I've done a number of virtual events (I shared my thoughts on being successful with them [last week]({{<ref "/posts/2020-07-20-online-events-experience-from-three-perspectives.md">}})) but earlier this week I did something new, I ran a two-day workshop as part of the [NDC Melbourne](https://ndcmelbourne.com) virtual event programming.
 
-{{<tweet user="meliss_houghton" id="1287549519786151936">}}
+{{<x user="meliss_houghton" id="1287549519786151936">}}
 
 The workshop was the [React for Beginners workshop]({{<ref "/talks/react-workshop.md">}}) that I've been running as part of NDC Sydney for the past few years (and originally created with [Jake Ginnivan](https://twitter.com/JakeGinnivan)) but normally it's done in person in person, so I wanted to do a write up on how I ran it virtually, what worked and where I feel there's room for improvement.
 

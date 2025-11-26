@@ -51,7 +51,7 @@ I ended up coming across the [Yale Assure Keyed lock](https://www.yalehome.com/a
 
 But because I wanted it integrated with Home Assistant, I picked up a [ZigBee network module](https://www.yalehome.com/au/en/products/smart-products/assure-lock-series/network-modules) and organised for our locksmith to come out (you can install it yourself, but we have a family friend who's a locksmith and they were going to upgrade all our locks from the ones the builder installed as he said they were all woefully bad 😅):
 
-{{<tweet user="slace" id="1564154041046683648">}}
+{{<x user="slace" id="1564154041046683648">}}
 
 ## Integrating with Home Assistant
 
@@ -349,3 +349,4 @@ So far the only problem I've had is early on there would be times when the lock 
 I still really like the initial options I looked at, such as the August and Danalock, but for day-to-day use, not having to get out a phone to unlock, and also not having to install a separate PIN pad, has made me realise that the Yale is really a great choice for the primary entranceway (I may get the others for the other deadbolts in the house, but that's a low priority).
 
 Ultimately, the Yale has been great and I would 100% recommend it to others. It was simple to install (well... get installed in my case!), it is easy to use (our 4 year old can do it) and it integrates nicely with Home Assistant on ZigBee (and I'd assume Z-Wave, I just haven't tried it. Yale US have also said they are working on a Matter network module too) so you can automate it with no problems.
+

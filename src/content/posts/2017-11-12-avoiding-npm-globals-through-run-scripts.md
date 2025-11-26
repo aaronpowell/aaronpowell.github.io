@@ -46,6 +46,6 @@ Actually, no. When a `run-script` is executed npm will append the path of `npm b
 
 It seems that this isn't the only way to do it:
 
-{{< tweet user="slace" id="929541326034501633" >}}
+_Tweet gone, much sads._
 
 Thanks Tim, TIL!

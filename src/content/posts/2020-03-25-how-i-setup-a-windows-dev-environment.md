@@ -8,7 +8,7 @@ tags = ["random"]
 
 Earlier this year I was tagged into a Twitter thread by [Amy Kapernick](https://twitter.com/Amys_Kapers) of someone looking to setup a dev environment on Windows:
 
-{{<tweet user="hayley_codes" id="1219827746219544576">}}
+{{<x user="hayley_codes" id="1219827746219544576">}}
 
 _Aside: Amy [has done one too](https://amygoestoperth.com.au/setting-up-a-windows-computer-for-dev) that you should also check out._
 
@@ -32,33 +32,33 @@ Occasionally I came across tools or codebases that don't work well in WSL, or ma
 
 To simplify the install of software on Windows I use [Chocolatey](https://chocolatey.org) for most of the stuff I want to install:
 
--   Git
-    -   My `.gitconfig` is [in the repo](https://github.com/aaronpowell/system-init/blob/master/common/.gitconfig) so I download that too
--   VS Code Insiders (I want the bleeding edge!)
-    -   I sign into the preview [Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) feature and VS Code is all setup for me
--   .NET Core SDK (latest version)
--   [Fiddler](https://www.telerik.com/fiddler) (web proxy/network debugger)
--   [Postman](https://www.postman.com/)
--   [LINQPad](https://www.linqpad.net/)
--   Firefox
--   Google Chrome
+- Git
+  - My `.gitconfig` is [in the repo](https://github.com/aaronpowell/system-init/blob/master/common/.gitconfig) so I download that too
+- VS Code Insiders (I want the bleeding edge!)
+  - I sign into the preview [Settings Sync](https://code.visualstudio.com/docs/editor/settings-sync) feature and VS Code is all setup for me
+- .NET Core SDK (latest version)
+- [Fiddler](https://www.telerik.com/fiddler) (web proxy/network debugger)
+- [Postman](https://www.postman.com/)
+- [LINQPad](https://www.linqpad.net/)
+- Firefox
+- Google Chrome
 
 I manually install Edge Canary as it's the first thing I install (until it just ships in the box!) so I add the other browsers just for cross-browser testing.
 
 There's a few other things I'll manually install as they ship via the Windows Store and automating installs from that is a bit trickier:
 
--   Windows Terminal (I want a decent terminal)
-    -   I keep my [settings for Terminal in the repo](https://github.com/aaronpowell/system-init/blob/master/windows/profiles.json) and copy them in once installed
--   Cascadia Code PL font
--   Ubuntu as my WSL distro
--   Visual Studio Preview (I'm too lazy to work out how to automate the install of that)
+- Windows Terminal (I want a decent terminal)
+  - I keep my [settings for Terminal in the repo](https://github.com/aaronpowell/system-init/blob/master/windows/profiles.json) and copy them in once installed
+- Cascadia Code PL font
+- Ubuntu as my WSL distro
+- Visual Studio Preview (I'm too lazy to work out how to automate the install of that)
 
 Once the applications are installed I install a few PowerShell modules from [PowerShell Gallery](https://www.powershellgallery.com/):
 
--   [Posh-Git](https://github.com/dahlbyk/posh-git)
-    -   Show the git status in the PowerShell prompt
--   [PowerShell nvm](https://github.com/aaronpowell/ps-nvm)
-    -   A Node Version Manager using PowerShell semantics that I wrote
+- [Posh-Git](https://github.com/dahlbyk/posh-git)
+  - Show the git status in the PowerShell prompt
+- [PowerShell nvm](https://github.com/aaronpowell/ps-nvm)
+  - A Node Version Manager using PowerShell semantics that I wrote
 
 The `README.md` has the command to run to install it (from an admin PowerShell prompt) and I kick back for a period of time while it does its thing.
 
@@ -77,16 +77,16 @@ _I also kick off an `sudo apt-get update && sudo apt-get upgrade` to ensure I am
 
 This installs:
 
--   git
-    -   I pull down the same `.gitconfig` as I use on Windows but change `autocrlf` to `false` and set the path of the credential helper to the [Git Credential Manager for Windows](https://github.com/microsoft/Git-Credential-Manager-for-Windows) which allows me to use the same git credentials from WSL2 and Windows, and also gives me the nice MFA prompt through to GitHub (I prefer username/password/MFA over ssh keys)
--   [zsh](http://www.zsh.org/) and [oh my zsh](https://ohmyz.sh/)
-    -   My [`.zshrc`](https://github.com/aaronpowell/system-init/blob/master/linux/.zshrc) is in the repo
--   [tmux](https://github.com/tmux/tmux/wiki) (a terminal multiplexer, basically makes my terminal more powerful)
--   Docker (using the standard Ubuntu install)
--   .NET Core SDK (2.2 LTS and 3.1 LTS)
-    -   I prompt to install the v5 preview too
--   Optionally install Golang
--   [fnm](https://github.com/Schniz/fnm) which is a simple Node Version Manager
+- git
+  - I pull down the same `.gitconfig` as I use on Windows but change `autocrlf` to `false` and set the path of the credential helper to the [Git Credential Manager for Windows](https://github.com/microsoft/Git-Credential-Manager-for-Windows) which allows me to use the same git credentials from WSL2 and Windows, and also gives me the nice MFA prompt through to GitHub (I prefer username/password/MFA over ssh keys)
+- [zsh](http://www.zsh.org/) and [oh my zsh](https://ohmyz.sh/)
+  - My [`.zshrc`](https://github.com/aaronpowell/system-init/blob/master/linux/.zshrc) is in the repo
+- [tmux](https://github.com/tmux/tmux/wiki) (a terminal multiplexer, basically makes my terminal more powerful)
+- Docker (using the standard Ubuntu install)
+- .NET Core SDK (2.2 LTS and 3.1 LTS)
+  - I prompt to install the v5 preview too
+- Optionally install Golang
+- [fnm](https://github.com/Schniz/fnm) which is a simple Node Version Manager
 
 And after a little bit more time my script completes and all my stuff is setup.
 

@@ -1,6 +1,6 @@
 {
     "name": "Aaron's blog",
-    "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:10.0-noble",
     "forwardPorts": [
         4014
     ],
@@ -12,10 +12,6 @@
             "extended": true
         },
         "ghcr.io/devcontainers/features/node:1": {},
-        "ghcr.io/devcontainers/features/dotnet:2.0.1": {
-            "version": "9.0"
-        },
-        "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
         "ghcr.io/devcontainers/features/go:1": {}
     },
     "customizations": {
@@ -25,15 +21,13 @@
                 "files.defaultLanguage": "markdown"
             },
             "extensions": [
-                "ms-dotnettools.csharp",
                 "dbaeumer.vscode-eslint",
                 "esbenp.prettier-vscode",
                 "editorconfig.editorconfig",
                 "streetsidesoftware.code-spell-checker",
                 "ionide.ionide-fsharp",
                 "ms-azuretools.vscode-bicep",
-                "GitHub.vscode-pull-request-github",
-                "ms-dotnettools.dotnet-interactive-vscode"
+                "GitHub.vscode-pull-request-github"
             ]
         }
     }

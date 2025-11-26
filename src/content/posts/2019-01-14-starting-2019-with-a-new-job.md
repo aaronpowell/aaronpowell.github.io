@@ -40,6 +40,7 @@ In the end this played a large factor on my decision to move on from Readify. I 
 
 ## So what's next?
 
-{{< tweet user="slace" id="1082396532060516352" >}}
+{{<x user="slace" id="1082396532060516352" >}}
 
 I'm part of the [Cloud Advocate team](https://developer.microsoft.com/en-us/advocates/index.html) at Microsoft, I've joined as a Regional Cloud Developer Advocate, focusing on the Australian (and in particular Sydney) IT communities. What does mean in practice? Well I'm still figuring that out, I'm only 1 week in so it'll take a bit of time 😝. But you'll likely see a lot more of my online and around the communities here, so if you're an event organiser I'd love to talk to you!
+

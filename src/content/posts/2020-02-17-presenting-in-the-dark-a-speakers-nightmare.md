@@ -7,7 +7,7 @@ tags = ["speaking"]
 cover_image = "/images/2020-02-17-presenting-in-the-dark-a-speakers-nightmare-banner.jpg"
 +++
 
-{{< tweet user="stillaslifematt" id="1228092104976424963" >}}
+{{<x user="stillaslifematt" id="1228092104976424963" >}}
 
 **\*Record Scratch\***
 

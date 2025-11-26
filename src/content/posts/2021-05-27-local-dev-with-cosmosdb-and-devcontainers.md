@@ -13,7 +13,7 @@ When I was a consultant the nirvana that I tried to achieve on projects was to b
 
 I've previously said [all projects need devcontainers]({{<ref "/posts/2021-03-08-your-open-source-project-needs-a-dev-container-heres-why.md">}}), that they are an [essential tool for workshops]({{<ref "/posts/2021-04-29-tools-to-make-remote-workshops-easier.md">}}) and might go overboard on it locally...
 
-{{<tweet user="slace" id="1391619892852396041">}}
+{{<x user="slace" id="1391619892852396041">}}
 
 Yes, I really had 23 devcontainers on my machine. These days I don't do any development on my machine, it all happens inside a container.
 
@@ -78,18 +78,18 @@ The one that was scaffolded up for us already has what we need for the app, all 
 version: "3"
 
 services:
-    cosmos:
-        image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
-        mem_limit: 3g
-        cpu_count: 2
-        environment:
-            AZURE_COSMOS_EMULATOR_PARTITION_COUNT: 10
-            AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE: "true"
-        volumes:
-            # Forwards the local Docker socket to the container.
-            - /var/run/docker.sock:/var/run/docker-host.sock
-    app:
-        # snip
+  cosmos:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+    mem_limit: 3g
+    cpu_count: 2
+    environment:
+      AZURE_COSMOS_EMULATOR_PARTITION_COUNT: 10
+      AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE: "true"
+    volumes:
+      # Forwards the local Docker socket to the container.
+      - /var/run/docker.sock:/var/run/docker-host.sock
+  app:
+    # snip
 ```
 
 We've added a new service called `cosmos` (obvious huh!) that uses the image for the emulator and passes in the environment variables to control startup. We'll also mount the [Docker socket](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option), just in case we need it later on.
@@ -98,26 +98,26 @@ There's one final thing we need to configure before we open in the container, an
 
 ```yml {hl_lines=[21]}
 services:
-    cosmos:
-    # snip
-    app:
-        build:
-        context: .
-        dockerfile: Dockerfile.compose
-        args:
-            USER_UID: 1000
-            USER_GID: 1000
-            VARIANT: 16
+  cosmos:
+  # snip
+  app:
+    build:
+    context: .
+    dockerfile: Dockerfile.compose
+    args:
+      USER_UID: 1000
+      USER_GID: 1000
+      VARIANT: 16
 
-        init: true
-        volumes:
-            - /var/run/docker.sock:/var/run/docker-host.sock
-            - ..:/workspace:cached
+    init: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker-host.sock
+      - ..:/workspace:cached
 
-        entrypoint: /usr/local/share/docker-init.sh
-        command: sleep infinity
+    entrypoint: /usr/local/share/docker-init.sh
+    command: sleep infinity
 
-        network_mode: service:cosmos
+    network_mode: service:cosmos
 ```
 
 ## Tweaking the `devcontainer.json`
@@ -138,32 +138,32 @@ The problem here is that the base Docker image we're using has created a user to
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.179.0/containers/docker-from-docker-compose
 {
-    "name": "Docker from Docker Compose",
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "app",
-    "workspaceFolder": "/workspace",
+  "name": "Docker from Docker Compose",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
 
-    // Use this environment variable if you need to bind mount your local source code into a new container.
-    "remoteEnv": {
-        "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
-    },
+  // Use this environment variable if you need to bind mount your local source code into a new container.
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  },
 
-    // Set *default* container specific settings.json values on container create.
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-    },
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
 
-    // Add the IDs of extensions you want installed when the container is created.
-    "extensions": ["ms-azuretools.vscode-docker"],
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": ["ms-azuretools.vscode-docker"],
 
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
 
-    // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": "docker --version",
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "docker --version",
 
-    // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-    "remoteUser": "vscode"
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode"
 }
 ```
 
@@ -199,12 +199,11 @@ Open `config.js` and fill in the details:
 // @ts-check
 
 const config = {
-    endpoint: "https://cosmos:8081/",
-    key:
-        "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
-    databaseId: "Tasks",
-    containerId: "Items",
-    partitionKey: { kind: "Hash", paths: ["/category"] }
+  endpoint: "https://cosmos:8081/",
+  key: "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+  databaseId: "Tasks",
+  containerId: "Items",
+  partitionKey: { kind: "Hash", paths: ["/category"] },
 };
 
 module.exports = config;

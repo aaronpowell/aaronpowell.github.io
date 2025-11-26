@@ -9,7 +9,7 @@ series_title = "Microsoft Build, a Look Back"
 cover_image = "/images/build2020-wrapup-post/banner.jpg"
 +++
 
-{{<tweet user="slace" id="1262875395218522114">}}
+{{<x user="slace" id="1262875395218522114">}}
 
 Just over a week ago, [Microsoft Build](https://mybuild.microsoft.com/) was run as a fully online event. This was the first time we'd done a 100% virtual event, but given the global situation, it was the sensibly way to do it.
 
@@ -49,18 +49,18 @@ The ear piece and lapel were connected to a small recorder which gave us control
 
 ## A Hosts View of the World
 
-{{<tweet user="slace" id="1262207713083154433">}}
+{{<x user="slace" id="1262207713083154433">}}
 
 That's right, I had 5 screens that _I_ had in my field of view (only 4 in the photo though), and they were:
 
--   Surface Book 2 on desk directly in front with an external screen
-    -   This acted as my notes screen for talking to guests and the rough outline of the Q&A we'd agreed upon
--   Surface Pro 4 on the desk to my right
-    -   For Twitter/moderation tool/back channel chats/etc.
--   Return feed from the camera
-    -   I like to look at myself all day
--   Surface Studio (we actually moved it to below the camera, not beside, to keep the camera in my eye line)
-    -   This ran the Microsoft Teams call so I could see who I was talking to
+- Surface Book 2 on desk directly in front with an external screen
+  - This acted as my notes screen for talking to guests and the rough outline of the Q&A we'd agreed upon
+- Surface Pro 4 on the desk to my right
+  - For Twitter/moderation tool/back channel chats/etc.
+- Return feed from the camera
+  - I like to look at myself all day
+- Surface Studio (we actually moved it to below the camera, not beside, to keep the camera in my eye line)
+  - This ran the Microsoft Teams call so I could see who I was talking to
 
 There was also a 2nd Surface Pro 4 off to my left and on the floor powering the TV behind me, and it wasn't something that I used because I couldn't see it. So all in all I had more screens than I could possibly need, but hey, why not have them everywhere!
 
@@ -76,7 +76,7 @@ As a techy, I found this whole setup so cool! I don't know how it works behind t
 
 ### Scripts
 
-{{<twitter user="slace" id="1262884020590833665">}}
+{{<x user="slace" id="1262884020590833665">}}
 
 While we tried to make everything seem as natural as possible, we did have a script to follow and keep us on track as much as we could.
 

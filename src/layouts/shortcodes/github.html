@@ -1,26 +1,4 @@
 {{ $repo := .Get 0 }}
-{{ with resources.GetRemote "https://hugo-github-embed.azurewebsites.net/api/html?repo=" $repo }}
-  {{ with .Err }}
-    <div class="github-readme-embed">
-      <div class="contents">
-        <p>Error loading GitHub repo</p>
-      </div>
-    </div>
-  {{ else }}
-    {{ $json = . | transform.Unmarshal }}
-    <div class="github-readme-embed">
-        <div class="contents">{{ safeHTML $json.html }}</div>
-        <div class="button">
-            <a href="https://github.com/{{ .Get 0 }}" target="_blank"
-                >View on GitHub</a
-            >
-        </div>
-    </div>
-  {{ end }}
-{{ else }}
 <div class="github-readme-embed">
-  <div class="contents">
-    <p>Error loading GitHub repo</p>
-  </div>
+    <a href="https://github.com/{{ $repo }}" target="_blank">{{ $repo }}</a>
 </div>
-{{ end }}

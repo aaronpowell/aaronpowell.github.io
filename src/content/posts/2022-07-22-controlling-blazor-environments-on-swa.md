@@ -10,7 +10,7 @@ tracking_id = "72061"
 
 Like all good problems, it started with a tweet:
 
-{{<tweet user="turtleonabike" id="1549998674557947905">}}
+![Tweet from JT](/images/posts/2022-07-22-controlling-blazor-environments-on-swa/tweet.png)
 
 JT is trying to run a Blazor application, using `appsettings.json` but load a different one depending on what environment is being deployed to. Given that Blazor has the feature built in to load different configs based on the `ASPNETCORE_ENVIRONMENT` environment variable, it's something that is _doable_, but how do we do it?
 
@@ -49,4 +49,3 @@ Add this file to your repo, or add the `globalHeaders` section to your existing 
 And with that, we can control the Blazor environment on our SWA application.
 
 By using the `staticwebapp.config.json` file we're able to set the custom header that Blazor needs to know what environment it's running under, and control the settings that the WASM application will load up when it runs.
-

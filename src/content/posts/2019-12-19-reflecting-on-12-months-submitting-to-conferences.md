@@ -9,7 +9,7 @@ cover_image = "/images/banners/2019-12-19-reflecting-on-12-months-submitting-to-
 
 A few weeks ago I put up what was intended to be a throw-away tweet.
 
-{{< tweet user="slace" id="1200276804805619713" >}}
+{{<x user="slace" id="1200276804805619713" >}}
 
 This tweet shows the success, or lack-there-of when it came to submitting to conferences this year, and this is only a snapshot of one platform, [Sessionize](https://sessionize.com), that I've submitted via. I also have rejections in [Papercall.io](https://papercall.io) and countless Google Form's. So from 4 talks across 7 events (total of 8 submissions) I only had 1 talk accepted. That's not 100% accurate from Sessionize, I actually submitted 16 sessions across 7 different talks to 7 events, of which 1 was selected. Wait, that doesn't sound any better! 😕
 
@@ -134,3 +134,4 @@ If you're looking to get into conferences I'd encourage you to attend a [Global 
 I'm also happy to review topics for people before they submit, just drop me a message.
 
 Good luck!
+

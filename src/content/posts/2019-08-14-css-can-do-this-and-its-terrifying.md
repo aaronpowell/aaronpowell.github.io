@@ -6,11 +6,11 @@ draft = false
 tags = ["css"]
 +++
 
-{{< tweet user="ThePracticalDev" id="1161443226580127745" >}}
+{{<x user="ThePracticalDev" id="1161443226580127745" >}}
 
 Inspired by today's _#DevDiscuss_ I commented with my favourite misdeeds in CSS.
 
-{{< tweet user="slace" id="1161446544723202048" >}}
+{{<x user="slace" id="1161446544723202048" >}}
 
 So let's have a look at how they work.
 
@@ -22,7 +22,7 @@ We have our selector like so:
 
 ```css
 input[type="password"][value$="a"] {
-    background-image: url("http://localhost:3000/a");
+  background-image: url("http://localhost:3000/a");
 }
 ```
 
@@ -44,15 +44,15 @@ This is quite easy to do, you just need some JavaScript like this:
 let inputs = document.getElementsByTagName("input");
 
 for (let i = 0; i < inputs.length; i++) {
-    let input = inputs[i];
+  let input = inputs[i];
 
-    input.addEventListener("keypress", e => {
-        e.preventDefault();
-        let char = String.fromCharCode(e.keyCode);
-        let newValue = input.value + char;
-        input.setAttribute("value", newValue);
-        input.setSelectionRange(newValue.length, newValue.length);
-    });
+  input.addEventListener("keypress", (e) => {
+    e.preventDefault();
+    let char = String.fromCharCode(e.keyCode);
+    let newValue = input.value + char;
+    input.setAttribute("value", newValue);
+    input.setSelectionRange(newValue.length, newValue.length);
+  });
 }
 ```
 
@@ -96,15 +96,15 @@ Here's the CSS that I applied to those elements:
 
 ```css
 #demo-02 p:hover {
-    background-color: #f0a;
+  background-color: #f0a;
 }
 
 #demo-02 input:focus {
-    background-color: #bada55;
+  background-color: #bada55;
 }
 
 #demo-02 button:active {
-    color: #ff0000;
+  color: #ff0000;
 }
 ```
 
@@ -142,12 +142,12 @@ This works by abusing Pesudo-classes like our tracker and combining those with t
 
 ```css
 #demo-03 p {
-    color: #00bb00;
+  color: #00bb00;
 }
 
 #demo-03 p + p {
-    font-family: "Comic Sans MS", sans serif;
-    font-style: italic;
+  font-family: "Comic Sans MS", sans serif;
+  font-style: italic;
 }
 ```
 
@@ -173,11 +173,11 @@ Who doesn't love themselves a liberal usage of Emoji's throughout their work? We
 
 ```css
 #demo-04 .🤣 {
-    font-family: "Comic Sans MS";
-    text-decoration: #f0a underline overline wavy;
-    text-shadow: 2px 2px #bada55;
-    transform: rotate(45deg);
-    display: inline-block;
+  font-family: "Comic Sans MS";
+  text-decoration: #f0a underline overline wavy;
+  text-shadow: 2px 2px #bada55;
+  transform: rotate(45deg);
+  display: inline-block;
 }
 ```
 
@@ -190,3 +190,4 @@ What started from a throw-away tweet became the catalyst for writing a post I've
 I hope you've enjoyed a look at a few things you **can** do with CSS, but maybe **shouldn't**.
 
 What are your favourite ways to exploit CSS?
+
