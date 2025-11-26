@@ -108,10 +108,76 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function setupThemeToggle() {
+        const toggle = document.querySelector("[data-theme-toggle]");
+
+        if (!toggle) {
+            return;
+        }
+
+        const label = toggle.querySelector(".nav__theme-toggle-label");
+        const icon = toggle.querySelector(".nav__theme-toggle-icon");
+        const storageKey = "site-theme";
+        const root = document.documentElement;
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const getSystemTheme = () => (mediaQuery.matches ? "dark" : "light");
+
+        const updateToggle = (theme) => {
+            const isDark = theme === "dark";
+            toggle.setAttribute("aria-pressed", String(isDark));
+            if (icon) {
+                icon.textContent = isDark ? "🌙" : "☀️";
+            }
+            if (label) {
+                label.textContent = isDark ? "Dark" : "Light";
+            }
+        };
+
+        const applyTheme = (theme, persist = true) => {
+            if (theme !== "light" && theme !== "dark") {
+                return;
+            }
+
+            root.setAttribute("data-theme", theme);
+
+            if (persist) {
+                localStorage.setItem(storageKey, theme);
+            }
+
+            updateToggle(theme);
+        };
+
+        const stored = localStorage.getItem(storageKey);
+        if (stored === "light" || stored === "dark") {
+            applyTheme(stored, false);
+        } else {
+            root.removeAttribute("data-theme");
+            updateToggle(getSystemTheme());
+        }
+
+        toggle.addEventListener("click", () => {
+            const current =
+                root.getAttribute("data-theme") || getSystemTheme();
+            const nextTheme = current === "dark" ? "light" : "dark";
+            applyTheme(nextTheme, true);
+        });
+
+        mediaQuery.addEventListener("change", (event) => {
+            if (localStorage.getItem(storageKey)) {
+                return;
+            }
+
+            root.removeAttribute("data-theme");
+            updateToggle(event.matches ? "dark" : "light");
+        });
+    }
+
     setupDynamicCodeBlock();
     setupToggleHeader();
     addCopyToCodeBlocks();
     setupCopyBlock();
+    setupThemeToggle();
 
     const upcoming = document.querySelector(".toggle-upcoming");
     if (upcoming) {

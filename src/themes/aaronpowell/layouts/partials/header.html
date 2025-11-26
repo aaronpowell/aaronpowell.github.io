@@ -36,6 +36,17 @@
                         >{{ .Name }}</a>
                 </li>
                 {{ end }}
+                <li class="nav__item nav__item--action">
+                    <button
+                        class="nav__theme-toggle"
+                        type="button"
+                        data-theme-toggle
+                        aria-pressed="false"
+                    >
+                        <span class="nav__theme-toggle-icon" aria-hidden="true">🌙</span>
+                        <span class="nav__theme-toggle-label">Dark</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </div>
