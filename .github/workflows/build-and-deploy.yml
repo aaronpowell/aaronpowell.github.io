@@ -24,6 +24,14 @@ jobs:
           hugo-version: "latest"
           extended: true
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build
         if: ${{ inputs.preview == false }}
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml
@@ -31,6 +39,10 @@ jobs:
       - name: Build (preview)
         if: ${{ inputs.preview == true }}
         run: hugo --minify --source ./src --destination ${{ github.workspace }}/${{ env.OUTPUT_FOLDER }} --config config.toml,config.speaking.toml --buildDrafts --buildFuture --baseURL '/'
+
+      - name: Compress generated images
+        if: success()
+        run: node ./scripts/compress-images.js --input "${{ github.workspace }}/${{ env.OUTPUT_FOLDER }}"
 
       - name: Publish website output
         uses: actions/upload-artifact@v4
