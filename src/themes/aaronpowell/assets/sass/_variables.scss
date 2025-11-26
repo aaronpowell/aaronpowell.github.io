@@ -3,9 +3,26 @@ $small: 768px;
 $normal: 992px;
 $wide: 1200px;
 
-$primaryHighlightColour: #02bdd5;
-$primaryTextColour: #555;
-$primaryHeaderColour: #333;
+$color-background: #0f172a;
+$color-background-accent: #111c34;
+$color-surface: rgba(15, 23, 42, 0.85);
+$color-surface-solid: #16213f;
+$color-subtle: rgba(148, 163, 184, 0.6);
+
+$primaryHighlightColour: #38bdf8;
+$primaryTextColour: #e2e8f0;
+$primaryHeaderColour: #f8fafc;
+
+$accentGradient: linear-gradient(135deg, rgba(59, 130, 246, 0.85), rgba(14, 165, 233, 0.9));
+$accentGradientSoft: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(14, 165, 233, 0.15));
+
+$radius-sm: 12px;
+$radius-md: 18px;
+$radius-lg: 28px;
+
+$shadow-soft: 0 25px 55px -25px rgba(15, 23, 42, 0.65);
+$shadow-sharp: 0 25px 45px -15px rgba(15, 23, 42, 0.8);
+$border-glass: rgba(255, 255, 255, 0.08);
 
 $light-medium-gray: #dbdbdb;
 $shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.18);

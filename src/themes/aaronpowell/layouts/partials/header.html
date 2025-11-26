@@ -1,19 +1,42 @@
-<header>
-    <nav>
-            <ul>
-                <li class="logo">
-                    <a href="{{ .Site.BaseURL }}"><img src="{{ .Site.Params.navLogo | absURL }}" alt="logo"></a>
-                </li>
-                <li class="item">
-                    <a href="{{ .Site.BaseURL }}">{{ .Site.Params.home }}</a>
+{{ $root := . }}
+<header class="site-header">
+    <div class="container">
+        <nav class="nav" aria-label="Primary navigation">
+            <a class="nav__brand" href="{{ $root.Site.BaseURL }}">
+                {{ with $root.Site.Params.navLogo }}
+                <img src="{{ . | absURL }}" alt="{{ $root.Site.Title }} logo" />
+                {{ end }}
+                <span>{{ $root.Site.Params.tagline | default $root.Site.Title }}</span>
+            </a>
+
+            <button
+                class="nav__toggle"
+                type="button"
+                aria-label="Toggle navigation"
+                aria-expanded="false"
+            >
+                <span class="nav__toggle-line"></span>
+            </button>
+
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a
+                        href="{{ .Site.BaseURL }}"
+                        class="nav__link{{ if .IsHome }} nav__link--active{{ end }}"
+                        >{{ .Site.Params.home }}</a
+                    >
                 </li>
                 {{ range .Site.Menus.nav }}
-                <li class="item">
-                    <a href="{{ .URL | absURL }}" title="{{ .Name }}">{{ .Name }}</a>
+                {{ $active := or ($root.IsMenuCurrent "nav" .) ($root.HasMenuCurrent "nav" .) }}
+                <li class="nav__item">
+                    <a
+                        href="{{ .URL | absURL }}"
+                        class="nav__link{{ if $active }} nav__link--active{{ end }}"
+                        title="{{ .Name }}"
+                        >{{ .Name }}</a>
                 </li>
                 {{ end }}
-
-                <li class="toggle"><a href="#"><i class="icon ion-md-menu"></i></a></li>
             </ul>
         </nav>
+    </div>
 </header>

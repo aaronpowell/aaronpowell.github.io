@@ -1,15 +1,48 @@
-<section class="banner" style='background-image: url("{{ .Site.Params.banner.bgImage | absURL }}");'>
-    <blockquote>
-        <p>{{ .Site.Params.banner.heading }}</p>
-        <span class="rotate">
-            {{ range $index, $element := .Site.Params.banner.flipText }}
-                {{ if eq $index 0 }}
-                <span>&nbsp;{{ .title }}</span>
-                {{else}}
-                <span>&nbsp;{{ .title }}</span>
-                {{end}}
+<section
+    class="hero"
+    style="--hero-image: url('{{ .Site.Params.banner.bgImage | absURL }}')"
+>
+    <div class="container">
+        <div class="hero__content">
+            <div>
+                {{ with .Site.Params.banner.eyebrow }}
+                <span class="hero__eyebrow">{{ . }}</span>
+                {{ end }}
+                <h1 class="hero__heading">
+                    {{ .Site.Params.banner.heading }}
+                    <span class="hero__highlight" aria-live="polite">
+                        <span class="hero__rotate">
+                            {{ range .Site.Params.banner.flipText }}
+                            <span>{{ .title }}</span>
+                            {{ end }}
+                        </span>
+                    </span>
+                </h1>
+                <p class="hero__description">{{ .Site.Params.banner.description }}</p>
+
+                <div class="hero__actions">
+                    <a class="button" href="/posts/">Explore the blog</a>
+                    <a class="button button--ghost" href="/about/">Meet Aaron</a>
+                </div>
+            </div>
+
+            {{ $scratch := newScratch }}
+            {{ with .Site.Params.speaking }}
+                {{ with .talks }}
+                    {{ $scratch.Set "talks" (where . "date" ">" now) }}
+                {{ end }}
             {{ end }}
-        </span>
-    </blockquote>
-    <blockquote>{{ .Site.Params.banner.description }}</blockquote>
+            {{ $talks := $scratch.Get "talks" | default (slice) }}
+            <aside class="hero__aside">
+                <div class="hero__stat-card">
+                    <strong>{{ len (where .Site.RegularPages "Section" "posts") }}</strong>
+                    <span>Published articles</span>
+                </div>
+                <div class="hero__stat-card">
+                    <strong>{{ len $talks }}</strong>
+                    <span>Upcoming talks</span>
+                </div>
+            </aside>
+        </div>
+    </div>
 </section>

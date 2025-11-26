@@ -23,14 +23,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function setupToggleHeader() {
-        const toggle = document.querySelector("header .toggle");
-        toggle.addEventListener("click", function (e) {
-            e.preventDefault();
-            toggle.parentElement.classList.toggle("active");
+        const header = document.querySelector(".site-header");
+        const toggle = header?.querySelector(".nav__toggle");
+        const navList = header?.querySelector(".nav__list");
 
-            const i = toggle.querySelector("i");
-            i.classList.toggle("ion-md-menu");
-            i.classList.toggle("ion-md-close");
+        if (!header || !toggle || !navList) {
+            return;
+        }
+
+        const closeMenu = () => {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+        };
+
+        toggle.addEventListener("click", (event) => {
+            event.preventDefault();
+            const isOpen = header.classList.toggle("is-open");
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            if (isOpen) {
+                navList.querySelector("a")?.focus();
+            }
+        });
+
+        navList.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                closeMenu();
+            });
+        });
+
+        window.matchMedia("(min-width: 992px)").addEventListener("change", () => {
+            closeMenu();
         });
     }
 
