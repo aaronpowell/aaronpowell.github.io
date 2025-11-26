@@ -18,24 +18,28 @@
                         </span>
                     </span>
                 </h1>
-                <p class="hero__description">{{ .Site.Params.banner.description }}</p>
+                <p class="hero__description">
+                    {{ .Site.Params.banner.description }}
+                </p>
 
                 <div class="hero__actions">
                     <a class="button" href="/posts/">Explore the blog</a>
-                    <a class="button button--ghost" href="/about/">Meet Aaron</a>
+                    <a class="button button--ghost" href="/about/"
+                        >Meet Aaron</a
+                    >
                 </div>
             </div>
 
-            {{ $scratch := newScratch }}
-            {{ with .Site.Params.speaking }}
-                {{ with .talks }}
-                    {{ $scratch.Set "talks" (where . "date" ">" now) }}
-                {{ end }}
-            {{ end }}
-            {{ $talks := $scratch.Get "talks" | default (slice) }}
+            {{ $scratch := newScratch }} {{ with .Site.Params.speaking }} {{
+            with .talks }} {{ $scratch.Set "talks" (where . "date" ">" now) }}
+            {{ end }} {{ end }} {{ $talks := $scratch.Get "talks" | default
+            (slice) }}
             <aside class="hero__aside">
                 <div class="hero__stat-card">
-                    <strong>{{ len (where .Site.RegularPages "Section" "posts") }}</strong>
+                    <strong
+                        >{{ len (where .Site.RegularPages "Section" "posts")
+                        }}</strong
+                    >
                     <span>Published articles</span>
                 </div>
                 <div class="hero__stat-card">

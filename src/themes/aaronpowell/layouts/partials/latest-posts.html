@@ -8,8 +8,7 @@
     </div>
 
     <div class="post-list">
-        {{ range first 6 (where .Site.RegularPages "Section" "posts") }}
-        {{ partial "post-summary" . }}
-        {{ end }}
+        {{ range first 6 (where .Site.RegularPages "Section" "posts") }} {{
+        partial "post-summary" . }} {{ end }}
     </div>
 </section>

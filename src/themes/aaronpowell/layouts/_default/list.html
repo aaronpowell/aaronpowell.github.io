@@ -18,9 +18,7 @@
 
 <section class="container">
     <div class="post-list">
-        {{ range .Data.Pages }}
-        {{ partial "post-summary" . }}
-        {{ end }}
+        {{ range .Data.Pages }} {{ partial "post-summary" . }} {{ end }}
     </div>
 </section>
 

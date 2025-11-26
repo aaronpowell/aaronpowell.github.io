@@ -1,7 +1,7 @@
 <article class="post-card">
     <span class="post-card__meta">
-        {{ .Date.Format (.Site.Params.dateform | default "January 2, 2006") }}
-        · {{ .ReadingTime }} min read
+        {{ .Date.Format (.Site.Params.dateform | default "January 2, 2006") }} ·
+        {{ .ReadingTime }} min read
     </span>
     <h3 class="post-card__title">
         <a href="{{ .Permalink }}" title="{{ .Title }}"
@@ -9,7 +9,8 @@
         >
     </h3>
     <p class="post-card__description">
-        {{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 180 }}{{ end }}
+        {{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify |
+        truncate 180 }}{{ end }}
     </p>
     <div class="post-card__actions">
         {{ if .Params.tags }}
@@ -21,8 +22,12 @@
         {{ else }}
         <span></span>
         {{ end }}
-        <a href="{{ .Permalink }}" class="post-card__cta" title="Read {{ .Title }}"
+        <a
+            href="{{ .Permalink }}"
+            class="post-card__cta"
+            title="Read {{ .Title }}"
             >Read story</a
         >
     </div>
 </article>
+

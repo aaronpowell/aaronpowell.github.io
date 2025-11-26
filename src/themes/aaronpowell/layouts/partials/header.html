@@ -6,7 +6,10 @@
                 {{ with $root.Site.Params.navLogo }}
                 <img src="{{ . | absURL }}" alt="{{ $root.Site.Title }} logo" />
                 {{ end }}
-                <span>{{ $root.Site.Params.tagline | default $root.Site.Title }}</span>
+                <span
+                    >{{ $root.Site.Params.tagline | default $root.Site.Title
+                    }}</span
+                >
             </a>
 
             <button
@@ -26,14 +29,15 @@
                         >{{ .Site.Params.home }}</a
                     >
                 </li>
-                {{ range .Site.Menus.nav }}
-                {{ $active := or ($root.IsMenuCurrent "nav" .) ($root.HasMenuCurrent "nav" .) }}
+                {{ range .Site.Menus.nav }} {{ $active := or
+                ($root.IsMenuCurrent "nav" .) ($root.HasMenuCurrent "nav" .) }}
                 <li class="nav__item">
                     <a
                         href="{{ .URL | absURL }}"
                         class="nav__link{{ if $active }} nav__link--active{{ end }}"
                         title="{{ .Name }}"
-                        >{{ .Name }}</a>
+                        >{{ .Name }}</a
+                    >
                 </li>
                 {{ end }}
                 <li class="nav__item nav__item--action">
@@ -43,7 +47,9 @@
                         data-theme-toggle
                         aria-pressed="false"
                     >
-                        <span class="nav__theme-toggle-icon" aria-hidden="true">🌙</span>
+                        <span class="nav__theme-toggle-icon" aria-hidden="true"
+                            >🌙</span
+                        >
                         <span class="nav__theme-toggle-label">Dark</span>
                     </button>
                 </li>

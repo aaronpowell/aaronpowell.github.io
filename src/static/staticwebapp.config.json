@@ -10,6 +10,7 @@
         "Referrer-Policy": "strict-origin-when-cross-origin"
     },
     "platform": {
-        "apiRuntime": "node:16"
+        "apiRuntime": "node:20"
     }
 }
+

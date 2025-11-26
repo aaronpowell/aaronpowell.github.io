@@ -2,27 +2,33 @@
 
 <section
     class="page-hero"
-    {{ if .Params.cover_image }}style="--hero-image: url('{{ .Params.cover_image | absURL }}')"{{ end }}
+    {{
+    if
+    .Params.cover_image
+    }}style="--hero-image: url('{{ .Params.cover_image | absURL }}')"
+    {{
+    end
+    }}
 >
     <div class="container">
         <div class="page-hero__panel">
             <div class="section-heading">
                 <div>
                     <span class="eyebrow">Article</span>
-                    <h1>{{ if eq .Draft true }}(Draft) {{ end }}{{ .Title }}</h1>
+                    <h1>
+                        {{ if eq .Draft true }}(Draft) {{ end }}{{ .Title }}
+                    </h1>
                 </div>
             </div>
             <div class="page-hero__meta">
                 <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
                 <span>{{ .ReadingTime }} minute read</span>
                 <span class="tags">
-                    {{ if .Params.tags }}
-                    {{ range .Params.tags }}
-                    <a href="/tags/{{ . | urlize }}/" title="Tag: {{ . }}">{{ . }}</a>
-                    {{ end }}
-                    {{ else }}
-                    No tags for this post
-                    {{ end }}
+                    {{ if .Params.tags }} {{ range .Params.tags }}
+                    <a href="/tags/{{ . | urlize }}/" title="Tag: {{ . }}"
+                        >{{ . }}</a
+                    >
+                    {{ end }} {{ else }} No tags for this post {{ end }}
                 </span>
             </div>
         </div>
@@ -35,8 +41,7 @@
         Hey, thanks for the interest in this post, but just letting you know
         that it is over 3 years old, so the content in here may not be accurate.
     </div>
-    {{ end }}
-    {{ if eq .Draft true }}
+    {{ end }} {{ if eq .Draft true }}
     <div class="outdated">
         Heads up, this post is a draft, so it's not meant for sharing. 🤫
     </div>
@@ -45,10 +50,12 @@
     <article class="article-surface">
         {{ if isset .Params "image" }}
         <figure class="post-image">
-            <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt }}" />
+            <img
+                src="{{ .Params.image | absURL }}"
+                alt="{{ .Params.imageAlt }}"
+            />
         </figure>
-        {{ end }}
-        {{ partial "series.html" . }}
+        {{ end }} {{ partial "series.html" . }}
         <div class="article-content">{{ .Content }}</div>
     </article>
 </section>
@@ -58,8 +65,7 @@
     <a href="{{ .PrevInSection.Permalink }}" class="prev"
         >{{ .PrevInSection.Title }}</a
     >
-    {{ end }}
-    {{ if .NextInSection }}
+    {{ end }} {{ if .NextInSection }}
     <a href="{{ .NextInSection.Permalink }}" class="next"
         >{{ .NextInSection.Title }}</a
     >
@@ -67,8 +73,7 @@
 </section>
 
 <footer>
-    {{ partial "disqus" . }}
-    {{ if and (.IsPage) (.GitInfo) }}
+    {{ partial "disqus" . }} {{ if and (.IsPage) (.GitInfo) }}
     <small class="gray"
         ><em
             >Published: {{ .Page.Lastmod }}, Version:
@@ -85,3 +90,4 @@
 </footer>
 
 {{ end }}
+

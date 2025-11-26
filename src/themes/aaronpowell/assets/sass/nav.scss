@@ -10,7 +10,8 @@
     backdrop-filter: blur(22px);
     border-bottom: 1px solid var(--nav-border, $border-glass);
     box-shadow: var(--shadow-soft, 0 20px 40px -30px rgba(15, 23, 42, 0.7));
-    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .site-header.is-open {
@@ -258,3 +259,4 @@
         font-size: 1rem;
     }
 }
+

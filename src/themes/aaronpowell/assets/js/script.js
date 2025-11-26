@@ -51,9 +51,11 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-        window.matchMedia("(min-width: 992px)").addEventListener("change", () => {
-            closeMenu();
-        });
+        window
+            .matchMedia("(min-width: 992px)")
+            .addEventListener("change", () => {
+                closeMenu();
+            });
     }
 
     function addCopyToCodeBlocks() {
@@ -157,8 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         toggle.addEventListener("click", () => {
-            const current =
-                root.getAttribute("data-theme") || getSystemTheme();
+            const current = root.getAttribute("data-theme") || getSystemTheme();
             const nextTheme = current === "dark" ? "light" : "dark";
             applyTheme(nextTheme, true);
         });
@@ -196,3 +197,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
