@@ -2,12 +2,17 @@
     "name": "aaronpowell.github.io",
     "version": "1.0.0",
     "private": true,
+    "type": "module",
     "description": "My blog",
     "main": "index.js",
     "devDependencies": {
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "sharp": "^0.33.5"
     },
-    "scripts": {},
+    "scripts": {
+        "compress:images": "node scripts/compress-images.js --input src/static/images",
+        "compress:output": "node scripts/compress-images.js --input .output"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/aaronpowell/aaronpowell.github.io.git"

@@ -94,6 +94,30 @@
             "problemMatcher": []
         },
         {
+            "label": "compress images (static)",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "compress:images"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "compress images (output)",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "compress:output"
+            ],
+            "dependsOn": [
+                "build:debug (hugo)"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
             "label": "build (dotnet)",
             "command": "dotnet",
             "type": "shell",
@@ -152,7 +176,7 @@
             "label": "build",
             "dependsOn": [
                 "publish (search)",
-                "build:debug (hugo)"
+                "compress images (output)"
             ],
             "group": {
                 "isDefault": true,
