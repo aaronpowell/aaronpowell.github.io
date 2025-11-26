@@ -9,6 +9,9 @@ enableEmoji = true
 
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
+section = [ "HTML", "RSS" ]
+taxonomy = [ "HTML" ]
+term = [ "HTML" ]
 
 # Site Menus
 [menu]
@@ -64,6 +67,7 @@ home = [ "HTML", "RSS", "JSON"]
 
     [params.banner]
         enable  = true
+        eyebrow = "Microsoft Cloud Advocate"
         bgImage = "images/hero.jpg"
         heading = "Hi, my name is Aaron and I'm a"
         description = "With over 15 years of software development experience and 10 years of public speaking. I'm active across a number of open source communities and this site shared my experiences."

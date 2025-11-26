@@ -1,17 +1,25 @@
 {{ define "main" }}
 
-<section class="main">
-    <header>
-        <div class="container">
-            <h1>{{ .Title }}</h1>
+<section class="page-hero">
+    <div class="container">
+        <div class="page-hero__panel">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">Collection</span>
+                    <h1>{{ .Title }}</h1>
+                </div>
+                {{ with .Description }}
+                <p>{{ . }}</p>
+                {{ end }}
+            </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <section class="container post-list">
-        {{ range .Data.Pages }}
-        {{ partial "post-summary" . }}
-        {{ end }}
-    </section>
+<section class="container">
+    <div class="post-list">
+        {{ range .Data.Pages }} {{ partial "post-summary" . }} {{ end }}
+    </div>
 </section>
 
 {{ end }}

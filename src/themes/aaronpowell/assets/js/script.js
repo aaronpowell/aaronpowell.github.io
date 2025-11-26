@@ -23,15 +23,39 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function setupToggleHeader() {
-        const toggle = document.querySelector("header .toggle");
-        toggle.addEventListener("click", function (e) {
-            e.preventDefault();
-            toggle.parentElement.classList.toggle("active");
+        const header = document.querySelector(".site-header");
+        const toggle = header?.querySelector(".nav__toggle");
+        const navList = header?.querySelector(".nav__list");
 
-            const i = toggle.querySelector("i");
-            i.classList.toggle("ion-md-menu");
-            i.classList.toggle("ion-md-close");
+        if (!header || !toggle || !navList) {
+            return;
+        }
+
+        const closeMenu = () => {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+        };
+
+        toggle.addEventListener("click", (event) => {
+            event.preventDefault();
+            const isOpen = header.classList.toggle("is-open");
+            toggle.setAttribute("aria-expanded", String(isOpen));
+            if (isOpen) {
+                navList.querySelector("a")?.focus();
+            }
         });
+
+        navList.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                closeMenu();
+            });
+        });
+
+        window
+            .matchMedia("(min-width: 992px)")
+            .addEventListener("change", () => {
+                closeMenu();
+            });
     }
 
     function addCopyToCodeBlocks() {
@@ -86,10 +110,75 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function setupThemeToggle() {
+        const toggle = document.querySelector("[data-theme-toggle]");
+
+        if (!toggle) {
+            return;
+        }
+
+        const label = toggle.querySelector(".nav__theme-toggle-label");
+        const icon = toggle.querySelector(".nav__theme-toggle-icon");
+        const storageKey = "site-theme";
+        const root = document.documentElement;
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+        const getSystemTheme = () => (mediaQuery.matches ? "dark" : "light");
+
+        const updateToggle = (theme) => {
+            const isDark = theme === "dark";
+            toggle.setAttribute("aria-pressed", String(isDark));
+            if (icon) {
+                icon.textContent = isDark ? "🌙" : "☀️";
+            }
+            if (label) {
+                label.textContent = isDark ? "Dark" : "Light";
+            }
+        };
+
+        const applyTheme = (theme, persist = true) => {
+            if (theme !== "light" && theme !== "dark") {
+                return;
+            }
+
+            root.setAttribute("data-theme", theme);
+
+            if (persist) {
+                localStorage.setItem(storageKey, theme);
+            }
+
+            updateToggle(theme);
+        };
+
+        const stored = localStorage.getItem(storageKey);
+        if (stored === "light" || stored === "dark") {
+            applyTheme(stored, false);
+        } else {
+            root.removeAttribute("data-theme");
+            updateToggle(getSystemTheme());
+        }
+
+        toggle.addEventListener("click", () => {
+            const current = root.getAttribute("data-theme") || getSystemTheme();
+            const nextTheme = current === "dark" ? "light" : "dark";
+            applyTheme(nextTheme, true);
+        });
+
+        mediaQuery.addEventListener("change", (event) => {
+            if (localStorage.getItem(storageKey)) {
+                return;
+            }
+
+            root.removeAttribute("data-theme");
+            updateToggle(event.matches ? "dark" : "light");
+        });
+    }
+
     setupDynamicCodeBlock();
     setupToggleHeader();
     addCopyToCodeBlocks();
     setupCopyBlock();
+    setupThemeToggle();
 
     const upcoming = document.querySelector(".toggle-upcoming");
     if (upcoming) {
@@ -108,3 +197,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+

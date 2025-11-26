@@ -1,37 +1,28 @@
 @import "./variables.scss";
 
 .container {
+    width: 100%;
+    max-width: 1140px;
     margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
-@media (max-width: $xsmall) {
+@media (max-width: $normal) {
     .container {
-        max-width: 520px;
-        padding: 10px;
+        max-width: 980px;
     }
 }
 
 @media (max-width: $small) {
     .container {
-        max-width: 700px;
-        padding: 10px;
+        max-width: 100%;
+        padding: 0 clamp(1rem, 5vw, 1.75rem);
     }
 }
 
-@media (max-width: $normal) {
+@media (max-width: $xsmall) {
     .container {
-        max-width: 960px;
+        padding: 0 clamp(0.85rem, 6vw, 1.25rem);
     }
 }
 
-@media (max-width: calc(#{$wide} - 1px)) {
-    .container {
-        padding: 10px;
-    }
-}
-
-@media (min-width: $wide) {
-    .container {
-        max-width: 1140px;
-    }
-}

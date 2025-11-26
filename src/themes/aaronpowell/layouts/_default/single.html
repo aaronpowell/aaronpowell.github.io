@@ -1,22 +1,41 @@
 {{ define "main" }}
 
-<section class="main">
-    <header
-        style="{{ if .Params.cover_image }}background-image: url('{{ .Params.cover_image | absURL }}');{{ end }}"
-    >
-        <div class="container">
-            <h1>{{ if eq .Draft true }}(Draft) {{ end }}{{ .Title }}</h1>
-            <div>
+<section
+    class="page-hero"
+    {{
+    if
+    .Params.cover_image
+    }}style="--hero-image: url('{{ .Params.cover_image | absURL }}')"
+    {{
+    end
+    }}
+>
+    <div class="container">
+        <div class="page-hero__panel">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">Article</span>
+                    <h1>
+                        {{ if eq .Draft true }}(Draft) {{ end }}{{ .Title }}
+                    </h1>
+                </div>
+            </div>
+            <div class="page-hero__meta">
                 <span>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</span>
                 <span>{{ .ReadingTime }} minute read</span>
-                <span class="tags"
-                    >Tags: {{ if ne .Params.tags nil }} {{ range .Params.tags }}
-                    <a href="/tags/{{ . }}" title="Tag: {{ . }}">{{ . }}</a>
+                <span class="tags">
+                    {{ if .Params.tags }} {{ range .Params.tags }}
+                    <a href="/tags/{{ . | urlize }}/" title="Tag: {{ . }}"
+                        >{{ . }}</a
+                    >
                     {{ end }} {{ else }} No tags for this post {{ end }}
                 </span>
             </div>
         </div>
-    </header>
+    </div>
+</section>
+
+<section class="container">
     {{ if le (.Date.Year) (sub now.Year 3) }}
     <div class="outdated">
         Hey, thanks for the interest in this post, but just letting you know
@@ -27,48 +46,48 @@
         Heads up, this post is a draft, so it's not meant for sharing. 🤫
     </div>
     {{ end }}
-    <section class="container">
-        <article>
-            {{ if isset .Params "image" }}
-            <div class="post-image">
-                <img
-                    src="{{ .Params.image | absURL }}"
-                    alt="{{ .Params.imageAlt }}"
-                />
-            </div>
-            {{ end }} {{ partial "series.html" . }}
-            <section>{{ .Content }}</section>
-        </article>
-    </section>
 
-    <section class="pagination container">
-        {{ if .PrevInSection }}
-        <a href="{{ .PrevInSection.Permalink }}" class="prev"
-            >{{ .PrevInSection.Title }}</a
-        >
-        {{ end }} {{ if .NextInSection }}
-        <a href="{{ .NextInSection.Permalink }}" class="next"
-            >{{ .NextInSection.Title }}</a
-        >
-        {{ end }}
-    </section>
-
-    <footer>
-        {{ partial "disqus" . }} {{ if and (.IsPage) (.GitInfo) }}
-        <small class="gray"
-            ><em
-                >Published: {{ .Page.Lastmod }}, Version:
-                <a
-                    href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}"
-                    target="_blank"
-                    >{{ .GitInfo.AbbreviatedHash }}</a
-                ></em
-            ></small
-        >
-        {{ else }}
-        <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
-        {{ end }}
-    </footer>
+    <article class="article-surface">
+        {{ if isset .Params "image" }}
+        <figure class="post-image">
+            <img
+                src="{{ .Params.image | absURL }}"
+                alt="{{ .Params.imageAlt }}"
+            />
+        </figure>
+        {{ end }} {{ partial "series.html" . }}
+        <div class="article-content">{{ .Content }}</div>
+    </article>
 </section>
 
+<section class="pagination container">
+    {{ if .PrevInSection }}
+    <a href="{{ .PrevInSection.Permalink }}" class="prev"
+        >{{ .PrevInSection.Title }}</a
+    >
+    {{ end }} {{ if .NextInSection }}
+    <a href="{{ .NextInSection.Permalink }}" class="next"
+        >{{ .NextInSection.Title }}</a
+    >
+    {{ end }}
+</section>
+
+<footer>
+    {{ partial "disqus" . }} {{ if and (.IsPage) (.GitInfo) }}
+    <small class="gray"
+        ><em
+            >Published: {{ .Page.Lastmod }}, Version:
+            <a
+                href="https://github.com/aaronpowell/aaronpowell.github.io/commit/{{ .GitInfo.AbbreviatedHash }}"
+                target="_blank"
+                >{{ .GitInfo.AbbreviatedHash }}</a
+            ></em
+        ></small
+    >
+    {{ else }}
+    <small class="gray"><em>Published: {{ .Page.Lastmod }}</em></small>
+    {{ end }}
+</footer>
+
 {{ end }}
+

@@ -1,13 +1,33 @@
-<article>
-    <h3>
+<article class="post-card">
+    <span class="post-card__meta">
+        {{ .Date.Format (.Site.Params.dateform | default "January 2, 2006") }} ·
+        {{ .ReadingTime }} min read
+    </span>
+    <h3 class="post-card__title">
         <a href="{{ .Permalink }}" title="{{ .Title }}"
             >{{ if eq .Draft true }}(Draft) {{ end }}{{ .Title }}</a
         >
     </h3>
-    <div>{{ .Description }}</div>
-    <div class="sub-header">
-        {{ .Date.Format (.Site.Params.dateform | default "January 2006") }} · {{
-        .ReadingTime }} minute read
+    <p class="post-card__description">
+        {{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify |
+        truncate 180 }}{{ end }}
+    </p>
+    <div class="post-card__actions">
+        {{ if .Params.tags }}
+        <div class="tags">
+            {{ range first 3 .Params.tags }}
+            <a href="/tags/{{ . | urlize }}/" title="Tag: {{ . }}">{{ . }}</a>
+            {{ end }}
+        </div>
+        {{ else }}
+        <span></span>
+        {{ end }}
+        <a
+            href="{{ .Permalink }}"
+            class="post-card__cta"
+            title="Read {{ .Title }}"
+            >Read story</a
+        >
     </div>
-    <a href="{{ .Permalink }}" title="Read Post" class="read-more">Read Post</a>
 </article>
+
