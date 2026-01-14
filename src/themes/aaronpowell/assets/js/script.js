@@ -221,13 +221,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const font = fontMap[fontName];
             if (!font) {
                 console.warn(`Invalid font selection: ${fontName}. Falling back to default.`);
-                applyFont('default', persist);
-                return;
+                fontName = 'default';
             }
 
-            root.style.setProperty("--font-body", font.body);
-            root.style.setProperty("--font-heading", font.heading);
-            root.style.setProperty("--font-code", font.code);
+            const selectedFont = fontMap[fontName];
+            root.style.setProperty("--font-body", selectedFont.body);
+            root.style.setProperty("--font-heading", selectedFont.heading);
+            root.style.setProperty("--font-code", selectedFont.code);
 
             if (persist) {
                 localStorage.setItem(storageKey, fontName);
