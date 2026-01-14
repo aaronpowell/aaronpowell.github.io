@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
             opendyslexic: {
                 body: '"OpenDyslexic", Arial, sans-serif',
                 heading: '"OpenDyslexic", Arial, sans-serif',
-                code: '"OpenDyslexic Mono", "Fira Code", monospace',
+                code: '"Fira Code", monospace',
             },
             arial: {
                 body: 'Arial, sans-serif',
