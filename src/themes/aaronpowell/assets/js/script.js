@@ -174,11 +174,86 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function setupFontPicker() {
+        const picker = document.querySelector("[data-font-picker]");
+
+        if (!picker) {
+            return;
+        }
+
+        const storageKey = "site-font";
+        const root = document.documentElement;
+
+        const fontMap = {
+            default: {
+                body: '"Inter", "Poppins", "Helvetica", Arial, sans-serif',
+                heading: '"Space Grotesk", "Inter", "Helvetica", Arial, sans-serif',
+                code: '"Fira Code", monospace',
+            },
+            opendyslexic: {
+                body: '"OpenDyslexic", Arial, sans-serif',
+                heading: '"OpenDyslexic", Arial, sans-serif',
+                code: '"OpenDyslexic Mono", "Fira Code", monospace',
+            },
+            arial: {
+                body: 'Arial, sans-serif',
+                heading: 'Arial, sans-serif',
+                code: '"Courier New", monospace',
+            },
+            verdana: {
+                body: 'Verdana, sans-serif',
+                heading: 'Verdana, sans-serif',
+                code: '"Courier New", monospace',
+            },
+            georgia: {
+                body: 'Georgia, serif',
+                heading: 'Georgia, serif',
+                code: '"Courier New", monospace',
+            },
+            "comic-sans": {
+                body: '"Comic Sans MS", "Comic Sans", cursive',
+                heading: '"Comic Sans MS", "Comic Sans", cursive',
+                code: '"Courier New", monospace',
+            },
+        };
+
+        const applyFont = (fontName, persist = true) => {
+            const font = fontMap[fontName];
+            if (!font) {
+                return;
+            }
+
+            root.style.setProperty("--font-body", font.body);
+            root.style.setProperty("--font-heading", font.heading);
+            root.style.setProperty("--font-code", font.code);
+
+            if (persist) {
+                localStorage.setItem(storageKey, fontName);
+            }
+
+            picker.value = fontName;
+        };
+
+        // Load saved font preference
+        const stored = localStorage.getItem(storageKey);
+        if (stored && fontMap[stored]) {
+            applyFont(stored, false);
+        } else {
+            picker.value = "default";
+        }
+
+        // Handle font selection changes
+        picker.addEventListener("change", (event) => {
+            applyFont(event.target.value, true);
+        });
+    }
+
     setupDynamicCodeBlock();
     setupToggleHeader();
     addCopyToCodeBlocks();
     setupCopyBlock();
     setupThemeToggle();
+    setupFontPicker();
 
     const upcoming = document.querySelector(".toggle-upcoming");
     if (upcoming) {
