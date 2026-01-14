@@ -174,11 +174,89 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function setupFontPicker() {
+        const picker = document.querySelector("[data-font-picker]");
+
+        if (!picker) {
+            return;
+        }
+
+        const storageKey = "site-font";
+        const root = document.documentElement;
+
+        const fontMap = {
+            default: {
+                body: '"Inter", "Poppins", "Helvetica", Arial, sans-serif',
+                heading: '"Space Grotesk", "Inter", "Helvetica", Arial, sans-serif',
+                code: '"Fira Code", monospace',
+            },
+            opendyslexic: {
+                body: '"OpenDyslexic", Arial, sans-serif',
+                heading: '"OpenDyslexic", Arial, sans-serif',
+                code: '"Fira Code", monospace',
+            },
+            nunito: {
+                body: '"Nunito", Arial, sans-serif',
+                heading: '"Nunito", Arial, sans-serif',
+                code: '"Fira Code", monospace',
+            },
+            arial: {
+                body: 'Arial, sans-serif',
+                heading: 'Arial, sans-serif',
+                code: '"Courier New", monospace',
+            },
+            verdana: {
+                body: 'Verdana, sans-serif',
+                heading: 'Verdana, sans-serif',
+                code: '"Courier New", monospace',
+            },
+            georgia: {
+                body: 'Georgia, serif',
+                heading: 'Georgia, serif',
+                code: '"Courier New", monospace',
+            },
+            "comic-sans": {
+                body: '"Comic Sans MS", "Comic Sans", cursive',
+                heading: '"Comic Sans MS", "Comic Sans", cursive',
+                code: '"Courier New", monospace',
+            },
+        };
+
+        const applyFont = (fontName, persist = true) => {
+            const font = fontMap[fontName];
+            if (!font) {
+                console.warn(`Invalid font selection: ${fontName}. Falling back to default.`);
+                fontName = 'default';
+            }
+
+            const selectedFont = fontMap[fontName];
+            root.style.setProperty("--font-body", selectedFont.body);
+            root.style.setProperty("--font-heading", selectedFont.heading);
+            root.style.setProperty("--font-code", selectedFont.code);
+
+            if (persist) {
+                localStorage.setItem(storageKey, fontName);
+            }
+
+            picker.value = fontName;
+        };
+
+        // Load saved font preference
+        const stored = localStorage.getItem(storageKey);
+        applyFont(stored || 'default', false);
+
+        // Handle font selection changes
+        picker.addEventListener("change", (event) => {
+            applyFont(event.target.value, true);
+        });
+    }
+
     setupDynamicCodeBlock();
     setupToggleHeader();
     addCopyToCodeBlocks();
     setupCopyBlock();
     setupThemeToggle();
+    setupFontPicker();
 
     const upcoming = document.querySelector(".toggle-upcoming");
     if (upcoming) {
