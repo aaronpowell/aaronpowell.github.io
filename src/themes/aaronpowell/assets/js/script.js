@@ -220,6 +220,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const applyFont = (fontName, persist = true) => {
             const font = fontMap[fontName];
             if (!font) {
+                console.warn(`Invalid font selection: ${fontName}. Falling back to default.`);
+                applyFont('default', persist);
                 return;
             }
 
@@ -239,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (stored && fontMap[stored]) {
             applyFont(stored, false);
         } else {
-            picker.value = "default";
+            applyFont('default', false);
         }
 
         // Handle font selection changes
