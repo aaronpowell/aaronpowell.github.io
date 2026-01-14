@@ -238,11 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Load saved font preference
         const stored = localStorage.getItem(storageKey);
-        if (stored && fontMap[stored]) {
-            applyFont(stored, false);
-        } else {
-            applyFont('default', false);
-        }
+        applyFont(stored || 'default', false);
 
         // Handle font selection changes
         picker.addEventListener("change", (event) => {
