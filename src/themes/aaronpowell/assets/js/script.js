@@ -195,6 +195,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 heading: '"OpenDyslexic", Arial, sans-serif',
                 code: '"Fira Code", monospace',
             },
+            nunito: {
+                body: '"Nunito", Arial, sans-serif',
+                heading: '"Nunito", Arial, sans-serif',
+                code: '"Fira Code", monospace',
+            },
             arial: {
                 body: 'Arial, sans-serif',
                 heading: 'Arial, sans-serif',
