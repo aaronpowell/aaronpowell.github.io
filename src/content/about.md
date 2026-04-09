@@ -4,7 +4,7 @@ layout: simple
 title: About Me
 ---
 
-Hi, my name's Aaron Powell and I'm a [Cloud Developer Advocate at Microsoft](https://developer.microsoft.com/advocates?{{<cda>}}), based in Sydney, Australia. I've been at Microsoft since 2019, working with developer communities around AI tooling, .NET, and the web.
+Hi, my name's Aaron Powell and I'm in DevRel at Microsoft/GitHub, based in Sydney, Australia. I've been at Microsoft since 2019, working with developer communities around AI tooling, .NET, and the web.
 
 These days my work sits firmly at the intersection of AI and developer productivity. I spend most of my time advocating for, and contributing to, projects that help developers get the most out of AI-assisted development.
 

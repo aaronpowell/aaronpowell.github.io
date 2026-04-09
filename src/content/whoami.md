@@ -16,7 +16,7 @@ layout: simple
     </ul>
 </aside>
 
-Hi, my name's Aaron Powell and I'm a Cloud Developer Advocate (CDA) at Microsoft, based in Sydney, Australia. I've been at Microsoft since January 2019, and these days my focus is squarely on AI developer tooling — particularly GitHub Copilot and the ecosystem of extensions, instructions, and resources around it.
+Hi, my name's Aaron Powell and I'm in DevRel at Microsoft/GitHub, based in Sydney, Australia. I've been at Microsoft since January 2019, and these days my focus is squarely on AI developer tooling — particularly GitHub Copilot and the ecosystem of extensions, instructions, and resources around it.
 
 Prior to Microsoft I worked at [Readify](https://readify.net) for over eight years, progressing from Senior Developer through to Principal Consultant and Technical Pre-Sales. My technical background spans ASP.NET, Node.js, React, and a little Go — I've always tried to be a polyglot.
 
@@ -30,7 +30,7 @@ Since 2011 I've been awarded a [Microsoft MVP (Front-end Web Development)](https
 
 #### January 2019 - Present
 
-**Regional [Cloud Developer Advocate (CDA)](https://developer.microsoft.com/en-us/advocates/index.html)**
+**DevRel at Microsoft/GitHub**
 
 I work with developer communities to help them get the most out of Microsoft's developer tools and platforms. Today my primary focus is AI developer tooling — primarily GitHub Copilot. I'm the lead maintainer of [Awesome Copilot](https://awesome-copilot.github.com/), a community-curated list of Copilot extensions, instructions, prompts, and resources that has grown to over 20k GitHub stars and 500+ resources. I also co-maintain the [Aspire Community Toolkit](https://github.com/CommunityToolkit/Aspire), a collection of community-built integrations for .NET Aspire.
 
