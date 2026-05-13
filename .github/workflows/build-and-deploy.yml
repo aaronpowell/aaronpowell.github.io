@@ -247,10 +247,12 @@ jobs:
     name: Update my readme
     environment: production
     if: github.event_name != 'pull_request'
+    # continue-on-error so a stale/expired PERSONAL_TOKEN doesn't block deploys.
+    # PERSONAL_TOKEN requires a classic PAT (or fine-grained PAT) with the
+    # "workflow" scope to trigger workflow_dispatch in aaronpowell/aaronpowell.
+    continue-on-error: true
     steps:
-      - name: Workflow Dispatch
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Update
-          repo: aaronpowell/aaronpowell
-          token: ${{ secrets.PERSONAL_TOKEN }}
+      - name: Trigger readme update
+        run: gh workflow run "Update" --repo aaronpowell/aaronpowell --ref main
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
