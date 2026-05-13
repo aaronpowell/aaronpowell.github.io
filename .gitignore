@@ -13,3 +13,4 @@ src/resources/_gen
 .hugo_build.lock
 *Zone.Identifier
 .playwright-cli
+src/public

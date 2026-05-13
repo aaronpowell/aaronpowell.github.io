@@ -2,7 +2,8 @@
 
 @font-face {
     font-family: "OpenDyslexic";
-    src: url("https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Regular.woff") format("woff");
+    src: url("https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Regular.woff")
+        format("woff");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -10,7 +11,8 @@
 
 @font-face {
     font-family: "OpenDyslexic";
-    src: url("https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Bold.woff") format("woff");
+    src: url("https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Bold.woff")
+        format("woff");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -18,7 +20,8 @@
 
 @font-face {
     font-family: "Nunito";
-    src: url("https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/files/nunito-latin-400-normal.woff2") format("woff2");
+    src: url("https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/files/nunito-latin-400-normal.woff2")
+        format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -26,7 +29,8 @@
 
 @font-face {
     font-family: "Nunito";
-    src: url("https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/files/nunito-latin-600-normal.woff2") format("woff2");
+    src: url("https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/files/nunito-latin-600-normal.woff2")
+        format("woff2");
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -34,7 +38,8 @@
 
 @font-face {
     font-family: "Nunito";
-    src: url("https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/files/nunito-latin-700-normal.woff2") format("woff2");
+    src: url("https://cdn.jsdelivr.net/npm/@fontsource/nunito@5.1.0/files/nunito-latin-700-normal.woff2")
+        format("woff2");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -93,7 +98,14 @@ html {
 body {
     color: var(--color-text-primary, #{$primaryTextColour});
     font-size: 1.05rem;
-    font-family: var(--font-body, "Inter", "Poppins", "Helvetica", Arial, sans-serif);
+    font-family: var(
+        --font-body,
+        "Inter",
+        "Poppins",
+        "Helvetica",
+        Arial,
+        sans-serif
+    );
     line-height: 1.7;
     margin: 0;
     min-height: 100vh;
@@ -164,7 +176,14 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-heading, "Space Grotesk", "Inter", "Helvetica", Arial, sans-serif);
+    font-family: var(
+        --font-heading,
+        "Space Grotesk",
+        "Inter",
+        "Helvetica",
+        Arial,
+        sans-serif
+    );
     font-weight: 600;
     letter-spacing: -0.01em;
     margin: 0 0 0.6em;
@@ -495,7 +514,7 @@ code {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: clamp(2rem, 5vw, 3rem) 0;
+    padding-top: 2rem;
     gap: 1rem;
 }
 
