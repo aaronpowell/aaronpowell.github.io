@@ -341,6 +341,12 @@ code {
     padding: 0.2rem 0.4rem;
 }
 
+.highlight pre code {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+}
+
 .hidden {
     display: none !important;
 }
@@ -518,6 +524,10 @@ code {
 .pagination .prev:before {
     content: "\00AB";
     padding-right: 5px;
+}
+
+.pagination .next {
+    margin-left: auto;
 }
 
 .pagination .next:after {
