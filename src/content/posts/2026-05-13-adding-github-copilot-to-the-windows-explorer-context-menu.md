@@ -2,7 +2,7 @@
 title = "Adding GitHub Copilot to the Windows Explorer Context Menu"
 date = 2026-05-13T01:04:43Z
 description = "A small Windows automation that lets me launch my GitHub Copilot terminal profiles straight from Explorer."
-draft = true
+draft = false
 tags = ["windows", "github-copilot", "terminal", "automation"]
 tracking_area = ""
 tracking_id = ""
