@@ -1,6 +1,6 @@
 title = "LINQ to Fail"
 baseURL = "https://www.aaron-powell.com"
-languageCode = "en-US"
+locale = "en-US"
 config = "config.toml"
 theme = "aaronpowell"
 canonifyURLS = true
