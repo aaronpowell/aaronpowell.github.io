@@ -55,6 +55,7 @@
 @import "./series.scss";
 @import "./talks.scss";
 @import "./contact.scss";
+@import "./chroma.scss";
 
 @import "../fontawesome/scss/fontawesome.scss";
 @import "../fontawesome/scss/solid.scss";
@@ -692,4 +693,3 @@ footer p {
         font-size: clamp(1.8rem, 6vw, 2.1rem);
     }
 }
-

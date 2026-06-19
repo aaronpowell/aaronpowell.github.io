@@ -1,0 +1,359 @@
+/* Hugo Chroma styles generated from:
+   hugo gen chromastyles --style=github
+   hugo gen chromastyles --style=github-dark
+*/
+
+/* Light theme (github) */
+.highlight .bg {
+    background-color: #f7f7f7;
+}
+
+.highlight .chroma {
+    background-color: #f7f7f7;
+    -webkit-text-size-adjust: none;
+}
+
+.highlight .chroma .err {
+    color: #f6f8fa;
+    background-color: #82071e;
+}
+
+.highlight .chroma .lnlinks {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.highlight .chroma .lntd {
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.highlight .chroma .lntable {
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.highlight .chroma .hl {
+    background-color: #dedede;
+}
+
+.highlight .chroma .lnt,
+.highlight .chroma .ln {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0 0.4em;
+    color: #7f7f7f;
+}
+
+.highlight .chroma .line {
+    display: flex;
+}
+
+.highlight .chroma .k,
+.highlight .chroma .kc,
+.highlight .chroma .kd,
+.highlight .chroma .kn,
+.highlight .chroma .kp,
+.highlight .chroma .kr,
+.highlight .chroma .kt {
+    color: #cf222e;
+}
+
+.highlight .chroma .na,
+.highlight .chroma .nc,
+.highlight .chroma .nx,
+.highlight .chroma .p,
+.highlight .chroma .ge,
+.highlight .chroma .go {
+    color: #1f2328;
+}
+
+.highlight .chroma .no,
+.highlight .chroma .nd,
+.highlight .chroma .nt,
+.highlight .chroma .m,
+.highlight .chroma .mb,
+.highlight .chroma .mf,
+.highlight .chroma .mh,
+.highlight .chroma .mi,
+.highlight .chroma .il,
+.highlight .chroma .mo,
+.highlight .chroma .o,
+.highlight .chroma .ow {
+    color: #0550ae;
+}
+
+.highlight .chroma .ni,
+.highlight .chroma .nb,
+.highlight .chroma .nf,
+.highlight .chroma .fm {
+    color: #6639ba;
+}
+
+.highlight .chroma .nl {
+    color: #900;
+    font-weight: bold;
+}
+
+.highlight .chroma .nn {
+    color: #24292e;
+}
+
+.highlight .chroma .bp {
+    color: #6a737d;
+}
+
+.highlight .chroma .nv,
+.highlight .chroma .vc,
+.highlight .chroma .vg,
+.highlight .chroma .vi,
+.highlight .chroma .vm {
+    color: #953800;
+}
+
+.highlight .chroma .s,
+.highlight .chroma .sa,
+.highlight .chroma .sb,
+.highlight .chroma .sc,
+.highlight .chroma .dl,
+.highlight .chroma .sd,
+.highlight .chroma .s2,
+.highlight .chroma .se,
+.highlight .chroma .sh,
+.highlight .chroma .si,
+.highlight .chroma .sx,
+.highlight .chroma .sr,
+.highlight .chroma .s1 {
+    color: #0a3069;
+}
+
+.highlight .chroma .ss {
+    color: #032f62;
+}
+
+.highlight .chroma .c,
+.highlight .chroma .ch,
+.highlight .chroma .cm,
+.highlight .chroma .c1,
+.highlight .chroma .cs,
+.highlight .chroma .cp,
+.highlight .chroma .cpf {
+    color: #57606a;
+}
+
+.highlight .chroma .gd {
+    color: #82071e;
+    background-color: #ffebe9;
+}
+
+.highlight .chroma .gi {
+    color: #116329;
+    background-color: #dafbe1;
+}
+
+.highlight .chroma .gl {
+    text-decoration: underline;
+}
+
+.highlight .chroma .w {
+    color: #fff;
+}
+
+@mixin chroma-dark-theme {
+    .highlight .bg {
+        color: #e6edf3;
+        background-color: #0d1117;
+    }
+
+    .highlight .chroma {
+        color: #e6edf3;
+        background-color: #0d1117;
+        -webkit-text-size-adjust: none;
+    }
+
+    .highlight .chroma .err {
+        color: #f85149;
+    }
+
+    .highlight .chroma .lnlinks {
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .highlight .chroma .lntd {
+        vertical-align: top;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    .highlight .chroma .lntable {
+        border-spacing: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    .highlight .chroma .hl {
+        background-color: #6e7681;
+    }
+
+    .highlight .chroma .lnt {
+        color: #737679;
+    }
+
+    .highlight .chroma .ln {
+        color: #6e7681;
+    }
+
+    .highlight .chroma .k,
+    .highlight .chroma .kd,
+    .highlight .chroma .kn,
+    .highlight .chroma .kr,
+    .highlight .chroma .kt,
+    .highlight .chroma .o,
+    .highlight .chroma .ow,
+    .highlight .chroma .nn,
+    .highlight .chroma .gt {
+        color: #ff7b72;
+    }
+
+    .highlight .chroma .na,
+    .highlight .chroma .nx,
+    .highlight .chroma .p,
+    .highlight .chroma .nb,
+    .highlight .chroma .bp {
+        color: #e6edf3;
+    }
+
+    .highlight .chroma .kc,
+    .highlight .chroma .kp,
+    .highlight .chroma .no,
+    .highlight .chroma .nl,
+    .highlight .chroma .py,
+    .highlight .chroma .nv,
+    .highlight .chroma .vc,
+    .highlight .chroma .vg,
+    .highlight .chroma .vi,
+    .highlight .chroma .vm,
+    .highlight .chroma .ld,
+    .highlight .chroma .sa,
+    .highlight .chroma .dl,
+    .highlight .chroma .se,
+    .highlight .chroma .sh,
+    .highlight .chroma .sr,
+    .highlight .chroma .m,
+    .highlight .chroma .mb,
+    .highlight .chroma .mf,
+    .highlight .chroma .mh,
+    .highlight .chroma .mi,
+    .highlight .chroma .il,
+    .highlight .chroma .mo,
+    .highlight .chroma .gh,
+    .highlight .chroma .gu {
+        color: #79c0ff;
+    }
+
+    .highlight .chroma .nc,
+    .highlight .chroma .ne {
+        color: #f0883e;
+        font-weight: bold;
+    }
+
+    .highlight .chroma .nd,
+    .highlight .chroma .nf,
+    .highlight .chroma .fm {
+        color: #d2a8ff;
+        font-weight: bold;
+    }
+
+    .highlight .chroma .ni {
+        color: #ffa657;
+    }
+
+    .highlight .chroma .nt {
+        color: #7ee787;
+    }
+
+    .highlight .chroma .l,
+    .highlight .chroma .s,
+    .highlight .chroma .sb,
+    .highlight .chroma .sc,
+    .highlight .chroma .sd,
+    .highlight .chroma .s2,
+    .highlight .chroma .si,
+    .highlight .chroma .sx,
+    .highlight .chroma .s1,
+    .highlight .chroma .ss {
+        color: #a5d6ff;
+    }
+
+    .highlight .chroma .c,
+    .highlight .chroma .ch,
+    .highlight .chroma .cm,
+    .highlight .chroma .c1 {
+        color: #8b949e;
+        font-style: italic;
+    }
+
+    .highlight .chroma .cs,
+    .highlight .chroma .cp,
+    .highlight .chroma .cpf {
+        color: #8b949e;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .highlight .chroma .gd {
+        color: #ffa198;
+        background-color: #490202;
+    }
+
+    .highlight .chroma .gr {
+        color: #ffa198;
+    }
+
+    .highlight .chroma .gi {
+        color: #56d364;
+        background-color: #0f5323;
+    }
+
+    .highlight .chroma .go,
+    .highlight .chroma .gp {
+        color: #8b949e;
+    }
+
+    .highlight .chroma .ge {
+        font-style: italic;
+    }
+
+    .highlight .chroma .gs {
+        font-weight: bold;
+    }
+
+    .highlight .chroma .gl {
+        text-decoration: underline;
+    }
+
+    .highlight .chroma .w {
+        color: #6e7681;
+    }
+}
+
+:root[data-theme="dark"] {
+    @include chroma-dark-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        @include chroma-dark-theme;
+    }
+}

@@ -40,8 +40,8 @@ term = [ "HTML" ]
     lineNoStart = 1
     lineNos = true
     lineNumbersInTable = true
-    noClasses = true
-    style = "manni"
+    noClasses = false
+    style = "github"
     tabWidth = 4
 
   [markup.goldmark]
