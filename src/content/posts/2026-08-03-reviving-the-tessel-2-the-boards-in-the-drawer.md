@@ -89,7 +89,23 @@ from the live hardware. Rewrite in your voice, but the facts are checked:
 
 ONE DETAIL WORTH PLANTING HERE, because it detonates in post 8: the MT7620n
 has NO FLOATING POINT UNIT. Drop it as a throwaway spec line now and don't
-explain it. Post 8 is "making JavaScript run on a CPU with no FPU".
+explain it — one clause in a list of specs, no signposting.
+
+  Note to future self on why this is the fuse. The payoff in post 8 is NOT
+  "no FPU is hard". It's better than that: the JavaScript runtime only ever
+  worked because the KERNEL WAS FAKING THE FPU, and modern kernels stopped
+  doing it. The factory node 4.2.1 is o32 HARD-float — floating-point
+  instructions, on a chip with no floating-point unit — and it ran fine for
+  a decade because the 15.05 kernel had FP emulation compiled in, quietly
+  trapping and emulating every one of them. Modern OpenWrt kernels ship
+  `# CONFIG_MIPS_FP_SUPPORT is not set` (their own userspace is soft-float,
+  so they don't need it), and the moment the board moved to one, node died
+  with SIGILL. The trap: building a soft-float node doesn't save you either,
+  because V8's JIT emits FPU instructions at runtime regardless of the ABI
+  the binary was compiled with — hard-float 4.2.1 and a purpose-built
+  soft-float 8.11.3 both died the same way. That's a "the thing you depended
+  on was an undocumented kindness" story, and it's worth eleven posts of
+  patience. Verified: build/openwrt-incremental/build.sh:113-121, :232.
 -->
 
 <!-- AARON: what drew you to it at the time? The JS story, the modules, something else? -->
@@ -146,9 +162,13 @@ specific decay is the hook for eleven more posts.
 These are all verified against the live boards and the project's own docs.
 Use them as a short list, not a wall of text — each one is a post later:
 
-- The board still boots. It has always still booted. It runs OpenWrt 15.05
-  "Chaos Calmer", released in 2015, on Linux kernel 3.18. That's the
-  firmware it shipped with and it has no patch stream behind it any more.
+- The board still boots. It has always still booted. It runs OpenWrt
+  Chaos Calmer **15.05-rc2** — a *release candidate*, from 2015, on Linux
+  kernel 3.18. That's the firmware it shipped with, it was never moved off
+  it, and its package feed is pinned to
+  `http://downloads.openwrt.org/chaos_calmer/15.05-rc2/…` — plaintext, and
+  gone. The boards are pointed at a package feed for a pre-release that
+  stopped existing years ago.
 - The JavaScript runtime on the board is Node 4.2.1, built against uClibc.
   Node 4 went end-of-life in 2018. Everything you'd want to npm install
   today assumes a runtime at least three major versions newer.
@@ -157,6 +177,11 @@ Use them as a short list, not a wall of text — each one is a post later:
   Node it does not install. Step zero fails. (That's post 3.)
 - `t2 update`, the built-in "get the latest firmware" command, points at an
   update feed that isn't there any more. It 404s.
+  <!-- Keep this in the past/original-state tense. There IS a working feed
+       now (releases/builds.json, v25.12.5-node8-r5), but the repo is
+       private so it 404s for everyone except Aaron. The statement above
+       describes the state he found the boards in, which is accurate and
+       unaffected. Post 10 is where the feed gets built. -->
 - I'm on Windows, which turns a USB-and-mDNS problem into a harder
   USB-and-mDNS problem. (Post 2 lays out that constraint; post 9 is where
   it gets expensive.)
@@ -180,7 +205,7 @@ INTENT: ~200 words. Set expectations, then get out.
 
 Where it ends up (all verified, safe to state):
 - The boards now run OpenWrt 25.12 on kernel 6.12 — ten years and eight
-  releases up from where they started.
+  upgrade hops on from 15.05-rc2 and kernel 3.18.
 - They run JavaScript again, on a CPU with no floating point unit, which
   took more doing than it sounds.
 - They join WiFi, they're discoverable, and the CLI works from Windows.
@@ -195,11 +220,11 @@ Tone to set:
   wasn't. That's most of the value.
 - Every technical claim in it was run on real hardware.
 
-AARON DECISION: do you want to list the twelve posts here as a roadmap, or
-let the theme's generated series list do that work? The theme already
-renders the full series list on every post, so a manual roadmap may be
-redundant — but it does help the first post stand alone if someone lands
-on it cold.
+RECOMMENDATION (agreed across both sessions): let the theme's generated
+series list do the roadmap. It already renders the full series on every
+post, and a hand-maintained list of twelve here will drift as the series
+shifts. If you want post 1 to stand alone for someone landing on it cold,
+one sentence naming the arc beats a numbered list.
 -->
 
 ## The part I'll argue properly at the end
@@ -229,10 +254,10 @@ Keep it honest and small here:
 - Resist the urge to pre-empt the objections. Post 12 handles them, and it
   handles them better because it can point at real transcripts.
 
-AARON: your call on how strongly to pitch this in post 1. Options are
-roughly "one paragraph, stated flat" or "a short section that names the
-bet". Recommendation: one paragraph, stated flat — understating it here
-makes post 12 land harder.
+RECOMMENDATION (agreed across both sessions): one paragraph, stated flat.
+Understating the claim here makes post 12 land harder. Overselling it in
+post 1 invites the reader to start arguing before they've seen any
+evidence, and the evidence is the whole point.
 -->
 
 <!--
