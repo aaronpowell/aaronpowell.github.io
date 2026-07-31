@@ -76,7 +76,7 @@ The whole OS is a squashfs image of about 4.3 MB, which is a genuinely impressiv
 
 <!-- AARON: every github.com/aaronpowell/... link in this post 404s until the repos are public. Confirm before publishing. -->
 
-There's a detail in the [build config](https://github.com/aaronpowell/openwrt-tessel/blob/master/config.mk) I keep coming back to. The image is built with its opkg package feed pinned to `http://downloads.openwrt.org/chaos_calmer/15.05-rc2/%S/packages`. Plaintext HTTP, and a feed for a release candidate that stopped existing years ago. So the boards were shipped pointing at a package repository that was always going to disappear, over a protocol that couldn't tell if it had been tampered with.
+There's a detail in the [build config](https://github.com/aaronpowell/openwrt-tessel/blob/d81c023d18e85bc3ea36b379c7dbb46d12c256ae/config.mk#L77) I keep coming back to. The image is built with its opkg package feed pinned to `http://downloads.openwrt.org/chaos_calmer/15.05-rc2/%S/packages`. Plaintext HTTP, and a feed for a release candidate that stopped existing years ago. So the boards were shipped pointing at a package repository that was always going to disappear, over a protocol that couldn't tell if it had been tampered with.
 
 None of this was negligence, to be clear. It was 2015, the project was moving fast, and shipping on `rc2` with a feed pinned to `rc2` is an entirely normal thing to do when you fully intend to ship `rc3` next month. The problem isn't the decision, it's that nobody ever got to make the next one.
 
@@ -98,7 +98,7 @@ Here's what you actually need to have read to understand a Tessel 2:
 - **[`t2-build`](https://github.com/aaronpowell/t2-build)** - the build environment, a Docker image based on Ubuntu Bionic, which is itself out of support now.
 - **[`t2-release`](https://github.com/aaronpowell/t2-release)** - the release plumbing that assembles and publishes images.
 
-That's seven, before you get to the module libraries, the hardware repo with the KiCad files, and the docs site source. And they're at different ages, they overlap, and in a few places they disagree with each other. The `openwrt` fork calls its base Barrier Breaker, from around 2014. The image it produces reports itself as Chaos Calmer 15.05-rc2. Both statements are true and it takes a while to work out why.
+That's seven, before you get to the module libraries, the hardware repo with the KiCad files, and the docs site source. And they're at different ages, they overlap, and in a few places they flatly disagree with each other - including, as I'll come back to at the end, about which version of OpenWrt this actually is.
 
 This is what I meant last post about the information not being gone. It isn't gone. It's just that "not gone" and "usable" are very different things, and the gap between them is a weekend of reading.
 
@@ -112,7 +112,7 @@ The obvious answer is WSL2, except WSL doesn't get USB devices for free. You nee
 
 And there's a third option that I rejected immediately and want to be explicit about: I could have just used a Linux box. I've got one. It would have worked. But the entire reason these boards sat in a drawer for six years is that the toolchain didn't work on the machine I actually use, and "solve that by using a different machine" isn't solving it, it's agreeing with it.
 
-Even the repos fight Windows. The OpenWrt fork carried 348 USB modem descriptor files whose names contain colons - things like `0421:03a7`. NTFS won't have a bar of that, so the repository simply cannot be cloned on Windows. Not "builds with warnings". Cannot be checked out.
+Even the repos fight Windows. The OpenWrt fork carried 348 USB modem descriptor files whose names contain colons - things like `0421:03a7`. NTFS won't have a bar of that, so a direct `git clone` on Windows doesn't build with warnings, it just fails to check out. There's a documented way around it - the Docker build clones the repo inside a Linux container volume where NTFS never sees the filenames - but "the repository cannot exist on your filesystem" is a fairly memorable thing to learn about a project you're trying to revive.
 
 ## What "modern" would have to mean
 
@@ -131,7 +131,13 @@ Here's the part that matters, and I want to be careful about the claim because t
 
 The tempting story is "the documentation was lost and AI recovered it." That's not what happened, and I said as much at the end of the last post. The information was all there. Seven repos, a docs site that mostly still resolves, source for everything.
 
-What AI actually did was _reconcile_ it. Seven repos' worth of partial, overlapping, differently-aged descriptions of the same device, some of them stale, at least two of them contradicting each other on something as basic as which OpenWrt release this is - checked against what the live board actually reported when you asked it. That's the job. It isn't retrieval, it's resolution, and it's the kind of tedious cross-referencing work that I would simply never have done on a Tuesday night.
+What AI actually did was _reconcile_ it. Seven repos' worth of partial, overlapping, differently-aged descriptions of the same device, some of them stale, some of them contradicting each other - all checked against what the live board actually reported when you asked it. That's the job. It isn't retrieval, it's resolution, and it's the kind of tedious cross-referencing work that I would simply never have done on a Tuesday night.
+
+Here's the concrete one I promised. Two documents in my own repo disagreed about which OpenWrt release these boards were even running. [One](https://github.com/aaronpowell/tessel-2-revive/blob/bf5ae1081b3c08818d9cd9bf1372c5f84af5249e/docs/how-it-works.md#L54) said Barrier Breaker, around 2014. [The other](https://github.com/aaronpowell/tessel-2-revive/blob/bf5ae1081b3c08818d9cd9bf1372c5f84af5249e/docs/repos.md#L169) said Chaos Calmer 15.05-rc2, 2015. No document anywhere answers it, because the answer isn't written down in prose - it's a consequence.
+
+Settling it meant going to the board port, following its `openwrt` submodule to the exact commit it pins - `c61b3d8`, dated 17 July 2018 - and reading [`include/version.mk`](https://github.com/tessel/openwrt/blob/c61b3d89a56bbf4209dea75432f506e9dc66d55b/include/version.mk) as it stood at _that_ commit, where the version defaults are `15.05.1` and `Chaos Calmer`. So it's Chaos Calmer. One of my two documents was just wrong.
+
+Which is the bit I'd rather not have to write, so I'll write it plainly: those were _my_ documents. Not 2015 material - notes from this project, weeks old. Both links above are pinned to a specific commit because the wrong one has since been fixed, and if I'd pointed them at the current branch this paragraph would quietly stop making sense. Rot isn't a property of old things. It's a property of having several documents about one thing, and it starts the moment you write the second one.
 
 The [architecture document](https://github.com/aaronpowell/tessel-2-revive/blob/main/docs/architecture.md) I've been quoting from throughout this post didn't exist before this project. It got written by reading all seven repos and probing a running board, and then I went through it and checked it. Some of it was wrong and got corrected - you'll see a decent example of that later in the series where a confident conclusion turned out to be backwards.
 
