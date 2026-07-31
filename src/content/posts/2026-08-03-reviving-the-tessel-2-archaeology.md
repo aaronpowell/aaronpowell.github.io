@@ -74,8 +74,6 @@ So what's the actual stack? From the bottom:
 
 The whole OS is a squashfs image of about 4.3 MB, which is a genuinely impressive bit of engineering and also the source of a lot of constraints later on.
 
-<!-- AARON: every github.com/aaronpowell/... link in this post 404s until the repos are public. Confirm before publishing. -->
-
 There's a detail in the [build config](https://github.com/aaronpowell/openwrt-tessel/blob/d81c023d18e85bc3ea36b379c7dbb46d12c256ae/config.mk#L77) I keep coming back to. The image is built with its opkg package feed pinned to `http://downloads.openwrt.org/chaos_calmer/15.05-rc2/%S/packages`. Plaintext HTTP, and a feed for a release candidate that stopped existing years ago. So the boards were shipped pointing at a package repository that was always going to disappear, over a protocol that couldn't tell if it had been tampered with.
 
 None of this was negligence, to be clear. It was 2015, the project was moving fast, and shipping on `rc2` with a feed pinned to `rc2` is an entirely normal thing to do when you fully intend to ship `rc3` next month. The problem isn't the decision, it's that nobody ever got to make the next one.
@@ -132,6 +130,8 @@ Here's the part that matters, and I want to be careful about the claim because t
 The tempting story is "the documentation was lost and AI recovered it." That's not what happened, and I said as much at the end of the last post. The information was all there. Seven repos, a docs site that mostly still resolves, source for everything.
 
 What AI actually did was _reconcile_ it. Seven repos' worth of partial, overlapping, differently-aged descriptions of the same device, some of them stale, some of them contradicting each other - all checked against what the live board actually reported when you asked it. That's the job. It isn't retrieval, it's resolution, and it's the kind of tedious cross-referencing work that I would simply never have done on a Tuesday night.
+
+<!-- AARON: the only links in this post that don't work yet are the three pointing at the tessel-2-revive repo - how-it-works.md and gaps-and-risks.md just below, and architecture.md further down. They all clear the moment that one repo goes public; there's nothing to check link by link. Everything else, including the seven fork links and the two evidence permalinks, is already live - verified anonymously, logged out. -->
 
 Here's the concrete one I promised. Two documents in my own repo disagreed about which OpenWrt release these boards were even running. [One](https://github.com/aaronpowell/tessel-2-revive/blob/bf5ae1081b3c08818d9cd9bf1372c5f84af5249e/docs/how-it-works.md#L54) said Barrier Breaker, around 2014. [The other](https://github.com/aaronpowell/tessel-2-revive/blob/bf5ae1081b3c08818d9cd9bf1372c5f84af5249e/docs/gaps-and-risks.md#L257) said Chaos Calmer 15.05-rc2, 2015. No document anywhere answers it, because the answer isn't written down in prose - it's a consequence.
 
