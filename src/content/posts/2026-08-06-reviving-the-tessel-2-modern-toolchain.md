@@ -47,13 +47,13 @@ This stretch of work is the exception. The session that did the modernisation is
 
 ## Replaced, patched, deleted, left alone
 
-The commit that does the work is [`9aa80f4`](https://github.com/aaronpowell/t2-cli/commit/9aa80f400594f2903b23693b38e5982d7bb7a155), and it touches 18 files. It breaks down into four kinds of change, and I think the four categories are more interesting than the diff.
+The commit that does most of the work is [`9aa80f4`](https://github.com/aaronpowell/t2-cli/commit/9aa80f400594f2903b23693b38e5982d7bb7a155), which touches 18 files, with a follow-up the next day in [`1b399db`](https://github.com/aaronpowell/t2-cli/commit/1b399db6107abec5c4c7aad5c0654ba04a90e433) that dealt with the `usb` package specifically. Between them it breaks down into four kinds of change, and I think the four categories are more interesting than the diff.
 
 **Replaced.** Every one of those dead hostnames became a configurable URL with a sensible default. Firmware builds now come from GitHub Releases via a `builds.json` manifest, and there are environment variables (`T2_ARTIFACT_REPOSITORY`, `T2_RELEASES_BASE_URL`, and friends) for anyone who wants to point it somewhere else. Nothing clever, but it's the difference between a tool that can fetch a firmware image and one that can't.
 
 There's a small piece of continuity here that made me smile. The build referenced in that manifest is pinned to commit `c61b3d89`, which is the exact same commit I spent the last post chasing through seven repositories to work out which OpenWrt version these boards were actually built from.
 
-**Patched.** The `usb` package changed its public shape between major versions - what used to be the module itself moved to a property on it. So there's a line that reads `var usb = rawUsb.usb || rawUsb`, which is not beautiful but works against both. There's stream handling to suit modern Node, and connection state tracking so a closed connection stops trying to read from itself.
+**Patched.** The `usb` package changed its public shape between major versions - what used to be the module itself moved to a property on it. That's the follow-up commit, and the fix is [a line that reads `var usb = rawUsb.usb || rawUsb`](https://github.com/aaronpowell/t2-cli/blob/1b399db6107abec5c4c7aad5c0654ba04a90e433/lib/usb-connection.js#L31), which is not beautiful but works against both. Back in the main commit there's stream handling to suit modern Node, and connection state tracking so a closed connection stops trying to read from itself.
 
 **Deleted.** This is the category I didn't expect to need. The `postinstall` script used to run two things; now it runs one:
 
@@ -76,7 +76,7 @@ With the tool running, the remaining problems were all about the host, and they 
 
 **`LIBUSB_TRANSFER_STALL` usually means "wait".** A freshly restarted board takes about a minute before it answers on USB, and until then this is what you get. It looks exactly like a flash failure. It isn't one, and I burned real time treating it as one before [writing it down](https://github.com/aaronpowell/tessel-2-revive/blob/95ddae903f22490fb97b4a16092bf79fe5cdd6c0/docs/getting-started.md).
 
-**And the one I'm most embarrassed by.** Several `t2` commands stream output and never exit on their own. Run one through a PowerShell pipeline and the pipeline buffers, so you get a command that has printed nothing and won't return - which looks precisely like a hang. It wasn't hanging. It was working perfectly and I couldn't see it. The fix is to redirect to a file and read the file, and I lost an hour to a program that was doing exactly what I asked.
+**And the one I'm most embarrassed by.** Several `t2` commands stream output and never exit on their own. Run one through a PowerShell pipeline and the pipeline buffers, so you get a command that has printed nothing and won't return - which looks precisely like a hang. It wasn't hanging. It was working perfectly and I couldn't see it. The fix is to redirect to a file and read the file, and I lost the better part of an evening to a program that was doing exactly what I asked.
 
 That last one is the sort of thing that never makes it into anyone's documentation, because once you know it it feels too obvious to write down.
 
