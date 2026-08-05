@@ -10,21 +10,11 @@ series = "tessel-revival"
 series_title = "Getting the Old Tooling to Run Again"
 +++
 
-At the end of [the last post]({{< ref "/posts/2026-08-03-reviving-the-tessel-2-archaeology.md" >}}) I said the next question was whether I could talk to these boards at all. So I plugged one in, ran the Tessel command line tool, and got this:
-
-```
-Cannot find module 'nomnom'
-```
-
-That's the whole result of my first attempt. Not a USB error, not a board that wouldn't answer, not a firmware problem. The tool didn't start.
-
-`nomnom` is an argument parser. It was deprecated years ago and it's the very first thing `t2-cli` reaches for, which means the tool falls over before it has parsed a single flag, let alone gone looking for hardware. And the fix was completely mundane - the dependencies simply weren't installed in my checkout. I ran `npm install`, it pulled down 884 packages, and it worked fine.
-
-I want to be honest that this is where I expected the story to be interesting and it wasn't. There's a version of this post where the install itself explodes in a shower of native compilation errors, and that would make a better anecdote. It just didn't happen. What happened instead is that the install succeeded and _then_ I started reading what it had installed.
+At the end of [the last post]({{< ref "/posts/2026-08-03-reviving-the-tessel-2-archaeology.md" >}}) I said the next question was whether I could talk to these boards at all. The answer turned out to have almost nothing to do with the boards.
 
 ## Four addresses that don't exist anymore
 
-Here's the file that changed my mind about how big this was going to be. This is [`lib/remote.js`](https://github.com/aaronpowell/t2-cli/blob/f52a5e143c4a6b3ffccb3b26e3e1c6ff35dab4ca/lib/remote.js) as it shipped:
+Here are four lines from [`lib/remote.js`](https://github.com/aaronpowell/t2-cli/blob/f52a5e143c4a6b3ffccb3b26e3e1c6ff35dab4ca/lib/remote.js) in the Tessel command line tool, as it shipped:
 
 ```js
 CRASH_REPORTER_HOSTNAME: 'crash-reporter.tessel.io',
@@ -33,11 +23,13 @@ PACKAGES_HOSTNAME: 'packages.tessel.io',
 RUSTCC_HOSTNAME: 'rustcc.tessel.io',
 ```
 
-Four hostnames, hard-coded. Firmware builds, the package feed, the Rust cross-compiler service, and crash reporting. I looked all four up. Every one of them is NXDOMAIN - not "returns an error", not "times out", simply no such name.
+Four hostnames, hard-coded. Firmware builds, the package feed, the Rust cross-compiler service, and crash reporting. Every one of them is NXDOMAIN today - not "returns an error", not "times out", simply no such name. There's nothing at the other end left to answer.
 
 The part I find genuinely poignant is that `tessel.io` itself still resolves. The apex outlived every single service underneath it.
 
-That reframed the problem for me. I'd been thinking of `t2-cli` as old software, and old software you can usually coax into running. But this wasn't a tool that was merely out of date. It was a tool with a set of assumptions baked into it about a company that no longer exists, and roughly half of what it wanted to do was reach out to machines that had been switched off years ago.
+That's the shape of the whole problem, in four lines of a constants file. I'd been thinking of `t2-cli` as old software, and old software you can usually coax into running. But this isn't a tool that's merely out of date. It's a tool with a set of assumptions baked into it about a company that no longer exists, and roughly half of what it wants to do is reach out to machines that were switched off years ago.
+
+So this post is about getting that tool working again on a current machine - and the part I didn't expect going in is that none of it touches the hardware. Not one byte changed on a board.
 
 ## A note on where this one comes from
 
@@ -90,7 +82,7 @@ Which means the answer to the question I ended the last post on is: the boards w
 
 ## Where the AI came in
 
-Dependency archaeology is genuinely miserable work. It's wide rather than deep - hundreds of packages, each needing a small judgement about whether it's fine, deprecated, moved, or a security problem - and there's no insight at the end of it, just a tool that starts. It's exactly the kind of task I would have abandoned on a hobby project, not because it's hard but because it's boring and there's no reward until _all_ of it is done.
+Dependency archaeology is genuinely miserable work. It's wide rather than deep - `npm install` pulls down 884 packages, and the very first thing the CLI reaches for is an argument parser called `nomnom` that was deprecated years ago. Each one needs a small judgement about whether it's fine, deprecated, moved, or a security problem, and there's no insight at the end of it, just a tool that starts. It's exactly the kind of task I would have abandoned on a hobby project, not because it's hard but because it's boring and there's no reward until _all_ of it is done.
 
 It's also the first appearance of the loop that ended up running this entire project: the agent proposes a change, runs the command itself, real hardware answers, and it adjusts based on what actually came back rather than what should have happened. Having something that will patiently do the tedious middle bit is what kept this alive past the first evening.
 
