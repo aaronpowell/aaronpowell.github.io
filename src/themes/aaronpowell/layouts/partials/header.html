@@ -42,11 +42,11 @@
                 {{ end }}
                 <li class="nav__item nav__item--search">
                     {{ if hugo.IsServer }}
-                    <form id="site-search" class="nav__search nav__dev-search">
+                    <div id="site-search" class="nav__search nav__dev-search">
                         <label class="visually-hidden" for="site-search-input">Search</label>
                         <input id="site-search-input" class="nav__search-input" type="search" placeholder="Search" autocomplete="off" />
                         <div id="site-search-results" class="nav__search-results" aria-live="polite"></div>
-                    </form>
+                    </div>
                     {{ else }}
                     <div id="site-search" class="nav__search">
                         <a class="nav__search-fallback" href="{{ "search" | relURL }}">Search</a>

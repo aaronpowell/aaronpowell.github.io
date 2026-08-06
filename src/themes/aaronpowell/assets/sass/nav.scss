@@ -231,12 +231,6 @@
     box-shadow: var(--shadow-soft, 0 20px 40px -30px rgba(15, 23, 42, 0.7));
 }
 
-.nav__search-results {
-    position: static;
-    width: 100%;
-    max-height: 24rem;
-}
-
 .nav__search .pagefind-ui__result-link,
 .nav__search .pagefind-ui__result-excerpt {
     color: var(--color-text-primary, #{$primaryTextColour});
@@ -399,6 +393,12 @@
     }
 
     .nav__search .pagefind-ui__drawer {
+        position: static;
+        width: 100%;
+        max-height: 24rem;
+    }
+
+    .nav__search-results {
         position: static;
         width: 100%;
         max-height: 24rem;
