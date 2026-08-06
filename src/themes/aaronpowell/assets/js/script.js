@@ -78,27 +78,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 copied.classList.add("copied");
                 copied.innerHTML = "✔";
 
-                const pre = codeBlock.parentNode;
-                if (pre.parentNode.classList.contains("highlight")) {
-                    const highlight = pre.parentNode;
-                    highlight.parentNode.insertBefore(button, highlight);
-                    highlight.parentNode.insertBefore(copied, highlight);
-                } else {
-                    pre.parentNode.insertBefore(button, pre);
-                    pre.parentNode.insertBefore(copied, pre);
-                }
+                const pre = codeBlock.parentElement;
+                const codeContainer = codeBlock.closest(".highlight") || pre;
+                codeContainer.parentNode.insertBefore(button, codeContainer);
+                codeContainer.parentNode.insertBefore(copied, codeContainer);
             });
     }
 
     function setupCopyBlock() {
         const copy = document.querySelectorAll(".copy");
         const handleCopy = async (e) => {
-            const item = e.target;
+            const item = e.currentTarget;
             const target = document.querySelector(item.dataset["target"]);
             await window.navigator.clipboard.writeText(
                 target.innerText.replace("\n\n", "\n")
             );
-            const copied = item.parentElement.querySelector(".copied");
+            const copied = item.nextElementSibling;
             copied.style.display = "inline";
             setTimeout(() => {
                 copied.style.display = "none";
@@ -273,6 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 sib.style.display = "none";
             }
         });
+
     }
 });
-
