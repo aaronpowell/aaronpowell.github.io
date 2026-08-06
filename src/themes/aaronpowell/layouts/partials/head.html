@@ -62,6 +62,9 @@
     rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
 
     <link rel="icon" href="{{ .Site.Params.favicon | absURL }}" />
+    {{ if not hugo.IsServer }}
+    <link href="{{ "pagefind/pagefind-ui.css" | absURL }}" rel="stylesheet" />
+    {{ end }}
     {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" true) }}
     {{ $style := resources.Get "sass/main.scss" | css.Sass $options }}
     <link
@@ -71,4 +74,3 @@
         media="screen"
     />
 </head>
-

@@ -1,1 +1,1 @@
-hugo.exe --source "%cd%\src"  --destination "%cd%\.output" %*
+hugo.exe --source "%cd%\src" --destination "%cd%\.output" %* && npx --yes pagefind@1.4.0 --site "%cd%\.output"
