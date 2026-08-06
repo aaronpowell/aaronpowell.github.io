@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(1.25rem, 4vw, 2.5rem);
+    gap: 0.75rem;
     position: relative;
 }
 
@@ -116,7 +116,10 @@
 .nav__list {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 2.2vw, 1.75rem);
+    justify-content: flex-end;
+    flex: 1;
+    min-width: 0;
+    gap: clamp(0.7rem, 1.2vw, 1rem);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -127,8 +130,12 @@
 }
 
 .nav__search {
-    width: 220px;
+    width: 175px;
     max-width: 100%;
+}
+
+.nav__item--search {
+    align-items: center;
 }
 
 .visually-hidden {
@@ -204,11 +211,15 @@
 }
 
 .nav__search .pagefind-ui__search-input {
+    box-sizing: border-box;
+    height: 2.35rem;
     min-height: 2.35rem;
+    padding: 0.35rem 2.75rem;
     border-radius: 999px;
     border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.35));
     background: var(--surface-elevated, rgba(15, 23, 42, 0.55));
     color: var(--nav-link, rgba(226, 232, 240, 0.85));
+    line-height: 1.2;
 }
 
 .nav__search .pagefind-ui__search-clear {
@@ -345,6 +356,7 @@
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
     padding-right: 2rem;
+    width: 115px;
 }
 
 .nav__font-picker-select:hover,
@@ -359,7 +371,7 @@
     color: var(--color-text-primary, #{$primaryTextColour});
 }
 
-@media (max-width: $wide) {
+@media (max-width: 1400px) {
     .nav__toggle {
         display: inline-flex;
     }

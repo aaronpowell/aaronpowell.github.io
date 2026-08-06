@@ -52,9 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         window
-            .matchMedia("(min-width: 992px)")
-            .addEventListener("change", () => {
-                closeMenu();
+            .matchMedia("(max-width: 1400px)")
+            .addEventListener("change", (event) => {
+                if (!event.matches) {
+                    closeMenu();
+                }
             });
     }
 
