@@ -28,10 +28,6 @@ term = [ "HTML" ]
         name    = "Talks"
         url     = "talks"
         weight  = 4
-    [[menu.nav]]
-        name    = "Search"
-        url     = "search"
-        weight  = 5
 
 [markup]
   [markup.highlight]

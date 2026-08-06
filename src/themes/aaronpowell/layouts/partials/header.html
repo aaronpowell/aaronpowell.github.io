@@ -1,5 +1,5 @@
 {{ $root := . }}
-<header class="site-header">
+<header class="site-header" data-pagefind-ignore>
     <div class="container">
         <nav class="nav" aria-label="Primary navigation">
             <a class="nav__brand" href="{{ $root.Site.BaseURL }}">
@@ -40,6 +40,19 @@
                     >
                 </li>
                 {{ end }}
+                <li class="nav__item nav__item--search">
+                    {{ if hugo.IsServer }}
+                    <div id="site-search" class="nav__search nav__dev-search">
+                        <label class="visually-hidden" for="site-search-input">Search</label>
+                        <input id="site-search-input" class="nav__search-input" type="search" placeholder="Search" autocomplete="off" />
+                        <div id="site-search-results" class="nav__search-results" aria-live="polite"></div>
+                    </div>
+                    {{ else }}
+                    <div id="site-search" class="nav__search">
+                        <a class="nav__search-fallback" href="{{ "search" | relURL }}">Search</a>
+                    </div>
+                    {{ end }}
+                </li>
                 <li class="nav__item nav__item--action">
                     <button
                         class="nav__theme-toggle"
@@ -76,3 +89,59 @@
         </nav>
     </div>
 </header>
+{{ if not hugo.IsServer }}
+<script src="{{ "pagefind/pagefind-ui.js" | absURL }}"></script>
+<script>
+    if (window.PagefindUI) {
+        new PagefindUI({ element: "#site-search", showImages: false });
+        document.querySelector(".nav__search-fallback").hidden = true;
+    }
+</script>
+{{ else }}
+<script>
+    const devSearchInput = document.querySelector("#site-search-input");
+    const devSearchResults = document.querySelector("#site-search-results");
+
+    fetch("{{ "index.json" | relURL }}")
+        .then(response => response.json())
+        .then(data => {
+            const posts = data.posts || [];
+            devSearchInput.addEventListener("input", () => {
+                const term = devSearchInput.value.trim().toLowerCase();
+                devSearchResults.replaceChildren();
+
+                if (!term) {
+                    return;
+                }
+
+                posts
+                    .filter(post => [post.title, post.description, post.content, ...(post.tags || [])]
+                        .join(" ")
+                        .toLowerCase()
+                        .includes(term))
+                    .slice(0, 8)
+                    .forEach(post => {
+                        const result = document.createElement("a");
+                        result.className = "nav__search-result";
+                        result.href = post.url;
+
+                        const title = document.createElement("strong");
+                        title.textContent = post.title;
+                        result.append(title);
+
+                        if (post.description) {
+                            const description = document.createElement("span");
+                            description.textContent = post.description;
+                            result.append(description);
+                        }
+
+                        devSearchResults.append(result);
+                    });
+            });
+        })
+        .catch(() => {
+            devSearchInput.disabled = true;
+            devSearchInput.placeholder = "Search unavailable";
+        });
+</script>
+{{ end }}
