@@ -2,7 +2,7 @@
 title = "Reviving the Tessel 2 - Getting the Old Tooling to Run Again"
 date = 2026-08-06T10:30:00+10:00
 description = "Before I could talk to a Tessel 2 I had to get a command line tool from 2015 running on a 2026 machine, which turned out to be a bigger project than I expected and didn't touch the hardware at all."
-draft = true
+draft = false
 tags = ["iot", "tessel", "ai"]
 tracking_area = "javascript"
 tracking_id = ""
@@ -120,11 +120,9 @@ There's a small piece of continuity here that made me smile. The build reference
 + "postinstall": "t2 install homedir --loglevel=error || true;"
 ```
 
-Installing USB drivers automatically on every install made sense in 2015. In 2026, on a machine where I'd already sorted out USB access myself, it was a step that could only fail or do damage. It's still there as an explicit `t2 install drivers` if you want it. It just doesn't happen behind your back anymore. The same instinct applies to the crash reporter, which now checks whether it's actually configured and whether anyone's watching before it decides to block on a prompt.
+Installing USB drivers automatically on every install made sense in 2015, but today, we don't need a custom driver to be installed, so this step would either do nothing or fail. I left those commands in the CLI if you want/need them, but I haven't used them so I don't know if they'll still work.
 
-**Left alone.** This is the important one and it's invisible in a diff. The temptation with a codebase this old is to modernise all of it - it's all `var` and callbacks and a promise library that predates promises being built in. I didn't touch any of that. The goal was a CLI that works, not a CLI I'd have written today, and every line changed for style is a line that can break something I have no test coverage for.
-
-The one number that captures the scale of it: `package.json` moved its engine floor from `"node": ">=4.2.0"` to [`">=20"`](https://github.com/aaronpowell/t2-cli/blob/9aa80f400594f2903b23693b38e5982d7bb7a155/package.json), and `package-lock.json` gained 9,329 lines and lost 6,558. Two lines of intent, fifteen thousand lines of consequence.
+**Left alone.** This is the important one and it's invisible in a diff. The temptation with a codebase this old is to modernise all of it - it's all `var` and callbacks and a promise library that predates promises being built in. I didn't touch any of that. The goal was a CLI that works, not a CLI I'd have written today, and every line changed for style is a line that can break something I have no test coverage for. Maybe in the future I'll revisit it and modernise the JavaScript, but that's a yak to be shaved another day.
 
 ## The Windows tax
 
@@ -134,7 +132,7 @@ With the tool running, the remaining problems were all about the host, and they 
 
 **`LIBUSB_TRANSFER_STALL` usually means "wait".** A freshly restarted board takes about a minute before it answers on USB, and until then this is what you get. It looks exactly like a flash failure. It isn't one, and I burned real time treating it as one before [writing it down](https://github.com/aaronpowell/tessel-2-revive/blob/95ddae903f22490fb97b4a16092bf79fe5cdd6c0/docs/getting-started.md).
 
-**And the one I'm most embarrassed by.** Several `t2` commands stream output and never exit on their own. Run one through a PowerShell pipeline and the pipeline buffers, so you get a command that has printed nothing and won't return - which looks precisely like a hang. It wasn't hanging. It was working perfectly and I couldn't see it. The fix is to redirect to a file and read the file, and I lost the better part of an evening to a program that was doing exactly what I asked.
+**Dealing with output.** While the CLI is scanning it runs a spinner, the little `-`, `\`, `|`, `/` cycle you've seen in a hundred command line tools. On a terminal that's fine, it's exactly what it's for. The problem is what it does when nobody's watching. It writes a character to stderr every 50 milliseconds, and it checks whether it's attached to a terminal only to decide _which_ carriage return to send - an ANSI cursor move if it is, a plain `\r` if it isn't. It never checks whether it should just be quiet. So redirecting to a file doesn't turn it off, it fills the file: a five second scan lands about a hundred `-\|/` characters and a hundred carriage returns wrapped around the one line I actually wanted. Driving all this from an agent, where the streams get merged and read back as plain text, that turns into a lot of noise around not much signal. The fix was mundane - capture to a file, put a timeout on the run, and teach the agent to throw the spinner characters away before it tried to read anything.
 
 That last one is the sort of thing that never makes it into anyone's documentation, because once you know it it feels too obvious to write down.
 
@@ -142,7 +140,7 @@ That last one is the sort of thing that never makes it into anyone's documentati
 
 Once all of that was true at the same time, I could run `t2 list`, `t2 version`, `t2 provision` and `t2 run` against a board, and get a JavaScript file to execute on it and stream its output back to me.
 
-The thing worth saying clearly: **those boards were completely unmodified.** Factory firmware, factory Node, nothing flashed, nothing upgraded. The whole of this phase happened on my laptop.
+The thing worth saying clearly: **those boards were completely unmodified.** Factory firmware, factory Node, nothing flashed, nothing upgraded. The whole of this phase happened on my current machines.
 
 Which means the answer to the question I ended the last post on is: the boards were fine the entire time. They'd been sitting in a drawer working perfectly, and the reason I couldn't talk to them was sitting on my own machine.
 
@@ -156,4 +154,8 @@ It's also the first appearance of the loop that ended up running this entire pro
 
 One thing I should be clear about, because it matters later: this post is about making the CLI **install and run**. It is not about making it **correct**. There are some real bugs in how it talks to a device, and every one of them stayed hidden until I put a modern OS on a board and the old assumptions stopped holding. That's a much later post.
 
-For now the tooling works, the boards work, and they work together. Which means the next question is the one I've been circling since the start: these boards run a JavaScript runtime from 2015 on an operating system from 2015. Can I actually move that forward, and what breaks first when I try?
+For now the tooling works, the boards work, and they work together. That means we've hit our goal!
+
+![Meme book cover titled "Getting an Arduino LED to Blink" with a subtitle "And then losing interest"](/images/2026-08-06-reviving-the-tessel-2-modern-toolchain/book-meme.jpg)
+
+Jokes aside, I could have very easily just paused at this point because the goal _can the board work?_ is done, but there's still a lot of rot in this project and that's what we're going to start digging into next time.
