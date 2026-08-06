@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         window
-            .matchMedia("(min-width: 992px)")
+            .matchMedia("(min-width: 1401px)")
             .addEventListener("change", () => {
                 closeMenu();
             });
