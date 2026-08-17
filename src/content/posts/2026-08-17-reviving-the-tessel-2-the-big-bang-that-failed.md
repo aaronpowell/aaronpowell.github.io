@@ -14,7 +14,7 @@ At the end of [the last post]({{< ref "/posts/2026-08-12-reviving-the-tessel-2-w
 
 There was a current upstream release, the Tessel's MT7620 hardware still belonged to a supported OpenWrt target family, and the factory image had been without security updates for about a decade. I also had an acceptance test: the board had to boot, the Tessel bridge had to start, the CLI had to connect, JavaScript had to run, WiFi had to work, and recovery had to remain repeatable.
 
-With that decision made, there was an obvious next move - one shop upgrade to the latest OpenWrt release, that's the target, so go big or go home!
+With that decision made, there was an obvious next move — a one-shot upgrade to the latest OpenWrt release. That's the target, so go big or go home!
 
 ## Ten years in one build
 
