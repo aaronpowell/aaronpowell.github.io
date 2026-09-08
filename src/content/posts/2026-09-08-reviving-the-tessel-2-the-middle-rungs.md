@@ -1,4 +1,4 @@
-﻿+++
++++
 title = "Reviving the Tessel 2 - The Middle Rungs"
 date = 2026-09-08T10:30:00+10:00
 description = "The 18.06 and 19.07 hops carried the SPI fix forward, exposed two false-success flash paths, and found a new rootfs split panic before the 21.02 kernel boundary."
