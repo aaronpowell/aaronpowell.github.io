@@ -111,7 +111,8 @@ body {
     margin: 0;
     min-height: 100vh;
     letter-spacing: 0.01em;
-    background: radial-gradient(
+    background:
+        radial-gradient(
             circle at 0% 0%,
             var(--bg-radial-1, rgba(56, 189, 248, 0.12)),
             transparent 45%
@@ -141,7 +142,9 @@ main {
 a {
     color: var(--color-link, #{$primaryHeaderColour});
     text-decoration: none;
-    transition: color 0.2s ease, text-shadow 0.2s ease;
+    transition:
+        color 0.2s ease,
+        text-shadow 0.2s ease;
     font-weight: 500;
 }
 
@@ -268,7 +271,10 @@ section {
         var(--accent-gradient-end, #{rgba(14, 165, 233, 0.9)})
     );
     border: 1px solid transparent;
-    transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        background 0.2s ease;
     box-shadow: var(--button-shadow, 0 18px 40px -18px rgba(14, 165, 233, 0.7));
 }
 
@@ -431,7 +437,9 @@ code {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease,
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
         border-color 0.3s ease;
 }
 
@@ -529,7 +537,9 @@ code {
     padding: 0.65rem 1.2rem;
     border: 1px solid var(--pagination-border, rgba(148, 163, 184, 0.35));
     color: var(--pagination-text, rgba(226, 232, 240, 0.85));
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .pagination a:hover {
@@ -565,7 +575,10 @@ code {
     position: relative;
     padding-top: clamp(4rem, 7vw, 6rem);
     padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
-    background: radial-gradient(
+    background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.22), rgba(15, 23, 42, 0.04)),
+        var(--hero-image, none),
+        radial-gradient(
             circle at 10% -10%,
             var(--bg-radial-1, rgba(56, 189, 248, 0.22)),
             transparent 55%
@@ -579,22 +592,9 @@ code {
             160deg,
             var(--bg-gradient-start, rgba(15, 23, 42, 0.9)),
             var(--bg-gradient-end, rgba(15, 23, 42, 0.75))
-        ),
-        var(--hero-image, transparent);
+        );
     background-size: cover;
     background-position: center;
-}
-
-.page-hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        var(--hero-overlay, rgba(15, 23, 42, 0.85)),
-        transparent
-    );
-    pointer-events: none;
 }
 
 .page-hero__panel {
@@ -695,3 +695,4 @@ footer p {
         font-size: clamp(1.8rem, 6vw, 2.1rem);
     }
 }
+

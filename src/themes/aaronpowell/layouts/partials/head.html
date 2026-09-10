@@ -69,7 +69,7 @@
     {{ $style := resources.Get "sass/main.scss" | css.Sass $options }}
     <link
         rel="stylesheet"
-        href="{{ $style.Permalink }}"
+        href="{{ $style.RelPermalink }}"
         integrity="{{ $style.Data.Integrity }}"
         media="screen"
     />
