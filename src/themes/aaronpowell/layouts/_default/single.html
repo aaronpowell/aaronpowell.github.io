@@ -5,7 +5,7 @@
     {{
     if
     .Params.cover_image
-    }}style="--hero-image: url('{{ .Params.cover_image | absURL }}')"
+    }}style="--hero-image: url('{{ .Params.cover_image | relURL }}')"
     {{
     end
     }}
@@ -90,3 +90,4 @@
 </footer>
 
 {{ end }}
+
