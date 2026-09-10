@@ -6,6 +6,7 @@ draft = false
 tags = ["keyboard"]
 tracking_area = "javascript"
 tracking_id = ""
+cover_image = "/images/2026-09-10-upgrading-my-keyboard-with-a-trackball/banner.jpg"
 +++
 
 Back in 2021 I switched to using [a split keyboard]({{< ref "/posts/2021-07-29-keyboard-first-impressions-zsa-moonlander.md">}}), the [ZSA Moonlander](https://www.zsa.io/moonlander/), and I wrote about my experience [after the first month]({{< ref "/posts/2021-09-01-zsa-moonlander-one-month-on.md">}}).
